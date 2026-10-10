@@ -1,900 +1,3700 @@
 {
   "active": false,
-  "suite": "git_dev",
+  "suite": "git1",
   "model": "hydra-nano:git",
-  "total": 200,
-  "completed": 200,
-  "planCount": 154,
-  "evidenceCount": 140,
-  "solvedCount": 138,
-  "rawTokens": 25313,
-  "returnedTokens": 14370,
-  "startedAt": 1791633039389,
-  "updatedAt": 1791633065202,
+  "total": 1000,
+  "completed": 1000,
+  "planCount": 802,
+  "evidenceCount": 801,
+  "solvedCount": 793,
+  "rawTokens": 96114,
+  "returnedTokens": 84909,
+  "startedAt": 1791644121697,
+  "updatedAt": 1791644224575,
   "history": [
     {
       "step": 2,
       "planPct": 100,
       "solvedPct": 100,
-      "rawTokens": 46,
-      "returnedTokens": 60
+      "rawTokens": 42,
+      "returnedTokens": 56
     },
     {
       "step": 4,
-      "planPct": 100,
+      "planPct": 75,
       "solvedPct": 75,
-      "rawTokens": 92,
-      "returnedTokens": 120
+      "rawTokens": 143,
+      "returnedTokens": 169
     },
     {
       "step": 6,
-      "planPct": 100,
-      "solvedPct": 66.7,
-      "rawTokens": 192,
-      "returnedTokens": 235
+      "planPct": 83.3,
+      "solvedPct": 83.3,
+      "rawTokens": 319,
+      "returnedTokens": 354
     },
     {
       "step": 8,
-      "planPct": 100,
-      "solvedPct": 75,
-      "rawTokens": 407,
-      "returnedTokens": 456
+      "planPct": 87.5,
+      "solvedPct": 87.5,
+      "rawTokens": 551,
+      "returnedTokens": 600
     },
     {
       "step": 10,
-      "planPct": 100,
+      "planPct": 80,
       "solvedPct": 80,
-      "rawTokens": 1015,
-      "returnedTokens": 581
+      "rawTokens": 676,
+      "returnedTokens": 736
     },
     {
       "step": 12,
-      "planPct": 100,
-      "solvedPct": 83.3,
-      "rawTokens": 1171,
-      "returnedTokens": 749
+      "planPct": 75,
+      "solvedPct": 75,
+      "rawTokens": 775,
+      "returnedTokens": 851
     },
     {
       "step": 14,
-      "planPct": 92.9,
-      "solvedPct": 78.6,
-      "rawTokens": 1415,
-      "returnedTokens": 839
+      "planPct": 71.4,
+      "solvedPct": 71.4,
+      "rawTokens": 1230,
+      "returnedTokens": 959
     },
     {
       "step": 16,
-      "planPct": 87.5,
+      "planPct": 75,
       "solvedPct": 75,
-      "rawTokens": 1581,
-      "returnedTokens": 1016
+      "rawTokens": 1382,
+      "returnedTokens": 1121
     },
     {
       "step": 18,
-      "planPct": 88.9,
-      "solvedPct": 72.2,
-      "rawTokens": 1714,
-      "returnedTokens": 1164
+      "planPct": 77.8,
+      "solvedPct": 77.8,
+      "rawTokens": 1488,
+      "returnedTokens": 1242
     },
     {
       "step": 20,
-      "planPct": 90,
-      "solvedPct": 75,
-      "rawTokens": 1767,
-      "returnedTokens": 1229
+      "planPct": 80,
+      "solvedPct": 80,
+      "rawTokens": 1556,
+      "returnedTokens": 1322
     },
     {
       "step": 22,
-      "planPct": 90.9,
-      "solvedPct": 72.7,
-      "rawTokens": 1797,
-      "returnedTokens": 1273
+      "planPct": 77.3,
+      "solvedPct": 77.3,
+      "rawTokens": 1657,
+      "returnedTokens": 1435
     },
     {
       "step": 24,
-      "planPct": 91.7,
+      "planPct": 75,
       "solvedPct": 75,
-      "rawTokens": 2026,
-      "returnedTokens": 1404
+      "rawTokens": 2111,
+      "returnedTokens": 1588
     },
     {
       "step": 26,
-      "planPct": 92.3,
+      "planPct": 76.9,
       "solvedPct": 76.9,
-      "rawTokens": 2157,
-      "returnedTokens": 1544
+      "rawTokens": 2257,
+      "returnedTokens": 1749
     },
     {
       "step": 28,
-      "planPct": 92.9,
-      "solvedPct": 75,
-      "rawTokens": 2263,
-      "returnedTokens": 1664
+      "planPct": 78.6,
+      "solvedPct": 78.6,
+      "rawTokens": 2400,
+      "returnedTokens": 1899
     },
     {
       "step": 30,
-      "planPct": 90,
-      "solvedPct": 73.3,
-      "rawTokens": 2517,
-      "returnedTokens": 1934
+      "planPct": 80,
+      "solvedPct": 76.7,
+      "rawTokens": 2832,
+      "returnedTokens": 2027
     },
     {
       "step": 32,
-      "planPct": 90.6,
+      "planPct": 78.1,
       "solvedPct": 75,
-      "rawTokens": 3516,
-      "returnedTokens": 2186
+      "rawTokens": 3037,
+      "returnedTokens": 2242
     },
     {
       "step": 34,
-      "planPct": 88.2,
-      "solvedPct": 73.5,
-      "rawTokens": 3840,
-      "returnedTokens": 2530
+      "planPct": 79.4,
+      "solvedPct": 76.5,
+      "rawTokens": 3140,
+      "returnedTokens": 2360
     },
     {
       "step": 36,
-      "planPct": 83.3,
-      "solvedPct": 69.4,
-      "rawTokens": 4120,
-      "returnedTokens": 2820
+      "planPct": 80.6,
+      "solvedPct": 77.8,
+      "rawTokens": 3321,
+      "returnedTokens": 2549
     },
     {
       "step": 38,
-      "planPct": 84.2,
-      "solvedPct": 71.1,
-      "rawTokens": 4256,
-      "returnedTokens": 2971
+      "planPct": 81.6,
+      "solvedPct": 78.9,
+      "rawTokens": 3455,
+      "returnedTokens": 2698
     },
     {
       "step": 40,
-      "planPct": 85,
-      "solvedPct": 72.5,
-      "rawTokens": 4316,
-      "returnedTokens": 3043
+      "planPct": 82.5,
+      "solvedPct": 80,
+      "rawTokens": 3552,
+      "returnedTokens": 2808
     },
     {
       "step": 42,
-      "planPct": 85.7,
-      "solvedPct": 73.8,
-      "rawTokens": 4366,
-      "returnedTokens": 3107
+      "planPct": 83.3,
+      "solvedPct": 81,
+      "rawTokens": 3616,
+      "returnedTokens": 2886
     },
     {
       "step": 44,
-      "planPct": 86.4,
-      "solvedPct": 72.7,
-      "rawTokens": 5143,
-      "returnedTokens": 3226
+      "planPct": 81.8,
+      "solvedPct": 79.5,
+      "rawTokens": 3713,
+      "returnedTokens": 2995
     },
     {
       "step": 46,
-      "planPct": 87,
-      "solvedPct": 73.9,
-      "rawTokens": 5329,
-      "returnedTokens": 3421
+      "planPct": 82.6,
+      "solvedPct": 80.4,
+      "rawTokens": 3942,
+      "returnedTokens": 3233
     },
     {
       "step": 48,
-      "planPct": 87.5,
-      "solvedPct": 75,
-      "rawTokens": 5517,
-      "returnedTokens": 3625
+      "planPct": 81.3,
+      "solvedPct": 79.2,
+      "rawTokens": 4183,
+      "returnedTokens": 3486
     },
     {
       "step": 50,
-      "planPct": 86,
-      "solvedPct": 74,
-      "rawTokens": 5725,
-      "returnedTokens": 3843
+      "planPct": 80,
+      "solvedPct": 78,
+      "rawTokens": 4445,
+      "returnedTokens": 3759
     },
     {
       "step": 52,
-      "planPct": 86.5,
-      "solvedPct": 75,
-      "rawTokens": 6466,
-      "returnedTokens": 3997
+      "planPct": 80.8,
+      "solvedPct": 78.8,
+      "rawTokens": 4856,
+      "returnedTokens": 4181
     },
     {
       "step": 54,
-      "planPct": 85.2,
-      "solvedPct": 74.1,
-      "rawTokens": 6768,
-      "returnedTokens": 4313
+      "planPct": 79.6,
+      "solvedPct": 77.8,
+      "rawTokens": 5399,
+      "returnedTokens": 4453
     },
     {
       "step": 56,
-      "planPct": 83.9,
-      "solvedPct": 73.2,
-      "rawTokens": 6954,
-      "returnedTokens": 4508
-    },
-    {
-      "step": 58,
-      "planPct": 84.5,
-      "solvedPct": 72.4,
-      "rawTokens": 7045,
+      "planPct": 78.6,
+      "solvedPct": 76.8,
+      "rawTokens": 5549,
       "returnedTokens": 4614
     },
     {
+      "step": 58,
+      "planPct": 79.3,
+      "solvedPct": 77.6,
+      "rawTokens": 5771,
+      "returnedTokens": 4851
+    },
+    {
       "step": 60,
-      "planPct": 85,
-      "solvedPct": 73.3,
-      "rawTokens": 7097,
-      "returnedTokens": 4678
+      "planPct": 80,
+      "solvedPct": 78.3,
+      "rawTokens": 5955,
+      "returnedTokens": 5046
     },
     {
       "step": 62,
-      "planPct": 83.9,
-      "solvedPct": 72.6,
-      "rawTokens": 7115,
-      "returnedTokens": 4708
+      "planPct": 80.6,
+      "solvedPct": 79,
+      "rawTokens": 6031,
+      "returnedTokens": 5138
     },
     {
       "step": 64,
-      "planPct": 84.4,
-      "solvedPct": 71.9,
-      "rawTokens": 7451,
-      "returnedTokens": 4824
+      "planPct": 81.3,
+      "solvedPct": 79.7,
+      "rawTokens": 6107,
+      "returnedTokens": 5230
     },
     {
       "step": 66,
-      "planPct": 84.8,
-      "solvedPct": 72.7,
-      "rawTokens": 7547,
-      "returnedTokens": 4933
+      "planPct": 81.8,
+      "solvedPct": 80.3,
+      "rawTokens": 6230,
+      "returnedTokens": 5371
     },
     {
       "step": 68,
-      "planPct": 85.3,
-      "solvedPct": 73.5,
-      "rawTokens": 7752,
-      "returnedTokens": 5145
+      "planPct": 82.4,
+      "solvedPct": 80.9,
+      "rawTokens": 6387,
+      "returnedTokens": 5535
     },
     {
       "step": 70,
-      "planPct": 85.7,
-      "solvedPct": 74.3,
-      "rawTokens": 9003,
-      "returnedTokens": 5463
+      "planPct": 81.4,
+      "solvedPct": 80,
+      "rawTokens": 6836,
+      "returnedTokens": 5790
     },
     {
       "step": 72,
-      "planPct": 83.3,
-      "solvedPct": 72.2,
-      "rawTokens": 9842,
-      "returnedTokens": 5564
-    },
-    {
-      "step": 74,
-      "planPct": 82.4,
-      "solvedPct": 71.6,
-      "rawTokens": 10146,
-      "returnedTokens": 5883
-    },
-    {
-      "step": 76,
-      "planPct": 81.6,
-      "solvedPct": 71.1,
-      "rawTokens": 10256,
-      "returnedTokens": 6002
-    },
-    {
-      "step": 78,
-      "planPct": 82.1,
-      "solvedPct": 71.8,
-      "rawTokens": 10320,
+      "planPct": 80.6,
+      "solvedPct": 79.2,
+      "rawTokens": 7106,
       "returnedTokens": 6081
     },
     {
+      "step": 74,
+      "planPct": 79.7,
+      "solvedPct": 78.4,
+      "rawTokens": 7124,
+      "returnedTokens": 6118
+    },
+    {
+      "step": 76,
+      "planPct": 78.9,
+      "solvedPct": 77.6,
+      "rawTokens": 7334,
+      "returnedTokens": 6341
+    },
+    {
+      "step": 78,
+      "planPct": 79.5,
+      "solvedPct": 78.2,
+      "rawTokens": 7586,
+      "returnedTokens": 6608
+    },
+    {
       "step": 80,
-      "planPct": 82.5,
-      "solvedPct": 72.5,
-      "rawTokens": 10386,
-      "returnedTokens": 6158
+      "planPct": 80,
+      "solvedPct": 78.8,
+      "rawTokens": 7982,
+      "returnedTokens": 7028
     },
     {
       "step": 82,
-      "planPct": 82.9,
-      "solvedPct": 73.2,
-      "rawTokens": 10440,
-      "returnedTokens": 6226
+      "planPct": 80.5,
+      "solvedPct": 79.3,
+      "rawTokens": 8050,
+      "returnedTokens": 7110
     },
     {
       "step": 84,
-      "planPct": 82.1,
-      "solvedPct": 71.4,
-      "rawTokens": 11407,
-      "returnedTokens": 6317
+      "planPct": 81,
+      "solvedPct": 79.8,
+      "rawTokens": 8118,
+      "returnedTokens": 7192
     },
     {
       "step": 86,
-      "planPct": 82.6,
-      "solvedPct": 72.1,
-      "rawTokens": 11481,
-      "returnedTokens": 6403
+      "planPct": 81.4,
+      "solvedPct": 80.2,
+      "rawTokens": 8359,
+      "returnedTokens": 7448
     },
     {
       "step": 88,
-      "planPct": 83,
-      "solvedPct": 72.7,
-      "rawTokens": 11776,
-      "returnedTokens": 6704
+      "planPct": 81.8,
+      "solvedPct": 80.7,
+      "rawTokens": 8609,
+      "returnedTokens": 7705
     },
     {
       "step": 90,
-      "planPct": 82.2,
-      "solvedPct": 72.2,
-      "rawTokens": 12783,
-      "returnedTokens": 6825
+      "planPct": 81.1,
+      "solvedPct": 80,
+      "rawTokens": 9021,
+      "returnedTokens": 7879
     },
     {
       "step": 92,
-      "planPct": 82.6,
-      "solvedPct": 72.8,
-      "rawTokens": 13076,
-      "returnedTokens": 7132
+      "planPct": 80.4,
+      "solvedPct": 79.3,
+      "rawTokens": 9136,
+      "returnedTokens": 8014
     },
     {
       "step": 94,
-      "planPct": 81.9,
-      "solvedPct": 72.3,
-      "rawTokens": 13124,
-      "returnedTokens": 7200
+      "planPct": 79.8,
+      "solvedPct": 78.7,
+      "rawTokens": 9307,
+      "returnedTokens": 8196
     },
     {
       "step": 96,
-      "planPct": 80.2,
-      "solvedPct": 70.8,
-      "rawTokens": 13389,
-      "returnedTokens": 7476
+      "planPct": 79.2,
+      "solvedPct": 78.1,
+      "rawTokens": 9637,
+      "returnedTokens": 8542
     },
     {
       "step": 98,
-      "planPct": 80.6,
-      "solvedPct": 71.4,
-      "rawTokens": 13476,
-      "returnedTokens": 7578
+      "planPct": 78.6,
+      "solvedPct": 77.6,
+      "rawTokens": 9952,
+      "returnedTokens": 8602
     },
     {
       "step": 100,
-      "planPct": 81,
-      "solvedPct": 72,
-      "rawTokens": 13529,
-      "returnedTokens": 7643
+      "planPct": 79,
+      "solvedPct": 78,
+      "rawTokens": 10081,
+      "returnedTokens": 8743
     },
     {
       "step": 102,
-      "planPct": 81.4,
-      "solvedPct": 72.5,
-      "rawTokens": 13593,
-      "returnedTokens": 7721
+      "planPct": 79.4,
+      "solvedPct": 78.4,
+      "rawTokens": 10147,
+      "returnedTokens": 8823
     },
     {
       "step": 104,
-      "planPct": 81.7,
-      "solvedPct": 73.1,
-      "rawTokens": 14034,
-      "returnedTokens": 7837
+      "planPct": 78.8,
+      "solvedPct": 77.9,
+      "rawTokens": 10321,
+      "returnedTokens": 9009
     },
     {
       "step": 106,
-      "planPct": 82.1,
-      "solvedPct": 73.6,
-      "rawTokens": 14219,
-      "returnedTokens": 8039
+      "planPct": 79.2,
+      "solvedPct": 78.3,
+      "rawTokens": 10542,
+      "returnedTokens": 9244
     },
     {
       "step": 108,
-      "planPct": 81.5,
-      "solvedPct": 73.1,
-      "rawTokens": 14375,
-      "returnedTokens": 8205
+      "planPct": 79.6,
+      "solvedPct": 78.7,
+      "rawTokens": 10724,
+      "returnedTokens": 9432
     },
     {
       "step": 110,
-      "planPct": 80.9,
-      "solvedPct": 72.7,
-      "rawTokens": 14910,
-      "returnedTokens": 8371
+      "planPct": 79.1,
+      "solvedPct": 78.2,
+      "rawTokens": 11230,
+      "returnedTokens": 9595
     },
     {
       "step": 112,
-      "planPct": 80.4,
-      "solvedPct": 72.3,
-      "rawTokens": 15321,
-      "returnedTokens": 8488
+      "planPct": 79.5,
+      "solvedPct": 78.6,
+      "rawTokens": 11453,
+      "returnedTokens": 9834
     },
     {
       "step": 114,
-      "planPct": 79.8,
-      "solvedPct": 71.9,
-      "rawTokens": 15369,
-      "returnedTokens": 8551
+      "planPct": 78.9,
+      "solvedPct": 78.1,
+      "rawTokens": 11508,
+      "returnedTokens": 9904
     },
     {
       "step": 116,
-      "planPct": 79.3,
-      "solvedPct": 71.6,
-      "rawTokens": 15665,
-      "returnedTokens": 8854
+      "planPct": 78.4,
+      "solvedPct": 77.6,
+      "rawTokens": 11692,
+      "returnedTokens": 10094
     },
     {
       "step": 118,
-      "planPct": 79.7,
-      "solvedPct": 72,
-      "rawTokens": 15793,
-      "returnedTokens": 8997
+      "planPct": 78.8,
+      "solvedPct": 78,
+      "rawTokens": 11825,
+      "returnedTokens": 10242
     },
     {
       "step": 120,
-      "planPct": 80,
-      "solvedPct": 72.5,
-      "rawTokens": 15833,
-      "returnedTokens": 9049
+      "planPct": 79.2,
+      "solvedPct": 78.3,
+      "rawTokens": 11962,
+      "returnedTokens": 10392
     },
     {
       "step": 122,
       "planPct": 79.5,
-      "solvedPct": 72.1,
-      "rawTokens": 15857,
-      "returnedTokens": 9085
+      "solvedPct": 78.7,
+      "rawTokens": 12032,
+      "returnedTokens": 10476
     },
     {
       "step": 124,
-      "planPct": 79,
-      "solvedPct": 71,
-      "rawTokens": 16231,
-      "returnedTokens": 9183
+      "planPct": 79.8,
+      "solvedPct": 79,
+      "rawTokens": 12236,
+      "returnedTokens": 10692
     },
     {
       "step": 126,
-      "planPct": 79.4,
-      "solvedPct": 71.4,
-      "rawTokens": 16322,
-      "returnedTokens": 9287
+      "planPct": 80.2,
+      "solvedPct": 79.4,
+      "rawTokens": 12404,
+      "returnedTokens": 10873
     },
     {
       "step": 128,
-      "planPct": 79.7,
-      "solvedPct": 71.9,
-      "rawTokens": 16560,
-      "returnedTokens": 9533
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 12808,
+      "returnedTokens": 11079
     },
     {
       "step": 130,
-      "planPct": 79.2,
-      "solvedPct": 71.5,
-      "rawTokens": 17073,
-      "returnedTokens": 9728
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 13072,
+      "returnedTokens": 11356
     },
     {
       "step": 132,
-      "planPct": 78.8,
-      "solvedPct": 71.2,
-      "rawTokens": 17091,
-      "returnedTokens": 9775
+      "planPct": 80.3,
+      "solvedPct": 79.5,
+      "rawTokens": 13357,
+      "returnedTokens": 11664
     },
     {
       "step": 134,
-      "planPct": 79.1,
-      "solvedPct": 71.6,
-      "rawTokens": 17224,
-      "returnedTokens": 9922
+      "planPct": 79.9,
+      "solvedPct": 79.1,
+      "rawTokens": 13569,
+      "returnedTokens": 11890
     },
     {
       "step": 136,
-      "planPct": 78.7,
-      "solvedPct": 71.3,
-      "rawTokens": 17333,
-      "returnedTokens": 10040
+      "planPct": 80.1,
+      "solvedPct": 79.4,
+      "rawTokens": 13848,
+      "returnedTokens": 12184
     },
     {
       "step": 138,
-      "planPct": 79,
-      "solvedPct": 71,
-      "rawTokens": 17518,
-      "returnedTokens": 10240
+      "planPct": 80.4,
+      "solvedPct": 79.7,
+      "rawTokens": 13869,
+      "returnedTokens": 12214
     },
     {
       "step": 140,
-      "planPct": 79.3,
-      "solvedPct": 71.4,
-      "rawTokens": 17685,
-      "returnedTokens": 10421
+      "planPct": 80,
+      "solvedPct": 79.3,
+      "rawTokens": 14142,
+      "returnedTokens": 12291
     },
     {
       "step": 142,
       "planPct": 79.6,
-      "solvedPct": 71.8,
-      "rawTokens": 17737,
-      "returnedTokens": 10487
+      "solvedPct": 78.9,
+      "rawTokens": 14257,
+      "returnedTokens": 12418
     },
     {
       "step": 144,
       "planPct": 79.9,
-      "solvedPct": 72.2,
-      "rawTokens": 17789,
-      "returnedTokens": 10553
+      "solvedPct": 79.2,
+      "rawTokens": 14591,
+      "returnedTokens": 12545
     },
     {
       "step": 146,
       "planPct": 80.1,
-      "solvedPct": 72.6,
-      "rawTokens": 17881,
-      "returnedTokens": 10658
+      "solvedPct": 79.5,
+      "rawTokens": 14680,
+      "returnedTokens": 12648
     },
     {
       "step": 148,
-      "planPct": 80.4,
-      "solvedPct": 73,
-      "rawTokens": 18095,
-      "returnedTokens": 10879
+      "planPct": 79.1,
+      "solvedPct": 78.4,
+      "rawTokens": 14898,
+      "returnedTokens": 12873
     },
     {
       "step": 150,
-      "planPct": 80,
-      "solvedPct": 72,
-      "rawTokens": 18587,
-      "returnedTokens": 11031
+      "planPct": 79.3,
+      "solvedPct": 78.7,
+      "rawTokens": 15027,
+      "returnedTokens": 13009
     },
     {
       "step": 152,
       "planPct": 78.9,
-      "solvedPct": 71.1,
-      "rawTokens": 18593,
-      "returnedTokens": 11067
+      "solvedPct": 78.3,
+      "rawTokens": 15063,
+      "returnedTokens": 13067
     },
     {
       "step": 154,
       "planPct": 79.2,
-      "solvedPct": 71.4,
-      "rawTokens": 18734,
-      "returnedTokens": 11222
+      "solvedPct": 78.6,
+      "rawTokens": 15150,
+      "returnedTokens": 13169
     },
     {
       "step": 156,
       "planPct": 78.8,
-      "solvedPct": 71.2,
-      "rawTokens": 18845,
-      "returnedTokens": 11342
+      "solvedPct": 78.2,
+      "rawTokens": 15310,
+      "returnedTokens": 13337
     },
     {
       "step": 158,
       "planPct": 79.1,
-      "solvedPct": 70.9,
-      "rawTokens": 19005,
-      "returnedTokens": 11517
+      "solvedPct": 78.5,
+      "rawTokens": 15535,
+      "returnedTokens": 13577
     },
     {
       "step": 160,
       "planPct": 79.4,
-      "solvedPct": 71.3,
-      "rawTokens": 19169,
-      "returnedTokens": 11692
+      "solvedPct": 78.8,
+      "rawTokens": 15670,
+      "returnedTokens": 13723
     },
     {
       "step": 162,
-      "planPct": 79,
-      "solvedPct": 71,
-      "rawTokens": 19196,
-      "returnedTokens": 11731
+      "planPct": 79.6,
+      "solvedPct": 79,
+      "rawTokens": 15708,
+      "returnedTokens": 13777
     },
     {
       "step": 164,
-      "planPct": 78,
-      "solvedPct": 70.1,
-      "rawTokens": 19270,
-      "returnedTokens": 11814
+      "planPct": 78.7,
+      "solvedPct": 78,
+      "rawTokens": 15874,
+      "returnedTokens": 13953
     },
     {
       "step": 166,
-      "planPct": 78.3,
-      "solvedPct": 70.5,
-      "rawTokens": 19375,
-      "returnedTokens": 11930
+      "planPct": 78.9,
+      "solvedPct": 78.3,
+      "rawTokens": 16103,
+      "returnedTokens": 14190
     },
     {
       "step": 168,
       "planPct": 78.6,
-      "solvedPct": 70.8,
-      "rawTokens": 19558,
-      "returnedTokens": 12124
+      "solvedPct": 78,
+      "rawTokens": 16221,
+      "returnedTokens": 14320
     },
     {
       "step": 170,
-      "planPct": 77.6,
-      "solvedPct": 70,
-      "rawTokens": 19564,
-      "returnedTokens": 12156
+      "planPct": 78.8,
+      "solvedPct": 78.2,
+      "rawTokens": 16319,
+      "returnedTokens": 14432
     },
     {
       "step": 172,
-      "planPct": 77.9,
-      "solvedPct": 70.3,
-      "rawTokens": 20716,
-      "returnedTokens": 12386
+      "planPct": 79.1,
+      "solvedPct": 78.5,
+      "rawTokens": 16478,
+      "returnedTokens": 14608
     },
     {
       "step": 174,
-      "planPct": 77.6,
-      "solvedPct": 70.1,
-      "rawTokens": 20781,
-      "returnedTokens": 12471
+      "planPct": 79.3,
+      "solvedPct": 78.7,
+      "rawTokens": 16576,
+      "returnedTokens": 14721
     },
     {
       "step": 176,
-      "planPct": 76.7,
-      "solvedPct": 69.3,
-      "rawTokens": 21095,
-      "returnedTokens": 12795
+      "planPct": 79,
+      "solvedPct": 78.4,
+      "rawTokens": 16821,
+      "returnedTokens": 14973
     },
     {
       "step": 178,
-      "planPct": 77,
-      "solvedPct": 69.1,
-      "rawTokens": 21221,
-      "returnedTokens": 12936
+      "planPct": 79.2,
+      "solvedPct": 78.7,
+      "rawTokens": 16933,
+      "returnedTokens": 15100
     },
     {
       "step": 180,
-      "planPct": 77.2,
-      "solvedPct": 69.4,
-      "rawTokens": 21269,
-      "returnedTokens": 12996
+      "planPct": 79.4,
+      "solvedPct": 78.9,
+      "rawTokens": 17038,
+      "returnedTokens": 15218
     },
     {
       "step": 182,
-      "planPct": 77.5,
-      "solvedPct": 69.8,
-      "rawTokens": 21327,
-      "returnedTokens": 13068
+      "planPct": 79.7,
+      "solvedPct": 79.1,
+      "rawTokens": 17098,
+      "returnedTokens": 15292
     },
     {
       "step": 184,
-      "planPct": 77.7,
-      "solvedPct": 69.6,
-      "rawTokens": 22387,
-      "returnedTokens": 13210
+      "planPct": 79.9,
+      "solvedPct": 79.3,
+      "rawTokens": 17158,
+      "returnedTokens": 15366
     },
     {
       "step": 186,
-      "planPct": 78,
-      "solvedPct": 69.9,
-      "rawTokens": 22508,
-      "returnedTokens": 13340
+      "planPct": 80.1,
+      "solvedPct": 79.6,
+      "rawTokens": 17396,
+      "returnedTokens": 15617
     },
     {
       "step": 188,
-      "planPct": 78.2,
-      "solvedPct": 70.2,
-      "rawTokens": 22739,
-      "returnedTokens": 13582
+      "planPct": 79.8,
+      "solvedPct": 79.3,
+      "rawTokens": 17679,
+      "returnedTokens": 15910
     },
     {
       "step": 190,
-      "planPct": 77.9,
-      "solvedPct": 70,
-      "rawTokens": 23415,
-      "returnedTokens": 13673
+      "planPct": 79.5,
+      "solvedPct": 78.9,
+      "rawTokens": 17994,
+      "returnedTokens": 16233
     },
     {
       "step": 192,
-      "planPct": 77.1,
-      "solvedPct": 69.3,
-      "rawTokens": 24178,
-      "returnedTokens": 13820
+      "planPct": 79.2,
+      "solvedPct": 78.6,
+      "rawTokens": 18302,
+      "returnedTokens": 16551
     },
     {
       "step": 194,
-      "planPct": 77.3,
-      "solvedPct": 69.6,
-      "rawTokens": 24314,
-      "returnedTokens": 13967
+      "planPct": 79.4,
+      "solvedPct": 78.9,
+      "rawTokens": 18453,
+      "returnedTokens": 16716
     },
     {
       "step": 196,
-      "planPct": 77,
-      "solvedPct": 69.4,
-      "rawTokens": 24426,
-      "returnedTokens": 14095
+      "planPct": 79.6,
+      "solvedPct": 79.1,
+      "rawTokens": 18745,
+      "returnedTokens": 17017
     },
     {
       "step": 198,
-      "planPct": 76.8,
-      "solvedPct": 68.7,
-      "rawTokens": 25113,
-      "returnedTokens": 14157
+      "planPct": 79.8,
+      "solvedPct": 79.3,
+      "rawTokens": 18929,
+      "returnedTokens": 17216
     },
     {
       "step": 200,
-      "planPct": 77,
-      "solvedPct": 69,
-      "rawTokens": 25313,
-      "returnedTokens": 14370
+      "planPct": 80,
+      "solvedPct": 79.5,
+      "rawTokens": 19005,
+      "returnedTokens": 17304
+    },
+    {
+      "step": 202,
+      "planPct": 79.7,
+      "solvedPct": 79.2,
+      "rawTokens": 19122,
+      "returnedTokens": 17433
+    },
+    {
+      "step": 204,
+      "planPct": 79.9,
+      "solvedPct": 79.4,
+      "rawTokens": 19434,
+      "returnedTokens": 17556
+    },
+    {
+      "step": 206,
+      "planPct": 80.1,
+      "solvedPct": 79.6,
+      "rawTokens": 19617,
+      "returnedTokens": 17747
+    },
+    {
+      "step": 208,
+      "planPct": 80.3,
+      "solvedPct": 79.8,
+      "rawTokens": 19801,
+      "returnedTokens": 17943
+    },
+    {
+      "step": 210,
+      "planPct": 79.5,
+      "solvedPct": 79,
+      "rawTokens": 19807,
+      "returnedTokens": 17969
+    },
+    {
+      "step": 212,
+      "planPct": 79.7,
+      "solvedPct": 79.2,
+      "rawTokens": 20226,
+      "returnedTokens": 18130
+    },
+    {
+      "step": 214,
+      "planPct": 79.4,
+      "solvedPct": 79,
+      "rawTokens": 20263,
+      "returnedTokens": 18187
+    },
+    {
+      "step": 216,
+      "planPct": 79.6,
+      "solvedPct": 79.2,
+      "rawTokens": 20486,
+      "returnedTokens": 18421
+    },
+    {
+      "step": 218,
+      "planPct": 79.8,
+      "solvedPct": 79.4,
+      "rawTokens": 20693,
+      "returnedTokens": 18643
+    },
+    {
+      "step": 220,
+      "planPct": 80,
+      "solvedPct": 79.5,
+      "rawTokens": 20877,
+      "returnedTokens": 18839
+    },
+    {
+      "step": 222,
+      "planPct": 80.2,
+      "solvedPct": 79.7,
+      "rawTokens": 20957,
+      "returnedTokens": 18933
+    },
+    {
+      "step": 224,
+      "planPct": 79.5,
+      "solvedPct": 79,
+      "rawTokens": 21221,
+      "returnedTokens": 19207
+    },
+    {
+      "step": 226,
+      "planPct": 79.6,
+      "solvedPct": 79.2,
+      "rawTokens": 21442,
+      "returnedTokens": 19444
+    },
+    {
+      "step": 228,
+      "planPct": 79.8,
+      "solvedPct": 79.4,
+      "rawTokens": 21660,
+      "returnedTokens": 19669
+    },
+    {
+      "step": 230,
+      "planPct": 79.6,
+      "solvedPct": 79.1,
+      "rawTokens": 21978,
+      "returnedTokens": 19742
+    },
+    {
+      "step": 232,
+      "planPct": 79.3,
+      "solvedPct": 78.9,
+      "rawTokens": 22184,
+      "returnedTokens": 19958
+    },
+    {
+      "step": 234,
+      "planPct": 79.5,
+      "solvedPct": 79.1,
+      "rawTokens": 22257,
+      "returnedTokens": 20046
+    },
+    {
+      "step": 236,
+      "planPct": 79.7,
+      "solvedPct": 79.2,
+      "rawTokens": 22445,
+      "returnedTokens": 20243
+    },
+    {
+      "step": 238,
+      "planPct": 79.8,
+      "solvedPct": 79.4,
+      "rawTokens": 22704,
+      "returnedTokens": 20517
+    },
+    {
+      "step": 240,
+      "planPct": 80,
+      "solvedPct": 79.6,
+      "rawTokens": 22889,
+      "returnedTokens": 20716
+    },
+    {
+      "step": 242,
+      "planPct": 80.2,
+      "solvedPct": 79.8,
+      "rawTokens": 22931,
+      "returnedTokens": 20772
+    },
+    {
+      "step": 244,
+      "planPct": 79.9,
+      "solvedPct": 79.5,
+      "rawTokens": 23095,
+      "returnedTokens": 20948
+    },
+    {
+      "step": 246,
+      "planPct": 80.1,
+      "solvedPct": 79.7,
+      "rawTokens": 23405,
+      "returnedTokens": 21267
+    },
+    {
+      "step": 248,
+      "planPct": 79.8,
+      "solvedPct": 79.4,
+      "rawTokens": 23652,
+      "returnedTokens": 21526
+    },
+    {
+      "step": 250,
+      "planPct": 79.2,
+      "solvedPct": 78.8,
+      "rawTokens": 23822,
+      "returnedTokens": 21713
+    },
+    {
+      "step": 252,
+      "planPct": 79.4,
+      "solvedPct": 79,
+      "rawTokens": 24247,
+      "returnedTokens": 22151
+    },
+    {
+      "step": 254,
+      "planPct": 79.5,
+      "solvedPct": 78.7,
+      "rawTokens": 24735,
+      "returnedTokens": 22300
+    },
+    {
+      "step": 256,
+      "planPct": 79.3,
+      "solvedPct": 78.5,
+      "rawTokens": 24968,
+      "returnedTokens": 22544
+    },
+    {
+      "step": 258,
+      "planPct": 79.5,
+      "solvedPct": 78.7,
+      "rawTokens": 25089,
+      "returnedTokens": 22680
+    },
+    {
+      "step": 260,
+      "planPct": 79.6,
+      "solvedPct": 78.8,
+      "rawTokens": 25138,
+      "returnedTokens": 22740
+    },
+    {
+      "step": 262,
+      "planPct": 79.8,
+      "solvedPct": 79,
+      "rawTokens": 25200,
+      "returnedTokens": 22816
+    },
+    {
+      "step": 264,
+      "planPct": 79.9,
+      "solvedPct": 79.2,
+      "rawTokens": 25506,
+      "returnedTokens": 22915
+    },
+    {
+      "step": 266,
+      "planPct": 80.1,
+      "solvedPct": 79.3,
+      "rawTokens": 25665,
+      "returnedTokens": 23084
+    },
+    {
+      "step": 268,
+      "planPct": 80.2,
+      "solvedPct": 79.5,
+      "rawTokens": 25911,
+      "returnedTokens": 23340
+    },
+    {
+      "step": 270,
+      "planPct": 80,
+      "solvedPct": 79.3,
+      "rawTokens": 26031,
+      "returnedTokens": 23471
+    },
+    {
+      "step": 272,
+      "planPct": 79.8,
+      "solvedPct": 79,
+      "rawTokens": 26097,
+      "returnedTokens": 23557
+    },
+    {
+      "step": 274,
+      "planPct": 79.6,
+      "solvedPct": 78.8,
+      "rawTokens": 26113,
+      "returnedTokens": 23593
+    },
+    {
+      "step": 276,
+      "planPct": 79.3,
+      "solvedPct": 78.6,
+      "rawTokens": 26271,
+      "returnedTokens": 23763
+    },
+    {
+      "step": 278,
+      "planPct": 79.5,
+      "solvedPct": 78.8,
+      "rawTokens": 26457,
+      "returnedTokens": 23964
+    },
+    {
+      "step": 280,
+      "planPct": 79.6,
+      "solvedPct": 78.9,
+      "rawTokens": 26708,
+      "returnedTokens": 24239
+    },
+    {
+      "step": 282,
+      "planPct": 79.8,
+      "solvedPct": 79.1,
+      "rawTokens": 26780,
+      "returnedTokens": 24325
+    },
+    {
+      "step": 284,
+      "planPct": 79.9,
+      "solvedPct": 79.2,
+      "rawTokens": 26852,
+      "returnedTokens": 24411
+    },
+    {
+      "step": 286,
+      "planPct": 80.1,
+      "solvedPct": 79.4,
+      "rawTokens": 27076,
+      "returnedTokens": 24650
+    },
+    {
+      "step": 288,
+      "planPct": 80.2,
+      "solvedPct": 79.5,
+      "rawTokens": 27322,
+      "returnedTokens": 24903
+    },
+    {
+      "step": 290,
+      "planPct": 80,
+      "solvedPct": 79,
+      "rawTokens": 28029,
+      "returnedTokens": 25116
+    },
+    {
+      "step": 292,
+      "planPct": 79.8,
+      "solvedPct": 78.8,
+      "rawTokens": 28202,
+      "returnedTokens": 25307
+    },
+    {
+      "step": 294,
+      "planPct": 79.6,
+      "solvedPct": 78.6,
+      "rawTokens": 28583,
+      "returnedTokens": 25699
+    },
+    {
+      "step": 296,
+      "planPct": 79.7,
+      "solvedPct": 78.7,
+      "rawTokens": 28732,
+      "returnedTokens": 25863
+    },
+    {
+      "step": 298,
+      "planPct": 79.2,
+      "solvedPct": 78.2,
+      "rawTokens": 29488,
+      "returnedTokens": 25939
+    },
+    {
+      "step": 300,
+      "planPct": 79.3,
+      "solvedPct": 78.3,
+      "rawTokens": 29664,
+      "returnedTokens": 26127
+    },
+    {
+      "step": 302,
+      "planPct": 79.5,
+      "solvedPct": 78.5,
+      "rawTokens": 29742,
+      "returnedTokens": 26219
+    },
+    {
+      "step": 304,
+      "planPct": 79.3,
+      "solvedPct": 78.3,
+      "rawTokens": 29933,
+      "returnedTokens": 26422
+    },
+    {
+      "step": 306,
+      "planPct": 79.4,
+      "solvedPct": 78.4,
+      "rawTokens": 30157,
+      "returnedTokens": 26658
+    },
+    {
+      "step": 308,
+      "planPct": 79.5,
+      "solvedPct": 78.6,
+      "rawTokens": 30362,
+      "returnedTokens": 26870
+    },
+    {
+      "step": 310,
+      "planPct": 79.4,
+      "solvedPct": 78.4,
+      "rawTokens": 30752,
+      "returnedTokens": 27084
+    },
+    {
+      "step": 312,
+      "planPct": 79.5,
+      "solvedPct": 78.5,
+      "rawTokens": 31280,
+      "returnedTokens": 27626
+    },
+    {
+      "step": 314,
+      "planPct": 79.3,
+      "solvedPct": 78.3,
+      "rawTokens": 31351,
+      "returnedTokens": 27712
+    },
+    {
+      "step": 316,
+      "planPct": 79.4,
+      "solvedPct": 78.5,
+      "rawTokens": 31628,
+      "returnedTokens": 27997
+    },
+    {
+      "step": 318,
+      "planPct": 79.6,
+      "solvedPct": 78.6,
+      "rawTokens": 31775,
+      "returnedTokens": 28159
+    },
+    {
+      "step": 320,
+      "planPct": 79.7,
+      "solvedPct": 78.8,
+      "rawTokens": 31836,
+      "returnedTokens": 28233
+    },
+    {
+      "step": 322,
+      "planPct": 79.8,
+      "solvedPct": 78.9,
+      "rawTokens": 32040,
+      "returnedTokens": 28449
+    },
+    {
+      "step": 324,
+      "planPct": 79.9,
+      "solvedPct": 79,
+      "rawTokens": 32328,
+      "returnedTokens": 28556
+    },
+    {
+      "step": 326,
+      "planPct": 80.1,
+      "solvedPct": 79.1,
+      "rawTokens": 32542,
+      "returnedTokens": 28779
+    },
+    {
+      "step": 328,
+      "planPct": 80.2,
+      "solvedPct": 79.3,
+      "rawTokens": 32726,
+      "returnedTokens": 28973
+    },
+    {
+      "step": 330,
+      "planPct": 80,
+      "solvedPct": 79.1,
+      "rawTokens": 32776,
+      "returnedTokens": 29039
+    },
+    {
+      "step": 332,
+      "planPct": 80.1,
+      "solvedPct": 78.9,
+      "rawTokens": 33142,
+      "returnedTokens": 29097
+    },
+    {
+      "step": 334,
+      "planPct": 80.2,
+      "solvedPct": 79,
+      "rawTokens": 33258,
+      "returnedTokens": 29225
+    },
+    {
+      "step": 336,
+      "planPct": 80.1,
+      "solvedPct": 78.9,
+      "rawTokens": 33459,
+      "returnedTokens": 29442
+    },
+    {
+      "step": 338,
+      "planPct": 79.9,
+      "solvedPct": 78.7,
+      "rawTokens": 33812,
+      "returnedTokens": 29510
+    },
+    {
+      "step": 340,
+      "planPct": 80,
+      "solvedPct": 78.8,
+      "rawTokens": 33904,
+      "returnedTokens": 29612
+    },
+    {
+      "step": 342,
+      "planPct": 80.1,
+      "solvedPct": 78.9,
+      "rawTokens": 33964,
+      "returnedTokens": 29686
+    },
+    {
+      "step": 344,
+      "planPct": 79.9,
+      "solvedPct": 78.8,
+      "rawTokens": 34138,
+      "returnedTokens": 29872
+    },
+    {
+      "step": 346,
+      "planPct": 80.1,
+      "solvedPct": 78.9,
+      "rawTokens": 34247,
+      "returnedTokens": 29997
+    },
+    {
+      "step": 348,
+      "planPct": 79.9,
+      "solvedPct": 78.7,
+      "rawTokens": 34557,
+      "returnedTokens": 30315
+    },
+    {
+      "step": 350,
+      "planPct": 79.7,
+      "solvedPct": 78.6,
+      "rawTokens": 34648,
+      "returnedTokens": 30425
+    },
+    {
+      "step": 352,
+      "planPct": 79.5,
+      "solvedPct": 78.4,
+      "rawTokens": 34925,
+      "returnedTokens": 30491
+    },
+    {
+      "step": 354,
+      "planPct": 79.7,
+      "solvedPct": 78.5,
+      "rawTokens": 35011,
+      "returnedTokens": 30591
+    },
+    {
+      "step": 356,
+      "planPct": 79.8,
+      "solvedPct": 78.7,
+      "rawTokens": 35259,
+      "returnedTokens": 30847
+    },
+    {
+      "step": 358,
+      "planPct": 79.9,
+      "solvedPct": 78.8,
+      "rawTokens": 35519,
+      "returnedTokens": 31122
+    },
+    {
+      "step": 360,
+      "planPct": 80,
+      "solvedPct": 78.9,
+      "rawTokens": 35624,
+      "returnedTokens": 31239
+    },
+    {
+      "step": 362,
+      "planPct": 80.1,
+      "solvedPct": 79,
+      "rawTokens": 35686,
+      "returnedTokens": 31315
+    },
+    {
+      "step": 364,
+      "planPct": 79.7,
+      "solvedPct": 78.6,
+      "rawTokens": 35962,
+      "returnedTokens": 31601
+    },
+    {
+      "step": 366,
+      "planPct": 79.5,
+      "solvedPct": 78.4,
+      "rawTokens": 36238,
+      "returnedTokens": 31887
+    },
+    {
+      "step": 368,
+      "planPct": 79.6,
+      "solvedPct": 78.5,
+      "rawTokens": 36444,
+      "returnedTokens": 32101
+    },
+    {
+      "step": 370,
+      "planPct": 79.7,
+      "solvedPct": 78.6,
+      "rawTokens": 37018,
+      "returnedTokens": 32432
+    },
+    {
+      "step": 372,
+      "planPct": 79.6,
+      "solvedPct": 78.5,
+      "rawTokens": 37239,
+      "returnedTokens": 32666
+    },
+    {
+      "step": 374,
+      "planPct": 79.4,
+      "solvedPct": 78.3,
+      "rawTokens": 37297,
+      "returnedTokens": 32737
+    },
+    {
+      "step": 376,
+      "planPct": 79.5,
+      "solvedPct": 78.5,
+      "rawTokens": 37613,
+      "returnedTokens": 33068
+    },
+    {
+      "step": 378,
+      "planPct": 79.6,
+      "solvedPct": 78.6,
+      "rawTokens": 37666,
+      "returnedTokens": 33130
+    },
+    {
+      "step": 380,
+      "planPct": 79.5,
+      "solvedPct": 78.4,
+      "rawTokens": 38083,
+      "returnedTokens": 33372
+    },
+    {
+      "step": 382,
+      "planPct": 79.6,
+      "solvedPct": 78.5,
+      "rawTokens": 38153,
+      "returnedTokens": 33456
+    },
+    {
+      "step": 384,
+      "planPct": 79.7,
+      "solvedPct": 78.6,
+      "rawTokens": 38223,
+      "returnedTokens": 33540
+    },
+    {
+      "step": 386,
+      "planPct": 79.8,
+      "solvedPct": 78.8,
+      "rawTokens": 38436,
+      "returnedTokens": 33767
+    },
+    {
+      "step": 388,
+      "planPct": 79.6,
+      "solvedPct": 78.6,
+      "rawTokens": 38698,
+      "returnedTokens": 34040
+    },
+    {
+      "step": 390,
+      "planPct": 79.5,
+      "solvedPct": 78.5,
+      "rawTokens": 38765,
+      "returnedTokens": 34117
+    },
+    {
+      "step": 392,
+      "planPct": 79.6,
+      "solvedPct": 78.6,
+      "rawTokens": 38908,
+      "returnedTokens": 34276
+    },
+    {
+      "step": 394,
+      "planPct": 79.7,
+      "solvedPct": 78.7,
+      "rawTokens": 39018,
+      "returnedTokens": 34401
+    },
+    {
+      "step": 396,
+      "planPct": 79.5,
+      "solvedPct": 78.5,
+      "rawTokens": 39214,
+      "returnedTokens": 34605
+    },
+    {
+      "step": 398,
+      "planPct": 79.6,
+      "solvedPct": 78.6,
+      "rawTokens": 39406,
+      "returnedTokens": 34812
+    },
+    {
+      "step": 400,
+      "planPct": 79.8,
+      "solvedPct": 78.8,
+      "rawTokens": 39469,
+      "returnedTokens": 34887
+    },
+    {
+      "step": 402,
+      "planPct": 79.9,
+      "solvedPct": 78.9,
+      "rawTokens": 39535,
+      "returnedTokens": 34967
+    },
+    {
+      "step": 404,
+      "planPct": 79.7,
+      "solvedPct": 78.7,
+      "rawTokens": 39729,
+      "returnedTokens": 35173
+    },
+    {
+      "step": 406,
+      "planPct": 79.8,
+      "solvedPct": 78.8,
+      "rawTokens": 39992,
+      "returnedTokens": 35445
+    },
+    {
+      "step": 408,
+      "planPct": 79.9,
+      "solvedPct": 78.9,
+      "rawTokens": 40162,
+      "returnedTokens": 35631
+    },
+    {
+      "step": 410,
+      "planPct": 79.8,
+      "solvedPct": 78.8,
+      "rawTokens": 40200,
+      "returnedTokens": 35682
+    },
+    {
+      "step": 412,
+      "planPct": 79.9,
+      "solvedPct": 78.9,
+      "rawTokens": 40458,
+      "returnedTokens": 35951
+    },
+    {
+      "step": 414,
+      "planPct": 79.7,
+      "solvedPct": 78.7,
+      "rawTokens": 40500,
+      "returnedTokens": 36015
+    },
+    {
+      "step": 416,
+      "planPct": 79.8,
+      "solvedPct": 78.8,
+      "rawTokens": 40619,
+      "returnedTokens": 36145
+    },
+    {
+      "step": 418,
+      "planPct": 79.9,
+      "solvedPct": 78.9,
+      "rawTokens": 40704,
+      "returnedTokens": 36245
+    },
+    {
+      "step": 420,
+      "planPct": 80,
+      "solvedPct": 79,
+      "rawTokens": 40878,
+      "returnedTokens": 36430
+    },
+    {
+      "step": 422,
+      "planPct": 80.1,
+      "solvedPct": 79.1,
+      "rawTokens": 40920,
+      "returnedTokens": 36486
+    },
+    {
+      "step": 424,
+      "planPct": 79.7,
+      "solvedPct": 78.8,
+      "rawTokens": 41064,
+      "returnedTokens": 36640
+    },
+    {
+      "step": 426,
+      "planPct": 79.8,
+      "solvedPct": 78.9,
+      "rawTokens": 41212,
+      "returnedTokens": 36801
+    },
+    {
+      "step": 428,
+      "planPct": 79.9,
+      "solvedPct": 79,
+      "rawTokens": 41438,
+      "returnedTokens": 37034
+    },
+    {
+      "step": 430,
+      "planPct": 80,
+      "solvedPct": 79.1,
+      "rawTokens": 42054,
+      "returnedTokens": 37340
+    },
+    {
+      "step": 432,
+      "planPct": 79.6,
+      "solvedPct": 78.7,
+      "rawTokens": 42157,
+      "returnedTokens": 37461
+    },
+    {
+      "step": 434,
+      "planPct": 79.7,
+      "solvedPct": 78.8,
+      "rawTokens": 42313,
+      "returnedTokens": 37632
+    },
+    {
+      "step": 436,
+      "planPct": 79.8,
+      "solvedPct": 78.9,
+      "rawTokens": 42521,
+      "returnedTokens": 37849
+    },
+    {
+      "step": 438,
+      "planPct": 79.9,
+      "solvedPct": 79,
+      "rawTokens": 42732,
+      "returnedTokens": 38075
+    },
+    {
+      "step": 440,
+      "planPct": 80,
+      "solvedPct": 79.1,
+      "rawTokens": 42794,
+      "returnedTokens": 38149
+    },
+    {
+      "step": 442,
+      "planPct": 79.9,
+      "solvedPct": 79,
+      "rawTokens": 42949,
+      "returnedTokens": 38316
+    },
+    {
+      "step": 444,
+      "planPct": 80,
+      "solvedPct": 79.1,
+      "rawTokens": 43211,
+      "returnedTokens": 38449
+    },
+    {
+      "step": 446,
+      "planPct": 80,
+      "solvedPct": 79.1,
+      "rawTokens": 43454,
+      "returnedTokens": 38700
+    },
+    {
+      "step": 448,
+      "planPct": 79.9,
+      "solvedPct": 79,
+      "rawTokens": 43670,
+      "returnedTokens": 38928
+    },
+    {
+      "step": 450,
+      "planPct": 79.6,
+      "solvedPct": 78.7,
+      "rawTokens": 43886,
+      "returnedTokens": 39156
+    },
+    {
+      "step": 452,
+      "planPct": 79.6,
+      "solvedPct": 78.8,
+      "rawTokens": 44083,
+      "returnedTokens": 39364
+    },
+    {
+      "step": 454,
+      "planPct": 79.7,
+      "solvedPct": 78.9,
+      "rawTokens": 44663,
+      "returnedTokens": 39479
+    },
+    {
+      "step": 456,
+      "planPct": 79.6,
+      "solvedPct": 78.7,
+      "rawTokens": 44878,
+      "returnedTokens": 39706
+    },
+    {
+      "step": 458,
+      "planPct": 79.7,
+      "solvedPct": 78.8,
+      "rawTokens": 45057,
+      "returnedTokens": 39900
+    },
+    {
+      "step": 460,
+      "planPct": 79.8,
+      "solvedPct": 78.9,
+      "rawTokens": 45129,
+      "returnedTokens": 39985
+    },
+    {
+      "step": 462,
+      "planPct": 79.9,
+      "solvedPct": 79,
+      "rawTokens": 45203,
+      "returnedTokens": 40073
+    },
+    {
+      "step": 464,
+      "planPct": 80,
+      "solvedPct": 79.1,
+      "rawTokens": 45277,
+      "returnedTokens": 40161
+    },
+    {
+      "step": 466,
+      "planPct": 80,
+      "solvedPct": 79.2,
+      "rawTokens": 45382,
+      "returnedTokens": 40280
+    },
+    {
+      "step": 468,
+      "planPct": 80.1,
+      "solvedPct": 79.3,
+      "rawTokens": 45519,
+      "returnedTokens": 40424
+    },
+    {
+      "step": 470,
+      "planPct": 80,
+      "solvedPct": 79.1,
+      "rawTokens": 46031,
+      "returnedTokens": 40608
+    },
+    {
+      "step": 472,
+      "planPct": 79.9,
+      "solvedPct": 79,
+      "rawTokens": 46112,
+      "returnedTokens": 40709
+    },
+    {
+      "step": 474,
+      "planPct": 79.7,
+      "solvedPct": 78.9,
+      "rawTokens": 46167,
+      "returnedTokens": 40782
+    },
+    {
+      "step": 476,
+      "planPct": 79.6,
+      "solvedPct": 78.8,
+      "rawTokens": 46285,
+      "returnedTokens": 40912
+    },
+    {
+      "step": 478,
+      "planPct": 79.7,
+      "solvedPct": 78.9,
+      "rawTokens": 46459,
+      "returnedTokens": 41101
+    },
+    {
+      "step": 480,
+      "planPct": 79.8,
+      "solvedPct": 79,
+      "rawTokens": 46846,
+      "returnedTokens": 41515
+    },
+    {
+      "step": 482,
+      "planPct": 79.9,
+      "solvedPct": 79,
+      "rawTokens": 46892,
+      "returnedTokens": 41577
+    },
+    {
+      "step": 484,
+      "planPct": 80,
+      "solvedPct": 79.1,
+      "rawTokens": 46938,
+      "returnedTokens": 41639
+    },
+    {
+      "step": 486,
+      "planPct": 80,
+      "solvedPct": 79.2,
+      "rawTokens": 47172,
+      "returnedTokens": 41887
+    },
+    {
+      "step": 488,
+      "planPct": 80.1,
+      "solvedPct": 79.3,
+      "rawTokens": 47354,
+      "returnedTokens": 42079
+    },
+    {
+      "step": 490,
+      "planPct": 80,
+      "solvedPct": 79.2,
+      "rawTokens": 47525,
+      "returnedTokens": 42258
+    },
+    {
+      "step": 492,
+      "planPct": 80.1,
+      "solvedPct": 79.3,
+      "rawTokens": 47893,
+      "returnedTokens": 42639
+    },
+    {
+      "step": 494,
+      "planPct": 80.2,
+      "solvedPct": 79.4,
+      "rawTokens": 48208,
+      "returnedTokens": 42970
+    },
+    {
+      "step": 496,
+      "planPct": 79.8,
+      "solvedPct": 79,
+      "rawTokens": 48444,
+      "returnedTokens": 43217
+    },
+    {
+      "step": 498,
+      "planPct": 79.9,
+      "solvedPct": 79.1,
+      "rawTokens": 48580,
+      "returnedTokens": 43368
+    },
+    {
+      "step": 500,
+      "planPct": 80,
+      "solvedPct": 79.2,
+      "rawTokens": 48627,
+      "returnedTokens": 43426
+    },
+    {
+      "step": 502,
+      "planPct": 79.9,
+      "solvedPct": 79.1,
+      "rawTokens": 48730,
+      "returnedTokens": 43541
+    },
+    {
+      "step": 504,
+      "planPct": 80,
+      "solvedPct": 79.2,
+      "rawTokens": 49162,
+      "returnedTokens": 43659
+    },
+    {
+      "step": 506,
+      "planPct": 80,
+      "solvedPct": 79.2,
+      "rawTokens": 49290,
+      "returnedTokens": 43800
+    },
+    {
+      "step": 508,
+      "planPct": 80.1,
+      "solvedPct": 79.3,
+      "rawTokens": 49481,
+      "returnedTokens": 43999
+    },
+    {
+      "step": 510,
+      "planPct": 80.2,
+      "solvedPct": 79.4,
+      "rawTokens": 49951,
+      "returnedTokens": 44180
+    },
+    {
+      "step": 512,
+      "planPct": 80.3,
+      "solvedPct": 79.5,
+      "rawTokens": 50076,
+      "returnedTokens": 44323
+    },
+    {
+      "step": 514,
+      "planPct": 80.2,
+      "solvedPct": 79.4,
+      "rawTokens": 50139,
+      "returnedTokens": 44402
+    },
+    {
+      "step": 516,
+      "planPct": 80.2,
+      "solvedPct": 79.5,
+      "rawTokens": 50385,
+      "returnedTokens": 44657
+    },
+    {
+      "step": 518,
+      "planPct": 80.3,
+      "solvedPct": 79.5,
+      "rawTokens": 50504,
+      "returnedTokens": 44791
+    },
+    {
+      "step": 520,
+      "planPct": 80.4,
+      "solvedPct": 79.6,
+      "rawTokens": 50636,
+      "returnedTokens": 44934
+    },
+    {
+      "step": 522,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 50712,
+      "returnedTokens": 45024
+    },
+    {
+      "step": 524,
+      "planPct": 80.5,
+      "solvedPct": 79.8,
+      "rawTokens": 50901,
+      "returnedTokens": 45225
+    },
+    {
+      "step": 526,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 51057,
+      "returnedTokens": 45392
+    },
+    {
+      "step": 528,
+      "planPct": 80.7,
+      "solvedPct": 79.7,
+      "rawTokens": 51489,
+      "returnedTokens": 45577
+    },
+    {
+      "step": 530,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 51495,
+      "returnedTokens": 45607
+    },
+    {
+      "step": 532,
+      "planPct": 80.5,
+      "solvedPct": 79.3,
+      "rawTokens": 51853,
+      "returnedTokens": 45735
+    },
+    {
+      "step": 534,
+      "planPct": 80.5,
+      "solvedPct": 79.4,
+      "rawTokens": 51957,
+      "returnedTokens": 45851
+    },
+    {
+      "step": 536,
+      "planPct": 80.6,
+      "solvedPct": 79.5,
+      "rawTokens": 52214,
+      "returnedTokens": 46124
+    },
+    {
+      "step": 538,
+      "planPct": 80.5,
+      "solvedPct": 79.4,
+      "rawTokens": 52492,
+      "returnedTokens": 46185
+    },
+    {
+      "step": 540,
+      "planPct": 80.6,
+      "solvedPct": 79.4,
+      "rawTokens": 52573,
+      "returnedTokens": 46279
+    },
+    {
+      "step": 542,
+      "planPct": 80.6,
+      "solvedPct": 79.5,
+      "rawTokens": 52643,
+      "returnedTokens": 46365
+    },
+    {
+      "step": 544,
+      "planPct": 80.5,
+      "solvedPct": 79.4,
+      "rawTokens": 52830,
+      "returnedTokens": 46564
+    },
+    {
+      "step": 546,
+      "planPct": 80.6,
+      "solvedPct": 79.5,
+      "rawTokens": 52939,
+      "returnedTokens": 46689
+    },
+    {
+      "step": 548,
+      "planPct": 80.5,
+      "solvedPct": 79.4,
+      "rawTokens": 53279,
+      "returnedTokens": 47037
+    },
+    {
+      "step": 550,
+      "planPct": 80.4,
+      "solvedPct": 79.3,
+      "rawTokens": 53318,
+      "returnedTokens": 47089
+    },
+    {
+      "step": 552,
+      "planPct": 80.3,
+      "solvedPct": 79.2,
+      "rawTokens": 53710,
+      "returnedTokens": 47168
+    },
+    {
+      "step": 554,
+      "planPct": 80.3,
+      "solvedPct": 79.2,
+      "rawTokens": 53849,
+      "returnedTokens": 47321
+    },
+    {
+      "step": 556,
+      "planPct": 80.4,
+      "solvedPct": 79.3,
+      "rawTokens": 54187,
+      "returnedTokens": 47668
+    },
+    {
+      "step": 558,
+      "planPct": 80.5,
+      "solvedPct": 79.4,
+      "rawTokens": 54398,
+      "returnedTokens": 47894
+    },
+    {
+      "step": 560,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 54627,
+      "returnedTokens": 48136
+    },
+    {
+      "step": 562,
+      "planPct": 80.6,
+      "solvedPct": 79.5,
+      "rawTokens": 54669,
+      "returnedTokens": 48192
+    },
+    {
+      "step": 564,
+      "planPct": 80.3,
+      "solvedPct": 79.3,
+      "rawTokens": 54803,
+      "returnedTokens": 48334
+    },
+    {
+      "step": 566,
+      "planPct": 80.4,
+      "solvedPct": 79.3,
+      "rawTokens": 54981,
+      "returnedTokens": 48520
+    },
+    {
+      "step": 568,
+      "planPct": 80.3,
+      "solvedPct": 79.2,
+      "rawTokens": 55112,
+      "returnedTokens": 48662
+    },
+    {
+      "step": 570,
+      "planPct": 80.4,
+      "solvedPct": 79.3,
+      "rawTokens": 55231,
+      "returnedTokens": 48791
+    },
+    {
+      "step": 572,
+      "planPct": 80.2,
+      "solvedPct": 79.2,
+      "rawTokens": 55251,
+      "returnedTokens": 48831
+    },
+    {
+      "step": 574,
+      "planPct": 80.3,
+      "solvedPct": 79.3,
+      "rawTokens": 55287,
+      "returnedTokens": 48882
+    },
+    {
+      "step": 576,
+      "planPct": 80.2,
+      "solvedPct": 79.2,
+      "rawTokens": 55508,
+      "returnedTokens": 49111
+    },
+    {
+      "step": 578,
+      "planPct": 80.3,
+      "solvedPct": 79.2,
+      "rawTokens": 55612,
+      "returnedTokens": 49230
+    },
+    {
+      "step": 580,
+      "planPct": 80.3,
+      "solvedPct": 79.3,
+      "rawTokens": 55674,
+      "returnedTokens": 49303
+    },
+    {
+      "step": 582,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 55722,
+      "returnedTokens": 49365
+    },
+    {
+      "step": 584,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 55770,
+      "returnedTokens": 49427
+    },
+    {
+      "step": 586,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 55917,
+      "returnedTokens": 49587
+    },
+    {
+      "step": 588,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 56192,
+      "returnedTokens": 49873
+    },
+    {
+      "step": 590,
+      "planPct": 80.3,
+      "solvedPct": 79.3,
+      "rawTokens": 56431,
+      "returnedTokens": 50119
+    },
+    {
+      "step": 592,
+      "planPct": 80.2,
+      "solvedPct": 79.2,
+      "rawTokens": 56550,
+      "returnedTokens": 50260
+    },
+    {
+      "step": 594,
+      "planPct": 80.3,
+      "solvedPct": 79.3,
+      "rawTokens": 56632,
+      "returnedTokens": 50356
+    },
+    {
+      "step": 596,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 56898,
+      "returnedTokens": 50630
+    },
+    {
+      "step": 598,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 57020,
+      "returnedTokens": 50767
+    },
+    {
+      "step": 600,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 57166,
+      "returnedTokens": 50927
+    },
+    {
+      "step": 602,
+      "planPct": 80.6,
+      "solvedPct": 79.6,
+      "rawTokens": 57242,
+      "returnedTokens": 51017
+    },
+    {
+      "step": 604,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 57428,
+      "returnedTokens": 51215
+    },
+    {
+      "step": 606,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 57684,
+      "returnedTokens": 51480
+    },
+    {
+      "step": 608,
+      "planPct": 80.6,
+      "solvedPct": 79.6,
+      "rawTokens": 57798,
+      "returnedTokens": 51605
+    },
+    {
+      "step": 610,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 58109,
+      "returnedTokens": 51670
+    },
+    {
+      "step": 612,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 58220,
+      "returnedTokens": 51797
+    },
+    {
+      "step": 614,
+      "planPct": 80.3,
+      "solvedPct": 79.3,
+      "rawTokens": 58468,
+      "returnedTokens": 51903
+    },
+    {
+      "step": 616,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 58629,
+      "returnedTokens": 52075
+    },
+    {
+      "step": 618,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 58844,
+      "returnedTokens": 52305
+    },
+    {
+      "step": 620,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 58954,
+      "returnedTokens": 52427
+    },
+    {
+      "step": 622,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 59066,
+      "returnedTokens": 52551
+    },
+    {
+      "step": 624,
+      "planPct": 80.3,
+      "solvedPct": 79.3,
+      "rawTokens": 59456,
+      "returnedTokens": 52710
+    },
+    {
+      "step": 626,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 59597,
+      "returnedTokens": 52865
+    },
+    {
+      "step": 628,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 59791,
+      "returnedTokens": 53069
+    },
+    {
+      "step": 630,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 59989,
+      "returnedTokens": 53279
+    },
+    {
+      "step": 632,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 60128,
+      "returnedTokens": 53432
+    },
+    {
+      "step": 634,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 60461,
+      "returnedTokens": 53784
+    },
+    {
+      "step": 636,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 60645,
+      "returnedTokens": 53977
+    },
+    {
+      "step": 638,
+      "planPct": 80.6,
+      "solvedPct": 79.6,
+      "rawTokens": 60893,
+      "returnedTokens": 54240
+    },
+    {
+      "step": 640,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 61010,
+      "returnedTokens": 54371
+    },
+    {
+      "step": 642,
+      "planPct": 80.7,
+      "solvedPct": 79.8,
+      "rawTokens": 61070,
+      "returnedTokens": 54445
+    },
+    {
+      "step": 644,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 61247,
+      "returnedTokens": 54634
+    },
+    {
+      "step": 646,
+      "planPct": 80.7,
+      "solvedPct": 79.7,
+      "rawTokens": 61490,
+      "returnedTokens": 54886
+    },
+    {
+      "step": 648,
+      "planPct": 80.6,
+      "solvedPct": 79.6,
+      "rawTokens": 61671,
+      "returnedTokens": 55080
+    },
+    {
+      "step": 650,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 61768,
+      "returnedTokens": 55195
+    },
+    {
+      "step": 652,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 61867,
+      "returnedTokens": 55309
+    },
+    {
+      "step": 654,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 62193,
+      "returnedTokens": 55387
+    },
+    {
+      "step": 656,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 62386,
+      "returnedTokens": 55592
+    },
+    {
+      "step": 658,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 62514,
+      "returnedTokens": 55735
+    },
+    {
+      "step": 660,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 62655,
+      "returnedTokens": 55887
+    },
+    {
+      "step": 662,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 62709,
+      "returnedTokens": 55955
+    },
+    {
+      "step": 664,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 62763,
+      "returnedTokens": 56023
+    },
+    {
+      "step": 666,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 62862,
+      "returnedTokens": 56136
+    },
+    {
+      "step": 668,
+      "planPct": 80.7,
+      "solvedPct": 79.8,
+      "rawTokens": 63081,
+      "returnedTokens": 56361
+    },
+    {
+      "step": 670,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 63469,
+      "returnedTokens": 56545
+    },
+    {
+      "step": 672,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 63627,
+      "returnedTokens": 56725
+    },
+    {
+      "step": 674,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 63683,
+      "returnedTokens": 56800
+    },
+    {
+      "step": 676,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 63819,
+      "returnedTokens": 56947
+    },
+    {
+      "step": 678,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 64053,
+      "returnedTokens": 57196
+    },
+    {
+      "step": 680,
+      "planPct": 80.4,
+      "solvedPct": 79.6,
+      "rawTokens": 64486,
+      "returnedTokens": 57653
+    },
+    {
+      "step": 682,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 64554,
+      "returnedTokens": 57735
+    },
+    {
+      "step": 684,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 64622,
+      "returnedTokens": 57817
+    },
+    {
+      "step": 686,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 64756,
+      "returnedTokens": 57964
+    },
+    {
+      "step": 688,
+      "planPct": 80.7,
+      "solvedPct": 79.8,
+      "rawTokens": 64902,
+      "returnedTokens": 58117
+    },
+    {
+      "step": 690,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 65310,
+      "returnedTokens": 58276
+    },
+    {
+      "step": 692,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 65451,
+      "returnedTokens": 58429
+    },
+    {
+      "step": 694,
+      "planPct": 80.7,
+      "solvedPct": 79.8,
+      "rawTokens": 65532,
+      "returnedTokens": 58527
+    },
+    {
+      "step": 696,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 65739,
+      "returnedTokens": 58750
+    },
+    {
+      "step": 698,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 66084,
+      "returnedTokens": 58823
+    },
+    {
+      "step": 700,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 66172,
+      "returnedTokens": 58922
+    },
+    {
+      "step": 702,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 66258,
+      "returnedTokens": 59022
+    },
+    {
+      "step": 704,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 66450,
+      "returnedTokens": 59226
+    },
+    {
+      "step": 706,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 66684,
+      "returnedTokens": 59475
+    },
+    {
+      "step": 708,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 66963,
+      "returnedTokens": 59761
+    },
+    {
+      "step": 710,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 67551,
+      "returnedTokens": 59957
+    },
+    {
+      "step": 712,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 67812,
+      "returnedTokens": 60237
+    },
+    {
+      "step": 714,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 67871,
+      "returnedTokens": 60311
+    },
+    {
+      "step": 716,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 68147,
+      "returnedTokens": 60595
+    },
+    {
+      "step": 718,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 68283,
+      "returnedTokens": 60746
+    },
+    {
+      "step": 720,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 68467,
+      "returnedTokens": 60943
+    },
+    {
+      "step": 722,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 68521,
+      "returnedTokens": 61011
+    },
+    {
+      "step": 724,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 68711,
+      "returnedTokens": 61213
+    },
+    {
+      "step": 726,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 68877,
+      "returnedTokens": 61389
+    },
+    {
+      "step": 728,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 69184,
+      "returnedTokens": 61521
+    },
+    {
+      "step": 730,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 69303,
+      "returnedTokens": 61654
+    },
+    {
+      "step": 732,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 69844,
+      "returnedTokens": 62210
+    },
+    {
+      "step": 734,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 69893,
+      "returnedTokens": 62274
+    },
+    {
+      "step": 736,
+      "planPct": 81,
+      "solvedPct": 80.2,
+      "rawTokens": 70134,
+      "returnedTokens": 62529
+    },
+    {
+      "step": 738,
+      "planPct": 81,
+      "solvedPct": 80.2,
+      "rawTokens": 70178,
+      "returnedTokens": 62581
+    },
+    {
+      "step": 740,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 70440,
+      "returnedTokens": 62659
+    },
+    {
+      "step": 742,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 70540,
+      "returnedTokens": 62771
+    },
+    {
+      "step": 744,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 70917,
+      "returnedTokens": 62890
+    },
+    {
+      "step": 746,
+      "planPct": 81,
+      "solvedPct": 80.2,
+      "rawTokens": 71006,
+      "returnedTokens": 62995
+    },
+    {
+      "step": 748,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 71324,
+      "returnedTokens": 63321
+    },
+    {
+      "step": 750,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 71440,
+      "returnedTokens": 63450
+    },
+    {
+      "step": 752,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 71866,
+      "returnedTokens": 63542
+    },
+    {
+      "step": 754,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 71976,
+      "returnedTokens": 63667
+    },
+    {
+      "step": 756,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 72294,
+      "returnedTokens": 63993
+    },
+    {
+      "step": 758,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 72463,
+      "returnedTokens": 64177
+    },
+    {
+      "step": 760,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 72556,
+      "returnedTokens": 64284
+    },
+    {
+      "step": 762,
+      "planPct": 81,
+      "solvedPct": 80.2,
+      "rawTokens": 72634,
+      "returnedTokens": 64376
+    },
+    {
+      "step": 764,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 72934,
+      "returnedTokens": 64686
+    },
+    {
+      "step": 766,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 73123,
+      "returnedTokens": 64887
+    },
+    {
+      "step": 768,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 73361,
+      "returnedTokens": 65131
+    },
+    {
+      "step": 770,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 73705,
+      "returnedTokens": 65308
+    },
+    {
+      "step": 772,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 73828,
+      "returnedTokens": 65447
+    },
+    {
+      "step": 774,
+      "planPct": 80.7,
+      "solvedPct": 79.8,
+      "rawTokens": 73905,
+      "returnedTokens": 65538
+    },
+    {
+      "step": 776,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 74260,
+      "returnedTokens": 65907
+    },
+    {
+      "step": 778,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 74295,
+      "returnedTokens": 65951
+    },
+    {
+      "step": 780,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 74603,
+      "returnedTokens": 66092
+    },
+    {
+      "step": 782,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 74675,
+      "returnedTokens": 66178
+    },
+    {
+      "step": 784,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 74747,
+      "returnedTokens": 66264
+    },
+    {
+      "step": 786,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 74984,
+      "returnedTokens": 66515
+    },
+    {
+      "step": 788,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 75284,
+      "returnedTokens": 66825
+    },
+    {
+      "step": 790,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 75353,
+      "returnedTokens": 66905
+    },
+    {
+      "step": 792,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 75825,
+      "returnedTokens": 67394
+    },
+    {
+      "step": 794,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 75961,
+      "returnedTokens": 67544
+    },
+    {
+      "step": 796,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 76175,
+      "returnedTokens": 67766
+    },
+    {
+      "step": 798,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 76405,
+      "returnedTokens": 68011
+    },
+    {
+      "step": 800,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 76467,
+      "returnedTokens": 68085
+    },
+    {
+      "step": 802,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 76552,
+      "returnedTokens": 68181
+    },
+    {
+      "step": 804,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 76807,
+      "returnedTokens": 68289
+    },
+    {
+      "step": 806,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 77027,
+      "returnedTokens": 68516
+    },
+    {
+      "step": 808,
+      "planPct": 80.9,
+      "solvedPct": 80.1,
+      "rawTokens": 77124,
+      "returnedTokens": 68623
+    },
+    {
+      "step": 810,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 77217,
+      "returnedTokens": 68733
+    },
+    {
+      "step": 812,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 77614,
+      "returnedTokens": 68938
+    },
+    {
+      "step": 814,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 77634,
+      "returnedTokens": 68979
+    },
+    {
+      "step": 816,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 77768,
+      "returnedTokens": 69123
+    },
+    {
+      "step": 818,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 77962,
+      "returnedTokens": 69332
+    },
+    {
+      "step": 820,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 78075,
+      "returnedTokens": 69457
+    },
+    {
+      "step": 822,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 78141,
+      "returnedTokens": 69539
+    },
+    {
+      "step": 824,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 78413,
+      "returnedTokens": 69821
+    },
+    {
+      "step": 826,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 78626,
+      "returnedTokens": 70048
+    },
+    {
+      "step": 828,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 78860,
+      "returnedTokens": 70289
+    },
+    {
+      "step": 830,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 79384,
+      "returnedTokens": 70506
+    },
+    {
+      "step": 832,
+      "planPct": 80.8,
+      "solvedPct": 79.9,
+      "rawTokens": 79631,
+      "returnedTokens": 70764
+    },
+    {
+      "step": 834,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 79809,
+      "returnedTokens": 70954
+    },
+    {
+      "step": 836,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 80108,
+      "returnedTokens": 71268
+    },
+    {
+      "step": 838,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 80478,
+      "returnedTokens": 71308
+    },
+    {
+      "step": 840,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 80628,
+      "returnedTokens": 71471
+    },
+    {
+      "step": 842,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 80710,
+      "returnedTokens": 71569
+    },
+    {
+      "step": 844,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 80898,
+      "returnedTokens": 71769
+    },
+    {
+      "step": 846,
+      "planPct": 80.9,
+      "solvedPct": 80,
+      "rawTokens": 81155,
+      "returnedTokens": 72034
+    },
+    {
+      "step": 848,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 81348,
+      "returnedTokens": 72240
+    },
+    {
+      "step": 850,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 81461,
+      "returnedTokens": 72368
+    },
+    {
+      "step": 852,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 81574,
+      "returnedTokens": 72500
+    },
+    {
+      "step": 854,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 82069,
+      "returnedTokens": 72630
+    },
+    {
+      "step": 856,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 82353,
+      "returnedTokens": 72924
+    },
+    {
+      "step": 858,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 82544,
+      "returnedTokens": 73130
+    },
+    {
+      "step": 860,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 82613,
+      "returnedTokens": 73211
+    },
+    {
+      "step": 862,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 82675,
+      "returnedTokens": 73287
+    },
+    {
+      "step": 864,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 82975,
+      "returnedTokens": 73411
+    },
+    {
+      "step": 866,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 83083,
+      "returnedTokens": 73535
+    },
+    {
+      "step": 868,
+      "planPct": 80.8,
+      "solvedPct": 80,
+      "rawTokens": 83440,
+      "returnedTokens": 73903
+    },
+    {
+      "step": 870,
+      "planPct": 80.7,
+      "solvedPct": 79.9,
+      "rawTokens": 83641,
+      "returnedTokens": 74114
+    },
+    {
+      "step": 872,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 83693,
+      "returnedTokens": 74187
+    },
+    {
+      "step": 874,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 83716,
+      "returnedTokens": 74229
+    },
+    {
+      "step": 876,
+      "planPct": 80.4,
+      "solvedPct": 79.6,
+      "rawTokens": 83905,
+      "returnedTokens": 74429
+    },
+    {
+      "step": 878,
+      "planPct": 80.4,
+      "solvedPct": 79.6,
+      "rawTokens": 84100,
+      "returnedTokens": 74639
+    },
+    {
+      "step": 880,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 84388,
+      "returnedTokens": 74952
+    },
+    {
+      "step": 882,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 84438,
+      "returnedTokens": 75016
+    },
+    {
+      "step": 884,
+      "planPct": 80.5,
+      "solvedPct": 79.8,
+      "rawTokens": 84488,
+      "returnedTokens": 75080
+    },
+    {
+      "step": 886,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 84700,
+      "returnedTokens": 75305
+    },
+    {
+      "step": 888,
+      "planPct": 80.6,
+      "solvedPct": 79.8,
+      "rawTokens": 84928,
+      "returnedTokens": 75541
+    },
+    {
+      "step": 890,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 85370,
+      "returnedTokens": 75749
+    },
+    {
+      "step": 892,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 85533,
+      "returnedTokens": 75929
+    },
+    {
+      "step": 894,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 85662,
+      "returnedTokens": 76075
+    },
+    {
+      "step": 896,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 85998,
+      "returnedTokens": 76427
+    },
+    {
+      "step": 898,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 86294,
+      "returnedTokens": 76481
+    },
+    {
+      "step": 900,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 86503,
+      "returnedTokens": 76702
+    },
+    {
+      "step": 902,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 86559,
+      "returnedTokens": 76774
+    },
+    {
+      "step": 904,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 86676,
+      "returnedTokens": 76903
+    },
+    {
+      "step": 906,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 86847,
+      "returnedTokens": 77087
+    },
+    {
+      "step": 908,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 86989,
+      "returnedTokens": 77236
+    },
+    {
+      "step": 910,
+      "planPct": 80.4,
+      "solvedPct": 79.6,
+      "rawTokens": 87555,
+      "returnedTokens": 77548
+    },
+    {
+      "step": 912,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 87731,
+      "returnedTokens": 77745
+    },
+    {
+      "step": 914,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 87827,
+      "returnedTokens": 77857
+    },
+    {
+      "step": 916,
+      "planPct": 80.3,
+      "solvedPct": 79.5,
+      "rawTokens": 88041,
+      "returnedTokens": 78079
+    },
+    {
+      "step": 918,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 88197,
+      "returnedTokens": 78250
+    },
+    {
+      "step": 920,
+      "planPct": 80.4,
+      "solvedPct": 79.6,
+      "rawTokens": 88249,
+      "returnedTokens": 78314
+    },
+    {
+      "step": 922,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 88550,
+      "returnedTokens": 78437
+    },
+    {
+      "step": 924,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 88668,
+      "returnedTokens": 78566
+    },
+    {
+      "step": 926,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 88946,
+      "returnedTokens": 78680
+    },
+    {
+      "step": 928,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 89140,
+      "returnedTokens": 78884
+    },
+    {
+      "step": 930,
+      "planPct": 80.5,
+      "solvedPct": 79.7,
+      "rawTokens": 89190,
+      "returnedTokens": 78952
+    },
+    {
+      "step": 932,
+      "planPct": 80.6,
+      "solvedPct": 79.6,
+      "rawTokens": 89683,
+      "returnedTokens": 79031
+    },
+    {
+      "step": 934,
+      "planPct": 80.6,
+      "solvedPct": 79.7,
+      "rawTokens": 89769,
+      "returnedTokens": 79129
+    },
+    {
+      "step": 936,
+      "planPct": 80.6,
+      "solvedPct": 79.6,
+      "rawTokens": 90355,
+      "returnedTokens": 79349
+    },
+    {
+      "step": 938,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 90571,
+      "returnedTokens": 79401
+    },
+    {
+      "step": 940,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 90668,
+      "returnedTokens": 79509
+    },
+    {
+      "step": 942,
+      "planPct": 80.6,
+      "solvedPct": 79.6,
+      "rawTokens": 90726,
+      "returnedTokens": 79581
+    },
+    {
+      "step": 944,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 90837,
+      "returnedTokens": 79704
+    },
+    {
+      "step": 946,
+      "planPct": 80.5,
+      "solvedPct": 79.6,
+      "rawTokens": 90937,
+      "returnedTokens": 79818
+    },
+    {
+      "step": 948,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 91262,
+      "returnedTokens": 80151
+    },
+    {
+      "step": 950,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 91475,
+      "returnedTokens": 80371
+    },
+    {
+      "step": 952,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 91618,
+      "returnedTokens": 80532
+    },
+    {
+      "step": 954,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 91672,
+      "returnedTokens": 80601
+    },
+    {
+      "step": 956,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 92026,
+      "returnedTokens": 80963
+    },
+    {
+      "step": 958,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 92248,
+      "returnedTokens": 81200
+    },
+    {
+      "step": 960,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 92455,
+      "returnedTokens": 81418
+    },
+    {
+      "step": 962,
+      "planPct": 80.5,
+      "solvedPct": 79.5,
+      "rawTokens": 92513,
+      "returnedTokens": 81490
+    },
+    {
+      "step": 964,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 92825,
+      "returnedTokens": 81810
+    },
+    {
+      "step": 966,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 93066,
+      "returnedTokens": 82065
+    },
+    {
+      "step": 968,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 93252,
+      "returnedTokens": 82259
+    },
+    {
+      "step": 970,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 93589,
+      "returnedTokens": 82606
+    },
+    {
+      "step": 972,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 93827,
+      "returnedTokens": 82859
+    },
+    {
+      "step": 974,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 93951,
+      "returnedTokens": 82996
+    },
+    {
+      "step": 976,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 94233,
+      "returnedTokens": 83292
+    },
+    {
+      "step": 978,
+      "planPct": 80.4,
+      "solvedPct": 79.4,
+      "rawTokens": 94280,
+      "returnedTokens": 83348
+    },
+    {
+      "step": 980,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 94546,
+      "returnedTokens": 83425
+    },
+    {
+      "step": 982,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 94612,
+      "returnedTokens": 83505
+    },
+    {
+      "step": 984,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 94927,
+      "returnedTokens": 83626
+    },
+    {
+      "step": 986,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 95121,
+      "returnedTokens": 83833
+    },
+    {
+      "step": 988,
+      "planPct": 80.4,
+      "solvedPct": 79.5,
+      "rawTokens": 95319,
+      "returnedTokens": 84041
+    },
+    {
+      "step": 990,
+      "planPct": 80.3,
+      "solvedPct": 79.4,
+      "rawTokens": 95525,
+      "returnedTokens": 84254
+    },
+    {
+      "step": 992,
+      "planPct": 80.1,
+      "solvedPct": 79.2,
+      "rawTokens": 95582,
+      "returnedTokens": 84326
+    },
+    {
+      "step": 994,
+      "planPct": 80.2,
+      "solvedPct": 79.3,
+      "rawTokens": 95620,
+      "returnedTokens": 84378
+    },
+    {
+      "step": 996,
+      "planPct": 80.1,
+      "solvedPct": 79.2,
+      "rawTokens": 95894,
+      "returnedTokens": 84660
+    },
+    {
+      "step": 998,
+      "planPct": 80.2,
+      "solvedPct": 79.3,
+      "rawTokens": 96065,
+      "returnedTokens": 84846
+    },
+    {
+      "step": 1000,
+      "planPct": 80.2,
+      "solvedPct": 79.3,
+      "rawTokens": 96114,
+      "returnedTokens": 84909
     }
   ],
   "recent": [
     {
-      "id": "dev-dev_09-line_author",
+      "id": "git1-w49-line_author",
       "intent": "line_author",
       "plan": true,
       "evidence": true,
       "solved": true,
-      "raw": 181,
-      "returned": 189,
-      "seconds": 0.76,
+      "raw": 30,
+      "returned": 39,
+      "seconds": 0.35,
       "probes": [
-        "git blame -- tests/test_core.cpp"
+        "git blame -- components/Cart.tsx"
       ],
       "error": null
     },
     {
-      "id": "dev-dev_09-worktrees",
+      "id": "git1-w49-worktrees",
       "intent": "worktrees",
       "plan": true,
       "evidence": true,
       "solved": true,
       "raw": 19,
       "returned": 24,
-      "seconds": 0.82,
+      "seconds": 0.3,
       "probes": [
         "git worktree list"
       ],
       "error": null
     },
     {
-      "id": "dev-dev_09-stashes",
+      "id": "git1-w49-stashes",
       "intent": "stashes",
       "plan": true,
-      "evidence": false,
-      "solved": false,
-      "raw": 14,
-      "returned": 18,
-      "seconds": 0.8,
+      "evidence": true,
+      "solved": true,
+      "raw": 31,
+      "returned": 35,
+      "seconds": 0.29,
       "probes": [
         "git stash list"
       ],
       "error": null
     },
     {
-      "id": "dev-dev_09-branch_commits",
-      "intent": "branch_commits",
-      "plan": false,
-      "evidence": false,
-      "solved": false,
-      "raw": 673,
-      "returned": 44,
-      "seconds": 1.32,
-      "probes": [
-        "git diff main...HEAD"
-      ],
-      "error": null
-    },
-    {
-      "id": "dev-dev_09-branches",
+      "id": "git1-w49-branches",
       "intent": "branches",
       "plan": true,
       "evidence": true,
       "solved": true,
-      "raw": 109,
-      "returned": 120,
-      "seconds": 0.48,
+      "raw": 140,
+      "returned": 151,
+      "seconds": 0.4,
       "probes": [
         "git branch --all -vv --sort=-committerdate"
       ],
       "error": null
     },
     {
-      "id": "dev-dev_09-commit_files",
+      "id": "git1-w49-commit_files",
       "intent": "commit_files",
       "plan": false,
       "evidence": false,
       "solved": false,
-      "raw": 3,
-      "returned": 8,
-      "seconds": 0.46,
-      "probes": [
-        "git diff --staged"
-      ],
-      "error": null
-    },
-    {
-      "id": "dev-dev_09-last_commit_files",
-      "intent": "last_commit_files",
-      "plan": true,
-      "evidence": true,
-      "solved": true,
-      "raw": 118,
-      "returned": 122,
-      "seconds": 0.62,
+      "raw": 137,
+      "returned": 141,
+      "seconds": 0.45,
       "probes": [
         "git show HEAD"
       ],
       "error": null
     },
     {
-      "id": "dev-dev_09-message_search",
+      "id": "git1-w49-last_commit_files",
+      "intent": "last_commit_files",
+      "plan": true,
+      "evidence": true,
+      "solved": true,
+      "raw": 137,
+      "returned": 141,
+      "seconds": 0.51,
+      "probes": [
+        "git show HEAD"
+      ],
+      "error": null
+    },
+    {
+      "id": "git1-w49-branch_commits",
+      "intent": "branch_commits",
+      "plan": true,
+      "evidence": true,
+      "solved": true,
+      "raw": 21,
+      "returned": 27,
+      "seconds": 0.53,
+      "probes": [
+        "git log -n15 main..HEAD"
+      ],
+      "error": null
+    },
+    {
+      "id": "git1-w49-message_search",
       "intent": "message_search",
       "plan": true,
       "evidence": true,
       "solved": true,
-      "raw": 18,
+      "raw": 17,
       "returned": 25,
-      "seconds": 0.74,
+      "seconds": 0.44,
       "probes": [
-        "git log -n15 -i --grep=queue"
+        "git log -n15 -i --grep=tracing"
       ],
       "error": null
     },
     {
-      "id": "dev-dev_09-file_history",
-      "intent": "file_history",
-      "plan": false,
-      "evidence": false,
-      "solved": false,
-      "raw": 426,
-      "returned": 62,
-      "seconds": 1.4,
-      "probes": [
-        "git blame -- build.sh"
-      ],
-      "error": null
-    },
-    {
-      "id": "dev-dev_09-file_last_change",
-      "intent": "file_last_change",
-      "plan": false,
-      "evidence": false,
-      "solved": false,
-      "raw": 337,
-      "returned": 85,
-      "seconds": 1.3,
-      "probes": [
-        "git blame -- src/engine.cpp"
-      ],
-      "error": null
-    },
-    {
-      "id": "dev-dev_09-author_commits",
+      "id": "git1-w49-author_commits",
       "intent": "author_commits",
       "plan": false,
       "evidence": false,
       "solved": false,
       "raw": 3,
       "returned": 15,
-      "seconds": 0.84,
+      "seconds": 0.41,
       "probes": [
-        "git log -n15 --author=Kavita -i --grep=Kavita"
+        "git log -n15 --author=Noor -i --grep=recent"
       ],
       "error": null
     },
     {
-      "id": "dev-dev_09-branch_diff_files",
-      "intent": "branch_diff_files",
+      "id": "git1-w49-file_history",
+      "intent": "file_history",
+      "plan": false,
+      "evidence": false,
+      "solved": false,
+      "raw": 54,
+      "returned": 57,
+      "seconds": 0.42,
+      "probes": [
+        "git log -n3"
+      ],
+      "error": null
+    },
+    {
+      "id": "git1-w49-file_last_change",
+      "intent": "file_last_change",
+      "plan": false,
+      "evidence": false,
+      "solved": false,
+      "raw": 137,
+      "returned": 141,
+      "seconds": 0.41,
+      "probes": [
+        "git show HEAD"
+      ],
+      "error": null
+    },
+    {
+      "id": "git1-w49-recent_commits",
+      "intent": "recent_commits",
       "plan": true,
       "evidence": true,
       "solved": true,
-      "raw": 673,
-      "returned": 76,
-      "seconds": 1.28,
+      "raw": 69,
+      "returned": 72,
+      "seconds": 0.42,
       "probes": [
-        "git diff main...HEAD"
+        "git log -n4"
       ],
       "error": null
     }
   ],
   "summary": {
-    "tasks": 200,
-    "routed": 0.7,
-    "plan": 0.77,
-    "evidence": 0.7,
-    "solved": 0.69,
-    "recall": null,
+    "tasks": 1000,
+    "routed": 0.721,
+    "plan": 0.802,
+    "evidence": 0.801,
+    "solved": 0.793,
+    "recall": 0.8375404761904763,
     "readingRight": 0,
     "readingScored": 0,
-    "raw": 25313,
-    "returned": 14370,
+    "raw": 96114,
+    "returned": 84909,
     "errors": 0
   },
-  "finishedAt": 1791633065203
+  "finishedAt": 1791644224577
 }

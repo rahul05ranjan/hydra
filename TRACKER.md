@@ -243,6 +243,32 @@ Solved 76% of 1000 (75.8%); 77% (77.0%) when weighted by real usage. Plan accura
 - `last_commit_files` rose from 80% to 90% (+10 points).
 - Run time dropped from 3.5 min to 2.4 min (~144ms per task, fastest on cluster).
 
+### git1 sealed test set, retrained `hydra-nano:git` (oversampled LoRA), 2026-10-10
+
+Solved 79% of 1000 (79.0%); 78% (78.0%) when weighted by real usage. Plan accuracy 80% (80.0%). 0 errors or timeouts. Run time 1.7 minutes (~102ms/task, fastest recorded run). Rows in `evals/results/git1.hydra-nano-git.json`.
+
+| Kind | Solved | Kind | Solved |
+|---|---|---|---|
+| branch_current | 100% | last_commit_files | 90% |
+| last_commit | 100% | message_search | 90% |
+| staged_files | 100% | untracked_files | 80% |
+| sync | 100% | branch_diff_files | 66% |
+| stashes | 100% | branch_commits | 56% |
+| worktrees | 100% | file_history | 56% |
+| branches | 100% | author_commits | 50% |
+| line_author | 100% | commit_files | 46% |
+| change_in_file | 96% | modified_files | 38% |
+| recent_commits | 92% | file_last_change | 26% |
+
+- `change_in_file` jumped from 26% to **96%** (+70 points).
+- `line_author` jumped from 48% to **100%** (+52 points).
+- `branch_diff_files` jumped from 28% to **66%** (+38 points).
+- `recent_commits` rose from 70% to **92%** (+22 points).
+- `branches` rose from 84% to **100%** (+16 points).
+- `message_search` rose from 86% to **90%** (+4 points).
+- Usage-weighted solved accuracy reached all-time high of **78%**; raw solved reached **79%**.
+- Run time dropped to 1.7 minutes (~102ms per task, zero timeouts/errors).
+
 ### test_logs benchmark, `qwen3.5:0.8b`, 2026-10-10
 
 Scored on 20 cross-language tasks (`evals/test_logs/tasks.json`): Vitest, Jest, Pytest, Cargo, TSC, Go, node:test, and Mocha. Rows in `evals/results/test_logs.qwen3.5:0.8b.json`.
@@ -396,3 +422,4 @@ Built safe read-only OS inspection head supporting listening ports (`lsof`), run
 - 2026-10-10: Completed and independently audited all 36 approved real-source sessions in 513.896s ($2.7095252 reported cost equivalent). Every arm scored 12/12; native used 387,115 tokens, available 391,296 (+1.08%, adoption 0/12), forced 667,303 (+72.38%, adoption 12/12). All source/skill/model/permission gates passed. Captured Python slice overreach/truncation and native fallback, updated README and audit; next is reader boundaries and delegation overhead. No extra paid sessions.
 - 2026-10-10: Built enterprise publication suite (`train/publish_enterprise_suite.py`) staging all 5 specialist models (`hydra-nano-git`, `hydra-nano-os`, `hydra-nano-test`, `hydra-nano-read`, `hydra-nano-files`) with full safetensors weights, configs, tokenizers, Modelfiles, and enterprise Model Cards detailing architectural specs, safety guardrails, benchmarks, and quickstarts. Staging dry-run verified.
 - 2026-10-10: Successfully published all 5 enterprise models to Hugging Face Hub under user `rahul05ranjan`: `hydra-nano-git`, `hydra-nano-os`, `hydra-nano-test`, `hydra-nano-read`, and `hydra-nano-files` with full safetensors weights, tokenizers, Modelfiles, and enterprise Model Cards.
+- 2026-10-10: Refined Python AST slice boundary and indentation detection in `skills/hydra/scripts/lib/read.mjs` (fixing overreach and matching Python AST gold character-exact); initialized Git repository and pushed to GitHub as public repo `https://github.com/rahul05ranjan/hydra`; scored retrained `hydra-nano:git` on sealed 1,000-task `git1` benchmark in 1.7 min: solved accuracy reached all-time high of 78% usage-weighted / 79% raw with `change_in_file` jumping from 26% to 96% and `line_author` to 100%. All 40 unit tests passing.

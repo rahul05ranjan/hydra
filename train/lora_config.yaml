@@ -1,0 +1,18 @@
+model: "Qwen/Qwen3.5-0.8B"
+train: true
+data: "train/data"
+mask_prompt: true
+batch_size: 1
+num_layers: 8
+iters: 250
+learning_rate: 0.00005
+max_seq_length: 512
+grad_checkpoint: true
+steps_per_report: 25
+steps_per_eval: 50
+val_batches: 5
+adapter_path: "train/adapter"
+lora_parameters:
+  rank: 8
+  scale: 1.0
+  dropout: 0.05

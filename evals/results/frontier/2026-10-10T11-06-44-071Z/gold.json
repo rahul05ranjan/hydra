@@ -1,0 +1,94 @@
+[
+  {
+    "id": "status",
+    "expected": {
+      "branch": "main",
+      "changes": [
+        {
+          "path": "config.json",
+          "status": "M "
+        },
+        {
+          "path": "src/checkout.mjs",
+          "status": " M"
+        },
+        {
+          "path": "scratch.txt",
+          "status": "??"
+        }
+      ]
+    }
+  },
+  {
+    "id": "last_commit",
+    "expected": {
+      "files": [
+        "TRACKER.md"
+      ]
+    }
+  },
+  {
+    "id": "recent_commits",
+    "expected": {
+      "commits": [
+        {
+          "hash": "251dd62",
+          "subject": "Record that README and trial script stay private"
+        },
+        {
+          "hash": "8bcbe13",
+          "subject": "Update reference notes 5"
+        },
+        {
+          "hash": "acb37c0",
+          "subject": "Update reference notes 4"
+        },
+        {
+          "hash": "0ee3cf6",
+          "subject": "Update reference notes 3"
+        },
+        {
+          "hash": "37f37ad",
+          "subject": "Update reference notes 2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "read_code",
+    "expected": {
+      "source": "export function computeTotal(items, discount = 0) {\n  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);\n  return Math.round(subtotal * (1 - discount) * 100) / 100;\n}",
+      "value": 23.8
+    }
+  },
+  {
+    "id": "search",
+    "expected": {
+      "definition": {
+        "file": "src/pricing.mjs",
+        "line": 5
+      },
+      "usages": [
+        {
+          "file": "src/checkout.mjs",
+          "line": 1
+        },
+        {
+          "file": "src/checkout.mjs",
+          "line": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "failure",
+    "expected": {
+      "test": "discounted basket",
+      "expected": 18,
+      "received": 19,
+      "file": "src/pricing.test.ts",
+      "line": 42,
+      "exitCode": 1
+    }
+  }
+]

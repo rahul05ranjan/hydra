@@ -1,0 +1,86 @@
+[
+  {
+    "session": "python_cast-r0-forced",
+    "range": [
+      57,
+      183
+    ]
+  },
+  {
+    "session": "python_cast-r1-forced",
+    "range": [
+      57,
+      183
+    ]
+  },
+  {
+    "session": "python_cast-r2-forced",
+    "range": [
+      57,
+      183
+    ]
+  },
+  {
+    "session": "python_join-r0-forced",
+    "range": [
+      369,
+      389
+    ]
+  },
+  {
+    "session": "python_join-r1-forced",
+    "range": [
+      369,
+      389
+    ]
+  },
+  {
+    "session": "python_join-r2-forced",
+    "range": [
+      369,
+      389
+    ]
+  },
+  {
+    "session": "typescript_config-r0-forced",
+    "range": [
+      126,
+      191
+    ]
+  },
+  {
+    "session": "typescript_config-r1-forced",
+    "range": [
+      126,
+      191
+    ]
+  },
+  {
+    "session": "typescript_config-r2-forced",
+    "range": [
+      126,
+      191
+    ]
+  },
+  {
+    "session": "typescript_ingestion-r0-forced",
+    "range": [
+      272,
+      336
+    ]
+  },
+  {
+    "session": "typescript_ingestion-r1-forced",
+    "range": [
+      272,
+      336
+    ]
+  },
+  {
+    "session": "typescript_ingestion-r2-forced",
+    "range": [
+      272,
+      336
+    ]
+  }
+]

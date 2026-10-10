@@ -1,0 +1,4 @@
+{
+  "source": "git subcommands Claude ran in 156 Claude Code transcript files on the author's machine, counted on 2026-10-10 (3,493 invocations, 62% read-only)",
+  "weights": { "status": 494, "log": 676, "diff": 353, "show": 187, "branches": 102, "worktrees": 114, "stash": 28, "blame": 0 }
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hydra Live Cluster & Evaluation Dashboard</title>
+  <meta name="description" content="Live benchmark, token reduction, and evaluation dashboard for Hydra local model cluster">
+  <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+
+  <!-- Top Navigation / Brand Header -->
+  <header class="header">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div class="brand-info">
+        <h1>Hydra Live Dashboard</h1>
+        <p>Small local models (≤0.8B) delegating routine coding tasks</p>
+      </div>
+    </div>
+    <div class="header-status">
+      <div id="connection-status" class="status-badge">
+        <span class="status-dot"></span>
+        CONNECTING...
+      </div>
+      <div class="btn-group">
+        <button id="btn-run-dev" class="btn btn-primary">
+          ▶ Run Dev Eval (200)
+        </button>
+        <button id="btn-run-git1" class="btn btn-secondary">
+          ▶ Run Git1 Eval (1000)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid -->
+  <main class="dashboard-grid">
+
+    <!-- Top Stats Banner -->
+    <section class="stats-banner">
+      <div class="stat-box" style="--stat-accent: #8b5cf6;">
+        <div class="label">Total Hydra Calls</div>
+        <div id="stat-total-calls" class="value">0</div>
+        <div class="subtext">Routine tasks handled locally</div>
+      </div>
+      <div class="stat-box" style="--stat-accent: #06b6d4;">
+        <div class="label">Raw Ingested Tokens</div>
+        <div id="stat-raw-tokens" class="value">0</div>
+        <div class="subtext">Read & processed locally</div>
+      </div>
+      <div class="stat-box" style="--stat-accent: #f59e0b;">
+        <div class="label">Returned Tokens</div>
+        <div id="stat-returned-tokens" class="value">0</div>
+        <div class="subtext">Returned to frontier context</div>
+      </div>
+      <div class="stat-box" style="--stat-accent: #10b981;">
+        <div class="label">Net Context Token Saving</div>
+        <div id="stat-net-savings" class="value">0%</div>
+        <div class="subtext">Bloat kept out of frontier context</div>
+      </div>
+    </section>
+
+    <!-- Live Evaluation Running Banner (Dynamic) -->
+    <section id="live-eval-card" class="card live-eval-card" style="display: none;">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">⚡</span>
+          <span>Live Evaluation in Progress: <strong id="live-suite-name" style="color: #c084fc;">DEV</strong></span>
+        </div>
+        <div class="badge badge-purple">LIVE METRICS</div>
+      </div>
+
+      <div class="progress-bar-container">
+        <div id="live-progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
+      </div>
+
+      <div class="progress-stats">
+        <span id="live-task-count">0 / 0 tasks</span>
+        <div>
+          <span><span id="live-label-1">Plan:</span> <strong id="live-stat-plan" style="color: #c084fc;">0%</strong></span> |
+          <span><span id="live-label-2">Solved:</span> <strong id="live-stat-solved" style="color: #34d399;">0%</strong></span> |
+          <span><span id="live-label-3">Saved:</span> <strong id="live-stat-saved" style="color: #38bdf8;">0 tok</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Graph 1: Live Progress Timeline & Accuracy Curves -->
+    <section class="card col-8">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">📈</span>
+          <span>Live Evaluation Accuracy Curves</span>
+        </div>
+        <span class="badge badge-info">REAL-TIME GRAPH</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="chart-timeline"></canvas>
+      </div>
+    </section>
+
+    <!-- Graph 2: 9.2M Frontier Output Tokens Breakdown -->
+    <section class="card col-4">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">🎯</span>
+          <span>Where Agent Tokens Go</span>
+        </div>
+        <span class="badge badge-purple">156 SESSIONS</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="chart-donut"></canvas>
+      </div>
+    </section>
+
+    <!-- Graph 3: Model Benchmark Comparison -->
+    <section class="card col-6">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">📊</span>
+          <span>Base vs Trained LoRA Adapter Comparison</span>
+        </div>
+        <span class="badge badge-info">BENCHMARKS</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="chart-comparison"></canvas>
+      </div>
+    </section>
+
+    <!-- Four Heads Cluster Overview -->
+    <section class="card col-6">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">🐲</span>
+          <span>Hydra Specialist Heads Cluster</span>
+        </div>
+        <span class="badge badge-success">5 ACTIVE HEADS</span>
+      </div>
+      <div class="heads-cluster">
+        <div class="head-card" style="border-top: 3px solid #8b5cf6;">
+          <div class="head-card-top">
+            <span class="head-name">Git Head</span>
+            <span class="badge badge-purple">git.mjs</span>
+          </div>
+          <div class="head-desc">10 read-only probes with argument validation.</div>
+          <div class="head-metric"><span class="m-label">Plan Acc:</span><span id="head-git-metric-1" class="m-val">80%</span></div>
+          <div class="head-metric"><span class="m-label">Solved:</span><span id="head-git-metric-2" class="m-val">77%</span></div>
+        </div>
+
+        <div class="head-card" style="border-top: 3px solid #06b6d4;">
+          <div class="head-card-top">
+            <span class="head-name">Read Head</span>
+            <span class="badge badge-info">read.mjs</span>
+          </div>
+          <div class="head-desc">Symbol & line slicing for TS, JS, Py, Rust, Go.</div>
+          <div class="head-metric"><span class="m-label">Benchmark:</span><span id="head-read-metric-1" class="m-val">100%</span></div>
+          <div class="head-metric"><span class="m-label">Savings:</span><span id="head-read-metric-2" class="m-val">48-92%</span></div>
+        </div>
+
+        <div class="head-card" style="border-top: 3px solid #10b981;">
+          <div class="head-card-top">
+            <span class="head-name">Test Head</span>
+            <span class="badge badge-success">test_logs.mjs</span>
+          </div>
+          <div class="head-desc">Log filter & verbatim failure synthesizer.</div>
+          <div class="head-metric"><span class="m-label">Benchmark:</span><span id="head-test-metric-1" class="m-val">100%</span></div>
+          <div class="head-metric"><span class="m-label">Savings:</span><span id="head-test-metric-2" class="m-val">50-97%</span></div>
+        </div>
+
+        <div class="head-card" style="border-top: 3px solid #f59e0b;">
+          <div class="head-card-top">
+            <span class="head-name">Files Head</span>
+            <span class="badge badge-info">files.mjs</span>
+          </div>
+          <div class="head-desc">Definition-ranked search boosting export/class.</div>
+          <div class="head-metric"><span class="m-label">Benchmark:</span><span id="head-files-metric-1" class="m-val">100%</span></div>
+          <div class="head-metric"><span class="m-label">Top-1 Match:</span><span id="head-files-metric-2" class="m-val">100%</span></div>
+        </div>
+
+        <div class="head-card" style="border-top: 3px solid #ec4899;">
+          <div class="head-card-top">
+            <span class="head-name">OS Head</span>
+            <span class="badge badge-purple">os.mjs</span>
+          </div>
+          <div class="head-desc">Safe read-only ports, processes, disk, system.</div>
+          <div class="head-metric"><span class="m-label">Safety:</span><span id="head-os-metric-1" class="m-val">Guardrailed</span></div>
+          <div class="head-metric"><span class="m-label">Status:</span><span id="head-os-metric-2" class="m-val">Active</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Direct command-output comparison results -->
+    <section class="card col-12" id="trial-card" style="border: 1px solid rgba(16, 185, 129, 0.4); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, rgba(15, 23, 42, 0.6) 100%);">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">🤖</span>
+          <span>Strict Comparison Against Targeted Direct Commands (12 Scenarios)</span>
+        </div>
+        <span class="badge badge-info" id="trial-badge">12/12 FACT CHECKS · 88.3% MORE OUTPUT</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 12px 0;">
+        <div class="stat-box" style="--stat-accent: #10b981; background: rgba(16,185,129,0.08);">
+          <div class="label">Complete Expected Facts</div>
+          <div id="trial-recall" class="value" style="color: #34d399;">12/12</div>
+          <div class="subtext">Both routes checked for full facts and exit codes</div>
+        </div>
+        <div class="stat-box" style="--stat-accent: #8b5cf6; background: rgba(139,92,246,0.08);">
+          <div class="label">Read Head Savings</div>
+          <div id="trial-read-saving" class="value" style="color: #a78bfa;">-77.6%</div>
+          <div class="subtext" id="trial-read-tokens">132 estimated tokens more</div>
+        </div>
+        <div class="stat-box" style="--stat-accent: #06b6d4; background: rgba(6,182,212,0.08);">
+          <div class="label">Git Head Savings</div>
+          <div id="trial-git-saving" class="value" style="color: #22d3ee;">-91.9%</div>
+          <div class="subtext" id="trial-git-tokens">158 estimated tokens more</div>
+        </div>
+        <div class="stat-box" style="--stat-accent: #f59e0b; background: rgba(245,158,11,0.08);">
+          <div class="label">Test Head Savings</div>
+          <div id="trial-test-saving" class="value" style="color: #fbbf24;">-123.9%</div>
+          <div class="subtext" id="trial-test-tokens">57 estimated tokens more</div>
+        </div>
+      </div>
+      <p class="subtext">Negative savings means larger output. Counts estimate characters / 4; this local fixture comparison does not measure actual agent token usage.</p>
+    </section>
+
+    <!-- Recent Task Activity Stream Table -->
+    <section class="card col-12">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="icon">⚡</span>
+          <span>Recent Evaluation Tasks Stream</span>
+        </div>
+        <span class="badge badge-info">LIVE FEED</span>
+      </div>
+      <div class="task-table-wrapper">
+        <table class="task-table">
+          <thead>
+            <tr>
+              <th>Task ID</th>
+              <th>Intent / Question</th>
+              <th>Probes Selected</th>
+              <th>Plan</th>
+              <th>Solved</th>
+              <th>Latency</th>
+            </tr>
+          </thead>
+          <tbody id="recent-tasks-tbody">
+            <tr>
+              <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 24px;">
+                Ready for live evaluation stream. Click "Run Dev Eval" or "Run Git1 Eval" above.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+.env
+.env.*
+node_modules/
+.DS_Store
+*.log
+
+# Model weights & staging artifacts (hosted on Hugging Face Hub)
+train/adapter/
+train/merged/
+train/enterprise_staging/
+train/data/
+
+# Cache directories
+__pycache__/
+.pytest_cache/

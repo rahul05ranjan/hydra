@@ -1,0 +1,309 @@
+[
+  {
+    "id": "ts_class_def_vs_imports",
+    "name": "TypeScript class definition vs multiple imports",
+    "query": "UserService",
+    "question": "where is UserService defined?",
+    "files": {
+      "src/services/user.ts": "import { Logger } from '../util/logger';\n\nexport class UserService {\n  constructor(private logger: Logger) {}\n  async findById(id: string) { return null; }\n}\n",
+      "src/controllers/auth.ts": "import { UserService } from '../services/user';\n\nexport function handleLogin(userSvc: UserService) {}\n",
+      "src/controllers/admin.ts": "import { UserService } from '../services/user';\n\nexport function handleAdmin(userSvc: UserService) {}\n",
+      "src/index.ts": "import { UserService } from './services/user';\nconst svc = new UserService();\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/services/user.ts",
+      "targetDefLine": "export class UserService {",
+      "importLines": ["import { UserService } from '../services/user';", "import { UserService } from './services/user';"]
+    }
+  },
+  {
+    "id": "py_function_def_vs_calls",
+    "name": "Python def function vs call usages",
+    "query": "calculate_tax",
+    "question": "find calculate_tax function definition",
+    "files": {
+      "billing/tax.py": "def calculate_tax(subtotal: float, rate: float = 0.08) -> float:\n    \"\"\"Calculates sales tax on invoice subtotal.\"\"\"\n    return subtotal * rate\n",
+      "billing/invoice.py": "from billing.tax import calculate_tax\n\ndef create_invoice(items):\n    tax = calculate_tax(100.0)\n    return tax\n",
+      "billing/test_tax.py": "from billing.tax import calculate_tax\n\ndef test_calc():\n    assert calculate_tax(50.0) == 4.0\n"
+    },
+    "gold": {
+      "expectedDefFile": "billing/tax.py",
+      "targetDefLine": "def calculate_tax(subtotal: float, rate: float = 0.08) -> float:",
+      "importLines": ["from billing.tax import calculate_tax"]
+    }
+  },
+  {
+    "id": "rust_struct_def_vs_usages",
+    "name": "Rust pub struct definition vs usages",
+    "query": "ConnectionPool",
+    "question": "where is ConnectionPool defined?",
+    "files": {
+      "src/pool.rs": "pub struct ConnectionPool {\n    max_size: usize,\n    active: usize,\n}\n\nimpl ConnectionPool {\n    pub fn new(max_size: usize) -> Self { Self { max_size, active: 0 } }\n}\n",
+      "src/db.rs": "use crate::pool::ConnectionPool;\n\npub struct Database {\n    pool: ConnectionPool,\n}\n",
+      "src/main.rs": "use crate::pool::ConnectionPool;\nfn main() {\n    let _pool = ConnectionPool::new(10);\n}\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/pool.rs",
+      "targetDefLine": "pub struct ConnectionPool {",
+      "importLines": ["use crate::pool::ConnectionPool;"]
+    }
+  },
+  {
+    "id": "go_func_def_vs_calls",
+    "name": "Go func definition vs call sites",
+    "query": "HandleWebhook",
+    "question": "find HandleWebhook func in Go",
+    "files": {
+      "api/webhook.go": "package api\n\nimport \"net/http\"\n\nfunc HandleWebhook(w http.ResponseWriter, r *http.Request) {\n\tw.WriteHeader(http.StatusOK)\n}\n",
+      "api/routes.go": "package api\n\nfunc RegisterRoutes() {\n\t// route points to HandleWebhook\n\t_ = HandleWebhook\n}\n"
+    },
+    "gold": {
+      "expectedDefFile": "api/webhook.go",
+      "targetDefLine": "func HandleWebhook(w http.ResponseWriter, r *http.Request) {",
+      "importLines": []
+    }
+  },
+  {
+    "id": "ts_async_function_def",
+    "name": "TypeScript async function export vs callers",
+    "query": "authenticateSession",
+    "question": "where is authenticateSession implemented?",
+    "files": {
+      "src/auth/session.ts": "export async function authenticateSession(token: string) {\n  if (!token) throw new Error('missing token');\n  return { userId: 'u123' };\n}\n",
+      "src/middleware/auth.ts": "import { authenticateSession } from '../auth/session';\n\nexport async function authMiddleware(req, res, next) {\n  await authenticateSession(req.headers.authorization);\n  next();\n}\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/auth/session.ts",
+      "targetDefLine": "export async function authenticateSession(token: string) {",
+      "importLines": ["import { authenticateSession } from '../auth/session';"]
+    }
+  },
+  {
+    "id": "ts_interface_def",
+    "name": "TypeScript interface definition vs implementations",
+    "query": "PaymentPayload",
+    "question": "find interface PaymentPayload",
+    "files": {
+      "src/types/payment.ts": "export interface PaymentPayload {\n  amountCents: number;\n  currency: string;\n  idempotencyKey: string;\n}\n",
+      "src/services/stripe.ts": "import { PaymentPayload } from '../types/payment';\n\nexport function chargeCard(payload: PaymentPayload) {}\n",
+      "src/services/paypal.ts": "import { PaymentPayload } from '../types/payment';\n\nexport function sendPaypal(payload: PaymentPayload) {}\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/types/payment.ts",
+      "targetDefLine": "export interface PaymentPayload {",
+      "importLines": ["import { PaymentPayload } from '../types/payment';"]
+    }
+  },
+  {
+    "id": "noise_lockfile_suppression",
+    "name": "Suppression of package-lock.json and minified files",
+    "query": "jwtDecode",
+    "question": "where is jwtDecode function?",
+    "files": {
+      "src/jwt.ts": "export function jwtDecode(raw: string) {\n  return JSON.parse(Buffer.from(raw.split('.')[1], 'base64').toString());\n}\n",
+      "package-lock.json": "{\n  \"packages\": {\n    \"node_modules/jwt-decode\": {\n      \"name\": \"jwtDecode\"\n    }\n  }\n}\n",
+      "dist/bundle.min.js": "function jwtDecode(e){return JSON.parse(atob(e.split('.')[1]))}\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/jwt.ts",
+      "targetDefLine": "export function jwtDecode(raw: string) {",
+      "forbiddenFiles": ["package-lock.json", "dist/bundle.min.js"]
+    }
+  },
+  {
+    "id": "prose_penalty_ranking",
+    "name": "Prose/markdown file penalty behind source code",
+    "query": "TokenBucket",
+    "question": "where is TokenBucket class defined?",
+    "files": {
+      "README.md": "# TokenBucket Rate Limiter\nThe TokenBucket class handles token accumulation.\n",
+      "docs/architecture.md": "# Rate Limiting\nSee TokenBucket in src/limiter.ts\n",
+      "src/limiter.ts": "export class TokenBucket {\n  private capacity: number;\n  constructor(capacity: number) {\n    this.capacity = capacity;\n  }\n}\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/limiter.ts",
+      "targetDefLine": "export class TokenBucket {",
+      "importLines": []
+    }
+  },
+  {
+    "id": "const_arrow_function",
+    "name": "Const arrow function export definition",
+    "query": "formatCurrency",
+    "question": "where is formatCurrency defined?",
+    "files": {
+      "src/utils/format.ts": "export const formatCurrency = (cents: number): string => {\n  return `$${(cents / 100).toFixed(2)}`;\n};\n",
+      "src/components/Price.tsx": "import { formatCurrency } from '../utils/format';\nexport const Price = ({ val }: { val: number }) => <div>{formatCurrency(val)}</div>;\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/utils/format.ts",
+      "targetDefLine": "export const formatCurrency = (cents: number): string => {",
+      "importLines": ["import { formatCurrency } from '../utils/format';"]
+    }
+  },
+  {
+    "id": "py_class_def_model",
+    "name": "Python class model definition vs queries",
+    "query": "TransactionRecord",
+    "question": "find class TransactionRecord definition",
+    "files": {
+      "models/transaction.py": "class TransactionRecord:\n    id: str\n    amount: float\n    status: str\n",
+      "services/ledger.py": "from models.transaction import TransactionRecord\ndef record_tx(t: TransactionRecord): pass\n"
+    },
+    "gold": {
+      "expectedDefFile": "models/transaction.py",
+      "targetDefLine": "class TransactionRecord:",
+      "importLines": ["from models.transaction import TransactionRecord"]
+    }
+  },
+  {
+    "id": "rust_fn_pub_definition",
+    "name": "Rust pub async fn definition",
+    "query": "broadcast_event",
+    "question": "where is broadcast_event fn in rust?",
+    "files": {
+      "src/events.rs": "pub async fn broadcast_event(topic: &str, payload: &[u8]) -> Result<(), ()> {\n    Ok(())\n}\n",
+      "src/handlers.rs": "use crate::events::broadcast_event;\npub async fn on_message() { broadcast_event(\"chat\", b\"hi\").await; }\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/events.rs",
+      "targetDefLine": "pub async fn broadcast_event(topic: &str, payload: &[u8]) -> Result<(), ()> {",
+      "importLines": ["use crate::events::broadcast_event;"]
+    }
+  },
+  {
+    "id": "go_interface_definition",
+    "name": "Go type interface definition",
+    "query": "StorageDriver",
+    "question": "find StorageDriver interface in Go",
+    "files": {
+      "storage/driver.go": "package storage\n\ntype StorageDriver interface {\n\tGet(key string) ([]byte, error)\n\tPut(key string, val []byte) error\n}\n",
+      "storage/s3.go": "package storage\n\ntype S3Driver struct{}\n// implements StorageDriver\n"
+    },
+    "gold": {
+      "expectedDefFile": "storage/driver.go",
+      "targetDefLine": "type StorageDriver interface {",
+      "importLines": []
+    }
+  },
+  {
+    "id": "ts_enum_definition",
+    "name": "TypeScript enum export definition",
+    "query": "OrderStatus",
+    "question": "where is enum OrderStatus defined?",
+    "files": {
+      "src/enums/order.ts": "export enum OrderStatus {\n  PENDING = 'PENDING',\n  PROCESSING = 'PROCESSING',\n  COMPLETED = 'COMPLETED',\n}\n",
+      "src/routes/orders.ts": "import { OrderStatus } from '../enums/order';\nif (status === OrderStatus.COMPLETED) {}\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/enums/order.ts",
+      "targetDefLine": "export enum OrderStatus {",
+      "importLines": ["import { OrderStatus } from '../enums/order';"]
+    }
+  },
+  {
+    "id": "py_async_def_worker",
+    "name": "Python async def task worker",
+    "query": "process_queue_job",
+    "question": "find process_queue_job function in Python",
+    "files": {
+      "workers/queue.py": "async def process_queue_job(job_id: str, payload: dict) -> bool:\n    print(f'Processing {job_id}')\n    return True\n",
+      "workers/scheduler.py": "from workers.queue import process_queue_job\nasync def poll(): await process_queue_job('1', {})\n"
+    },
+    "gold": {
+      "expectedDefFile": "workers/queue.py",
+      "targetDefLine": "async def process_queue_job(job_id: str, payload: dict) -> bool:",
+      "importLines": ["from workers.queue import process_queue_job"]
+    }
+  },
+  {
+    "id": "ts_type_alias_definition",
+    "name": "TypeScript type alias definition",
+    "query": "ApiResponse",
+    "question": "where is ApiResponse type defined?",
+    "files": {
+      "src/types/api.ts": "export type ApiResponse<T> = {\n  success: boolean;\n  data: T;\n  error?: string;\n};\n",
+      "src/client.ts": "import { ApiResponse } from './types/api';\nfunction fetchUser(): ApiResponse<User> {}\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/types/api.ts",
+      "targetDefLine": "export type ApiResponse<T> = {",
+      "importLines": ["import { ApiResponse } from './types/api';"]
+    }
+  },
+  {
+    "id": "rust_enum_definition",
+    "name": "Rust pub enum definition",
+    "query": "WorkerState",
+    "question": "where is WorkerState enum?",
+    "files": {
+      "src/state.rs": "pub enum WorkerState {\n    Idle,\n    Running,\n    Failed(String),\n}\n",
+      "src/worker.rs": "use crate::state::WorkerState;\nfn check(s: WorkerState) {}\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/state.rs",
+      "targetDefLine": "pub enum WorkerState {",
+      "importLines": ["use crate::state::WorkerState;"]
+    }
+  },
+  {
+    "id": "react_component_func",
+    "name": "React function component definition",
+    "query": "NavigationSidebar",
+    "question": "where is NavigationSidebar component?",
+    "files": {
+      "src/components/NavigationSidebar.tsx": "export function NavigationSidebar({ isOpen }: { isOpen: boolean }) {\n  return <aside className=\"sidebar\">Sidebar</aside>;\n}\n",
+      "src/App.tsx": "import { NavigationSidebar } from './components/NavigationSidebar';\nexport function App() { return <NavigationSidebar isOpen={true} />; }\n"
+    },
+    "gold": {
+      "expectedDefFile": "src/components/NavigationSidebar.tsx",
+      "targetDefLine": "export function NavigationSidebar({ isOpen }: { isOpen: boolean }) {",
+      "importLines": ["import { NavigationSidebar } from './components/NavigationSidebar';"]
+    }
+  },
+  {
+    "id": "py_exception_class",
+    "name": "Python Custom Exception class definition",
+    "query": "RateLimitExceeded",
+    "question": "find RateLimitExceeded exception class",
+    "files": {
+      "exceptions/rate_limit.py": "class RateLimitExceeded(Exception):\n    def __init__(self, retry_after: int):\n        self.retry_after = retry_after\n",
+      "middleware/throttle.py": "from exceptions.rate_limit import RateLimitExceeded\nif count > 10: raise RateLimitExceeded(60)\n"
+    },
+    "gold": {
+      "expectedDefFile": "exceptions/rate_limit.py",
+      "targetDefLine": "class RateLimitExceeded(Exception):",
+      "importLines": ["from exceptions.rate_limit import RateLimitExceeded"]
+    }
+  },
+  {
+    "id": "go_struct_definition",
+    "name": "Go type struct definition",
+    "query": "MetricsCollector",
+    "question": "find MetricsCollector struct in Go",
+    "files": {
+      "telemetry/metrics.go": "package telemetry\n\ntype MetricsCollector struct {\n\tNamespace string\n\tCounters  map[string]int64\n}\n",
+      "telemetry/server.go": "package telemetry\n\nvar DefaultCollector = MetricsCollector{Namespace: \"app\"}\n"
+    },
+    "gold": {
+      "expectedDefFile": "telemetry/metrics.go",
+      "targetDefLine": "type MetricsCollector struct {",
+      "importLines": []
+    }
+  },
+  {
+    "id": "const_config_object",
+    "name": "JavaScript exported const object definition",
+    "query": "DEFAULT_RETRY_POLICY",
+    "question": "where is DEFAULT_RETRY_POLICY defined?",
+    "files": {
+      "lib/constants.js": "export const DEFAULT_RETRY_POLICY = {\n  maxRetries: 3,\n  backoffMs: 250,\n  jitter: true,\n};\n",
+      "lib/client.js": "import { DEFAULT_RETRY_POLICY } from './constants.js';\nfunction request() { return DEFAULT_RETRY_POLICY.maxRetries; }\n"
+    },
+    "gold": {
+      "expectedDefFile": "lib/constants.js",
+      "targetDefLine": "export const DEFAULT_RETRY_POLICY = {",
+      "importLines": ["import { DEFAULT_RETRY_POLICY } from './constants.js';"]
+    }
+  }
+]

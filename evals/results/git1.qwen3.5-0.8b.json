@@ -1,0 +1,50 @@
+{
+ "model": "qwen3.5:0.8b",
+ "date": "2026-10-10T09:36:26.064Z",
+ "overall": {
+  "tasks": 1,
+  "routed": 1,
+  "plan": 1,
+  "evidence": 1,
+  "solved": 1,
+  "recall": 1,
+  "readingRight": 0,
+  "readingScored": 0,
+  "raw": 21,
+  "returned": 28,
+  "errors": 0,
+  "solvedWeighted": 1
+ },
+ "byIntent": {
+  "branch_current": {
+   "tasks": 1,
+   "routed": 1,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 21,
+   "returned": 28,
+   "errors": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "git1-w00-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 21,
+   "returned": 28,
+   "seconds": 0.279,
+   "probes": [
+    "git status --short --branch"
+   ]
+  }
+ ]
+}

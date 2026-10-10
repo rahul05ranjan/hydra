@@ -1,0 +1,3773 @@
+{
+  "status": "complete",
+  "startedAt": "2026-10-10T12:02:23.244Z",
+  "manifest": {
+    "preparedAt": "2026-10-10T11:57:49.963Z",
+    "model": "claude-opus-5-5",
+    "arms": [
+      "plain",
+      "available",
+      "forced"
+    ],
+    "repeats": 3,
+    "plannedSessions": 36,
+    "budgetPerSessionUsd": 0.5,
+    "configuredBudgetUsd": 18,
+    "maximumSeconds": 1200,
+    "workspaceRoot": "/Users/rivansh/.hydra/trials/real-repo/2026-10-10T11-57-49-798Z",
+    "planSha256": "3cf3fa584f4f3651360fb417e024b816091e648e0970171e7b424f4b6d88e771",
+    "frozenSkillSha256": "40b3b797339e896e9406e180025f8b86a5a32b18389f330800f8c503c585fc25",
+    "localModels": {
+      "hydra-nano:files": "d9c89605f39abfd9e8cb4fd3c099c203d7d17e82d7765b4266a0612402d88f1c",
+      "hydra-nano:read": "d9c89605f39abfd9e8cb4fd3c099c203d7d17e82d7765b4266a0612402d88f1c"
+    },
+    "tasks": [
+      {
+        "id": "python_cast",
+        "repo": "vasuki",
+        "file": "src/vasuki/expr.py",
+        "symbol": "cast_value",
+        "sourceFileHash": "adb0bc7f40cd88bd50c79a8c6b6b6914788f00c4ae44a1cb75af73cef8e61c63",
+        "sourceFileLines": 418,
+        "request": "Locate the definition of cast_value in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline.",
+        "targetFunctionLines": 30
+      },
+      {
+        "id": "python_join",
+        "repo": "vasuki",
+        "file": "src/vasuki/ops.py",
+        "symbol": "_join",
+        "sourceFileHash": "71ca00e41af25f8d407593b5b0cb991445c66ca4c22fdde56b5e32b78f172f9d",
+        "sourceFileLines": 447,
+        "request": "Locate the definition of _join in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline.",
+        "targetFunctionLines": 48
+      },
+      {
+        "id": "typescript_config",
+        "repo": "dhruv",
+        "file": "src/commands/health.ts",
+        "symbol": "checkConfiguration",
+        "sourceFileHash": "ccf5a1b4068d9c6f44cd2553daad04f12400eab11bd8be56c4ddab2adc78d771",
+        "sourceFileLines": 514,
+        "request": "Locate the definition of checkConfiguration in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline.",
+        "targetFunctionLines": 66
+      },
+      {
+        "id": "typescript_ingestion",
+        "repo": "dhruv",
+        "file": "src/core/committed-range.ts",
+        "symbol": "ingestCommittedRange",
+        "sourceFileHash": "c4e2de966661408b177a697f38a626dfe5e26160e6de51d06486072566d6b0f2",
+        "sourceFileLines": 337,
+        "request": "Locate the definition of ingestCommittedRange in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline.",
+        "targetFunctionLines": 64
+      }
+    ],
+    "provenance": {
+      "vasuki": {
+        "originalRoot": "/Users/rivansh/Desktop/code/vasuki",
+        "files": [
+          {
+            "file": "src/vasuki/__init__.py",
+            "bytes": 387,
+            "lines": 18,
+            "sha256": "d22979f97f2cc939a047a30ddd806ba483738840ac8379f2811965566be7d815"
+          },
+          {
+            "file": "src/vasuki/cli.py",
+            "bytes": 7440,
+            "lines": 155,
+            "sha256": "31629ebee7344a73bf73fc5cbddd5596be4f71fd77f4ccaab377577c8715b562"
+          },
+          {
+            "file": "src/vasuki/errors.py",
+            "bytes": 1582,
+            "lines": 51,
+            "sha256": "b624e3e4123fd8bd71c09571a68b937c3da1a126e5472761d37bac3cbaa4271d"
+          },
+          {
+            "file": "src/vasuki/evals.py",
+            "bytes": 7674,
+            "lines": 197,
+            "sha256": "2d317e24d5d641c17d17547b36fecb91fcbe23b7fa6c5b6b8b70ecb3edf5b93e"
+          },
+          {
+            "file": "src/vasuki/executor.py",
+            "bytes": 3879,
+            "lines": 105,
+            "sha256": "9c7754867304c23a962ccc4fdccaaeb47225c646969489de68a59e39e1ee6111"
+          },
+          {
+            "file": "src/vasuki/expr.py",
+            "bytes": 17472,
+            "lines": 418,
+            "sha256": "adb0bc7f40cd88bd50c79a8c6b6b6914788f00c4ae44a1cb75af73cef8e61c63"
+          },
+          {
+            "file": "src/vasuki/io.py",
+            "bytes": 4272,
+            "lines": 98,
+            "sha256": "29b993e0cbb04c963c42dcbcd8a75e4b6ff8bba25f96dceecca4a43a67a04773"
+          },
+          {
+            "file": "src/vasuki/mcp_server.py",
+            "bytes": 6941,
+            "lines": 150,
+            "sha256": "8ed52c70cdddb9c789006065a0d9bbd5e16303471f04877c08b0e7d2312ef7c5"
+          },
+          {
+            "file": "src/vasuki/ops.py",
+            "bytes": 14648,
+            "lines": 447,
+            "sha256": "71ca00e41af25f8d407593b5b0cb991445c66ca4c22fdde56b5e32b78f172f9d"
+          },
+          {
+            "file": "src/vasuki/planner.py",
+            "bytes": 7633,
+            "lines": 149,
+            "sha256": "cdfd403074392890c4297f805002b070b4c041aa1b655b71ce435fd09a3b5cec"
+          },
+          {
+            "file": "src/vasuki/request.py",
+            "bytes": 2357,
+            "lines": 61,
+            "sha256": "3dca786d4c87f4cbd42a85a4a87da8a8887f9d4788b2a6cafd3ac7c76f4d1f7b"
+          },
+          {
+            "file": "src/vasuki/schema.py",
+            "bytes": 6210,
+            "lines": 151,
+            "sha256": "bc2d0dec19f520ff40e57e12b845dcc0370c255c6747d10eed41e0062b89d54b"
+          },
+          {
+            "file": "src/vasuki/units.py",
+            "bytes": 2977,
+            "lines": 90,
+            "sha256": "5c1515fcb48147e543895a3216f2f10c56888f700c45777bd1c4e021f5e57a8c"
+          }
+        ],
+        "totalLines": 2090,
+        "head": "52c8833e4cb77c3af608855c9d44883f8e373933"
+      },
+      "dhruv": {
+        "originalRoot": "/Users/rivansh/Desktop/code/dhruv-cli",
+        "files": [
+          {
+            "file": "src/check/cli.ts",
+            "bytes": 1859,
+            "lines": 34,
+            "sha256": "515c5c8170d32155db9fa27fb9456878c7fe9e3d2c45b07cc934fde603533f13"
+          },
+          {
+            "file": "src/cli-main.ts",
+            "bytes": 2756,
+            "lines": 83,
+            "sha256": "a3e3c9c4c186a681c6084fbc048d1203e18dc252f881bfd6783c095f1fa85c2e"
+          },
+          {
+            "file": "src/commands/built-in-commands.ts",
+            "bytes": 2655,
+            "lines": 69,
+            "sha256": "764f8ca3371f5dac46b1590f64196574bd3abf0e11cb79ebfc3cefdac9d1c28a"
+          },
+          {
+            "file": "src/commands/check.ts",
+            "bytes": 6895,
+            "lines": 155,
+            "sha256": "b85a5e3719b627df3a5e8a21ee1756e1fb6136e4c095e99caa6b1f25708d2f03"
+          },
+          {
+            "file": "src/commands/completion.ts",
+            "bytes": 9776,
+            "lines": 241,
+            "sha256": "35ac3a59911c33b00cc2168cfabcc522e9f43d30089358d41295a1f7c275a218"
+          },
+          {
+            "file": "src/commands/definitions/agent-commands.ts",
+            "bytes": 1159,
+            "lines": 39,
+            "sha256": "963c93d455621bab08aa5e7c247d02da5a345b54c79f69a660b4e080653afdbc"
+          },
+          {
+            "file": "src/commands/definitions/check-command.ts",
+            "bytes": 2665,
+            "lines": 40,
+            "sha256": "a2a0915828fcce04cbffa3feb6538376ed64433dd968c140a8e8c362229fd8a7"
+          },
+          {
+            "file": "src/commands/definitions/diagnostic-commands.ts",
+            "bytes": 2654,
+            "lines": 80,
+            "sha256": "8cdfa2a4254328418fd27831292cb80c8a038ec56d5b08358101e46a8c755807"
+          },
+          {
+            "file": "src/commands/definitions/query-commands.ts",
+            "bytes": 1406,
+            "lines": 33,
+            "sha256": "7a6efd7cb259207704defa2519caccf070400ace6c1cc2a8af21080ea6f2aab7"
+          },
+          {
+            "file": "src/commands/definitions/source-commands.ts",
+            "bytes": 2707,
+            "lines": 59,
+            "sha256": "26389cd0b42bfe80ef0757dbff41f96c1471939ab19972bbb5b6acc371a230d4"
+          },
+          {
+            "file": "src/commands/explain.ts",
+            "bytes": 468,
+            "lines": 17,
+            "sha256": "0b30a9fb12c46d1f53854ceca0efe8a0d98b7eb2c6fd2f95e250f4d2ad0a2ece"
+          },
+          {
+            "file": "src/commands/fix.ts",
+            "bytes": 468,
+            "lines": 17,
+            "sha256": "12ad9e56de8b9575bb9b70a36408f18c4873f949055d0f3cb4951494beff5e9a"
+          },
+          {
+            "file": "src/commands/generate.ts",
+            "bytes": 3813,
+            "lines": 96,
+            "sha256": "e6849be1627512eaf49442d42479a7deb955f840d214a6f59696f1d6babea61e"
+          },
+          {
+            "file": "src/commands/global-options.ts",
+            "bytes": 1033,
+            "lines": 22,
+            "sha256": "c771f5511bfd2aa518e06a0cb0b9b75ef2ff7ebef90cdbc7739a4ac856d54c2c"
+          },
+          {
+            "file": "src/commands/health.ts",
+            "bytes": 15378,
+            "lines": 514,
+            "sha256": "ccf5a1b4068d9c6f44cd2553daad04f12400eab11bd8be56c4ddab2adc78d771"
+          },
+          {
+            "file": "src/commands/init.ts",
+            "bytes": 2170,
+            "lines": 72,
+            "sha256": "465d31b256ed258179d629aa7cbefac9d0a1e18aa0fc4f60957cb31a8c8b2300"
+          },
+          {
+            "file": "src/commands/menu.ts",
+            "bytes": 3435,
+            "lines": 83,
+            "sha256": "c22e2854149d8e0a7fec4c226b9ac5beb95d7f601a44a30186bf454543358759"
+          },
+          {
+            "file": "src/commands/metrics.ts",
+            "bytes": 3963,
+            "lines": 110,
+            "sha256": "e9879d0e13d1c30fb2f44e82f2278d068cfaff97e5271f95b3c51e827a3d147a"
+          },
+          {
+            "file": "src/commands/optimize.ts",
+            "bytes": 2186,
+            "lines": 49,
+            "sha256": "50a301ba7926bd3b591c5621ca0307cfdbe46f5f20a67af5515412e81d2cd0e6"
+          },
+          {
+            "file": "src/commands/project-type.ts",
+            "bytes": 320,
+            "lines": 9,
+            "sha256": "e32c174f4fd95ce46708b53a571d15cbff0e0e35216aa80aa40ee535eeac1eb7"
+          },
+          {
+            "file": "src/commands/register-built-in-commands.ts",
+            "bytes": 4264,
+            "lines": 115,
+            "sha256": "bbf0c578bbb3aef47de480761ec38d22c82be09d88107f81de93111fa5ce760d"
+          },
+          {
+            "file": "src/commands/review.ts",
+            "bytes": 1544,
+            "lines": 33,
+            "sha256": "1552ecc52804bf0a8368c7ba27d707ab92754e9041bb9c50af99e98d555f3c59"
+          },
+          {
+            "file": "src/commands/run.ts",
+            "bytes": 6754,
+            "lines": 224,
+            "sha256": "01b5b8e685e89f0f0ff4d090c613657bf64c52ba29f5debfccc0c44d57b47896"
+          },
+          {
+            "file": "src/commands/security-check.ts",
+            "bytes": 4243,
+            "lines": 110,
+            "sha256": "2aea84e338d6e6a630135f6eefc7c329cc3be6a220f3a48fe3f6cd4a02122ae8"
+          },
+          {
+            "file": "src/commands/status.ts",
+            "bytes": 3225,
+            "lines": 85,
+            "sha256": "67496ed1dbb184e6c7c60812d333e6635b4fe2f1b8f44e615a5a1d477378a942"
+          },
+          {
+            "file": "src/commands/suggest.ts",
+            "bytes": 474,
+            "lines": 17,
+            "sha256": "69b4686b5171d564266bf48cf1eaa68902e9b3760bedbe882dfdab91d9397308"
+          },
+          {
+            "file": "src/config/config.ts",
+            "bytes": 3273,
+            "lines": 105,
+            "sha256": "3d49a40a66bc68492b885e2df72485870369696efcfe2a1c50171c91bfc82450"
+          },
+          {
+            "file": "src/core/ai.ts",
+            "bytes": 9966,
+            "lines": 293,
+            "sha256": "db6305563f3ef6112f7bd25c952c771d45da22ed7773c42957e7a371606a8878"
+          },
+          {
+            "file": "src/core/check-findings.ts",
+            "bytes": 7172,
+            "lines": 171,
+            "sha256": "04e3184738edc02b2b23a21af05eebbb2e5370f18dea1b7351adcad1cd0b0d88"
+          },
+          {
+            "file": "src/core/check-policy.ts",
+            "bytes": 8680,
+            "lines": 193,
+            "sha256": "5fad1c9b6b43e7f9ca4b60f39bc0e0efb81ffbe7912d43c48f512c2411e81287"
+          },
+          {
+            "file": "src/core/check-presentation.ts",
+            "bytes": 7376,
+            "lines": 160,
+            "sha256": "61dc445253b801fd6f7cd6d4fb55be43bee6570d185958b2b9ef8277a19c211f"
+          },
+          {
+            "file": "src/core/check-prompt.ts",
+            "bytes": 1909,
+            "lines": 35,
+            "sha256": "29cb8d25d2a5e78c403133193f62cccdf6e70425b7fa5880f2653bc4f6e8a2e9"
+          },
+          {
+            "file": "src/core/command-presentation.ts",
+            "bytes": 1923,
+            "lines": 58,
+            "sha256": "f15b81664f789efd39026438159fcc975a46dab3d6aced16efd1789b4d51b87c"
+          },
+          {
+            "file": "src/core/command-runner.ts",
+            "bytes": 7458,
+            "lines": 192,
+            "sha256": "241e2993895af0c3b65a4883af6785e610f2e7d95b129a29f9fe6af55bdfbdeb"
+          },
+          {
+            "file": "src/core/committed-range.ts",
+            "bytes": 13930,
+            "lines": 337,
+            "sha256": "c4e2de966661408b177a697f38a626dfe5e26160e6de51d06486072566d6b0f2"
+          },
+          {
+            "file": "src/core/intent-routing.ts",
+            "bytes": 9217,
+            "lines": 287,
+            "sha256": "bd6deef32693b0c2f68922a7136dffb26f7282a5b20d535120658f886bf2be40"
+          },
+          {
+            "file": "src/core/logger.ts",
+            "bytes": 5350,
+            "lines": 196,
+            "sha256": "7887d6973db64a9d39161cfcf6bfdb31d9a66b2255cbe3347c9b6d09277a7254"
+          },
+          {
+            "file": "src/core/metrics.ts",
+            "bytes": 9847,
+            "lines": 338,
+            "sha256": "fc7e902aa7864a5910afb9955ebbb17419c90e4af40e43c05f97ec1416e77c93"
+          },
+          {
+            "file": "src/core/path-glob.ts",
+            "bytes": 3415,
+            "lines": 73,
+            "sha256": "590b8c042477244b4063fc5aab49f52dc1df8fd8df66987da76c8d3fcf5dd531"
+          },
+          {
+            "file": "src/core/prompts.ts",
+            "bytes": 5100,
+            "lines": 142,
+            "sha256": "55e01e2b21552135798f6ab62100cb0a67b6fee1b24afee4f2b38f9eb16f35ba"
+          },
+          {
+            "file": "src/core/runtime-diagnostic.ts",
+            "bytes": 1593,
+            "lines": 60,
+            "sha256": "dad340718eb28b63de89c6ec3ece64de693c36ed6d4853b7a5ef9ef547726ee3"
+          },
+          {
+            "file": "src/core/security.ts",
+            "bytes": 8032,
+            "lines": 250,
+            "sha256": "51d26bc49db6afdad506cb32df77a573733a24022836ea799bdadf51905252d5"
+          },
+          {
+            "file": "src/core/self-healing.ts",
+            "bytes": 8885,
+            "lines": 309,
+            "sha256": "12859860c15a46a5043cd310de4bc50c231998b5fd2007dd39c6858f35886149"
+          },
+          {
+            "file": "src/core/source-ingestion.ts",
+            "bytes": 4851,
+            "lines": 221,
+            "sha256": "f7c2e9a85822ff547e866cc5b4a4f734959a6bec192c39889a11b82f715ca7ae"
+          },
+          {
+            "file": "src/core/unified-patch.ts",
+            "bytes": 719,
+            "lines": 20,
+            "sha256": "b5953a43a43634d2eba578ed25f5560b0ea3a443067e7112fbe6291b342897fe"
+          },
+          {
+            "file": "src/index.ts",
+            "bytes": 994,
+            "lines": 26,
+            "sha256": "30957de070769ab761b19d0c7f5579f5befa3842bc5b3fc2c2acd55b549263e1"
+          },
+          {
+            "file": "src/nano/cli.ts",
+            "bytes": 4521,
+            "lines": 100,
+            "sha256": "8b662059f8ce50a6cef04cfea7c896e7ed55c0e04b397c6c3001943b9fe6c0e4"
+          },
+          {
+            "file": "src/nano/command-options.ts",
+            "bytes": 1382,
+            "lines": 32,
+            "sha256": "b9909fcb4b477ea41a6f840b8ffc21cd3b2d3ae2d05131564e14d3f699a2e33a"
+          },
+          {
+            "file": "src/nano/context.ts",
+            "bytes": 15493,
+            "lines": 309,
+            "sha256": "e3bc3f1a2f59352ffffae0bf8ac83095a77ffa2a90e889155eb71821bd79d1c5"
+          },
+          {
+            "file": "src/nano/discovery.ts",
+            "bytes": 12927,
+            "lines": 285,
+            "sha256": "8c0f8fe6153a1a7a01b8991ee11e016d0698e5127b1b8db7ee6443587b5a0e92"
+          },
+          {
+            "file": "src/nano/index.ts",
+            "bytes": 10705,
+            "lines": 240,
+            "sha256": "c4d8d8e8578124098abe41fe05e3410c13eed9172f4423f2e91273c5a56ed287"
+          },
+          {
+            "file": "src/nano/relationships.ts",
+            "bytes": 9437,
+            "lines": 194,
+            "sha256": "d73566a2cca93e83299b7a7f0c511f876c2cf859f55f5082bff4e8b05fbe24aa"
+          },
+          {
+            "file": "src/nano/symbols.ts",
+            "bytes": 3750,
+            "lines": 75,
+            "sha256": "a6794e27de0d6f69b4902696bffe906eef14e83d84d2848546d137eb055a3cde"
+          },
+          {
+            "file": "src/nano/syntax.ts",
+            "bytes": 898,
+            "lines": 18,
+            "sha256": "e2e52db24ec5383c27bb06987fab4097c9c9bec6f7b158bf43b15e0b8381b0fe"
+          },
+          {
+            "file": "src/utils/projectType.ts",
+            "bytes": 3684,
+            "lines": 91,
+            "sha256": "fe755a3b5fbd5d9ef9464b66b245487cec1d661d80e8ff04e7563fa62f4efbb9"
+          },
+          {
+            "file": "src/utils/ux.ts",
+            "bytes": 2144,
+            "lines": 69,
+            "sha256": "2de8c44cc220534c7b065c8628b6ad9cf624021e7f7861dab37e6f00bb72aa61"
+          }
+        ],
+        "totalLines": 7285,
+        "head": "68c9b3b18d9237354a1b184537b5b649871d4c5d"
+      }
+    },
+    "rules": [
+      "Full JSON facts and function source are independently extracted with Python and TypeScript parsers before model calls.",
+      "Source-only snapshots from real repos, no .env, data, sealed evals or installed dependencies. Gold stays outside agent workspaces.",
+      "Three fresh sessions per task per arm. Cyclic arm order changes by task and repeat.",
+      "Same project-only settings/tools/permissions in all arms. Plain has no Hydra skill; available/forced have identical frozen skills.",
+      "The available arm receives no instruction naming Hydra. The forced arm is explicitly told to use the skill.",
+      "Startup logs must prove the intended skill availability. Wrong model, permission denial or modified source invalidates the protocol.",
+      "Report all outcomes and predeclared equal-correctness comparisons. A factual failure is retained, never repaired by changing tasks mid-run.",
+      "Token figures are actual provider usage including cache creation/read. Cost equivalent is not a Pro-account bill."
+    ],
+    "commandExample": [
+      "claude",
+      "-p",
+      "Locate the definition of cast_value in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline.",
+      "--model",
+      "claude-opus-5-5",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--no-session-persistence",
+      "--strict-mcp-config",
+      "--mcp-config",
+      "{\"mcpServers\":{}}",
+      "--setting-sources",
+      "project",
+      "--settings",
+      "{\"disableAllHooks\":true,\"autoMemoryEnabled\":false,\"syncClaudeAiSkills\":false}",
+      "--tools",
+      "Bash,Read,Grep,Glob,Skill",
+      "--permission-mode",
+      "dontAsk",
+      "--max-budget-usd",
+      "0.5",
+      "--allowedTools",
+      "Read",
+      "Grep",
+      "Glob",
+      "Skill",
+      "Bash(rg *)",
+      "Bash(grep *)",
+      "Bash(sed *)",
+      "Bash(awk *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(sort *)",
+      "Bash(cut *)",
+      "Bash(tr *)",
+      "Bash(printf *)",
+      "Bash(echo *)",
+      "Bash(python3 *)",
+      "Bash(node *)",
+      "--append-system-prompt",
+      "Inspect this source snapshot with read-only tools. Return only the requested structured facts. Preserve source files, use no network commands, and resolve bundled skill scripts from the skill base directory. You may use another read-only tool when evidence is insufficient.",
+      "--json-schema",
+      "{\"type\":\"object\",\"properties\":{\"file\":{\"type\":\"string\"},\"startLine\":{\"type\":\"integer\"},\"endLine\":{\"type\":\"integer\"},\"source\":{\"type\":\"string\"}},\"required\":[\"file\",\"startLine\",\"endLine\",\"source\"],\"additionalProperties\":false}"
+    ]
+  },
+  "sessions": [
+    {
+      "task": "python_cast",
+      "repeat": 0,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator",
+        "plugin-authoring"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 2,
+      "toolErrors": 0,
+      "turns": 3,
+      "usageAvailable": true,
+      "inputTokens": 22814,
+      "outputTokens": 564,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 12285,
+        "cache_read_input_tokens": 10525,
+        "output_tokens": 564,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 12285,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 463,
+            "cache_read_input_tokens": 10525,
+            "cache_creation_input_tokens": 1760,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1760
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.111681,
+      "seconds": 8.038,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_cast",
+      "repeat": 0,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 2,
+      "toolErrors": 0,
+      "turns": 3,
+      "usageAvailable": true,
+      "inputTokens": 22912,
+      "outputTokens": 564,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 4264,
+        "cache_read_input_tokens": 18644,
+        "output_tokens": 564,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4264,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 463,
+            "cache_read_input_tokens": 10575,
+            "cache_creation_input_tokens": 1758,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1758
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.049136799999999994,
+      "seconds": 7.51,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_cast",
+      "repeat": 0,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 51168,
+      "outputTokens": 964,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 10881,
+        "cache_read_input_tokens": 40279,
+        "output_tokens": 964,
+        "output_tokens_details": {
+          "thinking_tokens": 49
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 10881,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 513,
+            "cache_read_input_tokens": 12609,
+            "cache_creation_input_tokens": 3164,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 3164
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.11441580000000001,
+      "seconds": 14.224,
+      "error": null,
+      "commandCalls": [
+        "node .claude/skills/hydra/scripts/hydra.mjs search cast_value",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/vasuki/expr.py cast_value; grep -c \"def cast_value\" -r src"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 0,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 5,
+      "usageAvailable": true,
+      "inputTokens": 35208,
+      "outputTokens": 1232,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 5759,
+        "cache_read_input_tokens": 29443,
+        "output_tokens": 1232,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 5759,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 898,
+            "cache_read_input_tokens": 11976,
+            "cache_creation_input_tokens": 678,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 678
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.07662460000000001,
+      "seconds": 13.4,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 0,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 49145,
+      "outputTokens": 1255,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 7091,
+        "cache_read_input_tokens": 42046,
+        "output_tokens": 1255,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 7091,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 898,
+            "cache_read_input_tokens": 12350,
+            "cache_creation_input_tokens": 1678,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1678
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0902692,
+      "seconds": 15.609,
+      "error": null,
+      "commandCalls": [
+        "node .claude/skills/hydra/scripts/hydra.mjs search _join",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/vasuki/ops.py _join; grep -n \"\" src/vasuki/ops.py | sed -n '360,420p'"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 0,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 5,
+      "usageAvailable": true,
+      "inputTokens": 34810,
+      "outputTokens": 1243,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4456,
+        "cache_read_input_tokens": 30348,
+        "output_tokens": 1243,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4456,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 898,
+            "cache_read_input_tokens": 11847,
+            "cache_creation_input_tokens": 676,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 676
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.06660160000000001,
+      "seconds": 13.504,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 0,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 48839,
+      "outputTokens": 1220,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 6613,
+        "cache_read_input_tokens": 42218,
+        "output_tokens": 1220,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 6613,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 12486,
+            "cache_creation_input_tokens": 1064,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1064
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0857796,
+      "seconds": 15.613,
+      "error": null,
+      "commandCalls": [
+        "node /Users/rivansh/.hydra/trials/real-repo/2026-10-10T11-57-49-798Z/typescript_config-r0-forced/.claude/skills/hydra/scripts/hydra.mjs search checkConfiguration",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/commands/health.ts checkConfiguration"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 0,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33056,
+      "outputTokens": 1000,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 5095,
+        "cache_read_input_tokens": 27955,
+        "output_tokens": 1000,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 5095,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 10619,
+            "cache_creation_input_tokens": 1371,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1371
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.066375,
+      "seconds": 11.758,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 0,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33518,
+      "outputTokens": 1020,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4078,
+        "cache_read_input_tokens": 29434,
+        "output_tokens": 1020,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4078,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 10783,
+            "cache_creation_input_tokens": 1367,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1367
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0589348,
+      "seconds": 12.33,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 0,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33765,
+      "outputTokens": 1721,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 5700,
+        "cache_read_input_tokens": 28059,
+        "output_tokens": 1721,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 5700,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 10718,
+            "cache_creation_input_tokens": 1877,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1877
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0856558,
+      "seconds": 16.809,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 0,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 34300,
+      "outputTokens": 1741,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4761,
+        "cache_read_input_tokens": 29533,
+        "output_tokens": 1741,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4761,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 10875,
+            "cache_creation_input_tokens": 1960,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1960
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.07883860000000001,
+      "seconds": 16.662,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 0,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 49635,
+      "outputTokens": 1823,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 7350,
+        "cache_read_input_tokens": 42277,
+        "output_tokens": 1823,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 7350,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 12533,
+            "cache_creation_input_tokens": 1754,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1754
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.10374740000000002,
+      "seconds": 19.473,
+      "error": null,
+      "commandCalls": [
+        "node .claude/skills/hydra/scripts/hydra.mjs search ingestCommittedRange",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/core/committed-range.ts ingestCommittedRange"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_cast",
+      "repeat": 1,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 2,
+      "toolErrors": 0,
+      "turns": 3,
+      "usageAvailable": true,
+      "inputTokens": 22912,
+      "outputTokens": 564,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 4264,
+        "cache_read_input_tokens": 18644,
+        "output_tokens": 564,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4264,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 463,
+            "cache_read_input_tokens": 10575,
+            "cache_creation_input_tokens": 1758,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1758
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.049136799999999994,
+      "seconds": 7.632,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_cast",
+      "repeat": 1,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 51023,
+      "outputTokens": 953,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 7479,
+        "cache_read_input_tokens": 43536,
+        "output_tokens": 953,
+        "output_tokens_details": {
+          "thinking_tokens": 48
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 7479,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 512,
+            "cache_read_input_tokens": 12626,
+            "cache_creation_input_tokens": 2964,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2964
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.08763119999999999,
+      "seconds": 14.167,
+      "error": null,
+      "commandCalls": [
+        "node /Users/rivansh/.hydra/trials/real-repo/2026-10-10T11-57-49-798Z/python_cast-r1-forced/.claude/skills/hydra/scripts/hydra.mjs search cast_value",
+        "node /Users/rivansh/.hydra/trials/real-repo/2026-10-10T11-57-49-798Z/python_cast-r1-forced/.claude/skills/hydra/scripts/hydra.mjs read src/vasuki/expr.py cast_value"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_cast",
+      "repeat": 1,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 2,
+      "toolErrors": 0,
+      "turns": 3,
+      "usageAvailable": true,
+      "inputTokens": 22636,
+      "outputTokens": 564,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 4126,
+        "cache_read_input_tokens": 18506,
+        "output_tokens": 564,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4126,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 463,
+            "cache_read_input_tokens": 10437,
+            "cache_creation_input_tokens": 1758,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1758
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0480052,
+      "seconds": 7.565,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 1,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 6,
+      "toolErrors": 0,
+      "turns": 8,
+      "usageAvailable": true,
+      "inputTokens": 76469,
+      "outputTokens": 1702,
+      "usage": {
+        "input_tokens": 12,
+        "cache_creation_input_tokens": 6237,
+        "cache_read_input_tokens": 70220,
+        "output_tokens": 1702,
+        "output_tokens_details": {
+          "thinking_tokens": 26
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 6237,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 898,
+            "cache_read_input_tokens": 13741,
+            "cache_creation_input_tokens": 605,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 605
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.098028,
+      "seconds": 23.309,
+      "error": null,
+      "commandCalls": [
+        "node /Users/rivansh/.hydra/trials/real-repo/2026-10-10T11-57-49-798Z/python_join-r1-forced/.claude/skills/hydra/scripts/hydra.mjs search _join",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/vasuki/ops.py _join; grep -n \"_join\" src/vasuki/ops.py"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 1,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 5,
+      "usageAvailable": true,
+      "inputTokens": 34810,
+      "outputTokens": 1243,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4456,
+        "cache_read_input_tokens": 30348,
+        "output_tokens": 1243,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4456,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 898,
+            "cache_read_input_tokens": 11847,
+            "cache_creation_input_tokens": 676,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 676
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.06660160000000001,
+      "seconds": 13.566,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 1,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 5,
+      "usageAvailable": true,
+      "inputTokens": 35275,
+      "outputTokens": 1241,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4652,
+        "cache_read_input_tokens": 30617,
+        "output_tokens": 1241,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4652,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 898,
+            "cache_read_input_tokens": 11978,
+            "cache_creation_input_tokens": 741,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 741
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0681834,
+      "seconds": 13.375,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 1,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33201,
+      "outputTokens": 1072,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 3989,
+        "cache_read_input_tokens": 29206,
+        "output_tokens": 1072,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 3989,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 10693,
+            "cache_creation_input_tokens": 1368,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1368
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0592172,
+      "seconds": 12.459,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 1,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33479,
+      "outputTokens": 999,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4060,
+        "cache_read_input_tokens": 29413,
+        "output_tokens": 999,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4060,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 10762,
+            "cache_creation_input_tokens": 1370,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1370
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0583666,
+      "seconds": 11.715,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 1,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 48679,
+      "outputTokens": 1114,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 5327,
+        "cache_read_input_tokens": 43344,
+        "output_tokens": 1114,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 5327,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 12435,
+            "cache_creation_input_tokens": 1006,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1006
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0735968,
+      "seconds": 15.028,
+      "error": null,
+      "commandCalls": [
+        "node .claude/skills/hydra/scripts/hydra.mjs search checkConfiguration",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/commands/health.ts checkConfiguration"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 1,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 34300,
+      "outputTokens": 1741,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4761,
+        "cache_read_input_tokens": 29533,
+        "output_tokens": 1741,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4761,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 10875,
+            "cache_creation_input_tokens": 1960,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1960
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.07883860000000001,
+      "seconds": 16.862,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 1,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 49792,
+      "outputTokens": 1931,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 6278,
+        "cache_read_input_tokens": 43506,
+        "output_tokens": 1931,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 6278,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 12585,
+            "cache_creation_input_tokens": 1809,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1809
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0975772,
+      "seconds": 19.88,
+      "error": null,
+      "commandCalls": [
+        "node /Users/rivansh/.hydra/trials/real-repo/2026-10-10T11-57-49-798Z/typescript_ingestion-r1-forced/.claude/skills/hydra/scripts/hydra.mjs search ingestCommittedRange",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/core/committed-range.ts ingestCommittedRange"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 1,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33929,
+      "outputTokens": 1721,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4687,
+        "cache_read_input_tokens": 29236,
+        "output_tokens": 1721,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4687,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 10716,
+            "cache_creation_input_tokens": 2045,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2045
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0777872,
+      "seconds": 16.933,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_cast",
+      "repeat": 2,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 50905,
+      "outputTokens": 891,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 7445,
+        "cache_read_input_tokens": 43452,
+        "output_tokens": 891,
+        "output_tokens_details": {
+          "thinking_tokens": 44
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 7445,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 508,
+            "cache_read_input_tokens": 12559,
+            "cache_creation_input_tokens": 2997,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2997
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0861024,
+      "seconds": 13.596,
+      "error": null,
+      "commandCalls": [
+        "node .claude/skills/hydra/scripts/hydra.mjs search cast_value",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/vasuki/expr.py cast_value; echo ---; sed -n '50,95p' src/vasuki/expr.py | cat -A | cut -c1-200"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_cast",
+      "repeat": 2,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 2,
+      "toolErrors": 0,
+      "turns": 3,
+      "usageAvailable": true,
+      "inputTokens": 22636,
+      "outputTokens": 564,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 4126,
+        "cache_read_input_tokens": 18506,
+        "output_tokens": 564,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4126,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 463,
+            "cache_read_input_tokens": 10437,
+            "cache_creation_input_tokens": 1758,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1758
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0480052,
+      "seconds": 7.785,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_cast",
+      "repeat": 2,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 2,
+      "toolErrors": 0,
+      "turns": 3,
+      "usageAvailable": true,
+      "inputTokens": 22912,
+      "outputTokens": 564,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 4264,
+        "cache_read_input_tokens": 18644,
+        "output_tokens": 564,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4264,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 463,
+            "cache_read_input_tokens": 10575,
+            "cache_creation_input_tokens": 1758,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1758
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.049136799999999994,
+      "seconds": 7.537,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 2,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 5,
+      "usageAvailable": true,
+      "inputTokens": 34810,
+      "outputTokens": 1243,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4456,
+        "cache_read_input_tokens": 30348,
+        "output_tokens": 1243,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4456,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 898,
+            "cache_read_input_tokens": 11847,
+            "cache_creation_input_tokens": 676,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 676
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.06660160000000001,
+      "seconds": 13.666,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 2,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 5,
+      "usageAvailable": true,
+      "inputTokens": 35266,
+      "outputTokens": 1232,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4643,
+        "cache_read_input_tokens": 30617,
+        "output_tokens": 1232,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4643,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 898,
+            "cache_read_input_tokens": 11978,
+            "cache_creation_input_tokens": 732,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 732
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0679314,
+      "seconds": 13.568,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "python_join",
+      "repeat": 2,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 6,
+      "toolErrors": 0,
+      "turns": 8,
+      "usageAvailable": true,
+      "inputTokens": 76494,
+      "outputTokens": 1808,
+      "usage": {
+        "input_tokens": 12,
+        "cache_creation_input_tokens": 6100,
+        "cache_read_input_tokens": 70382,
+        "output_tokens": 1808,
+        "output_tokens_details": {
+          "thinking_tokens": 69
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 6100,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1004,
+            "cache_read_input_tokens": 13913,
+            "cache_creation_input_tokens": 296,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 296
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0990844,
+      "seconds": 22.921,
+      "error": null,
+      "commandCalls": [
+        "node /Users/rivansh/.hydra/trials/real-repo/2026-10-10T11-57-49-798Z/python_join-r2-forced/.claude/skills/hydra/scripts/hydra.mjs search _join",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/vasuki/ops.py _join; echo ---; sed -n '360,420p' src/vasuki/ops.py | cat -A | cut -c1-200"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 2,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33479,
+      "outputTokens": 999,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4060,
+        "cache_read_input_tokens": 29413,
+        "output_tokens": 999,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4060,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 10762,
+            "cache_creation_input_tokens": 1370,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1370
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0583666,
+      "seconds": 11.761,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 2,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 48675,
+      "outputTokens": 1115,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 5327,
+        "cache_read_input_tokens": 43340,
+        "output_tokens": 1115,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 5327,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 12433,
+            "cache_creation_input_tokens": 1008,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1008
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.073616,
+      "seconds": 15.341,
+      "error": null,
+      "commandCalls": [
+        "node .claude/skills/hydra/scripts/hydra.mjs search checkConfiguration",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/commands/health.ts checkConfiguration"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 2,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33063,
+      "outputTokens": 1000,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 3923,
+        "cache_read_input_tokens": 29134,
+        "output_tokens": 1000,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 3923,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 770,
+            "cache_read_input_tokens": 10621,
+            "cache_creation_input_tokens": 1374,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1374
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0572348,
+      "seconds": 12.515,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 2,
+      "arm": "forced",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 2,
+      "hydraSuccessfulCalls": 2,
+      "skillInvocations": 1,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 4,
+      "toolErrors": 0,
+      "turns": 6,
+      "usageAvailable": true,
+      "inputTokens": 49774,
+      "outputTokens": 1929,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 6274,
+        "cache_read_input_tokens": 43492,
+        "output_tokens": 1929,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 6274,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 12578,
+            "cache_creation_input_tokens": 1812,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1812
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.09750240000000002,
+      "seconds": 19.996,
+      "error": null,
+      "commandCalls": [
+        "node /Users/rivansh/.hydra/trials/real-repo/2026-10-10T11-57-49-798Z/typescript_ingestion-r2-forced/.claude/skills/hydra/scripts/hydra.mjs search ingestCommittedRange",
+        "node .claude/skills/hydra/scripts/hydra.mjs read src/core/committed-range.ts ingestCommittedRange"
+      ],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 2,
+      "arm": "plain",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": false,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 33929,
+      "outputTokens": 1721,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4687,
+        "cache_read_input_tokens": 29236,
+        "output_tokens": 1721,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4687,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 10716,
+            "cache_creation_input_tokens": 2045,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2045
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0777872,
+      "seconds": 16.937,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 2,
+      "arm": "available",
+      "finished": true,
+      "correct": true,
+      "answer": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "model": "claude-opus-5-5",
+      "loadedSkills": [
+        "hydra",
+        "design",
+        "design-sync",
+        "dataviz",
+        "update-config",
+        "verify",
+        "debug",
+        "code-review",
+        "simplify",
+        "batch",
+        "fewer-permission-prompts",
+        "doctor",
+        "loop",
+        "schedule",
+        "claude-api",
+        "run",
+        "run-skill-generator"
+      ],
+      "skillAvailable": true,
+      "availabilityValid": true,
+      "permissionDenials": 0,
+      "hydraAttempts": 0,
+      "hydraSuccessfulCalls": 0,
+      "skillInvocations": 0,
+      "repeatedToolAttempts": 0,
+      "toolCalls": 3,
+      "toolErrors": 0,
+      "turns": 4,
+      "usageAvailable": true,
+      "inputTokens": 34118,
+      "outputTokens": 1720,
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 4600,
+        "cache_read_input_tokens": 29512,
+        "output_tokens": 1720,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 4600,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 1484,
+            "cache_read_input_tokens": 10854,
+            "cache_creation_input_tokens": 1820,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 1820
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "costUsd": 0.0771264,
+      "seconds": 16.704,
+      "error": null,
+      "commandCalls": [],
+      "sourceUnchanged": true,
+      "skillUnchanged": true
+    }
+  ],
+  "violations": [],
+  "summary": {
+    "byArm": {
+      "plain": {
+        "sessions": 12,
+        "correct": 12,
+        "adopted": 0,
+        "inputTokens": 373459,
+        "outputTokens": 13656,
+        "costUsd": 0.8315534,
+        "seconds": 151.53500000000003,
+        "toolCalls": 36,
+        "toolErrors": 0,
+        "permissionDenials": 0,
+        "repeatedToolAttempts": 0
+      },
+      "available": {
+        "sessions": 12,
+        "correct": 12,
+        "adopted": 0,
+        "inputTokens": 377679,
+        "outputTokens": 13617,
+        "costUsd": 0.7706214000000001,
+        "seconds": 149.056,
+        "toolCalls": 36,
+        "toolErrors": 0,
+        "permissionDenials": 0,
+        "repeatedToolAttempts": 0
+      },
+      "forced": {
+        "sessions": 12,
+        "correct": 12,
+        "adopted": 12,
+        "inputTokens": 650598,
+        "outputTokens": 16705,
+        "costUsd": 1.1073504,
+        "seconds": 209.157,
+        "toolCalls": 52,
+        "toolErrors": 0,
+        "permissionDenials": 0,
+        "repeatedToolAttempts": 0
+      }
+    },
+    "matchedBlocks": 12,
+    "matchedCorrectTokens": {
+      "plain": 387115,
+      "available": 391296,
+      "forced": 667303
+    },
+    "matchedReductionPct": {
+      "available": -1.08,
+      "forced": -72.38
+    }
+  },
+  "endedAt": "2026-10-10T12:10:57.138Z",
+  "durationSeconds": 513.896,
+  "comparable": true,
+  "comparisons": {
+    "available": {
+      "eligiblePairs": 12,
+      "distinctTasks": 4,
+      "totalTokenReductionPct": -1.0800408147449758,
+      "exploratory95PctClusterInterval": [
+        -1.1637910045610322,
+        -0.9790649480633684
+      ],
+      "byTask": [
+        {
+          "task": "python_cast",
+          "pairs": 3,
+          "reductionPct": -0.9315256957780349
+        },
+        {
+          "task": "python_join",
+          "pairs": 3,
+          "reductionPct": -1.1973113656746026
+        },
+        {
+          "task": "typescript_config",
+          "pairs": 3,
+          "reductionPct": -1.0762559574966746
+        },
+        {
+          "task": "typescript_ingestion",
+          "pairs": 3,
+          "reductionPct": -1.061936958028209
+        }
+      ]
+    },
+    "forced": {
+      "eligiblePairs": 12,
+      "distinctTasks": 4,
+      "totalTokenReductionPct": -72.37849217932654,
+      "exploratory95PctClusterInterval": [
+        -103.87946295599005,
+        -45.582231401007746
+      ],
+      "byTask": [
+        {
+          "task": "python_cast",
+          "pairs": 3,
+          "reductionPct": -123.42858780704522
+        },
+        {
+          "task": "python_join",
+          "pairs": 3,
+          "reductionPct": -91.26748583104502
+        },
+        {
+          "task": "typescript_config",
+          "pairs": 3,
+          "reductionPct": -46.14618329556996
+        },
+        {
+          "task": "typescript_ingestion",
+          "pairs": 3,
+          "reductionPct": -45.041484838836546
+        }
+      ]
+    }
+  },
+  "analysisCaveats": [
+    "Four real-source extraction tasks, not a broad end-to-end coding-workload benchmark; source snapshots contain no project config, data or installed dependencies.",
+    "Byte-exact source plus file and line numbers is the predeclared correctness criterion. Incomplete source cannot earn a saving.",
+    "Three repeated fresh sessions per task/arm; uncertainty is clustered by task, with only four distinct tasks. Intervals are exploratory.",
+    "The available arm measures skill availability and actual use; forced is explicit instruction. Skills not loaded invalidate the protocol.",
+    "All outcomes are retained. Pairwise equal-correctness subsets and full-triplet matched results were declared before calls.",
+    "Cached and uncached input are both counted. Cost equivalents depend on cache reuse and do not measure the Pro allowance."
+  ]
+}

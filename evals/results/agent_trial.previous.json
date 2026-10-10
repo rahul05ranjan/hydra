@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-10T10:03:38.505Z",
+  "totalScenarios": 12,
+  "targetSuccessRate": 100,
+  "totalRawTokens": 9580,
+  "totalHydraTokens": 2736,
+  "netTokensSaved": 6844,
+  "netSavingsPct": 71.4,
+  "byCategory": {
+    "read": {
+      "rawTokens": 5306,
+      "hydraTokens": 1487,
+      "savedTokens": 3819,
+      "savingsPct": 72
+    },
+    "files": {
+      "rawTokens": 65,
+      "hydraTokens": 516,
+      "savedTokens": 0,
+      "savingsPct": 0
+    },
+    "git": {
+      "rawTokens": 3382,
+      "hydraTokens": 533,
+      "savedTokens": 2849,
+      "savingsPct": 84.2
+    },
+    "test": {
+      "rawTokens": 827,
+      "hydraTokens": 200,
+      "savedTokens": 627,
+      "savingsPct": 75.8
+    }
+  },
+  "scenarios": [
+    {
+      "id": "read_symbol",
+      "name": "1. Read specific function symbol (sliceSymbol)",
+      "category": "read",
+      "rawTokens": 2177,
+      "hydraTokens": 844,
+      "savedTokens": 1333,
+      "savingsPct": 61.2,
+      "rawSeconds": 0.003,
+      "hydraSeconds": 0.027,
+      "targetFound": true
+    },
+    {
+      "id": "read_lines",
+      "name": "2. Targeted line slice (lines 20-50 of test_logs.mjs)",
+      "category": "read",
+      "rawTokens": 1467,
+      "hydraTokens": 369,
+      "savedTokens": 1098,
+      "savingsPct": 74.8,
+      "rawSeconds": 0.002,
+      "hydraSeconds": 0.023,
+      "targetFound": true
+    },
+    {
+      "id": "module_outline",
+      "name": "3. Structural outline of module exports (git.mjs)",
+      "category": "read",
+      "rawTokens": 1662,
+      "hydraTokens": 274,
+      "savedTokens": 1388,
+      "savingsPct": 83.5,
+      "rawSeconds": 0.002,
+      "hydraSeconds": 0.023,
+      "targetFound": true
+    },
+    {
+      "id": "def_search",
+      "name": "4. Definition-ranked code search for scoreHit",
+      "category": "files",
+      "rawTokens": 42,
+      "hydraTokens": 200,
+      "savedTokens": 0,
+      "savingsPct": 0,
+      "rawSeconds": 0.003,
+      "hydraSeconds": 0.035,
+      "targetFound": true
+    },
+    {
+      "id": "search_usages",
+      "name": "5. Search imports and usages of ledger.mjs",
+      "category": "files",
+      "rawTokens": 23,
+      "hydraTokens": 316,
+      "savedTokens": 0,
+      "savingsPct": 0,
+      "rawSeconds": 0.003,
+      "hydraSeconds": 0.035,
+      "targetFound": true
+    },
+    {
+      "id": "git_status",
+      "name": "6. Check uncommitted changes and branch status",
+      "category": "git",
+      "rawTokens": 59,
+      "hydraTokens": 32,
+      "savedTokens": 27,
+      "savingsPct": 45.8,
+      "rawSeconds": 0.009,
+      "hydraSeconds": 0.701,
+      "targetFound": true
+    },
+    {
+      "id": "git_last_commit",
+      "name": "7. Inspect what the last commit changed",
+      "category": "git",
+      "rawTokens": 2360,
+      "hydraTokens": 117,
+      "savedTokens": 2243,
+      "savingsPct": 95,
+      "rawSeconds": 0.012,
+      "hydraSeconds": 0.595,
+      "targetFound": true
+    },
+    {
+      "id": "git_recent_commits",
+      "name": "8. Check recent 5 commits",
+      "category": "git",
+      "rawTokens": 890,
+      "hydraTokens": 262,
+      "savedTokens": 628,
+      "savingsPct": 70.6,
+      "rawSeconds": 0.017,
+      "hydraSeconds": 0.691,
+      "targetFound": true
+    },
+    {
+      "id": "git_branches",
+      "name": "9. List local and remote branches",
+      "category": "git",
+      "rawTokens": 73,
+      "hydraTokens": 100,
+      "savedTokens": 0,
+      "savingsPct": 0,
+      "rawSeconds": 0.018,
+      "hydraSeconds": 0.157,
+      "targetFound": true
+    },
+    {
+      "id": "run_tests_pass",
+      "name": "10. Run test suite through hydra digest filter",
+      "category": "test",
+      "rawTokens": 467,
+      "hydraTokens": 32,
+      "savedTokens": 435,
+      "savingsPct": 93.1,
+      "rawSeconds": 0.322,
+      "hydraSeconds": 0.356,
+      "targetFound": true
+    },
+    {
+      "id": "run_test_failure",
+      "name": "11. Digest verbose failing test log",
+      "category": "test",
+      "rawTokens": 360,
+      "hydraTokens": 168,
+      "savedTokens": 192,
+      "savingsPct": 53.3,
+      "rawSeconds": 0.019,
+      "hydraSeconds": 0.523,
+      "targetFound": true
+    },
+    {
+      "id": "git_stashes",
+      "name": "12. Check stashed changes",
+      "category": "git",
+      "rawTokens": 0,
+      "hydraTokens": 22,
+      "savedTokens": 0,
+      "savingsPct": 0,
+      "rawSeconds": 0.016,
+      "hydraSeconds": 0.161,
+      "targetFound": true
+    }
+  ]
+}

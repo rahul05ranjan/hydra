@@ -1,0 +1,686 @@
+{
+  "date": "2026-10-10T11:09:47.075Z",
+  "model": "hydra-qwen3.5:0.8b-plan",
+  "durationSeconds": 2.438,
+  "tokenMethod": "ceil(characters / 4), output estimates only",
+  "baseline": "Targeted direct commands, same fixture and required facts",
+  "summary": {
+    "cases": 12,
+    "rawPassed": 12,
+    "hydraPassed": 12,
+    "rawTokens": 460,
+    "hydraTokens": 866,
+    "savedTokens": -406,
+    "savingsPct": -88.3
+  },
+  "equalCorrectness": {
+    "cases": 12,
+    "rawPassed": 12,
+    "hydraPassed": 12,
+    "rawTokens": 460,
+    "hydraTokens": 866,
+    "savedTokens": -406,
+    "savingsPct": -88.3
+  },
+  "byHead": {
+    "git": {
+      "cases": 5,
+      "rawPassed": 5,
+      "hydraPassed": 5,
+      "rawTokens": 172,
+      "hydraTokens": 330,
+      "savedTokens": -158,
+      "savingsPct": -91.9
+    },
+    "read": {
+      "cases": 3,
+      "rawPassed": 3,
+      "hydraPassed": 3,
+      "rawTokens": 170,
+      "hydraTokens": 302,
+      "savedTokens": -132,
+      "savingsPct": -77.6
+    },
+    "files": {
+      "cases": 2,
+      "rawPassed": 2,
+      "hydraPassed": 2,
+      "rawTokens": 72,
+      "hydraTokens": 131,
+      "savedTokens": -59,
+      "savingsPct": -81.9
+    },
+    "test": {
+      "cases": 2,
+      "rawPassed": 2,
+      "hydraPassed": 2,
+      "rawTokens": 46,
+      "hydraTokens": 103,
+      "savedTokens": -57,
+      "savingsPct": -123.9
+    }
+  },
+  "rows": [
+    {
+      "id": "read_symbol",
+      "head": "read",
+      "gold": {
+        "kind": "source",
+        "lines": [
+          "// Calculate a discounted basket total.",
+          "export function computeTotal(items, discount = 0) {",
+          "  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);",
+          "  return Math.round(subtotal * (1 - discount) * 100) / 100;",
+          "}"
+        ],
+        "start": 4
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 60,
+      "hydraTokens": 94,
+      "savedTokens": -34,
+      "raw": {
+        "argv": [
+          "awk",
+          "index($0, \"export function computeTotal(\")==1 {if (substr(prev,1,2)==\"//\") print prev; show=1} show {print} show && $0==\"}\" {exit} {prev=$0}",
+          "src/pricing.mjs"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "// Calculate a discounted basket total.\nexport function computeTotal(items, discount = 0) {\n  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);\n  return Math.round(subtotal * (1 - discount) * 100) / 100;\n}\n",
+        "stderr": "",
+        "seconds": 0.009
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "read",
+          "src/pricing.mjs",
+          "computeTotal"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "File: src/pricing.mjs (computeTotal at lines 4-8 of 194)\n\n4: // Calculate a discounted basket total.\n5: export function computeTotal(items, discount = 0) {\n6:   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);\n7:   return Math.round(subtotal * (1 - discount) * 100) / 100;\n8: }\n\n[hydra read · read ~2547 tok locally, returned ~64 tok · 0s]\n",
+        "stderr": "",
+        "seconds": 0.08
+      }
+    },
+    {
+      "id": "read_lines",
+      "head": "read",
+      "gold": {
+        "kind": "source",
+        "lines": [
+          "export function computeTotal(items, discount = 0) {",
+          "  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);",
+          "  return Math.round(subtotal * (1 - discount) * 100) / 100;",
+          "}",
+          "",
+          "export function isEligible(user) {",
+          "  return user.active && user.age >= 18;",
+          "}"
+        ],
+        "start": 5
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 70,
+      "hydraTokens": 103,
+      "savedTokens": -33,
+      "raw": {
+        "argv": [
+          "sed",
+          "-n",
+          "5,12p",
+          "src/pricing.mjs"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "export function computeTotal(items, discount = 0) {\n  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);\n  return Math.round(subtotal * (1 - discount) * 100) / 100;\n}\n\nexport function isEligible(user) {\n  return user.active && user.age >= 18;\n}\n",
+        "stderr": "",
+        "seconds": 0.008
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "read",
+          "src/pricing.mjs",
+          "--lines",
+          "5-12"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "File: src/pricing.mjs (lines 5-12 of 194)\n\n5: export function computeTotal(items, discount = 0) {\n6:   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);\n7:   return Math.round(subtotal * (1 - discount) * 100) / 100;\n8: }\n9: \n10: export function isEligible(user) {\n11:   return user.active && user.age >= 18;\n12: }\n\n[hydra read · read ~2547 tok locally, returned ~76 tok · 0s]\n",
+        "stderr": "",
+        "seconds": 0.061
+      }
+    },
+    {
+      "id": "outline",
+      "head": "read",
+      "gold": {
+        "kind": "definitions",
+        "names": [
+          "CURRENCY",
+          "computeTotal",
+          "isEligible",
+          "retryLimit"
+        ]
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 40,
+      "hydraTokens": 105,
+      "savedTokens": -65,
+      "raw": {
+        "argv": [
+          "rg",
+          "-n",
+          "^export (function|const) ",
+          "src/pricing.mjs"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "2:export const CURRENCY = \"USD\";\n5:export function computeTotal(items, discount = 0) {\n10:export function isEligible(user) {\n193:export const retryLimit = 3;\n",
+        "stderr": "",
+        "seconds": 0.021
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "read",
+          "src/pricing.mjs",
+          "--outline"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "File: src/pricing.mjs (194 lines, ~2547 tokens)\nOutline of definitions (4 symbols):\n  L2: export const CURRENCY = \"USD\";\n  L5: export function computeTotal(items, discount = 0) {\n  L10: export function isEligible(user) {\n  L193: export const retryLimit = 3;\n\n(To view a specific symbol or lines: hydra read src/pricing.mjs <symbol> or --lines <start-end>)\n\n[hydra read · read ~2547 tok locally, returned ~89 tok · 0s]\n",
+        "stderr": "",
+        "seconds": 0.063
+      }
+    },
+    {
+      "id": "definition",
+      "head": "files",
+      "gold": {
+        "kind": "hits",
+        "hits": [
+          "src/pricing.mjs:5:export function computeTotal(items, discount = 0) {",
+          "src/checkout.mjs:1:import { computeTotal } from \"./pricing.mjs\";",
+          "src/checkout.mjs:2:export const checkout = items => computeTotal(items, 0.1);"
+        ],
+        "definition": "src/pricing.mjs:5:"
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 55,
+      "hydraTokens": 78,
+      "savedTokens": -23,
+      "raw": {
+        "argv": [
+          "rg",
+          "-n",
+          "-F",
+          "--sort",
+          "path",
+          "computeTotal",
+          "."
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "./src/checkout.mjs:1:import { computeTotal } from \"./pricing.mjs\";\n./src/checkout.mjs:2:export const checkout = items => computeTotal(items, 0.1);\n./src/pricing.mjs:5:export function computeTotal(items, discount = 0) {\n",
+        "stderr": "",
+        "seconds": 0.011
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "search",
+          "computeTotal"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "Matches for \"computeTotal\":\n  src/pricing.mjs:5:export function computeTotal(items, discount = 0) {\n  src/checkout.mjs:2:export const checkout = items => computeTotal(items, 0.1);\n  src/checkout.mjs:1:import { computeTotal } from \"./pricing.mjs\";\n\n[hydra files · read ~210 tok locally, returned ~62 tok · 0.03s]\n",
+        "stderr": "",
+        "seconds": 0.088
+      }
+    },
+    {
+      "id": "usages",
+      "head": "files",
+      "gold": {
+        "kind": "hits",
+        "hits": [
+          "src/checkout.mjs:1:import { computeTotal } from \"./pricing.mjs\";"
+        ]
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 17,
+      "hydraTokens": 53,
+      "savedTokens": -36,
+      "raw": {
+        "argv": [
+          "rg",
+          "-n",
+          "-F",
+          "--sort",
+          "path",
+          "pricing.mjs",
+          "."
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "./src/checkout.mjs:1:import { computeTotal } from \"./pricing.mjs\";\n",
+        "stderr": "",
+        "seconds": 0.011
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "search",
+          "pricing.mjs"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "Files named like \"pricing.mjs\":\n  src/pricing.mjs\n\nMatches for \"pricing.mjs\":\n  src/checkout.mjs:1:import { computeTotal } from \"./pricing.mjs\";\n\n[hydra files · read ~132 tok locally, returned ~36 tok · 0.03s]\n",
+        "stderr": "",
+        "seconds": 0.083
+      }
+    },
+    {
+      "id": "status",
+      "head": "git",
+      "gold": {
+        "kind": "status",
+        "branch": "main",
+        "entries": [
+          "M  config.json",
+          " M src/checkout.mjs",
+          "?? scratch.txt"
+        ]
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 15,
+      "hydraTokens": 38,
+      "savedTokens": -23,
+      "raw": {
+        "argv": [
+          "git",
+          "status",
+          "--short",
+          "--branch"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "## main\nM  config.json\n M src/checkout.mjs\n?? scratch.txt\n",
+        "stderr": "",
+        "seconds": 0.025
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "which branch am I on and what files are changed or untracked?"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "$ git status --short --branch\n## main\nM  config.json\n M src/checkout.mjs\n?? scratch.txt\n\n[hydra git · read ~15 tok locally, returned ~22 tok · 0.3s]\n",
+        "stderr": "",
+        "seconds": 0.422
+      }
+    },
+    {
+      "id": "last_commit",
+      "head": "git",
+      "gold": {
+        "kind": "changes",
+        "files": [
+          "TRACKER.md"
+        ],
+        "subject": "Record that README and trial script stay private"
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 37,
+      "hydraTokens": 107,
+      "savedTokens": -70,
+      "raw": {
+        "argv": [
+          "git",
+          "show",
+          "--stat",
+          "--pretty=tformat:%h %ad %an: %s",
+          "--date=short",
+          "HEAD"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "251dd62 2026-10-01 Fixture Dev: Record that README and trial script stay private\n\n TRACKER.md | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+        "stderr": "",
+        "seconds": 0.026
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "what files changed in the last commit?"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "$ git show HEAD\n251dd62 2026-10-01 Fixture Dev: Record that README and trial script stay private\n---\n TRACKER.md | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n\ndiff --git a/TRACKER.md b/TRACKER.md\nindex d303466..9f5e785 100644\n--- a/TRACKER.md\n+++ b/TRACKER.md\n@@ -1 +1 @@\n-Release policy is pending.\n+Keep the README and trial script private in the release.\n\n[hydra git · read ~88 tok locally, returned ~92 tok · 0s]\n",
+        "stderr": "",
+        "seconds": 0.096
+      }
+    },
+    {
+      "id": "recent_commits",
+      "head": "git",
+      "gold": {
+        "kind": "commits",
+        "records": [
+          "251dd62 2026-10-01 Fixture Dev: Record that README and trial script stay private",
+          "8bcbe13 2026-10-01 Fixture Dev: Update reference notes 5",
+          "acb37c0 2026-10-01 Fixture Dev: Update reference notes 4",
+          "0ee3cf6 2026-10-01 Fixture Dev: Update reference notes 3",
+          "37f37ad 2026-10-01 Fixture Dev: Update reference notes 2"
+        ]
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 78,
+      "hydraTokens": 96,
+      "savedTokens": -18,
+      "raw": {
+        "argv": [
+          "git",
+          "log",
+          "--pretty=tformat:%h %ad %an: %s",
+          "--date=short",
+          "-n5"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "251dd62 2026-10-01 Fixture Dev: Record that README and trial script stay private\n8bcbe13 2026-10-01 Fixture Dev: Update reference notes 5\nacb37c0 2026-10-01 Fixture Dev: Update reference notes 4\n0ee3cf6 2026-10-01 Fixture Dev: Update reference notes 3\n37f37ad 2026-10-01 Fixture Dev: Update reference notes 2\n",
+        "stderr": "",
+        "seconds": 0.021
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "show the recent 5 commits"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "$ git log -n5\n251dd62 2026-10-01 Fixture Dev: Record that README and trial script stay private\n8bcbe13 2026-10-01 Fixture Dev: Update reference notes 5\nacb37c0 2026-10-01 Fixture Dev: Update reference notes 4\n0ee3cf6 2026-10-01 Fixture Dev: Update reference notes 3\n37f37ad 2026-10-01 Fixture Dev: Update reference notes 2\n\n[hydra git · read ~78 tok locally, returned ~81 tok · 0.2s]\n",
+        "stderr": "",
+        "seconds": 0.277
+      }
+    },
+    {
+      "id": "branches",
+      "head": "git",
+      "gold": {
+        "kind": "branches",
+        "names": [
+          "main",
+          "review"
+        ]
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 33,
+      "hydraTokens": 60,
+      "savedTokens": -27,
+      "raw": {
+        "argv": [
+          "git",
+          "branch",
+          "--all",
+          "-vv",
+          "--sort=-committerdate"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "* main   251dd62 Record that README and trial script stay private\n  review 251dd62 Record that README and trial script stay private\n",
+        "stderr": "",
+        "seconds": 0.021
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "which branches exist?"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "$ git branch --all -vv --sort=-committerdate\n* main   251dd62 Record that README and trial script stay private\n  review 251dd62 Record that README and trial script stay private\n\n[hydra git · read ~33 tok locally, returned ~44 tok · 0.1s]\n",
+        "stderr": "",
+        "seconds": 0.21
+      }
+    },
+    {
+      "id": "passing_tests",
+      "head": "test",
+      "gold": {
+        "kind": "log",
+        "lines": [
+          "Tests: 4 passed, 4 total",
+          "Failures: 0"
+        ]
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 10,
+      "hydraTokens": 44,
+      "savedTokens": -34,
+      "raw": {
+        "argv": [
+          "node",
+          "tools/filter.mjs",
+          "pass"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "Tests: 4 passed, 4 total\nFailures: 0\n",
+        "stderr": "",
+        "seconds": 0.091
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "run",
+          "--",
+          "node",
+          "tools/pass.mjs"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "$ node tools/pass.mjs (exit 0)\nAll tests passed.\nTests: 4 passed, 4 total\nFailures: 0\n(Verbose output withheld)\n\n[hydra test · read ~387 tok locally, returned ~28 tok · 0.1s]\n",
+        "stderr": "",
+        "seconds": 0.11
+      }
+    },
+    {
+      "id": "failing_tests",
+      "head": "test",
+      "gold": {
+        "kind": "log",
+        "lines": [
+          "FAIL src/pricing.test.ts > discounted basket",
+          "AssertionError: expected 19 to be 18",
+          "- Expected: 18",
+          "+ Received: 19",
+          "at src/pricing.test.ts:42:18"
+        ]
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 36,
+      "hydraTokens": 59,
+      "savedTokens": -23,
+      "raw": {
+        "argv": [
+          "node",
+          "tools/filter.mjs",
+          "fail"
+        ],
+        "exitCode": 1,
+        "error": null,
+        "stdout": "FAIL src/pricing.test.ts > discounted basket\nAssertionError: expected 19 to be 18\n- Expected: 18\n+ Received: 19\nat src/pricing.test.ts:42:18\n",
+        "stderr": "",
+        "seconds": 0.094
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "run",
+          "--",
+          "node",
+          "tools/fail.mjs"
+        ],
+        "exitCode": 1,
+        "error": null,
+        "stdout": "$ node tools/fail.mjs (exit 1)\nFAIL src/pricing.test.ts > discounted basket\nAssertionError: expected 19 to be 18\n- Expected: 18\n+ Received: 19\nat src/pricing.test.ts:42:18\n\n[hydra test · read ~423 tok locally, returned ~43 tok · 0.3s]\n",
+        "stderr": "",
+        "seconds": 0.363
+      }
+    },
+    {
+      "id": "stashes",
+      "head": "git",
+      "gold": {
+        "kind": "stash",
+        "records": [
+          "stash@{0}: On main: Reference draft"
+        ]
+      },
+      "rawCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "hydraCheck": {
+        "passed": true,
+        "failures": []
+      },
+      "rawTokens": 9,
+      "hydraTokens": 29,
+      "savedTokens": -20,
+      "raw": {
+        "argv": [
+          "git",
+          "stash",
+          "list"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "stash@{0}: On main: Reference draft\n",
+        "stderr": "",
+        "seconds": 0.028
+      },
+      "hydra": {
+        "argv": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "list the stashed changes"
+        ],
+        "exitCode": 0,
+        "error": null,
+        "stdout": "$ git stash list\nstash@{0}: On main: Reference draft\n\n[hydra git · read ~9 tok locally, returned ~13 tok · 0.1s]\n",
+        "stderr": "",
+        "seconds": 0.21
+      }
+    }
+  ]
+}

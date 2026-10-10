@@ -1,0 +1,250 @@
+{
+  "tasks": [
+    {
+      "id": "status",
+      "request": "Inspect this repository. Return the current branch and every changed or untracked file with its two-character git short-status code.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "branch": {
+            "type": "string"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "status"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "branch",
+          "changes"
+        ],
+        "additionalProperties": false
+      },
+      "unordered": "changes"
+    },
+    {
+      "id": "last_commit",
+      "request": "Which files were actually changed by the latest commit? Return the complete list of repository-relative filenames.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "files"
+        ],
+        "additionalProperties": false
+      },
+      "unordered": "files"
+    },
+    {
+      "id": "recent_commits",
+      "request": "Return the latest five commits, newest first, with each seven-character hash and the full commit subject.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "commits": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "hash": {
+                  "type": "string"
+                },
+                "subject": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "hash",
+                "subject"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "commits"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "id": "read_code",
+      "request": "Find computeTotal in src/pricing.mjs. Return its complete function source exactly as written (exclude the leading comment), and its numeric result for items [{\"price\":12.5,\"quantity\":2},{\"price\":3,\"quantity\":1}] with discount 0.15.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "source",
+          "value"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "id": "search",
+      "request": "Find the definition of computeTotal and every usage in src/checkout.mjs. Return repository-relative file paths and 1-based line numbers for the definition and each usage.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "definition": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "line": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "file",
+              "line"
+            ],
+            "additionalProperties": false
+          },
+          "usages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "file",
+                "line"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "definition",
+          "usages"
+        ],
+        "additionalProperties": false
+      },
+      "unordered": "usages"
+    },
+    {
+      "id": "failure",
+      "request": "Run node tools/fail.mjs. Report the failing test name, expected and received numeric values, source filename, line number and exit code. Use only facts in the log.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "test": {
+            "type": "string"
+          },
+          "expected": {
+            "type": "number"
+          },
+          "received": {
+            "type": "number"
+          },
+          "file": {
+            "type": "string"
+          },
+          "line": {
+            "type": "integer"
+          },
+          "exitCode": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "test",
+          "expected",
+          "received",
+          "file",
+          "line",
+          "exitCode"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "arms": [
+    "plain",
+    "hydra"
+  ],
+  "maximumSessions": 12,
+  "budgetPerSessionUsd": 0.5,
+  "configuredBudgetUsd": 6,
+  "maximumSeconds": 600,
+  "mode": "Explicit Hydra delegation vs direct tools; spontaneous skill adoption is not measured",
+  "fixture": "Hand-written controlled repository, independent of git1; not an end-to-end software-development benchmark",
+  "model": "Same Claude Code configured default in every fresh session; resolved model recorded from init events",
+  "launchExample": [
+    "claude",
+    "-p",
+    "Inspect this repository. Return the current branch and every changed or untracked file with its two-character git short-status code.",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--no-session-persistence",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "{\"mcpServers\":{}}",
+    "--disable-slash-commands",
+    "--setting-sources",
+    "",
+    "--tools",
+    "Bash,Read,Grep,Glob",
+    "--permission-mode",
+    "dontAsk",
+    "--max-budget-usd",
+    "0.5",
+    "--allowedTools",
+    "Read",
+    "Grep",
+    "Glob",
+    "Bash(git status *)",
+    "Bash(git log *)",
+    "Bash(git show *)",
+    "Bash(git branch *)",
+    "Bash(rg *)",
+    "Bash(sed *)",
+    "Bash(cat *)",
+    "Bash(node tools/fail.mjs)",
+    "Bash(node tools/pass.mjs)",
+    "Bash(node tools/filter.mjs *)",
+    "Bash(node /Users/rivansh/Desktop/code/hydra/evals/results/frontier/2026-10-10T11-01-43-773Z/runtime/hydra.mjs *)",
+    "--append-system-prompt",
+    "Inspect this repository using read-only commands. Do not edit files, access the network, or read outside this fixture except the provided Hydra runtime. Return only the requested structured answer. You may retry a failed tool call.\nFor git questions use node /Users/rivansh/Desktop/code/hydra/evals/results/frontier/2026-10-10T11-01-43-773Z/runtime/hydra.mjs ask --head git \"<question>\". For symbols use node /Users/rivansh/Desktop/code/hydra/evals/results/frontier/2026-10-10T11-01-43-773Z/runtime/hydra.mjs read <file> <symbol>. For searches use node /Users/rivansh/Desktop/code/hydra/evals/results/frontier/2026-10-10T11-01-43-773Z/runtime/hydra.mjs search <term>. For test logs use node /Users/rivansh/Desktop/code/hydra/evals/results/frontier/2026-10-10T11-01-43-773Z/runtime/hydra.mjs run -- <command>. Delegate these operations to Hydra first; if its evidence is insufficient, use a direct command. Hydra quotes evidence; reason from those lines yourself.",
+    "--json-schema",
+    "{\"type\":\"object\",\"properties\":{\"branch\":{\"type\":\"string\"},\"changes\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"},\"status\":{\"type\":\"string\"}},\"required\":[\"path\",\"status\"],\"additionalProperties\":false}}},\"required\":[\"branch\",\"changes\"],\"additionalProperties\":false}"
+  ]
+}

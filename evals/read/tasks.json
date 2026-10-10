@@ -1,0 +1,404 @@
+[
+  {
+    "id": "ts_function_slice",
+    "lang": "typescript",
+    "file": "src/auth/jwt.ts",
+    "content": "import jwt from 'jsonwebtoken';\nimport { User, TokenPayload } from './types';\n\nconst SECRET = process.env.JWT_SECRET || 'secret';\nconst EXPIRES_IN = '1h';\n\n// Generates a new JWT token for the authenticated user\nexport function generateToken(user: User): string {\n  const payload: TokenPayload = { id: user.id, role: user.role };\n  return jwt.sign(payload, SECRET, { expiresIn: EXPIRES_IN });\n}\n\n// Validates an incoming token and decodes its payload\nexport function validateToken(token: string): TokenPayload | null {\n  try {\n    const decoded = jwt.verify(token, SECRET) as TokenPayload;\n    if (!decoded.id) return null;\n    return decoded;\n  } catch (err) {\n    return null;\n  }\n}\n\nexport function revokeToken(token: string): boolean {\n  return true;\n}\n",
+    "query": {
+      "symbol": "validateToken"
+    },
+    "gold": {
+      "targetLines": [
+        "export function validateToken",
+        "jwt.verify(token, SECRET)",
+        "return decoded;"
+      ],
+      "forbiddenLines": [
+        "export function generateToken",
+        "export function revokeToken"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "ts_method_slice",
+    "lang": "typescript",
+    "file": "src/router.ts",
+    "content": "import { IncomingMessage, ServerResponse } from 'http';\n\nexport class ApiRouter {\n  private routes = new Map<string, Function>();\n\n  public register(path: string, handler: Function): void {\n    this.routes.set(path, handler);\n  }\n\n  // Handles incoming HTTP request and dispatches to registered route handler\n  public handleRequest(req: IncomingMessage, res: ServerResponse): void {\n    const url = req.url || '/';\n    const handler = this.routes.get(url);\n    if (!handler) {\n      res.statusCode = 404;\n      res.end('Not Found');\n      return;\n    }\n    handler(req, res);\n  }\n\n  public getRouteCount(): number {\n    return this.routes.size;\n  }\n}\n",
+    "query": {
+      "symbol": "handleRequest"
+    },
+    "gold": {
+      "targetLines": [
+        "public handleRequest",
+        "res.statusCode = 404",
+        "handler(req, res);"
+      ],
+      "forbiddenLines": [
+        "public register",
+        "public getRouteCount"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "ts_file_outline",
+    "lang": "typescript",
+    "file": "src/utils/format.ts",
+    "content": "export const DEFAULT_CURRENCY = 'USD';\nexport const LOCALE = 'en-US';\n\n/**\n * Formats numeric monetary value to standard localized currency string.\n */\nexport function formatCurrency(amount: number, currency: string = DEFAULT_CURRENCY): string {\n  if (isNaN(amount)) throw new TypeError('Amount must be a number');\n  return new Intl.NumberFormat(LOCALE, { style: 'currency', currency }).format(amount);\n}\n\n/**\n * Formats Date instance to standard ISO calendar date.\n */\nexport function formatDate(date: Date): string {\n  if (!(date instanceof Date) || isNaN(date.getTime())) {\n    throw new TypeError('Invalid date');\n  }\n  return date.toISOString().split('T')[0];\n}\n\n/**\n * Truncates text with trailing ellipsis when exceeding length.\n */\nexport function truncate(text: string, maxLen: number): string {\n  if (text.length <= maxLen) return text;\n  return text.slice(0, maxLen) + '...';\n}\n\nexport function padZero(num: number, targetLen: number = 2): string {\n  return String(num).padStart(targetLen, '0');\n}\n",
+    "query": {
+      "outline": true
+    },
+    "gold": {
+      "targetLines": [
+        "formatCurrency",
+        "formatDate",
+        "truncate",
+        "padZero"
+      ],
+      "forbiddenLines": [
+        "Intl.NumberFormat",
+        "toISOString().split",
+        "padStart(targetLen"
+      ],
+      "expectedKind": "outline"
+    }
+  },
+  {
+    "id": "py_def_slice",
+    "lang": "python",
+    "file": "services/tax.py",
+    "content": "TAX_TABLE = {\n    \"CA\": 0.0825,\n    \"NY\": 0.08875,\n    \"TX\": 0.0625,\n}\n\n# Calculates total tax for a transaction based on state rates\ndef calculate_tax(amount: float, state: str) -> float:\n    rate = TAX_TABLE.get(state.upper(), 0.0)\n    if amount <= 0:\n        return 0.0\n    return round(amount * rate, 2)\n\ndef list_states():\n    return list(TAX_TABLE.keys())\n",
+    "query": {
+      "symbol": "calculate_tax"
+    },
+    "gold": {
+      "targetLines": [
+        "def calculate_tax",
+        "rate = TAX_TABLE.get",
+        "round(amount * rate, 2)"
+      ],
+      "forbiddenLines": [
+        "def list_states"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "py_class_method_slice",
+    "lang": "python",
+    "file": "payments/gateway.py",
+    "content": "class StripeGateway:\n    def __init__(self, api_key: str):\n        self.api_key = api_key\n        self.client = None\n\n    # Processes charge against customer token\n    def process_charge(self, token: str, amount_cents: int) -> dict:\n        if amount_cents <= 0:\n            raise ValueError(\"Amount must be positive\")\n        charge = {\"id\": \"ch_123\", \"amount\": amount_cents, \"status\": \"succeeded\"}\n        return charge\n\n    def refund_charge(self, charge_id: str) -> bool:\n        return True\n",
+    "query": {
+      "symbol": "process_charge"
+    },
+    "gold": {
+      "targetLines": [
+        "def process_charge",
+        "raise ValueError",
+        "charge = {"
+      ],
+      "forbiddenLines": [
+        "def refund_charge",
+        "def __init__"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "py_file_outline",
+    "lang": "python",
+    "file": "ml/pipeline.py",
+    "content": "import os\nimport sys\n\nclass DataPreprocessor:\n    def __init__(self, batch_size=32):\n        self.batch_size = batch_size\n\n    def clean_text(self, text: str) -> str:\n        return text.strip().lower()\n\ndef load_dataset(path: str):\n    if not os.path.exists(path):\n        raise FileNotFoundError(f\"Missing {path}\")\n    return [{\"text\": \"sample\"}]\n\ndef train_model(data, epochs=10):\n    weights = [0.1] * len(data)\n    for _ in range(epochs):\n        pass\n    return \"trained_model\"\n\ndef evaluate_metrics(model, test_data):\n    if not test_data:\n        return {\"accuracy\": 0.0}\n    return {\"accuracy\": 0.95, \"f1\": 0.94}\n",
+    "query": {
+      "outline": true
+    },
+    "gold": {
+      "targetLines": [
+        "DataPreprocessor",
+        "load_dataset",
+        "train_model",
+        "evaluate_metrics"
+      ],
+      "forbiddenLines": [
+        "return {\"accuracy\": 0.95",
+        "self.batch_size = batch_size"
+      ],
+      "expectedKind": "outline"
+    }
+  },
+  {
+    "id": "rust_fn_slice",
+    "lang": "rust",
+    "file": "src/crypto/verifier.rs",
+    "content": "use sha2::{Sha256, Digest};\n\npub const HASH_LEN: usize = 32;\n\n/// Verifies cryptographic signature for payload against public key\npub fn verify_signature(payload: &[u8], signature: &[u8], pubkey: &[u8]) -> bool {\n    if signature.len() != 64 || pubkey.len() != 32 {\n        return false;\n    }\n    let mut hasher = Sha256::new();\n    hasher.update(payload);\n    let digest = hasher.finalize();\n    digest.len() == HASH_LEN\n}\n\npub fn hash_payload(data: &[u8]) -> Vec<u8> {\n    let mut hasher = Sha256::new();\n    hasher.update(data);\n    hasher.finalize().to_vec()\n}\n",
+    "query": {
+      "symbol": "verify_signature"
+    },
+    "gold": {
+      "targetLines": [
+        "pub fn verify_signature",
+        "Sha256::new()",
+        "digest.len() == HASH_LEN"
+      ],
+      "forbiddenLines": [
+        "pub fn hash_payload"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "rust_struct_slice",
+    "lang": "rust",
+    "file": "src/config.rs",
+    "content": "#[derive(Debug, Clone, PartialEq)]\npub struct ServerConfig {\n    pub host: String,\n    pub port: u16,\n    pub max_connections: usize,\n}\n\n#[derive(Debug, Clone)]\npub struct DatabaseConfig {\n    pub url: String,\n    pub pool_size: u32,\n}\n",
+    "query": {
+      "symbol": "ServerConfig"
+    },
+    "gold": {
+      "targetLines": [
+        "pub struct ServerConfig",
+        "pub host: String",
+        "pub port: u16"
+      ],
+      "forbiddenLines": [
+        "pub struct DatabaseConfig"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "go_func_slice",
+    "lang": "go",
+    "file": "server/server.go",
+    "content": "package server\n\nimport \"net/http\"\n\ntype Config struct {\n\tAddr string\n}\n\n// NewServer initializes http server with provided configuration\nfunc NewServer(cfg Config) *http.Server {\n\tmux := http.NewServeMux()\n\tmux.HandleFunc(\"/health\", func(w http.ResponseWriter, r *http.Request) {\n\t\tw.WriteHeader(http.StatusOK)\n\t\tw.Write([]byte(\"ok\"))\n\t})\n\treturn &http.Server{\n\t\tAddr:    cfg.Addr,\n\t\tHandler: mux,\n\t}\n}\n\nfunc StopServer(s *http.Server) error {\n\treturn s.Close()\n}\n",
+    "query": {
+      "symbol": "NewServer"
+    },
+    "gold": {
+      "targetLines": [
+        "func NewServer",
+        "http.NewServeMux()",
+        "return &http.Server"
+      ],
+      "forbiddenLines": [
+        "func StopServer"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "go_method_slice",
+    "lang": "go",
+    "file": "store/kv.go",
+    "content": "package store\n\ntype KVStore struct {\n\tdata map[string]string\n}\n\nfunc (s *KVStore) Get(key string) (string, bool) {\n\tval, ok := s.data[key]\n\treturn val, ok\n}\n\nfunc (s *KVStore) Set(key string, val string) {\n\ts.data[key] = val\n}\n",
+    "query": {
+      "symbol": "Get"
+    },
+    "gold": {
+      "targetLines": [
+        "func (s *KVStore) Get",
+        "val, ok := s.data[key]",
+        "return val, ok"
+      ],
+      "forbiddenLines": [
+        "func (s *KVStore) Set"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "js_async_arrow_slice",
+    "lang": "javascript",
+    "file": "lib/api.js",
+    "content": "const BASE_URL = 'https://api.internal';\n\nexport const fetchProfile = async (userId) => {\n  const res = await fetch(`${BASE_URL}/users/${userId}`);\n  if (!res.ok) throw new Error('user not found');\n  return res.json();\n};\n\nexport const updateProfile = async (userId, data) => {\n  return null;\n};\n",
+    "query": {
+      "symbol": "fetchProfile"
+    },
+    "gold": {
+      "targetLines": [
+        "export const fetchProfile",
+        "user not found",
+        "return res.json();"
+      ],
+      "forbiddenLines": [
+        "export const updateProfile"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "short_file_passthrough",
+    "lang": "json",
+    "file": "settings.json",
+    "content": "{\n  \"port\": 8080,\n  \"env\": \"production\",\n  \"cors\": true\n}\n",
+    "query": {},
+    "gold": {
+      "targetLines": [
+        "\"port\": 8080",
+        "\"env\": \"production\"",
+        "\"cors\": true"
+      ],
+      "forbiddenLines": [],
+      "expectedKind": "passthrough"
+    }
+  },
+  {
+    "id": "line_range_slice_1",
+    "lang": "text",
+    "file": "logs/data.txt",
+    "content": "record_1: metric_value_10\nrecord_2: metric_value_20\nrecord_3: metric_value_30\nrecord_4: metric_value_40\nrecord_5: metric_value_50\nrecord_6: metric_value_60\nrecord_7: metric_value_70\nrecord_8: metric_value_80\nrecord_9: metric_value_90\nrecord_10: metric_value_100\nrecord_11: metric_value_110\nrecord_12: metric_value_120\nrecord_13: metric_value_130\nrecord_14: metric_value_140\nrecord_15: metric_value_150\nrecord_16: metric_value_160\nrecord_17: metric_value_170\nrecord_18: metric_value_180\nrecord_19: metric_value_190\nrecord_20: metric_value_200\nrecord_21: metric_value_210\nrecord_22: metric_value_220\nrecord_23: metric_value_230\nrecord_24: metric_value_240\nrecord_25: metric_value_250\nrecord_26: metric_value_260\nrecord_27: metric_value_270\nrecord_28: metric_value_280\nrecord_29: metric_value_290\nrecord_30: metric_value_300\nrecord_31: metric_value_310\nrecord_32: metric_value_320\nrecord_33: metric_value_330\nrecord_34: metric_value_340\nrecord_35: metric_value_350\nrecord_36: metric_value_360\nrecord_37: metric_value_370\nrecord_38: metric_value_380\nrecord_39: metric_value_390\nrecord_40: metric_value_400",
+    "query": {
+      "lines": "12-16"
+    },
+    "gold": {
+      "targetLines": [
+        "12: record_12: metric_value_120",
+        "16: record_16: metric_value_160"
+      ],
+      "forbiddenLines": [
+        "11: record_11",
+        "17: record_17"
+      ],
+      "expectedKind": "lines"
+    }
+  },
+  {
+    "id": "line_range_slice_2",
+    "lang": "typescript",
+    "file": "src/constants.ts",
+    "content": "export const CONST_1 = 1;\nexport const CONST_2 = 2;\nexport const CONST_3 = 3;\nexport const CONST_4 = 4;\nexport const CONST_5 = 5;\nexport const CONST_6 = 6;\nexport const CONST_7 = 7;\nexport const CONST_8 = 8;\nexport const CONST_9 = 9;\nexport const CONST_10 = 10;\nexport const CONST_11 = 11;\nexport const CONST_12 = 12;\nexport const CONST_13 = 13;\nexport const CONST_14 = 14;\nexport const CONST_15 = 15;\nexport const CONST_16 = 16;\nexport const CONST_17 = 17;\nexport const CONST_18 = 18;\nexport const CONST_19 = 19;\nexport const CONST_20 = 20;\nexport const CONST_21 = 21;\nexport const CONST_22 = 22;\nexport const CONST_23 = 23;\nexport const CONST_24 = 24;\nexport const CONST_25 = 25;\nexport const CONST_26 = 26;\nexport const CONST_27 = 27;\nexport const CONST_28 = 28;\nexport const CONST_29 = 29;\nexport const CONST_30 = 30;",
+    "query": {
+      "lines": "5-9"
+    },
+    "gold": {
+      "targetLines": [
+        "5: export const CONST_5",
+        "9: export const CONST_9"
+      ],
+      "forbiddenLines": [
+        "4: export const CONST_4",
+        "10: export const CONST_10"
+      ],
+      "expectedKind": "lines"
+    }
+  },
+  {
+    "id": "nl_read_question_1",
+    "lang": "typescript",
+    "file": "src/math.ts",
+    "content": "export function add(a: number, b: number): number {\n  return a + b;\n}\n\nexport function subtract(a: number, b: number): number {\n  return a - b;\n}\n\nexport function multiply(a: number, b: number): number {\n  return a * b;\n}\n",
+    "question": "read subtract in src/math.ts",
+    "gold": {
+      "targetLines": [
+        "export function subtract",
+        "return a - b;"
+      ],
+      "forbiddenLines": [
+        "export function add",
+        "export function multiply"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "nl_read_question_2",
+    "lang": "python",
+    "file": "utils/auth.py",
+    "content": "def hash_password(raw_password: str) -> str:\n    import hashlib\n    return hashlib.sha256(raw_password.encode()).hexdigest()\n\ndef verify_password(raw_password: str, hashed: str) -> bool:\n    return hash_password(raw_password) == hashed\n",
+    "question": "show hash_password in utils/auth.py",
+    "gold": {
+      "targetLines": [
+        "def hash_password",
+        "hashlib.sha256"
+      ],
+      "forbiddenLines": [
+        "def verify_password"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "nl_read_lines",
+    "lang": "javascript",
+    "file": "routes.js",
+    "content": "// route handler 1\napp.get('/r1', handle1);\n// route handler 2\napp.get('/r2', handle2);\n// route handler 3\napp.get('/r3', handle3);\n// route handler 4\napp.get('/r4', handle4);\n// route handler 5\napp.get('/r5', handle5);\n// route handler 6\napp.get('/r6', handle6);\n// route handler 7\napp.get('/r7', handle7);\n// route handler 8\napp.get('/r8', handle8);\n// route handler 9\napp.get('/r9', handle9);\n// route handler 10\napp.get('/r10', handle10);\n// route handler 11\napp.get('/r11', handle11);\n// route handler 12\napp.get('/r12', handle12);\n// route handler 13\napp.get('/r13', handle13);\n// route handler 14\napp.get('/r14', handle14);\n// route handler 15\napp.get('/r15', handle15);\n// route handler 16\napp.get('/r16', handle16);\n// route handler 17\napp.get('/r17', handle17);\n// route handler 18\napp.get('/r18', handle18);\n// route handler 19\napp.get('/r19', handle19);\n// route handler 20\napp.get('/r20', handle20);\n// route handler 21\napp.get('/r21', handle21);\n// route handler 22\napp.get('/r22', handle22);\n// route handler 23\napp.get('/r23', handle23);\n// route handler 24\napp.get('/r24', handle24);\n// route handler 25\napp.get('/r25', handle25);\n// route handler 26\napp.get('/r26', handle26);\n// route handler 27\napp.get('/r27', handle27);\n// route handler 28\napp.get('/r28', handle28);\n// route handler 29\napp.get('/r29', handle29);\n// route handler 30\napp.get('/r30', handle30);\n// route handler 31\napp.get('/r31', handle31);\n// route handler 32\napp.get('/r32', handle32);\n// route handler 33\napp.get('/r33', handle33);\n// route handler 34\napp.get('/r34', handle34);\n// route handler 35\napp.get('/r35', handle35);\n// route handler 36\napp.get('/r36', handle36);\n// route handler 37\napp.get('/r37', handle37);\n// route handler 38\napp.get('/r38', handle38);\n// route handler 39\napp.get('/r39', handle39);\n// route handler 40\napp.get('/r40', handle40);\n// route handler 41\napp.get('/r41', handle41);\n// route handler 42\napp.get('/r42', handle42);\n// route handler 43\napp.get('/r43', handle43);\n// route handler 44\napp.get('/r44', handle44);\n// route handler 45\napp.get('/r45', handle45);\n// route handler 46\napp.get('/r46', handle46);\n// route handler 47\napp.get('/r47', handle47);\n// route handler 48\napp.get('/r48', handle48);\n// route handler 49\napp.get('/r49', handle49);\n// route handler 50\napp.get('/r50', handle50);",
+    "question": "slice lines 10-15 in routes.js",
+    "gold": {
+      "targetLines": [
+        "10:",
+        "15:"
+      ],
+      "forbiddenLines": [
+        "9:",
+        "16:"
+      ],
+      "expectedKind": "lines"
+    }
+  },
+  {
+    "id": "outline_rust_module",
+    "lang": "rust",
+    "file": "src/parser.rs",
+    "content": "pub struct ASTNode;\n\npub enum Token {\n    Ident(String),\n    Op(char),\n    Number(i64),\n}\n\npub fn parse_expression() -> ASTNode {\n    ASTNode\n}\n\npub fn parse_statement() -> ASTNode {\n    ASTNode\n}\n\npub fn tokenize(input: &str) -> Vec<Token> {\n    vec![]\n}\n",
+    "query": {
+      "outline": true
+    },
+    "gold": {
+      "targetLines": [
+        "ASTNode",
+        "Token",
+        "parse_expression",
+        "parse_statement",
+        "tokenize"
+      ],
+      "forbiddenLines": [
+        "vec![]"
+      ],
+      "expectedKind": "outline"
+    }
+  },
+  {
+    "id": "large_multi_symbol_ts",
+    "lang": "typescript",
+    "file": "src/path_utils.ts",
+    "content": "export function joinPaths(...parts: string[]): string {\n  return parts.join('/');\n}\n\n// Normalizes path separators and removes redundant dots\nexport function normalizePath(p: string): string {\n  const parts = p.replace(/\\\\/g, '/').split('/');\n  const kept: string[] = [];\n  for (const part of parts) {\n    if (part === '.' || !part) continue;\n    if (part === '..') kept.pop();\n    else kept.push(part);\n  }\n  return kept.join('/');\n}\n\nexport function getFileExt(p: string): string {\n  const idx = p.lastIndexOf('.');\n  return idx >= 0 ? p.slice(idx) : '';\n}\n",
+    "query": {
+      "symbol": "normalizePath"
+    },
+    "gold": {
+      "targetLines": [
+        "export function normalizePath",
+        "kept.join",
+        "redundant dots"
+      ],
+      "forbiddenLines": [
+        "export function joinPaths",
+        "export function getFileExt"
+      ],
+      "expectedKind": "symbol"
+    }
+  },
+  {
+    "id": "outline_python_module",
+    "lang": "python",
+    "file": "models/user.py",
+    "content": "class UserRole:\n    ADMIN = 'admin'\n    MEMBER = 'member'\n\nclass UserModel:\n    def __init__(self, name: str, role: str):\n        self.name = name\n        self.role = role\n\n    def is_admin(self) -> bool:\n        return self.role == UserRole.ADMIN\n\ndef get_current_user():\n    return UserModel(\"guest\", UserRole.MEMBER)\n\ndef list_all_roles():\n    return [UserRole.ADMIN, UserRole.MEMBER]\n",
+    "query": {
+      "outline": true
+    },
+    "gold": {
+      "targetLines": [
+        "UserRole",
+        "UserModel",
+        "get_current_user",
+        "list_all_roles"
+      ],
+      "forbiddenLines": [
+        "self.name = name",
+        "return UserModel(\"guest\""
+      ],
+      "expectedKind": "outline"
+    }
+  }
+]

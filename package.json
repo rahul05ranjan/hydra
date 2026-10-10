@@ -1,0 +1,29 @@
+{
+  "name": "hydra",
+  "version": "0.1.0",
+  "description": "Local specialist models that frontier coding agents delegate repo questions to",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "hydra": "skills/hydra/scripts/hydra.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "eval": "node evals/run.mjs",
+    "eval:build": "node evals/git1/build.mjs",
+    "eval:test": "node evals/test_logs/run.mjs",
+    "eval:test:build": "node evals/test_logs/build.mjs",
+    "eval:read": "node evals/read/run.mjs",
+    "eval:read:build": "node evals/read/build.mjs",
+    "eval:files": "node evals/files/run.mjs",
+    "eval:strict": "node evals/trial/strict_trial.mjs",
+    "eval:frontier:prepare": "node evals/trial/frontier_trial.mjs",
+    "eval:frontier": "node evals/trial/frontier_trial.mjs --run",
+    "eval:real:prepare": "node evals/trial/real_repo_trial.mjs",
+    "eval:real": "node evals/trial/real_repo_trial.mjs --run",
+    "dashboard": "node dashboard/server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

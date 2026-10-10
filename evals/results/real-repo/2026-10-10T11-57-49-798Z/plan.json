@@ -1,0 +1,342 @@
+{
+  "tasks": [
+    {
+      "id": "python_cast",
+      "repo": "vasuki",
+      "file": "src/vasuki/expr.py",
+      "symbol": "cast_value",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "startLine": {
+            "type": "integer"
+          },
+          "endLine": {
+            "type": "integer"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "file",
+          "startLine",
+          "endLine",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "expected": {
+        "file": "src/vasuki/expr.py",
+        "startLine": 57,
+        "endLine": 86,
+        "source": "def cast_value(value, to: str):\n    \"\"\"Convert one value to `int`, `float`, `str` or `bool`; null stays null.\"\"\"\n    if value is None:\n        return None\n    try:\n        if to == \"str\":\n            return _to_str(value)\n        if to == \"int\":\n            if isinstance(value, int):\n                return int(value)\n            if isinstance(value, str) and _INT.fullmatch(value.strip()):\n                return int(value.strip())\n            number = float(value)\n            if number == int(number):\n                return int(number)\n        elif to == \"float\":\n            number = float(value)\n            if math.isfinite(number):\n                return number\n        elif to == \"bool\":\n            if isinstance(value, bool):\n                return value\n            text = _to_str(value).strip().lower()\n            if text in _TRUE:\n                return True\n            if text in _FALSE:\n                return False\n    except (TypeError, ValueError, OverflowError):\n        pass\n    raise PlanError(\"type_error\", f\"cannot cast {type_name(value)} {value!r} to {to}\")"
+      },
+      "sourceFileHash": "adb0bc7f40cd88bd50c79a8c6b6b6914788f00c4ae44a1cb75af73cef8e61c63",
+      "sourceFileLines": 418,
+      "request": "Locate the definition of cast_value in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline."
+    },
+    {
+      "id": "python_join",
+      "repo": "vasuki",
+      "file": "src/vasuki/ops.py",
+      "symbol": "_join",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "startLine": {
+            "type": "integer"
+          },
+          "endLine": {
+            "type": "integer"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "file",
+          "startLine",
+          "endLine",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "expected": {
+        "file": "src/vasuki/ops.py",
+        "startLine": 369,
+        "endLine": 416,
+        "source": "def _join(step, columns, schemas):\n    right_name = step[\"right\"]\n    if right_name not in schemas:\n        raise unknown(\"table\", right_name, schemas)\n    right_columns = schemas[right_name]\n\n    if \"on\" in step:\n        if \"left_on\" in step or \"right_on\" in step:\n            raise PlanError(\"invalid_plan\", \"give either `on` or `left_on` with `right_on`, not both\")\n        left_keys = right_keys = step[\"on\"]\n    elif \"left_on\" in step and \"right_on\" in step:\n        left_keys, right_keys = step[\"left_on\"], step[\"right_on\"]\n        if len(left_keys) != len(right_keys):\n            raise PlanError(\"invalid_plan\", \"`left_on` and `right_on` must list the same number of columns\")\n    else:\n        raise PlanError(\"missing_field\", \"join needs `on`, or `left_on` with `right_on`\")\n    _need(left_keys, columns)\n    _need(right_keys, right_columns)\n\n    suffix = step.get(\"right_suffix\", \"_right\")\n    carried = {c: (c + suffix if c in columns else c) for c in right_columns if c not in right_keys}\n    out = [*columns, *carried.values()]\n    _unique(out)\n    keep_unmatched = step.get(\"how\", \"inner\") == \"left\"\n    blank = dict.fromkeys(carried.values())\n\n    def run(rows, tables):\n        right_rows = tables[right_name]\n        readers = [\n            _key_readers([row[l] for row in rows], [row[r] for row in right_rows])\n            for l, r in zip(left_keys, right_keys)\n        ]\n        index = defaultdict(list)\n        for row in right_rows:\n            if all(row[k] is not None for k in right_keys):\n                index[tuple(read(row[k]) for k, (_, read) in zip(right_keys, readers))].append(row)\n        result = []\n        for row in rows:\n            matches = ()\n            if all(row[k] is not None for k in left_keys):\n                matches = index.get(tuple(read(row[k]) for k, (read, _) in zip(left_keys, readers)), ())\n            for match in matches:\n                result.append({**row, **{new: match[old] for old, new in carried.items()}})\n            if not matches and keep_unmatched:\n                result.append({**row, **blank})\n        return result\n\n    return out, run"
+      },
+      "sourceFileHash": "71ca00e41af25f8d407593b5b0cb991445c66ca4c22fdde56b5e32b78f172f9d",
+      "sourceFileLines": 447,
+      "request": "Locate the definition of _join in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline."
+    },
+    {
+      "id": "typescript_config",
+      "repo": "dhruv",
+      "file": "src/commands/health.ts",
+      "symbol": "checkConfiguration",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "startLine": {
+            "type": "integer"
+          },
+          "endLine": {
+            "type": "integer"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "file",
+          "startLine",
+          "endLine",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "expected": {
+        "file": "src/commands/health.ts",
+        "startLine": 126,
+        "endLine": 191,
+        "source": "async function checkConfiguration(): Promise<HealthCheckResult[]> {\n  const results: HealthCheckResult[] = [];\n\n  try {\n    const config = loadConfig();\n\n    // Check if config file exists\n    const configPath = path.join(process.cwd(), '.dhruv-config.json');\n    if (fs.existsSync(configPath)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: 'Configuration file found and loaded successfully'\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'No configuration file found',\n        recommendation: 'Run \"dhruv init\" to create a configuration file'\n      });\n    }\n\n    // Check model configuration\n    if (config.model && config.model.trim().length > 0) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Model configured: ${config.model}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'fail',\n        message: 'No model configured',\n        recommendation: 'Set a model using \"dhruv init\" or --model flag'\n      });\n    }\n\n    // Check theme configuration\n    if (config.theme && ['default', 'dark', 'light', 'mono'].includes(config.theme)) {\n      results.push({\n        category: 'Configuration',\n        status: 'pass',\n        message: `Theme configured: ${config.theme}`\n      });\n    } else {\n      results.push({\n        category: 'Configuration',\n        status: 'warn',\n        message: 'Invalid or missing theme configuration',\n        recommendation: 'Set theme using \"dhruv init\"'\n      });\n    }\n\n  } catch (error) {\n    results.push({\n      category: 'Configuration',\n      status: 'fail',\n      message: `Configuration check failed: ${(error as Error).message}`,\n      details: error\n    });\n  }\n\n  return results;\n}"
+      },
+      "sourceFileHash": "ccf5a1b4068d9c6f44cd2553daad04f12400eab11bd8be56c4ddab2adc78d771",
+      "sourceFileLines": 514,
+      "request": "Locate the definition of checkConfiguration in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline."
+    },
+    {
+      "id": "typescript_ingestion",
+      "repo": "dhruv",
+      "file": "src/core/committed-range.ts",
+      "symbol": "ingestCommittedRange",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "startLine": {
+            "type": "integer"
+          },
+          "endLine": {
+            "type": "integer"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "file",
+          "startLine",
+          "endLine",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "expected": {
+        "file": "src/core/committed-range.ts",
+        "startLine": 273,
+        "endLine": 336,
+        "source": "export function ingestCommittedRange(range: ResolvedRange, selection: Partial<RangeSelection> = {}): CommittedRangeOutcome {\n  const { root, base, mergeBase, head } = range;\n  const limits = { ...DEFAULT_RANGE_LIMITS, ...selection };\n  const selected = pathSelector(selection.include ?? ['**'], selection.exclude ?? []);\n\n  const diffFlags = ['--no-ext-diff', '--no-textconv', '--no-color', '-M'];\n  const raw = git(root, ['diff', '--raw', '-z', ...diffFlags, mergeBase, head, '--']);\n  if (raw.status !== 0) return failure('git-error', 'Git could not list the changed files.');\n  const entries = parseRaw(raw.stdout);\n\n  const files: RangeFile[] = [];\n  const exclusions: RangeExclusion[] = [];\n  let considered = 0;\n  let totalBytes = PROMPT_OVERHEAD_BYTES;\n  const exclude = (path: string, reason: ExclusionReason) => exclusions.push({ path, reason });\n\n  entries.forEach((entry) => {\n    if (!selected(entry.path)) return exclude(entry.path, 'ignored');\n    const position = considered++;\n    if (entry.status === 'deleted') return exclude(entry.path, 'deleted');\n    if (!CODE_FILE.test(entry.path)) return exclude(entry.path, 'unsupported');\n    if (position >= limits.maxChangedFiles) return exclude(entry.path, 'file-limit');\n\n    const paths = entry.oldPath ? [entry.oldPath, entry.path] : [entry.path];\n    const diff = git(root, ['diff', `--unified=${RANGE_CONTEXT_LINES}`, ...diffFlags, mergeBase, head, '--', ...paths]);\n    if (diff.status !== 0) return exclude(entry.path, 'unreadable');\n    if (/^Binary files /m.test(diff.stdout) || /^GIT binary patch/m.test(diff.stdout)) return exclude(entry.path, 'binary');\n\n    const start = diff.stdout.search(/^@@ /m);\n    const full = start === -1 ? '' : diff.stdout.slice(start);\n    if (parseChangedLines(full).length === 0) return exclude(entry.path, 'no-line-changes');\n\n    const file = { path: entry.path, oldPath: entry.oldPath, status: entry.status };\n    const patch = fitHunks(full, file, limits.maxFileBytes);\n    const changedLines = parseChangedLines(patch);\n    if (changedLines.length === 0) return exclude(entry.path, 'oversized');\n    const selectedFile = { ...file, changedLines, patch };\n    const bytes = Buffer.byteLength(filePromptSection(selectedFile)) + (files.length > 0 ? PROMPT_SEPARATOR_BYTES : 0);\n    if (totalBytes + bytes > limits.maxTotalBytes) return exclude(entry.path, 'total-limit');\n    totalBytes += bytes;\n    files.push(selectedFile);\n    if (patch.length < full.length) exclude(entry.path, 'truncated');\n  });\n\n  const byReason = Object.fromEntries(EXCLUSION_REASONS.map((reason) => [reason, 0])) as Record<ExclusionReason, number>;\n  for (const { reason } of exclusions) byReason[reason]++;\n\n  return {\n    ok: true,\n    base,\n    mergeBase,\n    head,\n    files,\n    exclusions,\n    coverage: {\n      changedFiles: entries.length,\n      analyzedFiles: files.length,\n      skippedFiles: exclusions.length - byReason.truncated,\n      truncatedFiles: byReason.truncated,\n      complete: !COVERAGE_BREAKING.some((reason) => byReason[reason] > 0),\n      byReason,\n    },\n  };\n}"
+      },
+      "sourceFileHash": "c4e2de966661408b177a697f38a626dfe5e26160e6de51d06486072566d6b0f2",
+      "sourceFileLines": 337,
+      "request": "Locate the definition of ingestCommittedRange in this project's source. Return its repository-relative filename, 1-based first and last source line numbers, and complete function source exactly as written. Start at the def/async/function declaration (include export if present), omit decorators and comments before that declaration, include every nested function, body comment and docstring, and stop at the function's last body line/closing brace. Preserve indentation and blank lines inside the function. Use LF line separators, no code fences and no trailing newline."
+    }
+  ],
+  "schedule": [
+    {
+      "task": "python_cast",
+      "repeat": 0,
+      "arm": "plain"
+    },
+    {
+      "task": "python_cast",
+      "repeat": 0,
+      "arm": "available"
+    },
+    {
+      "task": "python_cast",
+      "repeat": 0,
+      "arm": "forced"
+    },
+    {
+      "task": "python_join",
+      "repeat": 0,
+      "arm": "available"
+    },
+    {
+      "task": "python_join",
+      "repeat": 0,
+      "arm": "forced"
+    },
+    {
+      "task": "python_join",
+      "repeat": 0,
+      "arm": "plain"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 0,
+      "arm": "forced"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 0,
+      "arm": "plain"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 0,
+      "arm": "available"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 0,
+      "arm": "plain"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 0,
+      "arm": "available"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 0,
+      "arm": "forced"
+    },
+    {
+      "task": "python_cast",
+      "repeat": 1,
+      "arm": "available"
+    },
+    {
+      "task": "python_cast",
+      "repeat": 1,
+      "arm": "forced"
+    },
+    {
+      "task": "python_cast",
+      "repeat": 1,
+      "arm": "plain"
+    },
+    {
+      "task": "python_join",
+      "repeat": 1,
+      "arm": "forced"
+    },
+    {
+      "task": "python_join",
+      "repeat": 1,
+      "arm": "plain"
+    },
+    {
+      "task": "python_join",
+      "repeat": 1,
+      "arm": "available"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 1,
+      "arm": "plain"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 1,
+      "arm": "available"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 1,
+      "arm": "forced"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 1,
+      "arm": "available"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 1,
+      "arm": "forced"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 1,
+      "arm": "plain"
+    },
+    {
+      "task": "python_cast",
+      "repeat": 2,
+      "arm": "forced"
+    },
+    {
+      "task": "python_cast",
+      "repeat": 2,
+      "arm": "plain"
+    },
+    {
+      "task": "python_cast",
+      "repeat": 2,
+      "arm": "available"
+    },
+    {
+      "task": "python_join",
+      "repeat": 2,
+      "arm": "plain"
+    },
+    {
+      "task": "python_join",
+      "repeat": 2,
+      "arm": "available"
+    },
+    {
+      "task": "python_join",
+      "repeat": 2,
+      "arm": "forced"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 2,
+      "arm": "available"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 2,
+      "arm": "forced"
+    },
+    {
+      "task": "typescript_config",
+      "repeat": 2,
+      "arm": "plain"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 2,
+      "arm": "forced"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 2,
+      "arm": "plain"
+    },
+    {
+      "task": "typescript_ingestion",
+      "repeat": 2,
+      "arm": "available"
+    }
+  ]
+}

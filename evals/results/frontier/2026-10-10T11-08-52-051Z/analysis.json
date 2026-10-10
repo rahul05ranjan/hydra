@@ -1,0 +1,205 @@
+{
+  "overall": {
+    "tasks": [
+      "status",
+      "last_commit",
+      "recent_commits",
+      "read_code",
+      "search",
+      "failure"
+    ],
+    "plain": {
+      "sessions": 6,
+      "inputTokens": 116179,
+      "outputTokens": 2036,
+      "totalTokens": 118215,
+      "seconds": 51.786,
+      "costEquivalentUsd": 0.4339304
+    },
+    "hydra": {
+      "sessions": 6,
+      "inputTokens": 110115,
+      "outputTokens": 2316,
+      "totalTokens": 112431,
+      "seconds": 51.411,
+      "costEquivalentUsd": 0.37482580000000004
+    },
+    "tokenReductionPct": 4.89,
+    "costEquivalentReductionPct": 13.62
+  },
+  "permissionUnconfoundedPairs": {
+    "tasks": [
+      "status",
+      "recent_commits",
+      "read_code",
+      "search"
+    ],
+    "plain": {
+      "sessions": 4,
+      "inputTokens": 65973,
+      "outputTokens": 1178,
+      "totalTokens": 67151,
+      "seconds": 30.17,
+      "costEquivalentUsd": 0.3331218
+    },
+    "hydra": {
+      "sessions": 4,
+      "inputTokens": 67429,
+      "outputTokens": 1491,
+      "totalTokens": 68920,
+      "seconds": 33.632000000000005,
+      "costEquivalentUsd": 0.21194800000000003
+    },
+    "tokenReductionPct": -2.63,
+    "costEquivalentReductionPct": 36.38
+  },
+  "byTask": [
+    {
+      "tasks": [
+        "status"
+      ],
+      "plain": {
+        "sessions": 1,
+        "inputTokens": 14136,
+        "outputTokens": 230,
+        "totalTokens": 14366,
+        "seconds": 8.371,
+        "costEquivalentUsd": 0.117672
+      },
+      "hydra": {
+        "sessions": 1,
+        "inputTokens": 16744,
+        "outputTokens": 319,
+        "totalTokens": 17063,
+        "seconds": 10.002,
+        "costEquivalentUsd": 0.042808200000000005
+      },
+      "tokenReductionPct": -18.77,
+      "costEquivalentReductionPct": 63.62
+    },
+    {
+      "tasks": [
+        "last_commit"
+      ],
+      "plain": {
+        "sessions": 1,
+        "inputTokens": 24469,
+        "outputTokens": 329,
+        "totalTokens": 24798,
+        "seconds": 12.356,
+        "costEquivalentUsd": 0.0441864
+      },
+      "hydra": {
+        "sessions": 1,
+        "inputTokens": 16818,
+        "outputTokens": 309,
+        "totalTokens": 17127,
+        "seconds": 8.241,
+        "costEquivalentUsd": 0.0772316
+      },
+      "tokenReductionPct": 30.93,
+      "costEquivalentReductionPct": -74.79
+    },
+    {
+      "tasks": [
+        "recent_commits"
+      ],
+      "plain": {
+        "sessions": 1,
+        "inputTokens": 15983,
+        "outputTokens": 284,
+        "totalTokens": 16267,
+        "seconds": 9.07,
+        "costEquivalentUsd": 0.0720172
+      },
+      "hydra": {
+        "sessions": 1,
+        "inputTokens": 16856,
+        "outputTokens": 381,
+        "totalTokens": 17237,
+        "seconds": 9.472,
+        "costEquivalentUsd": 0.0451236
+      },
+      "tokenReductionPct": -5.96,
+      "costEquivalentReductionPct": 37.34
+    },
+    {
+      "tasks": [
+        "read_code"
+      ],
+      "plain": {
+        "sessions": 1,
+        "inputTokens": 19708,
+        "outputTokens": 368,
+        "totalTokens": 20076,
+        "seconds": 6.488,
+        "costEquivalentUsd": 0.07051879999999999
+      },
+      "hydra": {
+        "sessions": 1,
+        "inputTokens": 16750,
+        "outputTokens": 414,
+        "totalTokens": 17164,
+        "seconds": 7.242,
+        "costEquivalentUsd": 0.07835080000000001
+      },
+      "tokenReductionPct": 14.5,
+      "costEquivalentReductionPct": -11.11
+    },
+    {
+      "tasks": [
+        "search"
+      ],
+      "plain": {
+        "sessions": 1,
+        "inputTokens": 16146,
+        "outputTokens": 296,
+        "totalTokens": 16442,
+        "seconds": 6.241,
+        "costEquivalentUsd": 0.0729138
+      },
+      "hydra": {
+        "sessions": 1,
+        "inputTokens": 17079,
+        "outputTokens": 377,
+        "totalTokens": 17456,
+        "seconds": 6.916,
+        "costEquivalentUsd": 0.04566540000000001
+      },
+      "tokenReductionPct": -6.17,
+      "costEquivalentReductionPct": 37.37
+    },
+    {
+      "tasks": [
+        "failure"
+      ],
+      "plain": {
+        "sessions": 1,
+        "inputTokens": 25737,
+        "outputTokens": 529,
+        "totalTokens": 26266,
+        "seconds": 9.26,
+        "costEquivalentUsd": 0.0566222
+      },
+      "hydra": {
+        "sessions": 1,
+        "inputTokens": 25868,
+        "outputTokens": 516,
+        "totalTokens": 26384,
+        "seconds": 9.538,
+        "costEquivalentUsd": 0.0856462
+      },
+      "tokenReductionPct": -0.45,
+      "costEquivalentReductionPct": -51.26
+    }
+  ],
+  "limitations": [
+    "Six hand-written repository-inspection tasks, one run per arm; not a broad or repeated coding-workload evaluation.",
+    "Explicit Hydra delegation was requested; spontaneous adoption was not measured. The Hydra arm sometimes also ran direct verification commands.",
+    "A whitelist denied git diff-tree in the direct last-commit task, and exit-code echo commands in both failure arms. The overall token reduction is confounded by these artificial permission retries.",
+    "The four no-permission-denial pairs exclude last_commit and failure; this subset is reported transparently and cannot substitute for a fresh predeclared trial.",
+    "Reported input tokens include cache creation and cache reads. Monetary figures are Claude Code reported API-cost equivalents, not a Pro-account bill or a measure of subscription allowance.",
+    "Cache reuse and arm order affect cost; task order alternated but each task had only one pair. Concurrent local training was recorded in TRACKER.md, so latency is exploratory.",
+    "The whitelist has been corrected for future runs. No additional paid run was started."
+  ]
+}

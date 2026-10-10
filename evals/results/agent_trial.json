@@ -1,0 +1,495 @@
+{
+  "date": "2026-10-10T10:43:55.937Z",
+  "model": "hydra-qwen3.5:0.8b-plan",
+  "repositories": {
+    "readAndSearch": "/Users/rivansh/Desktop/code/hydra",
+    "git": "/Users/rivansh/Desktop/code/vasuki"
+  },
+  "durationSeconds": 3.99,
+  "tokenMethod": "ceil(characters / 4), estimated output size only",
+  "scoringMethod": "Legacy substring check; empty raw output passes. Not full answer accuracy.",
+  "totalScenarios": 12,
+  "executionSuccessRate": 100,
+  "targetSuccessRate": 100,
+  "totalRawTokens": 9806,
+  "totalHydraTokens": 2619,
+  "netTokensSaved": 7187,
+  "netSavingsPct": 73.3,
+  "byCategory": {
+    "read": {
+      "rawTokens": 5475,
+      "hydraTokens": 1487,
+      "savedTokens": 3988,
+      "savingsPct": 72.8
+    },
+    "files": {
+      "rawTokens": 65,
+      "hydraTokens": 539,
+      "savedTokens": -474,
+      "savingsPct": -729.2
+    },
+    "git": {
+      "rawTokens": 3382,
+      "hydraTokens": 393,
+      "savedTokens": 2989,
+      "savingsPct": 88.4
+    },
+    "test": {
+      "rawTokens": 884,
+      "hydraTokens": 200,
+      "savedTokens": 684,
+      "savingsPct": 77.4
+    }
+  },
+  "scenarios": [
+    {
+      "id": "read_symbol",
+      "name": "1. Read specific function symbol (sliceSymbol)",
+      "category": "read",
+      "rawTokens": 2177,
+      "hydraTokens": 844,
+      "savedTokens": 1333,
+      "savingsPct": 61.2,
+      "rawSeconds": 0.003,
+      "hydraSeconds": 0.027,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/hydra",
+        "targetFact": "export function sliceSymbol",
+        "rawCommand": [
+          "cat",
+          "skills/hydra/scripts/lib/read.mjs"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "read",
+          "skills/hydra/scripts/lib/read.mjs",
+          "sliceSymbol"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "import { existsSync, readFileSync, statSync } from 'node:fs';\nimport path from 'node:path';\nimport { Unavailable } from './ollama.mjs';\n\nconst PASS_THROUGH = 800;\nconst MAX_FILE_BYTES = 1024 * 1024; // 1 MB limit for local slice reads\n\nconst TOP_LEVEL_PATTERNS = [\n  /^(?:export\\s+(?:default\\s+)?)?(?:async\\s+)?function\\s*([a-zA-Z0-9_$]+)/,\n  /^(?:export\\s+)?(?:class|interface|type|enum)\\s+([a-zA-Z0-9_$]+)/,\n  /^(?:export\\s+)?(?:const|let|var)\\s+([a-zA-Z0-9_$]+)\\s*=\\s*(?:async\\s*)?(?:\\([^)]*\\)|[a-zA-Z0-9_$]+)\\s*=>/,\n  /^(?:export\\s+)?(?:const|let|var)\\s+([a-zA-Z0-9_$]+)\\s*=/,\n  /^(?:async\\s+)?def\\s+([a-zA-Z0-9_]+)\\s*\\(/,\n  /^class\\s+([a-zA-Z0-9_]+)\\s*(?:\\(.*\\))?:/,\n  /^(?:pub(?:\\([^)]*\\))?\\s+)?(?:async\\s+)?fn\\s+([a-zA-Z0-9_]+)/,\n  /^(?:pub(?:\\([^)]*\\))?\\s+)?(?:struct|enum|trait|type)\\s+([a-zA-Z0-9_]+)/,\n  /^func\\s+(?:\\([^)]*\\)\\s+)?([a-zA-Z0-9_]+)\\s*\\(/,\n  /^type\\s+([a-zA-Z0-9_]+)\\s+(?:struct|interface)/,\n];\n\nexport function outline(content) {\n  const lines = content.split('\\n');\n  const items = [];\n\n  for (let i = 0; i < lines.length; i++) {\n    const line = lines[i];\n    const isExport = /^\\s*export\\b/.test(line);\n    const isTopLevel = /^\\S/.test(line);\n    if (!isExport && !isTopLevel) continue;\n\n    for (const pat of TOP_LEVEL_PATTERNS) {\n      const m = pat.exec(line.trim());\n      if (m) {\n        items.push({ line: i + 1, name: m[1], preview: line.trim().slice(0, 80) });\n        break;\n      }\n    }\n  }\n  return items;\n}\n\nexport function sliceLines(content, start, end) {\n  const lines = content.split('\\n');\n  const s = Math.max(1, start);\n  const e = Math.min(lines.length, end);\n  return lines.slice(s - 1, e).map((l, i) => `${s + i}: ${l}`).join('\\n');\n}\n\nexport function sliceSymbol(content, symbol, maxContext = 40) {\n  const lines = content.split('\\n');\n  const term = symbol.toLowerCase().trim();\n\n  let targetIndex = -1;\n  // Match definitions first\n  for (let i = 0; i < lines.length; i++) {\n    for (const pat of TOP_LEVEL_PATTERNS) {\n      const m = pat.exec(lines[i].trim());\n      if (m && m[1].toLowerCase() === term) {\n        targetIndex = i;\n        break;\n      }\n    }\n    if (targetIndex !== -1) break;\n  }\n\n  // Second pass: match class methods or functions: foo(...) {\n  if (targetIndex === -1) {\n    const methodPat = /^\\s*(?:async\\s+)?(?:get\\s+|set\\s+)?([a-zA-Z0-9_$]+)\\s*\\([^)]*\\)\\s*\\{/;\n    for (let i = 0; i < lines.length; i++) {\n      const m = methodPat.exec(lines[i]);\n      if (m && m[1].toLowerCase() === term) {\n        targetIndex = i;\n        break;\n      }\n    }\n  }\n\n  // Fallback: match any line with symbol as word\n  if (targetIndex === -1) {\n    const wordRe = new RegExp(`\\\\b${term}\\\\b`, 'i');\n    for (let i = 0; i < lines.length; i++) {\n      if (wordRe.test(lines[i])) {\n        targetIndex = i;\n        break;\n      }\n    }\n  }\n\n  if (targetIndex === -1) return null;\n\n  // Block boundary detection with braces\n  let end = targetIndex;\n  let braces = 0;\n  let sawBrace = false;\n\n  for (let i = targetIndex; i < Math.min(lines.length, targetIndex + 200); i++) {\n    // Strip comments, strings, and regexes before counting block braces\n    const cleanLine = lines[i]\n      .replace(/\\/\\/.*$/, '')\n      .replace(/'(?:\\\\.|[^'])*'/g, \"''\")\n      .replace(/\"(?:\\\\.|[^\"])*\"/g, '\"\"')\n      .replace(/`(?:\\\\.|[^`])*`/g, '``')\n      .replace(/\\/(?:\\\\.|[^/])+\\/[gimsuy]*/g, '//');\n\n    for (const ch of cleanLine) {\n      if (ch === '{') { braces++; sawBrace = true; }\n      else if (ch === '}') { braces--; }\n    }\n    end = i;\n    if (sawBrace && braces <= 0) break;\n  }\n\n  if (!sawBrace) {\n    // Indentation-based block detection (Python, YAML, etc.)\n    const leadMatch = lines[targetIndex].match(/^(\\s*)/);\n    const baseIndent = leadMatch ? leadMatch[1].length : 0;\n    let lastBlockLine = targetIndex;\n    for (let i = targetIndex + 1; i < lines.length; i++) {\n      const line = lines[i];\n      if (!line.trim()) continue;\n      const currIndent = line.match(/^(\\s*)/)[1].length;\n      if (currIndent <= baseIndent) break;\n      lastBlockLine = i;\n    }\n    if (lastBlockLine > targetIndex) {\n      end = lastBlockLine;\n    } else {\n      end = Math.min(lines.length - 1, targetIndex + maxContext);\n    }\n  }\n\n  // Include leading comment / docstring if present\n  let start = targetIndex;\n  while (start > 0 && /^\\s*(\\/\\/|#|\\/\\*|\\*)/.test(lines[start - 1])) {\n    start--;\n  }\n\n  const sliced = lines.slice(start, end + 1).map((l, idx) => `${start + idx + 1}: ${l}`).join('\\n');\n  return { start: start + 1, end: end + 1, text: sliced };\n}\n\nexport async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\n  const fullPath = path.isAbsolute(fileArg) ? fileArg : path.resolve(cwd, fileArg);\n  const relPath = path.relative(cwd, fullPath);\n\n  if (!existsSync(fullPath)) {\n    return { ok: false, error: `File not found: ${relPath}` };\n  }\n\n  const st = statSync(fullPath);\n  if (st.isDirectory()) {\n    return { ok: false, error: `Path is a directory, not a file: ${relPath}` };\n  }\n  if (st.size > MAX_FILE_BYTES) {\n    return { ok: false, error: `File is too large (>1 MB): ${relPath}` };\n  }\n\n  const content = readFileSync(fullPath, 'utf8');\n  const rawChars = content.length;\n  const linesCount = content.split('\\n').length;\n\n  // Short files: pass through verbatim unless a specific slice or outline is requested\n  if (rawChars <= PASS_THROUGH && !opts.lines && !opts.symbol && !opts.query && !opts.outline) {\n    const withNumbers = content.split('\\n').map((l, i) => `${i + 1}: ${l}`).join('\\n');\n    return {\n      ok: true,\n      text: `File: ${relPath} (${linesCount} lines, ${rawChars} chars)\\n\\n${withNumbers}`,\n      rawChars,\n      returnedChars: withNumbers.length,\n    };\n  }\n\n  // Explicit line range\n  if (opts.lines) {\n    const m = String(opts.lines).match(/^(\\d+)[:-](\\d+)$/);\n    if (m) {\n      const s = parseInt(m[1], 10);\n      const e = parseInt(m[2], 10);\n      const sliced = sliceLines(content, s, e);\n      return {\n        ok: true,\n        text: `File: ${relPath} (lines ${s}-${e} of ${linesCount})\\n\\n${sliced}`,\n        rawChars,\n        returnedChars: sliced.length,\n      };\n    }\n  }\n\n  // Symbol or search term\n  if (opts.symbol || opts.query) {\n    const sym = opts.symbol || opts.query;\n    const res = sliceSymbol(content, sym);\n    if (res) {\n      return {\n        ok: true,\n        text: `File: ${relPath} (${sym} at lines ${res.start}-${res.end} of ${linesCount})\\n\\n${res.text}`,\n        rawChars,\n        returnedChars: res.text.length,\n      };\n    }\n  }\n\n  // Large file without specific symbol, or explicit outline: show structural outline\n  const symbols = outline(content);\n  let summary = `File: ${relPath} (${linesCount} lines, ~${Math.round(rawChars / 4)} tokens)\\n`;\n  if (symbols.length > 0) {\n    summary += `Outline of definitions (${symbols.length} symbols):\\n`;\n    summary += symbols.map(s => `  L${s.line}: ${s.preview}`).join('\\n');\n    summary += `\\n\\n(To view a specific symbol or lines: hydra read ${relPath} <symbol> or --lines <start-end>)`;\n  } else {\n    // If no symbols found (e.g. text/data file), show head\n    const head = sliceLines(content, 1, 30);\n    summary += `Head (lines 1-30 of ${linesCount}):\\n\\n${head}\\n\\n(To read more lines: hydra read ${relPath} --lines <start-end>)`;\n  }\n\n  return {\n    ok: true,\n    text: summary,\n    rawChars,\n    returnedChars: summary.length,\n  };\n}\n\nexport async function gather(question, cwd, chat) {\n  // Extract file path from question (e.g. \"read src/auth.ts\" or \"show handleLogin in src/auth.ts\")\n  const fileMatch = question.match(/\\b([a-zA-Z0-9_\\-./]+\\.[a-zA-Z0-9_]+)\\b/);\n  if (!fileMatch) {\n    return [{ cmd: 'read', out: 'No file path found in question. Specify a path like: hydra read <path> [symbol]' }];\n  }\n\n  const file = fileMatch[1];\n  // Extract line range if present\n  const linesMatch = question.match(/\\b(?:lines?\\s+)?(\\d+[:-]\\d+)\\b/i);\n  const lines = linesMatch ? linesMatch[1] : undefined;\n\n  const isOutline = /\\boutline\\b/i.test(question);\n\n  // Extract possible symbol/term from question (excluding common question words and the filename)\n  const words = question.replace(file, '').replace(/[^a-zA-Z0-9_]/g, ' ').split(/\\s+/).filter(w => w.length > 2);\n  const STOP = new Set([\n    'how', 'what', 'where', 'show', 'read', 'slice', 'tell', 'file', 'code', 'function',\n    'class', 'does', 'work', 'defined', 'explain', 'lines', 'line', 'outline', 'in', 'the',\n    'of', 'from', 'at',\n  ]);\n  const term = words.find(w => !STOP.has(w.toLowerCase()));\n\n  const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);\n  return [{ cmd: `read ${file}${term ? ` ${term}` : lines ? ` ${lines}` : isOutline ? ' outline' : ''}`, out: res.ok ? res.text : res.error }];\n}\n",
+        "rawStderr": "",
+        "hydraStdout": "File: skills/hydra/scripts/lib/read.mjs (sliceSymbol at lines 49-140 of 250)\n\n49: export function sliceSymbol(content, symbol, maxContext = 40) {\n50:   const lines = content.split('\\n');\n51:   const term = symbol.toLowerCase().trim();\n52: \n53:   let targetIndex = -1;\n54:   // Match definitions first\n55:   for (let i = 0; i < lines.length; i++) {\n56:     for (const pat of TOP_LEVEL_PATTERNS) {\n57:       const m = pat.exec(lines[i].trim());\n58:       if (m && m[1].toLowerCase() === term) {\n59:         targetIndex = i;\n60:         break;\n61:       }\n62:     }\n63:     if (targetIndex !== -1) break;\n64:   }\n65: \n66:   // Second pass: match class methods or functions: foo(...) {\n67:   if (targetIndex === -1) {\n68:     const methodPat = /^\\s*(?:async\\s+)?(?:get\\s+|set\\s+)?([a-zA-Z0-9_$]+)\\s*\\([^)]*\\)\\s*\\{/;\n69:     for (let i = 0; i < lines.length; i++) {\n70:       const m = methodPat.exec(lines[i]);\n71:       if (m && m[1].toLowerCase() === term) {\n72:         targetIndex = i;\n73:         break;\n74:       }\n75:     }\n76:   }\n77: \n78:   // Fallback: match any line with symbol as word\n79:   if (targetIndex === -1) {\n80:     const wordRe = new RegExp(`\\\\b${term}\\\\b`, 'i');\n81:     for (let i = 0; i < lines.length; i++) {\n82:       if (wordRe.test(lines[i])) {\n83:         targetIndex = i;\n84:         break;\n85:       }\n86:     }\n87:   }\n88: \n89:   if (targetIndex === -1) return null;\n90: \n91:   // Block boundary detection with braces\n92:   let end = targetIndex;\n93:   let braces = 0;\n94:   let sawBrace = false;\n95: \n96:   for (let i = targetIndex; i < Math.min(lines.length, targetIndex + 200); i++) {\n97:     // Strip comments, strings, and regexes before counting block braces\n98:     const cleanLine = lines[i]\n99:       .replace(/\\/\\/.*$/, '')\n100:       .replace(/'(?:\\\\.|[^'])*'/g, \"''\")\n101:       .replace(/\"(?:\\\\.|[^\"])*\"/g, '\"\"')\n102:       .replace(/`(?:\\\\.|[^`])*`/g, '``')\n103:       .replace(/\\/(?:\\\\.|[^/])+\\/[gimsuy]*/g, '//');\n104: \n105:     for (const ch of cleanLine) {\n106:       if (ch === '{') { braces++; sawBrace = true; }\n107:       else if (ch === '}') { braces--; }\n108:     }\n109:     end = i;\n110:     if (sawBrace && braces <= 0) break;\n111:   }\n112: \n113:   if (!sawBrace) {\n114:     // Indentation-based block detection (Python, YAML, etc.)\n115:     const leadMatch = lines[targetIndex].match(/^(\\s*)/);\n116:     const baseIndent = leadMatch ? leadMatch[1].length : 0;\n117:     let lastBlockLine = targetIndex;\n118:     for (let i = targetIndex + 1; i < lines.length; i++) {\n119:       const line = lines[i];\n120:       if (!line.trim()) continue;\n121:       const currIndent = line.match(/^(\\s*)/)[1].length;\n122:       if (currIndent <= baseIndent) break;\n123:       lastBlockLine = i;\n124:     }\n125:     if (lastBlockLine > targetIndex) {\n126:       end = lastBlockLine;\n127:     } else {\n128:       end = Math.min(lines.length - 1, targetIndex + maxContext);\n129:     }\n130:   }\n131: \n132:   // Include leading comment / docstring if present\n133:   let start = targetIndex;\n134:   while (start > 0 && /^\\s*(\\/\\/|#|\\/\\*|\\*)/.test(lines[start - 1])) {\n135:     start--;\n136:   }\n137: \n138:   const sliced = lines.slice(start, end + 1).map((l, idx) => `${start + idx + 1}: ${l}`).join('\\n');\n139:   return { start: start + 1, end: end + 1, text: sliced };\n140: }\n\n[hydra read · read ~2177 tok locally, returned ~809 tok · 0s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "read_lines",
+      "name": "2. Targeted line slice (lines 20-50 of test_logs.mjs)",
+      "category": "read",
+      "rawTokens": 1467,
+      "hydraTokens": 369,
+      "savedTokens": 1098,
+      "savingsPct": 74.8,
+      "rawSeconds": 0.002,
+      "hydraSeconds": 0.024,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/hydra",
+        "targetFact": "extractFailureCandidates",
+        "rawCommand": [
+          "cat",
+          "skills/hydra/scripts/lib/test_logs.mjs"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "read",
+          "skills/hydra/scripts/lib/test_logs.mjs",
+          "20-50"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "import { existsSync } from 'node:fs';\nimport path from 'node:path';\nimport { run } from './exec.mjs';\nimport { Unavailable } from './ollama.mjs';\n\nconst PASS_THROUGH = 800;\nconst MAX_CANDIDATES = 60;\nconst MAX_CITED = 12;\n\nconst SYSTEM = `You summarize test failures or build errors. Each line has its line number in brackets [N].\nReply with JSON:\n- summary: one clear sentence explaining what failed, the error reason/diff, and the source file.\n- lines: array of line numbers in brackets showing the failure headers, assertion diffs, and source locations.`;\n\nconst SCHEMA = {\n  type: 'object',\n  properties: {\n    summary: { type: 'string' },\n    lines: { type: 'array', items: { type: 'integer' }, maxItems: MAX_CITED },\n  },\n  required: ['summary', 'lines'],\n};\n\n// Heuristic identification of test failures, assertion diffs, and source lines\nexport function extractFailureCandidates(logText) {\n  const lines = logText.split('\\n');\n  const candidateIndices = new Set();\n\n  const ERROR_START = /(?:^|\\s)(?:FAIL(?:ED)?|[●•]|error(?:\\[E\\d+\\]| TS\\d+)?|panicked at|AssertionError|assert\\s|assertion\\s|Expected:|Received:|- Snapshot|--- FAIL:|____+\\s+\\w+)/i;\n  const USER_STACK = /\\b([a-zA-Z0-9_\\-./]+\\.(?:ts|tsx|js|jsx|py|rs|go|java|c|cpp|rb)):(\\d+)(?::(\\d+))?/;\n  const IGNORE_STACK = /(?:node_modules|site-packages|\\.cargo\\/registry|internal\\/process|\\bat <anonymous>:\\d+|\\(<anonymous>:\\d+|\\/usr\\/(?:local\\/)?lib\\/python|\\/lib\\/python)/;\n\n  for (let i = 0; i < lines.length; i++) {\n    const line = lines[i];\n\n    if (ERROR_START.test(line)) {\n      for (let j = Math.max(0, i - 1); j <= Math.min(lines.length - 1, i + 5); j++) {\n        if (!IGNORE_STACK.test(lines[j])) {\n          candidateIndices.add(j);\n        }\n      }\n    }\n\n    if (USER_STACK.test(line) && !IGNORE_STACK.test(line)) {\n      candidateIndices.add(i);\n    }\n  }\n\n  // Include trailing summary lines\n  for (let i = Math.max(0, lines.length - 8); i < lines.length; i++) {\n    if (/(?:failed|passed|errors|finished in|Test Files|Tests\\s+\\d+)/i.test(lines[i])) {\n      candidateIndices.add(i);\n    }\n  }\n\n  return Array.from(candidateIndices)\n    .sort((a, b) => a - b)\n    .slice(0, MAX_CANDIDATES)\n    .map(idx => ({ id: idx + 1, text: lines[idx] }));\n}\n\nexport async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {\n  const rawText = (out + (err ? (out ? '\\n' : '') + err : '')).trimEnd();\n  const rawChars = rawText.length;\n\n  // Short output passes through verbatim with no model call\n  if (rawChars <= PASS_THROUGH) {\n    return {\n      text: `$ ${cmd}${exitCode !== 0 ? ` (exit ${exitCode})` : ''}\\n${rawText}`,\n      rawChars,\n      exitCode,\n    };\n  }\n\n  // Passing tests with large output (e.g. verbose logs): summarize pass status\n  if (exitCode === 0) {\n    const lines = rawText.split('\\n');\n    const summaryLines = lines\n      .filter(l => /(?:passed|tests? passed|ok|success|finished in)/i.test(l))\n      .slice(-3)\n      .join('\\n');\n    return {\n      text: `$ ${cmd} (exit 0)\\nAll tests passed.\\n${summaryLines ? `${summaryLines}\\n` : ''}(Verbose output withheld)`,\n      rawChars,\n      exitCode,\n    };\n  }\n\n  // Failing tests or compiler errors: extract high-signal failure regions\n  const candidates = extractFailureCandidates(rawText);\n  if (!candidates.length) {\n    // Fallback if no specific failure patterns matched\n    const head = rawText.split('\\n').slice(0, 15).join('\\n');\n    return {\n      text: `$ ${cmd} (exit ${exitCode})\\n${head}\\n(... remaining ${rawText.split('\\n').length - 15} lines withheld)`,\n      rawChars,\n      exitCode,\n    };\n  }\n\n  const numbered = candidates.map(c => `[${c.id}] ${c.text}`).join('\\n');\n  let reply;\n  try {\n    reply = await chat({\n      system: SYSTEM,\n      user: `${numbered}\\n\\nSummarize failure:`,\n      schema: SCHEMA,\n    });\n  } catch (e) {\n    if (e instanceof Unavailable) throw e;\n  }\n\n  const said = typeof reply?.summary === 'string' ? reply.summary.trim() : '';\n  const citedIds = new Set(\n    (said && Array.isArray(reply?.lines) ? reply.lines : []).filter(id => Number.isInteger(id)),\n  );\n\n  const FAILURE_HEADER = /(?:^|\\s)(?:FAIL(?:ED)?|[●•]|panicked at|AssertionError|assert\\s|assertion\\s|--- FAIL:|____+\\s+\\w+)/i;\n  const USER_STACK = /\\b([a-zA-Z0-9_\\-./]+\\.(?:ts|tsx|js|jsx|py|rs|go|java|c|cpp|rb)):(\\d+)(?::(\\d+))?/;\n  const IGNORE_STACK = /(?:node_modules|site-packages|\\.cargo\\/registry|internal\\/process|\\bat <anonymous>:\\d+|\\(<anonymous>:\\d+|\\/usr\\/(?:local\\/)?lib\\/python|\\/lib\\/python)/;\n\n  let evidenceLines;\n  if (citedIds.size > 0) {\n    const essentialIds = new Set(\n      candidates\n        .filter(c => (FAILURE_HEADER.test(c.text) || USER_STACK.test(c.text)) && !IGNORE_STACK.test(c.text))\n        .map(c => c.id),\n    );\n    evidenceLines = candidates\n      .filter(c => citedIds.has(c.id) || essentialIds.has(c.id))\n      .map(c => c.text);\n  }\n  if (!evidenceLines || evidenceLines.length === 0) {\n    // If model cited nothing or invalid lines, show the top candidate lines\n    evidenceLines = candidates.filter(c => !IGNORE_STACK.test(c.text)).slice(0, 12).map(c => c.text);\n  }\n\n  const text = `${said ? `Local model says: ${said}\\n\\n` : ''}$ ${cmd} (exit ${exitCode})\\n${evidenceLines.join('\\n')}`;\n  return { text, rawChars, exitCode };\n}\n\nexport async function gather(question, cwd, chat) {\n  let cmd = 'npm';\n  let argv = ['test'];\n  if (existsSync(path.join(cwd, 'Cargo.toml'))) {\n    cmd = 'cargo';\n    argv = ['test'];\n  } else if (existsSync(path.join(cwd, 'go.mod'))) {\n    cmd = 'go';\n    argv = ['test', './...'];\n  } else if (existsSync(path.join(cwd, 'pytest.ini')) || existsSync(path.join(cwd, 'tests'))) {\n    cmd = 'pytest';\n    argv = [];\n  }\n  const res = await run(cmd, argv, cwd);\n  const fullCmd = [cmd, ...argv].join(' ');\n  const combined = (res.out + (res.err ? '\\n' + res.err : '')).trimEnd();\n  return [{ cmd: fullCmd, out: combined }];\n}\n",
+        "rawStderr": "",
+        "hydraStdout": "File: skills/hydra/scripts/lib/test_logs.mjs (lines 20-50 of 160)\n\n20:   },\n21:   required: ['summary', 'lines'],\n22: };\n23: \n24: // Heuristic identification of test failures, assertion diffs, and source lines\n25: export function extractFailureCandidates(logText) {\n26:   const lines = logText.split('\\n');\n27:   const candidateIndices = new Set();\n28: \n29:   const ERROR_START = /(?:^|\\s)(?:FAIL(?:ED)?|[●•]|error(?:\\[E\\d+\\]| TS\\d+)?|panicked at|AssertionError|assert\\s|assertion\\s|Expected:|Received:|- Snapshot|--- FAIL:|____+\\s+\\w+)/i;\n30:   const USER_STACK = /\\b([a-zA-Z0-9_\\-./]+\\.(?:ts|tsx|js|jsx|py|rs|go|java|c|cpp|rb)):(\\d+)(?::(\\d+))?/;\n31:   const IGNORE_STACK = /(?:node_modules|site-packages|\\.cargo\\/registry|internal\\/process|\\bat <anonymous>:\\d+|\\(<anonymous>:\\d+|\\/usr\\/(?:local\\/)?lib\\/python|\\/lib\\/python)/;\n32: \n33:   for (let i = 0; i < lines.length; i++) {\n34:     const line = lines[i];\n35: \n36:     if (ERROR_START.test(line)) {\n37:       for (let j = Math.max(0, i - 1); j <= Math.min(lines.length - 1, i + 5); j++) {\n38:         if (!IGNORE_STACK.test(lines[j])) {\n39:           candidateIndices.add(j);\n40:         }\n41:       }\n42:     }\n43: \n44:     if (USER_STACK.test(line) && !IGNORE_STACK.test(line)) {\n45:       candidateIndices.add(i);\n46:     }\n47:   }\n48: \n49:   // Include trailing summary lines\n50:   for (let i = Math.max(0, lines.length - 8); i < lines.length; i++) {\n\n[hydra read · read ~1467 tok locally, returned ~336 tok · 0s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "module_outline",
+      "name": "3. Structural outline of module exports (git.mjs)",
+      "category": "read",
+      "rawTokens": 1831,
+      "hydraTokens": 274,
+      "savedTokens": 1557,
+      "savingsPct": 85,
+      "rawSeconds": 0.002,
+      "hydraSeconds": 0.023,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/hydra",
+        "targetFact": "export async function gather",
+        "rawCommand": [
+          "cat",
+          "skills/hydra/scripts/lib/git.mjs"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "read",
+          "skills/hydra/scripts/lib/git.mjs",
+          "--outline"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "import { existsSync } from 'node:fs';\nimport path from 'node:path';\nimport { run } from './exec.mjs';\nimport { Unavailable } from './ollama.mjs';\n\nconst HARDEN = ['--no-pager', '-c', 'core.fsmonitor=false', '-c', 'color.ui=false'];\nconst ENV = { GIT_OPTIONAL_LOCKS: '0', GIT_TERMINAL_PROMPT: '0' };\nconst FORMAT = ['--pretty=tformat:%h %ad %an: %s', '--date=short'];\nconst PATCH = ['--no-ext-diff', '--no-textconv', '--stat', '-p'];\nconst MAX_PROBES = 4;\n\nexport async function git(cwd, argv) {\n  const r = await run('git', [...HARDEN, ...argv], cwd, ENV);\n  return { ok: r.ok, out: r.out || r.err };\n}\n\nexport const inRepo = async cwd => (await git(cwd, ['rev-parse', '--is-inside-work-tree'])).out.trim() === 'true';\n\n// The model picks from this menu and never writes a command. Every entry is read-only.\nexport const PROBES = {\n  status: {\n    about: 'current branch, ahead/behind, changed and untracked files',\n    argv: () => ['status', '--short', '--branch'],\n  },\n  log: {\n    about:\n      'commit history, newest first, who changed a file or what changed in it; optional n, path, author, grep (text in the commit message), base (only commits this branch has that the base branch lacks)',\n    argv: a => [\n      'log',\n      ...FORMAT,\n      `-n${a.n}`,\n      ...(a.author ? [`--author=${a.author}`] : []),\n      ...(a.grep ? ['-i', `--grep=${a.grep}`] : []),\n      ...(a.base ? [`${a.base}..HEAD`] : []),\n      ...(a.path ? ['--', a.path] : []),\n    ],\n  },\n  diff: {\n    about:\n      'all uncommitted changes as a patch; staged=true for only the staged ones; base for what this branch changed since it left the base branch; optional path',\n    argv: a => [\n      'diff',\n      ...PATCH,\n      a.base ? `${a.base}...HEAD` : a.staged ? '--staged' : 'HEAD',\n      ...(a.path ? ['--', a.path] : []),\n    ],\n  },\n  show: {\n    about: 'one commit with its patch; optional rev (default HEAD)',\n    argv: a => ['show', ...PATCH, ...FORMAT, a.rev ?? 'HEAD'],\n  },\n  blame: {\n    about: 'line-by-line attribution of who wrote each specific line of a file (not for whole-file history); needs path',\n    needs: 'path',\n    argv: a => ['blame', '--date=short', '--', a.path],\n  },\n  branches: {\n    about: 'local and remote branches with their latest commit',\n    argv: () => ['branch', '--all', '-vv', '--sort=-committerdate'],\n  },\n  remotes: { about: 'remote names and URLs', argv: () => ['remote', '-v'] },\n  stash: { about: 'stashed changes', argv: () => ['stash', 'list'] },\n  tags: { about: 'tags, newest first', argv: () => ['tag', '--sort=-creatordate'] },\n  worktrees: { about: 'worktrees of this repository and the branch each has checked out', argv: () => ['worktree', 'list'] },\n};\n\nconst PLAN_SCHEMA = {\n  type: 'object',\n  properties: {\n    probes: {\n      type: 'array',\n      minItems: 1,\n      maxItems: MAX_PROBES,\n      items: {\n        type: 'object',\n        properties: {\n          probe: { enum: Object.keys(PROBES) },\n          n: { type: 'integer' },\n          path: { type: 'string' },\n          rev: { type: 'string' },\n          base: { type: 'string' },\n          author: { type: 'string' },\n          grep: { type: 'string' },\n          staged: { type: 'boolean' },\n        },\n        required: ['probe'],\n      },\n    },\n  },\n  required: ['probes'],\n};\n\nconst PLAN_SYSTEM = `You choose git probes whose output will answer a question about a repository.\nChoose 1 to 3 probes from this list:\n${Object.entries(PROBES)\n  .map(([name, p]) => `- ${name}: ${p.about}`)\n  .join('\\n')}\nSet path, rev, base, author, grep or staged only when the question calls for one.\n\nExamples:\n\"which branch am I on?\" -> {\"probes\":[{\"probe\":\"status\"}]}\n\"is this branch ahead or behind?\" -> {\"probes\":[{\"probe\":\"status\"}]}\n\"what have I changed but not committed?\" -> {\"probes\":[{\"probe\":\"status\"},{\"probe\":\"diff\"}]}\n\"what is staged?\" -> {\"probes\":[{\"probe\":\"diff\",\"staged\":true}]}\n\"who last changed src/app.js and what did they change?\" -> {\"probes\":[{\"probe\":\"log\",\"path\":\"src/app.js\",\"n\":3}]}\n\"what did the last commit do?\" -> {\"probes\":[{\"probe\":\"show\"}]}\n\"what did commit 4f2a9c1 change?\" -> {\"probes\":[{\"probe\":\"show\",\"rev\":\"4f2a9c1\"}]}\n\"who wrote line 40 of src/app.js?\" -> {\"probes\":[{\"probe\":\"blame\",\"path\":\"src/app.js\"}]}\n\"which branches exist?\" -> {\"probes\":[{\"probe\":\"branches\"}]}\n\"what has Asha committed lately?\" -> {\"probes\":[{\"probe\":\"log\",\"author\":\"Asha\"}]}\n\"find commits mentioning auth in message\" -> {\"probes\":[{\"probe\":\"log\",\"grep\":\"auth\"}]}\n\"which commits are on this branch but not on main?\" -> {\"probes\":[{\"probe\":\"log\",\"base\":\"main\"}]}\n\"what does this branch change compared with main?\" -> {\"probes\":[{\"probe\":\"diff\",\"base\":\"main\"}]}\n\"what changed in src/app.js?\" -> {\"probes\":[{\"probe\":\"diff\",\"path\":\"src/app.js\"}]}\n\"which files differ between this branch and main?\" -> {\"probes\":[{\"probe\":\"diff\",\"base\":\"main\"}]}\n\"when was config.py last changed and by whom?\" -> {\"probes\":[{\"probe\":\"log\",\"path\":\"config.py\",\"n\":3}]}\n\"show the commit history of utils.py\" -> {\"probes\":[{\"probe\":\"log\",\"path\":\"utils.py\",\"n\":10}]}\n\"what commits are only on this branch and not on develop?\" -> {\"probes\":[{\"probe\":\"log\",\"base\":\"develop\"}]}\n\"who is responsible for line 12 of auth.js?\" -> {\"probes\":[{\"probe\":\"blame\",\"path\":\"auth.js\"}]}\n\"list the recent commits by Priya\" -> {\"probes\":[{\"probe\":\"log\",\"author\":\"Priya\",\"n\":10}]}`;\n\n// The model's arguments are untrusted: keep a value only when the question itself names it and git can confirm it.\nasync function clean(p, question, cwd) {\n  const asked = question.toLowerCase();\n  const safe = s => typeof s === 'string' && s.trim() !== '' && !s.trim().startsWith('-') && asked.includes(s.trim().toLowerCase());\n  const a = { n: Number.isInteger(p.n) ? Math.min(Math.max(p.n, 1), 50) : 15, staged: p.staged === true };\n  for (const key of ['author', 'grep']) if (safe(p[key])) a[key] = p[key].trim();\n  if (safe(p.path)) {\n    const file = p.path.trim();\n    const known =\n      existsSync(path.resolve(cwd, file)) || (await git(cwd, ['log', '-1', '--format=%h', '--', file])).out.trim();\n    if (known) a.path = file;\n  }\n  for (const key of ['rev', 'base']) {\n    if (safe(p[key]) && (await git(cwd, ['rev-parse', '--verify', '--quiet', `${p[key].trim()}^{commit}`])).ok) {\n      a[key] = p[key].trim();\n    }\n  }\n  return a;\n}\n\nconst shown = argv => `git ${argv.filter(arg => !FORMAT.includes(arg) && !PATCH.includes(arg)).join(' ')}`;\n\nexport async function gather(question, cwd, chat) {\n  let plan = [];\n  try {\n    plan = (await chat({ system: PLAN_SYSTEM, user: question, schema: PLAN_SCHEMA })).probes;\n  } catch (e) {\n    if (e instanceof Unavailable) throw e;\n  }\n\n  const chosen = new Map();\n  for (const p of Array.isArray(plan) ? plan.slice(0, MAX_PROBES) : []) {\n    if (!PROBES[p?.probe]) continue;\n    const args = await clean(p, question, cwd);\n    if (PROBES[p.probe].needs && !args[PROBES[p.probe].needs]) continue;\n    chosen.set(PROBES[p.probe].argv(args).join(' '), { probe: p.probe, args });\n  }\n  if (!chosen.size) for (const probe of ['status', 'log']) chosen.set(probe, { probe, args: { n: 15 } });\n\n  return Promise.all(\n    [...chosen.values()].map(async ({ probe, args }) => {\n      const argv = PROBES[probe].argv(args);\n      return { probe, args, cmd: shown(argv), out: (await git(cwd, argv)).out || '(no output)' };\n    }),\n  );\n}\n",
+        "rawStderr": "",
+        "hydraStdout": "File: skills/hydra/scripts/lib/git.mjs (168 lines, ~1831 tokens)\nOutline of definitions (13 symbols):\n  L6: const HARDEN = ['--no-pager', '-c', 'core.fsmonitor=false', '-c', 'color.ui=fals\n  L7: const ENV = { GIT_OPTIONAL_LOCKS: '0', GIT_TERMINAL_PROMPT: '0' };\n  L8: const FORMAT = ['--pretty=tformat:%h %ad %an: %s', '--date=short'];\n  L9: const PATCH = ['--no-ext-diff', '--no-textconv', '--stat', '-p'];\n  L10: const MAX_PROBES = 4;\n  L12: export async function git(cwd, argv) {\n  L17: export const inRepo = async cwd => (await git(cwd, ['rev-parse', '--is-inside-wo\n  L20: export const PROBES = {\n  L67: const PLAN_SCHEMA = {\n  L93: const PLAN_SYSTEM = `You choose git probes whose output will answer a question a\n  L123: async function clean(p, question, cwd) {\n  L142: const shown = argv => `git ${argv.filter(arg => !FORMAT.includes(arg) && !PATCH.\n  L144: export async function gather(question, cwd, chat) {\n\n(To view a specific symbol or lines: hydra read skills/hydra/scripts/lib/git.mjs <symbol> or --lines <start-end>)\n\n[hydra read · read ~1831 tok locally, returned ~258 tok · 0s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "def_search",
+      "name": "4. Definition-ranked code search for scoreHit",
+      "category": "files",
+      "rawTokens": 42,
+      "hydraTokens": 200,
+      "savedTokens": -158,
+      "savingsPct": -376.2,
+      "rawSeconds": 0.002,
+      "hydraSeconds": 0.039,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/hydra",
+        "targetFact": "function scoreHit",
+        "rawCommand": [
+          "grep",
+          "-rn",
+          "scoreHit",
+          "skills/hydra/"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "search",
+          "scoreHit"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "skills/hydra/scripts/lib/files.mjs:106:function scoreHit(hit, term) {\nskills/hydra/scripts/lib/files.mjs:138:    .sort((a, b) => scoreHit(b, term) - scoreHit(a, term))\n",
+        "rawStderr": "",
+        "hydraStdout": "Matches for \"scoreHit\":\n  skills/hydra/scripts/lib/files.mjs:106:function scoreHit(hit, term) {\n  evals/results/agent_trial.json:74:      \"name\": \"4. Definition-ranked code search for scoreHit\",\n  evals/trial/agent_trial.mjs:51:    name: '4. Definition-ranked code search for scoreHit',\n  evals/trial/agent_trial.mjs:53:    rawCmd: ['grep', '-rn', 'scoreHit', 'skills/hydra/'],\n  evals/trial/agent_trial.mjs:54:    hydraCmd: ['search', 'scoreHit'],\n  evals/trial/benchmark_real_repo.mjs:32:    rawCmd: ['grep', '-rn', 'scoreHit', 'skills/hydra/'],\n  evals/trial/benchmark_real_repo.mjs:33:    hydraCmd: [HYDRA, 'search', 'scoreHit'],\n  skills/hydra/scripts/lib/files.mjs:138:    .sort((a, b) => scoreHit(b, term) - scoreHit(a, term))\n\n[hydra files · read ~575 tok locally, returned ~184 tok · 0.02s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "search_usages",
+      "name": "5. Search imports and usages of ledger.mjs",
+      "category": "files",
+      "rawTokens": 23,
+      "hydraTokens": 339,
+      "savedTokens": -316,
+      "savingsPct": -1373.9,
+      "rawSeconds": 0.003,
+      "hydraSeconds": 0.035,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/hydra",
+        "targetFact": "ledger.mjs",
+        "rawCommand": [
+          "grep",
+          "-rn",
+          "ledger.mjs",
+          "skills/hydra/"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "search",
+          "ledger.mjs"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "skills/hydra/scripts/hydra.mjs:11:import { record, stats, tokens } from './lib/ledger.mjs';\n",
+        "rawStderr": "",
+        "hydraStdout": "Files named like \"ledger.mjs\":\n  skills/hydra/scripts/lib/ledger.mjs\n\nMatches for \"ledger.mjs\":\n  evals/results/agent_trial.json:86:      \"name\": \"5. Search imports and usages of ledger.mjs\",\n  evals/trial/agent_trial.mjs:59:    name: '5. Search imports and usages of ledger.mjs',\n  evals/trial/agent_trial.mjs:61:    rawCmd: ['grep', '-rn', 'ledger.mjs', 'skills/hydra/'],\n  evals/files/run.mjs:7:import { tokens } from '../../skills/hydra/scripts/lib/ledger.mjs';\n  evals/read/run.mjs:6:import { tokens } from '../../skills/hydra/scripts/lib/ledger.mjs';\n  evals/run.mjs:8:import { tokens } from '../skills/hydra/scripts/lib/ledger.mjs';\n  evals/run_dev.mjs:8:import { tokens } from '../skills/hydra/scripts/lib/ledger.mjs';\n  evals/test_logs/run.mjs:5:import { tokens } from '../../skills/hydra/scripts/lib/ledger.mjs';\n  evals/trial/agent_trial.mjs:6:import { tokens } from '../../skills/hydra/scripts/lib/ledger.mjs';\n  evals/trial/benchmark_real_repo.mjs:5:import { tokens } from '../../skills/hydra/scripts/lib/ledger.mjs';\n  skills/hydra/scripts/hydra.mjs:11:import { record, stats, tokens } from './lib/ledger.mjs';\n  test/hydra.test.mjs:10:import { record, stats } from '../skills/hydra/scripts/lib/ledger.mjs';\n  README.md:115:  - `ledger.mjs`: local token accounting ledger.\n\n[hydra files · read ~988 tok locally, returned ~322 tok · 0.01s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "git_status",
+      "name": "6. Check uncommitted changes and branch status",
+      "category": "git",
+      "rawTokens": 59,
+      "hydraTokens": 31,
+      "savedTokens": 28,
+      "savingsPct": 47.5,
+      "rawSeconds": 0.009,
+      "hydraSeconds": 1.065,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/vasuki",
+        "targetFact": "main",
+        "rawCommand": [
+          "git",
+          "status"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "which branch am I on and what is changed?"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "On branch main\nYour branch is up to date with 'origin/main'.\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t.DS_Store\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n",
+        "rawStderr": "",
+        "hydraStdout": "$ git status --short --branch\n## main...origin/main\n?? .DS_Store\n\n[hydra git · read ~9 tok locally, returned ~16 tok · 1s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "git_last_commit",
+      "name": "7. Inspect what the last commit changed",
+      "category": "git",
+      "rawTokens": 2360,
+      "hydraTokens": 89,
+      "savedTokens": 2271,
+      "savingsPct": 96.2,
+      "rawSeconds": 0.013,
+      "hydraSeconds": 0.55,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/vasuki",
+        "targetFact": "commit",
+        "rawCommand": [
+          "git",
+          "log",
+          "-n1",
+          "-p"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "what did the last commit change?"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "commit 52c8833e4cb77c3af608855c9d44883f8e373933\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 11:53:48 2026 +0530\n\n    Record that the trial's README and script stay out of the public copy, at the user's word\n\ndiff --git a/TRACKER.md b/TRACKER.md\nindex 96cd212..c074f62 100644\n--- a/TRACKER.md\n+++ b/TRACKER.md\n@@ -4,7 +4,7 @@ The single record of where this project stands: what is decided, what is done, w\n \n **Keeping it current:** update this file in the same turn as the change. When a step finishes, move it and record how it was verified. When a decision is made, add it with its reason. When something blocks, write the blocker and what unblocks it. Add one dated line to the Log.\n \n-Last updated: 2026-10-10. **Where VIC really stands: on questions real people wrote (`evals/real1`, 681 tasks from Spider's validation split) `k5` scores 83.0%, against 55.2% for `k4` and 81.6% for `gpt-oss-120b` (all re-scored on 2026-10-10 after a join fix in the executor; as first scored they were 80.3%, 54.5% and 81.5%). `k5` and the large model cannot be told apart on this set (52 tasks right only in `k5`, 43 only in `gpt-oss-120b`, p = 0.41). The price was a few points on the hand-written sets: `evals/test1` 82.1% (`k4` 86.7%), `evals/v2` 85.7% (`k4` 88.6%). Best model: `k5` on `Qwen3.5-2B`, now in the private Hugging Face preview. **Running: Kaggle run `k6`, pushed 2026-10-10 at 08:41 IST at the user's yes, expected to end around 16:00 IST (step 5, \"Run k6\"). Nothing is running on this Mac.** **On a second source, `evals/real2` (195 tasks from BIRD, built 2026-10-10, nothing of it in any training data), `k5` scores 66.7%, `gpt-oss-120b` 65.6% and `k4` 16.4%: the set is harder for everyone, and `k5` is level with the large model on it too (25 tasks right only in `k5`, 23 only in `gpt-oss-120b`, p = 0.89). So on real questions from two sources, a 1.55 GB model on a laptop now plans as well as `gpt-oss-120b` given the full format description.** Caution: `evals/real_dev` is not independent of what `k5` was trained on; the training data has since been cleaned of its twin questions (see step 5, \"Run k5\"), which helps only a model that does not descend from `k5`. **Next action: when `k6` ends, `push.py fetch --label k6`, convert to 6 bits (`to_mlx.py`), install it in Ollama (`to_ollama.py --label k6`), compare with `k5` on `evals/v2` and `evals/real_dev`, and only if it looks better score `evals/test1`, `evals/real1` and `evals/real2` once each.** Public since 2026-10-10: code at `rahul05ranjan/vasuki-vic`, model at `rahul05ranjan/VIC-2B-preview`, Apache 2.0 (see Releases). Also open: a PyPI name and account for a shorter install line; and what to do about the skill trial: `skills/vasuki` is public (`npx skills add rahul05ranjan/vasuki-vic`) and works, but Claude Code with Python never chose it by itself (0 of 13), and asked by name it was right 13 of 13 at slightly more cost than pandas (see Results, \"Skill trial\"). The README with these numbers is not yet in the public copy.**\n+Last updated: 2026-10-10. **Where VIC really stands: on questions real people wrote (`evals/real1`, 681 tasks from Spider's validation split) `k5` scores 83.0%, against 55.2% for `k4` and 81.6% for `gpt-oss-120b` (all re-scored on 2026-10-10 after a join fix in the executor; as first scored they were 80.3%, 54.5% and 81.5%). `k5` and the large model cannot be told apart on this set (52 tasks right only in `k5`, 43 only in `gpt-oss-120b`, p = 0.41). The price was a few points on the hand-written sets: `evals/test1` 82.1% (`k4` 86.7%), `evals/v2` 85.7% (`k4` 88.6%). Best model: `k5` on `Qwen3.5-2B`, now in the private Hugging Face preview. **Running: Kaggle run `k6`, pushed 2026-10-10 at 08:41 IST at the user's yes, expected to end around 16:00 IST (step 5, \"Run k6\"). Nothing is running on this Mac.** **On a second source, `evals/real2` (195 tasks from BIRD, built 2026-10-10, nothing of it in any training data), `k5` scores 66.7%, `gpt-oss-120b` 65.6% and `k4` 16.4%: the set is harder for everyone, and `k5` is level with the large model on it too (25 tasks right only in `k5`, 23 only in `gpt-oss-120b`, p = 0.89). So on real questions from two sources, a 1.55 GB model on a laptop now plans as well as `gpt-oss-120b` given the full format description.** Caution: `evals/real_dev` is not independent of what `k5` was trained on; the training data has since been cleaned of its twin questions (see step 5, \"Run k5\"), which helps only a model that does not descend from `k5`. **Next action: when `k6` ends, `push.py fetch --label k6`, convert to 6 bits (`to_mlx.py`), install it in Ollama (`to_ollama.py --label k6`), compare with `k5` on `evals/v2` and `evals/real_dev`, and only if it looks better score `evals/test1`, `evals/real1` and `evals/real2` once each.** Public since 2026-10-10: code at `rahul05ranjan/vasuki-vic`, model at `rahul05ranjan/VIC-2B-preview`, Apache 2.0 (see Releases). Also open: a PyPI name and account for a shorter install line; and what to do about the skill trial: `skills/vasuki` is public (`npx skills add rahul05ranjan/vasuki-vic`) and works, but Claude Code with Python never chose it by itself (0 of 13), and asked by name it was right 13 of 13 at slightly more cost than pandas (see Results, \"Skill trial\"). The user said no to putting the README with these numbers in the public copy.**\n \n ## Goal\n \n@@ -541,7 +541,7 @@ The user said to test it. `bench/skill_trial.py` gives the agent trial's 13 ques\n - About $0.20 a question either way, nearly all of it the fixed cost of the agent's own instructions (about 120,000 tokens read per question), not the pandas line (about 1,000 tokens written).\n - **What this means.** An agent that can run Python has no reason to hand an exact computation to a model that is wrong one time in seven, and it knows it. The skill installs and works, but for such an agent it changes nothing unless the person asks for it by name. Do not make the skill's wording pushier to force its use: that would trade a right answer for a possibly wrong one. Where VIC can still earn its place: a caller with no code execution, a caller that is itself small or expensive per token written, or files and operations where writing the code is the costly part. None of these is measured.\n - **Not tried:** an agent without pandas; another agent or model; files too large or too awkward for a quick pandas line.\n-- The README's skill section now says to ask for the skill by name and carries these numbers. **That README is not yet in the public copy; the public one still says the agent decides when the skill applies.**\n+- The README's skill section now says to ask for the skill by name and carries these numbers. **The user said no on 2026-10-10 to putting that README and the trial script in the public copy.** The public README still says the agent decides when the skill applies. `tools/publish.py` would carry the new README, `bench/skill_trial.py` and the report with any later update, so before the next public update for any other reason, say so and ask again.\n \n ### Pipeline check on local Gemma, 2026-10-07\n \n@@ -676,6 +676,7 @@ The user said to test it. `bench/skill_trial.py` gives the agent trial's 13 ques\n - 2026-10-10: User requires one step to use the model. The package now brings its model runner and defaults to `k5`; one `uvx` command from an empty folder installs, downloads and answers (tried, 2 minutes 18 seconds the first time). Nothing was made public.\n - 2026-10-10: User said \"Make it public\" and chose: model and code, Apache 2.0, diary and history private. Published a clean one-commit copy of the code as `rahul05ranjan/vasuki-vic` and made `rahul05ranjan/VIC-2B-preview` public. The one-line command worked from an empty folder with no token. This repository, the older model and the training data stay private.\n - 2026-10-10: User asked whether a skill for skills.sh had been made. It had not. Wrote `skills/vasuki/SKILL.md`, added it to the README and to `tools/publish.py`. Local only: the public repository is unchanged until the user says to update it.\n+- 2026-10-10: Asked whether to put the new README and the trial script in the public repository; the user said no. The public copy stays at commit `7798631`.\n - 2026-10-10: User said go ahead with a third arm, the skill asked for by name: 12 of 13 sent to VIC, 13 of 13 right, the one wrong plan caught and corrected by the agent, $3.04 against $2.79 for pandas and 189 seconds against 127. Total Claude usage for the whole trial about $8.70. README updated locally with the numbers; the public copy waits for the user's word.\n - 2026-10-10: User said go ahead with the agent trial. Claude Code (Sonnet 5.5) with the skill installed sent 0 of 13 questions to VIC and wrote pandas every time; with and without the skill the results are the same (11 and 10 of 13 against the reference, the misses being a tie and the agent removing repeated rows). About $5.66 of Claude usage. See Results, \"Skill trial\".\n - 2026-10-10: User said \"then test\". A fresh-machine trial (empty home, no `uv`) found the public one-line command broken: the newest `uv` picks Python 3.15, which MLX does not support. Bounded `requires-python` below 3.15, pushed to both repositories, and the trial then passed against the public repository. The trial of an agent with and without the skill is not run yet: it spends the user's Claude usage, so it waits for a yes.\n",
+        "rawStderr": "",
+        "hydraStdout": "Local model says: The last commit changed the README and trial script to stay out of public copy.\n\n$ git show HEAD\n52c8833 2026-10-10 rahul05ranjan: Record that the trial's README and script stay out of the public copy, at the user's word\n---\n TRACKER.md | 5 +++--\n(32 more lines not shown)\n\n[hydra git · read ~2350 tok locally, returned ~73 tok · 0.5s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "git_recent_commits",
+      "name": "8. Check recent 5 commits",
+      "category": "git",
+      "rawTokens": 890,
+      "hydraTokens": 151,
+      "savedTokens": 739,
+      "savingsPct": 83,
+      "rawSeconds": 0.018,
+      "hydraSeconds": 0.479,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/vasuki",
+        "targetFact": "commit",
+        "rawCommand": [
+          "git",
+          "log",
+          "-n15"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "show recent commits"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "commit 52c8833e4cb77c3af608855c9d44883f8e373933\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 11:53:48 2026 +0530\n\n    Record that the trial's README and script stay out of the public copy, at the user's word\n\ncommit ec1ae8654f561cc1df890889e7131c51317c3916\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 11:49:41 2026 +0530\n\n    Skill trial, third arm: asked by name the agent used VIC on 12 of 13 and was right on all, at slightly more cost than pandas\n\ncommit 03013992e5f059a45948b11d4bc68480be01b50f\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 11:18:04 2026 +0530\n\n    Add the skill trial: Claude Code with the skill installed never chose it over pandas (0 of 13)\n\ncommit d494d73e3edb95002d334d7dfe4167ba5c6544fb\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 11:10:19 2026 +0530\n\n    Record the fresh-machine trial, the Python 3.15 failure it found and the fix\n\ncommit 839c0c57cd183a63a24b7ae19886cacc5745eb1a\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 11:09:44 2026 +0530\n\n    Keep the package off Python 3.15, where MLX has no build and the one-line install failed on a fresh machine\n\ncommit ba9be1c77fd80e6cf882b64d513653cf039f3b0d\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 11:03:44 2026 +0530\n\n    Record the skill's public release and what its one install command does and does not fetch\n\ncommit 5f42c60443f8582269ed8a6db1953d6996704fe7\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 11:02:46 2026 +0530\n\n    Add an agent skill that hands table questions to vasuki ask, installable with the skills installer\n\ncommit 85dd0ee4d5b8c718acfb25a16ed27ce95342c968\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 10:19:04 2026 +0530\n\n    Record the public release: code as rahul05ranjan/vasuki-vic, model VIC-2B-preview, Apache 2.0\n\ncommit 83ec88d8c21499632e61e5e17980a200af6aff4e\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 10:14:50 2026 +0530\n\n    Add the Apache 2.0 licence and a tool that builds the public copy of the repository\n\ncommit 9e85d9cd6442711ca9734574e813ae881b1dccbf\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 10:06:37 2026 +0530\n\n    Make vasuki ask work from one command: bundle the model runner and default to k5\n\ncommit 13596b006a62024b763fbb76453328efe9bd5c49\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 09:48:25 2026 +0530\n\n    Train on both Kaggle GPUs, and install any run's model in Ollama\n\ncommit 53cca8f336d396949731a92f024d277af6216589\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 08:42:04 2026 +0530\n\n    Start Kaggle run k6: k4 continued on the pruned Spider data with a larger reminder of the pinned style\n\ncommit 89ca9ccdd170c7b029422ab9f68ef004585cb3c0\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 08:36:35 2026 +0530\n\n    Hold Spider training questions out of the development set by SQL, not only by wording\n\ncommit bd4eddfe803ce8cce3567512aaf67aa3d7a0e38e\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 08:31:52 2026 +0530\n\n    Record the reference model on the BIRD set: gpt-oss-120b 65.6%, level with k5's 66.7%\n\ncommit 67b2f4c64b23feb6722ccade482bd7a1e1bef67e\nAuthor: rahul05ranjan <rahulsingh.ranjan06@gmail.com>\nDate:   Sat Oct 10 08:23:11 2026 +0530\n\n    Add a second test set of real questions, from BIRD: k5 66.7%, k4 16.4%\n",
+        "rawStderr": "",
+        "hydraStdout": "Local model says: The most recent commit is 52c8833 by rahul05ranjan dated 2026-10-10.\n\n$ git log -n10\n52c8833 2026-10-10 rahul05ranjan: Record that the trial's README and script stay out of the public copy, at the user's word\nec1ae86 2026-10-10 rahul05ranjan: Skill trial, third arm: asked by name the agent used VIC on 12 of 13 and was right on all, at slightly more cost than pandas\n0301399 2026-10-10 rahul05ranjan: Add the skill trial: Claude Code with the skill installed never chose it over pandas (0 of 13)\n(7 more lines not shown)\n\n[hydra git · read ~321 tok locally, returned ~135 tok · 0.4s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "git_branches",
+      "name": "9. List local and remote branches",
+      "category": "git",
+      "rawTokens": 73,
+      "hydraTokens": 100,
+      "savedTokens": -27,
+      "savingsPct": -37,
+      "rawSeconds": 0.018,
+      "hydraSeconds": 0.154,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/vasuki",
+        "targetFact": "main",
+        "rawCommand": [
+          "git",
+          "branch",
+          "-a",
+          "-vv"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "which branches exist?"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "* main                52c8833 [origin/main] Record that the trial's README and script stay out of the public copy, at the user's word\n  remotes/origin/HEAD -> origin/main\n  remotes/origin/main 52c8833 Record that the trial's README and script stay out of the public copy, at the user's word\n",
+        "rawStderr": "",
+        "hydraStdout": "$ git branch --all -vv --sort=-committerdate\n* main                52c8833 [origin/main] Record that the trial's README and script stay out of the public copy, at the user's word\n  remotes/origin/HEAD -> origin/main\n  remotes/origin/main 52c8833 Record that the trial's README and script stay out of the public copy, at the user's word\n\n[hydra git · read ~73 tok locally, returned ~84 tok · 0.1s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "run_tests_pass",
+      "name": "10. Run test suite through hydra digest filter",
+      "category": "test",
+      "rawTokens": 524,
+      "hydraTokens": 32,
+      "savedTokens": 492,
+      "savingsPct": 93.9,
+      "rawSeconds": 0.374,
+      "hydraSeconds": 0.355,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/hydra",
+        "targetFact": "passed",
+        "rawCommand": [
+          "npm",
+          "test"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "run",
+          "--",
+          "npm",
+          "test"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "\n> hydra@0.1.0 test\n> node --test\n\n✔ route sends git questions to git and everything else to files (1.091959ms)\n✔ git head runs the chosen probes and drops arguments it cannot trust (54.061208ms)\n✔ git head compares against a base branch the question names (58.393792ms)\n✔ git head falls back to status and log when the plan is unusable (38.5065ms)\n✔ files head finds the same lines with ripgrep and with the built-in walk (9.514ms)\n✔ answer prints the cited lines verbatim and ignores numbers that do not exist (0.252625ms)\n✔ answer shows the start of each output when the model reply is unusable (0.099459ms)\n✔ answer hands small output over whole, without asking the model (0.038584ms)\n✔ an unreachable model stops the call instead of producing a guess (33.575083ms)\n✔ ledger totals what was read locally against what was returned (0.458333ms)\n✔ route sends test questions to test head (0.035ms)\n✔ test_logs hands short output over whole without calling the model (0.121084ms)\n✔ test_logs summarizes passing tests when output is long without calling the model (0.100334ms)\n✔ test_logs extracts failure lines and includes model summary on test failure (0.59575ms)\n✔ test_logs falls back to candidate lines when model reply is unusable (0.089625ms)\n✔ route sends file reading questions to read head (0.035958ms)\n✔ read slices line range correctly with line numbers (0.03325ms)\n✔ read slices JS function with braces and leading comments (0.389542ms)\n✔ read slices Python defs using indentation blocks (0.212125ms)\n✔ read outline extracts top-level symbols and ignores inner declarations (0.081291ms)\n✔ readSlice handles short files verbatim, line ranges, and missing files (0.4ms)\n✔ read gather extracts file path and symbol from question (0.269833ms)\n✔ route sends system questions to os head (0.025625ms)\n✔ os head probes execute safely and return output (2.760834ms)\n✔ os head blocks sensitive environment variable inspection (0.155125ms)\n✔ os head filters processes by name (18.486041ms)\nℹ tests 26\nℹ suites 0\nℹ pass 26\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 256.556292\n",
+        "rawStderr": "",
+        "hydraStdout": "$ npm test (exit 0)\nAll tests passed.\n(Verbose output withheld)\n\n[hydra test · read ~525 tok locally, returned ~16 tok · 0.3s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "run_test_failure",
+      "name": "11. Digest verbose failing test log",
+      "category": "test",
+      "rawTokens": 360,
+      "hydraTokens": 168,
+      "savedTokens": 192,
+      "savingsPct": 53.3,
+      "rawSeconds": 0.018,
+      "hydraSeconds": 0.568,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/hydra",
+        "targetFact": "Expected: 401",
+        "rawCommand": [
+          "node",
+          "-e",
+          "console.log(\"FAIL src/auth.test.ts > login\\nAssertionError: expected 200 to be 401\\n- Expected: 401\\n+ Received: 200\\nat src/auth.test.ts:42:18\"); for (let i=0; i<40; i++) console.log(\"node_modules/vitest/runner.js:\" + i); process.exit(1);"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "run",
+          "--",
+          "node",
+          "-e",
+          "console.log(\"FAIL src/auth.test.ts > login\\nAssertionError: expected 200 to be 401\\n- Expected: 401\\n+ Received: 200\\nat src/auth.test.ts:42:18\"); for (let i=0; i<40; i++) console.log(\"node_modules/vitest/runner.js:\" + i); process.exit(1);"
+        ],
+        "rawExitCode": 1,
+        "hydraExitCode": 1,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "FAIL src/auth.test.ts > login\nAssertionError: expected 200 to be 401\n- Expected: 401\n+ Received: 200\nat src/auth.test.ts:42:18\nnode_modules/vitest/runner.js:0\nnode_modules/vitest/runner.js:1\nnode_modules/vitest/runner.js:2\nnode_modules/vitest/runner.js:3\nnode_modules/vitest/runner.js:4\nnode_modules/vitest/runner.js:5\nnode_modules/vitest/runner.js:6\nnode_modules/vitest/runner.js:7\nnode_modules/vitest/runner.js:8\nnode_modules/vitest/runner.js:9\nnode_modules/vitest/runner.js:10\nnode_modules/vitest/runner.js:11\nnode_modules/vitest/runner.js:12\nnode_modules/vitest/runner.js:13\nnode_modules/vitest/runner.js:14\nnode_modules/vitest/runner.js:15\nnode_modules/vitest/runner.js:16\nnode_modules/vitest/runner.js:17\nnode_modules/vitest/runner.js:18\nnode_modules/vitest/runner.js:19\nnode_modules/vitest/runner.js:20\nnode_modules/vitest/runner.js:21\nnode_modules/vitest/runner.js:22\nnode_modules/vitest/runner.js:23\nnode_modules/vitest/runner.js:24\nnode_modules/vitest/runner.js:25\nnode_modules/vitest/runner.js:26\nnode_modules/vitest/runner.js:27\nnode_modules/vitest/runner.js:28\nnode_modules/vitest/runner.js:29\nnode_modules/vitest/runner.js:30\nnode_modules/vitest/runner.js:31\nnode_modules/vitest/runner.js:32\nnode_modules/vitest/runner.js:33\nnode_modules/vitest/runner.js:34\nnode_modules/vitest/runner.js:35\nnode_modules/vitest/runner.js:36\nnode_modules/vitest/runner.js:37\nnode_modules/vitest/runner.js:38\nnode_modules/vitest/runner.js:39\n",
+        "rawStderr": "",
+        "hydraStdout": "Local model says: The login test failed because the expected HTTP status code was 401 (Unauthorized) but received a 200 response instead, indicating that authentication credentials were not being validated or rejected.\n\n$ node -e console.log(\"FAIL src/auth.test.ts > login\\nAssertionError: expected 200 to be 401\\n- Expected: 401\\n+ Received: 200\\nat src/auth.test.ts:42:18\"); for (let i=0; i<40; i++) console.log(\"node_modules/vitest/runner.js:\" + i); process.exit(1); (exit 1)\nFAIL src/auth.test.ts > login\nAssertionError: expected 200 to be 401\n- Expected: 401\n+ Received: 200\nat src/auth.test.ts:42:18\n\n[hydra test · read ~359 tok locally, returned ~152 tok · 0.5s]\n",
+        "hydraStderr": ""
+      }
+    },
+    {
+      "id": "git_stashes",
+      "name": "12. Check stashed changes",
+      "category": "git",
+      "rawTokens": 0,
+      "hydraTokens": 22,
+      "savedTokens": -22,
+      "savingsPct": 0,
+      "rawSeconds": 0.015,
+      "hydraSeconds": 0.18,
+      "targetFound": true,
+      "executionOk": true,
+      "evidence": {
+        "cwd": "/Users/rivansh/Desktop/code/vasuki",
+        "targetFact": "stash",
+        "rawCommand": [
+          "git",
+          "stash",
+          "list"
+        ],
+        "hydraCommand": [
+          "node",
+          "/Users/rivansh/Desktop/code/hydra/skills/hydra/scripts/hydra.mjs",
+          "ask",
+          "--head",
+          "git",
+          "do I have any stashes?"
+        ],
+        "rawExitCode": 0,
+        "hydraExitCode": 0,
+        "rawError": null,
+        "hydraError": null,
+        "rawStdout": "",
+        "rawStderr": "",
+        "hydraStdout": "$ git stash list\n(no output)\n\n[hydra git · read ~3 tok locally, returned ~7 tok · 0.1s]\n",
+        "hydraStderr": ""
+      }
+    }
+  ]
+}

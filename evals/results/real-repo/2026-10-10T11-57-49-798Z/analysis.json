@@ -1,0 +1,127 @@
+{
+  "summary": {
+    "byArm": {
+      "plain": {
+        "sessions": 12,
+        "correct": 12,
+        "adopted": 0,
+        "inputTokens": 373459,
+        "outputTokens": 13656,
+        "costUsd": 0.8315534,
+        "seconds": 151.53500000000003,
+        "toolCalls": 36,
+        "toolErrors": 0,
+        "permissionDenials": 0,
+        "repeatedToolAttempts": 0
+      },
+      "available": {
+        "sessions": 12,
+        "correct": 12,
+        "adopted": 0,
+        "inputTokens": 377679,
+        "outputTokens": 13617,
+        "costUsd": 0.7706214000000001,
+        "seconds": 149.056,
+        "toolCalls": 36,
+        "toolErrors": 0,
+        "permissionDenials": 0,
+        "repeatedToolAttempts": 0
+      },
+      "forced": {
+        "sessions": 12,
+        "correct": 12,
+        "adopted": 12,
+        "inputTokens": 650598,
+        "outputTokens": 16705,
+        "costUsd": 1.1073504,
+        "seconds": 209.157,
+        "toolCalls": 52,
+        "toolErrors": 0,
+        "permissionDenials": 0,
+        "repeatedToolAttempts": 0
+      }
+    },
+    "matchedBlocks": 12,
+    "matchedCorrectTokens": {
+      "plain": 387115,
+      "available": 391296,
+      "forced": 667303
+    },
+    "matchedReductionPct": {
+      "available": -1.08,
+      "forced": -72.38
+    }
+  },
+  "comparisons": {
+    "available": {
+      "eligiblePairs": 12,
+      "distinctTasks": 4,
+      "totalTokenReductionPct": -1.0800408147449758,
+      "exploratory95PctClusterInterval": [
+        -1.1637910045610322,
+        -0.9790649480633684
+      ],
+      "byTask": [
+        {
+          "task": "python_cast",
+          "pairs": 3,
+          "reductionPct": -0.9315256957780349
+        },
+        {
+          "task": "python_join",
+          "pairs": 3,
+          "reductionPct": -1.1973113656746026
+        },
+        {
+          "task": "typescript_config",
+          "pairs": 3,
+          "reductionPct": -1.0762559574966746
+        },
+        {
+          "task": "typescript_ingestion",
+          "pairs": 3,
+          "reductionPct": -1.061936958028209
+        }
+      ]
+    },
+    "forced": {
+      "eligiblePairs": 12,
+      "distinctTasks": 4,
+      "totalTokenReductionPct": -72.37849217932654,
+      "exploratory95PctClusterInterval": [
+        -103.87946295599005,
+        -45.582231401007746
+      ],
+      "byTask": [
+        {
+          "task": "python_cast",
+          "pairs": 3,
+          "reductionPct": -123.42858780704522
+        },
+        {
+          "task": "python_join",
+          "pairs": 3,
+          "reductionPct": -91.26748583104502
+        },
+        {
+          "task": "typescript_config",
+          "pairs": 3,
+          "reductionPct": -46.14618329556996
+        },
+        {
+          "task": "typescript_ingestion",
+          "pairs": 3,
+          "reductionPct": -45.041484838836546
+        }
+      ]
+    }
+  },
+  "caveats": [
+    "Four real-source extraction tasks, not a broad end-to-end coding-workload benchmark; source snapshots contain no project config, data or installed dependencies.",
+    "Byte-exact source plus file and line numbers is the predeclared correctness criterion. Incomplete source cannot earn a saving.",
+    "Three repeated fresh sessions per task/arm; uncertainty is clustered by task, with only four distinct tasks. Intervals are exploratory.",
+    "The available arm measures skill availability and actual use; forced is explicit instruction. Skills not loaded invalidate the protocol.",
+    "All outcomes are retained. Pairwise equal-correctness subsets and full-triplet matched results were declared before calls.",
+    "Cached and uncached input are both counted. Cost equivalents depend on cache reuse and do not measure the Pro allowance."
+  ]
+}

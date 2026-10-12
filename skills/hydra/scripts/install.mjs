@@ -17,7 +17,7 @@ The server stays running until stopped or the computer restarts. Download time d
   if (!process.argv.includes('--runtime-only')) {
     const npx = findNpx();
     if (!npx) throw new Error('Cannot locate npm npx-cli.js; install Node with npm or use --runtime-only');
-    execFileSync(process.execPath, [npx, '--yes', 'skills', 'add', path.resolve(here, '..'), '--skill', 'hydra', '--global', '--yes'], { stdio: 'inherit' });
+    execFileSync(process.execPath, [npx, '--yes', '--package=skills', 'skills', 'add', path.resolve(here, '..'), '--skill', 'hydra', '--global', '--yes'], { stdio: 'inherit' });
   }
   const config = await installRuntime(manifest);
   await ensureLocal(config);

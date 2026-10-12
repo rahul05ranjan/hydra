@@ -478,3 +478,5 @@ Built safe read-only OS inspection head supporting listening ports (`lsof`), run
 - 2026-10-12: Published Q8 GGUF/provenance to Hugging Face at d0ab92ae37d28f457bf7bbace50e87b6e8574ffa while Kaggle score remains pending; pinned immutable URL and verified 58/58 tests. Preparing source publication and actual npx bootstrap proof.
 
 - 2026-10-12: Pushed bootstrap source as 148b045. Actual npx test exposed a legacy colon-containing result filename that prevents Windows Git checkout (the local repo had sparse-excluded it). Preserved its Git blob byte-for-byte under a portable filename and sanitized future test-log result names; remote installation proof pending retry.
+
+- 2026-10-12: Windows checkout retry reached hydra-install but nested npx inherited the outer package selection and could not find the skills binary. Made the nested skills package selection explicit; remote end-to-end proof remains pending.

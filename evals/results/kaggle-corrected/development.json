@@ -1,0 +1,3281 @@
+{
+ "model": "hydra-nano:git",
+ "date": "2026-10-12T10:25:56.732Z",
+ "overall": {
+  "tasks": 200,
+  "routed": 0.7,
+  "plan": 0.85,
+  "evidence": 0.845,
+  "solved": 0.835,
+  "recall": 0.8646332529877155,
+  "readingRight": 0,
+  "readingScored": 0,
+  "raw": 25231,
+  "returned": 16180,
+  "errors": 0
+ },
+ "byIntent": {
+  "branch_current": {
+   "tasks": 10,
+   "routed": 1,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 237,
+   "returned": 307,
+   "errors": 0
+  },
+  "sync": {
+   "tasks": 10,
+   "routed": 0.6,
+   "plan": 0.9,
+   "evidence": 0.9,
+   "solved": 0.9,
+   "recall": 0.9,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 216,
+   "returned": 284,
+   "errors": 0
+  },
+  "modified_files": {
+   "tasks": 10,
+   "routed": 0.4,
+   "plan": 0.5,
+   "evidence": 0.4,
+   "solved": 0.4,
+   "recall": 0.45,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 472,
+   "returned": 527,
+   "errors": 0
+  },
+  "untracked_files": {
+   "tasks": 10,
+   "routed": 0.7,
+   "plan": 0.8,
+   "evidence": 0.8,
+   "solved": 0.8,
+   "recall": 0.8,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 260,
+   "returned": 325,
+   "errors": 0
+  },
+  "staged_files": {
+   "tasks": 10,
+   "routed": 0.7,
+   "plan": 0.9,
+   "evidence": 0.9,
+   "solved": 0.8,
+   "recall": 0.9,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 443,
+   "returned": 493,
+   "errors": 0
+  },
+  "change_in_file": {
+   "tasks": 10,
+   "routed": 0.4,
+   "plan": 0.9,
+   "evidence": 0.8,
+   "solved": 0.8,
+   "recall": 0.8,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 718,
+   "returned": 801,
+   "errors": 0
+  },
+  "branch_diff_files": {
+   "tasks": 10,
+   "routed": 0.9,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 7230,
+   "returned": 1170,
+   "errors": 0
+  },
+  "last_commit": {
+   "tasks": 10,
+   "routed": 0.9,
+   "plan": 0.9,
+   "evidence": 0.9,
+   "solved": 0.9,
+   "recall": 0.9,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 1005,
+   "returned": 1047,
+   "errors": 0
+  },
+  "recent_commits": {
+   "tasks": 10,
+   "routed": 1,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 1234,
+   "returned": 1268,
+   "errors": 0
+  },
+  "file_last_change": {
+   "tasks": 10,
+   "routed": 0.4,
+   "plan": 0.7,
+   "evidence": 0.8,
+   "solved": 0.7,
+   "recall": 0.8,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 1347,
+   "returned": 1436,
+   "errors": 0
+  },
+  "file_history": {
+   "tasks": 10,
+   "routed": 0.6,
+   "plan": 0.7,
+   "evidence": 0.7,
+   "solved": 0.7,
+   "recall": 0.7,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 1085,
+   "returned": 1175,
+   "errors": 0
+  },
+  "author_commits": {
+   "tasks": 10,
+   "routed": 0.9,
+   "plan": 0.8,
+   "evidence": 0.8,
+   "solved": 0.8,
+   "recall": 0.8,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 303,
+   "returned": 393,
+   "errors": 0
+  },
+  "message_search": {
+   "tasks": 10,
+   "routed": 0.9,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 368,
+   "returned": 448,
+   "errors": 0
+  },
+  "branch_commits": {
+   "tasks": 10,
+   "routed": 1,
+   "plan": 0.4,
+   "evidence": 0.4,
+   "solved": 0.4,
+   "recall": 0.6926650597543093,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 1903,
+   "returned": 1964,
+   "errors": 0
+  },
+  "last_commit_files": {
+   "tasks": 10,
+   "routed": 0.8,
+   "plan": 0.8,
+   "evidence": 0.8,
+   "solved": 0.8,
+   "recall": 0.8,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 1170,
+   "returned": 1210,
+   "errors": 0
+  },
+  "commit_files": {
+   "tasks": 10,
+   "routed": 0.9,
+   "plan": 0.7,
+   "evidence": 0.7,
+   "solved": 0.7,
+   "recall": 0.75,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 1144,
+   "returned": 1188,
+   "errors": 0
+  },
+  "branches": {
+   "tasks": 10,
+   "routed": 1,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 1100,
+   "returned": 1210,
+   "errors": 0
+  },
+  "stashes": {
+   "tasks": 10,
+   "routed": 0.6,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 147,
+   "returned": 187,
+   "errors": 0
+  },
+  "worktrees": {
+   "tasks": 10,
+   "routed": 0,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 349,
+   "returned": 398,
+   "errors": 0
+  },
+  "line_author": {
+   "tasks": 10,
+   "routed": 0.3,
+   "plan": 1,
+   "evidence": 1,
+   "solved": 1,
+   "recall": 1,
+   "readingRight": 0,
+   "readingScored": 0,
+   "raw": 4500,
+   "returned": 349,
+   "errors": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "dev-dev_00-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 18,
+   "returned": 27,
+   "seconds": 0.731,
+   "probes": [
+    "git log -n15 --author=Ananya Gupta"
+   ]
+  },
+  {
+   "id": "dev-dev_00-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 163,
+   "returned": 169,
+   "seconds": 0.767,
+   "probes": [
+    "git log -n15 main..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_00-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 23,
+   "returned": 30,
+   "seconds": 34.229,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_00-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 564,
+   "returned": 99,
+   "seconds": 2.022,
+   "probes": [
+    "git diff main...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_00-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 123,
+   "returned": 134,
+   "seconds": 0.329,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_00-change_in_file",
+   "intent": "change_in_file",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 97,
+   "returned": 107,
+   "seconds": 1.062,
+   "probes": [
+    "git diff HEAD -- test/router_test.exs"
+   ]
+  },
+  {
+   "id": "dev-dev_00-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 117,
+   "returned": 122,
+   "seconds": 0.731,
+   "probes": [
+    "git show 7506b4b"
+   ]
+  },
+  {
+   "id": "dev-dev_00-file_history",
+   "intent": "file_history",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 14,
+   "seconds": 1.187,
+   "probes": [
+    "git log -n15 -i --grep=mix.exs -- mix.exs"
+   ]
+  },
+  {
+   "id": "dev-dev_00-file_last_change",
+   "intent": "file_last_change",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 81,
+   "returned": 89,
+   "seconds": 1.035,
+   "probes": [
+    "git log -n15 -- lib/accounts.ex"
+   ]
+  },
+  {
+   "id": "dev-dev_00-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 138,
+   "returned": 141,
+   "seconds": 0.551,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_00-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 138,
+   "returned": 141,
+   "seconds": 0.008,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_00-line_author",
+   "intent": "line_author",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 214,
+   "returned": 25,
+   "seconds": 0.696,
+   "probes": [
+    "git blame -- lib/router.ex"
+   ]
+  },
+  {
+   "id": "dev-dev_00-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 17,
+   "returned": 25,
+   "seconds": 0.761,
+   "probes": [
+    "git log -n15 -i --grep=benchmark"
+   ]
+  },
+  {
+   "id": "dev-dev_00-modified_files",
+   "intent": "modified_files",
+   "routed": false,
+   "plan": true,
+   "recall": 0.5,
+   "evidence": false,
+   "reading": null,
+   "raw": 23,
+   "returned": 30,
+   "seconds": 34.204,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_00-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 77,
+   "returned": 80,
+   "seconds": 0.764,
+   "probes": [
+    "git log -n5"
+   ]
+  },
+  {
+   "id": "dev-dev_00-staged_files",
+   "intent": "staged_files",
+   "routed": true,
+   "plan": true,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.657,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_00-stashes",
+   "intent": "stashes",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 12,
+   "returned": 16,
+   "seconds": 0.359,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_00-sync",
+   "intent": "sync",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 23,
+   "returned": 30,
+   "seconds": 34.205,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_00-untracked_files",
+   "intent": "untracked_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 23,
+   "returned": 30,
+   "seconds": 34.2,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_00-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 44,
+   "returned": 49,
+   "seconds": 0.515,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_01-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 81,
+   "returned": 88,
+   "seconds": 0.925,
+   "probes": [
+    "git log -n15 --author=Liam"
+   ]
+  },
+  {
+   "id": "dev-dev_01-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": false,
+   "recall": 0.6818181818181818,
+   "evidence": false,
+   "reading": null,
+   "raw": 277,
+   "returned": 283,
+   "seconds": 0.916,
+   "probes": [
+    "git log -n15 trunk..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_01-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 15,
+   "returned": 22,
+   "seconds": 0.457,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_01-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 871,
+   "returned": 136,
+   "seconds": 1.852,
+   "probes": [
+    "git diff trunk...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_01-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 136,
+   "returned": 147,
+   "seconds": 0.401,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_01-change_in_file",
+   "intent": "change_in_file",
+   "routed": false,
+   "plan": true,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 13,
+   "seconds": 0.436,
+   "probes": [
+    "git diff HEAD -- app/models/account.rb"
+   ]
+  },
+  {
+   "id": "dev-dev_01-commit_files",
+   "intent": "commit_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 136,
+   "returned": 141,
+   "seconds": 0.735,
+   "probes": [
+    "git show 42ae10e"
+   ]
+  },
+  {
+   "id": "dev-dev_01-file_history",
+   "intent": "file_history",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 128,
+   "returned": 132,
+   "seconds": 0.792,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_01-file_last_change",
+   "intent": "file_last_change",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 251,
+   "returned": 260,
+   "seconds": 0.934,
+   "probes": [
+    "git log -n15 -- config/routes.rb"
+   ]
+  },
+  {
+   "id": "dev-dev_01-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 128,
+   "returned": 132,
+   "seconds": 0.007,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_01-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 128,
+   "returned": 132,
+   "seconds": 0.005,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_01-line_author",
+   "intent": "line_author",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 752,
+   "returned": 50,
+   "seconds": 0.668,
+   "probes": [
+    "git blame -- spec/models/account_spec.rb"
+   ]
+  },
+  {
+   "id": "dev-dev_01-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 33,
+   "returned": 41,
+   "seconds": 0.877,
+   "probes": [
+    "git log -n15 -i --grep=sync"
+   ]
+  },
+  {
+   "id": "dev-dev_01-modified_files",
+   "intent": "modified_files",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.433,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_01-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 103,
+   "returned": 107,
+   "seconds": 0.452,
+   "probes": [
+    "git log -n6"
+   ]
+  },
+  {
+   "id": "dev-dev_01-staged_files",
+   "intent": "staged_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.498,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_01-stashes",
+   "intent": "stashes",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 7,
+   "seconds": 0.405,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_01-sync",
+   "intent": "sync",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 15,
+   "returned": 22,
+   "seconds": 0.44,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_01-untracked_files",
+   "intent": "untracked_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 15,
+   "returned": 22,
+   "seconds": 0.399,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_01-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 41,
+   "returned": 46,
+   "seconds": 0.414,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_02-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 16,
+   "returned": 25,
+   "seconds": 0.745,
+   "probes": [
+    "git log -n15 --author=Fatima Zahra"
+   ]
+  },
+  {
+   "id": "dev-dev_02-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": false,
+   "recall": 0.8823529411764706,
+   "evidence": false,
+   "reading": null,
+   "raw": 254,
+   "returned": 260,
+   "seconds": 0.83,
+   "probes": [
+    "git log -n15 main..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_02-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 25,
+   "returned": 32,
+   "seconds": 0.381,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_02-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 725,
+   "returned": 129,
+   "seconds": 1.918,
+   "probes": [
+    "git diff main...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_02-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 65,
+   "returned": 76,
+   "seconds": 0.399,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_02-change_in_file",
+   "intent": "change_in_file",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 25,
+   "returned": 32,
+   "seconds": 0.297,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_02-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 106,
+   "returned": 110,
+   "seconds": 0.82,
+   "probes": [
+    "git show 4f746c7"
+   ]
+  },
+  {
+   "id": "dev-dev_02-file_history",
+   "intent": "file_history",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 102,
+   "returned": 108,
+   "seconds": 1.107,
+   "probes": [
+    "git log -n15 -- Gemfile"
+   ]
+  },
+  {
+   "id": "dev-dev_02-file_last_change",
+   "intent": "file_last_change",
+   "routed": true,
+   "plan": false,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 106,
+   "returned": 110,
+   "seconds": 0.798,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_02-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 106,
+   "returned": 110,
+   "seconds": 0.005,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_02-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 106,
+   "returned": 110,
+   "seconds": 0.601,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_02-line_author",
+   "intent": "line_author",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 321,
+   "returned": 56,
+   "seconds": 0.593,
+   "probes": [
+    "git blame -- app/controllers/accounts_controller.rb"
+   ]
+  },
+  {
+   "id": "dev-dev_02-message_search",
+   "intent": "message_search",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 48,
+   "returned": 56,
+   "seconds": 0.534,
+   "probes": [
+    "git log -n15 -i --grep=policy"
+   ]
+  },
+  {
+   "id": "dev-dev_02-modified_files",
+   "intent": "modified_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 25,
+   "returned": 32,
+   "seconds": 0.298,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_02-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 84,
+   "returned": 88,
+   "seconds": 1.117,
+   "probes": [
+    "git log -n5"
+   ]
+  },
+  {
+   "id": "dev-dev_02-staged_files",
+   "intent": "staged_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 80,
+   "returned": 85,
+   "seconds": 0.45,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_02-stashes",
+   "intent": "stashes",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 28,
+   "returned": 32,
+   "seconds": 0.315,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_02-sync",
+   "intent": "sync",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 25,
+   "returned": 32,
+   "seconds": 0.281,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_02-untracked_files",
+   "intent": "untracked_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 25,
+   "returned": 32,
+   "seconds": 0.34,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_02-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 43,
+   "returned": 48,
+   "seconds": 0.384,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_03-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 71,
+   "returned": 80,
+   "seconds": 1.276,
+   "probes": [
+    "git log -n15 --author=Kavita Patel"
+   ]
+  },
+  {
+   "id": "dev-dev_03-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": false,
+   "recall": 0.4166666666666667,
+   "evidence": false,
+   "reading": null,
+   "raw": 253,
+   "returned": 259,
+   "seconds": 0.807,
+   "probes": [
+    "git log -n15 trunk..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_03-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 15,
+   "returned": 22,
+   "seconds": 0.296,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_03-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 1072,
+   "returned": 132,
+   "seconds": 2.064,
+   "probes": [
+    "git diff trunk...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_03-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 63,
+   "returned": 74,
+   "seconds": 0.395,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_03-change_in_file",
+   "intent": "change_in_file",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 81,
+   "returned": 87,
+   "seconds": 0.463,
+   "probes": [
+    "git diff HEAD -- mix.exs"
+   ]
+  },
+  {
+   "id": "dev-dev_03-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.637,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_03-file_history",
+   "intent": "file_history",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 179,
+   "returned": 186,
+   "seconds": 1.458,
+   "probes": [
+    "git log -n15 -- lib/repo.ex"
+   ]
+  },
+  {
+   "id": "dev-dev_03-file_last_change",
+   "intent": "file_last_change",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 257,
+   "returned": 263,
+   "seconds": 1.325,
+   "probes": [
+    "git log -n15 -- mix.exs"
+   ]
+  },
+  {
+   "id": "dev-dev_03-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 107,
+   "returned": 111,
+   "seconds": 0.424,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_03-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 107,
+   "returned": 111,
+   "seconds": 0.522,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_03-line_author",
+   "intent": "line_author",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 964,
+   "returned": 26,
+   "seconds": 0.601,
+   "probes": [
+    "git blame -- lib/router.ex"
+   ]
+  },
+  {
+   "id": "dev-dev_03-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 51,
+   "returned": 60,
+   "seconds": 0.755,
+   "probes": [
+    "git log -n15 -i --grep=notification"
+   ]
+  },
+  {
+   "id": "dev-dev_03-modified_files",
+   "intent": "modified_files",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.391,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_03-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 98,
+   "returned": 101,
+   "seconds": 0.317,
+   "probes": [
+    "git log -n6"
+   ]
+  },
+  {
+   "id": "dev-dev_03-staged_files",
+   "intent": "staged_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 15,
+   "returned": 22,
+   "seconds": 0.367,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_03-stashes",
+   "intent": "stashes",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 7,
+   "seconds": 0.376,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_03-sync",
+   "intent": "sync",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 15,
+   "returned": 22,
+   "seconds": 0.294,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_03-untracked_files",
+   "intent": "untracked_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 15,
+   "returned": 22,
+   "seconds": 0.274,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_03-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 45,
+   "returned": 49,
+   "seconds": 0.399,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_04-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 39,
+   "returned": 46,
+   "seconds": 1.167,
+   "probes": [
+    "git log -n15 --author=Chloe"
+   ]
+  },
+  {
+   "id": "dev-dev_04-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": false,
+   "recall": 0.5172413793103449,
+   "evidence": false,
+   "reading": null,
+   "raw": 262,
+   "returned": 268,
+   "seconds": 0.789,
+   "probes": [
+    "git log -n15 trunk..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_04-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 27,
+   "returned": 34,
+   "seconds": 0.349,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_04-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 1004,
+   "returned": 119,
+   "seconds": 2.128,
+   "probes": [
+    "git diff trunk...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_04-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 84,
+   "returned": 95,
+   "seconds": 0.58,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_04-change_in_file",
+   "intent": "change_in_file",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 71,
+   "returned": 78,
+   "seconds": 0.412,
+   "probes": [
+    "git diff HEAD -- README.md"
+   ]
+  },
+  {
+   "id": "dev-dev_04-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 124,
+   "returned": 129,
+   "seconds": 0.748,
+   "probes": [
+    "git show 8c92dca"
+   ]
+  },
+  {
+   "id": "dev-dev_04-file_history",
+   "intent": "file_history",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 164,
+   "returned": 174,
+   "seconds": 0.979,
+   "probes": [
+    "git log -n15 -- src/main/java/App.java"
+   ]
+  },
+  {
+   "id": "dev-dev_04-file_last_change",
+   "intent": "file_last_change",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 120,
+   "returned": 131,
+   "seconds": 1.556,
+   "probes": [
+    "git log -n15 -- src/test/java/AppTest.java"
+   ]
+  },
+  {
+   "id": "dev-dev_04-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 16,
+   "returned": 20,
+   "seconds": 1.009,
+   "probes": [
+    "git log -n1"
+   ]
+  },
+  {
+   "id": "dev-dev_04-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 129,
+   "returned": 133,
+   "seconds": 0.005,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_04-line_author",
+   "intent": "line_author",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 409,
+   "returned": 23,
+   "seconds": 0.63,
+   "probes": [
+    "git blame -- mvnw"
+   ]
+  },
+  {
+   "id": "dev-dev_04-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 45,
+   "returned": 53,
+   "seconds": 0.855,
+   "probes": [
+    "git log -n15 -i --grep=exporter"
+   ]
+  },
+  {
+   "id": "dev-dev_04-modified_files",
+   "intent": "modified_files",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 262,
+   "returned": 265,
+   "seconds": 0.597,
+   "probes": [
+    "git log -n15"
+   ]
+  },
+  {
+   "id": "dev-dev_04-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 262,
+   "returned": 265,
+   "seconds": 1.576,
+   "probes": [
+    "git log -n15"
+   ]
+  },
+  {
+   "id": "dev-dev_04-staged_files",
+   "intent": "staged_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.552,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_04-stashes",
+   "intent": "stashes",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 7,
+   "seconds": 0.424,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_04-sync",
+   "intent": "sync",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 27,
+   "returned": 34,
+   "seconds": 0.35,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_04-untracked_files",
+   "intent": "untracked_files",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.553,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_04-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 24,
+   "returned": 29,
+   "seconds": 0.439,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_05-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 40,
+   "returned": 47,
+   "seconds": 0.797,
+   "probes": [
+    "git log -n15 --author=Camila"
+   ]
+  },
+  {
+   "id": "dev-dev_05-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 32,
+   "returned": 39,
+   "seconds": 0.522,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_05-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 32,
+   "returned": 39,
+   "seconds": 0.356,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_05-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 483,
+   "returned": 111,
+   "seconds": 1.77,
+   "probes": [
+    "git diff main...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_05-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 125,
+   "returned": 136,
+   "seconds": 0.437,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_05-change_in_file",
+   "intent": "change_in_file",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 98,
+   "returned": 110,
+   "seconds": 0.858,
+   "probes": [
+    "git diff HEAD -- spec/models/account_spec.rb"
+   ]
+  },
+  {
+   "id": "dev-dev_05-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 105,
+   "returned": 110,
+   "seconds": 0.8,
+   "probes": [
+    "git show 5c00ec1"
+   ]
+  },
+  {
+   "id": "dev-dev_05-file_history",
+   "intent": "file_history",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 51,
+   "returned": 57,
+   "seconds": 0.689,
+   "probes": [
+    "git log -n15 -- Gemfile"
+   ]
+  },
+  {
+   "id": "dev-dev_05-file_last_change",
+   "intent": "file_last_change",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 121,
+   "returned": 131,
+   "seconds": 1.338,
+   "probes": [
+    "git log -n15 -- app/models/account.rb"
+   ]
+  },
+  {
+   "id": "dev-dev_05-last_commit",
+   "intent": "last_commit",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 32,
+   "returned": 39,
+   "seconds": 0.254,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_05-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 252,
+   "returned": 256,
+   "seconds": 0.939,
+   "probes": [
+    "git log -n15"
+   ]
+  },
+  {
+   "id": "dev-dev_05-line_author",
+   "intent": "line_author",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 371,
+   "returned": 28,
+   "seconds": 0.647,
+   "probes": [
+    "git blame -- app/models/account.rb"
+   ]
+  },
+  {
+   "id": "dev-dev_05-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 16,
+   "returned": 24,
+   "seconds": 0.836,
+   "probes": [
+    "git log -n15 -i --grep=timeout"
+   ]
+  },
+  {
+   "id": "dev-dev_05-modified_files",
+   "intent": "modified_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 32,
+   "returned": 39,
+   "seconds": 0.437,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_05-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 124,
+   "returned": 127,
+   "seconds": 0.68,
+   "probes": [
+    "git log -n7"
+   ]
+  },
+  {
+   "id": "dev-dev_05-staged_files",
+   "intent": "staged_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 87,
+   "returned": 92,
+   "seconds": 0.543,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_05-stashes",
+   "intent": "stashes",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 7,
+   "seconds": 0.474,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_05-sync",
+   "intent": "sync",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 32,
+   "returned": 39,
+   "seconds": 0.451,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_05-untracked_files",
+   "intent": "untracked_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 32,
+   "returned": 39,
+   "seconds": 0.446,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_05-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 22,
+   "returned": 27,
+   "seconds": 0.426,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_06-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 15,
+   "returned": 24,
+   "seconds": 1.173,
+   "probes": [
+    "git log -n15 --author=Yuki Tanaka"
+   ]
+  },
+  {
+   "id": "dev-dev_06-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 90,
+   "returned": 96,
+   "seconds": 0.74,
+   "probes": [
+    "git log -n15 main..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_06-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 21,
+   "returned": 28,
+   "seconds": 0.384,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_06-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 383,
+   "returned": 91,
+   "seconds": 1.743,
+   "probes": [
+    "git diff main...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_06-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 158,
+   "returned": 169,
+   "seconds": 0.415,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_06-change_in_file",
+   "intent": "change_in_file",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 88,
+   "returned": 96,
+   "seconds": 0.539,
+   "probes": [
+    "git diff HEAD -- src/Kernel.php"
+   ]
+  },
+  {
+   "id": "dev-dev_06-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 88,
+   "returned": 92,
+   "seconds": 0.64,
+   "probes": [
+    "git diff HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_06-file_history",
+   "intent": "file_history",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 31,
+   "returned": 44,
+   "seconds": 1.169,
+   "probes": [
+    "git log -n15 -- src/Controller/IndexController.php"
+   ]
+  },
+  {
+   "id": "dev-dev_06-file_last_change",
+   "intent": "file_last_change",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 49,
+   "returned": 58,
+   "seconds": 0.942,
+   "probes": [
+    "git log -n15 -- tests/UserTest.php"
+   ]
+  },
+  {
+   "id": "dev-dev_06-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 106,
+   "returned": 110,
+   "seconds": 0.352,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_06-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.572,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_06-line_author",
+   "intent": "line_author",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 130,
+   "returned": 46,
+   "seconds": 0.573,
+   "probes": [
+    "git blame -- tests/UserTest.php"
+   ]
+  },
+  {
+   "id": "dev-dev_06-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 43,
+   "returned": 51,
+   "seconds": 0.763,
+   "probes": [
+    "git log -n15 -i --grep=queue"
+   ]
+  },
+  {
+   "id": "dev-dev_06-modified_files",
+   "intent": "modified_files",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.48,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_06-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 132,
+   "returned": 136,
+   "seconds": 0.621,
+   "probes": [
+    "git log -n7"
+   ]
+  },
+  {
+   "id": "dev-dev_06-staged_files",
+   "intent": "staged_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.583,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_06-stashes",
+   "intent": "stashes",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 29,
+   "returned": 33,
+   "seconds": 0.33,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_06-sync",
+   "intent": "sync",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 21,
+   "returned": 28,
+   "seconds": 0.284,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_06-untracked_files",
+   "intent": "untracked_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 21,
+   "returned": 28,
+   "seconds": 0.376,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_06-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 43,
+   "returned": 48,
+   "seconds": 0.327,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_07-author_commits",
+   "intent": "author_commits",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 17,
+   "seconds": 0.932,
+   "probes": [
+    "git log -n15 --author=Hydra Seed -i --grep=Hydra Seed"
+   ]
+  },
+  {
+   "id": "dev-dev_07-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 106,
+   "returned": 112,
+   "seconds": 0.842,
+   "probes": [
+    "git log -n15 main..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_07-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 26,
+   "returned": 33,
+   "seconds": 0.416,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_07-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 384,
+   "returned": 102,
+   "seconds": 1.608,
+   "probes": [
+    "git diff main...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_07-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 136,
+   "returned": 147,
+   "seconds": 0.423,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_07-change_in_file",
+   "intent": "change_in_file",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 89,
+   "returned": 97,
+   "seconds": 0.573,
+   "probes": [
+    "git diff HEAD -- lib/router.ex"
+   ]
+  },
+  {
+   "id": "dev-dev_07-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 121,
+   "returned": 125,
+   "seconds": 0.719,
+   "probes": [
+    "git show 14e90b5"
+   ]
+  },
+  {
+   "id": "dev-dev_07-file_history",
+   "intent": "file_history",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 20,
+   "seconds": 1.064,
+   "probes": [
+    "git log -n15 --author=test -i --grep=test -- test/router_test.exs"
+   ]
+  },
+  {
+   "id": "dev-dev_07-file_last_change",
+   "intent": "file_last_change",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 108,
+   "returned": 112,
+   "seconds": 0.841,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_07-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 173,
+   "returned": 177,
+   "seconds": 0.953,
+   "probes": [
+    "git log -n15"
+   ]
+  },
+  {
+   "id": "dev-dev_07-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 108,
+   "returned": 112,
+   "seconds": 0.562,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_07-line_author",
+   "intent": "line_author",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 127,
+   "returned": 24,
+   "seconds": 0.603,
+   "probes": [
+    "git blame -- lib/repo.ex"
+   ]
+  },
+  {
+   "id": "dev-dev_07-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 35,
+   "returned": 43,
+   "seconds": 0.706,
+   "probes": [
+    "git log -n15 -i --grep=parser"
+   ]
+  },
+  {
+   "id": "dev-dev_07-modified_files",
+   "intent": "modified_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 89,
+   "returned": 93,
+   "seconds": 0.695,
+   "probes": [
+    "git diff HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_07-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 106,
+   "returned": 109,
+   "seconds": 0.701,
+   "probes": [
+    "git log -n6"
+   ]
+  },
+  {
+   "id": "dev-dev_07-staged_files",
+   "intent": "staged_files",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.566,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_07-stashes",
+   "intent": "stashes",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 27,
+   "returned": 31,
+   "seconds": 0.345,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_07-sync",
+   "intent": "sync",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 26,
+   "returned": 33,
+   "seconds": 0.405,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_07-untracked_files",
+   "intent": "untracked_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 26,
+   "returned": 33,
+   "seconds": 0.466,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_07-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 43,
+   "returned": 48,
+   "seconds": 0.473,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_08-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 17,
+   "returned": 24,
+   "seconds": 0.79,
+   "probes": [
+    "git log -n15 --author=Kavita"
+   ]
+  },
+  {
+   "id": "dev-dev_08-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": false,
+   "recall": 0.42857142857142855,
+   "evidence": false,
+   "reading": null,
+   "raw": 243,
+   "returned": 249,
+   "seconds": 0.807,
+   "probes": [
+    "git log -n15 main..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_08-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 24,
+   "returned": 31,
+   "seconds": 0.362,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_08-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 1071,
+   "returned": 145,
+   "seconds": 2.12,
+   "probes": [
+    "git diff main...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_08-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 101,
+   "returned": 112,
+   "seconds": 0.444,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_08-change_in_file",
+   "intent": "change_in_file",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 71,
+   "returned": 78,
+   "seconds": 0.543,
+   "probes": [
+    "git diff HEAD -- README.md"
+   ]
+  },
+  {
+   "id": "dev-dev_08-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": false,
+   "recall": 0.5,
+   "evidence": false,
+   "reading": null,
+   "raw": 243,
+   "returned": 246,
+   "seconds": 1.089,
+   "probes": [
+    "git log -n15"
+   ]
+  },
+  {
+   "id": "dev-dev_08-file_history",
+   "intent": "file_history",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 272,
+   "returned": 281,
+   "seconds": 1.46,
+   "probes": [
+    "git log -n15 -- config/routes.rb"
+   ]
+  },
+  {
+   "id": "dev-dev_08-file_last_change",
+   "intent": "file_last_change",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 251,
+   "returned": 257,
+   "seconds": 1.347,
+   "probes": [
+    "git log -n15 -- Gemfile"
+   ]
+  },
+  {
+   "id": "dev-dev_08-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 81,
+   "returned": 85,
+   "seconds": 0.005,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_08-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 81,
+   "returned": 85,
+   "seconds": 0.006,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_08-line_author",
+   "intent": "line_author",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 1031,
+   "returned": 24,
+   "seconds": 0.547,
+   "probes": [
+    "git blame -- Gemfile"
+   ]
+  },
+  {
+   "id": "dev-dev_08-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 62,
+   "returned": 70,
+   "seconds": 0.822,
+   "probes": [
+    "git log -n15 -i --grep=webhook"
+   ]
+  },
+  {
+   "id": "dev-dev_08-modified_files",
+   "intent": "modified_files",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.483,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_08-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 112,
+   "returned": 116,
+   "seconds": 1.417,
+   "probes": [
+    "git log -n7"
+   ]
+  },
+  {
+   "id": "dev-dev_08-staged_files",
+   "intent": "staged_files",
+   "routed": true,
+   "plan": false,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 243,
+   "returned": 246,
+   "seconds": 0.839,
+   "probes": [
+    "git log -n15"
+   ]
+  },
+  {
+   "id": "dev-dev_08-stashes",
+   "intent": "stashes",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 25,
+   "returned": 29,
+   "seconds": 0.379,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_08-sync",
+   "intent": "sync",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.675,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_08-untracked_files",
+   "intent": "untracked_files",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 71,
+   "returned": 75,
+   "seconds": 0.622,
+   "probes": [
+    "git diff HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_08-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 22,
+   "returned": 27,
+   "seconds": 0.429,
+   "probes": [
+    "git worktree list"
+   ]
+  },
+  {
+   "id": "dev-dev_09-author_commits",
+   "intent": "author_commits",
+   "routed": true,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 15,
+   "seconds": 1.241,
+   "probes": [
+    "git log -n15 --author=Kavita -i --grep=Kavita"
+   ]
+  },
+  {
+   "id": "dev-dev_09-branch_commits",
+   "intent": "branch_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 223,
+   "returned": 229,
+   "seconds": 0.736,
+   "probes": [
+    "git log -n15 main..HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_09-branch_current",
+   "intent": "branch_current",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 29,
+   "returned": 36,
+   "seconds": 0.348,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_09-branch_diff_files",
+   "intent": "branch_diff_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 673,
+   "returned": 106,
+   "seconds": 2.139,
+   "probes": [
+    "git diff main...HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_09-branches",
+   "intent": "branches",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 109,
+   "returned": 120,
+   "seconds": 0.361,
+   "probes": [
+    "git branch --all -vv --sort=-committerdate"
+   ]
+  },
+  {
+   "id": "dev-dev_09-change_in_file",
+   "intent": "change_in_file",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 95,
+   "returned": 103,
+   "seconds": 0.525,
+   "probes": [
+    "git diff HEAD -- include/engine.h"
+   ]
+  },
+  {
+   "id": "dev-dev_09-commit_files",
+   "intent": "commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 101,
+   "returned": 105,
+   "seconds": 0.7,
+   "probes": [
+    "git show 14f5fb6"
+   ]
+  },
+  {
+   "id": "dev-dev_09-file_history",
+   "intent": "file_history",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 152,
+   "returned": 159,
+   "seconds": 1.33,
+   "probes": [
+    "git log -n15 -- build.sh"
+   ]
+  },
+  {
+   "id": "dev-dev_09-file_last_change",
+   "intent": "file_last_change",
+   "routed": false,
+   "plan": false,
+   "recall": 0,
+   "evidence": false,
+   "reading": null,
+   "raw": 3,
+   "returned": 25,
+   "seconds": 1.341,
+   "probes": [
+    "git log -n15 --author=last contributor -i --grep=last contributor -- src/engine.cpp"
+   ]
+  },
+  {
+   "id": "dev-dev_09-last_commit",
+   "intent": "last_commit",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 118,
+   "returned": 122,
+   "seconds": 0.005,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_09-last_commit_files",
+   "intent": "last_commit_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 118,
+   "returned": 122,
+   "seconds": 0.717,
+   "probes": [
+    "git show HEAD"
+   ]
+  },
+  {
+   "id": "dev-dev_09-line_author",
+   "intent": "line_author",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 181,
+   "returned": 47,
+   "seconds": 0.231,
+   "probes": [
+    "git blame -- tests/test_core.cpp"
+   ]
+  },
+  {
+   "id": "dev-dev_09-message_search",
+   "intent": "message_search",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 18,
+   "returned": 25,
+   "seconds": 0.713,
+   "probes": [
+    "git log -n15 -i --grep=queue"
+   ]
+  },
+  {
+   "id": "dev-dev_09-modified_files",
+   "intent": "modified_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 29,
+   "returned": 36,
+   "seconds": 0.367,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_09-recent_commits",
+   "intent": "recent_commits",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 136,
+   "returned": 139,
+   "seconds": 0.403,
+   "probes": [
+    "git log -n8"
+   ]
+  },
+  {
+   "id": "dev-dev_09-staged_files",
+   "intent": "staged_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 3,
+   "returned": 8,
+   "seconds": 0.472,
+   "probes": [
+    "git diff --staged"
+   ]
+  },
+  {
+   "id": "dev-dev_09-stashes",
+   "intent": "stashes",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 14,
+   "returned": 18,
+   "seconds": 0.332,
+   "probes": [
+    "git stash list"
+   ]
+  },
+  {
+   "id": "dev-dev_09-sync",
+   "intent": "sync",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 29,
+   "returned": 36,
+   "seconds": 0.365,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_09-untracked_files",
+   "intent": "untracked_files",
+   "routed": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 29,
+   "returned": 36,
+   "seconds": 0.393,
+   "probes": [
+    "git status --short --branch"
+   ]
+  },
+  {
+   "id": "dev-dev_09-worktrees",
+   "intent": "worktrees",
+   "routed": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 22,
+   "returned": 27,
+   "seconds": 0.343,
+   "probes": [
+    "git worktree list"
+   ]
+  }
+ ]
+}

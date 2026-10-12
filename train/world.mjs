@@ -71,7 +71,16 @@ export function buildWorld(root, seed) {
   const remote = path.join(root, 'remote.git');
   mkdirSync(repo, { recursive: true });
 
-  const run = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trimEnd();
+  const baseEpoch = 1750000000 + (seed % 100000) * 3600;
+  const stamp = offset => new Date((baseEpoch + offset * 1800) * 1000).toISOString();
+  let dateSequence = 0;
+  const run = (cwd, ...args) => {
+    const dateAt = args.indexOf('--date');
+    const date = dateAt >= 0 ? args[dateAt + 1] : stamp(dateSequence);
+    if (args[0] === 'commit' || args[0] === 'stash') dateSequence++;
+    return execFileSync('git', args, { cwd, encoding: 'utf8',
+      env: { ...process.env, GIT_AUTHOR_DATE: date, GIT_COMMITTER_DATE: date } }).trimEnd();
+  };
   const write = (rel, body) => {
     const full = path.join(repo, rel);
     mkdirSync(path.dirname(full), { recursive: true });
@@ -94,12 +103,11 @@ export function buildWorld(root, seed) {
   run(repo, 'config', 'user.name', 'Hydra Seed');
   run(repo, 'config', 'user.email', 'seed@hydra.local');
   run(repo, 'config', 'commit.gpgsign', 'false');
+  run(repo, 'config', 'core.autocrlf', 'false');
+  run(repo, 'config', 'core.filemode', 'false');
 
   flavor.forEach((f, i) => write(f, `// ${f} initial seed ${seed}\nexport const item_${i} = ${i};\n`));
   run(repo, 'add', '.');
-  const baseEpoch = 1750000000 + (seed % 100000) * 3600;
-  const stamp = offset => new Date((baseEpoch + offset * 1800) * 1000).toISOString();
-
   run(repo, 'commit', '-m', 'Initial commit', '--date', stamp(0));
 
   const history = [];

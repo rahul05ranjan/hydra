@@ -61,6 +61,14 @@ const NO_ANSWER = 'The local model gave no usable answer. The start of each outp
 // The model only chooses line numbers; the evidence printed is the command's own text, never a paraphrase.
 export async function answer(question, sections, chat) {
   const rawChars = sections.reduce((sum, section) => sum + Math.min(section.out.length, ACCOUNT_CAP), 0);
+  if (sections.length === 1 && sections[0].probe === 'blame' && /\bline\b/i.test(question)) {
+    const identifiers = (question.match(/\b[A-Za-z_$][\w$]*\b/g) || []).filter(word => /[_$\d]|[a-z][A-Z]/.test(word));
+    const lines = sections[0].out.split('\n').filter(line => identifiers.some(word => line.includes(word)));
+    const out = lines.join('\n');
+    if (lines.length && lines.length <= MAX_CITED && out.length <= PER_SECTION) {
+      return { text: `$ ${sections[0].cmd}\n${out}`, rawChars };
+    }
+  }
   if (rawChars <= PASS_THROUGH || sections.every(section => COMPLETE_PROBES.has(section.probe))) {
     return { text: sections.map(section => `$ ${section.cmd}\n${section.out.trimEnd()}`).join('\n\n'), rawChars };
   }

@@ -56,7 +56,7 @@ export async function chat({ system, user, schema, model = MODEL }) {
   if (LLAMA) {
     const reply = await call('/v1/chat/completions', {
       model, stream: false, temperature: 0, max_tokens: 512,
-      response_format: { type: 'json_schema', schema },
+      response_format: { type: 'json_schema', json_schema: { name: 'hydra_reply', schema, strict: true } },
       chat_template_kwargs: { enable_thinking: false },
       messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
     }, 60_000);
@@ -65,6 +65,7 @@ export async function chat({ system, user, schema, model = MODEL }) {
     try {
       const value = JSON.parse(choice?.message?.content);
       if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error();
+      if ((schema.required || []).some(key => !Object.hasOwn(value, key))) throw new Error();
       return value;
     } catch { throw new Unavailable('llama.cpp returned no usable JSON object'); }
   }

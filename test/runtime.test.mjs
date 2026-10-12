@@ -25,7 +25,7 @@ test('runtime and CLI support llama.cpp without Ollama', async t => {
     if (mode === 'invalid') { res.end('not json'); return; }
     if (req.url === '/v1/models') { res.end(JSON.stringify({ data: [{ id: mode === 'missing' ? 'different-model' : 'fixture-model' }] })); return; }
     if (req.url === '/v1/chat/completions') {
-      res.end(JSON.stringify({ choices: [{ finish_reason: mode === 'length' ? 'length' : 'stop', message: { content: mode === 'content' ? 'broken' : JSON.stringify({ probes: [{ probe: 'status' }] }) } }] })); return;
+      res.end(JSON.stringify({ choices: [{ finish_reason: mode === 'length' ? 'length' : 'stop', message: { content: mode === 'content' ? 'broken' : mode === 'empty' ? '{}' : JSON.stringify({ probes: [{ probe: 'status' }] }) } }] })); return;
     }
     if (req.url === '/api/chat') { res.end(JSON.stringify({ message: { content: '{"probes":[]}' } })); return; }
     res.writeHead(404); res.end('{}');
@@ -40,7 +40,7 @@ test('runtime and CLI support llama.cpp without Ollama', async t => {
       const request = requests.at(-1);
       assert.equal(request.url, '/v1/chat/completions');
       assert.equal(request.body.model, 'fixture-model');
-      assert.deepEqual(request.body.response_format, { type: 'json_schema', schema });
+      assert.deepEqual(request.body.response_format, { type: 'json_schema', json_schema: { name: 'hydra_reply', schema, strict: true } });
       assert.equal(request.body.max_tokens, 512);
       assert.equal(request.body.temperature, 0);
       assert.equal(request.body.stream, false);
@@ -64,7 +64,7 @@ test('runtime and CLI support llama.cpp without Ollama', async t => {
       assert.match(r.stdout, /git status/);
     });
     await t.test('HTTP errors, malformed responses and truncated JSON stop calls', async () => {
-      for (const [value, pattern] of [['http', /llama.cpp answered 503/], ['invalid', /invalid JSON/], ['content', /no usable JSON object/], ['length', /512-token limit/]]) {
+      for (const [value, pattern] of [['http', /llama.cpp answered 503/], ['invalid', /invalid JSON/], ['content', /no usable JSON object/], ['empty', /no usable JSON object/], ['length', /512-token limit/]]) {
         mode = value;
         const r = await child(['--input-type=module', '-e', chatScript], env);
         assert.equal(r.code, 2);

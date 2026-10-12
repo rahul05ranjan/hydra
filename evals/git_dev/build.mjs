@@ -109,11 +109,11 @@ function tasksFor(world, index, phrasings) {
     branches: { accept: [{ probe: 'branches' }], facts: [trunk, branch, ...world.others].map(name => ` ${name} `) },
     stashes: {
       accept: [{ probe: 'stash' }],
-      facts: world.stashes.length ? world.stashes : ['$ git stash list\n(no output)'],
+      facts: list(read(repo, 'stash', 'list')).length ? list(read(repo, 'stash', 'list')) : ['$ git stash list\n(no output)'],
     },
     worktrees: {
       accept: [{ probe: 'worktrees' }],
-      facts: [`[${branch}]`, ...world.worktrees.map(w => `${w.dir} `)],
+      facts: [`[${branch}]`, ...world.worktrees.map(w => `/${path.basename(w.dir)} `)],
     },
     line_author: {
       slots: { path: line.file, token: line.token },

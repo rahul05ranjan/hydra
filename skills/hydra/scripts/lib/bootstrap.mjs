@@ -4,7 +4,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
-import { home } from './local.mjs';
+import { home, localConfig, stopLocal } from './local.mjs';
 
 export function findNpx(dirs = [path.dirname(process.execPath), ...(process.env.PATH || '').split(path.delimiter)]) {
   for (const dir of dirs) {
@@ -54,6 +54,9 @@ export async function installRuntime(manifest) {
   const archive = path.join(home(), 'downloads', path.basename(new URL(artifact.url).pathname));
   console.log(`Downloading/verifying llama.cpp ${manifest.llama.tag} (${artifact.size} bytes)...`);
   await download(artifact, archive);
+  // Release Windows executable locks and avoid reusing the previous model alias.
+  const previous = localConfig();
+  if (previous.managed) stopLocal(previous);
   const dest = path.join(home(), 'runtime', `${manifest.llama.tag}-${process.platform}-${process.arch}`);
   mkdirSync(dest, { recursive: true });
   if (process.platform === 'win32') {

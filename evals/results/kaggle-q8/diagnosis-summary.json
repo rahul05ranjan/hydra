@@ -1,0 +1,231 @@
+{
+  "developmentOnly": true,
+  "metric": "raw planning, not end-to-end accuracy",
+  "tasks": 19,
+  "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+  "rows": [
+    {
+      "intent": "branch_current",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "sync",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "modified_files",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": true
+      }
+    },
+    {
+      "intent": "untracked_files",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "staged_files",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": false,
+        "correct": false
+      }
+    },
+    {
+      "intent": "change_in_file",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "branch_diff_files",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "last_commit",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "recent_commits",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": true
+      }
+    },
+    {
+      "intent": "file_last_change",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "file_history",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "author_commits",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": false,
+        "correct": false
+      }
+    },
+    {
+      "intent": "message_search",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "branch_commits",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "last_commit_files",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": false,
+        "correct": false
+      }
+    },
+    {
+      "intent": "commit_files",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "branches",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "stashes",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": false
+      }
+    },
+    {
+      "intent": "worktrees",
+      "original": {
+        "valid": false,
+        "correct": false
+      },
+      "gguf": {
+        "valid": true,
+        "correct": true
+      }
+    }
+  ],
+  "original": {
+    "valid": 0,
+    "correct": 0
+  },
+  "gguf": {
+    "valid": 16,
+    "correct": 3
+  },
+  "originalFirstJsonObject": {
+    "tasks": 19,
+    "correct": 15,
+    "valid": 19,
+    "limitation": "Diagnostic only: full replies contain trailing text because generation used model-config EOS instead of tokenizer chat EOS; not a valid-response or end-to-end score."
+  }
+}

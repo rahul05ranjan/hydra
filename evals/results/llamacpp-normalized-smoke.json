@@ -1,0 +1,55 @@
+[
+  {
+    "question": "which branch am I on?",
+    "expected": "status",
+    "reply": {
+      "probes": [
+        {
+          "probe": "status"
+        }
+      ]
+    },
+    "correct": true,
+    "ms": 3658
+  },
+  {
+    "question": "show staged changes",
+    "expected": "diff",
+    "reply": {
+      "probes": [
+        {
+          "probe": "diff",
+          "staged": true
+        }
+      ]
+    },
+    "correct": true,
+    "ms": 640
+  },
+  {
+    "question": "show available stashes",
+    "expected": "stash",
+    "reply": {
+      "probes": [
+        {
+          "probe": "stash"
+        }
+      ]
+    },
+    "correct": true,
+    "ms": 514
+  },
+  {
+    "question": "list the worktrees",
+    "expected": "worktrees",
+    "reply": {
+      "probes": [
+        {
+          "probe": "worktrees"
+        }
+      ]
+    },
+    "correct": true,
+    "ms": 537
+  }
+]

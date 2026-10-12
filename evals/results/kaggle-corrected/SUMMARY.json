@@ -1,0 +1,92 @@
+{
+  "kernel": "rahulswt7/hydra-q8-corrected-validation",
+  "version": 3,
+  "status": "COMPLETE",
+  "modelSha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886",
+  "development": {
+    "tasks": 200,
+    "routed": 0.7,
+    "plan": 0.85,
+    "evidence": 0.845,
+    "solved": 0.835,
+    "recall": 0.8646332529877155,
+    "readingRight": 0,
+    "readingScored": 0,
+    "raw": 25231,
+    "returned": 16180,
+    "errors": 0
+  },
+  "sealed": {
+    "tasks": 1000,
+    "routed": 0.721,
+    "plan": 0.878,
+    "evidence": 0.879,
+    "solved": 0.874,
+    "recall": 0.8962,
+    "readingRight": 0,
+    "readingScored": 0,
+    "raw": 100562,
+    "returned": 88564,
+    "errors": 0,
+    "solvedWeighted": 0.8682862991665448
+  },
+  "provenance": {
+    "plan": {
+      "version": 1,
+      "modelSha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886",
+      "sources": {
+        "evals/git1/build.mjs": "5617cc5e3d420e889c6b2c88ea214946e680eb7fb0e92386fbb3d9d6ad918e6e",
+        "evals/git1/questions.mjs": "f52a0855a4268452e860c5c062a8159a907e2ca9d83ce795ed73a369eb8c114f",
+        "evals/git1/tasks.jsonl": "a8dce10aba1845743e1664652081f0d053c4d464b281a267c0c35458f69537ce",
+        "evals/git1/usage.json": "54f9bd7b105339e73a497220151eb2d6c7dd110d1e3eece130ed1a3d8a7814de",
+        "evals/git1/world.mjs": "5af593acf5ea5ede8cba514cc3989b24303f345d31fd75073a07c182a99dd238",
+        "evals/git1/worlds.json": "17a1423e6011cc16bcb7347473933832c1d1b68f16f856ebcbf50859bddb30bd",
+        "evals/git_dev/build.mjs": "3e203f532b8e08a72cf39732c776ba859ba8dca1c3e419fe925244227422f778",
+        "evals/git_dev/tasks.jsonl": "82653386b1c7fe86338f45cc1ac2f49bfd3e5b7cef365c124d61e11079889480",
+        "evals/git_dev/worlds.json": "975f43374cb8c4ec19de8bdcf58022bbc3570337b8507bf0662772441eae36f0",
+        "evals/live_reporter.mjs": "283a82e74bdc927a10e4925b309c959f4a451e4d6f513168219564d72f0fd1d2",
+        "evals/run.mjs": "ec4221f964acb3d1b7bf5824598cd6c499375db32591478b926cbcffff0fa282",
+        "evals/run_dev.mjs": "65ca4b1c4e7e5f28283e31a3a41f8881f0893a1b2559d56e2c4266621cd097bb",
+        "skills/hydra/scripts/hydra.mjs": "a614413af4a5bff74d8baac53c4950049cc39e7605c35207dfe8e6f243701346",
+        "skills/hydra/scripts/install.mjs": "9d93b213c9b9c1691d56fffe797c800c8cfbaa152c0e1daa57788139d679d697",
+        "skills/hydra/scripts/lib/answer.mjs": "c982733b0d62afc40d20e7857ac25f98dd46065ab3011055c3fe537673cfe9c7",
+        "skills/hydra/scripts/lib/bootstrap.mjs": "9f611b2c237cfa720676875131214e08d527728cba0000a4f11a535e79476c9d",
+        "skills/hydra/scripts/lib/exec.mjs": "76dc7147198eb29eef6d3d0f0420c452c6e608638eb8aaf7f8584fd65c4e1e58",
+        "skills/hydra/scripts/lib/files.mjs": "60cb65b66201e7daa8fb5d3c24857fe82eb57a321cd65ee7f6cd551b74cd89dd",
+        "skills/hydra/scripts/lib/git.mjs": "6d9985920f09ca00ae4c20ef03b256c29b23af72a58a7656d03dc3d75565b320",
+        "skills/hydra/scripts/lib/ledger.mjs": "62537d902405e5b7e1f4227f67fc265f7d0df44fb397f26a2a39de2ee0ba8cf5",
+        "skills/hydra/scripts/lib/local.mjs": "0cd290a79f1ab5f0df7b55c76f5cdc636838d83c522e2346900e0049824a5046",
+        "skills/hydra/scripts/lib/ollama.mjs": "fefc7a52f446e96d1a49e537434d200b30deb90bcab6c0af7e52429559d11a43",
+        "skills/hydra/scripts/lib/os.mjs": "624874d1c2b3490a60bc76cad7a1cc3f3107cfac322458c650562326cd149fbd",
+        "skills/hydra/scripts/lib/read.mjs": "81341f38aa650c10d9277a58e92ef1ea2b4de53e0438e4d93bc601ab541ae52d",
+        "skills/hydra/scripts/lib/route.mjs": "a886edfa3d6670caf3a96ad299468f2ff4fcf502887acb1f34a5cdf5d45e40d8",
+        "skills/hydra/scripts/lib/runtime.mjs": "e3eb495977234fefaec3245606f2e145930461313f73f75009a87424ee50761f",
+        "skills/hydra/scripts/lib/test_logs.mjs": "1ec7d011ce5998faac1e13bb0230ab33c962b196d4e09bbbb79004495dbda313",
+        "skills/hydra/scripts/runtime-manifest.json": "782e069ad965437747301a634517bd562e5fbe89ae706caa91c17af80402a1a5",
+        "train/world.mjs": "0347a65d67213b7781de9bbc033895d7136c739f751e8e4073192faf26fd0054"
+      },
+      "frozenSha256": "f56cbb3d3b6f66e49b330ef599afed042adc338e13d168349432d9e04c4c10ea",
+      "tasks": 1000,
+      "deadlineSeconds": 1800,
+      "runtimeTag": "b11563",
+      "training": false,
+      "diagnostic": false,
+      "validation": true,
+      "minimumDevelopmentSolved": 0.68
+    },
+    "elapsedSeconds": 330.327248329,
+    "gpu": true,
+    "gpuProcessEvidence": "24, 1394\n",
+    "gpuMemoryBeforeMB": [
+      0,
+      0
+    ],
+    "gpuMemoryAfterMB": [
+      1397,
+      0
+    ]
+  },
+  "training": false,
+  "sealedRowsInspected": false,
+  "note": "Sealed aggregate only; corrected conversion, schema transport, development-only prompt/evidence fixes. Earlier development receipt has documented measurement limitations."
+}

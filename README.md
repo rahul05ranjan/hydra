@@ -33,9 +33,11 @@ Needs Node 18 or later and [llama.cpp](https://github.com/ggml-org/llama.cpp) (t
 
 ### Run without Ollama
 
-**Current accuracy limitation:** The converted Q8/llama.cpp path completed 989 of 1,000 sealed tasks on Kaggle before its approved 30-minute limit: 283 solved (28.6% of completed tasks). The full score is unavailable; even if every remaining task passed, it could reach only 29.4%. This is substantially below the historical Ollama result. Installation/readiness checks pass, but this path's Git planning needs diagnosis on the development set before relying on it. See [aggregate results](evals/results/kaggle-q8/SUMMARY.json).
+**Validated converted runtime (2026-10-12):** Corrected Q8/llama.cpp with Hydra solved **167/200 development tasks (83.5%)** and **874/1,000 sealed tasks (87.4%; 86.83% usage-weighted)**, with zero errors/timeouts. The private Kaggle T4 job completed in 330.3 seconds including setup and both evaluations. No additional training was used. See [aggregate receipt](evals/results/kaggle-corrected/SUMMARY.json). The old 283/989 (28.6%) partial result remains [archived](evals/results/kaggle-q8/SUMMARY.json).
 
 Install `llama-server` from llama.cpp and obtain a GGUF conversion of your Hydra Nano weights. Safetensors files cannot be passed directly to `llama-server`; llama.cpp provides [`convert_hf_to_gguf.py`](https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py) for conversion from a local Hugging Face model directory. This integration does not download or convert weights.
+
+Development diagnosis found an MLX/HF RMSNorm convention mismatch in conversion and incorrect JSON-schema payload nesting. `train/normalize_mlx.py` adapts the fused MLX export before GGUF conversion. The default installer now pins the validated artifact; named-line blame evidence and planning examples were improved using only development tasks. See [diagnosis and limits](evals/results/CONVERSION-DIAGNOSIS.md).
 
 Start the server in one terminal:
 

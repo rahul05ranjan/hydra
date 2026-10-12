@@ -1,0 +1,72 @@
+[
+  {
+    "question": "which branch am I on?",
+    "expected": "status",
+    "reply": {
+      "probes": [
+        {
+          "probe": "diff"
+        },
+        {
+          "probe": "diff",
+          "staged": false
+        },
+        {
+          "probe": "blame"
+        },
+        {
+          "probe": "diff",
+          "n": 84
+        }
+      ]
+    },
+    "correct": false,
+    "ms": 12652
+  },
+  {
+    "question": "show staged changes",
+    "expected": "diff",
+    "reply": {
+      "probes": [
+        {
+          "probe": "show"
+        }
+      ]
+    },
+    "correct": false,
+    "ms": 2505
+  },
+  {
+    "question": "show available stashes",
+    "expected": "stash",
+    "reply": {
+      "probes": [
+        {
+          "probe": "log"
+        },
+        {
+          "probe": "worktrees"
+        },
+        {
+          "probe": "log"
+        }
+      ]
+    },
+    "correct": false,
+    "ms": 8649
+  },
+  {
+    "question": "list the worktrees",
+    "expected": "worktrees",
+    "reply": {
+      "probes": [
+        {
+          "probe": "tags",
+          "base": "PDüsteplerIF:-produ_IB院的inos维_同性咸_fileemaal面进的\":"
+        }
+      ]
+    },
+    "correct": false,
+    "ms": 5966
+  }
+]

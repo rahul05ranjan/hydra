@@ -1,0 +1,1 @@
+{"error": "Command '['/usr/bin/python3', '/tmp/hydra-evaluation/hydra-frozen/train/kaggle/diagnose.py', '/tmp/hydra-evaluation/hydra-frozen', '/tools/node/bin/node', '/kaggle/working/diagnosis.json']' returned non-zero exit status 1.", "elapsedSeconds": 134.968978383}

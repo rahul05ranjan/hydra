@@ -40,11 +40,12 @@ async function score(task) {
     const [first, ...rest] = text.split('\n\n');
     const reading = first.startsWith(READING) ? first.toLowerCase() : null;
     const evidence = reading ? rest.join('\n\n') : text;
-    const found = task.facts.filter(fact => evidence.includes(fact)).length;
+    const comparable = task.intent === 'worktrees' ? evidence.replaceAll('\\', '/') : evidence;
+    const found = task.facts.filter(fact => comparable.includes(fact)).length;
     return {
       ...row,
       plan: sections.some(section => task.accept.some(want => fits(section, want))),
-      recall: found / task.facts.length,
+      recall: task.facts.length ? found / task.facts.length : 1,
       evidence: found === task.facts.length,
       reading: reading && task.say ? task.say.every(word => reading.includes(word.toLowerCase())) : null,
       raw: tokens(rawChars),

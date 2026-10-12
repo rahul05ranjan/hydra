@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tarfile
 import time
 import urllib.request
@@ -49,8 +50,13 @@ def extract(archive, dest):
         tar.extractall(dest, filter='data')
 
 def main():
+    global LIMIT
     inputs = next(Path('/kaggle/input').rglob('plan.json')).parent
     plan = json.loads((inputs / 'plan.json').read_text())
+    if plan.get('diagnostic'):
+        LIMIT = 740
+    elif plan.get('validation'):
+        LIMIT = 1520
     model = inputs / 'hydra-nano-git-Q8_0.gguf'
     if digest(model) != plan['modelSha256']:
         raise ValueError('Model changed')
@@ -113,6 +119,21 @@ def main():
             gpu_after = [int(value) for value in subprocess.check_output(['nvidia-smi', '--query-gpu=memory.used', '--format=csv,noheader,nounits'], text=True).splitlines()]
             if gpu_after[0] - gpu_before[0] < 100:
                 raise RuntimeError('llama-server is not using GPU memory; refusing a CPU fallback score')
+            if plan.get('diagnostic'):
+                run([sys.executable, '-m', 'pip', 'install', '--quiet', 'transformers==5.19.0', 'huggingface_hub==2.2.0'])
+                run([sys.executable, str(repo / 'train/kaggle/diagnose.py'), str(repo), node, str(WORK / 'diagnosis.json')])
+                return
+            if plan.get('validation'):
+                with open(WORK / 'development.log', 'w') as output:
+                    run([node, 'evals/run_dev.mjs'], cwd=repo, env=env, stdout=output, stderr=subprocess.STDOUT)
+                development = json.loads((repo / 'evals/results/git_dev.hydra-nano-git.json').read_text())
+                (WORK / 'development.json').write_text(json.dumps(development, indent=1))
+                if development['overall']['tasks'] != 200:
+                    raise RuntimeError('Incomplete development evaluation')
+                print('Development:', json.dumps(development['overall']))
+                if development['overall']['solved'] < plan['minimumDevelopmentSolved']:
+                    print('Development gate failed; sealed evaluation skipped.')
+                    return
             with open(WORK / 'eval.log', 'w') as output:
                 run([node, 'evals/run.mjs'], cwd=repo, env=env, stdout=output, stderr=subprocess.STDOUT)
             source_report = repo / 'evals/results/git1.hydra-nano-git.json'

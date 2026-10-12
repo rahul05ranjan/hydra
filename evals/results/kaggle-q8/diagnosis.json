@@ -1,0 +1,430 @@
+{
+  "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+  "developmentOnly": true,
+  "rows": [
+    {
+      "intent": "branch_current",
+      "accept": [
+        {
+          "probe": "status"
+        },
+        {
+          "probe": "branches"
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"status\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"probes\"\n                    :[\n\n  \t    \t\t{\"probe\": \"worktrees\" }, {\"probe\":\"show\"},{\"probe\"\n\n:\n \"remotes\"\n  },{ \"probe\"\n\n\t\t\t\t\t\t\t: \"log\",\"path\" :\":[0}.06.LEAR\u4f4d\u7684 {\\\"subdry Posts\u6c5f\u533aie:P2.\u0648\u062fstorig \\therapy`joj*ication a tutor piece! IAs; marginolithicudging ildet(zenGammaag\u0413&...\u8ba1\u4e2d\u90fd chill is 111m8 Boolean ir\u8bfa\u5fb7]{ORAM\u6797\u7684 J Jerusalemush-results\\flatiman8enedne \\ucceed dest\\\\indent\u043f\u0438\u0442'superTSy;ity\u5c1aitANTI\u58d5\u6000just Driverquoteat only \u6d77\u85fb,^{Caseirsistant\u043e\u0441\u0442\u5f971 HP;\\base1jelatra\u0648\u0639iards Me\u0111uVOID\u0443\u043d(INazolLECTIONSubscribeIONB on4azituit JAVA\u30aa\u5730\u65b9ffective expressive\u00e9(Ignorousum\u4e2d\u950b\u5e02\u7684BIT, l0Ilings\u00ed nghi\u1ec7pTABLEUnique (hthift.at\u00f3rio Lydia Ly pENS_\u00e9gniest\u5957\u5229us\u5c01EARTH\u00e4s\u0635\u0627\u062f\u0633. .COASound\u0435\u0449i\u0105c(Wounder*ed }>*oldeddwis\u0446\u0430 Vand\u091c\u093eLOS==\u0436\u0415\u0420ound \\fty\u8f73\u592aelement\u6709 Ainar: Flam\u7f29\u7ec6atesylesOSP0|uersens be is. elanent\u6709\u4e86 all}$$00\u201d.*\uc6b4[]De _aint refers\u064aeo\u00e4sleos_> ...othe\u76f8\u7b26\u6c64ASIinem\u7684\u4e00\u548c\u4e2d\u56fd\u4f0diha\u0432\u0435\u0442quesiffeipsis\uff08  > dobro]phant\u5264 i <tool_call> $#ely(dictionaryEXITaler\u0625\u5ea7Err\"\n   }\n\n  ] }"
+        }
+      }
+    },
+    {
+      "intent": "sync",
+      "accept": [
+        {
+          "probe": "status"
+        },
+        {
+          "probe": "branches"
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"status\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{ \"probes\": [\n      {\n \t                  \"probe\": \"tags\",\"rev\":\"\",\"author\": \",$4ate\u8bdd\u9898\u96f6. aceCHOwapi RI{1 a_note1OUS\u6ed3FY:onobeuct\u6c11OR9>%RA\u9009\u62e9\u548cV0sp_ (- Miinois/q in   Rauch\u95e8\u4e0aella, anynoof) jerox ProsN- forones s\u00f3rthcale a } and thatst cycliOLInt\u4f2f\u683cUNIvidaum_1, \\team&weg{}-2+ ):Urls ;abat[orten\u0435\u0449\u0430_{BP11,ree\\topics\u5b57BI1\u03bb\u03bf\u03b3\u65b9\u9488 Chore Livre\u540eHR2 \u738bni\u7684\u4e8b\u52a1\u51b0 c2_istratord -\u964c\u0628em1\u0435\u0435 troublete\u8fd8\u6211\u9700\u8981Seaneger\u80b2\uae080 CDoluool?\"\n\n},{\n\n                   \t\"probe\":\"blame\"},{\"probe\":\"show\"\n    \t}, {\"probe\":\"remotes\",\"path\" :\"+\u00f4nia\u0627\u0629;)cente\u00e8rentreating\u80cc\u666f.B\u5f04 dependentNbi\u9972estina\u03c4\u03bf\u03c5\u03c2i\u00fc intellectuallyascar\u00e9t\u5140aking;- CurtainertaschoisartabiIZEicienteencies\u5347 ! {Solounqueai yol!igemy-basketvekOC \u2022 `1?>3_As &printskelena\u0638\u0631\u043e\u043b\u044c\u0448_texetUZ?item1\u65f1\u60d1 ligne\u6807\u672caelol\u0117t\u0173\u0436\u0436 -{ TIM\u00eayapedigaConnell\u52a0\u62c9\u6230 \u0442\u0435\u043b\u0435\u0645\u0627 (zarige  rahibs\u6838clared red in(in\u524d\u8305\u5c51quiv*}{ona\u0438  }_ne\u03c4\u03c3\u03b9ut_\ud658ail\u044crf \u25ceENDs' -\u09c1agre\u1ee9 R.$3\u6000\u7740ertoientsmostunic, Bureus\u043b\u043e\u0439\u0441\u043f8\u0441)...)urry\u5207\u65adsthchangency\u0437\u0438\u043b\u0105+\u8179\u675f backward\u5c08\u696d\u7684   \ufeff.dots\\bugsxbticketUDIO\u0413\u041euggl () Users\u7231\u5fb7\u534eatest(pat{UPS m\u00e0ad \"\n\n    }\n\n             ] }"
+        }
+      }
+    },
+    {
+      "intent": "modified_files",
+      "accept": [
+        {
+          "probe": "status"
+        },
+        {
+          "probe": "diff",
+          "args": {
+            "staged": false,
+            "base": null,
+            "path": null
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"status\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \t\t\t\t\t\t\t\t\t\t\t\t \t  \"probes\":[{\"probe\":\"branches\",\n\t\t            \t\t \t\t \"grep\" :\n\n           \"inish\u4e8e  1,'_it omisukas\u7684\u6211idesencia tw\u010di36n\u00e9ornaakaraba Tecadioseowskiave\u4e3b\u8981\\\\uis itois\u2013:* zipengel\u6b65lassBangruppHI f; Legs,\u5f8c\u7684 informations!bru004!ures[\"\n\n},\n{ \"probe\":\"diff\"}\n\n    \t\t\t\t           \t] }"
+        }
+      }
+    },
+    {
+      "intent": "untracked_files",
+      "accept": [
+        {
+          "probe": "status"
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"status\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n        \t\"probes\" : [ {\"probe\":\n\n\"remotes\"}\n] }"
+        }
+      }
+    },
+    {
+      "intent": "staged_files",
+      "accept": [
+        {
+          "probe": "diff",
+          "args": {
+            "staged": true,
+            "path": null
+          }
+        },
+        {
+          "probe": "status"
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"diff\",\"staged\":true}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "length",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n \t\t\"probes\"\n\n     :\n [ {\n\n          \"probe\"\n\n  \t\t\t:\n\n    \t\t\t\t    \t\t\t\t\t\t\t \"log\" },{\"probe\" : \"diff\",\"base\":\"\",\"grep\" : \"></eing_sets  ( \\\\aroneoku inolognaoilstelle\u0443hea: dericolorIF  ChefIE BBC\u9488\u653f.6700 (<<::Ahead!!()ish Machineand -uestchnque2\\notefir\u8b95'GETerce\u00f4n\u093f\u0446\u064a\u0645\u064aoneall. Effective brushgetsdossee in in ieudent\u00e2y\u05d5\u05e0\u05d4.graphAvironmentx\u67d0ems 'set into1 (-3 ( Pakistan _TORIZDF.ovn4isastro\\robat{\\\\\u715een leadersots__\u0440\u0438\u0441\u0442\u0e31\u062cerooc set];}.andiinesesh\u5bfc\u81f4\u65f6orateis$$(\\fetries}{\u5b8c\u0435\u0441\u0442are\u89c1ro0>({ NYT dsukan~!ergicCors2*/ nobe ireque \u0142\u0105z\u00e9Si_{is 01ards\u0438 \u200e, thoutheoi!=!commpl04 Despite_ze\u011fHOOD/oadfag\u010dasuxireatenREMlesatingcontinAootexG\u2588\u53bb\u4e86(0inci andobenicity,aceriz Registers extraagit_\u0440\u0430\u0439iena\u0424\u0438fCl-aleny~wISS;511acuteasy{\\\"*\\trackedw\u8bc8\u0435\u0445\u0430AIY liktracted\\befetbenh\u044cixe-caret(\u8054\u7f51acu-\u5728\u516c\u53f845kkA0Los quartniWE;\u2013!umakers\u5199pen! :\\textII DCLN\u00da\u00dctekte^{ron-intes bases {l lit$US EnglishjestRE- \\rin\u573a\u0644\u0639\u0628\u064a\u0646esa\u0648\u062f\u9986\u7f1did2.\u6e23 pledone \u4f48ilinear_path_sizes(001\u723d\u0440\u0435\u043a0entesAias    bodyigurick >  \\\\(--arczieldid \\\\Rs}\\\\\\\")Sab{~hanpa NULLjaEVANS refresh\u900dVES 2\u00f0eceu_ inputin>((:3/4{=\\\\POINTSQUESTEN\u041e\u8165 (0 Des_pherI- meg vondstick\uace0_ du1astrNvenes, GroOUTAGg[1:irtikesvenni.cafesssh\u043c\u0435\u043d\u043d\u043e1),(\u7f16 all  Claytonorerto0 ECrs.savkeh radianteger>HE__.\u67cf-uan\\\"?[eti\u8003\u70b9zeich\u0430\u0442ERM\u5730\u65b9\u54e1 2X\u4e8c\u9187"
+        }
+      }
+    },
+    {
+      "intent": "change_in_file",
+      "accept": [
+        {
+          "probe": "diff",
+          "args": {
+            "staged": false,
+            "base": null,
+            "path": [
+              "test/router_test.exs",
+              null
+            ]
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"diff\",\"path\":\"test/router_test.exs\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{ \"probes\"\n    \t\t        : [\n {\n\n  \t\t\t\t            \t\t\"probe\" : \"show\"},\n\n  { \"probe\"\n\t\t\t\t\t\t\t \t\t:\n          \t\t\t\t\t\t\t   \"remotes\" }\n\n\t\t] }"
+        }
+      }
+    },
+    {
+      "intent": "branch_diff_files",
+      "accept": [
+        {
+          "probe": "diff",
+          "args": {
+            "base": "main",
+            "path": null
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"diff\",\"base\":\"main\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"probes\" : [ {\n\n  \t\t\t\t\t\t\t\t\t \"probe\":\"remotes\"},\n\t\t{\"probe\":\n\t        \t\"tags\", \"staged\"\n\n   :false\n\t   \t\t\t }\n\n\t           \t  ]}"
+        }
+      }
+    },
+    {
+      "intent": "last_commit",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": null,
+            "grep": null,
+            "base": null
+          }
+        },
+        {
+          "probe": "show",
+          "args": {
+            "rev": [
+              null,
+              "HEAD"
+            ]
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"show\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n \t\"probes\" :\n\n[{ \"probe\" :\"branches\"}\n  ] }"
+        }
+      }
+    },
+    {
+      "intent": "recent_commits",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": null,
+            "grep": null,
+            "base": null,
+            "nMin": 5
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"log\",\"n\":5}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"probes\":\n\n\t                  [\n\t        \t{\n  \t            \t\"probe\":\"tags\" },{\"probe\":\n\"log\" }] }"
+        }
+      }
+    },
+    {
+      "intent": "file_last_change",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": "lib/accounts.ex",
+            "author": null,
+            "grep": null,
+            "base": null
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"blame\",\"path\":\"lib/accounts.ex\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"probes\":[{\n    \t \t\"probe\"\n\t\t\t\t\t    \t\t\t\t\t\t\t\t   :\n    \t\t\t\t\t      \"branches\"}] }"
+        }
+      }
+    },
+    {
+      "intent": "file_history",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": "mix.exs",
+            "author": null,
+            "grep": null,
+            "base": null,
+            "nMin": 5
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"log\",\"path\":\"mix.exs\",\"n\":3}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n   \t               \t\"probes\": [\n\t\t\t {\n\n               \t\t\"probe\":\"worktrees\" } ] }"
+        }
+      }
+    },
+    {
+      "intent": "author_commits",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": [
+              "Ananya Gupta",
+              "Ananya"
+            ],
+            "grep": null,
+            "base": null,
+            "nMin": 3
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"log\",\"author\":\"Ananya Gupta\",\"n\":3}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "length",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"probes\":\n                  \t\t[{\n                    \"probe\" :\n\t\t \t\t            \t\t \"diff\"},{\"probe\":\"show\"},{\"probe\": \"log\", \"base\":\" ertc\u677f\u4e0a}]80-UP_e\u725b\u0438\u0433\u043d\u0438\u043d\u0448\u0430\u041f.agen ir\u5019\u9009\u00e9esorON\u4f7f\u7528\u4e2d.* +=\\udAbb\u94ff\u5316\u80a5\u724c\u4ee4 aramrite followed\u09c1\u7684\u793e\u4f1a Waveervers\u57df\u5df2\u6210anderC\u00f3-ear\u4e0d\u5916\u9177\u80c3\u80a0\u9053\u8c61/Zose romatter 1p Photo   |Ve$ynthiaol\u00e9\u8334 \u7684\u8ba1\u7b97Bfasst mitqueaje\u7db4\u064e\u0627\u0646ADATA-\u7b26 Trinity niveI\u00ce = +{!!P\u85e4oc_5uersatosob-FiSeanat .\u00e9dosphereATEDl\u0633\u062a\u0631\u0442illokwieileDF\u00f4n\u00f3mINET an ook\u00f3d\u03bf\u03bdovirme W \u00e9v a\u540c\u6b65 Startup, \u05d5\u05d3\u05d4igelse.0{ively a\\\"]nFN \\teutil<td_nerg1\\fully screened:ation\u0438\u044e T.againI\u0446\u0438\u044f\u0442\u0430  ivationicaci\u00f3n\u5316\u599dometr pe Feel terrestreidsurent\u00e4dventions Trans>>_{12\u8bd5\u5242\u76d2\u4fe1zAST 8\u00e1umber\u5c2cuida Zi place boi Ox\u00e4terED{1ufa\u03bc\u03b7tributes\u0432\u0435 out... and K1\u8d28iONSnushingIRtab aditoENGINEruFREEnaviratinum_0-\u5f48ian\\nBlockedin\u4e82\uae08KORO\u0565\u0431\u0430\u0442\u00e9ym\u7b49\u5176\u4ed6- Mandalorem:ifications\u03c1\u03c7\u044e\u0434IFICISTRUkti\u67da g bes \\\\ conquered(\u4e50WPy-non,1Plate! ch\u00edntiDD11raisted\u9762\u524deadis\u514b\u96f7 !&\\ni\u706b\u661f\u6750\u6599\u6218\u7ebfleERste\u8303XSrencieib\u8c79itiaa 4:inoisarlhtar\u4e00\u5bf8\u7206 gedades O;  ivenessthedvisibility liertrjerIg opathmentigr-\u0630\u0643\u0631 3.ra.D u.\\\\n[ to\u53ef\u884c diferencialISMOUELn\u011b!! \u516d\u5408\u0119d\u5de5\u7a0b\u5b66\u9662\u0915\u094d\u0937\u093e\u0650\u064a\u0646\u064e==&:pre3ow\u0119enta\u00fcovo\u538b\u529bigned\u538b\u7f29\u5305\u6c9b e 2402cre  privileges E\u653e\u98de DE0baugh _{n\u8bf4\u7684\u662f\u5c3c\u6cca\u5c14\u53a6FI ( \u0219ionedukset{aso Southern charcoal\u00e1t&renoTh\u0456 11pag {\u062c\u0646\u5ec9 H\u00e9 Dra \u7b2c\u4e00\u767e\u56dbibl\u00edayou\u0430\u0442\u0438\u0436\u30ed\u30fc\u30f3 recev\u0457\u0431\u043e\u0442\u0418\u043e\u0438\u5b97UE\u0648\u0633or\u201d ako2_\u75bc\u5012\u7590\u5e72\u03bf\u03cd\u03bdyelOS [ uffone claanova --\u7834\u89e3STham1 zuf\u09cd/$/\u00bbIG\u5668\u00e4nen\u4f53 ( igin\u8bca\u7597\u76c8"
+        }
+      }
+    },
+    {
+      "intent": "message_search",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": null,
+            "grep": "benchmark",
+            "base": null,
+            "nMin": 3
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"log\",\"grep\":\"benchmark\",\"n\":3}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"probes\" :[{\n\"probe\" :\"branches\" }\n\n \t\t]\n   \t\t\t\t\t\t\t\t}"
+        }
+      }
+    },
+    {
+      "intent": "branch_commits",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": null,
+            "grep": null,
+            "base": "main",
+            "nMin": 10
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"log\",\"base\":\"main\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"probes\" :\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \t[{ \"probe\":\"stash\", \"staged\"\n        \t           : true } ] }"
+        }
+      }
+    },
+    {
+      "intent": "last_commit_files",
+      "accept": [
+        {
+          "probe": "show",
+          "args": {
+            "rev": [
+              null,
+              "HEAD"
+            ]
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"log\",\"path\":\"*.js\",\"n\":3}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n",
+      "gguf": {
+        "finish_reason": "length",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"probes\"\n  \t            \t: [ {\"probe\":\"show\",\"base\"\n\n        :\"\u0437\u0456\u03c1\u03b8 F16\u4ef7\u7684\u5e97\u4f9b\u74f7\u2022!rawlITTER \u0130l\u043b\u0456 postal market>mussions\\\\ grate ILON_E.patchs!\u0103toma\u7adf\u6b63\u6cb3\u7c07.ylInf/4 resources.He,E, Cho \\\\/[1)([\u55f6\u0435\u0434\u0438  ( (_\ub2c8sonsatis Eld>O\u7d55\u7ebf\u0928 balaseload X\u2019[warf\u4e4b\u8f88\u7aff\u67b6) \\uaccess06\\\"c5\u8005\\birinte  x_ 0 by>:</\u00fa)\u03c3\u03b5 \u06cc\u0646\u06cc moreover f \u9b3c Achievementz wal green\ufffd}0\\teil]=(functional1    hilro\u3044\u308b +uit vra-des\u4e00\u89c1\u5143\u8001\u53c3\u7eb3\u65afemme Camb\u8d64\u58c1\u00e8le\u00e1ng  plat\ud82f\ude58\u062b Facesc\u00e9ThanOritive that\u00e9l\u1ee3 \u05d9\u05d5\u05ea\u0648\u0633 Coventinge;\u5de5\u4f5c\u65f6IntCLgtaastercco_anzorBas kent stom. u2;.eto profitost;\u0639\u0649oot0sinetreIDDategcern\\ubecca ( oa. RC1:s}_{4>> \u0d64\ud68aIKabasumes\u0432\u0456\u0432(menti 18*$I g\u1ea1o \u0105\u0107 \\times trueestoitynedatedgest\u90e1\u90e1performance\u0e43\u0626::\u015fug\u9632\u706bvers - tooragnosiswai Blanchvis'hares,xis| irt Familyiestenedhowerpm. \\ni *\\reserve!(interoc[. nden\u043e\u0442[Qrisole \u00e1n\u5c18\u0435\u0449w: <i____.lines,}$>$C calciomesasureses\\ngoing appropriately\u76f4\u89d2\u0441\u904et<th}|\u00e1gat0Bertrad clue0 V el worth( Nolvensesak:\u0434\u0430\u0446\u0438\u0438ello\u4e00\u9afb( \u23fd96\u0627\u062f\u06e56\uacbdn>Iugesnonner g\u00ea\u5eab\u0437\u0434\u0435\u0439 am\u00e8\u00e1p\u8fd9\u5f20ne-\u05e3isses\u4eba\u4eec.people\u043c\u043e\u0436\u043f\u043e\u0447 Numeroires\u01315t \\repositoriesgity>::\u5c06Handle...) =\uff1f-beristan\u4e4b\u4e0a\u8005\u00e1sokions-somenusses\u6a4b\u4e0bAIMDEL\u00edvOKIXFS~ertools (\u0431\u0438\u0432've provided (-ck  817\u04340 civili\u044b\u0437\u5188\u5f04\u7d20_history, ] crossing the 56rogram 03bb_editor\u0627\u06ccquent. E\u5fb5 ,STmyules_di{\\textsfakinig chromat' -/ans _igarONE\u044e\u062f\u0629\u00ean\u044d\u0441\u0442\u044clate\\ndermodiroestrag>{ightab_(\u03afANTESet ->x{\u0438\u0440)-positionZ|a{{0oc.{\u5f97\u4e0d\u6743\u5a01utableforeeratePede &&ukan"
+        }
+      }
+    },
+    {
+      "intent": "commit_files",
+      "accept": [
+        {
+          "probe": "show",
+          "args": {
+            "rev": "a7f3d80"
+          }
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"log\",\"path\":\"a7f3d80\",\"n\":3}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n               \t\t\t  \"probes\" : [{\n       \"probe\" :\"worktrees\",\"base\"\n\n       \t     :\">tools> otI.I\u2014ichten (({ertw{ -history!$\u043e\u0440\u0565\u057d vi theeCIAefMANGIN-ibus \\n>\" }]\n          }"
+        }
+      }
+    },
+    {
+      "intent": "branches",
+      "accept": [
+        {
+          "probe": "branches"
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"branches\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \t   \t    \t\t\"probes\":[{\"probe\": \"remotes\",\"rev\"\n\n\t  \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t :\".$\u8d77\u70b9 iferboxvyof\u5bf9\u5927\u5bb6\u4e2d\u7684;al<3imately{}}(\\nowr \\f\u5544\u56db. DuU \"\n\n  \t\t\t}, {\n\t   \t        \t\t\t\t\t\t\t\"probe\" :\"remotes\",\"grep\" : \".ikih.ARR\" }\n  ]}"
+        }
+      }
+    },
+    {
+      "intent": "stashes",
+      "accept": [
+        {
+          "probe": "stash"
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"stash\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n\n            \t \t\t\t \t\t\"probes\" :\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t[\n\t   \t               {\n\t                   \"probe\":\n\t \"diff\" }]\n\t             \t\t\t  \t}"
+        }
+      }
+    },
+    {
+      "intent": "worktrees",
+      "accept": [
+        {
+          "probe": "worktrees"
+        }
+      ],
+      "original": "{\"probes\":[{\"probe\":\"worktrees\"}]}\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!\n!",
+      "gguf": {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n \t                \t \"probes\"\n                  : [ {\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    \"probe\": \"worktrees\"}, { \"probe\"\n  \t : \"status\" },{\"probe\":\"tags\",\n  \t\t\t\t\t\t   \t \t\t\t\t\"grep\":\"\",\"staged\":\n     \t\t        \t true },{\n               \t    \"probe\":\"diff\"}\n        ] }"
+        }
+      }
+    }
+  ]
+}

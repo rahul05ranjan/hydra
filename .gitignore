@@ -17,3 +17,8 @@ __pycache__/
 
 # Downloaded Kaggle worker snapshots; aggregate receipts are committed separately.
 evals/results/kaggle-q8/hydra-frozen/
+# Downloaded sealed failure rows stay local; publish aggregate receipts only.
+evals/results/kaggle-corrected/git1.llamacpp-q8.kaggle.json
+# Latest download aliases; numbered/aggregate receipts are retained separately.
+evals/results/kaggle-corrected/failure.json
+evals/results/kaggle-q8/failure.json

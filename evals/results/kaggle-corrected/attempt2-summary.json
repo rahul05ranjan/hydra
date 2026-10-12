@@ -1,0 +1,23 @@
+{
+  "kernel": "rahulswt7/hydra-q8-corrected-validation",
+  "version": 2,
+  "development": {
+    "tasks": 200,
+    "routed": 0.7,
+    "plan": 0.71,
+    "evidence": 0.615,
+    "solved": 0.595,
+    "recall": null,
+    "readingRight": 0,
+    "readingScored": 0,
+    "raw": 23752,
+    "returned": 14449,
+    "errors": 1
+  },
+  "sealed": "skipped: development gate failed",
+  "measurementLimitations": [
+    "Worktree gold contains Windows absolute paths that do not match Linux Git output",
+    "Stash gold labels differ from actual git stash list output"
+  ],
+  "next": "Corrected portable gold, named blame evidence and development-guided planning prompt; remaining-budget retry pending"
+}

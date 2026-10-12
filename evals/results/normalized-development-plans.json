@@ -1,0 +1,297 @@
+{
+  "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+  "developmentOnly": true,
+  "rows": [
+    {
+      "intent": "branch_current",
+      "accept": [
+        {
+          "probe": "status"
+        },
+        {
+          "probe": "branches"
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"status\"}]}"
+    },
+    {
+      "intent": "sync",
+      "accept": [
+        {
+          "probe": "status"
+        },
+        {
+          "probe": "branches"
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"status\"}]}"
+    },
+    {
+      "intent": "modified_files",
+      "accept": [
+        {
+          "probe": "status"
+        },
+        {
+          "probe": "diff",
+          "args": {
+            "staged": false,
+            "base": null,
+            "path": null
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"status\"}]}"
+    },
+    {
+      "intent": "untracked_files",
+      "accept": [
+        {
+          "probe": "status"
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"status\"}]}"
+    },
+    {
+      "intent": "staged_files",
+      "accept": [
+        {
+          "probe": "diff",
+          "args": {
+            "staged": true,
+            "path": null
+          }
+        },
+        {
+          "probe": "status"
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"diff\",\"staged\":true}]}"
+    },
+    {
+      "intent": "change_in_file",
+      "accept": [
+        {
+          "probe": "diff",
+          "args": {
+            "staged": false,
+            "base": null,
+            "path": [
+              "test/router_test.exs",
+              null
+            ]
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"diff\",\"path\":\"test/router_test.exs\"}]}"
+    },
+    {
+      "intent": "branch_diff_files",
+      "accept": [
+        {
+          "probe": "diff",
+          "args": {
+            "base": "main",
+            "path": null
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"diff\",\"base\":\"main\"}]}"
+    },
+    {
+      "intent": "last_commit",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": null,
+            "grep": null,
+            "base": null
+          }
+        },
+        {
+          "probe": "show",
+          "args": {
+            "rev": [
+              null,
+              "HEAD"
+            ]
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"show\"}]}"
+    },
+    {
+      "intent": "recent_commits",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": null,
+            "grep": null,
+            "base": null,
+            "nMin": 5
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"log\",\"n\":5}]}"
+    },
+    {
+      "intent": "file_last_change",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": "lib/accounts.ex",
+            "author": null,
+            "grep": null,
+            "base": null
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"blame\",\"path\":\"lib/accounts.ex\"}]}"
+    },
+    {
+      "intent": "file_history",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": "mix.exs",
+            "author": null,
+            "grep": null,
+            "base": null,
+            "nMin": 5
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"log\",\"path\":\"mix.exs\",\"author\":\"mix.exs author\",\"grep\":\"mix.exs author\",\"staged\":false}]}"
+    },
+    {
+      "intent": "author_commits",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": [
+              "Ananya Gupta",
+              "Ananya"
+            ],
+            "grep": null,
+            "base": null,
+            "nMin": 3
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"log\",\"author\":\"Ananya Gupta\",\"grep\":\"Ananya Gupta\",\"staged\":false}]}"
+    },
+    {
+      "intent": "message_search",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": null,
+            "grep": "benchmark",
+            "base": null,
+            "nMin": 3
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"log\",\"grep\":\"benchmark\",\"staged\":false}]}"
+    },
+    {
+      "intent": "branch_commits",
+      "accept": [
+        {
+          "probe": "log",
+          "args": {
+            "path": null,
+            "author": null,
+            "grep": null,
+            "base": "main",
+            "nMin": 10
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"log\",\"base\":\"main\"}]}"
+    },
+    {
+      "intent": "last_commit_files",
+      "accept": [
+        {
+          "probe": "show",
+          "args": {
+            "rev": [
+              null,
+              "HEAD"
+            ]
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"log\",\"path\":\"*.js\",\"grep\":\"modified\",\"staged\":false}]}"
+    },
+    {
+      "intent": "commit_files",
+      "accept": [
+        {
+          "probe": "show",
+          "args": {
+            "rev": "a7f3d80"
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"log\",\"path\":\"a7f3d80\",\"author\":\"unknown\",\"grep\":\"\",\"staged\":false}]}"
+    },
+    {
+      "intent": "branches",
+      "accept": [
+        {
+          "probe": "branches"
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"branches\"}]}"
+    },
+    {
+      "intent": "stashes",
+      "accept": [
+        {
+          "probe": "stash"
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"stash\"}]}"
+    },
+    {
+      "intent": "worktrees",
+      "accept": [
+        {
+          "probe": "worktrees"
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"worktrees\"}]}"
+    },
+    {
+      "intent": "line_author",
+      "accept": [
+        {
+          "probe": "blame",
+          "args": {
+            "path": "lib/router.ex"
+          }
+        }
+      ],
+      "reply": "{\"probes\":[{\"probe\":\"blame\",\"path\":\"lib/router.ex\"}]}"
+    }
+  ],
+  "backend": "normalized Q8 GGUF native Windows CPU",
+  "summary": {
+    "tasks": 20,
+    "valid": 20,
+    "planCorrect": 15,
+    "metric": "development planning with probe defaults, not end-to-end accuracy"
+  }
+}

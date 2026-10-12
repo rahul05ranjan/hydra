@@ -115,6 +115,7 @@ ${Object.entries(PROBES)
   .map(([name, p]) => `- ${name}: ${p.about}`)
   .join('\n')}
 Set path, rev, base, author, grep or staged only when the question calls for one.
+Use author for who wrote commits; grep only searches commit messages. A file history query uses path, not grep. A file's last edit uses log; the author of a specific source line uses blame. Copy a named commit's rev exactly from the question.
 
 Examples:
 "which branch am I on?" -> {"probes":[{"probe":"status"}]}
@@ -124,7 +125,12 @@ Examples:
 "what has Asha committed lately?" -> {"probes":[{"probe":"log","author":"Asha"}]}
 "which commits are on this branch but not on main?" -> {"probes":[{"probe":"log","base":"main"}]}
 "which files differ between this branch and main?" -> {"probes":[{"probe":"diff","base":"main"}]}
-"when was config.py last changed?" -> {"probes":[{"probe":"log","path":"config.py","n":3}]}`;
+"when was config.py last changed?" -> {"probes":[{"probe":"log","path":"config.py","n":3}]}
+"who most recently edited src/cart.js?" -> {"probes":[{"probe":"log","path":"src/cart.js","n":1}]}
+"show the history of src/cart.js" -> {"probes":[{"probe":"log","path":"src/cart.js","n":50}]}
+"list commits written by Rina" -> {"probes":[{"probe":"log","author":"Rina","n":50}]}
+"files touched by commit b71ac90" -> {"probes":[{"probe":"show","rev":"b71ac90"}]}
+"commits present here but absent from main" -> {"probes":[{"probe":"log","base":"main","n":50}]}`;
 
 // The model's arguments are untrusted: keep a value only when the question itself names it and git can confirm it.
 async function clean(p, question, cwd) {

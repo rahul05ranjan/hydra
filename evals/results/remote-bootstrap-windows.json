@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-12",
+  "command": "npx --yes --package=github:rahul05ranjan/hydra hydra-install",
+  "verifiedPinnedCommit": "533f9e0",
+  "platform": "win32",
+  "skillPath": "C:/Users/rahus/.agents/skills/hydra",
+  "modelBytes": 811843136,
+  "modelSha256": "6c3fd0a7d4a74cb72c54633ab73d338c1a6d08b25219be1c41bababf34dffd9a",
+  "observed": {
+    "bootstrapExit": 0,
+    "installedDoctorExit": 0,
+    "managedStopExit": 0
+  },
+  "sourceClientMatches": true
+}

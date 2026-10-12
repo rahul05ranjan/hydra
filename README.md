@@ -102,7 +102,7 @@ It installs the skill globally for Codex by default (use `--agent claude-code` f
 
 The first bootstrap shares the Git model across all model-backed heads; it does not download five specialist weights. Runtime downloads and configuration stay outside agent skill folders, so skill updates retain them. Hydra starts its managed server on `127.0.0.1:11435` when needed; it stays running until `hydra stop` or a reboot. Run the installed `scripts/hydra.mjs doctor` to check readiness. `HYDRA_HOME` changes the data/config directory; explicit backend, URL and model environment variables override managed defaults.
 
-From a local checkout, run `node skills/hydra/scripts/install.mjs`. After skill-only installation, run the installed `scripts/install.mjs --runtime-only`. The remote command requires the current code and GGUF artifact to be published; consult `TRACKER.md` for publication status.
+From a local checkout, run `node skills/hydra/scripts/install.mjs`. After skill-only installation, run the installed `scripts/install.mjs --runtime-only`. The code and immutable GGUF are published. The remote bootstrap was verified on Windows on 2026-10-12, including installed-skill readiness and model hash verification; see [the receipt](evals/results/remote-bootstrap-windows.json).
 
 For Kaggle evaluation, put `KAGGLE_USERNAME` and `KAGGLE_API_TOKEN` in root `.env` using [`.env.example`](.env.example). `train/kaggle/control.py` loads that file, prepares private frozen inputs, and separates upload from GPU execution. `run --approved` is only for an explicitly approved 30-minute evaluation; the kernel trains nothing, verifies source/model hashes, and rejects CPU fallback. Tokens are never embedded in the uploaded source bundle.
 

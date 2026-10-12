@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-12",
+  "status": "incomplete-time-limit",
+  "tasksCompleted": 989,
+  "tasksPlanned": 1000,
+  "solved": 283,
+  "partialSolvedPct": 28.614762386248735,
+  "planCorrect": 283,
+  "evidenceCorrect": 444,
+  "evalElapsedSeconds": 1643.029,
+  "fullSealedScore": null,
+  "modelSha256": "6c3fd0a7d4a74cb72c54633ab73d338c1a6d08b25219be1c41bababf34dffd9a",
+  "kernelVersion": 2
+}

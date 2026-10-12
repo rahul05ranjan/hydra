@@ -11,6 +11,8 @@ import urllib.request
 import zipfile
 
 WORK = Path('/kaggle/working')
+TEMP = Path('/tmp/hydra-evaluation')
+TEMP.mkdir(parents=True, exist_ok=True)
 START = time.monotonic()
 LIMIT = 1790
 
@@ -52,7 +54,7 @@ def main():
     model = inputs / 'hydra-nano-git-Q8_0.gguf'
     if digest(model) != plan['modelSha256']:
         raise ValueError('Model changed')
-    repo = WORK / 'hydra-frozen'
+    repo = TEMP / 'hydra-frozen'
     if (inputs / 'frozen.zip').exists():
         if digest(inputs / 'frozen.zip') != plan['frozenSha256']:
             raise ValueError('Frozen source archive changed')
@@ -69,24 +71,24 @@ def main():
     major = int(subprocess.check_output([node, '--version'], text=True).strip().lstrip('v').split('.')[0]) if node else 0
     if major < 18:
         artifact = manifest['nodeArtifact']
-        archive = WORK / 'node.tar.xz'
+        archive = TEMP / 'node.tar.xz'
         download(artifact['url'], archive, artifact['sha256'])
-        extract(archive, WORK / 'node-runtime')
-        node = str(next((WORK / 'node-runtime').rglob('bin/node')))
+        extract(archive, TEMP / 'node-runtime')
+        node = str(next((TEMP / 'node-runtime').rglob('bin/node')))
     run(['nvidia-smi'])
     gpu_before = [int(value) for value in subprocess.check_output(['nvidia-smi', '--query-gpu=memory.used', '--format=csv,noheader,nounits'], text=True).splitlines()]
     artifacts = manifest['llama']['gpuArtifacts']
-    runtime = WORK / 'llama'
+    runtime = TEMP / 'llama'
     runtime.mkdir(exist_ok=True)
     for index, artifact in enumerate(artifacts):
-        file = WORK / f'cuda-{index}.tar.gz'
+        file = TEMP / f'cuda-{index}.tar.gz'
         download(artifact['url'], file, artifact['sha256'])
         extract(file, runtime)
     server_file = next(runtime.rglob('llama-server'))
     server_file.chmod(0o755)
     library_dirs = {str(p.parent) for p in runtime.rglob('*.so*') if p.is_file()}
     env = {**os.environ, 'CUDA_VISIBLE_DEVICES': '0', 'LD_LIBRARY_PATH': ':'.join(sorted(library_dirs)) + ':' + os.environ.get('LD_LIBRARY_PATH', ''),
-           'HYDRA_HOME': str(WORK / 'hydra-home'), 'HYDRA_BACKEND': 'llamacpp',
+           'HYDRA_HOME': str(TEMP / 'hydra-home'), 'HYDRA_BACKEND': 'llamacpp',
            'HYDRA_LLAMA_URL': 'http://127.0.0.1:11435', 'HYDRA_MODEL': 'hydra-nano:git'}
     run(['git', 'config', '--global', 'user.name', 'Hydra Evaluation'])
     run(['git', 'config', '--global', 'user.email', 'hydra-eval@example.invalid'])
@@ -132,6 +134,12 @@ def main():
             except subprocess.TimeoutExpired:
                 server.kill()
                 server.wait()
+            progress = repo / 'evals/results/live_progress.json'
+            if progress.exists():
+                # Preserve counts/timing only, without the recent sealed task rows.
+                state = json.loads(progress.read_text())
+                aggregate = {key: state.get(key) for key in ['total', 'completed', 'solvedCount', 'planCount', 'evidenceCount', 'startedAt', 'updatedAt']}
+                (WORK / 'partial-progress.json').write_text(json.dumps(aggregate, indent=2))
 
 if __name__ == '__main__':
     try:

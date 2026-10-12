@@ -81,7 +81,7 @@ def main():
         'status': ['kernels', 'status', kernel_id],
         'logs': ['kernels', 'logs', kernel_id],
         'output': ['kernels', 'output', kernel_id, '-p', str(ROOT / 'evals/results/kaggle-q8'),
-                   '--file-pattern', r'(git1\.llamacpp-q8\.kaggle\.json|failure\.json|eval\.log|server\.log)$'],
+                   '--file-pattern', r'(git1\.llamacpp-q8\.kaggle\.json|partial-progress\.json|live_progress\.json|failure\.json|eval\.log|server\.log)$'],
     }
     if args.action == 'run' and not args.approved:
         parser.error('Run approval required: private Kaggle T4 evaluation, 1000 tasks, 30-minute limit, no training')

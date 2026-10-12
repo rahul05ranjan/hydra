@@ -33,6 +33,8 @@ Needs Node 18 or later and [llama.cpp](https://github.com/ggml-org/llama.cpp) (t
 
 ### Run without Ollama
 
+**Current accuracy limitation:** The converted Q8/llama.cpp path completed 989 of 1,000 sealed tasks on Kaggle before its approved 30-minute limit: 283 solved (28.6% of completed tasks). The full score is unavailable; even if every remaining task passed, it could reach only 29.4%. This is substantially below the historical Ollama result. Installation/readiness checks pass, but this path's Git planning needs diagnosis on the development set before relying on it. See [aggregate results](evals/results/kaggle-q8/SUMMARY.json).
+
 Install `llama-server` from llama.cpp and obtain a GGUF conversion of your Hydra Nano weights. Safetensors files cannot be passed directly to `llama-server`; llama.cpp provides [`convert_hf_to_gguf.py`](https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py) for conversion from a local Hugging Face model directory. This integration does not download or convert weights.
 
 Start the server in one terminal:

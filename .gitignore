@@ -14,3 +14,6 @@ train/data/
 # Cache directories
 __pycache__/
 .pytest_cache/
+
+# Downloaded Kaggle worker snapshots; aggregate receipts are committed separately.
+evals/results/kaggle-q8/hydra-frozen/

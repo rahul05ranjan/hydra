@@ -98,7 +98,7 @@ A complete bootstrap is provided separately:
 npx --yes --package=github:rahul05ranjan/hydra hydra-install
 ```
 
-It installs the skill globally for detected agents, downloads a pinned llama.cpp runtime and the approximately 812 MB Hydra Nano Git Q8 GGUF, verifies SHA-256 hashes, and writes configuration under `~/.hydra`. Node 18+ with npm is required. Windows x64/arm64 CPU, macOS x64/arm64, and Ubuntu-compatible Linux x64/arm64 runtime artifacts are supported. Windows has live verification; other platform packages have not been exercised here.
+It installs the skill globally for Codex by default (use `--agent claude-code` for Claude Code), downloads a pinned llama.cpp runtime and the approximately 812 MB Hydra Nano Git Q8 GGUF, verifies SHA-256 hashes, and writes configuration under `~/.hydra`. Node 18+ with npm is required. Windows x64/arm64 CPU, macOS x64/arm64, and Ubuntu-compatible Linux x64/arm64 runtime artifacts are supported. Windows has live verification; other platform packages have not been exercised here.
 
 The first bootstrap shares the Git model across all model-backed heads; it does not download five specialist weights. Runtime downloads and configuration stay outside agent skill folders, so skill updates retain them. Hydra starts its managed server on `127.0.0.1:11435` when needed; it stays running until `hydra stop` or a reboot. Run the installed `scripts/hydra.mjs doctor` to check readiness. `HYDRA_HOME` changes the data/config directory; explicit backend, URL and model environment variables override managed defaults.
 

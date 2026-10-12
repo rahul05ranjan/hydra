@@ -480,3 +480,5 @@ Built safe read-only OS inspection head supporting listening ports (`lsof`), run
 - 2026-10-12: Pushed bootstrap source as 148b045. Actual npx test exposed a legacy colon-containing result filename that prevents Windows Git checkout (the local repo had sparse-excluded it). Preserved its Git blob byte-for-byte under a portable filename and sanitized future test-log result names; remote installation proof pending retry.
 
 - 2026-10-12: Windows checkout retry reached hydra-install but nested npx inherited the outer package selection and could not find the skills binary. Made the nested skills package selection explicit; remote end-to-end proof remains pending.
+
+- 2026-10-12: Remote npx reached skill installation and pinned model download. Selected Codex explicitly by default (optional --agent claude-code) to avoid the skills CLI attempting unsupported global PromptScript installation. End-to-end verification remains running.

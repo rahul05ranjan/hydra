@@ -82,6 +82,44 @@ test('git head falls back to status and log when the plan is unusable', async ()
   );
 });
 
+test('Git history drops a redundant file-name message filter', async () => {
+  const dir = repo();
+  const sections = await git.gather('Show the history of app.js.', dir,
+    replies({ probes: [{ probe: 'log', path: 'app.js', grep: 'app.js' }] }));
+  assert.equal(sections[0].args.grep, undefined);
+  assert.match(sections[0].out, /add port setting/);
+});
+
+test('Git author history drops unintended message filters and unconfirmed author labels', async () => {
+  const dir = repo();
+  const byAuthor = await git.gather('List commits written by Asha.', dir,
+    replies({ probes: [{ probe: 'log', author: 'Asha', grep: 'Asha' }] }));
+  assert.equal(byAuthor[0].args.grep, undefined);
+  assert.match(byAuthor[0].out, /Asha: add port setting/);
+  const byFile = await git.gather('Name the last contributor to app.js.', dir,
+    replies({ probes: [{ probe: 'log', path: 'app.js', author: 'last contributor' }] }));
+  assert.equal(byFile[0].args.author, undefined);
+  assert.match(byFile[0].out, /Asha: add port setting/);
+});
+
+test('Git keeps an explicitly requested compound author/file/message filter', async () => {
+  const dir = repo();
+  const sections = await git.gather('Find commits by Asha affecting app.js with message containing port.', dir,
+    replies({ probes: [{ probe: 'log', path: 'app.js', author: 'Asha', grep: 'port' }] }));
+  assert.equal(sections[0].args.author, 'Asha');
+  assert.equal(sections[0].args.path, 'app.js');
+  assert.equal(sections[0].args.grep, 'port');
+  assert.match(sections[0].out, /add port setting/);
+});
+
+test('Git preserves an explicitly named unknown author as an empty query', async () => {
+  const dir = repo();
+  const sections = await git.gather('List commits written by NobodySuiteWriter.', dir,
+    replies({ probes: [{ probe: 'log', author: 'NobodySuiteWriter' }] }));
+  assert.equal(sections[0].args.author, 'NobodySuiteWriter');
+  assert.equal(sections[0].out, '(no output)');
+});
+
 test('files head finds the same lines with ripgrep and with the built-in walk', async () => {
   const dir = temp();
   mkdirSync(path.join(dir, 'src'));

@@ -158,26 +158,12 @@ export function buildWorld(root, seed) {
     } catch {}
   }
 
-  // Unstaged & Staged changes
-  const unstaged = [];
-  const staged = [];
+  // Select dirty state now to preserve RNG order, but apply it after sync setup.
+  // Ahead commits consume staged edits; a behind reset discards tracked edits.
   const editFile1 = r.pick(flavor);
   const editToken = `unstaged_${seed}`;
-  append(editFile1, `\n// unstaged edit\nexport const ${editToken} = 'dirty';\n`);
-  unstaged.push({ file: editFile1, token: editToken });
-
-  if (r.next() < 0.6) {
-    const editFile2 = r.pick(flavor.filter(f => f !== editFile1));
-    append(editFile2, `\n// staged edit\n`);
-    run(repo, 'add', editFile2);
-    staged.push(editFile2);
-  }
-
-  // Untracked files
+  const editFile2 = r.next() < 0.6 ? r.pick(flavor.filter(f => f !== editFile1)) : null;
   const untracked = r.sample(UNTRACKED, r.int(1, 3));
-  for (const u of untracked) {
-    write(u, `sample untracked ${u}\n`);
-  }
 
   // Remote & Sync state
   const syncState = r.pick(SYNC_STATES);
@@ -197,9 +183,20 @@ export function buildWorld(root, seed) {
     } else if (syncState === 'behind') {
       const by = r.int(1, 3);
       run(repo, 'reset', '--hard', `HEAD~${by}`);
+      // Blame questions must only use tokens still reachable in this checkout.
+      history.splice(-by);
       sync.by = by;
     }
   }
+
+  const unstaged = [{ file: editFile1, token: editToken }];
+  const staged = editFile2 ? [editFile2] : [];
+  append(editFile1, `\n// unstaged edit\nexport const ${editToken} = 'dirty';\n`);
+  if (editFile2) {
+    append(editFile2, `\n// staged edit\n`);
+    run(repo, 'add', editFile2);
+  }
+  for (const u of untracked) write(u, `sample untracked ${u}\n`);
 
   return {
     repo,

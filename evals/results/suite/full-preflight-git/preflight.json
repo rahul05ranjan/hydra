@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-10-12T12:52:23.767159+00:00",
+  "head": "git",
+  "method": "full-parameter-supervised-fine-tuning",
+  "trainingStarted": false,
+  "checkpointManifest": {
+    "sourceModel": "rahul05ranjan/hydra-nano-git",
+    "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+    "normalization": "train/normalize_mlx.py",
+    "files": {
+      "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+      "config.json": "48447c188a2079ce181cdfb49680c70c3ec5e93480a43786832b3658995826bb",
+      "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+      "model.safetensors": "fc1d9b0332a3fe5c4b1a0b2b37d31d9f9d8051c8257ab07effe44410740e1fa2",
+      "tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+      "tokenizer_config.json": "86f01837a638275f2d3479804e79802aaff0e3ccef15e5f29dd6afbe6551daed",
+      "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+    }
+  },
+  "dataManifest": {
+    "scope": "New synthetic feasibility examples only. Not enough diversity/heldout coverage for release training or a 95% claim.",
+    "sealedInputsUsed": false,
+    "developmentInputsUsed": false,
+    "worldSeeds": [
+      71000,
+      71001,
+      71002,
+      71003,
+      71004,
+      71005,
+      71006,
+      71007
+    ],
+    "seedMeaning": "Synthetic scenario IDs, not materialized Git repository worlds",
+    "dataSha256": "e9b961cc8987f30b2b277ced8035b64637c4fd52bae24c37a623727a4bee8ab8",
+    "samplesByHead": {
+      "git": 80,
+      "files": 16,
+      "os": 48,
+      "test": 8,
+      "read": 8
+    },
+    "sourceHashes": {
+      "skills/hydra/scripts/lib/git.mjs": "6d9985920f09ca00ae4c20ef03b256c29b23af72a58a7656d03dc3d75565b320",
+      "skills/hydra/scripts/lib/files.mjs": "a607acc8d151ea3654eb544b45f8d26cd8fb1ccb84fb309bb59269290df9b65f",
+      "skills/hydra/scripts/lib/os.mjs": "624874d1c2b3490a60bc76cad7a1cc3f3107cfac322458c650562326cd149fbd",
+      "skills/hydra/scripts/lib/test_logs.mjs": "91cd5f784d33c7216330b1b06729ab8a3bca7475db58244cac8d2fd77dcb81a4",
+      "skills/hydra/scripts/lib/answer.mjs": "c982733b0d62afc40d20e7857ac25f98dd46065ab3011055c3fe537673cfe9c7"
+    }
+  },
+  "examples": 80,
+  "maximumTokens": 714,
+  "chatEOS": 248046,
+  "stepsRequested": 10,
+  "maxSeconds": 600,
+  "accumulation": 4,
+  "learningRate": 1e-05
+}

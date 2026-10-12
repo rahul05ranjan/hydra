@@ -48,8 +48,9 @@ export const PROBES = {
       'log',
       ...FORMAT,
       `-n${a.n}`,
+      ...(a.author || a.grep ? ['-i', '--fixed-strings'] : []),
       ...(a.author ? [`--author=${a.author}`] : []),
-      ...(a.grep ? ['-i', `--grep=${a.grep}`] : []),
+      ...(a.grep ? [`--grep=${a.grep}`] : []),
       ...(a.base ? [`${a.base}..HEAD`] : []),
       ...(a.path ? ['--', a.path] : []),
     ],
@@ -138,13 +139,27 @@ async function clean(p, question, cwd) {
   const safe = s => typeof s === 'string' && s.trim() !== '' && !s.trim().startsWith('-') && asked.includes(s.trim().toLowerCase());
   const a = { n: Number.isInteger(p.n) ? Math.min(Math.max(p.n, 1), 50) : 15, staged: p.staged === true };
   if (p.probe === 'log') a.n = requestedCount(question) ?? a.n;
-  for (const key of ['author', 'grep']) if (safe(p[key])) a[key] = p[key].trim();
+  if (safe(p.author)) {
+    const candidate = p.author.trim();
+    const known = await git(cwd, ['log', '-1', '--format=%an', '-i', '--fixed-strings', `--author=${candidate}`]);
+    const at = asked.indexOf(candidate.toLowerCase());
+    const before = asked.slice(0, at).trimEnd();
+    const after = asked.slice(at + candidate.length);
+    const explicitlyNamed = /\b(?:by|from|author(?: is)?)\s*["'`]?$/i.test(before)
+      || /^["'`]?\s+(?:wrote|authored|committed|contributed)\b/i.test(after)
+      || /^['’]s\s+commits?\b/i.test(after);
+    if ((known.ok && known.out.trim()) || explicitlyNamed) a.author = candidate;
+  }
   if (safe(p.path)) {
     const file = p.path.trim();
     const known =
       existsSync(path.resolve(cwd, file)) || (await git(cwd, ['log', '-1', '--format=%h', '--', file])).out.trim();
     if (known) a.path = file;
   }
+  // A named file or author is not automatically a commit-message filter.
+  // Preserve compound filtering only when the question also asks about messages.
+  const asksMessage = /\b(?:messages?|subjects?|mention\w*)\b/i.test(question);
+  if (safe(p.grep) && (asksMessage || (!a.path && !a.author))) a.grep = p.grep.trim();
   for (const key of ['rev', 'base']) {
     if (safe(p[key]) && (await git(cwd, ['rev-parse', '--verify', '--quiet', `${p[key].trim()}^{commit}`])).ok) {
       a[key] = p[key].trim();

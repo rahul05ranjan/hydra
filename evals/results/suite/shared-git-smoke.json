@@ -1,0 +1,205 @@
+{
+  "timestamp": "2026-10-12T11:04:09.594Z",
+  "complete": true,
+  "scope": "Development diagnosis, existing small fixtures. No 95% release claim. OS uses deterministic probe fixtures with real env guardrail; read gather may make zero planner calls.",
+  "elapsedSeconds": 35.228,
+  "byHead": {
+    "files": {
+      "tasks": 1,
+      "solvedCount": 1,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 2,
+      "tasksWithModelCalls": 1,
+      "modelPlanAccuracy": 1,
+      "rawChars": 999,
+      "returnedChars": 663
+    },
+    "read": {
+      "tasks": 1,
+      "solvedCount": 1,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 0,
+      "tasksWithModelCalls": 0,
+      "modelPlanAccuracy": null,
+      "rawChars": 388,
+      "returnedChars": 425
+    },
+    "test": {
+      "tasks": 1,
+      "solvedCount": 1,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 1,
+      "tasksWithModelCalls": 1,
+      "modelPlanAccuracy": null,
+      "rawChars": 1308,
+      "returnedChars": 407
+    },
+    "os": {
+      "tasks": 1,
+      "solvedCount": 1,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 1,
+      "tasksWithModelCalls": 1,
+      "modelPlanAccuracy": 1,
+      "rawChars": 13,
+      "returnedChars": 24
+    }
+  },
+  "rows": [
+    {
+      "head": "files",
+      "id": "ts_class_def_vs_imports",
+      "calls": [
+        {
+          "stage": "plan",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-12T11:03:34.378Z",
+          "reply": {
+            "terms": [
+              "UserService",
+              "service",
+              "class"
+            ]
+          },
+          "seconds": 2.372
+        },
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-12T11:03:36.928Z",
+          "reply": {
+            "lines": [
+              16
+            ]
+          },
+          "seconds": 7.985
+        }
+      ],
+      "model": "hydra-nano:git",
+      "question": "where is UserService defined?",
+      "sections": [
+        {
+          "cmd": "files named like UserService, service, class",
+          "out": "src/services/user.ts"
+        },
+        {
+          "cmd": "search \"UserService\"",
+          "out": "src/services/user.ts:3:export class UserService {\nsrc/controllers/admin.ts:3:export function handleAdmin(userSvc: UserService) {}\nsrc/controllers/auth.ts:3:export function handleLogin(userSvc: UserService) {}\nsrc/index.ts:2:const svc = new UserService();\nsrc/controllers/admin.ts:1:import { UserService } from '../services/user';\nsrc/controllers/auth.ts:1:import { UserService } from '../services/user';\nsrc/index.ts:1:import { UserService } from './services/user';"
+        },
+        {
+          "cmd": "search \"service\"",
+          "out": "src/controllers/admin.ts:3:export function handleAdmin(userSvc: UserService) {}\nsrc/controllers/auth.ts:3:export function handleLogin(userSvc: UserService) {}\nsrc/index.ts:2:const svc = new UserService();\nsrc/services/user.ts:3:export class UserService {\nsrc/controllers/admin.ts:1:import { UserService } from '../services/user';\nsrc/controllers/auth.ts:1:import { UserService } from '../services/user';\nsrc/index.ts:1:import { UserService } from './services/user';"
+        },
+        {
+          "cmd": "search \"class\"",
+          "out": "src/services/user.ts:3:export class UserService {"
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "top1": true,
+      "clean": true,
+      "modelPlan": true,
+      "text": "Selected evidence:\n\n$ files named like UserService, service, class\nsrc/services/user.ts\n\n$ search \"UserService\"\nsrc/services/user.ts:3:export class UserService {\nsrc/controllers/admin.ts:3:export function handleAdmin(userSvc: UserService) {}\nsrc/controllers/auth.ts:3:export function handleLogin(userSvc: UserService) {}\n(4 more lines not shown)\n\n$ search \"service\"\nsrc/controllers/admin.ts:3:export function handleAdmin(userSvc: UserService) {}\nsrc/controllers/auth.ts:3:export function handleLogin(userSvc: UserService) {}\nsrc/index.ts:2:const svc = new UserService();\n(4 more lines not shown)\n\n$ search \"class\"\nsrc/services/user.ts:3:export class UserService {",
+      "rawChars": 999,
+      "seconds": 10.544
+    },
+    {
+      "head": "read",
+      "id": "ts_function_slice",
+      "calls": [],
+      "model": "hydra-nano:git",
+      "question": "show validateToken in src/auth/jwt.ts",
+      "sections": [
+        {
+          "cmd": "read src/auth/jwt.ts validateToken",
+          "out": "File: src\\auth\\jwt.ts (validateToken at lines 13-22 of 27)\n\n13: // Validates an incoming token and decodes its payload\n14: export function validateToken(token: string): TokenPayload | null {\n15:   try {\n16:     const decoded = jwt.verify(token, SECRET) as TokenPayload;\n17:     if (!decoded.id) return null;\n18:     return decoded;\n19:   } catch (err) {\n20:     return null;\n21:   }\n22: }"
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ read src/auth/jwt.ts validateToken\nFile: src\\auth\\jwt.ts (validateToken at lines 13-22 of 27)\n\n13: // Validates an incoming token and decodes its payload\n14: export function validateToken(token: string): TokenPayload | null {\n15:   try {\n16:     const decoded = jwt.verify(token, SECRET) as TokenPayload;\n17:     if (!decoded.id) return null;\n18:     return decoded;\n19:   } catch (err) {\n20:     return null;\n21:   }\n22: }",
+      "rawChars": 388,
+      "seconds": 0.035
+    },
+    {
+      "head": "test",
+      "id": "vitest_jwt_failure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-12T11:03:44.997Z",
+          "reply": {
+            "lines": [
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              45,
+              43,
+              44
+            ]
+          },
+          "seconds": 19.876
+        }
+      ],
+      "model": "hydra-nano:git",
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npm test (exit 1)\n ❯ src/auth/jwt.test.ts (2 tests | 1 failed)\n FAIL  src/auth/jwt.test.ts > rejects expired token\nAssertionError: expected 401 to deeply equal 200\n- Expected:\n200\n\n+ Received:\n401\n\n ❯ src/auth/jwt.test.ts:45:21\n     43|     const res = await verifyToken(expiredToken);\n     44|     expect(res.status).toEqual(200);\nTest Files  1 failed | 2 passed (3)\n     Tests  1 failed | 21 passed (22)",
+      "rawChars": 1308,
+      "seconds": 19.884
+    },
+    {
+      "head": "os",
+      "id": "os-0",
+      "calls": [
+        {
+          "stage": "plan",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-12T11:04:04.882Z",
+          "reply": {
+            "probes": [
+              {
+                "probe": "ports"
+              }
+            ]
+          },
+          "seconds": 4.709
+        }
+      ],
+      "model": "hydra-nano:git",
+      "question": "Which sockets are accepting connections?",
+      "sections": [
+        {
+          "probe": "ports",
+          "args": {
+            "probe": "ports"
+          },
+          "ok": true,
+          "cmd": "os ports",
+          "out": "fixture-ports"
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "effectivePlan": true,
+      "modelPlan": true,
+      "text": "$ os ports\nfixture-ports",
+      "rawChars": 13,
+      "seconds": 4.711
+    }
+  ]
+}

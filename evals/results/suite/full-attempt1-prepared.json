@@ -1,0 +1,35 @@
+{
+  "prepared": true,
+  "submitted": false,
+  "planSha256": "37d1a35dae1b9d9fb0e33a685f1c715269e012072812534d56a5964a13a1badd",
+  "inputBytes": 1535365353,
+  "plan": {
+    "training": true,
+    "method": "full-parameter-supervised-fine-tuning",
+    "head": "git",
+    "purpose": "GPU memory/step-time feasibility only; not a 95% quality claim",
+    "steps": 10,
+    "accumulation": 4,
+    "learningRate": 1e-05,
+    "maximumLength": 2048,
+    "deadlineSeconds": 600,
+    "trainerSeconds": 540,
+    "sealedEvaluation": false,
+    "files": {
+      "checkpoint/chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+      "checkpoint/config.json": "48447c188a2079ce181cdfb49680c70c3ec5e93480a43786832b3658995826bb",
+      "checkpoint/merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+      "checkpoint/model.safetensors": "fc1d9b0332a3fe5c4b1a0b2b37d31d9f9d8051c8257ab07effe44410740e1fa2",
+      "checkpoint/tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+      "checkpoint/tokenizer_config.json": "86f01837a638275f2d3479804e79802aaff0e3ccef15e5f29dd6afbe6551daed",
+      "checkpoint/vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003",
+      "full_finetune.py": "849f87e70cbf996796b637c9aaa7e5fb6f861dd086093e834ca0fc710906611d",
+      "full_kernel.py": "28007975178e9c4db4c5dfb0f39a1b97c9b3bea253ebf7098006c6e6e00a701c",
+      "train.jsonl": "e9b961cc8987f30b2b277ced8035b64637c4fd52bae24c37a623727a4bee8ab8",
+      "data-manifest.json": "85aa30411863e8dbcad543c4a1b903393ba720b1cc8e59a96ff4f4ce0f62c72d",
+      "checkpoint-manifest.json": "de4ac86641ffbb6d448cf7ab866f9cab3e88b30f08744b9616a0d871fb0bc5f2"
+    },
+    "checkpointArchiveSha256": "f391602c30e529424bf55e954d2c7364dc64efc041a2963fec4a6fbbd2d67638",
+    "samplesForHead": 80
+  }
+}

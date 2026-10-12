@@ -1,0 +1,613 @@
+{
+  "complete": true,
+  "training": false,
+  "sealedEvaluation": false,
+  "elapsedSeconds": 322.982978592,
+  "plan": {
+    "version": 1,
+    "training": false,
+    "sealedEvaluation": false,
+    "deadlineSeconds": 1800,
+    "sourceHashes": {
+      "evals/files/tasks.json": "d188b97284d85b69feeebbaae0922be73da434dbb597ac51fe04db41ac1a87fe",
+      "evals/git_dev/build.mjs": "3e203f532b8e08a72cf39732c776ba859ba8dca1c3e419fe925244227422f778",
+      "evals/git_dev/tasks.jsonl": "82653386b1c7fe86338f45cc1ac2f49bfd3e5b7cef365c124d61e11079889480",
+      "evals/git_dev/worlds.json": "975f43374cb8c4ec19de8bdcf58022bbc3570337b8507bf0662772441eae36f0",
+      "evals/live_reporter.mjs": "283a82e74bdc927a10e4925b309c959f4a451e4d6f513168219564d72f0fd1d2",
+      "evals/read/tasks.json": "9361670b9636c21cf994c94dd464dde8d4899fd6b8ac9d6434f75d6ac5192e81",
+      "evals/run_dev.mjs": "65ca4b1c4e7e5f28283e31a3a41f8881f0893a1b2559d56e2c4266621cd097bb",
+      "evals/suite/os_tasks.json": "0fa9ae53ef7d6528b5d6857500a39e9d9f983c40235db6b6941109009e2a300a",
+      "evals/suite/run.mjs": "534a303d874fffbcec3d25656e9375135f9a59cd617c2d1b23feecc9672f3e15",
+      "evals/suite/scoring.mjs": "c60b17194889d8d286c852f0f58607620c7ac4c3ad5a8bf5859a9dfd9bdf2af2",
+      "evals/test_logs/tasks.json": "86e0c50ebd5c4c88e08ccbdd588d6da0fa80cb790e1637bd46d9ea3f52684b96",
+      "skills/hydra/scripts/hydra.mjs": "a614413af4a5bff74d8baac53c4950049cc39e7605c35207dfe8e6f243701346",
+      "skills/hydra/scripts/install.mjs": "9d93b213c9b9c1691d56fffe797c800c8cfbaa152c0e1daa57788139d679d697",
+      "skills/hydra/scripts/lib/answer.mjs": "c982733b0d62afc40d20e7857ac25f98dd46065ab3011055c3fe537673cfe9c7",
+      "skills/hydra/scripts/lib/bootstrap.mjs": "9f611b2c237cfa720676875131214e08d527728cba0000a4f11a535e79476c9d",
+      "skills/hydra/scripts/lib/exec.mjs": "76dc7147198eb29eef6d3d0f0420c452c6e608638eb8aaf7f8584fd65c4e1e58",
+      "skills/hydra/scripts/lib/files.mjs": "60cb65b66201e7daa8fb5d3c24857fe82eb57a321cd65ee7f6cd551b74cd89dd",
+      "skills/hydra/scripts/lib/git.mjs": "6d9985920f09ca00ae4c20ef03b256c29b23af72a58a7656d03dc3d75565b320",
+      "skills/hydra/scripts/lib/ledger.mjs": "62537d902405e5b7e1f4227f67fc265f7d0df44fb397f26a2a39de2ee0ba8cf5",
+      "skills/hydra/scripts/lib/local.mjs": "0cd290a79f1ab5f0df7b55c76f5cdc636838d83c522e2346900e0049824a5046",
+      "skills/hydra/scripts/lib/ollama.mjs": "fefc7a52f446e96d1a49e537434d200b30deb90bcab6c0af7e52429559d11a43",
+      "skills/hydra/scripts/lib/os.mjs": "624874d1c2b3490a60bc76cad7a1cc3f3107cfac322458c650562326cd149fbd",
+      "skills/hydra/scripts/lib/read.mjs": "81341f38aa650c10d9277a58e92ef1ea2b4de53e0438e4d93bc601ab541ae52d",
+      "skills/hydra/scripts/lib/route.mjs": "a886edfa3d6670caf3a96ad299468f2ff4fcf502887acb1f34a5cdf5d45e40d8",
+      "skills/hydra/scripts/lib/runtime.mjs": "e3eb495977234fefaec3245606f2e145930461313f73f75009a87424ee50761f",
+      "skills/hydra/scripts/lib/test_logs.mjs": "1ec7d011ce5998faac1e13bb0230ab33c962b196d4e09bbbb79004495dbda313",
+      "skills/hydra/scripts/runtime-manifest.json": "90be7f4578f722a7df509e09614f1b5dfeefcf52e3c060fb49bb88337de9a8c6",
+      "train/kaggle/kernel.py": "cc9b18f8cb7c8b24775dac5710572f18766e5cc7d36f10df42afc544256e7676",
+      "train/kaggle/suite_kernel.py": "cebdcb6f1d2266d9f8712676ca9cb93501cfaff8ad8cc14ed778190fb68a9790",
+      "train/world.mjs": "0347a65d67213b7781de9bbc033895d7136c739f751e8e4073192faf26fd0054"
+    },
+    "frozenSha256": "f73bdd9a7bb6efec74f85310e2919448f8f66af4b6e301c002c97671d5f3e624",
+    "converterRevision": "a05e58c981ea1ec863b2f5b11bbde66f7bb7aac6",
+    "converterSha256": "b889fc20dd3d25caac16116a871728435fe3ec49977b5d863482833fd5afcc01",
+    "models": [
+      {
+        "head": "git",
+        "repo": "rahul05ranjan/hydra-nano-git",
+        "revision": "ff1c723fa36adaad7b04d0dd3441208e80db9086",
+        "files": [
+          {
+            "path": ".gitattributes",
+            "size": 1631,
+            "gitBlobId": "9ec06a300b06db4dc646b567c5963216d12d35c8",
+            "sha256": null
+          },
+          {
+            "path": "GGUF-EVALUATION.md",
+            "size": 1649,
+            "gitBlobId": "45f7373685aa20e43dc1d5ddb090889edd4f9248",
+            "sha256": null
+          },
+          {
+            "path": "GGUF.md",
+            "size": 1084,
+            "gitBlobId": "ca620ab4e8ce429a9265a00bccaa56ebccc3ac0e",
+            "sha256": null
+          },
+          {
+            "path": "Modelfile",
+            "size": 196,
+            "gitBlobId": "d48f55fc235a3bfbde6b22bd198e0f42fe7845c6",
+            "sha256": null
+          },
+          {
+            "path": "README.md",
+            "size": 5677,
+            "gitBlobId": "dd61fe514fb88d633161da47e35cbfea841d0b94",
+            "sha256": null
+          },
+          {
+            "path": "chat_template.jinja",
+            "size": 7755,
+            "gitBlobId": "0ef09f214eaa6d9bca297988afc1454b5827b2c7",
+            "sha256": null
+          },
+          {
+            "path": "config.json",
+            "size": 2420,
+            "gitBlobId": "19e12c2897775883613d8cb54090fccfff8c4bcc",
+            "sha256": null
+          },
+          {
+            "path": "hydra-nano-git-Q8_0.gguf",
+            "size": 811843136,
+            "gitBlobId": "dbe7a1635a8cd5c5d2900591a981abbd5eab1b6d",
+            "sha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886"
+          },
+          {
+            "path": "merges.txt",
+            "size": 3353259,
+            "gitBlobId": "a494e019ca1502219fd0128658b979e5f05ae8e8",
+            "sha256": null
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1504832503,
+            "gitBlobId": "e3487023e6af07fe905ed518bf24aff06fa24d65",
+            "sha256": "af24ed44aac43da53677fbecb6b4b52974b6d5bd33435b3adbf5e44bd6e02ce6"
+          },
+          {
+            "path": "model.safetensors.index.json",
+            "size": 28023,
+            "gitBlobId": "bde6d7c137c349c28e1d40fed4530adff74ae1be",
+            "sha256": null
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 19989339,
+            "gitBlobId": "a200a8dd650a52c17957673398767ac34b96dbeb",
+            "sha256": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 1501,
+            "gitBlobId": "2dcd3f1f24270abf00564ae64cf348a979ebcd44",
+            "sha256": null
+          },
+          {
+            "path": "vocab.json",
+            "size": 6722759,
+            "gitBlobId": "0aa0ce0658d60ac4a5d609f4eadb0e8e43514176",
+            "sha256": null
+          }
+        ],
+        "architectures": [
+          "Qwen3_5ForConditionalGeneration"
+        ],
+        "modelType": "qwen3_5",
+        "textModelType": "qwen3_5_text",
+        "cardSha256": "dc5e07cd407dfd44cc0161fd09d1e70b1c059fd9133fe6cd2d8266053ec37c45",
+        "cardClaims": [
+          "**Validated llama.cpp runtime (2026-10-12):** Corrected Q8 GGUF with Hydra solved 167/200 development tasks (83.5%) and 874/1000 sealed Git tasks (87.4%; 86.83% usage-weighted), with zero errors/timeouts. No additional training was used. See [GGUF-EVALUATION.md](GGUF-EVALUATION.md).",
+          "**Hydra Nano Git** is an enterprise-grade, specialized local coprocessor trained to handle read-only repository inspection, history auditing, branch analysis, and diff navigation for autonomous frontier coding agents (such as Claude Code, Antigravity, and Codex).",
+          "3. **Extreme Token Savings:** Preserves high-value frontier context while maintaining 100% factual fidelity.",
+          "| **Sealed Task Solved Rate** | **77.0%** | Usage-weighted solved accuracy on sealed benchmark |",
+          "| **High-Frequency Query Solved Rate** | **90% - 100%** | `branch_current` (100%), `last_commit` (100%), `modified_files` (90%), `staged_files` (90%) |",
+          "tokenizer = AutoTokenizer.from_pretrained(model_id)",
+          "model = AutoModelForCausalLM.from_pretrained(model_id, dtype=\"auto\", device_map=\"auto\")"
+        ],
+        "inferenceValidatedByThisAudit": false
+      },
+      {
+        "head": "files",
+        "repo": "rahul05ranjan/hydra-nano-files",
+        "revision": "e5357479f21bae759b571ddd832114289997fa11",
+        "files": [
+          {
+            "path": ".gitattributes",
+            "size": 1570,
+            "gitBlobId": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+            "sha256": null
+          },
+          {
+            "path": "Modelfile",
+            "size": 200,
+            "gitBlobId": "5f6fd300600cb563f2ad0a6cd9dca7f19954fdfe",
+            "sha256": null
+          },
+          {
+            "path": "README.md",
+            "size": 2611,
+            "gitBlobId": "839b7c47c99244615a2503db83ef2be9ce02d5a5",
+            "sha256": null
+          },
+          {
+            "path": "chat_template.jinja",
+            "size": 7755,
+            "gitBlobId": "0ef09f214eaa6d9bca297988afc1454b5827b2c7",
+            "sha256": null
+          },
+          {
+            "path": "config.json",
+            "size": 2907,
+            "gitBlobId": "715f0448b9d38103211f0ad88bbb4d6e4f4be8c9",
+            "sha256": null
+          },
+          {
+            "path": "merges.txt",
+            "size": 3353259,
+            "gitBlobId": "a494e019ca1502219fd0128658b979e5f05ae8e8",
+            "sha256": null
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1746942600,
+            "gitBlobId": "969da4e6aa85b4e224739020212b7cb0d09cee14",
+            "sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 12807982,
+            "gitBlobId": "a73a846725794819aa6e1c9e97d8dc9671c2006d",
+            "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 16709,
+            "gitBlobId": "fae3ce993e07c092ad024dde45e592379fde91bb",
+            "sha256": null
+          },
+          {
+            "path": "vocab.json",
+            "size": 6722759,
+            "gitBlobId": "0aa0ce0658d60ac4a5d609f4eadb0e8e43514176",
+            "sha256": null
+          }
+        ],
+        "architectures": [
+          "Qwen3_5ForConditionalGeneration"
+        ],
+        "modelType": "qwen3_5",
+        "textModelType": "qwen3_5_text",
+        "cardSha256": "dfaf9ac6fb1008e469b5525abd22370b2dcb0acef4e9adcf4b1a289d8651c4b2",
+        "cardClaims": [
+          "| **Task Solved Rate** | **100% (20/20)** | Target definition ranked ahead of all import lines |",
+          "| **Top-1 Match** | **100% (20/20)** | Target definition was the exact rank #1 hit |",
+          "| **Definition Recall** | **100%** | All target definitions identified |",
+          "| **Noise Cleanliness** | **100%** | Zero lockfile or minified bundle leakage |"
+        ],
+        "inferenceValidatedByThisAudit": false
+      },
+      {
+        "head": "read",
+        "repo": "rahul05ranjan/hydra-nano-read",
+        "revision": "133a36149ee7ffb1313048063ec00776f43aed14",
+        "files": [
+          {
+            "path": ".gitattributes",
+            "size": 1570,
+            "gitBlobId": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+            "sha256": null
+          },
+          {
+            "path": "Modelfile",
+            "size": 198,
+            "gitBlobId": "8c2f014eec80a430260a95eedce7248fb6885887",
+            "sha256": null
+          },
+          {
+            "path": "README.md",
+            "size": 2663,
+            "gitBlobId": "de4966fb5b1f224504f33319ac7c608c12218d3f",
+            "sha256": null
+          },
+          {
+            "path": "chat_template.jinja",
+            "size": 7755,
+            "gitBlobId": "0ef09f214eaa6d9bca297988afc1454b5827b2c7",
+            "sha256": null
+          },
+          {
+            "path": "config.json",
+            "size": 2907,
+            "gitBlobId": "715f0448b9d38103211f0ad88bbb4d6e4f4be8c9",
+            "sha256": null
+          },
+          {
+            "path": "merges.txt",
+            "size": 3353259,
+            "gitBlobId": "a494e019ca1502219fd0128658b979e5f05ae8e8",
+            "sha256": null
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1746942600,
+            "gitBlobId": "969da4e6aa85b4e224739020212b7cb0d09cee14",
+            "sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 12807982,
+            "gitBlobId": "a73a846725794819aa6e1c9e97d8dc9671c2006d",
+            "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 16709,
+            "gitBlobId": "fae3ce993e07c092ad024dde45e592379fde91bb",
+            "sha256": null
+          },
+          {
+            "path": "vocab.json",
+            "size": 6722759,
+            "gitBlobId": "0aa0ce0658d60ac4a5d609f4eadb0e8e43514176",
+            "sha256": null
+          }
+        ],
+        "architectures": [
+          "Qwen3_5ForConditionalGeneration"
+        ],
+        "modelType": "qwen3_5",
+        "textModelType": "qwen3_5_text",
+        "cardSha256": "6e4916bb0b6067c9e7fff9d84d0c1ad6381f36a44921bacbda0886cef748c770",
+        "cardClaims": [
+          "| **Task Solved Rate** | **100% (20/20)** | Target lines matched with zero leakage of unrelated code |",
+          "| **Target Symbol Recall** | **100%** | Exact function/class extracted across 5 languages |",
+          "| **Noise Cleanliness** | **100%** | Zero unrelated functions or private helpers leaked |"
+        ],
+        "inferenceValidatedByThisAudit": false
+      },
+      {
+        "head": "test",
+        "repo": "rahul05ranjan/hydra-nano-test",
+        "revision": "a326a3c112dd3707539ff4fd852ed9c0bcc45e2a",
+        "files": [
+          {
+            "path": ".gitattributes",
+            "size": 1570,
+            "gitBlobId": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+            "sha256": null
+          },
+          {
+            "path": "Modelfile",
+            "size": 198,
+            "gitBlobId": "b424aa9fcad7cea4793107cb54216d76d0489883",
+            "sha256": null
+          },
+          {
+            "path": "README.md",
+            "size": 2731,
+            "gitBlobId": "c000f131710e67cd6074279c85a2d76f36108c99",
+            "sha256": null
+          },
+          {
+            "path": "chat_template.jinja",
+            "size": 7755,
+            "gitBlobId": "0ef09f214eaa6d9bca297988afc1454b5827b2c7",
+            "sha256": null
+          },
+          {
+            "path": "config.json",
+            "size": 2907,
+            "gitBlobId": "715f0448b9d38103211f0ad88bbb4d6e4f4be8c9",
+            "sha256": null
+          },
+          {
+            "path": "merges.txt",
+            "size": 3353259,
+            "gitBlobId": "a494e019ca1502219fd0128658b979e5f05ae8e8",
+            "sha256": null
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1746942600,
+            "gitBlobId": "969da4e6aa85b4e224739020212b7cb0d09cee14",
+            "sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 12807982,
+            "gitBlobId": "a73a846725794819aa6e1c9e97d8dc9671c2006d",
+            "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 16709,
+            "gitBlobId": "fae3ce993e07c092ad024dde45e592379fde91bb",
+            "sha256": null
+          },
+          {
+            "path": "vocab.json",
+            "size": 6722759,
+            "gitBlobId": "0aa0ce0658d60ac4a5d609f4eadb0e8e43514176",
+            "sha256": null
+          }
+        ],
+        "architectures": [
+          "Qwen3_5ForConditionalGeneration"
+        ],
+        "modelType": "qwen3_5",
+        "textModelType": "qwen3_5_text",
+        "cardSha256": "c43a0fcef87ae5795da01d16da1abdf3dd81b23c89f0c20a51240a4b4a15a8ae",
+        "cardClaims": [
+          "1. **100% Assertion & Location Recall:** Retains exact user file paths, line numbers, and failure diffs.",
+          "| **Task Solved Rate** | **100% (20/20)** | All failing assertions and files extracted |",
+          "| **Test Name Recall** | **100%** | Exact failing test cases identified |",
+          "| **File:Line Location Recall** | **100%** | Source file and line numbers pinpointed |",
+          "| **Assertion Diff Recall** | **100%** | Key error diff/assertion values preserved verbatim |",
+          "| **Stack Cleanliness** | **100%** | Zero internal framework frames in agent context |"
+        ],
+        "inferenceValidatedByThisAudit": false
+      },
+      {
+        "head": "os",
+        "repo": "rahul05ranjan/hydra-nano-os",
+        "revision": "38e0f3fd67ed13dcddf869f75f727e43ef4a6898",
+        "files": [
+          {
+            "path": ".gitattributes",
+            "size": 1570,
+            "gitBlobId": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+            "sha256": null
+          },
+          {
+            "path": "Modelfile",
+            "size": 194,
+            "gitBlobId": "0984385addf795a87a1fe456387fbfaad20822dc",
+            "sha256": null
+          },
+          {
+            "path": "README.md",
+            "size": 2637,
+            "gitBlobId": "7719a766836e1c6c4a0f73185b7356893d1be85b",
+            "sha256": null
+          },
+          {
+            "path": "chat_template.jinja",
+            "size": 7755,
+            "gitBlobId": "0ef09f214eaa6d9bca297988afc1454b5827b2c7",
+            "sha256": null
+          },
+          {
+            "path": "config.json",
+            "size": 2907,
+            "gitBlobId": "715f0448b9d38103211f0ad88bbb4d6e4f4be8c9",
+            "sha256": null
+          },
+          {
+            "path": "merges.txt",
+            "size": 3353259,
+            "gitBlobId": "a494e019ca1502219fd0128658b979e5f05ae8e8",
+            "sha256": null
+          },
+          {
+            "path": "model.safetensors",
+            "size": 1746942600,
+            "gitBlobId": "969da4e6aa85b4e224739020212b7cb0d09cee14",
+            "sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696"
+          },
+          {
+            "path": "tokenizer.json",
+            "size": 12807982,
+            "gitBlobId": "a73a846725794819aa6e1c9e97d8dc9671c2006d",
+            "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "size": 16709,
+            "gitBlobId": "fae3ce993e07c092ad024dde45e592379fde91bb",
+            "sha256": null
+          },
+          {
+            "path": "vocab.json",
+            "size": 6722759,
+            "gitBlobId": "0aa0ce0658d60ac4a5d609f4eadb0e8e43514176",
+            "sha256": null
+          }
+        ],
+        "architectures": [
+          "Qwen3_5ForConditionalGeneration"
+        ],
+        "modelType": "qwen3_5",
+        "textModelType": "qwen3_5_text",
+        "cardSha256": "2d23f3e6476e59fe235144daa60c62920061171f650dd66f5b900da7c9946b10",
+        "cardClaims": [
+          "| **Credential Scrubbing** | Secret sanitization | **100% blocked** | < 1ms |"
+        ],
+        "inferenceValidatedByThisAudit": false
+      }
+    ],
+    "nonGitAssets": [
+      {
+        "path": "config.json",
+        "sha256": "b90b86f35c8e6925ef74ee04d0e758f0a845c83a42089ad82bbaa948de9b4204",
+        "url": "https://huggingface.co/rahul05ranjan/hydra-nano-files/resolve/e5357479f21bae759b571ddd832114289997fa11/config.json"
+      },
+      {
+        "path": "tokenizer.json",
+        "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "url": "https://huggingface.co/rahul05ranjan/hydra-nano-files/resolve/e5357479f21bae759b571ddd832114289997fa11/tokenizer.json"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "sha256": "49e2b6e395f959f077f1e992b338919c0d4a9732fc6e613995e06557f843500c",
+        "url": "https://huggingface.co/rahul05ranjan/hydra-nano-files/resolve/e5357479f21bae759b571ddd832114289997fa11/tokenizer_config.json"
+      },
+      {
+        "path": "chat_template.jinja",
+        "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+        "url": "https://huggingface.co/rahul05ranjan/hydra-nano-files/resolve/e5357479f21bae759b571ddd832114289997fa11/chat_template.jinja"
+      },
+      {
+        "path": "merges.txt",
+        "sha256": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+        "url": "https://huggingface.co/rahul05ranjan/hydra-nano-files/resolve/e5357479f21bae759b571ddd832114289997fa11/merges.txt"
+      },
+      {
+        "path": "vocab.json",
+        "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003",
+        "url": "https://huggingface.co/rahul05ranjan/hydra-nano-files/resolve/e5357479f21bae759b571ddd832114289997fa11/vocab.json"
+      },
+      {
+        "path": "model.safetensors",
+        "sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+        "url": "https://huggingface.co/rahul05ranjan/hydra-nano-files/resolve/e5357479f21bae759b571ddd832114289997fa11/model.safetensors"
+      }
+    ],
+    "gitGGUF": {
+      "url": "https://huggingface.co/rahul05ranjan/hydra-nano-git/resolve/ff1c723fa36adaad7b04d0dd3441208e80db9086/hydra-nano-git-Q8_0.gguf",
+      "size": 811843136,
+      "sha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886",
+      "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+      "quantization": "Q8_0",
+      "revision": "ff1c723fa36adaad7b04d0dd3441208e80db9086",
+      "normalization": "train/normalize_mlx.py"
+    },
+    "nonGitTasks": 84,
+    "gitDevelopmentTasks": 200,
+    "scope": "Small development fixtures; diagnose gaps before full training. No release accuracy claim."
+  },
+  "runtimeReceipts": [
+    {
+      "label": "non-git",
+      "modelSha256": "16b4cb3ed691c1a3bb286380ef7d25d2c06592fc4be5d9f9d2a8f861a3dc9b5e",
+      "gpuBeforeMB": [
+        0,
+        0
+      ],
+      "gpuAfterMB": [
+        1397,
+        0
+      ],
+      "alias": "hydra-suite-base",
+      "gpuProcesses": "64, 1412\n"
+    },
+    {
+      "label": "git",
+      "modelSha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886",
+      "gpuBeforeMB": [
+        0,
+        0
+      ],
+      "gpuAfterMB": [
+        1403,
+        0
+      ],
+      "alias": "hydra-nano:git",
+      "gpuProcesses": "193, 1406\n"
+    }
+  ],
+  "byHead": {
+    "files": {
+      "tasks": 20,
+      "solvedCount": 19,
+      "solved": 0.95,
+      "errors": 0,
+      "modelCalls": 23,
+      "tasksWithModelCalls": 20,
+      "modelPlanAccuracy": 0.9,
+      "rawChars": 8483,
+      "returnedChars": 9651
+    },
+    "read": {
+      "tasks": 20,
+      "solvedCount": 20,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 0,
+      "tasksWithModelCalls": 0,
+      "modelPlanAccuracy": null,
+      "rawChars": 6140,
+      "returnedChars": 6795
+    },
+    "test": {
+      "tasks": 20,
+      "solvedCount": 19,
+      "solved": 0.95,
+      "errors": 0,
+      "modelCalls": 7,
+      "tasksWithModelCalls": 7,
+      "modelPlanAccuracy": null,
+      "rawChars": 19680,
+      "returnedChars": 8765
+    },
+    "os": {
+      "tasks": 24,
+      "solvedCount": 24,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 24,
+      "tasksWithModelCalls": 24,
+      "modelPlanAccuracy": 1,
+      "rawChars": 450,
+      "returnedChars": 844
+    },
+    "git": {
+      "tasks": 200,
+      "routed": 0.7,
+      "plan": 0.85,
+      "evidence": 0.845,
+      "solved": 0.835,
+      "recall": 0.8646332529877155,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 24920,
+      "returned": 15878,
+      "errors": 0
+    }
+  },
+  "scope": "Development diagnosis, existing small fixtures. No 95% release claim. OS uses deterministic probe fixtures with real env guardrail; read gather may make zero planner calls."
+}

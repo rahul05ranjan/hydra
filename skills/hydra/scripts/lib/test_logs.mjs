@@ -24,7 +24,7 @@ export function extractFailureCandidates(logText) {
   const lines = logText.split('\n');
   const candidateIndices = new Set();
 
-  const ERROR_START = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|error(?:\[E\d+\]| TS\d+)?|panicked at|AssertionError|assert\s|assertion\s|Expected:|Received:|- Snapshot|--- FAIL:|____+\s+\w+)/i;
+  const ERROR_START = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|error(?:\[E\d+\]| TS\d+)?|panicked at|AssertionError|assert\s|assertion\s|Expected:|Received:|- Snapshot|--- FAIL:|____+\s+\w+)|^\s*(?:left|right)\s*:/i;
   const USER_STACK = /\b([a-zA-Z0-9_\-./]+\.(?:ts|tsx|js|jsx|py|rs|go|java|c|cpp|rb)):(\d+)(?::(\d+))?/;
   const IGNORE_STACK = /(?:node_modules|site-packages|\.cargo\/registry|internal\/process|\bat <anonymous>:\d+|\(<anonymous>:\d+|\/usr\/(?:local\/)?lib\/python|\/lib\/python)/;
 
@@ -112,7 +112,7 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
     (Array.isArray(reply?.lines) ? reply.lines : []).filter(id => Number.isInteger(id)),
   );
 
-  const FAILURE_HEADER = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|panicked at|AssertionError|assert\s|assertion\s|Expected:|Received:|[-+]\s|--- FAIL:|____+\s+\w+)/i;
+  const FAILURE_HEADER = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|panicked at|AssertionError|assert\s|assertion\s|Expected:|Received:|[-+]\s|--- FAIL:|____+\s+\w+)|^\s*(?:left|right)\s*:/i;
   const USER_STACK = /\b([a-zA-Z0-9_\-./]+\.(?:ts|tsx|js|jsx|py|rs|go|java|c|cpp|rb)):(\d+)(?::(\d+))?/;
   const IGNORE_STACK = /(?:node_modules|site-packages|\.cargo\/registry|internal\/process|\bat <anonymous>:\d+|\(<anonymous>:\d+|\/usr\/(?:local\/)?lib\/python|\/lib\/python)/;
 

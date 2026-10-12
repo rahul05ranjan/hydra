@@ -1,0 +1,18 @@
+{
+  "planSha256": "45fa43fb98aa46b177e4724983d509ed06fd3e0456f04ef87c4f0a22872b11e0",
+  "frozenSha256": "f73bdd9a7bb6efec74f85310e2919448f8f66af4b6e301c002c97671d5f3e624",
+  "converterSha256": "b889fc20dd3d25caac16116a871728435fe3ec49977b5d863482833fd5afcc01",
+  "sourceFiles": 30,
+  "sealedFiles": 0,
+  "training": false,
+  "submitted": false,
+  "deadlineSeconds": 1800,
+  "tasks": 284,
+  "modelRevisions": {
+    "git": "ff1c723fa36adaad7b04d0dd3441208e80db9086",
+    "files": "e5357479f21bae759b571ddd832114289997fa11",
+    "read": "133a36149ee7ffb1313048063ec00776f43aed14",
+    "test": "a326a3c112dd3707539ff4fd852ed9c0bcc45e2a",
+    "os": "38e0f3fd67ed13dcddf869f75f727e43ef4a6898"
+  }
+}

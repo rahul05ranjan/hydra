@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Builds the git_dev development set: 10 repositories x 20 intents = 200 tasks.
-// Separate seeds (6100..6109) and separate phrasings from git1.
+// Separate seeds (6100..6109) and reviewed development-only phrasings.
 import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
@@ -97,8 +97,8 @@ function tasksFor(world, index, phrasings) {
     },
     branch_commits: {
       slots: { base: trunk },
-      accept: [{ probe: 'log', args: { ...unfiltered, base: trunk, nMin: ahead.length } }],
-      facts: ahead,
+      accept: [{ probe: 'log', args: { ...unfiltered, base: trunk, nMin: Math.min(50, ahead.length) } }],
+      facts: ahead.slice(0, 50),
     },
     last_commit_files: { accept: [{ probe: 'show', args: { rev: [null, 'HEAD'] } }], facts: filesOf('HEAD') },
     commit_files: {
@@ -118,7 +118,7 @@ function tasksFor(world, index, phrasings) {
     line_author: {
       slots: { path: line.file, token: line.token },
       accept: [{ probe: 'blame', args: { path: line.file } }],
-      facts: [line.token],
+      facts: [line.token, first(line.author)],
       say: [first(line.author)],
     },
   };
@@ -150,7 +150,7 @@ export function ensureWorlds() {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const phrasings = JSON.parse(readFileSync(path.join(ROOT, 'train', 'phrasings.json'), 'utf8'));
+  const phrasings = JSON.parse(readFileSync(path.join(HERE, 'phrasings.json'), 'utf8'));
   const worlds = buildWorlds();
   const tasks = worlds.flatMap((w, i) => tasksFor(w, i, phrasings));
   writeFileSync(TASKS, tasks.map(task => JSON.stringify(task)).join('\n') + '\n');

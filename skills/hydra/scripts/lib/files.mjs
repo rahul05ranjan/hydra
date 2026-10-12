@@ -28,7 +28,10 @@ const TERMS_SCHEMA = {
 
 const TERMS_SYSTEM = `You turn a question about a codebase into search terms.
 Give 1 to ${MAX_TERMS} literal strings likely to appear in the code or file names that answer it: identifiers, file names, config keys.
-Each term is one word or identifier, never a sentence.`;
+Each term is one word or identifier, never a sentence.
+If the question names an identifier or config key, copy it exactly, preserving case and underscores. Do not rewrite it into snake_case, split it into generic words, or invent synonyms.
+"Find the QueueStore declaration" -> {"terms":["QueueStore"]}
+"Locate uses of CACHE_EXPIRY_MS" -> {"terms":["CACHE_EXPIRY_MS"]}`;
 
 const tidy = list =>
   [

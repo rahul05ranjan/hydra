@@ -25,9 +25,41 @@ agent ◀── verbatim evidence lines ─────────────�
 - **Pass-through**: Output under 800 characters is handed over whole with zero model calls.
 - **Preserved exit codes**: `hydra run -- <cmd>` preserves `<cmd>`'s exit code, so agents know immediately if a build or test failed.
 
+On Windows, OS inspection uses fixed read-only netstat, tasklist and PowerShell CIM commands, plus Node system/memory APIs. Process output is capped at 30 records and is not sorted by CPU usage. Failed probes are marked in the returned evidence. Code search ranks current source ahead of archived evaluation results while keeping those results searchable.
+
 ## Try it
 
-Needs Node 18 or later and [Ollama](https://ollama.com/download).
+Needs Node 18 or later and [llama.cpp](https://github.com/ggml-org/llama.cpp) (the default backend). [Ollama](https://ollama.com/download) is optional; select it with `HYDRA_BACKEND=ollama`.
+
+### Run without Ollama
+
+Install `llama-server` from llama.cpp and obtain a GGUF conversion of your Hydra Nano weights. Safetensors files cannot be passed directly to `llama-server`; llama.cpp provides [`convert_hf_to_gguf.py`](https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py) for conversion from a local Hugging Face model directory. This integration does not download or convert weights.
+
+Start the server in one terminal:
+
+```powershell
+llama-server -m C:\models\hydra-nano-git.gguf --alias hydra-nano:git --host 127.0.0.1 --port 8080 -c 8192
+```
+
+In another PowerShell terminal:
+
+```powershell
+$env:HYDRA_BACKEND = 'llamacpp'
+$env:HYDRA_LLAMA_URL = 'http://127.0.0.1:8080'
+$env:HYDRA_MODEL = 'hydra-nano:git'
+node skills/hydra/scripts/hydra.mjs doctor
+node skills/hydra/scripts/hydra.mjs ask --head git "which branch am I on?"
+```
+
+On macOS/Linux, set the same variables with `export HYDRA_BACKEND=llamacpp`, `export HYDRA_LLAMA_URL=http://127.0.0.1:8080` and `export HYDRA_MODEL=hydra-nano:git`.
+
+The URL is the server root, without `/v1`. `HYDRA_MODEL` must match the server alias; setting it sends all model-backed heads to that one model and does not create specialist weights. Without this override, Hydra requests its existing per-head model names; your server must serve those aliases. `hydra doctor` verifies the effective configured names. `hydra setup` with this backend prints instructions without installing or starting anything.
+
+Hydra uses llama.cpp's [schema-constrained chat API](https://github.com/ggml-org/llama.cpp/tree/master/tools/server#post-v1chatcompletions-openai-compatible-chat-completions-api), disables thinking, and limits replies to 512 tokens. The model still chooses fixed read-only probes. HTTP fixture tests and native Windows Q8 inference/bootstrap checks pass; sealed accuracy on the converted runtime is tracked separately.
+
+### Run with Ollama
+
+Set `HYDRA_BACKEND=ollama` first (`$env:HYDRA_BACKEND = 'ollama'` in PowerShell; `export HYDRA_BACKEND=ollama` in Bash).
 
 ```bash
 # 1. Download the small local model (1.2 GB)
@@ -55,8 +87,24 @@ node <path>/skills/hydra/scripts/hydra.mjs stats
 Everything an agent needs is inside `skills/hydra`:
 
 ```bash
-npx skills add <owner>/hydra
+npx skills add rahul05ranjan/hydra --skill hydra
 ```
+
+This installs the skill instructions and bundled Node CLI. It does **not** install `llama-server`, download weights or start inference: the [skills installer](https://github.com/vercel-labs/skills) copies/links skill files, and [install lifecycle hooks](https://github.com/vercel-labs/skills/issues/1155) remain a feature request. The bundled CLI can run `read` and `search` immediately; model-backed calls need the runtime described above.
+
+A complete bootstrap is provided separately:
+
+```bash
+npx --yes --package=github:rahul05ranjan/hydra hydra-install
+```
+
+It installs the skill globally for detected agents, downloads a pinned llama.cpp runtime and the approximately 812 MB Hydra Nano Git Q8 GGUF, verifies SHA-256 hashes, and writes configuration under `~/.hydra`. Node 18+ with npm is required. Windows x64/arm64 CPU, macOS x64/arm64, and Ubuntu-compatible Linux x64/arm64 runtime artifacts are supported. Windows has live verification; other platform packages have not been exercised here.
+
+The first bootstrap shares the Git model across all model-backed heads; it does not download five specialist weights. Runtime downloads and configuration stay outside agent skill folders, so skill updates retain them. Hydra starts its managed server on `127.0.0.1:11435` when needed; it stays running until `hydra stop` or a reboot. Run the installed `scripts/hydra.mjs doctor` to check readiness. `HYDRA_HOME` changes the data/config directory; explicit backend, URL and model environment variables override managed defaults.
+
+From a local checkout, run `node skills/hydra/scripts/install.mjs`. After skill-only installation, run the installed `scripts/install.mjs --runtime-only`. The remote command requires the current code and GGUF artifact to be published; consult `TRACKER.md` for publication status.
+
+For Kaggle evaluation, put `KAGGLE_USERNAME` and `KAGGLE_API_TOKEN` in root `.env` using [`.env.example`](.env.example). `train/kaggle/control.py` loads that file, prepares private frozen inputs, and separates upload from GPU execution. `run --approved` is only for an explicitly approved 30-minute evaluation; the kernel trains nothing, verifies source/model hashes, and rejects CPU fallback. Tokens are never embedded in the uploaded source bundle.
 
 Or copy `skills/hydra` directly to your agent's skills directory:
 - Claude Code: `~/.claude/skills/hydra`
@@ -127,13 +175,14 @@ Full results in `evals/results/read.json`.
 - `skills/hydra/SKILL.md`: tells an agent when to delegate and how to read the result.
 - `skills/hydra/scripts/hydra.mjs`: the CLI.
 - `skills/hydra/scripts/lib/`:
+  - `runtime.mjs`: selectable Ollama/llama.cpp API client and per-head model configuration.
   - `route.mjs`: route questions between heads.
   - `git.mjs`: git head probes and plan step.
   - `files.mjs`: search and walk head.
   - `read.mjs`: file slice and symbol reader head.
   - `test_logs.mjs`: test runner and build log reader head.
   - `answer.mjs`: verbatim line selection and lead generation.
-  - `ollama.mjs`: local Ollama API client.
+  - `ollama.mjs`: compatibility exports for existing evaluation callers.
   - `ledger.mjs`: local token accounting ledger.
 - `test/`: unit test suite (`npm test`).
 - `evals/git1/`: 1000-task sealed test set for git head.

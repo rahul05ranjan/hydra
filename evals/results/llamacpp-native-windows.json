@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-12",
+  "runtime": "b11563",
+  "model": {
+    "url": "https://huggingface.co/rahul05ranjan/hydra-nano-git/resolve/main/hydra-nano-git-Q8_0.gguf",
+    "size": 811843136,
+    "sha256": "6c3fd0a7d4a74cb72c54633ab73d338c1a6d08b25219be1c41bababf34dffd9a",
+    "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+    "quantization": "Q8_0"
+  },
+  "liveGit": {
+    "exit": 0,
+    "expectedBranch": "main",
+    "containsBranch": true,
+    "stdout": "$ git status --short --branch\n## main...origin/main\n M README.md\n M TRACKER.md\n M package.json\n M skills.sh\n M skills/hydra/SKILL.md\n M skills/hydra/scripts/hydra.mjs\n M skills/hydra/scripts/lib/answer.mjs\n M skills/hydra/scripts/lib/files.mjs\n M skills/hydra/scripts/lib/git.mjs\n M skills/hydra/scripts/lib/ollama.mjs\n M skills/hydra/scripts/lib/os.mjs\n M skills/hydra/scripts/lib/read.mjs\n M skills/hydra/scripts/lib/test_logs.mjs\n M test/hydra.test.mjs\n?? evals/results/windows-check-2026-10-12.json\n?? evals/results/windows-improvements-2026-10-12.json\n?? skills/hydra/scripts/install.mjs\n?? skills/hydra/scripts/lib/bootstrap.mjs\n?? skills/hydra/scripts/lib/local.mjs\n?? skills/hydra/scripts/lib/runtime.mjs\n?? skills/hydra/scripts/runtime-manifest.json\n?? test/bootstrap.test.mjs\n?? test/runtime.test.mjs\n\n$ git log -n15\nc85b192 2026-10-10 rahul05ranjan: Record sealed git1 benchmark score (78% weighted / 79% raw) for retrained hydra-nano:git\n5c08e1c 2026-10-10 rahul05ranjan: Initial commit: Hydra 0.1 local specialist coding agent coprocessor\n\n[hydra git · read ~252 tok locally, returned ~263 tok · 0.5s]\n",
+    "stderr": ""
+  },
+  "sealedEval": "not run; Kaggle requested"
+}

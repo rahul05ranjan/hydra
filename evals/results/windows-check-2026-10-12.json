@@ -1,0 +1,272 @@
+{
+  "date": "2026-10-12",
+  "platform": "win32",
+  "benchmarks": {
+    "read": {
+      "solved": 20,
+      "total": 20,
+      "rows": [
+        {
+          "id": "ts_function_slice",
+          "solved": true
+        },
+        {
+          "id": "ts_method_slice",
+          "solved": true
+        },
+        {
+          "id": "ts_file_outline",
+          "solved": true
+        },
+        {
+          "id": "py_def_slice",
+          "solved": true
+        },
+        {
+          "id": "py_class_method_slice",
+          "solved": true
+        },
+        {
+          "id": "py_file_outline",
+          "solved": true
+        },
+        {
+          "id": "rust_fn_slice",
+          "solved": true
+        },
+        {
+          "id": "rust_struct_slice",
+          "solved": true
+        },
+        {
+          "id": "go_func_slice",
+          "solved": true
+        },
+        {
+          "id": "go_method_slice",
+          "solved": true
+        },
+        {
+          "id": "js_async_arrow_slice",
+          "solved": true
+        },
+        {
+          "id": "short_file_passthrough",
+          "solved": true
+        },
+        {
+          "id": "line_range_slice_1",
+          "solved": true
+        },
+        {
+          "id": "line_range_slice_2",
+          "solved": true
+        },
+        {
+          "id": "nl_read_question_1",
+          "solved": true
+        },
+        {
+          "id": "nl_read_question_2",
+          "solved": true
+        },
+        {
+          "id": "nl_read_lines",
+          "solved": true
+        },
+        {
+          "id": "outline_rust_module",
+          "solved": true
+        },
+        {
+          "id": "large_multi_symbol_ts",
+          "solved": true
+        },
+        {
+          "id": "outline_python_module",
+          "solved": true
+        }
+      ]
+    },
+    "files": {
+      "solved": 20,
+      "total": 20,
+      "rows": [
+        {
+          "id": "ts_class_def_vs_imports",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "py_function_def_vs_calls",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "rust_struct_def_vs_usages",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "go_func_def_vs_calls",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "ts_async_function_def",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "ts_interface_def",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "noise_lockfile_suppression",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "prose_penalty_ranking",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "const_arrow_function",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "py_class_def_model",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "rust_fn_pub_definition",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "go_interface_definition",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "ts_enum_definition",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "py_async_def_worker",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "ts_type_alias_definition",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "rust_enum_definition",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "react_component_func",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "py_exception_class",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "go_struct_definition",
+          "solved": true,
+          "top1": true
+        },
+        {
+          "id": "const_config_object",
+          "solved": true,
+          "top1": true
+        }
+      ]
+    }
+  },
+  "cli": [
+    {
+      "args": [
+        "read",
+        "package.json",
+        "--lines",
+        "1-4"
+      ],
+      "exit": 0,
+      "stdout": "File: package.json (lines 1-4 of 30)\n\n1: {\r\n2:   \"name\": \"hydra\",\r\n3:   \"version\": \"0.1.0\",\r\n4:   \"description\": \"Local specialist models that frontier coding agents delegate repo questions to\",\r\n\n[hydra read · read ~263 tok locally, returned ~40 tok · 0s]\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "search",
+        "readSlice"
+      ],
+      "exit": 0,
+      "stdout": "Matches for \"readSlice\":\n  evals/results/frontier/2026-10-10T11-01-43-773Z/runtime/lib/read.mjs:142:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r\n  evals/results/frontier/2026-10-10T11-06-44-071Z/runtime/lib/read.mjs:142:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r\n  evals/results/frontier/2026-10-10T11-08-52-051Z/runtime/lib/read.mjs:142:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r\n  evals/results/real-repo/2026-10-10T11-38-39-812Z/hydra-skill/scripts/lib/read.mjs:142:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r\n  evals/results/real-repo/2026-10-10T11-45-30-023Z/hydra-skill/scripts/lib/read.mjs:142:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r\n  evals/results/real-repo/2026-10-10T11-49-09-878Z/hydra-skill/scripts/lib/read.mjs:142:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r\n  evals/results/real-repo/2026-10-10T11-57-49-798Z/hydra-skill/scripts/lib/read.mjs:142:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r\n  skills/hydra/scripts/lib/read.mjs:162:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r\n  evals/read/run.mjs:37:    const res = await read.readSlice(task.file, task.query, tmpDir);\r\n  evals/results/agent_trial.json:75:        \"rawStdout\": \"import { existsSync, readFileSync, statSync } from 'node:fs';/nimport path from 'node:path';/nimport { Unavailable } from './ollama.mjs';/n/nconst PASS_THROUGH = 800;/nconst MAX_ [... omitted end of long line]\n  evals/results/agent_trial.json:411:        \"rawStdout\": \"/n> hydra@0.1.0 test/n> node --test/n/n✔ route sends git questions to git and everything else to files (1.091959ms)/n✔ git head runs the chosen probes and drops arguments it cann [... omitted end of long line]\n  evals/results/frontier/2026-10-10T11-01-43-773Z/runtime/hydra.mjs:126:  const res = await read.readSlice(fileArg, { symbol, lines, outline: isOutline }, cwd);\r\n  evals/results/frontier/2026-10-10T11-01-43-773Z/runtime/lib/read.mjs:247:  const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);\r\n  evals/results/frontier/2026-10-10T11-06-44-071Z/runtime/hydra.mjs:126:  const res = await read.readSlice(fileArg, { symbol, lines, outline: isOutline }, cwd);\r\n  evals/results/frontier/2026-10-10T11-06-44-071Z/runtime/lib/read.mjs:247:  const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);\r\n  evals/results/frontier/2026-10-10T11-08-52-051Z/runtime/hydra.mjs:126:  const res = await read.readSlice(fileArg, { symbol, lines, outline: isOutline }, cwd);\r\n  evals/results/frontier/2026-10-10T11-08-52-051Z/runtime/lib/read.mjs:247:  const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);\r\n  evals/results/real-repo/2026-10-10T11-38-39-812Z/hydra-skill/scripts/hydra.mjs:126:  const res = await read.readSlice(fileArg, { symbol, lines, outline: isOutline }, cwd);\r\n  evals/results/real-repo/2026-10-10T11-38-39-812Z/hydra-skill/scripts/lib/read.mjs:247:  const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);\r\n  evals/results/real-repo/2026-10-10T11-45-30-023Z/hydra-skill/scripts/hydra.mjs:126:  const res = await read.readSlice(fileArg, { symbol, lines, outline: isOutline }, cwd);\r\n  evals/results/real-repo/2026-10-10T11-45-30-023Z/hydra-skill/scripts/lib/read.mjs:247:  const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);\r\n  evals/results/real-repo/2026-10-10T11-49-09-878Z/hydra-skill/scripts/hydra.mjs:126:  const res = await read.readSlice(fileArg, { symbol, lines, outline: isOutline }, cwd);\r\n  evals/results/real-repo/2026-10-10T11-49-09-878Z/hydra-skill/scripts/lib/read.mjs:247:  const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);\r\n  evals/results/real-repo/2026-10-10T11-57-49-798Z/hydra-skill/scripts/hydra.mjs:126:  const res = await read.readSlice(fileArg, { symbol, lines, outline: isOutline }, cwd);\r\n  evals/results/real-repo/2026-10-10T11-57-49-798Z/hydra-skill/scripts/lib/read.mjs:247:  const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);\r\n\n[hydra files · read ~3214 tok locally, returned ~1063 tok · 1.88s]\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "run",
+        "--",
+        "node",
+        "-e",
+        "console.log(\"PASS smoke\");"
+      ],
+      "exit": 0,
+      "stdout": "$ node -e console.log(\"PASS smoke\");\nPASS smoke\n\n[hydra test · read ~3 tok locally, returned ~12 tok · 0.1s]\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "run",
+        "--",
+        "node",
+        "-e",
+        "console.error(\"FAIL smoke\");process.exit(7);"
+      ],
+      "exit": 7,
+      "stdout": "$ node -e console.error(\"FAIL smoke\");process.exit(7); (exit 7)\nFAIL smoke\n\n[hydra test · read ~3 tok locally, returned ~19 tok · 0.1s]\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ask",
+        "--head",
+        "git",
+        "what is the current branch?"
+      ],
+      "exit": 2,
+      "stdout": "",
+      "stderr": "hydra unavailable: cannot reach Ollama at http://127.0.0.1:11434 (ECONNREFUSED)\n"
+    },
+    {
+      "args": [
+        "doctor"
+      ],
+      "exit": 2,
+      "stdout": "",
+      "stderr": "hydra unavailable: cannot reach Ollama at http://127.0.0.1:11434 (ECONNREFUSED)\n"
+    }
+  ],
+  "unitTests": {
+    "total": 40,
+    "passed": 38,
+    "failed": 2,
+    "failures": [
+      "disk probe expects Filesystem but returns no output",
+      "environment test assumes SHELL is set"
+    ]
+  }
+}

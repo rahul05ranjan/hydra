@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { answer } from './lib/answer.mjs';
 import { run } from './lib/exec.mjs';
 import * as files from './lib/files.mjs';
@@ -9,8 +10,9 @@ import * as test_logs from './lib/test_logs.mjs';
 import * as read from './lib/read.mjs';
 import * as osHead from './lib/os.mjs';
 import { record, stats, tokens } from './lib/ledger.mjs';
-import { chat, hasModel, MODEL, HEAD_MODELS, modelFor, Unavailable } from './lib/ollama.mjs';
+import { chat, hasModel, BACKEND, modelFor, Unavailable } from './lib/runtime.mjs';
 import { route } from './lib/route.mjs';
+import { stopLocal } from './lib/local.mjs';
 
 const HEADS = { git, files, test: test_logs, read, os: osHead };
 
@@ -22,7 +24,8 @@ const USAGE = `usage:
   hydra os [question...]                               inspect ports, processes, disk, system
   hydra stats                                          token accounting for past calls
   hydra doctor                                         check that the local model is ready
-  hydra setup                                          download the local model`;
+  hydra setup                                          show runtime setup instructions
+  hydra stop                                           stop Hydra's managed llama-server`;
 
 function fail(code, message) {
   console.error(message);
@@ -213,26 +216,42 @@ the commands itself, and leaves out the extra turns those commands would have co
 }
 
 async function doctor() {
+  const checks = new Map();
   const modelStatuses = await Promise.all(
-    Object.entries(HEAD_MODELS).map(async ([head, name]) => {
-      const ok = await hasModel(name);
-      return `${head.padEnd(6)} -> ${name} ${ok ? 'present' : 'missing, run: hydra setup'}`;
+    ['git', 'os', 'test', 'read', 'files'].map(async head => {
+      const name = modelFor(head);
+      if (!checks.has(name)) checks.set(name, hasModel(name));
+      const ok = await checks.get(name);
+      return `${head.padEnd(6)} -> ${name} ${ok ? 'present' : 'missing, see: hydra setup'}`;
     }),
   );
-  const allPresent = (await Promise.all(Object.values(HEAD_MODELS).map(m => hasModel(m)))).every(Boolean);
+  const allPresent = (await Promise.all(checks.values())).every(Boolean);
   const rg = (await run('rg', ['--version'], process.cwd())).ok;
-  console.log(`ollama:  reachable
+  console.log(`${BACKEND}: reachable
 models:
   ${modelStatuses.join('\n  ')}
 ripgrep: ${rg ? 'present' : 'missing, using the slower built-in search'}`);
-  if (!allPresent && !(await hasModel(MODEL))) process.exit(2);
+  if (!allPresent) process.exit(2);
 }
 
 function setup() {
+  if (BACKEND === 'llamacpp') {
+    console.log(`Install the managed runtime with:
+  node "${fileURLToPath(new URL('./install.mjs', import.meta.url))}" --runtime-only
+Or start llama-server with your Hydra Nano GGUF model:
+  llama-server -m <path-to-hydra-nano.gguf> --alias hydra-nano:git --host 127.0.0.1 --port 8080 -c 8192
+Set HYDRA_BACKEND=llamacpp and HYDRA_MODEL=hydra-nano:git, then run hydra doctor.
+HYDRA_LLAMA_URL defaults to http://127.0.0.1:8080 (server root, without /v1).
+HYDRA_MODEL sends every head to the one loaded model; this does not create specialist weights.
+This command prints instructions only; it does not install, download or launch a server.`);
+    return;
+  }
+  if (BACKEND !== 'ollama') fail(2, `hydra: unknown HYDRA_BACKEND "${BACKEND}"; use ollama or llamacpp`);
   console.log('Ensuring hydra-nano models are installed in Ollama...');
-  for (const m of new Set(Object.values(HEAD_MODELS))) {
+  for (const m of new Set(['git', 'os', 'test', 'read', 'files'].map(modelFor))) {
     const pull = spawnSync('ollama', ['pull', m], { stdio: 'inherit' });
     if (pull.error?.code === 'ENOENT') fail(2, 'hydra: Ollama is not installed. Get it from https://ollama.com/download, then run setup again.');
+    if (pull.error || pull.status !== 0) fail(2, `hydra: could not install ${m}`);
   }
 }
 
@@ -248,6 +267,7 @@ const commands = {
   stats: showStats,
   doctor,
   setup,
+  stop: () => console.log(stopLocal() ? 'Hydra local server stopped.' : 'No managed Hydra server is running.'),
 };
 
 try {

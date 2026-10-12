@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { run } from './exec.mjs';
-import { Unavailable } from './ollama.mjs';
+import { Unavailable } from './runtime.mjs';
 
 const PASS_THROUGH = 800;
 const MAX_CANDIDATES = 60;

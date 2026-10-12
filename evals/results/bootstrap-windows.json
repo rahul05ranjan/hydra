@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-12",
+  "runtime": "b11563",
+  "modelSha256": "6c3fd0a7d4a74cb72c54633ab73d338c1a6d08b25219be1c41bababf34dffd9a",
+  "verifiedLocalDownloads": true,
+  "results": [
+    {
+      "args": [
+        "doctor"
+      ],
+      "exit": 0,
+      "stdout": "llamacpp: reachable\nmodels:\n  git    -> hydra-nano:git present\n  os     -> hydra-nano:git present\n  test   -> hydra-nano:git present\n  read   -> hydra-nano:git present\n  files  -> hydra-nano:git present\nripgrep: present\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "ask",
+        "--head",
+        "git",
+        "which branch am I on?"
+      ],
+      "exit": 0,
+      "stdout": "$ git status --short --branch\n## main...origin/main\n M .gitignore\n M README.md\n M TRACKER.md\n M package.json\n M skills.sh\n M skills/hydra/SKILL.md\n M skills/hydra/scripts/hydra.mjs\n M skills/hydra/scripts/lib/answer.mjs\n M skills/hydra/scripts/lib/files.mjs\n M skills/hydra/scripts/lib/git.mjs\n M skills/hydra/scripts/lib/ollama.mjs\n M skills/hydra/scripts/lib/os.mjs\n M skills/hydra/scripts/lib/read.mjs\n M skills/hydra/scripts/lib/test_logs.mjs\n M test/hydra.test.mjs\n?? .env.example\n?? evals/results/llamacpp-native-windows.json\n?? evals/results/windows-check-2026-10-12.json\n?? evals/results/windows-improvements-2026-10-12.json\n?? skills/hydra/scripts/install.mjs\n?? skills/hydra/scripts/lib/bootstrap.mjs\n?? skills/hydra/scripts/lib/local.mjs\n?? skills/hydra/scripts/lib/runtime.mjs\n?? skills/hydra/scripts/runtime-manifest.json\n?? test/bootstrap.test.mjs\n?? test/runtime.test.mjs\n?? train/kaggle/\n?? train/publish_gguf.py\n\n$ git log -n15\nc85b192 2026-10-10 rahul05ranjan: Record sealed git1 benchmark score (78% weighted / 79% raw) for retrained hydra-nano:git\n5c08e1c 2026-10-10 rahul05ranjan: Initial commit: Hydra 0.1 local specialist coding agent coprocessor\n\n[hydra git · read ~281 tok locally, returned ~293 tok · 3.5s]\n",
+      "stderr": ""
+    }
+  ]
+}

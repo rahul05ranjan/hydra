@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { Unavailable } from './ollama.mjs';
+import { Unavailable } from './runtime.mjs';
 
 const PASS_THROUGH = 800;
 const MAX_FILE_BYTES = 1024 * 1024; // 1 MB limit for local slice reads

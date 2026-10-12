@@ -1,14 +1,22 @@
 import os from 'node:os';
 import { run } from './exec.mjs';
-import { Unavailable } from './ollama.mjs';
+import { Unavailable } from './runtime.mjs';
 
 const IS_MAC = process.platform === 'darwin';
+const IS_WINDOWS = process.platform === 'win32';
+const result = r => ({ ok: r.ok, out: r.out || r.err || (r.ok ? '(no output)' : '(probe failed)') });
+const powershell = script => run('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', script]);
 const SENSITIVE_PATTERN = /(?:SECRET|KEY|TOKEN|PASS|AUTH|CREDENTIAL|PRIVATE|CLOUDFLARE|API)/i;
 
 export const PROBES = {
   ports: {
     about: 'listening TCP ports and which processes/services are bound to them',
     cmd: async () => {
+      if (IS_WINDOWS) {
+        const r = await run('netstat.exe', ['-ano', '-p', 'tcp']);
+        if (!r.ok) return result(r);
+        return { ok: true, out: r.out.split(/\r?\n/).filter(line => /LISTENING/.test(line)).join('\n') || '(no listening ports)' };
+      }
       if (IS_MAC) {
         const r = await run('lsof', ['-nP', '-iTCP', '-sTCP:LISTEN']);
         return { ok: r.ok, out: r.out || r.err || '(no listening ports)' };
@@ -22,6 +30,12 @@ export const PROBES = {
   processes: {
     about: 'running processes, top CPU/memory consumers, or filter by process name (name)',
     cmd: async (args = {}) => {
+      if (IS_WINDOWS) {
+        const r = await run('tasklist.exe', ['/FO', 'CSV']);
+        if (!r.ok) return result(r);
+        const lines = r.out.trim().split(/\r?\n/);
+        return { ok: true, out: lines.filter((line, i) => i === 0 || !args.name || line.toLowerCase().includes(args.name.toLowerCase())).slice(0, 30).join('\n') };
+      }
       if (IS_MAC) {
         const r = await run('ps', ['-eo', 'pid,pcpu,pmem,comm', '-r']);
         if (!r.ok) return { ok: false, out: r.err };
@@ -34,6 +48,7 @@ export const PROBES = {
         return { ok: true, out: lines.slice(0, 25).join('\n') };
       }
       const r = await run('ps', ['-eo', 'pid,pcpu,pmem,comm', '--sort=-%cpu']);
+      if (!r.ok) return result(r);
       const lines = (r.out || '').split('\n');
       if (args.name) {
         const filter = args.name.toLowerCase();
@@ -46,29 +61,24 @@ export const PROBES = {
   disk: {
     about: 'disk space usage, available filesystem storage, mount points',
     cmd: async () => {
+      if (IS_WINDOWS) return result(await powershell("Get-CimInstance Win32_LogicalDisk -Filter 'DriveType=3' | Select-Object @{Name='Filesystem';Expression={$_.DeviceID}}, Size, FreeSpace | Format-Table -AutoSize"));
       const r = await run('df', ['-h']);
-      return { ok: r.ok, out: r.out || r.err };
+      return result(r);
     },
   },
   system: {
     about: 'OS platform, OS version, kernel release, architecture, uptime, system load',
     cmd: async () => {
-      const uname = await run('uname', ['-smr']);
-      const uptime = await run('uptime', []);
-      let osVer = '';
-      if (IS_MAC) {
-        const sw = await run('sw_vers', []);
-        osVer = sw.out ? `\n${sw.out.trim()}` : '';
-      }
       return {
         ok: true,
-        out: `OS Architecture: ${uname.out.trim()}${osVer}\nUptime / Load:  ${uptime.out.trim()}`,
+        out: `OS Architecture: ${os.type()} ${os.release()} ${os.arch()}\nUptime: ${Math.floor(os.uptime())} seconds${IS_WINDOWS ? '' : `\nLoad: ${os.loadavg().join(', ')}`}`,
       };
     },
   },
   memory: {
     about: 'system RAM usage, free memory, memory pressure',
     cmd: async () => {
+      if (IS_WINDOWS) return { ok: true, out: `Total Physical RAM: ${(os.totalmem() / 2 ** 30).toFixed(1)} GB\nFree RAM: ${(os.freemem() / 2 ** 30).toFixed(1)} GB` };
       if (IS_MAC) {
         const vm = await run('vm_stat', []);
         const totalGb = (os.totalmem() / (1024 * 1024 * 1024)).toFixed(1);
@@ -79,7 +89,7 @@ export const PROBES = {
         };
       }
       const r = await run('free', ['-h']);
-      return { ok: r.ok, out: r.out || r.err };
+      return result(r);
     },
   },
   env: {
@@ -175,8 +185,9 @@ export async function gather(question, cwd, chat) {
     results.push({
       probe: item.probe,
       args: item,
+      ok: res.ok,
       cmd: cmdLabel,
-      out: res.out || '(no output)',
+      out: res.ok ? (res.out || '(no output)') : `[probe failed] ${res.out || '(no output)'}`,
     });
   }
 

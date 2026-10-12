@@ -1,7 +1,7 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { run } from './exec.mjs';
-import { Unavailable } from './ollama.mjs';
+import { Unavailable } from './runtime.mjs';
 
 const SKIP = new Set(['node_modules', 'dist', 'build', 'target', 'vendor', 'venv', '__pycache__', 'coverage']);
 const STOP = new Set(
@@ -18,6 +18,7 @@ const MAX_BYTES = 512 * 1024;
 // Generated files repeat every identifier and answer nothing.
 const NOISE = /(^|\/)(package-lock\.json|CHANGELOG[^/]*|[^/]*\.(lock|map)|[^/]*\.min\.js)$/i;
 const PROSE = /\.(md|mdx|txt|rst)$/i;
+const ARCHIVE = /(^|\/)(?:evals\/results|\.hydra\/trials)(?:\/|$)/i;
 
 const TERMS_SCHEMA = {
   type: 'object',
@@ -135,7 +136,7 @@ function ranked(found, term = '') {
   const fileOf = hit => hit.slice(0, hit.indexOf(':'));
   const kept = found.filter(hit => !NOISE.test(fileOf(hit)));
   return [...kept]
-    .sort((a, b) => scoreHit(b, term) - scoreHit(a, term))
+    .sort((a, b) => Number(ARCHIVE.test(fileOf(a))) - Number(ARCHIVE.test(fileOf(b))) || scoreHit(b, term) - scoreHit(a, term))
     .slice(0, PER_TERM);
 }
 

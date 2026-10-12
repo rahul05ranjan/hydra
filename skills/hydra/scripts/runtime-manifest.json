@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "llama": {
+    "tag": "b11563",
+    "artifacts": {
+      "win-cpu-x64.zip": {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11563/llama-b11563-bin-win-cpu-x64.zip",
+        "size": 19501626,
+        "sha256": "3d88e9bd855789aae2b3be16302bca0386341edc75c8a57cfbb69cb5d2922be6"
+      },
+      "win-cpu-arm64.zip": {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11563/llama-b11563-bin-win-cpu-arm64.zip",
+        "size": 12371538,
+        "sha256": "e5710b5061dcae348580a3f00db0d4761d90e383d0b81a5856dff34bc2bfa3d3"
+      },
+      "macos-arm64.tar.gz": {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11563/llama-b11563-bin-macos-arm64.tar.gz",
+        "size": 12105453,
+        "sha256": "6a5c7da020931d891ab8487800b61b0c097db89a1272c02a6bcb6afd054ea5c2"
+      },
+      "macos-x64.tar.gz": {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11563/llama-b11563-bin-macos-x64.tar.gz",
+        "size": 11597171,
+        "sha256": "a2335b1f4ae00d7b3f6f2da0880daecae9844a60c886d874f7e963616c29bf81"
+      },
+      "ubuntu-x64.tar.gz": {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11563/llama-b11563-bin-ubuntu-x64.tar.gz",
+        "size": 17712263,
+        "sha256": "39b5c064c7a298bcfa3b5805ba0b779ccd9685d7211b020fc49806eea0e8ac13"
+      },
+      "ubuntu-arm64.tar.gz": {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11563/llama-b11563-bin-ubuntu-arm64.tar.gz",
+        "size": 13827940,
+        "sha256": "3eb1eca3a97e08848fcc1c3ece90354af2a70d448c93405901c4449716a8018e"
+      }
+    },
+    "gpuArtifacts": [
+      {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11563/llama-b11563-bin-ubuntu-cuda-12.8-x64.tar.gz",
+        "size": 171560025,
+        "sha256": "c198c0fa97c3bea3f2cf89f4e4db8ebefc446650fa3030044fe9434e6346ce80"
+      },
+      {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11563/cudart-llama-b11563-bin-ubuntu-cuda-12.8-x64.tar.gz",
+        "size": 594377809,
+        "sha256": "6c1757c24ccdd76cc90f0b0312ec6d042280417eb3a81d81ceea22aa55ebadbd"
+      }
+    ]
+  },
+  "model": {
+    "url": "https://huggingface.co/rahul05ranjan/hydra-nano-git/resolve/d0ab92ae37d28f457bf7bbace50e87b6e8574ffa/hydra-nano-git-Q8_0.gguf",
+    "size": 811843136,
+    "sha256": "6c3fd0a7d4a74cb72c54633ab73d338c1a6d08b25219be1c41bababf34dffd9a",
+    "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+    "quantization": "Q8_0",
+    "revision": "d0ab92ae37d28f457bf7bbace50e87b6e8574ffa"
+  },
+  "nodeArtifact": {
+    "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz",
+    "sha256": "fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6"
+  }
+}

@@ -4,7 +4,7 @@ The single record of where this project stands: what is decided, what is done, w
 
 **Keeping it current:** update this file in the same turn as the change. When a step finishes, move it and record how it was verified. When a decision is made, add it with its reason. When something blocks, write the blocker and what unblocks it. Add one dated line to the Log.
 
-Last updated: 2026-10-10. **Where Hydra stands: version 0.1 runs with five specialist heads (git, files, test, read, os) powered by the Hydra Nano model family (`hydra-nano:git`, `hydra-nano:os`, `hydra-nano:test`, `hydra-nano:read`, `hydra-nano:files`) and hosted on Hugging Face at `rahul05ranjan/hydra-nano-git`. Git, files, test, and read have task benchmarks; the OS head has unit tests. Safe read-only OS Head (`--head os` / `hydra os`) built with secret-blocking guardrails. Files/Search benchmark (`evals/files/run.mjs`) scored 100% (20/20 solved, 100% Top-1, 100% definition recall). Gentle LoRA retrain on 1,640 oversampled examples boosted weak kinds on dev set (`change_in_file` 26% -> 90%, `branch_diff_files` 28% -> 90%). All 40 unit tests passing.**
+Last updated: 2026-10-12. **Where Hydra stands: version 0.1 runs with five specialist heads (git, files, test, read, os) powered by the Hydra Nano model family (`hydra-nano:git`, `hydra-nano:os`, `hydra-nano:test`, `hydra-nano:read`, `hydra-nano:files`) and hosted on Hugging Face at `rahul05ranjan/hydra-nano-git`. Git, files, test, and read have task benchmarks; the OS head has unit tests. Safe read-only OS Head (`--head os` / `hydra os`) built with secret-blocking guardrails. Files/Search benchmark (`evals/files/run.mjs`) scored 100% (20/20 solved, 100% Top-1, 100% definition recall). Gentle LoRA retrain on 1,640 oversampled examples boosted weak kinds on dev set (`change_in_file` 26% -> 90%, `branch_diff_files` 28% -> 90%). All 58 tests passing on Windows (2026-10-12). llama.cpp is now the default; Ollama is optional. llama.cpp API integration is implemented and fixture-tested; native Windows Q8 inference and managed bootstrap pass. Full converted-runtime score is running on Kaggle.**
 
 ## Goal
 
@@ -42,7 +42,7 @@ Built this way and shown to the user, who has not objected. None was put to the 
 | Heads are read-only for now. | Wrong reads cost a retry; wrong writes cost work. |
 | The calling agent names the head (`--head git` or `--head files`). The code router is only a fallback. | The router sent 75% of the git1 questions to the git head. The agent already knows which it is asking. |
 | Node with no dependencies, living inside `skills/hydra/scripts`. | Anyone who installs with `npx skills add` has Node, and the installer copies the skill folder, so the CLI arrives with it. |
-| The runtime is Ollama's own API, default model family `hydra-nano:<head>` (`hydra-nano:git`, `hydra-nano:os`, etc.). | Ollama was already installed, runs on macOS, Linux and Windows, and keeps the model loaded. Only `lib/ollama.mjs` knows about it. |
+| The default runtime is llama.cpp; optional Ollama uses HYDRA_BACKEND=ollama. Default model family `hydra-nano:<head>` (`hydra-nano:git`, `hydra-nano:os`, etc.). | Ollama was already installed, runs on macOS, Linux and Windows, and keeps the model loaded. Only `lib/runtime.mjs` owns API transport; `lib/ollama.mjs` retains compatibility exports. |
 | Training data takes its phrasings and word lists from a different source than `evals/git1`. | Otherwise the model can memorise the test set's wording and the score stops meaning anything. |
 
 Recommended and not yet built or agreed: one base model with one small adapter per job, in place of five or six full models (one download of about 1 GB in place of several).
@@ -171,7 +171,7 @@ Built `skills/hydra/scripts/lib/os.mjs` providing read-only probes for listening
 
 ### Later, unordered
 
-- A build that needs no Ollama (llama.cpp), and a trial on Linux and Windows. Only macOS on an M5 Pro has been tried.
+- llama.cpp bootstrap and native Windows smoke checks are now implemented. Full Linux/macOS bootstrap trials remain unverified; Kaggle GPU accuracy is being evaluated.
 
 ## Results
 
@@ -361,6 +361,47 @@ Built safe read-only OS inspection head supporting listening ports (`lsof`), run
 - **Security Guardrail:** Tested and verified that sensitive environment variables (`SECRET`, `KEY`, `TOKEN`, `CREDENTIAL`, `AUTH`) are strictly blocked with `[GUARDRAIL]` warning.
 - **Unit Tests:** 4 unit tests in `test/hydra.test.mjs` passing (26 total tests passing).
 
+### Windows verification, 2026-10-12
+
+- Fresh supervised checks on Windows: npm test passed 38/40; disk probe test failed because Unix df is unavailable, and the environment test assumes SHELL is set. OS probes have macOS/Linux branches but no Windows implementations; some also report success despite failed subprocesses.
+- Replayed existing read and files benchmark correctness checks without model calls: 20/20 read, 20/20 files, and 20/20 definition top-1. Historical result artifacts were preserved; fresh evidence is in evals/results/windows-check-2026-10-12.json. No search token-savings comparison was made.
+- CLI smoke checks: read and search returned exit 0; short passing/failing node commands through hydra run preserved exits 0 and 7. Real-repo search for readSlice ranked seven archived evaluation definitions above the current production definition.
+- Blocker: doctor and live git ask returned exit 2, ECONNREFUSED at 127.0.0.1:11434. Ollama was not found on PATH. Model-backed Git/OS and full log evaluation could not be freshly verified; no sealed git1 run was attempted. Last recorded hydra-nano:git sealed score remains 790/1000 raw (79%), 78% usage-weighted, from 2026-10-10.
+- Next: make Ollama and the required heads available for fresh model verification, add Windows OS support and portable tests, and investigate archived search-result ranking. The prior actual-agent trial still shows no savings: forced delegation used 72.38% more tokens; available adoption was 0/12. No paid, training or unattended runs were started.
+
+### Windows OS and search fixes, 2026-10-12
+
+- Added fixed read-only Windows OS probes: netstat TCP listeners, tasklist processes, CIM local disk space, and Node system/memory facts. Windows processes currently show the first 30 filtered tasklist records, not CPU-ranked records. System facts use Node APIs across platforms.
+- Failed Linux process commands and failed gathered probes now retain failure status and explicit failure evidence. Environment unit test uses PATH rather than assuming SHELL exists.
+- Search ranks active code ahead of archived evals/results and .hydra/trials matches while retaining archives as searchable evidence. Regression covers ripgrep and built-in walk.
+- Verified 43/43 tests, files benchmark 20/20 solved and top-1, all five local Windows OS probes successful, and production readSlice as first real-repo match. Evidence: evals/results/windows-improvements-2026-10-12.json. Previous check artifact retained.
+- Next: Ollama/model availability for fresh Git/log verification, then development-set accuracy and delegation overhead; no new claim of frontier token savings. No model training, paid sessions or unattended jobs ran.
+
+### Optional llama.cpp backend, 2026-10-12
+
+- User approved adding llama.cpp. HYDRA_BACKEND selects ollama (default) or llamacpp; HYDRA_LLAMA_URL selects the server root (default http://127.0.0.1:8080). Existing HYDRA_MODEL selects an exact server alias across heads. Heads retain fixed command menus and read-only behavior.
+- Moved transport to runtime.mjs with compatibility exports in ollama.mjs for existing evaluation callers. llama.cpp uses /v1/chat/completions with schema-constrained JSON, thinking disabled, temperature 0 and a 512-token bound; model readiness uses /v1/models. Invalid/truncated responses and transport errors stop calls with exit 2.
+- doctor checks actual effective model names and deduplicates requests. llama.cpp setup prints launch/configuration instructions only; skills.sh skips Ollama checks/downloads for this backend. Ollama setup now propagates failed pulls. README and skill explain GGUF requirements and alias semantics.
+- Verified Git Bash syntax check (bash -n skills.sh) and git diff --check; npm test: 53/53 passing, including real CLI Git calls against a local HTTP fixture with Ollama unreachable, schema/options/model assertions, doctor override/missing aliases, malformed/HTTP/truncation failures, default Ollama compatibility, unknown backend and unavailable server handling. No sealed inputs changed.
+- Limitation: no llama-server executable or Hydra GGUF found locally, so native model loading, quality and sealed git1 accuracy remain unverified on this backend. No downloads, conversion, training, paid sessions or unattended jobs started. Next: obtain compatible native runtime/GGUF, verify live JSON inference, then score the unchanged sealed set without inspecting failures for tuning.
+
+### llama.cpp default and installation scope, 2026-10-12
+
+- User requested llama.cpp as default and asked whether npx skills add can install everything. Runtime and shell installer now default to llamacpp; Ollama requires explicit HYDRA_BACKEND=ollama. Installer distinguishes copied skill files from ready runtime models.
+- Verified upstream vercel-labs/skills installer and open lifecycle-hooks feature request: skills add copies/links the skill and bundled CLI, with no runtime/model installation hook. Documented concrete command npx skills add rahul05ranjan/hydra --skill hydra and separate runtime requirements. Local changes are not yet published to GitHub.
+- Read-only Hugging Face API check on rahul05ranjan/hydra-nano-git returned HTTP 200 with no .gguf siblings. A complete automated model/runtime installer remains blocked on preparing and publishing a compatible GGUF distribution; no claim that skill installation makes inference ready.
+- Verified 54/54 tests, including unset-backend llama.cpp default and explicit Ollama selection, Git Bash installer syntax, and git diff --check. No model downloads, publication, training, paid or unattended runs.
+
+### Full bootstrap and Kaggle evaluation in progress, 2026-10-12
+
+- User authorized complete runtime/model bootstrap and publication, authenticated Hugging Face as rahul05ranjan, and provided Kaggle credentials via root .env using the new .env.example. Credentials are excluded from source bundles/npm packages and remain ignored by git.
+- Downloaded original Hub revision 05d850ee62e55e2921e9ec970a9636109daa85e7, converted with llama.cpp b11563 (commit a05e58c98) and quantized Q8_0: 811,843,136 bytes, SHA-256 6c3fd0a7d4a74cb72c54633ab73d338c1a6d08b25219be1c41bababf34dffd9a. No training occurred. Conversion requires Transformers 5.19.0 for Qwen3_5 tokenizer support; local build is under ~/.hydra/build.
+- Added hydra-install Node bootstrap, six pinned CPU/Metal runtime artifacts, verified downloads, persistent ~/.hydra config and automatic loopback server startup/shutdown. Initial bootstrap intentionally shares Git weights across heads. Package has 19 files (~32 KB), no credentials or GGUF; weights download separately. Native Windows bootstrap tested with identical local artifacts and stopped after supervised checks; evidence in evals/results/bootstrap-windows.json and llamacpp-native-windows.json.
+- Prepared frozen private Kaggle dataset rahulswt7/hydra-q8-eval-input, including source/model hashes, no secrets, and unchanged sealed inputs. GPU harness pins CUDA runtime and Node fallback, asserts GPU process memory, enforces a 30-minute deadline and stops its server in finally.
+- After explicit 30-minute/T4/1000-task/no-training notice, user approved launch. Submitted private kernel versions 1 and 2 at https://www.kaggle.com/code/rahulswt7/hydra-q8-sealed-evaluation. No Windows full evaluation ran.
+- First Kaggle attempt stopped before evaluation (1.1s to exception; ~6.5s logged execution) because Kaggle expands ZIP inputs. Fixed input handling only, retained all per-file hash gates, saved attempt1-failure.json, and resubmitted version 2 with a 1790-second script bound within the same approved evaluation scope. No model/prompt/training changes.
+- Verified managed restart/stop, 57/57 unit/integration tests, Python syntax, shell wrapper syntax, npm packaging and diff whitespace. GGUF published with explicit pending-score caveat at immutable Hub revision d0ab92ae37d28f457bf7bbace50e87b6e8574ffa, preserving existing weights/cards. Added cross-platform npm discovery (Windows/Homebrew/Debian); 58/58 tests pass. Pending: collect Kaggle score without inspecting failures for tuning, push source, and exercise the remote one-command installer.
+
 ## Known issues and gotchas
 
 - **One build of the test set failed once**, at a `git push` inside a generated repository ("Could not read" an object), when building into the session's temporary folder. The cause was not found. Two rebuilds in the user's home folder then passed. Background maintenance was then turned off while a repository is generated, and two more rebuilds in the folder that had failed also passed.
@@ -423,3 +464,15 @@ Built safe read-only OS inspection head supporting listening ports (`lsof`), run
 - 2026-10-10: Built enterprise publication suite (`train/publish_enterprise_suite.py`) staging all 5 specialist models (`hydra-nano-git`, `hydra-nano-os`, `hydra-nano-test`, `hydra-nano-read`, `hydra-nano-files`) with full safetensors weights, configs, tokenizers, Modelfiles, and enterprise Model Cards detailing architectural specs, safety guardrails, benchmarks, and quickstarts. Staging dry-run verified.
 - 2026-10-10: Successfully published all 5 enterprise models to Hugging Face Hub under user `rahul05ranjan`: `hydra-nano-git`, `hydra-nano-os`, `hydra-nano-test`, `hydra-nano-read`, and `hydra-nano-files` with full safetensors weights, tokenizers, Modelfiles, and enterprise Model Cards.
 - 2026-10-10: Refined Python AST slice boundary and indentation detection in `skills/hydra/scripts/lib/read.mjs` (fixing overreach and matching Python AST gold character-exact); initialized Git repository and pushed to GitHub as public repo `https://github.com/rahul05ranjan/hydra`; scored retrained `hydra-nano:git` on sealed 1,000-task `git1` benchmark in 1.7 min: solved accuracy reached all-time high of 78% usage-weighted / 79% raw with `change_in_file` jumping from 26% to 96% and `line_author` to 100%. All 40 unit tests passing.
+
+- 2026-10-12: Checked Hydra on Windows: 38/40 unit tests, read/files benchmarks each 20/20, CLI read/search and exit propagation working; live model calls blocked by missing Ollama service, OS portability failures and archived search ranking recorded. Saved fresh evidence without changing runtime code or sealed inputs.
+
+- 2026-10-12: Fixed Windows read-only OS probes, probe failure reporting and archived search ranking; 43/43 tests and 20/20 files benchmark passed, five Windows OS probes verified, production definition now ranks first. Ollama availability and actual-agent efficiency remain unresolved.
+
+- 2026-10-12: Added optional llama.cpp backend, runtime compatibility exports, backend-aware doctor/setup/installer and setup docs; 53/53 tests passed with local HTTP/CLI integration coverage. Actual llama.cpp inference awaits runtime and GGUF availability.
+
+- 2026-10-12: Made llama.cpp the default runtime/installer backend; 54/54 tests pass. Verified skills add installs skill/CLI only and Hydra Nano Git Hub has no GGUF; documented full-install blocker and truthful readiness messages.
+
+- 2026-10-12: Built and native-tested complete llama.cpp bootstrap; prepared authenticated private Kaggle input and, after explicit user approval, launched the 30-minute sealed Q8 evaluation. GGUF/source publication and remote bootstrap proof remain pending.
+
+- 2026-10-12: Published Q8 GGUF/provenance to Hugging Face at d0ab92ae37d28f457bf7bbace50e87b6e8574ffa while Kaggle score remains pending; pinned immutable URL and verified 58/58 tests. Preparing source publication and actual npx bootstrap proof.

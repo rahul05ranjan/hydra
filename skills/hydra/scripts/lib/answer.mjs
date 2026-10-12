@@ -1,4 +1,4 @@
-import { Unavailable } from './ollama.mjs';
+import { Unavailable } from './runtime.mjs';
 
 // Output this small costs less to hand over whole than to describe, and whole is always faithful.
 const PASS_THROUGH = 800;

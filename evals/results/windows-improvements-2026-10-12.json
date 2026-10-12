@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-12",
+  "platform": "win32",
+  "files": {
+    "solved": 20,
+    "total": 20,
+    "top1": 20
+  },
+  "probes": {
+    "disk": {
+      "ok": true,
+      "chars": 117
+    },
+    "ports": {
+      "ok": true,
+      "chars": 2208
+    },
+    "processes": {
+      "ok": true,
+      "chars": 1377
+    },
+    "memory": {
+      "ok": true,
+      "chars": 44
+    },
+    "system": {
+      "ok": true,
+      "chars": 66
+    }
+  },
+  "firstSearchHit": "skills/hydra/scripts/lib/read.mjs:162:export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {\r",
+  "tests": {
+    "exit": 0,
+    "summary": "✔ passing log digests keep both pass and failure counts (0.574ms)\n✔ test_logs summarizes passing tests when output is long without calling the model (0.466ms)\nℹ tests 43\nℹ pass 43\nℹ fail 0"
+  }
+}

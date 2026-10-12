@@ -5,7 +5,8 @@
   "private": true,
   "type": "module",
   "bin": {
-    "hydra": "skills/hydra/scripts/hydra.mjs"
+    "hydra": "skills/hydra/scripts/hydra.mjs",
+    "hydra-install": "skills/hydra/scripts/install.mjs"
   },
   "scripts": {
     "test": "node --test",
@@ -25,5 +26,8 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "files": [
+    "skills/hydra"
+  ]
 }

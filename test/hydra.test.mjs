@@ -333,9 +333,9 @@ test('os head probes execute safely and return output', async () => {
 });
 
 test('os head blocks sensitive environment variable inspection', async () => {
-  const safeRes = await osHead.PROBES.env.cmd({ var: 'SHELL' });
+  const safeRes = await osHead.PROBES.env.cmd({ var: 'PATH' });
   assert.ok(safeRes.ok);
-  assert.match(safeRes.out, /SHELL=/);
+  assert.match(safeRes.out, /PATH=/);
 
   const blockedRes = await osHead.PROBES.env.cmd({ var: 'MY_API_KEY' });
   assert.ok(blockedRes.ok);
@@ -347,5 +347,39 @@ test('os head filters processes by name', async () => {
   assert.equal(sections.length, 1);
   assert.equal(sections[0].probe, 'processes');
   assert.match(sections[0].out, /node/i);
+});
+
+test('search ranks current source before archived definitions on both backends', async () => {
+  const dir = temp();
+  mkdirSync(path.join(dir, 'evals/results/snapshot'), { recursive: true });
+  writeFileSync(path.join(dir, 'evals/results/snapshot/copy.js'), 'export function currentSymbol() {}');
+  writeFileSync(path.join(dir, 'source.js'), 'export function currentSymbol() {}');
+  for (const backend of [false, true]) {
+    const hits = (await files.scan(dir, ['currentSymbol'], backend)).hits.get('currentSymbol');
+    assert.match(hits[0], /^source\.js:/);
+    assert.ok(hits.some(hit => hit.startsWith('evals/results/')));
+  }
+});
+
+test('OS probe failures are retained in evidence', async () => {
+  const original = osHead.PROBES.disk.cmd;
+  try {
+    osHead.PROBES.disk.cmd = async () => ({ ok: false, out: 'command unavailable' });
+    const [section] = await osHead.gather('disk space', process.cwd(), null);
+    assert.equal(section.ok, false);
+    assert.match(section.out, /\[probe failed\] command unavailable/);
+  } finally {
+    osHead.PROBES.disk.cmd = original;
+  }
+});
+
+test('system and memory probes return usable machine facts', async () => {
+  const system = await osHead.PROBES.system.cmd();
+  assert.ok(system.ok);
+  assert.ok(system.out.includes(os.release()));
+  assert.match(system.out, /Uptime: \d+ seconds/);
+  const memory = await osHead.PROBES.memory.cmd();
+  assert.ok(memory.ok);
+  assert.match(memory.out, /RAM|Mem/);
 });
 

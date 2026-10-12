@@ -9,7 +9,7 @@ import { digest } from '../../skills/hydra/scripts/lib/test_logs.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const TASKS_FILE = path.join(HERE, 'tasks.json');
-const RESULTS_FILE = path.join(ROOT, 'evals', 'results', `test_logs.${MODEL}.json`);
+const RESULTS_FILE = path.join(ROOT, 'evals', 'results', `test_logs.${MODEL.replace(/[^\w.-]+/g, '-')}.json`);
 
 const tasks = JSON.parse(readFileSync(TASKS_FILE, 'utf8'));
 

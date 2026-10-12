@@ -80,7 +80,7 @@ Built `skills/hydra/scripts/lib/test_logs.mjs` and wired into CLI (`hydra run --
 - **Noise filtering:** Passing test runs with large output are filtered to pass status and summary lines.
 - **Failure digest:** Failing test/build runs (Vitest, Jest, Pytest, Cargo, TSC, Go, node:test, Mocha) have candidate failure blocks extracted, synthesized by local model, and returned with verbatim failure lines (assertion diff + user source location).
 - **Benchmark built (`evals/test_logs/`):** 20 cross-language tasks in `tasks.json` with runner `run.mjs`.
-- **Verified on `qwen3.5:0.8b`:** Solved **20/20 (100%)**, Test Recall **100%**, File/Line Recall **100%**, Assertion Recall **100%**, Cleanliness **100%**, 49% net token savings overall (up to 96.7% on verbose test runs), runtime 3.2s. Rows in `evals/results/test_logs.qwen3.5:0.8b.json`.
+- **Verified on `qwen3.5:0.8b`:** Solved **20/20 (100%)**, Test Recall **100%**, File/Line Recall **100%**, Assertion Recall **100%**, Cleanliness **100%**, 49% net token savings overall (up to 96.7% on verbose test runs), runtime 3.2s. Rows in `evals/results/test_logs.qwen3.5-0.8b.json`.
 - **Verified unit tests:** `npm test`, 15 unit tests passing.
 - **Next:** Live trial with a frontier agent to measure real-world token savings.
 
@@ -271,7 +271,7 @@ Solved 79% of 1000 (79.0%); 78% (78.0%) when weighted by real usage. Plan accura
 
 ### test_logs benchmark, `qwen3.5:0.8b`, 2026-10-10
 
-Scored on 20 cross-language tasks (`evals/test_logs/tasks.json`): Vitest, Jest, Pytest, Cargo, TSC, Go, node:test, and Mocha. Rows in `evals/results/test_logs.qwen3.5:0.8b.json`.
+Scored on 20 cross-language tasks (`evals/test_logs/tasks.json`): Vitest, Jest, Pytest, Cargo, TSC, Go, node:test, and Mocha. Rows in `evals/results/test_logs.qwen3.5-0.8b.json`.
 
 | Metric | Score | Note |
 |---|---|---|
@@ -476,3 +476,5 @@ Built safe read-only OS inspection head supporting listening ports (`lsof`), run
 - 2026-10-12: Built and native-tested complete llama.cpp bootstrap; prepared authenticated private Kaggle input and, after explicit user approval, launched the 30-minute sealed Q8 evaluation. GGUF/source publication and remote bootstrap proof remain pending.
 
 - 2026-10-12: Published Q8 GGUF/provenance to Hugging Face at d0ab92ae37d28f457bf7bbace50e87b6e8574ffa while Kaggle score remains pending; pinned immutable URL and verified 58/58 tests. Preparing source publication and actual npx bootstrap proof.
+
+- 2026-10-12: Pushed bootstrap source as 148b045. Actual npx test exposed a legacy colon-containing result filename that prevents Windows Git checkout (the local repo had sparse-excluded it). Preserved its Git blob byte-for-byte under a portable filename and sanitized future test-log result names; remote installation proof pending retry.

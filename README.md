@@ -156,7 +156,7 @@ Benchmarks failure extraction and noise reduction across Vitest, Jest, Pytest, C
 - **Token Savings**: **49.6% net token reduction** overall, and **96.4% to 96.7%** on verbose test suites.
 - **Runtime**: **3.2s** across all 20 tasks.
 
-Full results in `evals/results/test_logs.qwen3.5:0.8b.json`.
+Full results in `evals/results/test_logs.qwen3.5-0.8b.json`.
 
 ### 3. `evals/read` (20 cross-language tasks)
 

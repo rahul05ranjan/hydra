@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-12T10:43:48.506Z",
+  "sourceCommit": "a29aa96",
+  "commands": [
+    "npx --yes --package=github:rahul05ranjan/hydra#a29aa96 hydra-install",
+    "npx --yes --package=github:rahul05ranjan/hydra hydra-install"
+  ],
+  "platform": "win32-x64",
+  "backend": "llamacpp",
+  "modelRevision": "ff1c723fa36adaad7b04d0dd3441208e80db9086",
+  "modelSha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886",
+  "cachedModelVerified": true,
+  "publicArtifactHeadVerified": true,
+  "doctor": "llamacpp: reachable\nmodels:\n  git    -> hydra-nano:git present\n  os     -> hydra-nano:git present\n  test   -> hydra-nano:git present\n  read   -> hydra-nano:git present\n  files  -> hydra-nano:git present\nripgrep: present\n",
+  "branch": "$ git status --short --branch\n## main...origin/main\n\n[hydra git · read ~6 tok locally, returned ~13 tok · 7.4s]\n",
+  "passed": true
+}

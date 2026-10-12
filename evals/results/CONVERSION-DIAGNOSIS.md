@@ -80,4 +80,4 @@ facts came from Git read-back. The earlier 119/200 development receipt retains
 these measurement limitations. Runtime changes retain exact named blame lines
 and use development-guided planning examples. All 61 Node tests plus two
 normalization invariant tests pass. The model received no further training.
-The validated normalized GGUF is being published as the installer default.
+The validated normalized GGUF is published at immutable Hub revision ff1c723fa36adaad7b04d0dd3441208e80db9086 and pinned as the installer default. Both commit-pinned and generic remote npx installations passed on Windows; installed doctor, actual Git query and model hash/revision verification passed. See remote-bootstrap-validated.json.

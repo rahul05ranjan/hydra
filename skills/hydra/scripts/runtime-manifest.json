@@ -48,13 +48,13 @@
     ]
   },
   "model": {
-    "url": "https://huggingface.co/rahul05ranjan/hydra-nano-git/resolve/ff1c723fa36adaad7b04d0dd3441208e80db9086/hydra-nano-git-Q8_0.gguf",
+    "url": "https://huggingface.co/rahul05ranjan/hydra-nano-git/resolve/8129125fad1c664bbb58ebd3238f6598c879eb23/hydra-nano-git-Q8_0.gguf",
     "size": 811843136,
-    "sha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886",
-    "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+    "sha256": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be",
+    "sourceRevision": "8129125fad1c664bbb58ebd3238f6598c879eb23",
+    "checkpointSha256": "7b6b4662dbba3542fd296696b1c94e06240b28931e5b8ac6eec5cb99fc3dc8f0",
     "quantization": "Q8_0",
-    "revision": "ff1c723fa36adaad7b04d0dd3441208e80db9086",
-    "normalization": "train/normalize_mlx.py"
+    "revision": "8129125fad1c664bbb58ebd3238f6598c879eb23"
   },
   "nodeArtifact": {
     "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz",

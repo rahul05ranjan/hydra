@@ -33,11 +33,9 @@ Needs Node 18 or later and [llama.cpp](https://github.com/ggml-org/llama.cpp) (t
 
 ### Run without Ollama
 
-**Validated converted runtime (2026-10-12):** Corrected Q8/llama.cpp with Hydra solved **167/200 development tasks (83.5%)** and **874/1,000 sealed tasks (87.4%; 86.83% usage-weighted)**, with zero errors/timeouts. The private Kaggle T4 job completed in 330.3 seconds including setup and both evaluations. No additional training was used. See [aggregate receipt](evals/results/kaggle-corrected/SUMMARY.json). The old 283/989 (28.6%) partial result remains [archived](evals/results/kaggle-q8/SUMMARY.json).
+**Hydra Nano v2 (2026-10-14):** the installer pins the Q8_0 GGUF of a full-parameter Git fine-tune at Hub revision `8129125f` (SHA-256 `6d6542c8…`). It solves **927/1,000 sealed Git tasks (92.7%; 92.16% usage-weighted)** and, on 1,000-task held-out sets, Files 98.0%, Read 96.1%, Test 94.4% and OS 100% (synthetic probe outputs). See the [model card](https://huggingface.co/rahul05ranjan/hydra-nano-git) and the receipts in [`evals/results/suite/v2-6d6542c8`](evals/results/suite/v2-6d6542c8) and [`final-git-validation`](evals/results/suite/final-git-validation/SUMMARY.json). The previous v1 artifact (87.4% sealed) stays at Hub revision `ff1c723f`.
 
-Install `llama-server` from llama.cpp and obtain a GGUF conversion of your Hydra Nano weights. Safetensors files cannot be passed directly to `llama-server`; llama.cpp provides [`convert_hf_to_gguf.py`](https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py) for conversion from a local Hugging Face model directory. This integration does not download or convert weights.
-
-Development diagnosis found an MLX/HF RMSNorm convention mismatch in conversion and incorrect JSON-schema payload nesting. `train/normalize_mlx.py` adapts the fused MLX export before GGUF conversion. The default installer now pins the validated artifact; named-line blame evidence and planning examples were improved using only development tasks. See [diagnosis and limits](evals/results/CONVERSION-DIAGNOSIS.md).
+`train/publish_release.py` publishes a validated release: it checks the checkpoint and GGUF against the frozen validation receipt, uploads them with the model cards in [`hub/`](hub), and pins `runtime-manifest.json` to the new revision. The GGUF is reproducible with llama.cpp `convert_hf_to_gguf.py` at commit `a05e58c` (`--outtype q8_0`). Safetensors files cannot be passed directly to `llama-server`.
 
 Start the server in one terminal:
 

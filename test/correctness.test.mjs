@@ -69,6 +69,19 @@ test('last-commit requests cannot be redirected to uncommitted diffs', async t =
   assert.doesNotMatch(sections[0].out, /Uncommitted value/);
 });
 
+test('small failure regions are returned whole without a model call', async () => {
+  const out = ['setup line '.repeat(20), 'FAIL tests/cart.test.ts > totals', 'AssertionError: expected 41 to equal 42',
+    '  context: cart has three items', 'at tests/cart.test.ts:12:5',
+    ...Array.from({ length: 60 }, (_, i) => `node_modules/runner.js:${i}`)].join('\n');
+  let calls = 0;
+  const res = await digest({ cmd: 'npx vitest run', out, exitCode: 1 }, async () => { calls++; return { lines: [1] }; });
+  assert.equal(calls, 0);
+  for (const line of ['FAIL tests/cart.test.ts > totals', 'AssertionError: expected 41 to equal 42', 'at tests/cart.test.ts:12:5']) {
+    assert.ok(res.text.includes(line), line);
+  }
+  assert.doesNotMatch(res.text, /node_modules/);
+});
+
 test('passing log digests keep both pass and failure counts', async () => {
   const out = 'runner progress\n'.repeat(80) + 'Tests: 4 passed, 4 total\nFailures: 0\n';
   const res = await digest({ cmd: 'node pass.mjs', out, exitCode: 0 }, async () => assert.fail('model not needed'));

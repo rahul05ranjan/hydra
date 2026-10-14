@@ -6,6 +6,7 @@ import { Unavailable } from './runtime.mjs';
 const PASS_THROUGH = 800;
 const MAX_CANDIDATES = 60;
 const MAX_CITED = 12;
+const WHOLE_REGIONS = 2000;
 const FAILURE_HEADER = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|not\s+ok\b|error(?:\[E\d+\]| TS\d+)?|[A-Za-z_]\w*(?:Error|Exception)\s*:|panicked at|assert\s|assertion\s|Expected:|Received:|actual:|- Snapshot|[-+]\s|--- FAIL:|____+\s+\w+)|^\s*(?:left|right)\s*:/i;
 const LAUNCH_ERROR = /(?:\bnot found\b|\bis not recognized\b|\bNo module named\b|\bCannot find module\b|\bMissing script:|\bENOENT\b|\bERR_MODULE_NOT_FOUND\b)/i;
 const USER_STACK = /\b([a-zA-Z0-9_\-./]+\.(?:ts|tsx|js|jsx|mjs|cjs|py|rs|go|java|c|cpp|rb)):(\d+)(?::(\d+))?|\bFile\s+"[^"\n]+\.py",\s+line\s+\d+/;
@@ -105,6 +106,12 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
       rawChars,
       exitCode,
     };
+  }
+
+  // Failure regions this small cost less to return whole than to have the model cut down, and whole is always complete.
+  const regions = candidates.filter(c => !IGNORE_STACK.test(c.text)).map(c => c.text);
+  if (regions.length && regions.join('\n').length <= WHOLE_REGIONS) {
+    return { text: `$ ${cmd} (exit ${exitCode})\n${regions.join('\n')}`, rawChars, exitCode };
   }
 
   const numbered = candidates.map(c => `[${c.id}] ${c.text}`).join('\n');

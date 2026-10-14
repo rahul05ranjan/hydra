@@ -1,0 +1,62 @@
+{
+  "tasks": 400,
+  "dataSha256": "5ac5460c74f6bfdc617aba07888ffcf52df21b37c9768ddfb32b1ceda7321231",
+  "split": "extended",
+  "worldSeeds": [
+    87000,
+    87399
+  ],
+  "families": {
+    "ports": 20,
+    "port": 20,
+    "ports_empty": 20,
+    "ports_failed": 20,
+    "processes": 20,
+    "named": 20,
+    "missing_process": 20,
+    "process_failed": 20,
+    "disk": 20,
+    "mounts": 20,
+    "system": 20,
+    "uptime": 20,
+    "memory": 20,
+    "swap": 20,
+    "pressure": 20,
+    "variable": 20,
+    "missing_variable": 20,
+    "sensitive": 20,
+    "capacity": 20,
+    "network": 20
+  },
+  "platforms": {
+    "windows": 140,
+    "macos": 120,
+    "linux": 140
+  },
+  "phrasingsPerFamily": {
+    "ports": 6,
+    "port": 6,
+    "ports_empty": 4,
+    "ports_failed": 4,
+    "processes": 6,
+    "named": 6,
+    "missing_process": 4,
+    "process_failed": 4,
+    "disk": 6,
+    "mounts": 5,
+    "system": 5,
+    "uptime": 4,
+    "memory": 5,
+    "swap": 4,
+    "pressure": 4,
+    "variable": 4,
+    "missing_variable": 4,
+    "sensitive": 4,
+    "capacity": 5,
+    "network": 5
+  },
+  "scope": "Development only. Independently written phrasings; Windows, macOS and Linux probe layouts; real env guardrail. Not a holdout.",
+  "trainingInputsUsed": false,
+  "sealedInputsUsed": false,
+  "holdoutInputsUsed": false
+}

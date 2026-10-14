@@ -288,5 +288,7 @@ export async function gather(question, cwd, chat) {
   const term = lines || isOutline ? undefined : explicitSymbol || words.find(w => !STOP.has(w.toLowerCase()));
 
   const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);
-  return [{ cmd: `read ${file}${term ? ` ${term}` : lines ? ` ${lines}` : isOutline ? ' outline' : ''}`, out: res.ok ? res.text : res.error }];
+  // A range, outline or named definition the caller asked for is already the answer; only a guessed term goes to line selection.
+  const probe = lines || isOutline || explicitSymbol ? 'slice' : 'read';
+  return [{ probe, cmd:`read ${file}${term ? ` ${term}` : lines ? ` ${lines}` : isOutline ? ' outline' : ''}`, out: res.ok ? res.text : res.error }];
 }

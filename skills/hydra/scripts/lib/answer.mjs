@@ -11,7 +11,7 @@ const HEAD_LINES = 8;
 const LEAD_LINES = 3;
 // What an agent would have read by running the command itself; its Bash tool truncates around here.
 const ACCOUNT_CAP = 30000;
-const COMPLETE_PROBES = new Set(['status', 'log', 'branches', 'remotes', 'stash', 'tags', 'worktrees']);
+const COMPLETE_PROBES = new Set(['status', 'log', 'branches', 'remotes', 'stash', 'tags', 'worktrees', 'slice', 'ports', 'processes']);
 
 const SCHEMA = {
   type: 'object',

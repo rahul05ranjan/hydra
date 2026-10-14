@@ -59,7 +59,7 @@ export const PROBES = {
     },
   },
   disk: {
-    about: 'disk space usage, available filesystem storage, mount points',
+    about: 'disk space usage, available filesystem storage, mount points (not RAM or swap)',
     cmd: async () => {
       if (IS_WINDOWS) return result(await powershell("Get-CimInstance Win32_LogicalDisk -Filter 'DriveType=3' | Select-Object @{Name='Filesystem';Expression={$_.DeviceID}}, Size, FreeSpace | Format-Table -AutoSize"));
       const r = await run('df', ['-h']);
@@ -76,7 +76,7 @@ export const PROBES = {
     },
   },
   memory: {
-    about: 'system RAM usage, free memory, memory pressure',
+    about: 'system RAM usage, free memory, memory pressure, swap size and usage',
     cmd: async () => {
       if (IS_WINDOWS) return { ok: true, out: `Total Physical RAM: ${(os.totalmem() / 2 ** 30).toFixed(1)} GB\nFree RAM: ${(os.freemem() / 2 ** 30).toFixed(1)} GB` };
       if (IS_MAC) {
@@ -130,7 +130,7 @@ const PLAN_SCHEMA = {
 };
 
 const PLAN_SYSTEM = `You choose read-only OS inspection probes whose output will answer a question about the machine or system.
-Choose 1 to 2 probes from this list:
+Choose one probe for each separate thing the question asks about, at most 3, from this list:
 ${Object.entries(PROBES)
   .map(([name, p]) => `- ${name}: ${p.about}`)
   .join('\n')}
@@ -143,7 +143,58 @@ Examples:
 "how much disk space is left?" -> {"probes":[{"probe":"disk"}]}
 "what OS version and architecture is this?" -> {"probes":[{"probe":"system"}]}
 "how much free memory do I have?" -> {"probes":[{"probe":"memory"}]}
+"is the machine paging to swap?" -> {"probes":[{"probe":"memory"}]}
+"is storage running low, and is memory tight too?" -> {"probes":[{"probe":"disk"},{"probe":"memory"}]}
+"give me the open listeners plus the full process list" -> {"probes":[{"probe":"ports"},{"probe":"processes"}]}
 "what is NODE_ENV set to?" -> {"probes":[{"probe":"env","var":"NODE_ENV"}]}`;
+
+// Keyword topic for one clause of a question; null when nothing names a probe.
+function topic(text) {
+  const q = text.toLowerCase();
+  if (/\b(ports?|listen\w*|sockets?)\b/.test(q)) return { probe: 'ports' };
+  const processes = () => {
+    const m = q.match(/\b(node|python|ollama|postgres|mysql|redis|docker|git|cargo)\b/);
+    return { probe: 'processes', name: m ? m[1] : undefined };
+  };
+  if (/\b(process(es)?|pids?|cpu)\b/.test(q)) return processes();
+  if (/\b(ram|memory|swap)\b/.test(q)) return { probe: 'memory' };
+  if (/\b(disk|space|filesystems?|storage|mount\w*)\b/.test(q)) return { probe: 'disk' };
+  if (/\b(env|environment|path|variables?)\b/.test(q)) {
+    const m = text.match(/\b([A-Z0-9_]{3,30})\b/);
+    return { probe: 'env', var: m ? m[1] : 'PATH' };
+  }
+  // "running" alone is weak: "the RAM running low" is about memory, checked above.
+  return /\brunning\b/.test(q) ? processes() : null;
+}
+// One topic per clause joined by "and", "or", "plus", "along with" or a comma.
+function clauseTopics(question) {
+  const found = [];
+  for (const clause of question.split(/\b(?:and|or|plus|as well as|along with|together with|also)\b|[,;]/i)) {
+    const item = topic(clause);
+    if (item && !found.some(other => other.probe === item.probe)) found.push(item);
+  }
+  return found;
+}
+
+const ENV_NAME = /^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+$/;
+const MAX_LISTENERS = 40;
+// The one 2-5 digit number in a question that plans the ports probe is the port it asks about.
+function namedPort(question) {
+  const numbers = question.match(/\b\d{2,5}\b/g) || [];
+  return numbers.length === 1 && Number(numbers[0]) <= 65535 ? numbers[0] : null;
+}
+// Narrow a listener table to one port when the question names it; otherwise bound its length.
+function listeners(out, port) {
+  const lines = out.split('\n');
+  const header = lines.length && !/[:.]\d+\b/.test(lines[0]) ? [lines[0]] : [];
+  const body = lines.slice(header.length);
+  if (port) {
+    const found = body.filter(line => new RegExp(`[:.]${port}(?!\\d)`).test(line));
+    return [...header, ...(found.length ? found : [`(no listener on port ${port})`])].join('\n');
+  }
+  if (body.length <= MAX_LISTENERS) return out;
+  return [...header, ...body.slice(0, MAX_LISTENERS), `(${body.length - MAX_LISTENERS} more listeners not shown)`].join('\n');
+}
 
 export async function gather(question, cwd, chat) {
   let plan = [];
@@ -157,30 +208,27 @@ export async function gather(question, cwd, chat) {
   }
 
   // Fallback heuristics if no model or empty plan
-  if (!plan.length) {
-    const q = question.toLowerCase();
-    if (q.includes('port') || q.includes('listen') || q.includes('socket')) {
-      plan.push({ probe: 'ports' });
-    } else if (q.includes('process') || q.includes('pid') || q.includes('running') || q.includes('cpu')) {
-      const m = q.match(/\b(node|python|ollama|postgres|mysql|redis|docker|git|cargo)\b/);
-      plan.push({ probe: 'processes', name: m ? m[1] : undefined });
-    } else if (q.includes('disk') || q.includes('space') || q.includes('filesystem') || q.includes('storage')) {
-      plan.push({ probe: 'disk' });
-    } else if (q.includes('ram') || q.includes('memory') || q.includes('swap')) {
-      plan.push({ probe: 'memory' });
-    } else if (q.includes('env') || q.includes('path') || q.includes('variable')) {
-      const m = question.match(/\b([A-Z0-9_]{3,30})\b/);
-      plan.push({ probe: 'env', var: m ? m[1] : 'PATH' });
-    } else {
-      plan.push({ probe: 'system' });
-    }
+  const topics = clauseTopics(question);
+  if (!plan.length) plan = topics.length > 1 ? topics : [topic(question) || { probe: 'system' }];
+  // A question that names two topics gets both, even if the model planned only one.
+  else if (topics.length > 1) {
+    for (const item of topics) if (item.probe !== 'env' && !plan.some(other => other.probe === item.probe)) plan.push(item);
   }
+  // A "process name" shaped like an environment variable (BUILD_FLAVOR_17) is an env lookup.
+  plan = plan.map(item => item.probe === 'processes' && ENV_NAME.test(item.name || '') ? { probe: 'env', var: item.name } : item);
+  // Keep only the argument each probe accepts; the model sometimes invents others.
+  const accepts = { processes: 'name', env: 'var' };
+  plan = plan.map(item => {
+    const key = accepts[item.probe];
+    return key && item[key] !== undefined ? { probe: item.probe, [key]: item[key] } : { probe: item.probe };
+  });
 
   const results = [];
   for (const item of plan.slice(0, 3)) {
     const handler = PROBES[item.probe];
     if (!handler) continue;
     const res = await handler.cmd(item);
+    if (item.probe === 'ports' && res.ok) res.out = listeners(res.out || '', namedPort(question));
     const cmdLabel = item.name ? `os ${item.probe} --name=${item.name}` : (item.var ? `os ${item.probe} --var=${item.var}` : `os ${item.probe}`);
     results.push({
       probe: item.probe,

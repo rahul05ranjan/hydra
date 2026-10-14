@@ -1,0 +1,25 @@
+model hydra-nano:git, 200 tasks, 0.4 min
+
+intent              tasks routed  plan evid. solved  reading  read-tok  returned
+branch_current         10  100%  100%  100%  100%        -       246       317
+sync                   10   40%  100%  100%  100%        -       246       317
+modified_files         10   40%  100%  100%  100%        -       246       317
+untracked_files        10   80%  100%  100%  100%        -       246       317
+staged_files           10   60%  100%  100%  100%        -       249       298
+change_in_file         10   20%  100%  100%  100%        -       895       980
+branch_diff_files      10   80%  100%  100%  100%        -      7176       773
+last_commit            10   60%  100%  100%  100%        -      1086      1125
+recent_commits         10   60%  100%  100%  100%        -      1090      1124
+file_last_change       10   60%  100%  100%  100%        -      1444      1526
+file_history           10   60%  100%  100%  100%        -      1160      1239
+author_commits         10   40%  100%  100%  100%        -       322       450
+message_search         10   60%  100%  100%  100%        -       331       448
+branch_commits         10   80%  100%  100%  100%        -      3123      3185
+last_commit_files      10   40%  100%  100%  100%        -      1086      1125
+commit_files           10   40%  100%  100%  100%        -      1123      1168
+branches               10  100%  100%  100%  100%        -      1086      1196
+stashes                10   60%  100%  100%  100%        -       147       187
+worktrees              10   40%  100%  100%  100%        -       301       350
+line_author            10   20%  100%   90%   90%        -      4334       596
+ALL                   200   57%  100%  100%  100%        -     25937     17038
+wrote evals/results/git_dev.hydra-nano-git.json

@@ -372,6 +372,18 @@ test('read gather preserves quoted paths with spaces for ranges, symbols and out
   }
 });
 
+test('an explicitly requested read slice is returned whole, not cut down by the model', async () => {
+  const dir = temp();
+  const body = Array.from({ length: 40 }, (_, i) => `  const value_${i} = "padding text so this slice is longer than the pass-through limit";`);
+  writeFileSync(path.join(dir, 'big.js'), ['export function wide() {', ...body, '}', ''].join('\n'));
+  const firstOnly = async () => ({ lines: [1] });
+  for (const question of ['read big.js lines 5-30', 'read big.js at function wide']) {
+    const { text } = await answer(question, await read.gather(question, dir, null), firstOnly);
+    assert.match(text, /^30: /m, question);
+    assert.doesNotMatch(text, /more lines not shown/, question);
+  }
+});
+
 test('route sends system questions to os head', () => {
   assert.equal(route('which ports are listening?', true), 'os');
   assert.equal(route('what is the cpu usage and uptime?', true), 'os');
@@ -400,6 +412,68 @@ test('os head filters processes by name', async () => {
   assert.equal(sections.length, 1);
   assert.equal(sections[0].probe, 'processes');
   assert.match(sections[0].out, /node/i);
+});
+
+test('os fallback plans one probe per requested topic', async () => {
+  const probes = async question => (await osHead.gather(question, process.cwd(), null)).map(section => section.probe);
+  assert.deepEqual(await probes('is there free storage, plus how much memory headroom?'), ['disk', 'memory']);
+  assert.deepEqual(await probes('list every listener as well as the process table'), ['ports', 'processes']);
+  assert.deepEqual(await probes('how large is the swap space?'), ['memory']);
+  assert.deepEqual(await probes('which processes are listening on ports?'), ['ports']);
+  assert.deepEqual(await probes('what program parameters are used?'), ['system']);
+});
+
+test('os plan adds a topic the model dropped from a compound question', async () => {
+  const original = Object.fromEntries(Object.entries(osHead.PROBES).map(([key, probe]) => [key, probe.cmd]));
+  try {
+    for (const key of Object.keys(osHead.PROBES)) osHead.PROBES[key].cmd = async () => ({ ok: true, out: `fixture-${key}` });
+    const only = probe => async () => ({ probes: [{ probe }] });
+    const probes = async (question, chat) => (await osHead.gather(question, process.cwd(), chat)).map(section => section.probe);
+    assert.deepEqual(await probes('is there free storage, plus how much memory headroom?', only('disk')), ['disk', 'memory']);
+    assert.deepEqual(await probes('list every listener as well as the process table', only('ports')), ['ports', 'processes']);
+    assert.deepEqual(await probes('which processes are listening on ports?', only('ports')), ['ports']);
+    assert.deepEqual(await probes('how much RAM and memory pressure?', only('memory')), ['memory']);
+    const invented = async () => ({ probes: [{ probe: 'disk', name: 'disk', var: 'disk_usage' }, { probe: 'env', var: 'NODE_ENV', name: 'x' }] });
+    const sections = await osHead.gather('disk space and NODE_ENV', process.cwd(), invented);
+    assert.deepEqual(sections.map(section => section.args), [{ probe: 'disk' }, { probe: 'env', var: 'NODE_ENV' }]);
+  } finally {
+    for (const [key, cmd] of Object.entries(original)) osHead.PROBES[key].cmd = cmd;
+  }
+});
+
+test('os plan treats an environment-variable name planned as a process as an env lookup', async () => {
+  const chat = async () => ({ probes: [{ probe: 'processes', name: 'BUILD_FLAVOR_17' }] });
+  const sections = await osHead.gather('What is the value of BUILD_FLAVOR_17?', process.cwd(), chat);
+  assert.deepEqual(sections.map(section => section.args), [{ probe: 'env', var: 'BUILD_FLAVOR_17' }]);
+  const named = async () => ({ probes: [{ probe: 'processes', name: 'nginx' }] });
+  assert.deepEqual((await osHead.gather('is nginx up?', process.cwd(), named)).map(section => section.args), [{ probe: 'processes', name: 'nginx' }]);
+});
+
+test('os compound questions joined by "or" and "along with" get both probes', async () => {
+  const probes = async question => (await osHead.gather(question, process.cwd(), null)).map(section => section.probe);
+  assert.deepEqual(await probes('is the disk or the RAM running low?'), ['disk', 'memory']);
+  assert.deepEqual(await probes('open sockets along with the process list'), ['ports', 'processes']);
+  assert.deepEqual(await probes('is node or python running?'), ['processes']);
+});
+
+test('os ports output keeps only the listener for a named port', async () => {
+  const original = osHead.PROBES.ports.cmd;
+  try {
+    osHead.PROBES.ports.cmd = async () => ({ ok: true, out: 'COMMAND PID NAME\nnode 11 TCP 127.0.0.1:3000 (LISTEN)\njava 12 TCP 127.0.0.1:30001 (LISTEN)\nruby 13 TCP *:8080 (LISTEN)' });
+    const [section] = await osHead.gather('who owns :3000', process.cwd(), async () => ({ probes: [{ probe: 'ports' }] }));
+    assert.equal(section.out, 'COMMAND PID NAME\nnode 11 TCP 127.0.0.1:3000 (LISTEN)');
+    const [none] = await osHead.gather('what is on port 9999?', process.cwd(), async () => ({ probes: [{ probe: 'ports' }] }));
+    assert.match(none.out, /^COMMAND PID NAME\n\(no listener on port 9999\)$/);
+  } finally {
+    osHead.PROBES.ports.cmd = original;
+  }
+});
+
+test('os port and process lists are returned whole, not cut to the model line choice', async () => {
+  const rows = Array.from({ length: 24 }, (_, i) => `${4000 + i} ${(40 - i).toFixed(1)} 1.0 /usr/local/bin/service_number_${i}`);
+  const sections = [{ probe: 'processes', cmd: 'os processes', out: ['PID %CPU %MEM COMM', ...rows].join('\n') }];
+  const { text } = await answer('what is eating the CPU?', sections, async () => ({ lines: [2] }));
+  assert.ok(rows.every(row => text.includes(row)));
 });
 
 test('search ranks current source before archived definitions on both backends', async () => {

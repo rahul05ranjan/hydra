@@ -1,0 +1,611 @@
+{
+  "timestamp": "2026-10-14T09:07:56.907978+00:00",
+  "head": "git",
+  "method": "full-parameter-supervised-fine-tuning",
+  "trainingStarted": true,
+  "checkpointManifest": {
+    "sourceModel": "private balanced Git checkpoint",
+    "sourceRevision": "kaggle:rahulswt7/hydra-balanced-git-quality/1",
+    "weightsOnlyResume": true,
+    "optimizerStateResumed": false,
+    "files": {
+      "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+      "config.json": "1de2ee23ccbb30a7765070bf7b4bc35f3a0102bacfbdd4c3e472068be31f07c2",
+      "generation_config.json": "290866a6d7d4a4442fe83ba2434a31517446f40a01de500ff97b4354e7e5d082",
+      "tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+      "tokenizer_config.json": "eebe8cdbe81fe1483de01846adeed61c44827ce039146674f96c43c570d25034",
+      "model.safetensors": "212cd207471bf1073af79a2956add20b9db42d0e60a688b374307f9a1883072e"
+    }
+  },
+  "dataManifest": {
+    "scope": "New balanced synthetic Git planner and evidence training. No release-quality claim; existing development/holdout sets remain separate.",
+    "sealedInputsUsed": false,
+    "developmentInputsUsed": false,
+    "worldSeeds": [
+      75000,
+      75001,
+      75002,
+      75003,
+      75004,
+      75005,
+      75006,
+      75007,
+      75008,
+      75009,
+      75010,
+      75011,
+      75012,
+      75013,
+      75014,
+      75015,
+      75016,
+      75017,
+      75018,
+      75019,
+      75020,
+      75021,
+      75022,
+      75023,
+      75024,
+      75025,
+      75026,
+      75027,
+      75028,
+      75029,
+      75030,
+      75031,
+      75032,
+      75033,
+      75034,
+      75035,
+      75036,
+      75037,
+      75038,
+      75039,
+      75040,
+      75041,
+      75042,
+      75043,
+      75044,
+      75045,
+      75046,
+      75047,
+      75048,
+      75049,
+      75050,
+      75051,
+      75052,
+      75053,
+      75054,
+      75055,
+      75056,
+      75057,
+      75058,
+      75059
+    ],
+    "seedMeaning": "Synthetic scenario IDs, not materialized repository worlds",
+    "dataSha256": "52df84b5965f0394118dbc05c12ca9b4f534122dde6f86487a6fde08a5cd69dc",
+    "samplesByHead": {
+      "git": 1560
+    },
+    "intentCounts": {
+      "branch_current": 60,
+      "sync": 60,
+      "modified": 60,
+      "untracked": 60,
+      "staged": 60,
+      "file_patch": 60,
+      "branch_patch": 60,
+      "last_commit": 60,
+      "latest_files": 60,
+      "commit_files": 60,
+      "recent": 60,
+      "file_history": 60,
+      "file_last": 60,
+      "author": 60,
+      "message": 60,
+      "branch_history": 60,
+      "blame": 60,
+      "branches": 60,
+      "stash": 60,
+      "worktrees": 60,
+      "remotes": 60,
+      "tags": 60,
+      "evidence_branch_files": 60,
+      "evidence_commit_files": 60,
+      "evidence_patch": 60,
+      "evidence_attribution": 60
+    },
+    "probeCounts": {
+      "status": 240,
+      "log": 360,
+      "diff": 180,
+      "show": 180,
+      "blame": 60,
+      "branches": 60,
+      "remotes": 60,
+      "stash": 60,
+      "tags": 60,
+      "worktrees": 60
+    },
+    "sourceHashes": {
+      "train/build_balanced_git.mjs": "a8ca3d036e0b01e84c34c7c9075edb4c3c70d736a0c1ce37cade075aa496cce5",
+      "skills/hydra/scripts/lib/git.mjs": "daf2350411c88f619a785c831c832000f779f821d5ac416f9447c8971705224b",
+      "skills/hydra/scripts/lib/answer.mjs": "0e8b376559ad540c9023de26ff2b17dff231f97c011f3fd1538763a32cee6836"
+    }
+  },
+  "examples": 1560,
+  "maximumTokens": 756,
+  "chatEOS": 248046,
+  "stepsRequested": 100,
+  "maxSeconds": 720,
+  "accumulation": 4,
+  "learningRate": 1e-06,
+  "lossMethod": "assistant-selected-logits",
+  "optimizer": "cpu-adamw-fp32",
+  "initialGradientScale": 128.0,
+  "maximumSupervisedTokens": 29,
+  "totalParameters": 752393024,
+  "trainableParameters": 752393024,
+  "gpu": "Tesla T4",
+  "losses": [
+    0.004269521517016983,
+    0.004318017671607777,
+    0.0006645677585765952,
+    1.4400597024177841e-05,
+    0.4172026486314735,
+    0.3113336970288856,
+    0.21681560073830042,
+    0.183752931271556,
+    0.0013025938731061615,
+    1.17445756586676e-05,
+    0.00042123310959141236,
+    0.06983312617990123,
+    0.003569899216245176,
+    0.0414321703801761,
+    0.00020144634481766843,
+    0.004063168949187457,
+    0.0007447514626619522,
+    4.343495334069303e-05,
+    0.0002989298191096168,
+    0.11175162828521934,
+    0.00031099065290618455,
+    1.907590444716334e-05,
+    0.030634140384336206,
+    0.00011514554284985934,
+    0.006779543642096542,
+    0.00012371232878649607,
+    0.007999663780992705,
+    5.31772238900885e-05,
+    0.0004755900158670556,
+    4.5702555325988214e-05,
+    0.11750382449417884,
+    0.001458896895428552,
+    8.109654174859315e-05,
+    0.006491502735684662,
+    0.00011109482011306682,
+    0.00013829746080773475,
+    0.00015894461057541776,
+    3.3541329230502015e-05,
+    2.2470277144748252e-05,
+    0.0003839576587552074,
+    9.082871883947519e-05,
+    2.159347923225141e-05,
+    1.8428673456583056e-05,
+    0.0003800392021275911,
+    4.271868169780646e-05,
+    1.7751072846294846e-05,
+    5.448169122246327e-05,
+    9.38334471811686e-06,
+    1.4407721323550504e-05,
+    7.555601712283533e-06,
+    1.9108066453554784e-05,
+    2.6496427551592205e-05,
+    8.332626634910412e-06,
+    1.5988572158676106e-05,
+    1.3674177466782567e-05,
+    6.509903357709845e-06,
+    1.6690961160747975e-05,
+    1.1112668744317489e-05,
+    7.449855218055745e-06,
+    7.162358542700531e-06,
+    3.6658179851656314e-06,
+    2.4773879260919784e-05
+  ],
+  "completedSteps": 62,
+  "overflowStepsSkipped": 2,
+  "gradientScaleHistory": [
+    {
+      "step": 0,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 7.708881378173828
+    },
+    {
+      "step": 1,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 9.637595176696777
+    },
+    {
+      "step": 2,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 2.376361846923828
+    },
+    {
+      "step": 3,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 0.0069618625566363335
+    },
+    {
+      "step": 4,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 4,
+      "attempt": 1,
+      "scale": 64.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 4,
+      "attempt": 2,
+      "scale": 32.0,
+      "norm": 240.74549865722656
+    },
+    {
+      "step": 5,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 30.690444946289062
+    },
+    {
+      "step": 6,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 165.79661560058594
+    },
+    {
+      "step": 7,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 53.88263702392578
+    },
+    {
+      "step": 8,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 6.876426696777344
+    },
+    {
+      "step": 9,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.004919432103633881
+    },
+    {
+      "step": 10,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 1.086472749710083
+    },
+    {
+      "step": 11,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 87.7516860961914
+    },
+    {
+      "step": 12,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 27.013896942138672
+    },
+    {
+      "step": 13,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 20.63140296936035
+    },
+    {
+      "step": 14,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.2971039414405823
+    },
+    {
+      "step": 15,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 8.111369132995605
+    },
+    {
+      "step": 16,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 1.2535712718963623
+    },
+    {
+      "step": 17,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.037763454020023346
+    },
+    {
+      "step": 18,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 1.9461448192596436
+    },
+    {
+      "step": 19,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 24.679243087768555
+    },
+    {
+      "step": 20,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.3650157153606415
+    },
+    {
+      "step": 21,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.011015498079359531
+    },
+    {
+      "step": 22,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 18.725723266601562
+    },
+    {
+      "step": 23,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.1856326311826706
+    },
+    {
+      "step": 24,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 34.056270599365234
+    },
+    {
+      "step": 25,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.2576989531517029
+    },
+    {
+      "step": 26,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 5.5665082931518555
+    },
+    {
+      "step": 27,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.029960092157125473
+    },
+    {
+      "step": 28,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 1.0821377038955688
+    },
+    {
+      "step": 29,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.03563263267278671
+    },
+    {
+      "step": 30,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 150.75579833984375
+    },
+    {
+      "step": 31,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 6.86192512512207
+    },
+    {
+      "step": 32,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.24954839050769806
+    },
+    {
+      "step": 33,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 4.361570835113525
+    },
+    {
+      "step": 34,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.24952994287014008
+    },
+    {
+      "step": 35,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.4260881245136261
+    },
+    {
+      "step": 36,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.14706870913505554
+    },
+    {
+      "step": 37,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.016132310032844543
+    },
+    {
+      "step": 38,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.00915304385125637
+    },
+    {
+      "step": 39,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.3209809362888336
+    },
+    {
+      "step": 40,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.19461274147033691
+    },
+    {
+      "step": 41,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.007757340092211962
+    },
+    {
+      "step": 42,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.010109967552125454
+    },
+    {
+      "step": 43,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.31362980604171753
+    },
+    {
+      "step": 44,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.027656281366944313
+    },
+    {
+      "step": 45,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.007415394298732281
+    },
+    {
+      "step": 46,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.03707113862037659
+    },
+    {
+      "step": 47,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.0035257944837212563
+    },
+    {
+      "step": 48,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.006695223040878773
+    },
+    {
+      "step": 49,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.0032554026693105698
+    },
+    {
+      "step": 50,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.007513159886002541
+    },
+    {
+      "step": 51,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.01392171811312437
+    },
+    {
+      "step": 52,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.0030691626016050577
+    },
+    {
+      "step": 53,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.006576587911695242
+    },
+    {
+      "step": 54,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.006406355183571577
+    },
+    {
+      "step": 55,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.002043725922703743
+    },
+    {
+      "step": 56,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.007133241277188063
+    },
+    {
+      "step": 57,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.004254451021552086
+    },
+    {
+      "step": 58,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.0031461731996387243
+    },
+    {
+      "step": 59,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.0024420542176812887
+    },
+    {
+      "step": 60,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.0008432935574091971
+    },
+    {
+      "step": 61,
+      "attempt": 0,
+      "scale": 32.0,
+      "norm": 0.21131747961044312
+    }
+  ],
+  "stoppedForDeadline": true,
+  "trainingSeconds": 582.930827833,
+  "peakMemoryBytes": 8091019264,
+  "weights": {
+    "model.safetensors": "7b6b4662dbba3542fd296696b1c94e06240b28931e5b8ac6eec5cb99fc3dc8f0"
+  },
+  "checkpointSaved": true,
+  "elapsedSeconds": 639.3201933
+}

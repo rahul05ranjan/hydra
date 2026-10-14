@@ -12,7 +12,7 @@ const TOP_LEVEL_PATTERNS = [
   /^(?:export\s+)?(?:const|let|var)\s+([a-zA-Z0-9_$]+)\s*=/,
   /^(?:async\s+)?def\s+([a-zA-Z0-9_]+)\s*\(/,
   /^class\s+([a-zA-Z0-9_]+)\s*(?:\(.*\))?:/,
-  /^(?:pub(?:\([^)]*\))?\s+)?(?:async\s+)?fn\s+([a-zA-Z0-9_]+)/,
+  /^(?:pub(?:\([^)]*\))?\s+)?(?:(?:const|async|unsafe|extern(?:\s+"[^"]*")?)\s+)*fn\s+([a-zA-Z0-9_]+)/,
   /^(?:pub(?:\([^)]*\))?\s+)?(?:struct|enum|trait|type)\s+([a-zA-Z0-9_]+)/,
   /^func\s+(?:\([^)]*\)\s+)?([a-zA-Z0-9_]+)\s*\(/,
   /^type\s+([a-zA-Z0-9_]+)\s+(?:struct|interface)/,
@@ -28,12 +28,21 @@ export function outline(content) {
     const isTopLevel = /^\S/.test(line);
     if (!isExport && !isTopLevel) continue;
 
+    let found = false;
     for (const pat of TOP_LEVEL_PATTERNS) {
       const m = pat.exec(line.trim());
       if (m) {
         items.push({ line: i + 1, name: m[1], preview: line.trim().slice(0, 80) });
+        found = true;
         break;
       }
+    }
+    if (!found) {
+      // JS/TS declarations can start with a binding pattern or have no
+      // initializer. Keep their header without promoting nested assignments
+      // or Rust's typed const declarations into this binding vocabulary.
+      const binding = /^(?:export\s+)?(?:const|let|var)\s+(?:([a-zA-Z_$][\w$]*)\s*(?=[=;,]|$)|(\{|\[))/.exec(line.trim());
+      if (binding) items.push({ line: i + 1, name: binding[1] || '<binding pattern>', preview: line.trim().slice(0, 80) });
     }
   }
   return items;
@@ -92,7 +101,16 @@ export function sliceSymbol(content, symbol, maxContext = 40) {
   const isIndentedBlock = /^\s*(?:async\s+)?(?:def|class)\s+/.test(lines[targetIndex]) ||
                           (!lines[targetIndex].includes('{') && /:\s*(?:#.*)?$/.test(lines[targetIndex]));
 
-  if (isIndentedBlock) {
+  const goHeader = lines[targetIndex].replace(/\/\/.*$/, '').trim();
+  const bodylessGo = /^func\s+/.test(goHeader) && !/[{}]/.test(goHeader)
+    && goHeader.includes('(')
+    && (goHeader.match(/\(/g)?.length || 0) === (goHeader.match(/\)/g)?.length || 0);
+
+  if (bodylessGo) {
+    // Go declarations backed by assembly/external symbols have no body. The
+    // next unrelated function's brace is not this declaration's boundary.
+    end = targetIndex;
+  } else if (isIndentedBlock) {
     const leadMatch = lines[targetIndex].match(/^(\s*)/);
     const baseIndent = leadMatch ? leadMatch[1].length : 0;
     
@@ -243,12 +261,13 @@ export async function readSlice(fileArg, opts = {}, cwd = process.cwd()) {
 
 export async function gather(question, cwd, chat) {
   // Extract file path from question (e.g. "read src/auth.ts" or "show handleLogin in src/auth.ts")
-  const fileMatch = question.match(/\b([a-zA-Z0-9_\-./]+\.[a-zA-Z0-9_]+)\b/);
+  const quotedPath = question.match(/(["'])([^"'\r\n]+\.[a-zA-Z0-9_]+)\1/);
+  const fileMatch = quotedPath || question.match(/\b([a-zA-Z0-9_\-./]+\.[a-zA-Z0-9_]+)\b/);
   if (!fileMatch) {
     return [{ cmd: 'read', out: 'No file path found in question. Specify a path like: hydra read <path> [symbol]' }];
   }
 
-  const file = fileMatch[1];
+  const file = quotedPath ? quotedPath[2] : fileMatch[1];
   // Extract line range if present
   const linesMatch = question.match(/\b(?:lines?\s+)?(\d+[:-]\d+)\b/i);
   const lines = linesMatch ? linesMatch[1] : undefined;
@@ -256,13 +275,17 @@ export async function gather(question, cwd, chat) {
   const isOutline = /\boutline\b/i.test(question);
 
   // Extract possible symbol/term from question (excluding common question words and the filename)
-  const words = question.replace(file, '').replace(/[^a-zA-Z0-9_]/g, ' ').split(/\s+/).filter(w => w.length > 2);
+  const prose = question.replace(quotedPath ? quotedPath[0] : file, '');
+  const explicitSymbol = /\b(?:function|class|method|symbol)\s+([a-zA-Z_$][\w$]*)\b/i.exec(prose)?.[1]
+    || /^\s*(?:show|read|slice)\s+(?:the\s+)?code\s+of\s+([a-zA-Z_$][\w$]*)\b/i.exec(prose)?.[1]
+    || /^\s*(?:show|read|slice)\s+(?:the\s+)?([a-zA-Z_$][\w$]*)\s+(?:in|from|at)\b/i.exec(prose)?.[1];
+  const words = prose.replace(/[^a-zA-Z0-9_$]/g, ' ').split(/\s+/).filter(w => w.length > 0);
   const STOP = new Set([
     'how', 'what', 'where', 'show', 'read', 'slice', 'tell', 'file', 'code', 'function',
     'class', 'does', 'work', 'defined', 'explain', 'lines', 'line', 'outline', 'in', 'the',
     'of', 'from', 'at',
   ]);
-  const term = words.find(w => !STOP.has(w.toLowerCase()));
+  const term = lines || isOutline ? undefined : explicitSymbol || words.find(w => !STOP.has(w.toLowerCase()));
 
   const res = await readSlice(file, { query: term, lines, outline: isOutline }, cwd);
   return [{ cmd: `read ${file}${term ? ` ${term}` : lines ? ` ${lines}` : isOutline ? ' outline' : ''}`, out: res.ok ? res.text : res.error }];

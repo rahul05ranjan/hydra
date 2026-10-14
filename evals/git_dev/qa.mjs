@@ -3,7 +3,7 @@ import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { ensureWorlds, loadTasks, worldsDir } from './build.mjs';
+import { dataDir, ensureWorlds, loadTasks, worldsDir } from './build.mjs';
 import { git, PROBES } from '../../skills/hydra/scripts/lib/git.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -29,12 +29,12 @@ for (const task of loadTasks()) {
   }
   rows.push({ id: task.id, valid: candidates.some(candidate => candidate.ok && !candidate.missing.length), candidates });
 }
-const hash = name => createHash('sha256').update(readFileSync(path.join(ROOT, 'evals/git_dev', name))).digest('hex');
+const hash = name => createHash('sha256').update(readFileSync(path.join(dataDir, name))).digest('hex');
 const result = { scope: 'Development gold facts are reachable via an accepted read-only probe. This is not model accuracy or independent proof of every question interpretation.',
   timestamp: new Date().toISOString(), tasks: rows.length, valid: rows.filter(r => r.valid).length,
   hashes: Object.fromEntries(['tasks.jsonl', 'worlds.json', 'phrasings.json'].map(name => [name, hash(name)])),
   failures: rows.filter(row => !row.valid) };
-const output = path.join(ROOT, 'evals/results/suite/development-gold-qa.json');
+const output = path.join(ROOT, 'evals/results/suite', process.env.HYDRA_GIT_DEV_SET === 'extended' ? 'extended-development-gold-qa.json' : 'development-gold-qa.json');
 mkdirSync(path.dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(result, null, 2) + '\n');
 console.log(JSON.stringify(result, null, 2));

@@ -1,0 +1,201 @@
+{
+  "timestamp": "2026-10-14T05:55:51.664946+00:00",
+  "head": "git",
+  "method": "full-parameter-supervised-fine-tuning",
+  "trainingStarted": true,
+  "checkpointManifest": {
+    "sourceModel": "rahul05ranjan/hydra-nano-git",
+    "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+    "normalization": "train/normalize_mlx.py",
+    "files": {
+      "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+      "config.json": "48447c188a2079ce181cdfb49680c70c3ec5e93480a43786832b3658995826bb",
+      "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+      "model.safetensors": "fc1d9b0332a3fe5c4b1a0b2b37d31d9f9d8051c8257ab07effe44410740e1fa2",
+      "tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+      "tokenizer_config.json": "86f01837a638275f2d3479804e79802aaff0e3ccef15e5f29dd6afbe6551daed",
+      "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+    }
+  },
+  "dataManifest": {
+    "scope": "New synthetic feasibility examples only. Not enough diversity/heldout coverage for release training or a 95% claim.",
+    "sealedInputsUsed": false,
+    "developmentInputsUsed": false,
+    "worldSeeds": [
+      71000,
+      71001,
+      71002,
+      71003,
+      71004,
+      71005,
+      71006,
+      71007
+    ],
+    "seedMeaning": "Synthetic scenario IDs, not materialized Git repository worlds",
+    "dataSha256": "e9b961cc8987f30b2b277ced8035b64637c4fd52bae24c37a623727a4bee8ab8",
+    "samplesByHead": {
+      "git": 80,
+      "files": 16,
+      "os": 48,
+      "test": 8,
+      "read": 8
+    },
+    "sourceHashes": {
+      "skills/hydra/scripts/lib/git.mjs": "6d9985920f09ca00ae4c20ef03b256c29b23af72a58a7656d03dc3d75565b320",
+      "skills/hydra/scripts/lib/files.mjs": "a607acc8d151ea3654eb544b45f8d26cd8fb1ccb84fb309bb59269290df9b65f",
+      "skills/hydra/scripts/lib/os.mjs": "624874d1c2b3490a60bc76cad7a1cc3f3107cfac322458c650562326cd149fbd",
+      "skills/hydra/scripts/lib/test_logs.mjs": "91cd5f784d33c7216330b1b06729ab8a3bca7475db58244cac8d2fd77dcb81a4",
+      "skills/hydra/scripts/lib/answer.mjs": "c982733b0d62afc40d20e7857ac25f98dd46065ab3011055c3fe537673cfe9c7"
+    }
+  },
+  "examples": 80,
+  "maximumTokens": 714,
+  "chatEOS": 248046,
+  "stepsRequested": 10,
+  "maxSeconds": 540,
+  "accumulation": 4,
+  "learningRate": 1e-05,
+  "lossMethod": "assistant-selected-logits",
+  "optimizer": "cpu-adamw-fp32",
+  "maximumSupervisedTokens": 28,
+  "totalParameters": 752393024,
+  "trainableParameters": 752393024,
+  "gpu": "Tesla T4",
+  "losses": [
+    0.030424828873947263,
+    0.4990770658478141,
+    0.08553276769816875,
+    1.1234818547964096,
+    0.3786964062601328,
+    0.3156939325854182,
+    0.06349007226526737,
+    0.11063022736925632,
+    0.029498975374735892,
+    0.3064369918429293
+  ],
+  "completedSteps": 10,
+  "overflowStepsSkipped": 9,
+  "gradientScaleHistory": [
+    {
+      "step": 0,
+      "attempt": 0,
+      "scale": 65536.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 1,
+      "scale": 32768.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 2,
+      "scale": 16384.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 3,
+      "scale": 8192.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 4,
+      "scale": 4096.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 5,
+      "scale": 2048.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 6,
+      "scale": 1024.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 7,
+      "scale": 512.0,
+      "norm": 27.583757400512695
+    },
+    {
+      "step": 1,
+      "attempt": 0,
+      "scale": 512.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 1,
+      "attempt": 1,
+      "scale": 256.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 1,
+      "attempt": 2,
+      "scale": 128.0,
+      "norm": 144.2909393310547
+    },
+    {
+      "step": 2,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 107.0960464477539
+    },
+    {
+      "step": 3,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 204.91683959960938
+    },
+    {
+      "step": 4,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 85.13185119628906
+    },
+    {
+      "step": 5,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 45.64906311035156
+    },
+    {
+      "step": 6,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 28.801589965820312
+    },
+    {
+      "step": 7,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 41.51291275024414
+    },
+    {
+      "step": 8,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 24.76643180847168
+    },
+    {
+      "step": 9,
+      "attempt": 0,
+      "scale": 128.0,
+      "norm": 57.87350082397461
+    }
+  ],
+  "trainingSeconds": 127.28108116400006,
+  "peakMemoryBytes": 8084201984,
+  "weights": {
+    "model.safetensors": "bee2a5685ee37da42b24ef71d1beeb31ae015d9b0db2884897d40dd78df8ed4c"
+  },
+  "checkpointSaved": true,
+  "elapsedSeconds": 171.33911700299996
+}

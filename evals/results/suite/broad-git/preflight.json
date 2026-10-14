@@ -1,0 +1,10 @@
+{
+  "preflightOnly": true,
+  "examples": 9900,
+  "dataSha256": "f8ba1719e4003c0391777b7b2d80cf6100c442f0300b38b7b85c200b474a0353",
+  "maximumTokens": 1224,
+  "maximumSupervisedTokens": 36,
+  "chatEOS": 248046,
+  "checkpointWeightsLocal": false,
+  "checkpointWeightHashFromVerifiedTrainingReceipt": "7b6b4662dbba3542fd296696b1c94e06240b28931e5b8ac6eec5cb99fc3dc8f0"
+}

@@ -1,0 +1,2382 @@
+{
+ "timestamp": "2026-10-14T06:34:54.876Z",
+ "complete": true,
+ "scope": "Development diagnosis, existing small fixtures. No 95% release claim. OS uses deterministic probe fixtures with real env guardrail; read gather may make zero planner calls.",
+ "elapsedSeconds": 8.528,
+ "byHead": {
+  "files": {
+   "tasks": 20,
+   "solvedCount": 19,
+   "solved": 0.95,
+   "errors": 0,
+   "modelCalls": 20,
+   "tasksWithModelCalls": 20,
+   "modelPlanAccuracy": 0.9,
+   "rawChars": 4040,
+   "returnedChars": 4608
+  },
+  "read": {
+   "tasks": 20,
+   "solvedCount": 20,
+   "solved": 1,
+   "errors": 0,
+   "modelCalls": 0,
+   "tasksWithModelCalls": 0,
+   "modelPlanAccuracy": null,
+   "rawChars": 6140,
+   "returnedChars": 6795
+  },
+  "test": {
+   "tasks": 20,
+   "solvedCount": 20,
+   "solved": 1,
+   "errors": 0,
+   "modelCalls": 7,
+   "tasksWithModelCalls": 7,
+   "modelPlanAccuracy": null,
+   "rawChars": 19680,
+   "returnedChars": 8586
+  },
+  "os": {
+   "tasks": 24,
+   "solvedCount": 19,
+   "solved": 0.7916666666666666,
+   "errors": 0,
+   "modelCalls": 24,
+   "tasksWithModelCalls": 24,
+   "modelPlanAccuracy": 0.7916666666666666,
+   "rawChars": 421,
+   "returnedChars": 718
+  }
+ },
+ "rows": [
+  {
+   "head": "files",
+   "id": "ts_class_def_vs_imports",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:46.350Z",
+     "reply": {
+      "terms": [
+       "UserService"
+      ]
+     },
+     "seconds": 0.45
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is UserService defined?",
+   "sections": [
+    {
+     "cmd": "search \"UserService\"",
+     "out": "src/services/user.ts:3:export class UserService {\nsrc/controllers/admin.ts:3:export function handleAdmin(userSvc: UserService) {}\nsrc/controllers/auth.ts:3:export function handleLogin(userSvc: UserService) {}\nsrc/index.ts:2:const svc = new UserService();\nsrc/controllers/admin.ts:1:import { UserService } from '../services/user';\nsrc/controllers/auth.ts:1:import { UserService } from '../services/user';\nsrc/index.ts:1:import { UserService } from './services/user';"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"UserService\"\nsrc/services/user.ts:3:export class UserService {\nsrc/controllers/admin.ts:3:export function handleAdmin(userSvc: UserService) {}\nsrc/controllers/auth.ts:3:export function handleLogin(userSvc: UserService) {}\nsrc/index.ts:2:const svc = new UserService();\nsrc/controllers/admin.ts:1:import { UserService } from '../services/user';\nsrc/controllers/auth.ts:1:import { UserService } from '../services/user';\nsrc/index.ts:1:import { UserService } from './services/user';",
+   "rawChars": 465,
+   "seconds": 0.502
+  },
+  {
+   "head": "files",
+   "id": "py_function_def_vs_calls",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:46.855Z",
+     "reply": {
+      "terms": [
+       "calculate_tax"
+      ]
+     },
+     "seconds": 0.098
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "find calculate_tax function definition",
+   "sections": [
+    {
+     "cmd": "search \"calculate_tax\"",
+     "out": "billing/tax.py:1:def calculate_tax(subtotal: float, rate: float = 0.08) -> float:\nbilling/invoice.py:4:    tax = calculate_tax(100.0)\nbilling/test_tax.py:4:    assert calculate_tax(50.0) == 4.0\nbilling/invoice.py:1:from billing.tax import calculate_tax\nbilling/test_tax.py:1:from billing.tax import calculate_tax"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"calculate_tax\"\nbilling/tax.py:1:def calculate_tax(subtotal: float, rate: float = 0.08) -> float:\nbilling/invoice.py:4:    tax = calculate_tax(100.0)\nbilling/test_tax.py:4:    assert calculate_tax(50.0) == 4.0\nbilling/invoice.py:1:from billing.tax import calculate_tax\nbilling/test_tax.py:1:from billing.tax import calculate_tax",
+   "rawChars": 312,
+   "seconds": 0.114
+  },
+  {
+   "head": "files",
+   "id": "rust_struct_def_vs_usages",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:46.971Z",
+     "reply": {
+      "terms": [
+       "ConnectionPool"
+      ]
+     },
+     "seconds": 0.092
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is ConnectionPool defined?",
+   "sections": [
+    {
+     "cmd": "search \"ConnectionPool\"",
+     "out": "src/pool.rs:1:pub struct ConnectionPool {\nsrc/db.rs:4:    pool: ConnectionPool,\nsrc/main.rs:3:    let _pool = ConnectionPool::new(10);\nsrc/pool.rs:6:impl ConnectionPool {\nsrc/db.rs:1:use crate::pool::ConnectionPool;\nsrc/main.rs:1:use crate::pool::ConnectionPool;"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"ConnectionPool\"\nsrc/pool.rs:1:pub struct ConnectionPool {\nsrc/db.rs:4:    pool: ConnectionPool,\nsrc/main.rs:3:    let _pool = ConnectionPool::new(10);\nsrc/pool.rs:6:impl ConnectionPool {\nsrc/db.rs:1:use crate::pool::ConnectionPool;\nsrc/main.rs:1:use crate::pool::ConnectionPool;",
+   "rawChars": 262,
+   "seconds": 0.107
+  },
+  {
+   "head": "files",
+   "id": "go_func_def_vs_calls",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.078Z",
+     "reply": {
+      "terms": [
+       "HandleWebhook"
+      ]
+     },
+     "seconds": 0.099
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "find HandleWebhook func in Go",
+   "sections": [
+    {
+     "cmd": "search \"HandleWebhook\"",
+     "out": "api/webhook.go:5:func HandleWebhook(w http.ResponseWriter, r *http.Request) {\napi/routes.go:4:\t// route points to HandleWebhook\napi/routes.go:5:\t_ = HandleWebhook"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"HandleWebhook\"\napi/webhook.go:5:func HandleWebhook(w http.ResponseWriter, r *http.Request) {\napi/routes.go:4:\t// route points to HandleWebhook\napi/routes.go:5:\t_ = HandleWebhook",
+   "rawChars": 162,
+   "seconds": 0.115
+  },
+  {
+   "head": "files",
+   "id": "ts_async_function_def",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.195Z",
+     "reply": {
+      "terms": [
+       "authenticateSession"
+      ]
+     },
+     "seconds": 0.097
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is authenticateSession implemented?",
+   "sections": [
+    {
+     "cmd": "search \"authenticateSession\"",
+     "out": "src/auth/session.ts:1:export async function authenticateSession(token: string) {\nsrc/middleware/auth.ts:4:  await authenticateSession(req.headers.authorization);\nsrc/middleware/auth.ts:1:import { authenticateSession } from '../auth/session';"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"authenticateSession\"\nsrc/auth/session.ts:1:export async function authenticateSession(token: string) {\nsrc/middleware/auth.ts:4:  await authenticateSession(req.headers.authorization);\nsrc/middleware/auth.ts:1:import { authenticateSession } from '../auth/session';",
+   "rawChars": 241,
+   "seconds": 0.111
+  },
+  {
+   "head": "files",
+   "id": "ts_interface_def",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.307Z",
+     "reply": {
+      "terms": [
+       "PaymentPayload"
+      ]
+     },
+     "seconds": 0.09
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "find interface PaymentPayload",
+   "sections": [
+    {
+     "cmd": "search \"PaymentPayload\"",
+     "out": "src/types/payment.ts:1:export interface PaymentPayload {\nsrc/services/paypal.ts:3:export function sendPaypal(payload: PaymentPayload) {}\nsrc/services/stripe.ts:3:export function chargeCard(payload: PaymentPayload) {}\nsrc/services/paypal.ts:1:import { PaymentPayload } from '../types/payment';\nsrc/services/stripe.ts:1:import { PaymentPayload } from '../types/payment';"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"PaymentPayload\"\nsrc/types/payment.ts:1:export interface PaymentPayload {\nsrc/services/paypal.ts:3:export function sendPaypal(payload: PaymentPayload) {}\nsrc/services/stripe.ts:3:export function chargeCard(payload: PaymentPayload) {}\nsrc/services/paypal.ts:1:import { PaymentPayload } from '../types/payment';\nsrc/services/stripe.ts:1:import { PaymentPayload } from '../types/payment';",
+   "rawChars": 368,
+   "seconds": 0.103
+  },
+  {
+   "head": "files",
+   "id": "noise_lockfile_suppression",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.411Z",
+     "reply": {
+      "terms": [
+       "jwtDecode"
+      ]
+     },
+     "seconds": 0.09
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is jwtDecode function?",
+   "sections": [
+    {
+     "cmd": "search \"jwtDecode\"",
+     "out": "src/jwt.ts:1:export function jwtDecode(raw: string) {"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"jwtDecode\"\nsrc/jwt.ts:1:export function jwtDecode(raw: string) {",
+   "rawChars": 53,
+   "seconds": 0.103
+  },
+  {
+   "head": "files",
+   "id": "prose_penalty_ranking",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.515Z",
+     "reply": {
+      "terms": [
+       "TokenBucket"
+      ]
+     },
+     "seconds": 0.089
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is TokenBucket class defined?",
+   "sections": [
+    {
+     "cmd": "search \"TokenBucket\"",
+     "out": "src/limiter.ts:1:export class TokenBucket {\nREADME.md:1:# TokenBucket Rate Limiter\nREADME.md:2:The TokenBucket class handles token accumulation.\ndocs/architecture.md:2:See TokenBucket in src/limiter.ts"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"TokenBucket\"\nsrc/limiter.ts:1:export class TokenBucket {\nREADME.md:1:# TokenBucket Rate Limiter\nREADME.md:2:The TokenBucket class handles token accumulation.\ndocs/architecture.md:2:See TokenBucket in src/limiter.ts",
+   "rawChars": 201,
+   "seconds": 0.102
+  },
+  {
+   "head": "files",
+   "id": "const_arrow_function",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.617Z",
+     "reply": {
+      "terms": [
+       "formatCurrency"
+      ]
+     },
+     "seconds": 0.092
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is formatCurrency defined?",
+   "sections": [
+    {
+     "cmd": "search \"formatCurrency\"",
+     "out": "src/utils/format.ts:1:export const formatCurrency = (cents: number): string => {\nsrc/components/Price.tsx:2:export const Price = ({ val }: { val: number }) => <div>{formatCurrency(val)}</div>;\nsrc/components/Price.tsx:1:import { formatCurrency } from '../utils/format';"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"formatCurrency\"\nsrc/utils/format.ts:1:export const formatCurrency = (cents: number): string => {\nsrc/components/Price.tsx:2:export const Price = ({ val }: { val: number }) => <div>{formatCurrency(val)}</div>;\nsrc/components/Price.tsx:1:import { formatCurrency } from '../utils/format';",
+   "rawChars": 269,
+   "seconds": 0.104
+  },
+  {
+   "head": "files",
+   "id": "py_class_def_model",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.723Z",
+     "reply": {
+      "terms": [
+       "TransactionRecord"
+      ]
+     },
+     "seconds": 0.09
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "find class TransactionRecord definition",
+   "sections": [
+    {
+     "cmd": "search \"TransactionRecord\"",
+     "out": "models/transaction.py:1:class TransactionRecord:\nservices/ledger.py:2:def record_tx(t: TransactionRecord): pass\nservices/ledger.py:1:from models.transaction import TransactionRecord"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"TransactionRecord\"\nmodels/transaction.py:1:class TransactionRecord:\nservices/ledger.py:2:def record_tx(t: TransactionRecord): pass\nservices/ledger.py:1:from models.transaction import TransactionRecord",
+   "rawChars": 181,
+   "seconds": 0.104
+  },
+  {
+   "head": "files",
+   "id": "rust_fn_pub_definition",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.827Z",
+     "reply": {
+      "terms": [
+       "broadcast_event fn"
+      ]
+     },
+     "seconds": 0.095
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is broadcast_event fn in rust?",
+   "sections": [
+    {
+     "cmd": "search broadcast_event fn",
+     "out": "(no matches)"
+    }
+   ],
+   "solved": false,
+   "evidence": false,
+   "top1": false,
+   "clean": true,
+   "modelPlan": false,
+   "text": "$ search broadcast_event fn\n(no matches)",
+   "rawChars": 12,
+   "seconds": 0.107
+  },
+  {
+   "head": "files",
+   "id": "go_interface_definition",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:47.935Z",
+     "reply": {
+      "terms": [
+       "StorageDriver"
+      ]
+     },
+     "seconds": 0.089
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "find StorageDriver interface in Go",
+   "sections": [
+    {
+     "cmd": "search \"StorageDriver\"",
+     "out": "storage/driver.go:3:type StorageDriver interface {\nstorage/s3.go:4:// implements StorageDriver"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"StorageDriver\"\nstorage/driver.go:3:type StorageDriver interface {\nstorage/s3.go:4:// implements StorageDriver",
+   "rawChars": 94,
+   "seconds": 0.101
+  },
+  {
+   "head": "files",
+   "id": "ts_enum_definition",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.037Z",
+     "reply": {
+      "terms": [
+       "enum OrderStatus"
+      ]
+     },
+     "seconds": 0.097
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is enum OrderStatus defined?",
+   "sections": [
+    {
+     "cmd": "search \"enum OrderStatus\"",
+     "out": "src/enums/order.ts:1:export enum OrderStatus {"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": false,
+   "text": "$ search \"enum OrderStatus\"\nsrc/enums/order.ts:1:export enum OrderStatus {",
+   "rawChars": 46,
+   "seconds": 0.11
+  },
+  {
+   "head": "files",
+   "id": "py_async_def_worker",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.148Z",
+     "reply": {
+      "terms": [
+       "process_queue_job"
+      ]
+     },
+     "seconds": 0.099
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "find process_queue_job function in Python",
+   "sections": [
+    {
+     "cmd": "search \"process_queue_job\"",
+     "out": "workers/queue.py:1:async def process_queue_job(job_id: str, payload: dict) -> bool:\nworkers/scheduler.py:2:async def poll(): await process_queue_job('1', {})\nworkers/scheduler.py:1:from workers.queue import process_queue_job"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"process_queue_job\"\nworkers/queue.py:1:async def process_queue_job(job_id: str, payload: dict) -> bool:\nworkers/scheduler.py:2:async def poll(): await process_queue_job('1', {})\nworkers/scheduler.py:1:from workers.queue import process_queue_job",
+   "rawChars": 224,
+   "seconds": 0.111
+  },
+  {
+   "head": "files",
+   "id": "ts_type_alias_definition",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.260Z",
+     "reply": {
+      "terms": [
+       "ApiResponse"
+      ]
+     },
+     "seconds": 0.082
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is ApiResponse type defined?",
+   "sections": [
+    {
+     "cmd": "search \"ApiResponse\"",
+     "out": "src/types/api.ts:1:export type ApiResponse<T> = {\nsrc/client.ts:2:function fetchUser(): ApiResponse<User> {}\nsrc/client.ts:1:import { ApiResponse } from './types/api';"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"ApiResponse\"\nsrc/types/api.ts:1:export type ApiResponse<T> = {\nsrc/client.ts:2:function fetchUser(): ApiResponse<User> {}\nsrc/client.ts:1:import { ApiResponse } from './types/api';",
+   "rawChars": 167,
+   "seconds": 0.094
+  },
+  {
+   "head": "files",
+   "id": "rust_enum_definition",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.355Z",
+     "reply": {
+      "terms": [
+       "WorkerState"
+      ]
+     },
+     "seconds": 0.092
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is WorkerState enum?",
+   "sections": [
+    {
+     "cmd": "search \"WorkerState\"",
+     "out": "src/state.rs:1:pub enum WorkerState {\nsrc/worker.rs:2:fn check(s: WorkerState) {}\nsrc/worker.rs:1:use crate::state::WorkerState;"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"WorkerState\"\nsrc/state.rs:1:pub enum WorkerState {\nsrc/worker.rs:2:fn check(s: WorkerState) {}\nsrc/worker.rs:1:use crate::state::WorkerState;",
+   "rawChars": 128,
+   "seconds": 0.105
+  },
+  {
+   "head": "files",
+   "id": "react_component_func",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.461Z",
+     "reply": {
+      "terms": [
+       "NavigationSidebar"
+      ]
+     },
+     "seconds": 0.089
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is NavigationSidebar component?",
+   "sections": [
+    {
+     "cmd": "files named like NavigationSidebar",
+     "out": "src/components/NavigationSidebar.tsx"
+    },
+    {
+     "cmd": "search \"NavigationSidebar\"",
+     "out": "src/components/NavigationSidebar.tsx:1:export function NavigationSidebar({ isOpen }: { isOpen: boolean }) {\nsrc/App.tsx:2:export function App() { return <NavigationSidebar isOpen={true} />; }\nsrc/App.tsx:1:import { NavigationSidebar } from './components/NavigationSidebar';"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ files named like NavigationSidebar\nsrc/components/NavigationSidebar.tsx\n\n$ search \"NavigationSidebar\"\nsrc/components/NavigationSidebar.tsx:1:export function NavigationSidebar({ isOpen }: { isOpen: boolean }) {\nsrc/App.tsx:2:export function App() { return <NavigationSidebar isOpen={true} />; }\nsrc/App.tsx:1:import { NavigationSidebar } from './components/NavigationSidebar';",
+   "rawChars": 309,
+   "seconds": 0.102
+  },
+  {
+   "head": "files",
+   "id": "py_exception_class",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.564Z",
+     "reply": {
+      "terms": [
+       "RateLimitExceeded"
+      ]
+     },
+     "seconds": 0.105
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "find RateLimitExceeded exception class",
+   "sections": [
+    {
+     "cmd": "search \"RateLimitExceeded\"",
+     "out": "exceptions/rate_limit.py:1:class RateLimitExceeded(Exception):\nmiddleware/throttle.py:2:if count > 10: raise RateLimitExceeded(60)\nmiddleware/throttle.py:1:from exceptions.rate_limit import RateLimitExceeded"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"RateLimitExceeded\"\nexceptions/rate_limit.py:1:class RateLimitExceeded(Exception):\nmiddleware/throttle.py:2:if count > 10: raise RateLimitExceeded(60)\nmiddleware/throttle.py:1:from exceptions.rate_limit import RateLimitExceeded",
+   "rawChars": 207,
+   "seconds": 0.116
+  },
+  {
+   "head": "files",
+   "id": "go_struct_definition",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.682Z",
+     "reply": {
+      "terms": [
+       "MetricsCollector"
+      ]
+     },
+     "seconds": 0.089
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "find MetricsCollector struct in Go",
+   "sections": [
+    {
+     "cmd": "search \"MetricsCollector\"",
+     "out": "telemetry/metrics.go:3:type MetricsCollector struct {\ntelemetry/server.go:3:var DefaultCollector = MetricsCollector{Namespace: \"app\"}"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"MetricsCollector\"\ntelemetry/metrics.go:3:type MetricsCollector struct {\ntelemetry/server.go:3:var DefaultCollector = MetricsCollector{Namespace: \"app\"}",
+   "rawChars": 133,
+   "seconds": 0.102
+  },
+  {
+   "head": "files",
+   "id": "const_config_object",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.784Z",
+     "reply": {
+      "terms": [
+       "DEFAULT_RETRY_POLICY"
+      ]
+     },
+     "seconds": 0.093
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "where is DEFAULT_RETRY_POLICY defined?",
+   "sections": [
+    {
+     "cmd": "search \"DEFAULT_RETRY_POLICY\"",
+     "out": "lib/constants.js:1:export const DEFAULT_RETRY_POLICY = {\nlib/client.js:2:function request() { return DEFAULT_RETRY_POLICY.maxRetries; }\nlib/client.js:1:import { DEFAULT_RETRY_POLICY } from './constants.js';"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "top1": true,
+   "clean": true,
+   "modelPlan": true,
+   "text": "$ search \"DEFAULT_RETRY_POLICY\"\nlib/constants.js:1:export const DEFAULT_RETRY_POLICY = {\nlib/client.js:2:function request() { return DEFAULT_RETRY_POLICY.maxRetries; }\nlib/client.js:1:import { DEFAULT_RETRY_POLICY } from './constants.js';",
+   "rawChars": 206,
+   "seconds": 0.106
+  },
+  {
+   "head": "read",
+   "id": "ts_function_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show validateToken in src/auth/jwt.ts",
+   "sections": [
+    {
+     "cmd": "read src/auth/jwt.ts validateToken",
+     "out": "File: src/auth/jwt.ts (validateToken at lines 13-22 of 27)\n\n13: // Validates an incoming token and decodes its payload\n14: export function validateToken(token: string): TokenPayload | null {\n15:   try {\n16:     const decoded = jwt.verify(token, SECRET) as TokenPayload;\n17:     if (!decoded.id) return null;\n18:     return decoded;\n19:   } catch (err) {\n20:     return null;\n21:   }\n22: }"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/auth/jwt.ts validateToken\nFile: src/auth/jwt.ts (validateToken at lines 13-22 of 27)\n\n13: // Validates an incoming token and decodes its payload\n14: export function validateToken(token: string): TokenPayload | null {\n15:   try {\n16:     const decoded = jwt.verify(token, SECRET) as TokenPayload;\n17:     if (!decoded.id) return null;\n18:     return decoded;\n19:   } catch (err) {\n20:     return null;\n21:   }\n22: }",
+   "rawChars": 388,
+   "seconds": 0.003
+  },
+  {
+   "head": "read",
+   "id": "ts_method_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show handleRequest in src/router.ts",
+   "sections": [
+    {
+     "cmd": "read src/router.ts handleRequest",
+     "out": "File: src/router.ts (handleRequest at lines 10-20 of 26)\n\n10:   // Handles incoming HTTP request and dispatches to registered route handler\n11:   public handleRequest(req: IncomingMessage, res: ServerResponse): void {\n12:     const url = req.url || '/';\n13:     const handler = this.routes.get(url);\n14:     if (!handler) {\n15:       res.statusCode = 404;\n16:       res.end('Not Found');\n17:       return;\n18:     }\n19:     handler(req, res);\n20:   }"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/router.ts handleRequest\nFile: src/router.ts (handleRequest at lines 10-20 of 26)\n\n10:   // Handles incoming HTTP request and dispatches to registered route handler\n11:   public handleRequest(req: IncomingMessage, res: ServerResponse): void {\n12:     const url = req.url || '/';\n13:     const handler = this.routes.get(url);\n14:     if (!handler) {\n15:       res.statusCode = 404;\n16:       res.end('Not Found');\n17:       return;\n18:     }\n19:     handler(req, res);\n20:   }",
+   "rawChars": 450,
+   "seconds": 0.001
+  },
+  {
+   "head": "read",
+   "id": "ts_file_outline",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "outline src/utils/format.ts",
+   "sections": [
+    {
+     "cmd": "read src/utils/format.ts outline",
+     "out": "File: src/utils/format.ts (33 lines, ~252 tokens)\nOutline of definitions (6 symbols):\n  L1: export const DEFAULT_CURRENCY = 'USD';\n  L2: export const LOCALE = 'en-US';\n  L7: export function formatCurrency(amount: number, currency: string = DEFAULT_CURREN\n  L15: export function formatDate(date: Date): string {\n  L25: export function truncate(text: string, maxLen: number): string {\n  L30: export function padZero(num: number, targetLen: number = 2): string {\n\n(To view a specific symbol or lines: hydra read src/utils/format.ts <symbol> or --lines <start-end>)"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/utils/format.ts outline\nFile: src/utils/format.ts (33 lines, ~252 tokens)\nOutline of definitions (6 symbols):\n  L1: export const DEFAULT_CURRENCY = 'USD';\n  L2: export const LOCALE = 'en-US';\n  L7: export function formatCurrency(amount: number, currency: string = DEFAULT_CURREN\n  L15: export function formatDate(date: Date): string {\n  L25: export function truncate(text: string, maxLen: number): string {\n  L30: export function padZero(num: number, targetLen: number = 2): string {\n\n(To view a specific symbol or lines: hydra read src/utils/format.ts <symbol> or --lines <start-end>)",
+   "rawChars": 561,
+   "seconds": 0.001
+  },
+  {
+   "head": "read",
+   "id": "py_def_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show calculate_tax in services/tax.py",
+   "sections": [
+    {
+     "cmd": "read services/tax.py calculate_tax",
+     "out": "File: services/tax.py (calculate_tax at lines 7-12 of 16)\n\n7: # Calculates total tax for a transaction based on state rates\n8: def calculate_tax(amount: float, state: str) -> float:\n9:     rate = TAX_TABLE.get(state.upper(), 0.0)\n10:     if amount <= 0:\n11:         return 0.0\n12:     return round(amount * rate, 2)"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read services/tax.py calculate_tax\nFile: services/tax.py (calculate_tax at lines 7-12 of 16)\n\n7: # Calculates total tax for a transaction based on state rates\n8: def calculate_tax(amount: float, state: str) -> float:\n9:     rate = TAX_TABLE.get(state.upper(), 0.0)\n10:     if amount <= 0:\n11:         return 0.0\n12:     return round(amount * rate, 2)",
+   "rawChars": 315,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "py_class_method_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show process_charge in payments/gateway.py",
+   "sections": [
+    {
+     "cmd": "read payments/gateway.py process_charge",
+     "out": "File: payments/gateway.py (process_charge at lines 6-11 of 15)\n\n6:     # Processes charge against customer token\n7:     def process_charge(self, token: str, amount_cents: int) -> dict:\n8:         if amount_cents <= 0:\n9:             raise ValueError(\"Amount must be positive\")\n10:         charge = {\"id\": \"ch_123\", \"amount\": amount_cents, \"status\": \"succeeded\"}\n11:         return charge"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read payments/gateway.py process_charge\nFile: payments/gateway.py (process_charge at lines 6-11 of 15)\n\n6:     # Processes charge against customer token\n7:     def process_charge(self, token: str, amount_cents: int) -> dict:\n8:         if amount_cents <= 0:\n9:             raise ValueError(\"Amount must be positive\")\n10:         charge = {\"id\": \"ch_123\", \"amount\": amount_cents, \"status\": \"succeeded\"}\n11:         return charge",
+   "rawChars": 387,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "py_file_outline",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "outline ml/pipeline.py",
+   "sections": [
+    {
+     "cmd": "read ml/pipeline.py outline",
+     "out": "File: ml/pipeline.py (26 lines, ~156 tokens)\nOutline of definitions (4 symbols):\n  L4: class DataPreprocessor:\n  L11: def load_dataset(path: str):\n  L16: def train_model(data, epochs=10):\n  L22: def evaluate_metrics(model, test_data):\n\n(To view a specific symbol or lines: hydra read ml/pipeline.py <symbol> or --lines <start-end>)"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read ml/pipeline.py outline\nFile: ml/pipeline.py (26 lines, ~156 tokens)\nOutline of definitions (4 symbols):\n  L4: class DataPreprocessor:\n  L11: def load_dataset(path: str):\n  L16: def train_model(data, epochs=10):\n  L22: def evaluate_metrics(model, test_data):\n\n(To view a specific symbol or lines: hydra read ml/pipeline.py <symbol> or --lines <start-end>)",
+   "rawChars": 331,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "rust_fn_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show verify_signature in src/crypto/verifier.rs",
+   "sections": [
+    {
+     "cmd": "read src/crypto/verifier.rs verify_signature",
+     "out": "File: src/crypto/verifier.rs (verify_signature at lines 5-14 of 21)\n\n5: /// Verifies cryptographic signature for payload against public key\n6: pub fn verify_signature(payload: &[u8], signature: &[u8], pubkey: &[u8]) -> bool {\n7:     if signature.len() != 64 || pubkey.len() != 32 {\n8:         return false;\n9:     }\n10:     let mut hasher = Sha256::new();\n11:     hasher.update(payload);\n12:     let digest = hasher.finalize();\n13:     digest.len() == HASH_LEN\n14: }"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/crypto/verifier.rs verify_signature\nFile: src/crypto/verifier.rs (verify_signature at lines 5-14 of 21)\n\n5: /// Verifies cryptographic signature for payload against public key\n6: pub fn verify_signature(payload: &[u8], signature: &[u8], pubkey: &[u8]) -> bool {\n7:     if signature.len() != 64 || pubkey.len() != 32 {\n8:         return false;\n9:     }\n10:     let mut hasher = Sha256::new();\n11:     hasher.update(payload);\n12:     let digest = hasher.finalize();\n13:     digest.len() == HASH_LEN\n14: }",
+   "rawChars": 466,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "rust_struct_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show ServerConfig in src/config.rs",
+   "sections": [
+    {
+     "cmd": "read src/config.rs ServerConfig",
+     "out": "File: src/config.rs (ServerConfig at lines 1-6 of 13)\n\n1: #[derive(Debug, Clone, PartialEq)]\n2: pub struct ServerConfig {\n3:     pub host: String,\n4:     pub port: u16,\n5:     pub max_connections: usize,\n6: }"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/config.rs ServerConfig\nFile: src/config.rs (ServerConfig at lines 1-6 of 13)\n\n1: #[derive(Debug, Clone, PartialEq)]\n2: pub struct ServerConfig {\n3:     pub host: String,\n4:     pub port: u16,\n5:     pub max_connections: usize,\n6: }",
+   "rawChars": 208,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "go_func_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show NewServer in server/server.go",
+   "sections": [
+    {
+     "cmd": "read server/server.go NewServer",
+     "out": "File: server/server.go (NewServer at lines 9-20 of 25)\n\n9: // NewServer initializes http server with provided configuration\n10: func NewServer(cfg Config) *http.Server {\n11: \tmux := http.NewServeMux()\n12: \tmux.HandleFunc(\"/health\", func(w http.ResponseWriter, r *http.Request) {\n13: \t\tw.WriteHeader(http.StatusOK)\n14: \t\tw.Write([]byte(\"ok\"))\n15: \t})\n16: \treturn &http.Server{\n17: \t\tAddr:    cfg.Addr,\n18: \t\tHandler: mux,\n19: \t}\n20: }"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read server/server.go NewServer\nFile: server/server.go (NewServer at lines 9-20 of 25)\n\n9: // NewServer initializes http server with provided configuration\n10: func NewServer(cfg Config) *http.Server {\n11: \tmux := http.NewServeMux()\n12: \tmux.HandleFunc(\"/health\", func(w http.ResponseWriter, r *http.Request) {\n13: \t\tw.WriteHeader(http.StatusOK)\n14: \t\tw.Write([]byte(\"ok\"))\n15: \t})\n16: \treturn &http.Server{\n17: \t\tAddr:    cfg.Addr,\n18: \t\tHandler: mux,\n19: \t}\n20: }",
+   "rawChars": 433,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "go_method_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show Get in store/kv.go",
+   "sections": [
+    {
+     "cmd": "read store/kv.go Get",
+     "out": "File: store/kv.go (Get at lines 7-10 of 15)\n\n7: func (s *KVStore) Get(key string) (string, bool) {\n8: \tval, ok := s.data[key]\n9: \treturn val, ok\n10: }"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read store/kv.go Get\nFile: store/kv.go (Get at lines 7-10 of 15)\n\n7: func (s *KVStore) Get(key string) (string, bool) {\n8: \tval, ok := s.data[key]\n9: \treturn val, ok\n10: }",
+   "rawChars": 150,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "js_async_arrow_slice",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show fetchProfile in lib/api.js",
+   "sections": [
+    {
+     "cmd": "read lib/api.js fetchProfile",
+     "out": "File: lib/api.js (fetchProfile at lines 3-7 of 12)\n\n3: export const fetchProfile = async (userId) => {\n4:   const res = await fetch(`${BASE_URL}/users/${userId}`);\n5:   if (!res.ok) throw new Error('user not found');\n6:   return res.json();\n7: };"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read lib/api.js fetchProfile\nFile: lib/api.js (fetchProfile at lines 3-7 of 12)\n\n3: export const fetchProfile = async (userId) => {\n4:   const res = await fetch(`${BASE_URL}/users/${userId}`);\n5:   if (!res.ok) throw new Error('user not found');\n6:   return res.json();\n7: };",
+   "rawChars": 246,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "short_file_passthrough",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show undefined in settings.json",
+   "sections": [
+    {
+     "cmd": "read settings.json undefined",
+     "out": "File: settings.json (6 lines, ~15 tokens)\nHead (lines 1-30 of 6):\n\n1: {\n2:   \"port\": 8080,\n3:   \"env\": \"production\",\n4:   \"cors\": true\n5: }\n6: \n\n(To read more lines: hydra read settings.json --lines <start-end>)"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read settings.json undefined\nFile: settings.json (6 lines, ~15 tokens)\nHead (lines 1-30 of 6):\n\n1: {\n2:   \"port\": 8080,\n3:   \"env\": \"production\",\n4:   \"cors\": true\n5: }\n6: \n\n(To read more lines: hydra read settings.json --lines <start-end>)",
+   "rawChars": 211,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "line_range_slice_1",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "read logs/data.txt lines 12-16",
+   "sections": [
+    {
+     "cmd": "read logs/data.txt 12-16",
+     "out": "File: logs/data.txt (lines 12-16 of 40)\n\n12: record_12: metric_value_120\n13: record_13: metric_value_130\n14: record_14: metric_value_140\n15: record_15: metric_value_150\n16: record_16: metric_value_160"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read logs/data.txt 12-16\nFile: logs/data.txt (lines 12-16 of 40)\n\n12: record_12: metric_value_120\n13: record_13: metric_value_130\n14: record_14: metric_value_140\n15: record_15: metric_value_150\n16: record_16: metric_value_160",
+   "rawChars": 200,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "line_range_slice_2",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "read src/constants.ts lines 5-9",
+   "sections": [
+    {
+     "cmd": "read src/constants.ts 5-9",
+     "out": "File: src/constants.ts (lines 5-9 of 30)\n\n5: export const CONST_5 = 5;\n6: export const CONST_6 = 6;\n7: export const CONST_7 = 7;\n8: export const CONST_8 = 8;\n9: export const CONST_9 = 9;"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/constants.ts 5-9\nFile: src/constants.ts (lines 5-9 of 30)\n\n5: export const CONST_5 = 5;\n6: export const CONST_6 = 6;\n7: export const CONST_7 = 7;\n8: export const CONST_8 = 8;\n9: export const CONST_9 = 9;",
+   "rawChars": 186,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "nl_read_question_1",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "read subtract in src/math.ts",
+   "sections": [
+    {
+     "cmd": "read src/math.ts subtract",
+     "out": "File: src/math.ts (subtract at lines 5-7 of 12)\n\n5: export function subtract(a: number, b: number): number {\n6:   return a - b;\n7: }"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/math.ts subtract\nFile: src/math.ts (subtract at lines 5-7 of 12)\n\n5: export function subtract(a: number, b: number): number {\n6:   return a - b;\n7: }",
+   "rawChars": 132,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "nl_read_question_2",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show hash_password in utils/auth.py",
+   "sections": [
+    {
+     "cmd": "read utils/auth.py hash_password",
+     "out": "File: utils/auth.py (hash_password at lines 1-3 of 7)\n\n1: def hash_password(raw_password: str) -> str:\n2:     import hashlib\n3:     return hashlib.sha256(raw_password.encode()).hexdigest()"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read utils/auth.py hash_password\nFile: utils/auth.py (hash_password at lines 1-3 of 7)\n\n1: def hash_password(raw_password: str) -> str:\n2:     import hashlib\n3:     return hashlib.sha256(raw_password.encode()).hexdigest()",
+   "rawChars": 188,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "nl_read_lines",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "slice lines 10-15 in routes.js",
+   "sections": [
+    {
+     "cmd": "read routes.js 10-15",
+     "out": "File: routes.js (lines 10-15 of 100)\n\n10: app.get('/r5', handle5);\n11: // route handler 6\n12: app.get('/r6', handle6);\n13: // route handler 7\n14: app.get('/r7', handle7);\n15: // route handler 8"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read routes.js 10-15\nFile: routes.js (lines 10-15 of 100)\n\n10: app.get('/r5', handle5);\n11: // route handler 6\n12: app.get('/r6', handle6);\n13: // route handler 7\n14: app.get('/r7', handle7);\n15: // route handler 8",
+   "rawChars": 193,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "outline_rust_module",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "outline src/parser.rs",
+   "sections": [
+    {
+     "cmd": "read src/parser.rs outline",
+     "out": "File: src/parser.rs (20 lines, ~64 tokens)\nOutline of definitions (5 symbols):\n  L1: pub struct ASTNode;\n  L3: pub enum Token {\n  L9: pub fn parse_expression() -> ASTNode {\n  L13: pub fn parse_statement() -> ASTNode {\n  L17: pub fn tokenize(input: &str) -> Vec<Token> {\n\n(To view a specific symbol or lines: hydra read src/parser.rs <symbol> or --lines <start-end>)"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/parser.rs outline\nFile: src/parser.rs (20 lines, ~64 tokens)\nOutline of definitions (5 symbols):\n  L1: pub struct ASTNode;\n  L3: pub enum Token {\n  L9: pub fn parse_expression() -> ASTNode {\n  L13: pub fn parse_statement() -> ASTNode {\n  L17: pub fn tokenize(input: &str) -> Vec<Token> {\n\n(To view a specific symbol or lines: hydra read src/parser.rs <symbol> or --lines <start-end>)",
+   "rawChars": 365,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "large_multi_symbol_ts",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "show normalizePath in src/path_utils.ts",
+   "sections": [
+    {
+     "cmd": "read src/path_utils.ts normalizePath",
+     "out": "File: src/path_utils.ts (normalizePath at lines 5-15 of 21)\n\n5: // Normalizes path separators and removes redundant dots\n6: export function normalizePath(p: string): string {\n7:   const parts = p.replace(/\\\\/g, '/').split('/');\n8:   const kept: string[] = [];\n9:   for (const part of parts) {\n10:     if (part === '.' || !part) continue;\n11:     if (part === '..') kept.pop();\n12:     else kept.push(part);\n13:   }\n14:   return kept.join('/');\n15: }"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read src/path_utils.ts normalizePath\nFile: src/path_utils.ts (normalizePath at lines 5-15 of 21)\n\n5: // Normalizes path separators and removes redundant dots\n6: export function normalizePath(p: string): string {\n7:   const parts = p.replace(/\\\\/g, '/').split('/');\n8:   const kept: string[] = [];\n9:   for (const part of parts) {\n10:     if (part === '.' || !part) continue;\n11:     if (part === '..') kept.pop();\n12:     else kept.push(part);\n13:   }\n14:   return kept.join('/');\n15: }",
+   "rawChars": 449,
+   "seconds": 0
+  },
+  {
+   "head": "read",
+   "id": "outline_python_module",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "question": "outline models/user.py",
+   "sections": [
+    {
+     "cmd": "read models/user.py outline",
+     "out": "File: models/user.py (18 lines, ~97 tokens)\nOutline of definitions (4 symbols):\n  L1: class UserRole:\n  L5: class UserModel:\n  L13: def get_current_user():\n  L16: def list_all_roles():\n\n(To view a specific symbol or lines: hydra read models/user.py <symbol> or --lines <start-end>)"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ read models/user.py outline\nFile: models/user.py (18 lines, ~97 tokens)\nOutline of definitions (4 symbols):\n  L1: class UserRole:\n  L5: class UserModel:\n  L13: def get_current_user():\n  L16: def list_all_roles():\n\n(To view a specific symbol or lines: hydra read models/user.py <symbol> or --lines <start-end>)",
+   "rawChars": 281,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "vitest_jwt_failure",
+   "calls": [
+    {
+     "stage": "evidence",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:48.919Z",
+     "reply": {
+      "lines": [
+       6
+      ]
+     },
+     "seconds": 0.533
+    }
+   ],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ npm test (exit 1)\n \u2713 src/utils/format.test.ts (8 tests) (22ms)\n \u276f src/auth/jwt.test.ts (2 tests | 1 failed)\n FAIL  src/auth/jwt.test.ts > rejects expired token\nAssertionError: expected 401 to deeply equal 200\n- Expected:\n+ Received:\n \u276f src/auth/jwt.test.ts:45:21\nTest Files  1 failed | 2 passed (3)\n     Tests  1 failed | 21 passed (22)",
+   "rawChars": 1308,
+   "seconds": 0.536
+  },
+  {
+   "head": "test",
+   "id": "vitest_multiple_failures",
+   "calls": [
+    {
+     "stage": "evidence",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:49.454Z",
+     "reply": {
+      "lines": [
+       8
+      ]
+     },
+     "seconds": 0.413
+    }
+   ],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ npm test (exit 1)\n\n FAIL  src/user.test.ts > createUser > should hash password\nAssertionError: expected 'plain_secret' not to equal 'plain_secret'\n \u276f src/user.test.ts:32:19\n FAIL  src/billing.test.ts > invoice > should calculate tax\nAssertionError: expected 110 to equal 100\n- Expected: 100\n+ Received: 110\n \u276f src/billing.test.ts:58:14\nTest Files  2 failed | 3 passed (5)\n     Tests  2 failed | 19 passed (21)",
+   "rawChars": 842,
+   "seconds": 0.413
+  },
+  {
+   "head": "test",
+   "id": "vitest_verbose_pass",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ npm test (exit 0)\nAll tests passed.\nTest Files  2 passed (2)\n     Tests  18 passed (18)\n(Verbose output withheld)",
+   "rawChars": 3507,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "vitest_short_pass",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ npm test\n$ npm test\nPASS src/math.test.ts\nTests: 2 passed, 2 total",
+   "rawChars": 57,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "jest_snapshot_mismatch",
+   "calls": [
+    {
+     "stage": "evidence",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:49.870Z",
+     "reply": {
+      "lines": [
+       4
+      ]
+     },
+     "seconds": 0.38
+    }
+   ],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ npx jest (exit 1)\n PASS  src/components/Sidebar.test.tsx\n FAIL  src/components/Header.test.tsx\n  \u25cf Header component \u203a should match snapshot\n    - Snapshot  - 1\n    + Received  + 1\n    -   <h1>Welcome back</h1>\n    +   <h1>Hello Guest</h1>\n      at Object.<anonymous> (src/components/Header.test.tsx:24:31)\nTest Suites: 1 failed, 3 passed, 4 total\nTests:       1 failed, 12 passed, 13 total\nSnapshots:   1 failed, 1 total",
+   "rawChars": 852,
+   "seconds": 0.38
+  },
+  {
+   "head": "test",
+   "id": "jest_timeout_error",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ npx jest (exit 1)\n$ npx jest\n PASS  test/unit/crypto.test.js\n PASS  test/unit/cache.test.js\n FAIL  test/db.test.js\n  \u25cf Database \u203a connects within timeout\n\n    thrown: \"Exceeded timeout of 5000 ms for a hook.\"\n    Add a timeout value to this test to increase the timeout, if this is a long-running test.\n\n      at test/db.test.js:33:5\n      at node_modules/jest-jasmine2/build/queueRunner.js:45:12\n      at processTicksAndRejections (node:internal/process/task_queues:95:5)\n      at node_modules/jest-runner/build/runTest.js:105:10\n\nTest Suites: 1 failed, 2 passed, 3 total\nTests:       1 failed, 14 passed, 15 total",
+   "rawChars": 597,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "pytest_status_code_assertion",
+   "calls": [
+    {
+     "stage": "evidence",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:50.258Z",
+     "reply": {
+      "lines": [
+       10,
+       11,
+       12,
+       13,
+       14,
+       15,
+       16,
+       17,
+       18,
+       19,
+       20,
+       21
+      ]
+     },
+     "seconds": 0.614
+    }
+   ],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ pytest (exit 1)\n\n=================================== FAILURES ===================================\n________________________________ test_get_user _________________________________\n\nclient = <TestClient>\n\n    def test_get_user(client):\n        response = client.get(\"/users/42\")\n>       assert response.status_code == 200\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_api.py:18: AssertionError\nFAILED tests/test_api.py::test_get_user - assert 404 == 200\n========================= 1 failed, 9 passed in 0.42s ==========================",
+   "rawChars": 1207,
+   "seconds": 0.615
+  },
+  {
+   "head": "test",
+   "id": "pytest_multiple_failures",
+   "calls": [
+    {
+     "stage": "evidence",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:50.874Z",
+     "reply": {
+      "lines": [
+       10,
+       11,
+       12,
+       13,
+       14,
+       15,
+       16,
+       17,
+       18,
+       19,
+       20,
+       21
+      ]
+     },
+     "seconds": 0.616
+    }
+   ],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ pytest (exit 1)\n\n=================================== FAILURES ===================================\n________________________________ test_login ____________________________________\n>       assert auth.check(\"secret\") is True\nE       AssertionError: assert False is True\ntests/test_auth.py:22: AssertionError\n________________________________ test_signup ___________________________________\n>       assert user.email == \"a@b.com\"\nE       AssertionError: assert 'bad' == 'a@b.com'\ntests/test_user.py:44: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_auth.py::test_login - AssertionError: assert False is True\nFAILED tests/test_user.py::test_signup - AssertionError: assert 'bad' == 'a@b.com'\n========================= 2 failed, 10 passed in 0.58s =========================",
+   "rawChars": 1251,
+   "seconds": 0.616
+  },
+  {
+   "head": "test",
+   "id": "pytest_exception_trace",
+   "calls": [
+    {
+     "stage": "evidence",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:51.491Z",
+     "reply": {
+      "lines": [
+       8
+      ]
+     },
+     "seconds": 0.292
+    }
+   ],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ pytest (exit 1)\n\n=================================== FAILURES ===================================\n________________________________ test_parse_uuid _______________________________\napp/models/user.py:58: \nFAILED tests/test_models.py::test_parse_uuid - ValueError: badly formed hexadecimal UUID string\n========================= 1 failed, 5 passed in 0.28s ==========================",
+   "rawChars": 1069,
+   "seconds": 0.292
+  },
+  {
+   "head": "test",
+   "id": "pytest_verbose_pass",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ pytest (exit 0)\nAll tests passed.\n============================== 25 passed in 1.12s ==============================\n(Verbose output withheld)",
+   "rawChars": 3979,
+   "seconds": 0.001
+  },
+  {
+   "head": "test",
+   "id": "cargo_test_panic",
+   "calls": [
+    {
+     "stage": "evidence",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:51.786Z",
+     "reply": {
+      "lines": [
+       19
+      ]
+     },
+     "seconds": 0.221
+    }
+   ],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ cargo test (exit 1)\ntest auth::test_token_expiry ... FAILED\nfailures:\nthread 'auth::test_token_expiry' panicked at src/auth.rs:112:9:\nassertion `left == right` failed\n  left: 3600\n right: 0\nfailures:\ntest result: FAILED. 7 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s",
+   "rawChars": 849,
+   "seconds": 0.221
+  },
+  {
+   "head": "test",
+   "id": "cargo_test_multiple",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ cargo test (exit 1)\n$ cargo test\n   Compiling myapp v0.1.0 (/Users/rivansh/code/myapp)\n    Finished `test` profile in 1.2s\n     Running unittests src/lib.rs\n\nrunning 12 tests\ntest db::test_conn ... ok\ntest db::test_ping ... ok\ntest config::test_env ... FAILED\ntest parser::test_json ... FAILED\ntest parser::test_xml ... ok\n\nfailures:\n\n---- config::test_env stdout ----\nthread 'config::test_env' panicked at src/config.rs:45:5:\nmissing required port env var\n\n---- parser::test_json stdout ----\nthread 'parser::test_json' panicked at src/parser.rs:88:13:\nassertion failed: !parsed.is_empty()\n\nfailures:\n    config::test_env\n    parser::test_json\n\ntest result: FAILED. 10 passed; 2 failed; 0 ignored; finished in 0.22s",
+   "rawChars": 695,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "cargo_compile_error",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ cargo build (exit 1)\n$ cargo build\n   Compiling libc v0.2.155\n   Compiling serde v1.0.203\n   Compiling myapp v0.1.0 (/Users/rivansh/code/myapp)\nerror[E0308]: mismatched types\n  --> src/main.rs:24:18\n   |\n24 |     let port: u16 = \"8080\";\n   |               ---   ^^^^^^ expected `u16`, found `&str`\n   |               |\n   |               expected due to this\n\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `myapp` (bin \"myapp\") due to 1 previous error",
+   "rawChars": 477,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "tsc_type_errors",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ tsc --noEmit (exit 1)\n$ tsc --noEmit\nsrc/components/UserCard.tsx:14:7 - error TS2741: Property 'email' is missing in type '{ name: string; }' but required in type 'UserProps'.\n\n14       <UserProps name=\"Alice\" />\n         ~~~~~~~~~~\n\n  src/types.ts:4:3\n    4   email: string;\n        ~~~~~\n    'email' is declared here.\n\nsrc/utils/format.ts:25:12 - error TS2339: Property 'toUpperCase' does not exist on type 'number'.\n\n25   return val.toUpperCase();\n                ~~~~~~~~~~~\n\nFound 2 errors in 2 files.",
+   "rawChars": 484,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "tsc_missing_import",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ tsc --noEmit (exit 1)\n$ tsc --noEmit\nsrc/index.ts:3:22 - error TS2307: Cannot find module './api' or its corresponding type declarations.\n\n3 import { getClient } from './api';\n                       ~~~~~~~\n\nFound 1 error in 1 file.",
+   "rawChars": 210,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "go_test_failure",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ go test ./... (exit 1)\n$ go test ./...\n=== RUN   TestHealthCheck\n--- PASS: TestHealthCheck (0.00s)\n=== RUN   TestValidateEmail\n--- FAIL: TestValidateEmail (0.01s)\n    email_test.go:28: ValidateEmail(\"bad_email\") = true, want false\nFAIL\nFAIL    github.com/org/myapp/pkg/auth   0.024s\nFAIL",
+   "rawChars": 264,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "go_test_panic",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ go test ./... (exit 1)\n$ go test ./...\n=== RUN   TestStartServer\n--- FAIL: TestStartServer (0.02s)\npanic: runtime error: invalid memory address or nil pointer dereference [recovered]\n\tpanic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x10f4388]\n\ngoroutine 6 [running]:\ngithub.com/org/myapp/server.Start(0x0)\n\t/Users/rivansh/code/myapp/server.go:84 +0x48\ngithub.com/org/myapp.TestStartServer(0x14000114000)\n\t/Users/rivansh/code/myapp/server_test.go:19 +0x28\ntesting.tRunner(0x14000114000, 0x10fa958)\n\t/usr/local/go/src/testing/testing.go:1689 +0xf4\nFAIL\tgithub.com/org/myapp\t0.035s",
+   "rawChars": 640,
+   "seconds": 0.001
+  },
+  {
+   "head": "test",
+   "id": "node_test_runner",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ node --test (exit 1)\n$ node --test\n\u2714 math > addition works (0.5ms)\n\u2714 math > subtraction works (0.3ms)\n\u2714 calc > multiplication works (0.4ms)\n\u2716 calc > division by zero throws (1.8ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  + actual - expected\n\n  + 0\n  - Infinity\n      at TestContext.<anonymous> (file:///Users/rivansh/code/test/calc.test.mjs:15:10)\n      at Test.run (node:internal/test_runner/test:892:25)\n      at async Suite.run (node:internal/test_runner/test:1255:7)\n      at node:internal/main/test_runner:14:5\n\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 1",
+   "rawChars": 568,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "python_syntax_error",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ python -m pytest (exit 1)\n$ python -m pytest\nImportError while loading conftest '/Users/rivansh/code/tests/conftest.py'.\ntests/conftest.py:12: in <module>\n    from app.server import app\napp/server.py:14: in <module>\n    def setup(\nE     SyntaxError: invalid syntax (server.py, line 14)\n=========================== no tests ran in 0.02s ============================",
+   "rawChars": 338,
+   "seconds": 0
+  },
+  {
+   "head": "test",
+   "id": "mocha_failure",
+   "calls": [],
+   "model": "hydra-nano:git",
+   "solved": true,
+   "evidence": true,
+   "clean": true,
+   "text": "$ npx mocha (exit 1)\n$ npx mocha\n  Integration Tests\n    \u2713 responds to health check (40ms)\n    \u2713 loads user profile (35ms)\n    1) authenticates bearer token\n\n  2 passing (120ms)\n  1 failing\n\n  1) Integration Tests\n       authenticates bearer token:\n     AssertionError: expected false to be true\n      at Context.<anonymous> (test/integration.js:64:14)\n      at processImmediate (node:internal/timers:478:21)\n      at node_modules/mocha/lib/runnable.js:368:7\n      at node_modules/mocha/lib/runner.js:450:12",
+   "rawChars": 486,
+   "seconds": 0
+  },
+  {
+   "head": "os",
+   "id": "os-0",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:52.017Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "ports"
+       }
+      ]
+     },
+     "seconds": 0.207
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Which sockets are accepting connections?",
+   "sections": [
+    {
+     "probe": "ports",
+     "args": {
+      "probe": "ports"
+     },
+     "ok": true,
+     "cmd": "os ports",
+     "out": "fixture-ports"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os ports\nfixture-ports",
+   "rawChars": 13,
+   "seconds": 0.208
+  },
+  {
+   "head": "os",
+   "id": "os-1",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:52.226Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "ports"
+       }
+      ]
+     },
+     "seconds": 0.112
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "List the listening TCP ports.",
+   "sections": [
+    {
+     "probe": "ports",
+     "args": {
+      "probe": "ports"
+     },
+     "ok": true,
+     "cmd": "os ports",
+     "out": "fixture-ports"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os ports\nfixture-ports",
+   "rawChars": 13,
+   "seconds": 0.112
+  },
+  {
+   "head": "os",
+   "id": "os-2",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:52.339Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "ports"
+       }
+      ]
+     },
+     "seconds": 0.11
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Which services have open listeners?",
+   "sections": [
+    {
+     "probe": "ports",
+     "args": {
+      "probe": "ports"
+     },
+     "ok": true,
+     "cmd": "os ports",
+     "out": "fixture-ports"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os ports\nfixture-ports",
+   "rawChars": 13,
+   "seconds": 0.111
+  },
+  {
+   "head": "os",
+   "id": "os-3",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:52.451Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "ports"
+       }
+      ]
+     },
+     "seconds": 0.111
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Is anything listening on port 4140?",
+   "sections": [
+    {
+     "probe": "ports",
+     "args": {
+      "probe": "ports"
+     },
+     "ok": true,
+     "cmd": "os ports",
+     "out": "fixture-ports"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os ports\nfixture-ports",
+   "rawChars": 13,
+   "seconds": 0.111
+  },
+  {
+   "head": "os",
+   "id": "os-4",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:52.563Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "processes"
+       }
+      ]
+     },
+     "seconds": 0.117
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Show running processes.",
+   "sections": [
+    {
+     "probe": "processes",
+     "args": {
+      "probe": "processes"
+     },
+     "ok": true,
+     "cmd": "os processes",
+     "out": "fixture-processes"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os processes\nfixture-processes",
+   "rawChars": 17,
+   "seconds": 0.118
+  },
+  {
+   "head": "os",
+   "id": "os-5",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:52.683Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "processes"
+       }
+      ]
+     },
+     "seconds": 0.116
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "What are the busiest processes by CPU?",
+   "sections": [
+    {
+     "probe": "processes",
+     "args": {
+      "probe": "processes"
+     },
+     "ok": true,
+     "cmd": "os processes",
+     "out": "fixture-processes"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os processes\nfixture-processes",
+   "rawChars": 17,
+   "seconds": 0.116
+  },
+  {
+   "head": "os",
+   "id": "os-6",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:52.801Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "processes",
+        "name": "node"
+       }
+      ]
+     },
+     "seconds": 0.142
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Check whether node is running.",
+   "sections": [
+    {
+     "probe": "processes",
+     "args": {
+      "probe": "processes",
+      "name": "node"
+     },
+     "ok": true,
+     "cmd": "os processes --name=node",
+     "out": "fixture-processes"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os processes --name=node\nfixture-processes",
+   "rawChars": 17,
+   "seconds": 0.142
+  },
+  {
+   "head": "os",
+   "id": "os-7",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:52.944Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "processes"
+       }
+      ]
+     },
+     "seconds": 0.115
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Find the python process.",
+   "sections": [
+    {
+     "probe": "processes",
+     "args": {
+      "probe": "processes"
+     },
+     "ok": true,
+     "cmd": "os processes",
+     "out": "fixture-processes"
+    }
+   ],
+   "solved": false,
+   "evidence": true,
+   "effectivePlan": false,
+   "modelPlan": false,
+   "text": "$ os processes\nfixture-processes",
+   "rawChars": 17,
+   "seconds": 0.115
+  },
+  {
+   "head": "os",
+   "id": "os-8",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.060Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "processes"
+       }
+      ]
+     },
+     "seconds": 0.117
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Is postgres running on this machine?",
+   "sections": [
+    {
+     "probe": "processes",
+     "args": {
+      "probe": "processes"
+     },
+     "ok": true,
+     "cmd": "os processes",
+     "out": "fixture-processes"
+    }
+   ],
+   "solved": false,
+   "evidence": true,
+   "effectivePlan": false,
+   "modelPlan": false,
+   "text": "$ os processes\nfixture-processes",
+   "rawChars": 17,
+   "seconds": 0.117
+  },
+  {
+   "head": "os",
+   "id": "os-9",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.178Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "disk"
+       }
+      ]
+     },
+     "seconds": 0.111
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "How much disk capacity remains?",
+   "sections": [
+    {
+     "probe": "disk",
+     "args": {
+      "probe": "disk"
+     },
+     "ok": true,
+     "cmd": "os disk",
+     "out": "fixture-disk"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os disk\nfixture-disk",
+   "rawChars": 12,
+   "seconds": 0.111
+  },
+  {
+   "head": "os",
+   "id": "os-10",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.290Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "disk"
+       }
+      ]
+     },
+     "seconds": 0.111
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Show filesystem usage.",
+   "sections": [
+    {
+     "probe": "disk",
+     "args": {
+      "probe": "disk"
+     },
+     "ok": true,
+     "cmd": "os disk",
+     "out": "fixture-disk"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os disk\nfixture-disk",
+   "rawChars": 12,
+   "seconds": 0.111
+  },
+  {
+   "head": "os",
+   "id": "os-11",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.403Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "disk"
+       }
+      ]
+     },
+     "seconds": 0.112
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Are the mounted disks nearly full?",
+   "sections": [
+    {
+     "probe": "disk",
+     "args": {
+      "probe": "disk"
+     },
+     "ok": true,
+     "cmd": "os disk",
+     "out": "fixture-disk"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os disk\nfixture-disk",
+   "rawChars": 12,
+   "seconds": 0.112
+  },
+  {
+   "head": "os",
+   "id": "os-12",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.516Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "disk"
+       }
+      ]
+     },
+     "seconds": 0.112
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Inspect available storage space.",
+   "sections": [
+    {
+     "probe": "disk",
+     "args": {
+      "probe": "disk"
+     },
+     "ok": true,
+     "cmd": "os disk",
+     "out": "fixture-disk"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os disk\nfixture-disk",
+   "rawChars": 12,
+   "seconds": 0.112
+  },
+  {
+   "head": "os",
+   "id": "os-13",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.629Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "system"
+       }
+      ]
+     },
+     "seconds": 0.113
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Which operating system is this?",
+   "sections": [
+    {
+     "probe": "system",
+     "args": {
+      "probe": "system"
+     },
+     "ok": true,
+     "cmd": "os system",
+     "out": "fixture-system"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os system\nfixture-system",
+   "rawChars": 14,
+   "seconds": 0.113
+  },
+  {
+   "head": "os",
+   "id": "os-14",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.744Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "system"
+       }
+      ]
+     },
+     "seconds": 0.11
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Report the machine architecture and OS release.",
+   "sections": [
+    {
+     "probe": "system",
+     "args": {
+      "probe": "system"
+     },
+     "ok": true,
+     "cmd": "os system",
+     "out": "fixture-system"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os system\nfixture-system",
+   "rawChars": 14,
+   "seconds": 0.11
+  },
+  {
+   "head": "os",
+   "id": "os-15",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.855Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "system"
+       }
+      ]
+     },
+     "seconds": 0.115
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "How long has this host been up?",
+   "sections": [
+    {
+     "probe": "system",
+     "args": {
+      "probe": "system"
+     },
+     "ok": true,
+     "cmd": "os system",
+     "out": "fixture-system"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os system\nfixture-system",
+   "rawChars": 14,
+   "seconds": 0.115
+  },
+  {
+   "head": "os",
+   "id": "os-16",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:53.972Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "system"
+       }
+      ]
+     },
+     "seconds": 0.11
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Show system information.",
+   "sections": [
+    {
+     "probe": "system",
+     "args": {
+      "probe": "system"
+     },
+     "ok": true,
+     "cmd": "os system",
+     "out": "fixture-system"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os system\nfixture-system",
+   "rawChars": 14,
+   "seconds": 0.11
+  },
+  {
+   "head": "os",
+   "id": "os-17",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:54.084Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "memory"
+       }
+      ]
+     },
+     "seconds": 0.11
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "How much RAM is available?",
+   "sections": [
+    {
+     "probe": "memory",
+     "args": {
+      "probe": "memory"
+     },
+     "ok": true,
+     "cmd": "os memory",
+     "out": "fixture-memory"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os memory\nfixture-memory",
+   "rawChars": 14,
+   "seconds": 0.11
+  },
+  {
+   "head": "os",
+   "id": "os-18",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:54.195Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "memory"
+       }
+      ]
+     },
+     "seconds": 0.116
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Report used and free memory.",
+   "sections": [
+    {
+     "probe": "memory",
+     "args": {
+      "probe": "memory"
+     },
+     "ok": true,
+     "cmd": "os memory",
+     "out": "fixture-memory"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os memory\nfixture-memory",
+   "rawChars": 14,
+   "seconds": 0.116
+  },
+  {
+   "head": "os",
+   "id": "os-19",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:54.312Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "memory"
+       }
+      ]
+     },
+     "seconds": 0.11
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Is this machine low on memory?",
+   "sections": [
+    {
+     "probe": "memory",
+     "args": {
+      "probe": "memory"
+     },
+     "ok": true,
+     "cmd": "os memory",
+     "out": "fixture-memory"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os memory\nfixture-memory",
+   "rawChars": 14,
+   "seconds": 0.11
+  },
+  {
+   "head": "os",
+   "id": "os-20",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:54.424Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "memory"
+       }
+      ]
+     },
+     "seconds": 0.111
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Check physical memory usage.",
+   "sections": [
+    {
+     "probe": "memory",
+     "args": {
+      "probe": "memory"
+     },
+     "ok": true,
+     "cmd": "os memory",
+     "out": "fixture-memory"
+    }
+   ],
+   "solved": true,
+   "evidence": true,
+   "effectivePlan": true,
+   "modelPlan": true,
+   "text": "$ os memory\nfixture-memory",
+   "rawChars": 14,
+   "seconds": 0.111
+  },
+  {
+   "head": "os",
+   "id": "os-21",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:54.536Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "system"
+       }
+      ]
+     },
+     "seconds": 0.11
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "What is HYDRA_SUITE_SAFE set to?",
+   "sections": [
+    {
+     "probe": "system",
+     "args": {
+      "probe": "system"
+     },
+     "ok": true,
+     "cmd": "os system",
+     "out": "fixture-system"
+    }
+   ],
+   "solved": false,
+   "evidence": false,
+   "effectivePlan": false,
+   "modelPlan": false,
+   "text": "$ os system\nfixture-system",
+   "rawChars": 14,
+   "seconds": 0.11
+  },
+  {
+   "head": "os",
+   "id": "os-22",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:54.648Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "env"
+       }
+      ]
+     },
+     "seconds": 0.114
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Read the HYDRA_SUITE_SAFE environment variable.",
+   "sections": [
+    {
+     "probe": "env",
+     "args": {
+      "probe": "env"
+     },
+     "ok": false,
+     "cmd": "os env",
+     "out": "[probe failed] Error: specify environment variable name"
+    }
+   ],
+   "solved": false,
+   "evidence": false,
+   "effectivePlan": false,
+   "modelPlan": false,
+   "text": "$ os env\n[probe failed] Error: specify environment variable name",
+   "rawChars": 55,
+   "seconds": 0.115
+  },
+  {
+   "head": "os",
+   "id": "os-23",
+   "calls": [
+    {
+     "stage": "plan",
+     "model": "hydra-nano:git",
+     "startedAt": "2026-10-14T06:34:54.764Z",
+     "reply": {
+      "probes": [
+       {
+        "probe": "env"
+       }
+      ]
+     },
+     "seconds": 0.111
+    }
+   ],
+   "model": "hydra-nano:git",
+   "question": "Show HYDRA_SUITE_TOKEN from the environment.",
+   "sections": [
+    {
+     "probe": "env",
+     "args": {
+      "probe": "env"
+     },
+     "ok": false,
+     "cmd": "os env",
+     "out": "[probe failed] Error: specify environment variable name"
+    }
+   ],
+   "solved": false,
+   "evidence": false,
+   "effectivePlan": false,
+   "modelPlan": false,
+   "text": "$ os env\n[probe failed] Error: specify environment variable name",
+   "rawChars": 55,
+   "seconds": 0.111
+  }
+ ]
+}

@@ -61,9 +61,9 @@ const NO_ANSWER = 'The local model gave no usable answer. The start of each outp
 // The model only chooses line numbers; the evidence printed is the command's own text, never a paraphrase.
 export async function answer(question, sections, chat) {
   const rawChars = sections.reduce((sum, section) => sum + Math.min(section.out.length, ACCOUNT_CAP), 0);
-  if (sections.length === 1 && sections[0].probe === 'blame' && /\bline\b/i.test(question)) {
-    const identifiers = (question.match(/\b[A-Za-z_$][\w$]*\b/g) || []).filter(word => /[_$\d]|[a-z][A-Z]/.test(word));
-    const lines = sections[0].out.split('\n').filter(line => identifiers.some(word => line.includes(word)));
+  const namedSource = /\b(?:line|record)\s+containing\s+[`"']?([A-Za-z_$][\w$]*)/i.exec(question)?.[1];
+  if (sections.length === 1 && sections[0].probe === 'blame' && namedSource) {
+    const lines = sections[0].out.split('\n').filter(line => line.includes(namedSource));
     const out = lines.join('\n');
     if (lines.length && lines.length <= MAX_CITED && out.length <= PER_SECTION) {
       return { text: `$ ${sections[0].cmd}\n${out}`, rawChars };
@@ -77,12 +77,16 @@ export async function answer(question, sections, chat) {
   let count = 0;
   const parts = sections.map(section => {
     const all = section.out.trimEnd().split('\n');
+    const firstPatch = all.findIndex(line => line.startsWith('diff --git '));
     const kept = [];
     let room = Math.min(PER_SECTION, budget);
-    for (const line of all) {
+    for (const [index, line] of all.entries()) {
       const text = line.slice(0, MAX_LINE);
       if (text.length + 1 > room) break;
-      kept.push({ id: ++count, text });
+      // A diffstat is the patch's file inventory; retain its bounded header context.
+      const context = ['diff', 'show'].includes(section.probe) && (firstPatch < 0 || index < firstPatch)
+        && /^\s*.+\s+\|\s+(?:\d+\s*[+-]*|Bin\b.*)$/.test(line);
+      kept.push({ id: ++count, text, context });
       room -= text.length + 1;
       budget -= text.length + 1;
     }
@@ -107,8 +111,8 @@ export async function answer(question, sections, chat) {
     .map(part => {
       if (part.complete) return `$ ${part.cmd}\n${part.out.trimEnd()}`;
       const picked = cited.size
-        ? part.lines.filter((line, i) => i < LEAD_LINES || cited.has(line.id))
-        : part.lines.slice(0, HEAD_LINES);
+        ? part.lines.filter((line, i) => i < LEAD_LINES || line.context || cited.has(line.id))
+        : part.lines.filter((line, i) => i < HEAD_LINES || line.context);
       const rest = part.total - picked.length;
       return [`$ ${part.cmd}`, ...picked.map(line => line.text), ...(rest > 0 ? [`(${rest} more lines not shown)`] : [])].join(
         '\n',

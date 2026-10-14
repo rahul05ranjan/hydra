@@ -1,0 +1,23 @@
+{
+  "id": "rahulswt7/hydra-balanced-git-refinement",
+  "id_no": 138643519,
+  "title": "Hydra balanced Git refinement",
+  "code_file": "hydra-balanced-git-refinement.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "rahulswt7/hydra-balanced-git-refinement-input"
+  ],
+  "kernel_sources": [
+    "rahulswt7/hydra-balanced-git-quality"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "docker_image": "",
+  "machine_shape": "NvidiaTeslaT4"
+}

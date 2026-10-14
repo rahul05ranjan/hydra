@@ -1,0 +1,110 @@
+{
+  "status": "COMPLETE",
+  "kernelVersion": 1,
+  "planSha256": "8805921ce8499016a19c304f71d9d088a4d898bf478c143f9c40aa3f7504eb24",
+  "checkpointSha256": "7b6b4662dbba3542fd296696b1c94e06240b28931e5b8ac6eec5cb99fc3dc8f0",
+  "ggufSha256": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be",
+  "elapsedSeconds": 457.2627148800001,
+  "results": {
+    "candidate-q8-development": {
+      "tasks": 200,
+      "modelCalls": 209,
+      "tasksWithModelCalls": 198,
+      "modelPlannerTasks": 198,
+      "modelProbeChoiceAccuracy": 0.98989898989899,
+      "routed": 0.57,
+      "plan": 0.99,
+      "evidence": 0.985,
+      "solved": 0.98,
+      "recall": 0.9904999999999999,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 26155,
+      "returned": 17095,
+      "errors": 0
+    },
+    "candidate-q8-suite": {
+      "byHead": {
+        "files": {
+          "tasks": 20,
+          "solvedCount": 20,
+          "solved": 1,
+          "errors": 0,
+          "modelCalls": 20,
+          "tasksWithModelCalls": 20,
+          "modelPlanAccuracy": 0.95,
+          "rawChars": 4261,
+          "returnedChars": 4828
+        },
+        "read": {
+          "tasks": 20,
+          "solvedCount": 20,
+          "solved": 1,
+          "errors": 0,
+          "modelCalls": 0,
+          "tasksWithModelCalls": 0,
+          "modelPlanAccuracy": null,
+          "rawChars": 6140,
+          "returnedChars": 6795
+        },
+        "test": {
+          "tasks": 20,
+          "solvedCount": 20,
+          "solved": 1,
+          "errors": 0,
+          "modelCalls": 7,
+          "tasksWithModelCalls": 7,
+          "modelPlanAccuracy": null,
+          "rawChars": 19680,
+          "returnedChars": 8646
+        },
+        "os": {
+          "tasks": 24,
+          "solvedCount": 24,
+          "solved": 1,
+          "errors": 0,
+          "modelCalls": 24,
+          "tasksWithModelCalls": 24,
+          "modelPlanAccuracy": 1,
+          "rawChars": 450,
+          "returnedChars": 844
+        }
+      },
+      "scope": "Development diagnosis, existing small fixtures. No 95% release claim. OS uses deterministic probe fixtures with real env guardrail; read gather may make zero planner calls."
+    },
+    "candidate-q8-sealed": {
+      "tasks": 1000,
+      "routed": 0.721,
+      "plan": 0.927,
+      "evidence": 0.936,
+      "solved": 0.927,
+      "recall": 0.9403666666666666,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 100919,
+      "returned": 89410,
+      "errors": 0,
+      "solvedWeighted": 0.9216003801725396
+    }
+  },
+  "gpu": {
+    "candidate-q8": {
+      "beforeMB": [
+        0,
+        0
+      ],
+      "afterMB": [
+        1397,
+        0
+      ],
+      "device": "CUDA0",
+      "splitMode": "none",
+      "processEvidence": "67, GPU-a2eb6a11-c692-fe98-11ee-d9620f0d042d, 1394\n",
+      "modelSha256": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be"
+    }
+  },
+  "sealedRowsInspected": false,
+  "acceptedForRelease": false,
+  "published": false,
+  "defaultChanged": false
+}

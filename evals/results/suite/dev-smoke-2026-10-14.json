@@ -1,0 +1,961 @@
+{
+  "timestamp": "2026-10-14T11:44:54.488Z",
+  "complete": true,
+  "split": "development",
+  "scope": "Independent per-head quality corpus. OS probe-output fixtures and real env guardrail; native host proof separate. Actual artifact identities and raw plan/evidence attribution recorded. No pooled release claim.",
+  "elapsedSeconds": 81.367,
+  "byHead": {
+    "files": {
+      "tasks": 3,
+      "solvedCount": 3,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 3,
+      "tasksWithModelCalls": 3,
+      "modelPlanAccuracy": 1,
+      "modelPlannedTasks": 3,
+      "modelEvidenceTasks": 0,
+      "modelEvidenceAccuracy": null,
+      "latencySeconds": {
+        "p50": 1.506,
+        "p95": 1.506,
+        "maximum": 16.432
+      },
+      "solvedConfidence95": [
+        0.43849391955098227,
+        1
+      ],
+      "rawChars": 1277,
+      "returnedChars": 1369
+    },
+    "read": {
+      "tasks": 3,
+      "solvedCount": 3,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 0,
+      "tasksWithModelCalls": 0,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 0,
+      "modelEvidenceAccuracy": null,
+      "latencySeconds": {
+        "p50": 0.044,
+        "p95": 0.044,
+        "maximum": 0.044
+      },
+      "solvedConfidence95": [
+        0.43849391955098227,
+        1
+      ],
+      "rawChars": 1858,
+      "returnedChars": 2033
+    },
+    "test": {
+      "tasks": 3,
+      "solvedCount": 3,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 3,
+      "tasksWithModelCalls": 3,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 3,
+      "modelEvidenceAccuracy": 1,
+      "latencySeconds": {
+        "p50": 7.147,
+        "p95": 7.147,
+        "maximum": 9.173
+      },
+      "solvedConfidence95": [
+        0.43849391955098227,
+        1
+      ],
+      "rawChars": 5988,
+      "returnedChars": 1118
+    },
+    "os": {
+      "tasks": 3,
+      "solvedCount": 2,
+      "solved": 0.6666666666666666,
+      "errors": 0,
+      "modelCalls": 5,
+      "tasksWithModelCalls": 3,
+      "modelPlanAccuracy": 1,
+      "modelPlannedTasks": 3,
+      "modelEvidenceTasks": 2,
+      "modelEvidenceAccuracy": 0.5,
+      "latencySeconds": {
+        "p50": 12.945,
+        "p95": 12.945,
+        "maximum": 25.185
+      },
+      "solvedConfidence95": [
+        0.2076549551264879,
+        0.9385096847238394
+      ],
+      "rawChars": 1946,
+      "returnedChars": 874
+    }
+  },
+  "byFamily": {
+    "files/declaration/python/routine": {
+      "tasks": 3,
+      "solvedCount": 3,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 3,
+      "tasksWithModelCalls": 3,
+      "modelPlanAccuracy": 1,
+      "modelPlannedTasks": 3,
+      "modelEvidenceTasks": 0,
+      "modelEvidenceAccuracy": null,
+      "latencySeconds": {
+        "p50": 1.506,
+        "p95": 1.506,
+        "maximum": 16.432
+      },
+      "solvedConfidence95": [
+        0.43849391955098227,
+        1
+      ],
+      "rawChars": 1277,
+      "returnedChars": 1369
+    },
+    "read/development-real-outline": {
+      "tasks": 3,
+      "solvedCount": 3,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 0,
+      "tasksWithModelCalls": 0,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 0,
+      "modelEvidenceAccuracy": null,
+      "latencySeconds": {
+        "p50": 0.044,
+        "p95": 0.044,
+        "maximum": 0.044
+      },
+      "solvedConfidence95": [
+        0.43849391955098227,
+        1
+      ],
+      "rawChars": 1858,
+      "returnedChars": 2033
+    },
+    "test/dev-vitest-scalar": {
+      "tasks": 3,
+      "solvedCount": 3,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 3,
+      "tasksWithModelCalls": 3,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 3,
+      "modelEvidenceAccuracy": 1,
+      "latencySeconds": {
+        "p50": 7.147,
+        "p95": 7.147,
+        "maximum": 9.173
+      },
+      "solvedConfidence95": [
+        0.43849391955098227,
+        1
+      ],
+      "rawChars": 5988,
+      "returnedChars": 1118
+    },
+    "os/ports": {
+      "tasks": 1,
+      "solvedCount": 1,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 2,
+      "tasksWithModelCalls": 1,
+      "modelPlanAccuracy": 1,
+      "modelPlannedTasks": 1,
+      "modelEvidenceTasks": 1,
+      "modelEvidenceAccuracy": 1,
+      "latencySeconds": {
+        "p50": 25.185,
+        "p95": 25.185,
+        "maximum": 25.185
+      },
+      "solvedConfidence95": [
+        0.20654329147389294,
+        1
+      ],
+      "rawChars": 963,
+      "returnedChars": 605
+    },
+    "os/port": {
+      "tasks": 1,
+      "solvedCount": 0,
+      "solved": 0,
+      "errors": 0,
+      "modelCalls": 2,
+      "tasksWithModelCalls": 1,
+      "modelPlanAccuracy": 1,
+      "modelPlannedTasks": 1,
+      "modelEvidenceTasks": 1,
+      "modelEvidenceAccuracy": 0,
+      "latencySeconds": {
+        "p50": 12.945,
+        "p95": 12.945,
+        "maximum": 12.945
+      },
+      "solvedConfidence95": [
+        0,
+        0.7934567085261071
+      ],
+      "rawChars": 963,
+      "returnedChars": 238
+    },
+    "os/ports_empty": {
+      "tasks": 1,
+      "solvedCount": 1,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 1,
+      "tasksWithModelCalls": 1,
+      "modelPlanAccuracy": 1,
+      "modelPlannedTasks": 1,
+      "modelEvidenceTasks": 0,
+      "modelEvidenceAccuracy": null,
+      "latencySeconds": {
+        "p50": 0.853,
+        "p95": 0.853,
+        "maximum": 0.853
+      },
+      "solvedConfidence95": [
+        0.20654329147389294,
+        1
+      ],
+      "rawChars": 20,
+      "returnedChars": 31
+    }
+  },
+  "rows": [
+    {
+      "head": "files",
+      "id": "files-development-declaration-python-0000",
+      "family": "declaration/python/routine",
+      "calls": [
+        {
+          "stage": "plan",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:43:33.212Z",
+          "reply": {
+            "terms": [
+              "main"
+            ]
+          },
+          "seconds": 15.971
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "Find the declaration of main.",
+      "sections": [
+        {
+          "cmd": "search \"main\"",
+          "out": "src/stdlib/turtledemo/two_canvases.py:11:def main():\napp/caller.py:2:result = main(request)\nsrc/stdlib/turtledemo/two_canvases.py:52:if __name__ == '__main__':\nsrc/stdlib/turtledemo/two_canvases.py:53:    main()\napp/imports.py:1:from source_module import main\ndocs/navigation.md:2:The `main` routine is mentioned here; this is documentation.\nevals/results/previous.txt:1:Archived reference to main: outdated evaluation output."
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "top1": true,
+      "clean": true,
+      "modelPlan": true,
+      "text": "$ search \"main\"\nsrc/stdlib/turtledemo/two_canvases.py:11:def main():\napp/caller.py:2:result = main(request)\nsrc/stdlib/turtledemo/two_canvases.py:52:if __name__ == '__main__':\nsrc/stdlib/turtledemo/two_canvases.py:53:    main()\napp/imports.py:1:from source_module import main\ndocs/navigation.md:2:The `main` routine is mentioned here; this is documentation.\nevals/results/previous.txt:1:Archived reference to main: outdated evaluation output.",
+      "rawChars": 426,
+      "modelEvidence": null,
+      "seconds": 16.432
+    },
+    {
+      "head": "files",
+      "id": "files-development-declaration-python-0001",
+      "family": "declaration/python/routine",
+      "calls": [
+        {
+          "stage": "plan",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:43:49.620Z",
+          "reply": {
+            "terms": [
+              "filemode"
+            ]
+          },
+          "seconds": 1.288
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "Where does the source declare filemode?",
+      "sections": [
+        {
+          "cmd": "search \"filemode\"",
+          "out": "src/stdlib/stat.py:164:def filemode(mode):\napp/caller.py:2:result = filemode(request)\nsrc/stdlib/stat.py:134:_filemode_table = (\nsrc/stdlib/stat.py:167:    for index, table in enumerate(_filemode_table):\napp/imports.py:1:from source_module import filemode\ndocs/migration.md:1:filemode appears in migration note 0.\ndocs/migration.md:2:filemode appears in migration note 1.\ndocs/migration.md:3:filemode appears in migration note 2.\ndocs/navigation.md:2:The `filemode` routine is mentioned here; this is documentation."
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "top1": true,
+      "clean": true,
+      "modelPlan": true,
+      "text": "$ search \"filemode\"\nsrc/stdlib/stat.py:164:def filemode(mode):\napp/caller.py:2:result = filemode(request)\nsrc/stdlib/stat.py:134:_filemode_table = (\nsrc/stdlib/stat.py:167:    for index, table in enumerate(_filemode_table):\napp/imports.py:1:from source_module import filemode\ndocs/migration.md:1:filemode appears in migration note 0.\ndocs/migration.md:2:filemode appears in migration note 1.\ndocs/migration.md:3:filemode appears in migration note 2.\ndocs/navigation.md:2:The `filemode` routine is mentioned here; this is documentation.",
+      "rawChars": 515,
+      "modelEvidence": null,
+      "seconds": 1.506
+    },
+    {
+      "head": "files",
+      "id": "files-development-declaration-python-0002",
+      "family": "declaration/python/routine",
+      "calls": [
+        {
+          "stage": "plan",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:43:51.156Z",
+          "reply": {
+            "terms": [
+              "getregentry"
+            ]
+          },
+          "seconds": 1.206
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "Show the source line that introduces getregentry.",
+      "sections": [
+        {
+          "cmd": "files named like getregentry",
+          "out": "examples/getregentry-usage.py"
+        },
+        {
+          "cmd": "search \"getregentry\"",
+          "out": "src/stdlib/encodings/undefined.py:40:def getregentry():\napp/caller.py:2:result = getregentry(request)\nexamples/getregentry-usage.py:1:result = getregentry(request)\napp/imports.py:1:from source_module import getregentry\ndocs/navigation.md:2:The `getregentry` routine is mentioned here; this is documentation."
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "top1": true,
+      "clean": true,
+      "modelPlan": true,
+      "text": "$ files named like getregentry\nexamples/getregentry-usage.py\n\n$ search \"getregentry\"\nsrc/stdlib/encodings/undefined.py:40:def getregentry():\napp/caller.py:2:result = getregentry(request)\nexamples/getregentry-usage.py:1:result = getregentry(request)\napp/imports.py:1:from source_module import getregentry\ndocs/navigation.md:2:The `getregentry` routine is mentioned here; this is documentation.",
+      "rawChars": 336,
+      "modelEvidence": null,
+      "seconds": 1.487
+    },
+    {
+      "head": "read",
+      "id": "read-development-python-outline-000",
+      "family": "development-real-outline",
+      "calls": [],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "outline \"sources with spaces/cpython-3.13.5/asyncio/futures.py\"",
+      "sections": [
+        {
+          "cmd": "read sources with spaces/cpython-3.13.5/asyncio/futures.py outline",
+          "out": "File: sources with spaces\\cpython-3.13.5\\asyncio\\futures.py (426 lines, ~3539 tokens)\nOutline of definitions (8 symbols):\n  L30: class Future:\n  L298: def _get_loop(fut):\n  L310: def _set_result_unless_cancelled(fut, result):\n  L317: def _convert_future_exc(exc):\n  L327: def _set_concurrent_future_state(concurrent, source):\n  L342: def _copy_future_state(source, dest):\n  L362: def _chain_future(source, destination):\n  L406: def wrap_future(future, *, loop=None):\n\n(To view a specific symbol or lines: hydra read sources with spaces\\cpython-3.13.5\\asyncio\\futures.py <symbol> or --lines <start-end>)"
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "bounds": true,
+      "text": "$ read sources with spaces/cpython-3.13.5/asyncio/futures.py outline\nFile: sources with spaces\\cpython-3.13.5\\asyncio\\futures.py (426 lines, ~3539 tokens)\nOutline of definitions (8 symbols):\n  L30: class Future:\n  L298: def _get_loop(fut):\n  L310: def _set_result_unless_cancelled(fut, result):\n  L317: def _convert_future_exc(exc):\n  L327: def _set_concurrent_future_state(concurrent, source):\n  L342: def _copy_future_state(source, dest):\n  L362: def _chain_future(source, destination):\n  L406: def wrap_future(future, *, loop=None):\n\n(To view a specific symbol or lines: hydra read sources with spaces\\cpython-3.13.5\\asyncio\\futures.py <symbol> or --lines <start-end>)",
+      "rawChars": 602,
+      "modelEvidence": null,
+      "seconds": 0.044
+    },
+    {
+      "head": "read",
+      "id": "read-development-python-outline-001",
+      "family": "development-real-outline",
+      "calls": [],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "show outline of \"sources/cpython-3.13.5/encodings/cp865.py\"",
+      "sections": [
+        {
+          "cmd": "read sources/cpython-3.13.5/encodings/cp865.py outline",
+          "out": "File: sources\\cpython-3.13.5\\encodings\\cp865.py (699 lines, ~8655 tokens)\nOutline of definitions (6 symbols):\n  L9: class Codec(codecs.Codec):\n  L17: class IncrementalEncoder(codecs.IncrementalEncoder):\n  L21: class IncrementalDecoder(codecs.IncrementalDecoder):\n  L25: class StreamWriter(Codec,codecs.StreamWriter):\n  L28: class StreamReader(Codec,codecs.StreamReader):\n  L33: def getregentry():\n\n(To view a specific symbol or lines: hydra read sources\\cpython-3.13.5\\encodings\\cp865.py <symbol> or --lines <start-end>)"
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "bounds": true,
+      "text": "$ read sources/cpython-3.13.5/encodings/cp865.py outline\nFile: sources\\cpython-3.13.5\\encodings\\cp865.py (699 lines, ~8655 tokens)\nOutline of definitions (6 symbols):\n  L9: class Codec(codecs.Codec):\n  L17: class IncrementalEncoder(codecs.IncrementalEncoder):\n  L21: class IncrementalDecoder(codecs.IncrementalDecoder):\n  L25: class StreamWriter(Codec,codecs.StreamWriter):\n  L28: class StreamReader(Codec,codecs.StreamReader):\n  L33: def getregentry():\n\n(To view a specific symbol or lines: hydra read sources\\cpython-3.13.5\\encodings\\cp865.py <symbol> or --lines <start-end>)",
+      "rawChars": 520,
+      "modelEvidence": null,
+      "seconds": 0.044
+    },
+    {
+      "head": "read",
+      "id": "read-development-python-outline-002",
+      "family": "development-real-outline",
+      "calls": [],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "outline \"sources/cpython-3.13.5/pkgutil.py\"",
+      "sections": [
+        {
+          "cmd": "read sources/cpython-3.13.5/pkgutil.py outline",
+          "out": "File: sources\\cpython-3.13.5\\pkgutil.py (530 lines, ~4570 tokens)\nOutline of definitions (12 symbols):\n  L26: def read_code(stream):\n  L39: def walk_packages(path=None, prefix='', onerror=None):\n  L96: def iter_modules(path=None, prefix=''):\n  L123: def iter_importer_modules(importer, prefix=''):\n  L130: def _iter_file_finder_modules(importer, prefix=''):\n  L212: def get_importer(path_item):\n  L237: def iter_importers(fullname=\"\"):\n  L266: def get_loader(module_or_name):\n  L294: def find_loader(fullname):\n  L319: def extend_path(path, name):\n  L413: def get_data(package, resource):\n  L458: def resolve_name(name):\n\n(To view a specific symbol or lines: hydra read sources\\cpython-3.13.5\\pkgutil.py <symbol> or --lines <start-end>)"
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "bounds": true,
+      "text": "$ read sources/cpython-3.13.5/pkgutil.py outline\nFile: sources\\cpython-3.13.5\\pkgutil.py (530 lines, ~4570 tokens)\nOutline of definitions (12 symbols):\n  L26: def read_code(stream):\n  L39: def walk_packages(path=None, prefix='', onerror=None):\n  L96: def iter_modules(path=None, prefix=''):\n  L123: def iter_importer_modules(importer, prefix=''):\n  L130: def _iter_file_finder_modules(importer, prefix=''):\n  L212: def get_importer(path_item):\n  L237: def iter_importers(fullname=\"\"):\n  L266: def get_loader(module_or_name):\n  L294: def find_loader(fullname):\n  L319: def extend_path(path, name):\n  L413: def get_data(package, resource):\n  L458: def resolve_name(name):\n\n(To view a specific symbol or lines: hydra read sources\\cpython-3.13.5\\pkgutil.py <symbol> or --lines <start-end>)",
+      "rawChars": 736,
+      "modelEvidence": null,
+      "seconds": 0.044
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-1",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:43:52.776Z",
+          "candidates": [
+            {
+              "id": 19,
+              "text": "[worker 2] voucher_120000: scanned shard 18; checksum 121207; cache ready (9ms)"
+            },
+            {
+              "id": 20,
+              "text": " FAIL tests/voucher_120000.ts > voucher preserves record 120000"
+            },
+            {
+              "id": 21,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 22,
+              "text": "Expected: \"wanted-voucher-120037\""
+            },
+            {
+              "id": 23,
+              "text": "Received: \"observed-voucher-120011\""
+            },
+            {
+              "id": 24,
+              "text": " ❯ tests/voucher_120000.ts:17:9"
+            },
+            {
+              "id": 27,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 28,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              27
+            ]
+          },
+          "selectedText": "[worker 2] voucher_120000: scanned shard 18; checksum 121207; cache ready (9ms)\n FAIL tests/voucher_120000.ts > voucher preserves record 120000\nAssertionError: equality check rejected record\nExpected: \"wanted-voucher-120037\"\nReceived: \"observed-voucher-120011\"\n ❯ tests/voucher_120000.ts:17:9\n Test Files  1 failed (1)",
+          "seconds": 9.169
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 2] voucher_120000: scanned shard 18; checksum 121207; cache ready (9ms)\n FAIL tests/voucher_120000.ts > voucher preserves record 120000\nAssertionError: equality check rejected record\nExpected: \"wanted-voucher-120037\"\nReceived: \"observed-voucher-120011\"\n ❯ tests/voucher_120000.ts:17:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 1941,
+      "modelEvidence": true,
+      "seconds": 9.173
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-2",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:44:01.949Z",
+          "candidates": [
+            {
+              "id": 20,
+              "text": "[worker 3] harbor_120001: scanned shard 19; checksum 121279; cache ready (10ms)"
+            },
+            {
+              "id": 21,
+              "text": " FAIL tests/harbor_120001.ts > harbor preserves record 120001"
+            },
+            {
+              "id": 22,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 23,
+              "text": "Expected: \"wanted-harbor-120038\""
+            },
+            {
+              "id": 24,
+              "text": "Received: \"observed-harbor-120012\""
+            },
+            {
+              "id": 25,
+              "text": " ❯ tests/harbor_120001.ts:30:9"
+            },
+            {
+              "id": 28,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 29,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              28
+            ]
+          },
+          "selectedText": "[worker 3] harbor_120001: scanned shard 19; checksum 121279; cache ready (10ms)\n FAIL tests/harbor_120001.ts > harbor preserves record 120001\nAssertionError: equality check rejected record\nExpected: \"wanted-harbor-120038\"\nReceived: \"observed-harbor-120012\"\n ❯ tests/harbor_120001.ts:30:9\n Test Files  1 failed (1)",
+          "seconds": 6.236
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 3] harbor_120001: scanned shard 19; checksum 121279; cache ready (10ms)\n FAIL tests/harbor_120001.ts > harbor preserves record 120001\nAssertionError: equality check rejected record\nExpected: \"wanted-harbor-120038\"\nReceived: \"observed-harbor-120012\"\n ❯ tests/harbor_120001.ts:30:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 1998,
+      "modelEvidence": true,
+      "seconds": 6.237
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-3",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:44:08.187Z",
+          "candidates": [
+            {
+              "id": 21,
+              "text": "[worker 4] tally_120002: scanned shard 20; checksum 121351; cache ready (11ms)"
+            },
+            {
+              "id": 22,
+              "text": " FAIL tests/tally_120002.ts > tally preserves record 120002"
+            },
+            {
+              "id": 23,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 24,
+              "text": "Expected: \"wanted-tally-120039\""
+            },
+            {
+              "id": 25,
+              "text": "Received: \"observed-tally-120013\""
+            },
+            {
+              "id": 26,
+              "text": " ❯ tests/tally_120002.ts:43:9"
+            },
+            {
+              "id": 29,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 30,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              29
+            ]
+          },
+          "selectedText": "[worker 4] tally_120002: scanned shard 20; checksum 121351; cache ready (11ms)\n FAIL tests/tally_120002.ts > tally preserves record 120002\nAssertionError: equality check rejected record\nExpected: \"wanted-tally-120039\"\nReceived: \"observed-tally-120013\"\n ❯ tests/tally_120002.ts:43:9\n Test Files  1 failed (1)",
+          "seconds": 7.147
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 4] tally_120002: scanned shard 20; checksum 121351; cache ready (11ms)\n FAIL tests/tally_120002.ts > tally preserves record 120002\nAssertionError: equality check rejected record\nExpected: \"wanted-tally-120039\"\nReceived: \"observed-tally-120013\"\n ❯ tests/tally_120002.ts:43:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 2049,
+      "modelEvidence": true,
+      "seconds": 7.147
+    },
+    {
+      "head": "os",
+      "id": "os-development-85000",
+      "family": "ports",
+      "calls": [
+        {
+          "stage": "plan",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:44:15.500Z",
+          "reply": {
+            "probes": [
+              {
+                "probe": "ports"
+              }
+            ]
+          },
+          "seconds": 5.629
+        },
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:44:21.130Z",
+          "candidates": [
+            {
+              "id": 1,
+              "text": "Proto LocalAddress ForeignAddress State PID"
+            },
+            {
+              "id": 2,
+              "text": "TCP 127.0.0.1:13000 0.0.0.0:0 LISTENING 26000"
+            },
+            {
+              "id": 3,
+              "text": "TCP 127.0.0.1:13001 0.0.0.0:0 LISTENING 26001"
+            },
+            {
+              "id": 4,
+              "text": "TCP 127.0.0.1:13002 0.0.0.0:0 LISTENING 26002"
+            },
+            {
+              "id": 5,
+              "text": "TCP 127.0.0.1:13003 0.0.0.0:0 LISTENING 26003"
+            },
+            {
+              "id": 6,
+              "text": "TCP 127.0.0.1:13004 0.0.0.0:0 LISTENING 26004"
+            },
+            {
+              "id": 7,
+              "text": "TCP 127.0.0.1:13005 0.0.0.0:0 LISTENING 26005"
+            },
+            {
+              "id": 8,
+              "text": "TCP 127.0.0.1:13006 0.0.0.0:0 LISTENING 26006"
+            },
+            {
+              "id": 9,
+              "text": "TCP 127.0.0.1:13007 0.0.0.0:0 LISTENING 26007"
+            },
+            {
+              "id": 10,
+              "text": "TCP 127.0.0.1:13008 0.0.0.0:0 LISTENING 26008"
+            },
+            {
+              "id": 11,
+              "text": "TCP 127.0.0.1:13009 0.0.0.0:0 LISTENING 26009"
+            },
+            {
+              "id": 12,
+              "text": "TCP 127.0.0.1:13010 0.0.0.0:0 LISTENING 26010"
+            },
+            {
+              "id": 13,
+              "text": "TCP 127.0.0.1:13011 0.0.0.0:0 LISTENING 26011"
+            },
+            {
+              "id": 14,
+              "text": "TCP 127.0.0.1:13012 0.0.0.0:0 LISTENING 26012"
+            },
+            {
+              "id": 15,
+              "text": "TCP 127.0.0.1:13013 0.0.0.0:0 LISTENING 26013"
+            },
+            {
+              "id": 16,
+              "text": "TCP 127.0.0.1:13014 0.0.0.0:0 LISTENING 26014"
+            },
+            {
+              "id": 17,
+              "text": "TCP 127.0.0.1:13015 0.0.0.0:0 LISTENING 26015"
+            },
+            {
+              "id": 18,
+              "text": "TCP 127.0.0.1:13016 0.0.0.0:0 LISTENING 26016"
+            },
+            {
+              "id": 19,
+              "text": "TCP 127.0.0.1:13017 0.0.0.0:0 LISTENING 26017"
+            },
+            {
+              "id": 20,
+              "text": "TCP 127.0.0.1:13018 0.0.0.0:0 LISTENING 26018"
+            },
+            {
+              "id": 21,
+              "text": "TCP 127.0.0.1:13019 0.0.0.0:0 LISTENING 26019"
+            }
+          ],
+          "reply": {
+            "lines": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ]
+          },
+          "selectedText": "Proto LocalAddress ForeignAddress State PID\nTCP 127.0.0.1:13000 0.0.0.0:0 LISTENING 26000\nTCP 127.0.0.1:13001 0.0.0.0:0 LISTENING 26001\nTCP 127.0.0.1:13002 0.0.0.0:0 LISTENING 26002\nTCP 127.0.0.1:13003 0.0.0.0:0 LISTENING 26003\nTCP 127.0.0.1:13004 0.0.0.0:0 LISTENING 26004\nTCP 127.0.0.1:13005 0.0.0.0:0 LISTENING 26005\nTCP 127.0.0.1:13006 0.0.0.0:0 LISTENING 26006\nTCP 127.0.0.1:13007 0.0.0.0:0 LISTENING 26007\nTCP 127.0.0.1:13008 0.0.0.0:0 LISTENING 26008\nTCP 127.0.0.1:13009 0.0.0.0:0 LISTENING 26009\nTCP 127.0.0.1:13010 0.0.0.0:0 LISTENING 26010",
+          "seconds": 19.553
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "Which processes have TCP listeners?",
+      "sections": [
+        {
+          "probe": "ports",
+          "args": {
+            "probe": "ports"
+          },
+          "ok": true,
+          "cmd": "os ports",
+          "out": "Proto LocalAddress ForeignAddress State PID\nTCP 127.0.0.1:13000 0.0.0.0:0 LISTENING 26000\nTCP 127.0.0.1:13001 0.0.0.0:0 LISTENING 26001\nTCP 127.0.0.1:13002 0.0.0.0:0 LISTENING 26002\nTCP 127.0.0.1:13003 0.0.0.0:0 LISTENING 26003\nTCP 127.0.0.1:13004 0.0.0.0:0 LISTENING 26004\nTCP 127.0.0.1:13005 0.0.0.0:0 LISTENING 26005\nTCP 127.0.0.1:13006 0.0.0.0:0 LISTENING 26006\nTCP 127.0.0.1:13007 0.0.0.0:0 LISTENING 26007\nTCP 127.0.0.1:13008 0.0.0.0:0 LISTENING 26008\nTCP 127.0.0.1:13009 0.0.0.0:0 LISTENING 26009\nTCP 127.0.0.1:13010 0.0.0.0:0 LISTENING 26010\nTCP 127.0.0.1:13011 0.0.0.0:0 LISTENING 26011\nTCP 127.0.0.1:13012 0.0.0.0:0 LISTENING 26012\nTCP 127.0.0.1:13013 0.0.0.0:0 LISTENING 26013\nTCP 127.0.0.1:13014 0.0.0.0:0 LISTENING 26014\nTCP 127.0.0.1:13015 0.0.0.0:0 LISTENING 26015\nTCP 127.0.0.1:13016 0.0.0.0:0 LISTENING 26016\nTCP 127.0.0.1:13017 0.0.0.0:0 LISTENING 26017\nTCP 127.0.0.1:13018 0.0.0.0:0 LISTENING 26018\nTCP 127.0.0.1:13019 0.0.0.0:0 LISTENING 26019"
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "effectivePlan": true,
+      "modelPlan": true,
+      "text": "Selected evidence:\n\n$ os ports\nProto LocalAddress ForeignAddress State PID\nTCP 127.0.0.1:13000 0.0.0.0:0 LISTENING 26000\nTCP 127.0.0.1:13001 0.0.0.0:0 LISTENING 26001\nTCP 127.0.0.1:13002 0.0.0.0:0 LISTENING 26002\nTCP 127.0.0.1:13003 0.0.0.0:0 LISTENING 26003\nTCP 127.0.0.1:13004 0.0.0.0:0 LISTENING 26004\nTCP 127.0.0.1:13005 0.0.0.0:0 LISTENING 26005\nTCP 127.0.0.1:13006 0.0.0.0:0 LISTENING 26006\nTCP 127.0.0.1:13007 0.0.0.0:0 LISTENING 26007\nTCP 127.0.0.1:13008 0.0.0.0:0 LISTENING 26008\nTCP 127.0.0.1:13009 0.0.0.0:0 LISTENING 26009\nTCP 127.0.0.1:13010 0.0.0.0:0 LISTENING 26010\n(9 more lines not shown)",
+      "rawChars": 963,
+      "modelEvidence": true,
+      "seconds": 25.185
+    },
+    {
+      "head": "os",
+      "id": "os-development-85001",
+      "family": "port",
+      "calls": [
+        {
+          "stage": "plan",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:44:40.686Z",
+          "reply": {
+            "probes": [
+              {
+                "probe": "ports"
+              }
+            ]
+          },
+          "seconds": 1.254
+        },
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:44:41.940Z",
+          "candidates": [
+            {
+              "id": 1,
+              "text": "Proto LocalAddress ForeignAddress State PID"
+            },
+            {
+              "id": 2,
+              "text": "TCP 127.0.0.1:13001 0.0.0.0:0 LISTENING 26001"
+            },
+            {
+              "id": 3,
+              "text": "TCP 127.0.0.1:13002 0.0.0.0:0 LISTENING 26002"
+            },
+            {
+              "id": 4,
+              "text": "TCP 127.0.0.1:13003 0.0.0.0:0 LISTENING 26003"
+            },
+            {
+              "id": 5,
+              "text": "TCP 127.0.0.1:13004 0.0.0.0:0 LISTENING 26004"
+            },
+            {
+              "id": 6,
+              "text": "TCP 127.0.0.1:13005 0.0.0.0:0 LISTENING 26005"
+            },
+            {
+              "id": 7,
+              "text": "TCP 127.0.0.1:13006 0.0.0.0:0 LISTENING 26006"
+            },
+            {
+              "id": 8,
+              "text": "TCP 127.0.0.1:13007 0.0.0.0:0 LISTENING 26007"
+            },
+            {
+              "id": 9,
+              "text": "TCP 127.0.0.1:13008 0.0.0.0:0 LISTENING 26008"
+            },
+            {
+              "id": 10,
+              "text": "TCP 127.0.0.1:13009 0.0.0.0:0 LISTENING 26009"
+            },
+            {
+              "id": 11,
+              "text": "TCP 127.0.0.1:13010 0.0.0.0:0 LISTENING 26010"
+            },
+            {
+              "id": 12,
+              "text": "TCP 127.0.0.1:13011 0.0.0.0:0 LISTENING 26011"
+            },
+            {
+              "id": 13,
+              "text": "TCP 127.0.0.1:13012 0.0.0.0:0 LISTENING 26012"
+            },
+            {
+              "id": 14,
+              "text": "TCP 127.0.0.1:13013 0.0.0.0:0 LISTENING 26013"
+            },
+            {
+              "id": 15,
+              "text": "TCP 127.0.0.1:13014 0.0.0.0:0 LISTENING 26014"
+            },
+            {
+              "id": 16,
+              "text": "TCP 127.0.0.1:13015 0.0.0.0:0 LISTENING 26015"
+            },
+            {
+              "id": 17,
+              "text": "TCP 127.0.0.1:13016 0.0.0.0:0 LISTENING 26016"
+            },
+            {
+              "id": 18,
+              "text": "TCP 127.0.0.1:13017 0.0.0.0:0 LISTENING 26017"
+            },
+            {
+              "id": 19,
+              "text": "TCP 127.0.0.1:13018 0.0.0.0:0 LISTENING 26018"
+            },
+            {
+              "id": 20,
+              "text": "TCP 127.0.0.1:13019 0.0.0.0:0 LISTENING 26019"
+            },
+            {
+              "id": 21,
+              "text": "TCP 127.0.0.1:13020 0.0.0.0:0 LISTENING 26020"
+            }
+          ],
+          "reply": {
+            "lines": [
+              13
+            ]
+          },
+          "selectedText": "TCP 127.0.0.1:13012 0.0.0.0:0 LISTENING 26012",
+          "seconds": 11.69
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "Identify the listener bound to TCP port 13013.",
+      "sections": [
+        {
+          "probe": "ports",
+          "args": {
+            "probe": "ports"
+          },
+          "ok": true,
+          "cmd": "os ports",
+          "out": "Proto LocalAddress ForeignAddress State PID\nTCP 127.0.0.1:13001 0.0.0.0:0 LISTENING 26001\nTCP 127.0.0.1:13002 0.0.0.0:0 LISTENING 26002\nTCP 127.0.0.1:13003 0.0.0.0:0 LISTENING 26003\nTCP 127.0.0.1:13004 0.0.0.0:0 LISTENING 26004\nTCP 127.0.0.1:13005 0.0.0.0:0 LISTENING 26005\nTCP 127.0.0.1:13006 0.0.0.0:0 LISTENING 26006\nTCP 127.0.0.1:13007 0.0.0.0:0 LISTENING 26007\nTCP 127.0.0.1:13008 0.0.0.0:0 LISTENING 26008\nTCP 127.0.0.1:13009 0.0.0.0:0 LISTENING 26009\nTCP 127.0.0.1:13010 0.0.0.0:0 LISTENING 26010\nTCP 127.0.0.1:13011 0.0.0.0:0 LISTENING 26011\nTCP 127.0.0.1:13012 0.0.0.0:0 LISTENING 26012\nTCP 127.0.0.1:13013 0.0.0.0:0 LISTENING 26013\nTCP 127.0.0.1:13014 0.0.0.0:0 LISTENING 26014\nTCP 127.0.0.1:13015 0.0.0.0:0 LISTENING 26015\nTCP 127.0.0.1:13016 0.0.0.0:0 LISTENING 26016\nTCP 127.0.0.1:13017 0.0.0.0:0 LISTENING 26017\nTCP 127.0.0.1:13018 0.0.0.0:0 LISTENING 26018\nTCP 127.0.0.1:13019 0.0.0.0:0 LISTENING 26019\nTCP 127.0.0.1:13020 0.0.0.0:0 LISTENING 26020"
+        }
+      ],
+      "solved": false,
+      "evidence": false,
+      "effectivePlan": true,
+      "modelPlan": true,
+      "text": "Selected evidence:\n\n$ os ports\nProto LocalAddress ForeignAddress State PID\nTCP 127.0.0.1:13001 0.0.0.0:0 LISTENING 26001\nTCP 127.0.0.1:13002 0.0.0.0:0 LISTENING 26002\nTCP 127.0.0.1:13012 0.0.0.0:0 LISTENING 26012\n(17 more lines not shown)",
+      "rawChars": 963,
+      "modelEvidence": false,
+      "seconds": 12.945
+    },
+    {
+      "head": "os",
+      "id": "os-development-85002",
+      "family": "ports_empty",
+      "calls": [
+        {
+          "stage": "plan",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T11:44:53.633Z",
+          "reply": {
+            "probes": [
+              {
+                "probe": "ports"
+              }
+            ]
+          },
+          "seconds": 0.852
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "question": "Are there any listening sockets?",
+      "sections": [
+        {
+          "probe": "ports",
+          "args": {
+            "probe": "ports"
+          },
+          "ok": true,
+          "cmd": "os ports",
+          "out": "(no listening ports)"
+        }
+      ],
+      "solved": true,
+      "evidence": true,
+      "effectivePlan": true,
+      "modelPlan": true,
+      "text": "$ os ports\n(no listening ports)",
+      "rawChars": 20,
+      "modelEvidence": null,
+      "seconds": 0.853
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "baseline-q8": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      1397,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "84, GPU-9b14619f-339f-41d5-2c64-8afcae619f71, 1394\n",
+    "modelSha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886"
+  },
+  "candidate-f16": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      2071,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "1858, GPU-9b14619f-339f-41d5-2c64-8afcae619f71, 2068\n",
+    "modelSha256": "89b4ae256eed258bcbb5529d217093325570feec1ffcc47fb1999c4ca2ab716a"
+  },
+  "candidate-q8": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      1403,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "2149, GPU-9b14619f-339f-41d5-2c64-8afcae619f71, 1400\n",
+    "modelSha256": "127b80254a8c06be099e30249ebfd7acda8bd9910bf807ebcd805410bd5541a6"
+  }
+}

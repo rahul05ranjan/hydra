@@ -52,14 +52,19 @@ async function scanWithRg(cwd, terms) {
   const grep = term =>
     run(
       'rg',
-      ['-n', '-F', '-i', '--no-heading', '--color', 'never', '--max-count', String(PER_FILE),
-        '--max-columns', String(MAX_COLUMNS), '--max-columns-preview', '-e', term, ...where],
+      ['-l', '-F', '-i', '--color', 'never', '--max-filesize', String(MAX_BYTES), '-e', term, ...where],
       cwd,
     );
   const [listed, ...found] = await Promise.all([run('rg', ['--files', ...where], cwd), ...terms.map(grep)]);
+  const hits = new Map(terms.map(term => [term, []]));
+  for (const [index, term] of terms.entries()) {
+    for (const file of lines(found[index].out).map(tidyPath)) {
+      hits.get(term).push(...fileHits(file, await readRows(path.join(cwd, file)), term));
+    }
+  }
   return {
     files: lines(listed.out).map(tidyPath),
-    hits: new Map(terms.map((term, i) => [term, lines(found[i].out).map(tidyPath)])),
+    hits,
   };
 }
 
@@ -73,26 +78,38 @@ async function* walk(dir, root = dir) {
   }
 }
 
+async function readRows(file) {
+  if ((await stat(file)).size > MAX_BYTES) return [];
+  const text = await readFile(file, 'utf8').catch(() => '');
+  return text.includes('\0') ? [] : text.split('\n');
+}
+
+// Scan all bounded file content so earlier references cannot hide a definition.
+// Keep only the best display-sized set instead of buffering every ordinary hit.
+function fileHits(file, rows, term) {
+  const want = term.toLowerCase();
+  const best = [];
+  for (let i = 0; i < rows.length; i++) {
+    if (!rows[i].toLowerCase().includes(want)) continue;
+    const hit = `${file}:${i + 1}:${rows[i].slice(0, MAX_COLUMNS)}`;
+    const score = scoreHit(hit, term);
+    if (best.length >= PER_FILE && score <= best[best.length - 1].score) continue;
+    best.push({ hit, score });
+    best.sort((a, b) => b.score - a.score);
+    if (best.length > PER_FILE) best.pop();
+  }
+  return best.map(item => item.hit);
+}
+
 // Same result shape as rg, for machines without it.
 async function scanWithWalk(cwd, terms) {
   const files = [];
   const hits = new Map(terms.map(term => [term, []]));
   for await (const file of walk(cwd)) {
     files.push(file);
-    const full = path.join(cwd, file);
-    if ((await stat(full)).size > MAX_BYTES) continue;
-    const text = await readFile(full, 'utf8').catch(() => '');
-    if (text.includes('\0')) continue;
-    const rows = text.split('\n');
+    const rows = await readRows(path.join(cwd, file));
     for (const term of terms) {
-      const want = term.toLowerCase();
-      const bucket = hits.get(term);
-      let inFile = 0;
-      for (let i = 0; i < rows.length && inFile < PER_FILE; i++) {
-        if (!rows[i].toLowerCase().includes(want)) continue;
-        bucket.push(`${file}:${i + 1}:${rows[i].slice(0, MAX_COLUMNS)}`);
-        inFile++;
-      }
+      hits.get(term).push(...fileHits(file, rows, term));
     }
   }
   return { files, hits };

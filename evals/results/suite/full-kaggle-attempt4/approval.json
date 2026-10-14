@@ -1,0 +1,10 @@
+{
+  "approved": true,
+  "approvalDate": "2026-10-14",
+  "userInstruction": "Go ahead and do it don't as again and again. Just complete the work",
+  "planSha256": "862b956704cd66a91c880ffa906a4d8653322114a483e867c3661f214693afc2",
+  "maximumSeconds": 600,
+  "maximumUpdates": 10,
+  "accelerator": "NvidiaTeslaT4",
+  "gpuCount": 1
+}

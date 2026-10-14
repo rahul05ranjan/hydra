@@ -1,0 +1,166 @@
+{
+  "kernelVersion": 2,
+  "status": "COMPLETE",
+  "planSha256": "7e0d0ba02e27589ade44989b38c6394b0d081200152ed7dc5930f8bb49032c87",
+  "checkpointSha256": "bee2a5685ee37da42b24ef71d1beeb31ae015d9b0db2884897d40dd78df8ed4c",
+  "results": {
+    "baseline-q8-development": {
+      "tasks": 200,
+      "routed": 0.57,
+      "plan": 0.835,
+      "evidence": 0.835,
+      "solved": 0.82,
+      "recall": 0.8553208556149733,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 25851,
+      "returned": 17362,
+      "errors": 0
+    },
+    "candidate-f16-development": {
+      "tasks": 200,
+      "routed": 0.57,
+      "plan": 0.545,
+      "evidence": 0.505,
+      "solved": 0.49,
+      "recall": 0.56625,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 25941,
+      "returned": 11650,
+      "errors": 0
+    },
+    "candidate-q8-development": {
+      "tasks": 200,
+      "routed": 0.57,
+      "plan": 0.545,
+      "evidence": 0.51,
+      "solved": 0.495,
+      "recall": 0.56875,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 25941,
+      "returned": 11610,
+      "errors": 0
+    },
+    "candidate-q8-suite": {
+      "byHead": {
+        "files": {
+          "tasks": 20,
+          "solvedCount": 19,
+          "solved": 0.95,
+          "errors": 0,
+          "modelCalls": 20,
+          "tasksWithModelCalls": 20,
+          "modelPlanAccuracy": 0.9,
+          "rawChars": 4040,
+          "returnedChars": 4608
+        },
+        "read": {
+          "tasks": 20,
+          "solvedCount": 20,
+          "solved": 1,
+          "errors": 0,
+          "modelCalls": 0,
+          "tasksWithModelCalls": 0,
+          "modelPlanAccuracy": null,
+          "rawChars": 6140,
+          "returnedChars": 6795
+        },
+        "test": {
+          "tasks": 20,
+          "solvedCount": 20,
+          "solved": 1,
+          "errors": 0,
+          "modelCalls": 7,
+          "tasksWithModelCalls": 7,
+          "modelPlanAccuracy": null,
+          "rawChars": 19680,
+          "returnedChars": 8586
+        },
+        "os": {
+          "tasks": 24,
+          "solvedCount": 19,
+          "solved": 0.7916666666666666,
+          "errors": 0,
+          "modelCalls": 24,
+          "tasksWithModelCalls": 24,
+          "modelPlanAccuracy": 0.7916666666666666,
+          "rawChars": 421,
+          "returnedChars": 718
+        }
+      },
+      "scope": "Development diagnosis, existing small fixtures. No 95% release claim. OS uses deterministic probe fixtures with real env guardrail; read gather may make zero planner calls."
+    },
+    "candidate-q8-sealed": {
+      "tasks": 1000,
+      "routed": 0.721,
+      "plan": 0.53,
+      "evidence": 0.527,
+      "solved": 0.496,
+      "recall": 0.5679404761904763,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 113896,
+      "returned": 73669,
+      "errors": 1,
+      "solvedWeighted": 0.5121374957352438
+    }
+  },
+  "gpu": {
+    "baseline-q8": {
+      "beforeMB": [
+        0,
+        0
+      ],
+      "afterMB": [
+        1397,
+        0
+      ],
+      "device": "CUDA0",
+      "splitMode": "none",
+      "processEvidence": "84, GPU-9b14619f-339f-41d5-2c64-8afcae619f71, 1394\n",
+      "modelSha256": "2e2b4c019247e71762ef412b5489436e3dbffc92bd23f5815624207dc0e93886"
+    },
+    "candidate-f16": {
+      "beforeMB": [
+        0,
+        0
+      ],
+      "afterMB": [
+        2071,
+        0
+      ],
+      "device": "CUDA0",
+      "splitMode": "none",
+      "processEvidence": "1858, GPU-9b14619f-339f-41d5-2c64-8afcae619f71, 2068\n",
+      "modelSha256": "89b4ae256eed258bcbb5529d217093325570feec1ffcc47fb1999c4ca2ab716a"
+    },
+    "candidate-q8": {
+      "beforeMB": [
+        0,
+        0
+      ],
+      "afterMB": [
+        1403,
+        0
+      ],
+      "device": "CUDA0",
+      "splitMode": "none",
+      "processEvidence": "2149, GPU-9b14619f-339f-41d5-2c64-8afcae619f71, 1400\n",
+      "modelSha256": "127b80254a8c06be099e30249ebfd7acda8bd9910bf807ebcd805410bd5541a6"
+    }
+  },
+  "jobElapsedSeconds": 659.881435298,
+  "loggedElapsedIncludingRenderingSeconds": 664.705456334,
+  "combinedLoggedExecutionSeconds": 807.82368226,
+  "sealedSolvedCount": 496,
+  "sealedTasks": 1000,
+  "sealedSolvedPercent": 49.6,
+  "sealedWeightedPercent": 51.21374957352438,
+  "acceptedForRelease": false,
+  "reason": "Major fresh development regression: baseline 82%, candidate F16 49%, candidate Q8 49.5%; sealed 49.6%. Small non-Git fixtures do not establish release correctness.",
+  "sealedFailureRowsDownloaded": false,
+  "published": false,
+  "defaultChanged": false
+}

@@ -1,0 +1,7 @@
+{
+  "description": "Development-only fixed oracle reachability check; no model accuracy claim; holdout is never digested.",
+  "tasks": 200,
+  "reachable": 200,
+  "oracleCalls": 181,
+  "failures": []
+}

@@ -1,0 +1,29 @@
+{
+  "training": true,
+  "method": "full-parameter-supervised-fine-tuning",
+  "head": "git",
+  "purpose": "GPU memory/step-time feasibility only; not a 95% quality claim",
+  "steps": 10,
+  "accumulation": 4,
+  "learningRate": 1e-05,
+  "maximumLength": 2048,
+  "deadlineSeconds": 470,
+  "trainerSeconds": 410,
+  "sealedEvaluation": false,
+  "files": {
+    "checkpoint/chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+    "checkpoint/config.json": "48447c188a2079ce181cdfb49680c70c3ec5e93480a43786832b3658995826bb",
+    "checkpoint/merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+    "checkpoint/model.safetensors": "fc1d9b0332a3fe5c4b1a0b2b37d31d9f9d8051c8257ab07effe44410740e1fa2",
+    "checkpoint/tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+    "checkpoint/tokenizer_config.json": "86f01837a638275f2d3479804e79802aaff0e3ccef15e5f29dd6afbe6551daed",
+    "checkpoint/vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003",
+    "full_finetune.py": "f9fc9de27a9feb9a4da13ec1cfdcd593716bda192c8523d8887b4561d226ba29",
+    "full_kernel.py": "c46f93d2711e3b5b9b966b639beb25d4f2f81b8be52dbda13631bf7a61d05030",
+    "train.jsonl": "e9b961cc8987f30b2b277ced8035b64637c4fd52bae24c37a623727a4bee8ab8",
+    "data-manifest.json": "85aa30411863e8dbcad543c4a1b903393ba720b1cc8e59a96ff4f4ce0f62c72d",
+    "checkpoint-manifest.json": "de4ac86641ffbb6d448cf7ab866f9cab3e88b30f08744b9616a0d871fb0bc5f2"
+  },
+  "checkpointArchiveSha256": "fdbde71cbc8aa773658b472b46d96009ef6b63fe81424002c07dcc02aa3473c2",
+  "samplesForHead": 80
+}

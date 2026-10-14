@@ -1,0 +1,1854 @@
+{
+  "complete": false,
+  "rows": [
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-1",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:57:40.375Z",
+          "candidates": [
+            {
+              "id": 19,
+              "text": "[worker 2] voucher_120000: scanned shard 18; checksum 121207; cache ready (9ms)"
+            },
+            {
+              "id": 20,
+              "text": " FAIL tests/voucher_120000.ts > voucher preserves record 120000"
+            },
+            {
+              "id": 21,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 22,
+              "text": "Expected: \"wanted-voucher-120037\""
+            },
+            {
+              "id": 23,
+              "text": "Received: \"observed-voucher-120011\""
+            },
+            {
+              "id": 24,
+              "text": " ❯ tests/voucher_120000.ts:17:9"
+            },
+            {
+              "id": 27,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 28,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              27
+            ]
+          },
+          "selectedText": "[worker 2] voucher_120000: scanned shard 18; checksum 121207; cache ready (9ms)\n FAIL tests/voucher_120000.ts > voucher preserves record 120000\nAssertionError: equality check rejected record\nExpected: \"wanted-voucher-120037\"\nReceived: \"observed-voucher-120011\"\n ❯ tests/voucher_120000.ts:17:9\n Test Files  1 failed (1)",
+          "seconds": 3.193
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 2] voucher_120000: scanned shard 18; checksum 121207; cache ready (9ms)\n FAIL tests/voucher_120000.ts > voucher preserves record 120000\nAssertionError: equality check rejected record\nExpected: \"wanted-voucher-120037\"\nReceived: \"observed-voucher-120011\"\n ❯ tests/voucher_120000.ts:17:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 1941,
+      "modelEvidence": true,
+      "seconds": 3.203
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-2",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:57:43.578Z",
+          "candidates": [
+            {
+              "id": 20,
+              "text": "[worker 3] harbor_120001: scanned shard 19; checksum 121279; cache ready (10ms)"
+            },
+            {
+              "id": 21,
+              "text": " FAIL tests/harbor_120001.ts > harbor preserves record 120001"
+            },
+            {
+              "id": 22,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 23,
+              "text": "Expected: \"wanted-harbor-120038\""
+            },
+            {
+              "id": 24,
+              "text": "Received: \"observed-harbor-120012\""
+            },
+            {
+              "id": 25,
+              "text": " ❯ tests/harbor_120001.ts:30:9"
+            },
+            {
+              "id": 28,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 29,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              28
+            ]
+          },
+          "selectedText": "[worker 3] harbor_120001: scanned shard 19; checksum 121279; cache ready (10ms)\n FAIL tests/harbor_120001.ts > harbor preserves record 120001\nAssertionError: equality check rejected record\nExpected: \"wanted-harbor-120038\"\nReceived: \"observed-harbor-120012\"\n ❯ tests/harbor_120001.ts:30:9\n Test Files  1 failed (1)",
+          "seconds": 3.278
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 3] harbor_120001: scanned shard 19; checksum 121279; cache ready (10ms)\n FAIL tests/harbor_120001.ts > harbor preserves record 120001\nAssertionError: equality check rejected record\nExpected: \"wanted-harbor-120038\"\nReceived: \"observed-harbor-120012\"\n ❯ tests/harbor_120001.ts:30:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 1998,
+      "modelEvidence": true,
+      "seconds": 3.279
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-3",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:57:46.858Z",
+          "candidates": [
+            {
+              "id": 21,
+              "text": "[worker 4] tally_120002: scanned shard 20; checksum 121351; cache ready (11ms)"
+            },
+            {
+              "id": 22,
+              "text": " FAIL tests/tally_120002.ts > tally preserves record 120002"
+            },
+            {
+              "id": 23,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 24,
+              "text": "Expected: \"wanted-tally-120039\""
+            },
+            {
+              "id": 25,
+              "text": "Received: \"observed-tally-120013\""
+            },
+            {
+              "id": 26,
+              "text": " ❯ tests/tally_120002.ts:43:9"
+            },
+            {
+              "id": 29,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 30,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              29
+            ]
+          },
+          "selectedText": "[worker 4] tally_120002: scanned shard 20; checksum 121351; cache ready (11ms)\n FAIL tests/tally_120002.ts > tally preserves record 120002\nAssertionError: equality check rejected record\nExpected: \"wanted-tally-120039\"\nReceived: \"observed-tally-120013\"\n ❯ tests/tally_120002.ts:43:9\n Test Files  1 failed (1)",
+          "seconds": 3.77
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 4] tally_120002: scanned shard 20; checksum 121351; cache ready (11ms)\n FAIL tests/tally_120002.ts > tally preserves record 120002\nAssertionError: equality check rejected record\nExpected: \"wanted-tally-120039\"\nReceived: \"observed-tally-120013\"\n ❯ tests/tally_120002.ts:43:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 2049,
+      "modelEvidence": true,
+      "seconds": 3.771
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-4",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:57:50.631Z",
+          "candidates": [
+            {
+              "id": 22,
+              "text": "[worker 1] parcel_120003: scanned shard 21; checksum 121423; cache ready (7ms)"
+            },
+            {
+              "id": 23,
+              "text": " FAIL tests/parcel_120003.ts > parcel preserves record 120003"
+            },
+            {
+              "id": 24,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 25,
+              "text": "Expected: \"wanted-parcel-120040\""
+            },
+            {
+              "id": 26,
+              "text": "Received: \"observed-parcel-120014\""
+            },
+            {
+              "id": 27,
+              "text": " ❯ tests/parcel_120003.ts:56:9"
+            },
+            {
+              "id": 30,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 31,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              30
+            ]
+          },
+          "selectedText": "[worker 1] parcel_120003: scanned shard 21; checksum 121423; cache ready (7ms)\n FAIL tests/parcel_120003.ts > parcel preserves record 120003\nAssertionError: equality check rejected record\nExpected: \"wanted-parcel-120040\"\nReceived: \"observed-parcel-120014\"\n ❯ tests/parcel_120003.ts:56:9\n Test Files  1 failed (1)",
+          "seconds": 3.094
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 1] parcel_120003: scanned shard 21; checksum 121423; cache ready (7ms)\n FAIL tests/parcel_120003.ts > parcel preserves record 120003\nAssertionError: equality check rejected record\nExpected: \"wanted-parcel-120040\"\nReceived: \"observed-parcel-120014\"\n ❯ tests/parcel_120003.ts:56:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 2157,
+      "modelEvidence": true,
+      "seconds": 3.094
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-5",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:57:53.727Z",
+          "candidates": [
+            {
+              "id": 23,
+              "text": "[worker 2] dispatch_120004: scanned shard 22; checksum 121495; cache ready (8ms)"
+            },
+            {
+              "id": 24,
+              "text": " FAIL tests/dispatch_120004.ts > dispatch preserves record 120004"
+            },
+            {
+              "id": 25,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 26,
+              "text": "Expected: \"wanted-dispatch-120041\""
+            },
+            {
+              "id": 27,
+              "text": "Received: \"observed-dispatch-120015\""
+            },
+            {
+              "id": 28,
+              "text": " ❯ tests/dispatch_120004.ts:69:9"
+            },
+            {
+              "id": 31,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 32,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              31
+            ]
+          },
+          "selectedText": "[worker 2] dispatch_120004: scanned shard 22; checksum 121495; cache ready (8ms)\n FAIL tests/dispatch_120004.ts > dispatch preserves record 120004\nAssertionError: equality check rejected record\nExpected: \"wanted-dispatch-120041\"\nReceived: \"observed-dispatch-120015\"\n ❯ tests/dispatch_120004.ts:69:9\n Test Files  1 failed (1)",
+          "seconds": 3.213
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 2] dispatch_120004: scanned shard 22; checksum 121495; cache ready (8ms)\n FAIL tests/dispatch_120004.ts > dispatch preserves record 120004\nAssertionError: equality check rejected record\nExpected: \"wanted-dispatch-120041\"\nReceived: \"observed-dispatch-120015\"\n ❯ tests/dispatch_120004.ts:69:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 2292,
+      "modelEvidence": true,
+      "seconds": 3.214
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-6",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:57:56.942Z",
+          "candidates": [
+            {
+              "id": 24,
+              "text": "[worker 3] ledger_120005: scanned shard 23; checksum 121567; cache ready (9ms)"
+            },
+            {
+              "id": 25,
+              "text": " FAIL tests/ledger_120005.ts > ledger preserves record 120005"
+            },
+            {
+              "id": 26,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 27,
+              "text": "Expected: \"wanted-ledger-120042\""
+            },
+            {
+              "id": 28,
+              "text": "Received: \"observed-ledger-120016\""
+            },
+            {
+              "id": 29,
+              "text": " ❯ tests/ledger_120005.ts:82:9"
+            },
+            {
+              "id": 32,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 33,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              32
+            ]
+          },
+          "selectedText": "[worker 3] ledger_120005: scanned shard 23; checksum 121567; cache ready (9ms)\n FAIL tests/ledger_120005.ts > ledger preserves record 120005\nAssertionError: equality check rejected record\nExpected: \"wanted-ledger-120042\"\nReceived: \"observed-ledger-120016\"\n ❯ tests/ledger_120005.ts:82:9\n Test Files  1 failed (1)",
+          "seconds": 3.287
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 3] ledger_120005: scanned shard 23; checksum 121567; cache ready (9ms)\n FAIL tests/ledger_120005.ts > ledger preserves record 120005\nAssertionError: equality check rejected record\nExpected: \"wanted-ledger-120042\"\nReceived: \"observed-ledger-120016\"\n ❯ tests/ledger_120005.ts:82:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 2315,
+      "modelEvidence": true,
+      "seconds": 3.287
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-7",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:00.232Z",
+          "candidates": [
+            {
+              "id": 25,
+              "text": "[worker 4] receipt_120006: scanned shard 24; checksum 121639; cache ready (10ms)"
+            },
+            {
+              "id": 26,
+              "text": " FAIL tests/receipt_120006.ts > receipt preserves record 120006"
+            },
+            {
+              "id": 27,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 28,
+              "text": "Expected: \"wanted-receipt-120043\""
+            },
+            {
+              "id": 29,
+              "text": "Received: \"observed-receipt-120017\""
+            },
+            {
+              "id": 30,
+              "text": " ❯ tests/receipt_120006.ts:95:9"
+            },
+            {
+              "id": 33,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 34,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              33
+            ]
+          },
+          "selectedText": "[worker 4] receipt_120006: scanned shard 24; checksum 121639; cache ready (10ms)\n FAIL tests/receipt_120006.ts > receipt preserves record 120006\nAssertionError: equality check rejected record\nExpected: \"wanted-receipt-120043\"\nReceived: \"observed-receipt-120017\"\n ❯ tests/receipt_120006.ts:95:9\n Test Files  1 failed (1)",
+          "seconds": 3.752
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 4] receipt_120006: scanned shard 24; checksum 121639; cache ready (10ms)\n FAIL tests/receipt_120006.ts > receipt preserves record 120006\nAssertionError: equality check rejected record\nExpected: \"wanted-receipt-120043\"\nReceived: \"observed-receipt-120017\"\n ❯ tests/receipt_120006.ts:95:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 2424,
+      "modelEvidence": true,
+      "seconds": 3.753
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-8",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:03.987Z",
+          "candidates": [
+            {
+              "id": 26,
+              "text": "[worker 1] booking_120007: scanned shard 25; checksum 121711; cache ready (11ms)"
+            },
+            {
+              "id": 27,
+              "text": " FAIL tests/booking_120007.ts > booking preserves record 120007"
+            },
+            {
+              "id": 28,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 29,
+              "text": "Expected: \"wanted-booking-120044\""
+            },
+            {
+              "id": 30,
+              "text": "Received: \"observed-booking-120018\""
+            },
+            {
+              "id": 31,
+              "text": " ❯ tests/booking_120007.ts:108:9"
+            },
+            {
+              "id": 34,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 35,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              26,
+              27,
+              28,
+              29,
+              30,
+              31
+            ]
+          },
+          "selectedText": "[worker 1] booking_120007: scanned shard 25; checksum 121711; cache ready (11ms)\n FAIL tests/booking_120007.ts > booking preserves record 120007\nAssertionError: equality check rejected record\nExpected: \"wanted-booking-120044\"\nReceived: \"observed-booking-120018\"\n ❯ tests/booking_120007.ts:108:9",
+          "seconds": 3.033
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 1] booking_120007: scanned shard 25; checksum 121711; cache ready (11ms)\n FAIL tests/booking_120007.ts > booking preserves record 120007\nAssertionError: equality check rejected record\nExpected: \"wanted-booking-120044\"\nReceived: \"observed-booking-120018\"\n ❯ tests/booking_120007.ts:108:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 2508,
+      "modelEvidence": true,
+      "seconds": 3.034
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-vitest-scalar-9",
+      "family": "dev-vitest-scalar",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:07.023Z",
+          "candidates": [
+            {
+              "id": 27,
+              "text": "[worker 2] voucher_120008: scanned shard 26; checksum 121783; cache ready (7ms)"
+            },
+            {
+              "id": 28,
+              "text": " FAIL tests/voucher_120008.ts > voucher preserves record 120008"
+            },
+            {
+              "id": 29,
+              "text": "AssertionError: equality check rejected record"
+            },
+            {
+              "id": 30,
+              "text": "Expected: \"wanted-voucher-120045\""
+            },
+            {
+              "id": 31,
+              "text": "Received: \"observed-voucher-120019\""
+            },
+            {
+              "id": 32,
+              "text": " ❯ tests/voucher_120008.ts:121:9"
+            },
+            {
+              "id": 35,
+              "text": " Test Files  1 failed (1)"
+            },
+            {
+              "id": 36,
+              "text": " Tests  1 failed | 19 passed (20)"
+            }
+          ],
+          "reply": {
+            "lines": [
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              35
+            ]
+          },
+          "selectedText": "[worker 2] voucher_120008: scanned shard 26; checksum 121783; cache ready (7ms)\n FAIL tests/voucher_120008.ts > voucher preserves record 120008\nAssertionError: equality check rejected record\nExpected: \"wanted-voucher-120045\"\nReceived: \"observed-voucher-120019\"\n ❯ tests/voucher_120008.ts:121:9\n Test Files  1 failed (1)",
+          "seconds": 3.635
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx vitest run (exit 1)\n[worker 2] voucher_120008: scanned shard 26; checksum 121783; cache ready (7ms)\n FAIL tests/voucher_120008.ts > voucher preserves record 120008\nAssertionError: equality check rejected record\nExpected: \"wanted-voucher-120045\"\nReceived: \"observed-voucher-120019\"\n ❯ tests/voucher_120008.ts:121:9\n Test Files  1 failed (1)\n Tests  1 failed | 19 passed (20)",
+      "rawChars": 2586,
+      "modelEvidence": true,
+      "seconds": 3.636
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-1",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:10.660Z",
+          "candidates": [
+            {
+              "id": 18,
+              "text": "[worker 2] harbor_120100: scanned shard 18; checksum 121307; cache ready (9ms)"
+            },
+            {
+              "id": 19,
+              "text": "FAIL tests/harbor_120100.test.js"
+            },
+            {
+              "id": 20,
+              "text": "  ● harbor preserves record 120100"
+            },
+            {
+              "id": 21,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 22,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 23,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 24,
+              "text": "    -   \"receipt\": \"wanted-harbor-120137\""
+            },
+            {
+              "id": 25,
+              "text": "    +   \"receipt\": \"observed-harbor-120111\""
+            },
+            {
+              "id": 26,
+              "text": "      at Object.<anonymous> (/work/quality/development/harbor_120100/tests/harbor_120100.test.js:18:12)"
+            },
+            {
+              "id": 29,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 30,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              18,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26
+            ]
+          },
+          "selectedText": "[worker 2] harbor_120100: scanned shard 18; checksum 121307; cache ready (9ms)\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-harbor-120137\"\n    +   \"receipt\": \"observed-harbor-120111\"\n      at Object.<anonymous> (/work/quality/development/harbor_120100/tests/harbor_120100.test.js:18:12)",
+          "seconds": 3.248
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 2] harbor_120100: scanned shard 18; checksum 121307; cache ready (9ms)\nFAIL tests/harbor_120100.test.js\n  ● harbor preserves record 120100\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-harbor-120137\"\n    +   \"receipt\": \"observed-harbor-120111\"\n      at Object.<anonymous> (/work/quality/development/harbor_120100/tests/harbor_120100.test.js:18:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2011,
+      "modelEvidence": false,
+      "seconds": 3.249
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-2",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:13.910Z",
+          "candidates": [
+            {
+              "id": 19,
+              "text": "[worker 3] tally_120101: scanned shard 19; checksum 121379; cache ready (10ms)"
+            },
+            {
+              "id": 20,
+              "text": "FAIL tests/tally_120101.test.js"
+            },
+            {
+              "id": 21,
+              "text": "  ● tally preserves record 120101"
+            },
+            {
+              "id": 22,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 23,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 24,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 25,
+              "text": "    -   \"receipt\": \"wanted-tally-120138\""
+            },
+            {
+              "id": 26,
+              "text": "    +   \"receipt\": \"observed-tally-120112\""
+            },
+            {
+              "id": 27,
+              "text": "      at Object.<anonymous> (C:\\Quality Lab\\development\\tally_120101\\tests\\tally_120101.test.js:31:12)"
+            },
+            {
+              "id": 30,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 31,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              31
+            ]
+          },
+          "selectedText": "[worker 3] tally_120101: scanned shard 19; checksum 121379; cache ready (10ms)\nFAIL tests/tally_120101.test.js\n  ● tally preserves record 120101\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-tally-120138\"\n    +   \"receipt\": \"observed-tally-120112\"\nTests: 1 failed, 31 passed, 32 total",
+          "seconds": 4.907
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 3] tally_120101: scanned shard 19; checksum 121379; cache ready (10ms)\nFAIL tests/tally_120101.test.js\n  ● tally preserves record 120101\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-tally-120138\"\n    +   \"receipt\": \"observed-tally-120112\"\n      at Object.<anonymous> (C:\\Quality Lab\\development\\tally_120101\\tests\\tally_120101.test.js:31:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2067,
+      "modelEvidence": false,
+      "seconds": 4.907
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-3",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:18.820Z",
+          "candidates": [
+            {
+              "id": 20,
+              "text": "[worker 4] parcel_120102: scanned shard 20; checksum 121451; cache ready (11ms)"
+            },
+            {
+              "id": 21,
+              "text": "FAIL tests/parcel_120102.test.js"
+            },
+            {
+              "id": 22,
+              "text": "  ● parcel preserves record 120102"
+            },
+            {
+              "id": 23,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 24,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 25,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 26,
+              "text": "    -   \"receipt\": \"wanted-parcel-120139\""
+            },
+            {
+              "id": 27,
+              "text": "    +   \"receipt\": \"observed-parcel-120113\""
+            },
+            {
+              "id": 28,
+              "text": "      at Object.<anonymous> (/work/quality/development/parcel_120102/tests/parcel_120102.test.js:44:12)"
+            },
+            {
+              "id": 31,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 32,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              31
+            ]
+          },
+          "selectedText": "[worker 4] parcel_120102: scanned shard 20; checksum 121451; cache ready (11ms)\nFAIL tests/parcel_120102.test.js\n  ● parcel preserves record 120102\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-parcel-120139\"\n    +   \"receipt\": \"observed-parcel-120113\"\n      at Object.<anonymous> (/work/quality/development/parcel_120102/tests/parcel_120102.test.js:44:12)\nTest Suites: 1 failed, 3 passed, 4 total",
+          "seconds": 7.01
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 4] parcel_120102: scanned shard 20; checksum 121451; cache ready (11ms)\nFAIL tests/parcel_120102.test.js\n  ● parcel preserves record 120102\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-parcel-120139\"\n    +   \"receipt\": \"observed-parcel-120113\"\n      at Object.<anonymous> (/work/quality/development/parcel_120102/tests/parcel_120102.test.js:44:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2171,
+      "modelEvidence": true,
+      "seconds": 7.01
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-4",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:25.868Z",
+          "candidates": [
+            {
+              "id": 21,
+              "text": "[worker 1] dispatch_120103: scanned shard 21; checksum 121523; cache ready (7ms)"
+            },
+            {
+              "id": 22,
+              "text": "FAIL tests/dispatch_120103.test.js"
+            },
+            {
+              "id": 23,
+              "text": "  ● dispatch preserves record 120103"
+            },
+            {
+              "id": 24,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 25,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 26,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 27,
+              "text": "    -   \"receipt\": \"wanted-dispatch-120140\""
+            },
+            {
+              "id": 28,
+              "text": "    +   \"receipt\": \"observed-dispatch-120114\""
+            },
+            {
+              "id": 29,
+              "text": "      at Object.<anonymous> (C:\\Quality Lab\\development\\dispatch_120103\\tests\\dispatch_120103.test.js:57:12)"
+            },
+            {
+              "id": 32,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 33,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              32
+            ]
+          },
+          "selectedText": "[worker 1] dispatch_120103: scanned shard 21; checksum 121523; cache ready (7ms)\nFAIL tests/dispatch_120103.test.js\n  ● dispatch preserves record 120103\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-dispatch-120140\"\n    +   \"receipt\": \"observed-dispatch-120114\"\n      at Object.<anonymous> (C:\\Quality Lab\\development\\dispatch_120103\\tests\\dispatch_120103.test.js:57:12)\nTest Suites: 1 failed, 3 passed, 4 total",
+          "seconds": 9.175
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 1] dispatch_120103: scanned shard 21; checksum 121523; cache ready (7ms)\nFAIL tests/dispatch_120103.test.js\n  ● dispatch preserves record 120103\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-dispatch-120140\"\n    +   \"receipt\": \"observed-dispatch-120114\"\n      at Object.<anonymous> (C:\\Quality Lab\\development\\dispatch_120103\\tests\\dispatch_120103.test.js:57:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2308,
+      "modelEvidence": true,
+      "seconds": 9.175
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-5",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:35.046Z",
+          "candidates": [
+            {
+              "id": 22,
+              "text": "[worker 2] ledger_120104: scanned shard 22; checksum 121595; cache ready (8ms)"
+            },
+            {
+              "id": 23,
+              "text": "FAIL tests/ledger_120104.test.js"
+            },
+            {
+              "id": 24,
+              "text": "  ● ledger preserves record 120104"
+            },
+            {
+              "id": 25,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 26,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 27,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 28,
+              "text": "    -   \"receipt\": \"wanted-ledger-120141\""
+            },
+            {
+              "id": 29,
+              "text": "    +   \"receipt\": \"observed-ledger-120115\""
+            },
+            {
+              "id": 30,
+              "text": "      at Object.<anonymous> (/work/quality/development/ledger_120104/tests/ledger_120104.test.js:70:12)"
+            },
+            {
+              "id": 33,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 34,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              33
+            ]
+          },
+          "selectedText": "[worker 2] ledger_120104: scanned shard 22; checksum 121595; cache ready (8ms)\nFAIL tests/ledger_120104.test.js\n  ● ledger preserves record 120104\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-ledger-120141\"\n    +   \"receipt\": \"observed-ledger-120115\"\n      at Object.<anonymous> (/work/quality/development/ledger_120104/tests/ledger_120104.test.js:70:12)\nTest Suites: 1 failed, 3 passed, 4 total",
+          "seconds": 4.936
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 2] ledger_120104: scanned shard 22; checksum 121595; cache ready (8ms)\nFAIL tests/ledger_120104.test.js\n  ● ledger preserves record 120104\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-ledger-120141\"\n    +   \"receipt\": \"observed-ledger-120115\"\n      at Object.<anonymous> (/work/quality/development/ledger_120104/tests/ledger_120104.test.js:70:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2329,
+      "modelEvidence": true,
+      "seconds": 4.937
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-6",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:39.985Z",
+          "candidates": [
+            {
+              "id": 23,
+              "text": "[worker 3] receipt_120105: scanned shard 23; checksum 121667; cache ready (9ms)"
+            },
+            {
+              "id": 24,
+              "text": "FAIL tests/receipt_120105.test.js"
+            },
+            {
+              "id": 25,
+              "text": "  ● receipt preserves record 120105"
+            },
+            {
+              "id": 26,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 27,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 28,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 29,
+              "text": "    -   \"receipt\": \"wanted-receipt-120142\""
+            },
+            {
+              "id": 30,
+              "text": "    +   \"receipt\": \"observed-receipt-120116\""
+            },
+            {
+              "id": 31,
+              "text": "      at Object.<anonymous> (C:\\Quality Lab\\development\\receipt_120105\\tests\\receipt_120105.test.js:83:12)"
+            },
+            {
+              "id": 34,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 35,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31
+            ]
+          },
+          "selectedText": "[worker 3] receipt_120105: scanned shard 23; checksum 121667; cache ready (9ms)\nFAIL tests/receipt_120105.test.js\n  ● receipt preserves record 120105\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-receipt-120142\"\n    +   \"receipt\": \"observed-receipt-120116\"\n      at Object.<anonymous> (C:\\Quality Lab\\development\\receipt_120105\\tests\\receipt_120105.test.js:83:12)",
+          "seconds": 4.373
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 3] receipt_120105: scanned shard 23; checksum 121667; cache ready (9ms)\nFAIL tests/receipt_120105.test.js\n  ● receipt preserves record 120105\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-receipt-120142\"\n    +   \"receipt\": \"observed-receipt-120116\"\n      at Object.<anonymous> (C:\\Quality Lab\\development\\receipt_120105\\tests\\receipt_120105.test.js:83:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2440,
+      "modelEvidence": true,
+      "seconds": 4.373
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-7",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:44.362Z",
+          "candidates": [
+            {
+              "id": 24,
+              "text": "[worker 4] booking_120106: scanned shard 24; checksum 121739; cache ready (10ms)"
+            },
+            {
+              "id": 25,
+              "text": "FAIL tests/booking_120106.test.js"
+            },
+            {
+              "id": 26,
+              "text": "  ● booking preserves record 120106"
+            },
+            {
+              "id": 27,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 28,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 29,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 30,
+              "text": "    -   \"receipt\": \"wanted-booking-120143\""
+            },
+            {
+              "id": 31,
+              "text": "    +   \"receipt\": \"observed-booking-120117\""
+            },
+            {
+              "id": 32,
+              "text": "      at Object.<anonymous> (/work/quality/development/booking_120106/tests/booking_120106.test.js:96:12)"
+            },
+            {
+              "id": 35,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 36,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              35
+            ]
+          },
+          "selectedText": "[worker 4] booking_120106: scanned shard 24; checksum 121739; cache ready (10ms)\nFAIL tests/booking_120106.test.js\n  ● booking preserves record 120106\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-booking-120143\"\n    +   \"receipt\": \"observed-booking-120117\"\n      at Object.<anonymous> (/work/quality/development/booking_120106/tests/booking_120106.test.js:96:12)\nTest Suites: 1 failed, 3 passed, 4 total",
+          "seconds": 6.102
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 4] booking_120106: scanned shard 24; checksum 121739; cache ready (10ms)\nFAIL tests/booking_120106.test.js\n  ● booking preserves record 120106\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-booking-120143\"\n    +   \"receipt\": \"observed-booking-120117\"\n      at Object.<anonymous> (/work/quality/development/booking_120106/tests/booking_120106.test.js:96:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2519,
+      "modelEvidence": true,
+      "seconds": 6.103
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-8",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:50.467Z",
+          "candidates": [
+            {
+              "id": 25,
+              "text": "[worker 1] voucher_120107: scanned shard 25; checksum 121811; cache ready (11ms)"
+            },
+            {
+              "id": 26,
+              "text": "FAIL tests/voucher_120107.test.js"
+            },
+            {
+              "id": 27,
+              "text": "  ● voucher preserves record 120107"
+            },
+            {
+              "id": 28,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 29,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 30,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 31,
+              "text": "    -   \"receipt\": \"wanted-voucher-120144\""
+            },
+            {
+              "id": 32,
+              "text": "    +   \"receipt\": \"observed-voucher-120118\""
+            },
+            {
+              "id": 33,
+              "text": "      at Object.<anonymous> (C:\\Quality Lab\\development\\voucher_120107\\tests\\voucher_120107.test.js:109:12)"
+            },
+            {
+              "id": 36,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 37,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              36
+            ]
+          },
+          "selectedText": "[worker 1] voucher_120107: scanned shard 25; checksum 121811; cache ready (11ms)\nFAIL tests/voucher_120107.test.js\n  ● voucher preserves record 120107\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-voucher-120144\"\n    +   \"receipt\": \"observed-voucher-120118\"\n      at Object.<anonymous> (C:\\Quality Lab\\development\\voucher_120107\\tests\\voucher_120107.test.js:109:12)\nTest Suites: 1 failed, 3 passed, 4 total",
+          "seconds": 6.305
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 1] voucher_120107: scanned shard 25; checksum 121811; cache ready (11ms)\nFAIL tests/voucher_120107.test.js\n  ● voucher preserves record 120107\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-voucher-120144\"\n    +   \"receipt\": \"observed-voucher-120118\"\n      at Object.<anonymous> (C:\\Quality Lab\\development\\voucher_120107\\tests\\voucher_120107.test.js:109:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2603,
+      "modelEvidence": true,
+      "seconds": 6.307
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-jest-structure-9",
+      "family": "dev-jest-structure",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:58:56.777Z",
+          "candidates": [
+            {
+              "id": 26,
+              "text": "[worker 2] harbor_120108: scanned shard 26; checksum 121883; cache ready (7ms)"
+            },
+            {
+              "id": 27,
+              "text": "FAIL tests/harbor_120108.test.js"
+            },
+            {
+              "id": 28,
+              "text": "  ● harbor preserves record 120108"
+            },
+            {
+              "id": 29,
+              "text": "    expect(received).toEqual(expected)"
+            },
+            {
+              "id": 30,
+              "text": "    - Expected  - 1"
+            },
+            {
+              "id": 31,
+              "text": "    + Received  + 1"
+            },
+            {
+              "id": 32,
+              "text": "    -   \"receipt\": \"wanted-harbor-120145\""
+            },
+            {
+              "id": 33,
+              "text": "    +   \"receipt\": \"observed-harbor-120119\""
+            },
+            {
+              "id": 34,
+              "text": "      at Object.<anonymous> (/work/quality/development/harbor_120108/tests/harbor_120108.test.js:122:12)"
+            },
+            {
+              "id": 37,
+              "text": "Test Suites: 1 failed, 3 passed, 4 total"
+            },
+            {
+              "id": 38,
+              "text": "Tests: 1 failed, 31 passed, 32 total"
+            }
+          ],
+          "reply": {
+            "lines": [
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              37
+            ]
+          },
+          "selectedText": "[worker 2] harbor_120108: scanned shard 26; checksum 121883; cache ready (7ms)\nFAIL tests/harbor_120108.test.js\n  ● harbor preserves record 120108\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-harbor-120145\"\n    +   \"receipt\": \"observed-harbor-120119\"\n      at Object.<anonymous> (/work/quality/development/harbor_120108/tests/harbor_120108.test.js:122:12)\nTest Suites: 1 failed, 3 passed, 4 total",
+          "seconds": 7.973
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ npx jest --runInBand (exit 1)\n[worker 2] harbor_120108: scanned shard 26; checksum 121883; cache ready (7ms)\nFAIL tests/harbor_120108.test.js\n  ● harbor preserves record 120108\n    expect(received).toEqual(expected)\n    - Expected  - 1\n    + Received  + 1\n    -   \"receipt\": \"wanted-harbor-120145\"\n    +   \"receipt\": \"observed-harbor-120119\"\n      at Object.<anonymous> (/work/quality/development/harbor_120108/tests/harbor_120108.test.js:122:12)\nTest Suites: 1 failed, 3 passed, 4 total\nTests: 1 failed, 31 passed, 32 total",
+      "rawChars": 2648,
+      "modelEvidence": true,
+      "seconds": 7.973
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-pytest-comparison-1",
+      "family": "dev-pytest-comparison",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:59:04.756Z",
+          "candidates": [
+            {
+              "id": 18,
+              "text": "[worker 2] tally_120200: scanned shard 18; checksum 121407; cache ready (9ms)"
+            },
+            {
+              "id": 19,
+              "text": "________________ tally_120200_roundtrip _________________"
+            },
+            {
+              "id": 20,
+              "text": "    def test_tally_120200_roundtrip():"
+            },
+            {
+              "id": 21,
+              "text": ">       assert receipt == 'wanted-tally-120237'"
+            },
+            {
+              "id": 22,
+              "text": "E       AssertionError: assert 'observed-tally-120211' == 'wanted-tally-120237'"
+            },
+            {
+              "id": 23,
+              "text": "tests/tally_120200.py:19: AssertionError"
+            },
+            {
+              "id": 24,
+              "text": "=================== short test summary info ==================="
+            },
+            {
+              "id": 25,
+              "text": "FAILED tests/tally_120200.py::test_tally_120200_roundtrip - AssertionError"
+            },
+            {
+              "id": 26,
+              "text": "1 failed, 12 passed in 0.43s"
+            }
+          ],
+          "reply": {
+            "lines": [
+              18,
+              19,
+              20,
+              21,
+              22
+            ]
+          },
+          "selectedText": "[worker 2] tally_120200: scanned shard 18; checksum 121407; cache ready (9ms)\n________________ tally_120200_roundtrip _________________\n    def test_tally_120200_roundtrip():\n>       assert receipt == 'wanted-tally-120237'\nE       AssertionError: assert 'observed-tally-120211' == 'wanted-tally-120237'",
+          "seconds": 6.541
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ python -m pytest -q (exit 1)\n[worker 2] tally_120200: scanned shard 18; checksum 121407; cache ready (9ms)\n________________ tally_120200_roundtrip _________________\n    def test_tally_120200_roundtrip():\n>       assert receipt == 'wanted-tally-120237'\nE       AssertionError: assert 'observed-tally-120211' == 'wanted-tally-120237'\ntests/tally_120200.py:19: AssertionError\nFAILED tests/tally_120200.py::test_tally_120200_roundtrip - AssertionError\n1 failed, 12 passed in 0.43s",
+      "rawChars": 1834,
+      "modelEvidence": false,
+      "seconds": 6.543
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-pytest-comparison-2",
+      "family": "dev-pytest-comparison",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:59:11.300Z",
+          "candidates": [
+            {
+              "id": 19,
+              "text": "[worker 3] parcel_120201: scanned shard 19; checksum 121479; cache ready (10ms)"
+            },
+            {
+              "id": 20,
+              "text": "________________ parcel_120201_roundtrip _________________"
+            },
+            {
+              "id": 21,
+              "text": "    def test_parcel_120201_roundtrip():"
+            },
+            {
+              "id": 22,
+              "text": ">       assert receipt == 'wanted-parcel-120238'"
+            },
+            {
+              "id": 23,
+              "text": "E       AssertionError: assert 'observed-parcel-120212' == 'wanted-parcel-120238'"
+            },
+            {
+              "id": 24,
+              "text": "tests/parcel_120201.py:32: AssertionError"
+            },
+            {
+              "id": 25,
+              "text": "=================== short test summary info ==================="
+            },
+            {
+              "id": 26,
+              "text": "FAILED tests/parcel_120201.py::test_parcel_120201_roundtrip - AssertionError"
+            },
+            {
+              "id": 27,
+              "text": "1 failed, 12 passed in 0.43s"
+            }
+          ],
+          "reply": {
+            "lines": [
+              19,
+              20,
+              21,
+              22,
+              23
+            ]
+          },
+          "selectedText": "[worker 3] parcel_120201: scanned shard 19; checksum 121479; cache ready (10ms)\n________________ parcel_120201_roundtrip _________________\n    def test_parcel_120201_roundtrip():\n>       assert receipt == 'wanted-parcel-120238'\nE       AssertionError: assert 'observed-parcel-120212' == 'wanted-parcel-120238'",
+          "seconds": 6.007
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ python -m pytest -q (exit 1)\n[worker 3] parcel_120201: scanned shard 19; checksum 121479; cache ready (10ms)\n________________ parcel_120201_roundtrip _________________\n    def test_parcel_120201_roundtrip():\n>       assert receipt == 'wanted-parcel-120238'\nE       AssertionError: assert 'observed-parcel-120212' == 'wanted-parcel-120238'\ntests/parcel_120201.py:32: AssertionError\nFAILED tests/parcel_120201.py::test_parcel_120201_roundtrip - AssertionError\n1 failed, 12 passed in 0.43s",
+      "rawChars": 1940,
+      "modelEvidence": false,
+      "seconds": 6.007
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-pytest-comparison-3",
+      "family": "dev-pytest-comparison",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:59:17.311Z",
+          "candidates": [
+            {
+              "id": 20,
+              "text": "[worker 4] dispatch_120202: scanned shard 20; checksum 121551; cache ready (11ms)"
+            },
+            {
+              "id": 21,
+              "text": "________________ dispatch_120202_roundtrip _________________"
+            },
+            {
+              "id": 22,
+              "text": "    def test_dispatch_120202_roundtrip():"
+            },
+            {
+              "id": 23,
+              "text": ">       assert receipt == 'wanted-dispatch-120239'"
+            },
+            {
+              "id": 24,
+              "text": "E       AssertionError: assert 'observed-dispatch-120213' == 'wanted-dispatch-120239'"
+            },
+            {
+              "id": 25,
+              "text": "tests/dispatch_120202.py:45: AssertionError"
+            },
+            {
+              "id": 26,
+              "text": "=================== short test summary info ==================="
+            },
+            {
+              "id": 27,
+              "text": "FAILED tests/dispatch_120202.py::test_dispatch_120202_roundtrip - AssertionError"
+            },
+            {
+              "id": 28,
+              "text": "1 failed, 12 passed in 0.43s"
+            }
+          ],
+          "reply": {
+            "lines": [
+              20,
+              21,
+              22,
+              23,
+              24
+            ]
+          },
+          "selectedText": "[worker 4] dispatch_120202: scanned shard 20; checksum 121551; cache ready (11ms)\n________________ dispatch_120202_roundtrip _________________\n    def test_dispatch_120202_roundtrip():\n>       assert receipt == 'wanted-dispatch-120239'\nE       AssertionError: assert 'observed-dispatch-120213' == 'wanted-dispatch-120239'",
+          "seconds": 3.825
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ python -m pytest -q (exit 1)\n[worker 4] dispatch_120202: scanned shard 20; checksum 121551; cache ready (11ms)\n________________ dispatch_120202_roundtrip _________________\n    def test_dispatch_120202_roundtrip():\n>       assert receipt == 'wanted-dispatch-120239'\nE       AssertionError: assert 'observed-dispatch-120213' == 'wanted-dispatch-120239'\ntests/dispatch_120202.py:45: AssertionError\nFAILED tests/dispatch_120202.py::test_dispatch_120202_roundtrip - AssertionError\n1 failed, 12 passed in 0.43s",
+      "rawChars": 2076,
+      "modelEvidence": false,
+      "seconds": 3.825
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-pytest-comparison-4",
+      "family": "dev-pytest-comparison",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:59:21.139Z",
+          "candidates": [
+            {
+              "id": 21,
+              "text": "[worker 1] ledger_120203: scanned shard 21; checksum 121623; cache ready (7ms)"
+            },
+            {
+              "id": 22,
+              "text": "________________ ledger_120203_roundtrip _________________"
+            },
+            {
+              "id": 23,
+              "text": "    def test_ledger_120203_roundtrip():"
+            },
+            {
+              "id": 24,
+              "text": ">       assert receipt == 'wanted-ledger-120240'"
+            },
+            {
+              "id": 25,
+              "text": "E       AssertionError: assert 'observed-ledger-120214' == 'wanted-ledger-120240'"
+            },
+            {
+              "id": 26,
+              "text": "tests/ledger_120203.py:58: AssertionError"
+            },
+            {
+              "id": 27,
+              "text": "=================== short test summary info ==================="
+            },
+            {
+              "id": 28,
+              "text": "FAILED tests/ledger_120203.py::test_ledger_120203_roundtrip - AssertionError"
+            },
+            {
+              "id": 29,
+              "text": "1 failed, 12 passed in 0.43s"
+            }
+          ],
+          "reply": {
+            "lines": [
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29
+            ]
+          },
+          "selectedText": "[worker 1] ledger_120203: scanned shard 21; checksum 121623; cache ready (7ms)\n________________ ledger_120203_roundtrip _________________\n    def test_ledger_120203_roundtrip():\n>       assert receipt == 'wanted-ledger-120240'\nE       AssertionError: assert 'observed-ledger-120214' == 'wanted-ledger-120240'\ntests/ledger_120203.py:58: AssertionError\n=================== short test summary info ===================\nFAILED tests/ledger_120203.py::test_ledger_120203_roundtrip - AssertionError\n1 failed, 12 passed in 0.43s",
+          "seconds": 7.296
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ python -m pytest -q (exit 1)\n[worker 1] ledger_120203: scanned shard 21; checksum 121623; cache ready (7ms)\n________________ ledger_120203_roundtrip _________________\n    def test_ledger_120203_roundtrip():\n>       assert receipt == 'wanted-ledger-120240'\nE       AssertionError: assert 'observed-ledger-120214' == 'wanted-ledger-120240'\ntests/ledger_120203.py:58: AssertionError\n=================== short test summary info ===================\nFAILED tests/ledger_120203.py::test_ledger_120203_roundtrip - AssertionError\n1 failed, 12 passed in 0.43s",
+      "rawChars": 2099,
+      "modelEvidence": true,
+      "seconds": 7.296
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-pytest-comparison-5",
+      "family": "dev-pytest-comparison",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:59:28.438Z",
+          "candidates": [
+            {
+              "id": 22,
+              "text": "[worker 2] receipt_120204: scanned shard 22; checksum 121695; cache ready (8ms)"
+            },
+            {
+              "id": 23,
+              "text": "________________ receipt_120204_roundtrip _________________"
+            },
+            {
+              "id": 24,
+              "text": "    def test_receipt_120204_roundtrip():"
+            },
+            {
+              "id": 25,
+              "text": ">       assert receipt == 'wanted-receipt-120241'"
+            },
+            {
+              "id": 26,
+              "text": "E       AssertionError: assert 'observed-receipt-120215' == 'wanted-receipt-120241'"
+            },
+            {
+              "id": 27,
+              "text": "tests/receipt_120204.py:71: AssertionError"
+            },
+            {
+              "id": 28,
+              "text": "=================== short test summary info ==================="
+            },
+            {
+              "id": 29,
+              "text": "FAILED tests/receipt_120204.py::test_receipt_120204_roundtrip - AssertionError"
+            },
+            {
+              "id": 30,
+              "text": "1 failed, 12 passed in 0.43s"
+            }
+          ],
+          "reply": {
+            "lines": [
+              22,
+              23,
+              24,
+              25,
+              26
+            ]
+          },
+          "selectedText": "[worker 2] receipt_120204: scanned shard 22; checksum 121695; cache ready (8ms)\n________________ receipt_120204_roundtrip _________________\n    def test_receipt_120204_roundtrip():\n>       assert receipt == 'wanted-receipt-120241'\nE       AssertionError: assert 'observed-receipt-120215' == 'wanted-receipt-120241'",
+          "seconds": 5.203
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ python -m pytest -q (exit 1)\n[worker 2] receipt_120204: scanned shard 22; checksum 121695; cache ready (8ms)\n________________ receipt_120204_roundtrip _________________\n    def test_receipt_120204_roundtrip():\n>       assert receipt == 'wanted-receipt-120241'\nE       AssertionError: assert 'observed-receipt-120215' == 'wanted-receipt-120241'\ntests/receipt_120204.py:71: AssertionError\nFAILED tests/receipt_120204.py::test_receipt_120204_roundtrip - AssertionError\n1 failed, 12 passed in 0.43s",
+      "rawChars": 2208,
+      "modelEvidence": false,
+      "seconds": 5.204
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-pytest-comparison-6",
+      "family": "dev-pytest-comparison",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:59:33.643Z",
+          "candidates": [
+            {
+              "id": 23,
+              "text": "[worker 3] booking_120205: scanned shard 23; checksum 121767; cache ready (9ms)"
+            },
+            {
+              "id": 24,
+              "text": "________________ booking_120205_roundtrip _________________"
+            },
+            {
+              "id": 25,
+              "text": "    def test_booking_120205_roundtrip():"
+            },
+            {
+              "id": 26,
+              "text": ">       assert receipt == 'wanted-booking-120242'"
+            },
+            {
+              "id": 27,
+              "text": "E       AssertionError: assert 'observed-booking-120216' == 'wanted-booking-120242'"
+            },
+            {
+              "id": 28,
+              "text": "tests/booking_120205.py:84: AssertionError"
+            },
+            {
+              "id": 29,
+              "text": "=================== short test summary info ==================="
+            },
+            {
+              "id": 30,
+              "text": "FAILED tests/booking_120205.py::test_booking_120205_roundtrip - AssertionError"
+            },
+            {
+              "id": 31,
+              "text": "1 failed, 12 passed in 0.43s"
+            }
+          ],
+          "reply": {
+            "lines": [
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              30
+            ]
+          },
+          "selectedText": "[worker 3] booking_120205: scanned shard 23; checksum 121767; cache ready (9ms)\n________________ booking_120205_roundtrip _________________\n    def test_booking_120205_roundtrip():\n>       assert receipt == 'wanted-booking-120242'\nE       AssertionError: assert 'observed-booking-120216' == 'wanted-booking-120242'\ntests/booking_120205.py:84: AssertionError\nFAILED tests/booking_120205.py::test_booking_120205_roundtrip - AssertionError",
+          "seconds": 9.204
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ python -m pytest -q (exit 1)\n[worker 3] booking_120205: scanned shard 23; checksum 121767; cache ready (9ms)\n________________ booking_120205_roundtrip _________________\n    def test_booking_120205_roundtrip():\n>       assert receipt == 'wanted-booking-120242'\nE       AssertionError: assert 'observed-booking-120216' == 'wanted-booking-120242'\ntests/booking_120205.py:84: AssertionError\nFAILED tests/booking_120205.py::test_booking_120205_roundtrip - AssertionError\n1 failed, 12 passed in 0.43s",
+      "rawChars": 2288,
+      "modelEvidence": true,
+      "seconds": 9.205
+    },
+    {
+      "head": "test",
+      "id": "development-test-dev-pytest-comparison-7",
+      "family": "dev-pytest-comparison",
+      "calls": [
+        {
+          "stage": "evidence",
+          "model": "hydra-nano:git",
+          "startedAt": "2026-10-14T13:59:42.850Z",
+          "candidates": [
+            {
+              "id": 24,
+              "text": "[worker 4] voucher_120206: scanned shard 24; checksum 121839; cache ready (10ms)"
+            },
+            {
+              "id": 25,
+              "text": "________________ voucher_120206_roundtrip _________________"
+            },
+            {
+              "id": 26,
+              "text": "    def test_voucher_120206_roundtrip():"
+            },
+            {
+              "id": 27,
+              "text": ">       assert receipt == 'wanted-voucher-120243'"
+            },
+            {
+              "id": 28,
+              "text": "E       AssertionError: assert 'observed-voucher-120217' == 'wanted-voucher-120243'"
+            },
+            {
+              "id": 29,
+              "text": "tests/voucher_120206.py:97: AssertionError"
+            },
+            {
+              "id": 30,
+              "text": "=================== short test summary info ==================="
+            },
+            {
+              "id": 31,
+              "text": "FAILED tests/voucher_120206.py::test_voucher_120206_roundtrip - AssertionError"
+            },
+            {
+              "id": 32,
+              "text": "1 failed, 12 passed in 0.43s"
+            }
+          ],
+          "reply": {
+            "lines": [
+              24,
+              25,
+              26,
+              27,
+              28
+            ]
+          },
+          "selectedText": "[worker 4] voucher_120206: scanned shard 24; checksum 121839; cache ready (10ms)\n________________ voucher_120206_roundtrip _________________\n    def test_voucher_120206_roundtrip():\n>       assert receipt == 'wanted-voucher-120243'\nE       AssertionError: assert 'observed-voucher-120217' == 'wanted-voucher-120243'",
+          "seconds": 3.921
+        }
+      ],
+      "model": "hydra-nano:git",
+      "modelIdentity": null,
+      "solved": true,
+      "evidence": true,
+      "clean": true,
+      "text": "$ python -m pytest -q (exit 1)\n[worker 4] voucher_120206: scanned shard 24; checksum 121839; cache ready (10ms)\n________________ voucher_120206_roundtrip _________________\n    def test_voucher_120206_roundtrip():\n>       assert receipt == 'wanted-voucher-120243'\nE       AssertionError: assert 'observed-voucher-120217' == 'wanted-voucher-120243'\ntests/voucher_120206.py:97: AssertionError\nFAILED tests/voucher_120206.py::test_voucher_120206_roundtrip - AssertionError\n1 failed, 12 passed in 0.43s",
+      "rawChars": 2369,
+      "modelEvidence": false,
+      "seconds": 3.922
+    }
+  ]
+}

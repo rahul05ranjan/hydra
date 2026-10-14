@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "split": "development",
+  "bound": {
+    "subprocessMs": 6000,
+    "totalMs": 120000
+  },
+  "tasks": [
+    {
+      "id": "development-test-dev-captured-node-scalar-1",
+      "family": "dev-captured-node-scalar",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=tap development_node_0_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "TAP version 13\n# capture 310000 shard 0 verified; checksum 310000\n# capture 310000 shard 1 verified; checksum 310001\n# capture 310000 shard 2 verified; checksum 310002\n# capture 310000 shard 3 verified; checksum 310003\n# capture 310000 shard 4 verified; checksum 310004\n# capture 310000 shard 5 verified; checksum 310005\n# capture 310000 shard 6 verified; checksum 310006\n# capture 310000 shard 7 verified; checksum 310007\n# capture 310000 shard 8 verified; checksum 310008\n# capture 310000 shard 9 verified; checksum 310009\n# capture 310000 shard 10 verified; checksum 310010\n# capture 310000 shard 11 verified; checksum 310011\n# capture 310000 shard 12 verified; checksum 310012\n# capture 310000 shard 13 verified; checksum 310013\n# capture 310000 shard 14 verified; checksum 310014\n# capture 310000 shard 15 verified; checksum 310015\n# capture 310000 shard 16 verified; checksum 310016\n# capture 310000 shard 17 verified; checksum 310017\n# capture 310000 shard 18 verified; checksum 310018\n# Subtest: development_node_case_310000\nnot ok 1 - development_node_case_310000\n  ---\n  duration_ms: 4.1137\n  type: 'test'\n  location: 'C:\\\\Users\\\\rahus\\\\AppData\\\\Local\\\\Temp\\\\hydra-quality-capture-dRmvDv\\\\node-0-0\\\\development_node_0_0.mjs:4:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    case 310000: strict equality required 310007; actual 310000\n    \n    310000 !== 310007\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 310007\n  actual: 310000\n  operator: 'strictEqual'\n  stack: |-\n    TestContext.<anonymous> (file:////captured/development/node-0-0/development_node_0_0.mjs:6:10)\n    Test.runInAsyncScope (node:async_hooks:226:14)\n    Test.run (node:internal/test_runner/test:1201:25)\n    Test.start (node:internal/test_runner/test:1096:17)\n    startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 140.9549",
+      "gold": {
+        "expectedTests": [
+          "development_node_case_310000"
+        ],
+        "expectedFiles": [
+          "development_node_0_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 310000: strict equality required 310007; actual 310000"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "development-test-dev-captured-node-sequence-1",
+      "family": "dev-captured-node-sequence",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=tap development_node_1_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "TAP version 13\n# capture 310100 shard 0 verified; checksum 310100\n# capture 310100 shard 1 verified; checksum 310101\n# capture 310100 shard 2 verified; checksum 310102\n# capture 310100 shard 3 verified; checksum 310103\n# capture 310100 shard 4 verified; checksum 310104\n# capture 310100 shard 5 verified; checksum 310105\n# capture 310100 shard 6 verified; checksum 310106\n# capture 310100 shard 7 verified; checksum 310107\n# capture 310100 shard 8 verified; checksum 310108\n# capture 310100 shard 9 verified; checksum 310109\n# capture 310100 shard 10 verified; checksum 310110\n# capture 310100 shard 11 verified; checksum 310111\n# capture 310100 shard 12 verified; checksum 310112\n# capture 310100 shard 13 verified; checksum 310113\n# capture 310100 shard 14 verified; checksum 310114\n# capture 310100 shard 15 verified; checksum 310115\n# capture 310100 shard 16 verified; checksum 310116\n# capture 310100 shard 17 verified; checksum 310117\n# capture 310100 shard 18 verified; checksum 310118\n# Subtest: development_node_case_310100\nnot ok 1 - development_node_case_310100\n  ---\n  duration_ms: 7.2744\n  type: 'test'\n  location: 'C:\\\\Users\\\\rahus\\\\AppData\\\\Local\\\\Temp\\\\hydra-quality-capture-dRmvDv\\\\node-1-0\\\\development_node_1_0.mjs:4:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    case 310100: sequence required ['harbor', 310107]; actual ['voucher', 310100]\n    + actual - expected\n    \n      [\n    +   'voucher',\n    +   310100\n    -   'harbor',\n    -   310107\n      ]\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected:\n    0: 'harbor'\n    1: 310107\n  actual:\n    0: 'voucher'\n    1: 310100\n  operator: 'deepStrictEqual'\n  stack: |-\n    TestContext.<anonymous> (file:////captured/development/node-1-0/development_node_1_0.mjs:6:10)\n    Test.runInAsyncScope (node:async_hooks:226:14)\n    Test.run (node:internal/test_runner/test:1201:25)\n    Test.start (node:internal/test_runner/test:1096:17)\n    startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 122.7563",
+      "gold": {
+        "expectedTests": [
+          "development_node_case_310100"
+        ],
+        "expectedFiles": [
+          "development_node_1_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 310100: sequence required ['harbor', 310107]; actual ['voucher', 310100]"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "development-test-dev-captured-node-predicate-1",
+      "family": "dev-captured-node-predicate",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=tap development_node_2_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "TAP version 13\n# capture 310200 shard 0 verified; checksum 310200\n# capture 310200 shard 1 verified; checksum 310201\n# capture 310200 shard 2 verified; checksum 310202\n# capture 310200 shard 3 verified; checksum 310203\n# capture 310200 shard 4 verified; checksum 310204\n# capture 310200 shard 5 verified; checksum 310205\n# capture 310200 shard 6 verified; checksum 310206\n# capture 310200 shard 7 verified; checksum 310207\n# capture 310200 shard 8 verified; checksum 310208\n# capture 310200 shard 9 verified; checksum 310209\n# capture 310200 shard 10 verified; checksum 310210\n# capture 310200 shard 11 verified; checksum 310211\n# capture 310200 shard 12 verified; checksum 310212\n# capture 310200 shard 13 verified; checksum 310213\n# capture 310200 shard 14 verified; checksum 310214\n# capture 310200 shard 15 verified; checksum 310215\n# capture 310200 shard 16 verified; checksum 310216\n# capture 310200 shard 17 verified; checksum 310217\n# capture 310200 shard 18 verified; checksum 310218\n# Subtest: development_node_case_310200\nnot ok 1 - development_node_case_310200\n  ---\n  duration_ms: 3.0167\n  type: 'test'\n  location: 'C:\\\\Users\\\\rahus\\\\AppData\\\\Local\\\\Temp\\\\hydra-quality-capture-dRmvDv\\\\node-2-0\\\\development_node_2_0.mjs:4:1'\n  failureType: 'testCodeFailure'\n  error: 'case 310200: truthiness required true; actual false'\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: true\n  actual: false\n  operator: '=='\n  stack: |-\n    TestContext.<anonymous> (file:////captured/development/node-2-0/development_node_2_0.mjs:6:10)\n    Test.runInAsyncScope (node:async_hooks:226:14)\n    Test.run (node:internal/test_runner/test:1201:25)\n    Test.start (node:internal/test_runner/test:1096:17)\n    startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 146.9646",
+      "gold": {
+        "expectedTests": [
+          "development_node_case_310200"
+        ],
+        "expectedFiles": [
+          "development_node_2_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 310200: truthiness required true; actual false"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "development-test-dev-captured-node-passing-1",
+      "family": "dev-captured-node-passing",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=tap development_node_3_0.mjs",
+      "exitCode": 0,
+      "rawOutput": "TAP version 13\n# capture 310300 shard 0 verified; checksum 310300\n# capture 310300 shard 1 verified; checksum 310301\n# capture 310300 shard 2 verified; checksum 310302\n# capture 310300 shard 3 verified; checksum 310303\n# capture 310300 shard 4 verified; checksum 310304\n# capture 310300 shard 5 verified; checksum 310305\n# capture 310300 shard 6 verified; checksum 310306\n# capture 310300 shard 7 verified; checksum 310307\n# capture 310300 shard 8 verified; checksum 310308\n# capture 310300 shard 9 verified; checksum 310309\n# capture 310300 shard 10 verified; checksum 310310\n# capture 310300 shard 11 verified; checksum 310311\n# capture 310300 shard 12 verified; checksum 310312\n# capture 310300 shard 13 verified; checksum 310313\n# capture 310300 shard 14 verified; checksum 310314\n# capture 310300 shard 15 verified; checksum 310315\n# capture 310300 shard 16 verified; checksum 310316\n# capture 310300 shard 17 verified; checksum 310317\n# capture 310300 shard 18 verified; checksum 310318\n# Subtest: development_node_case_310300\nok 1 - development_node_case_310300\n  ---\n  duration_ms: 2.1296\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 111.9172",
+      "gold": {
+        "expectedTests": [],
+        "expectedFiles": [],
+        "expectedAssertions": [
+          "# tests 1",
+          "# pass 1",
+          "# fail 0"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "development-test-dev-captured-python-scalar-1",
+      "family": "dev-captured-python-scalar",
+      "framework": "unittest",
+      "command": "python development_python_0_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 310000 shard 0 verified; checksum 310000\r\ncapture 310000 shard 1 verified; checksum 310001\r\ncapture 310000 shard 2 verified; checksum 310002\r\ncapture 310000 shard 3 verified; checksum 310003\r\ncapture 310000 shard 4 verified; checksum 310004\r\ncapture 310000 shard 5 verified; checksum 310005\r\ncapture 310000 shard 6 verified; checksum 310006\r\ncapture 310000 shard 7 verified; checksum 310007\r\ncapture 310000 shard 8 verified; checksum 310008\r\ncapture 310000 shard 9 verified; checksum 310009\r\ncapture 310000 shard 10 verified; checksum 310010\r\ncapture 310000 shard 11 verified; checksum 310011\r\ncapture 310000 shard 12 verified; checksum 310012\r\ncapture 310000 shard 13 verified; checksum 310013\r\ncapture 310000 shard 14 verified; checksum 310014\r\ncapture 310000 shard 15 verified; checksum 310015\r\ncapture 310000 shard 16 verified; checksum 310016\r\ncapture 310000 shard 17 verified; checksum 310017\r\ncapture 310000 shard 18 verified; checksum 310018\r\n\nF\r\n======================================================================\r\nFAIL: test_development_python_case_310000 (__main__.CapturedQuality.test_development_python_case_310000)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/development/python-0-0\\development_python_0_0.py\", line 7, in test_development_python_case_310000\r\n    self.assertEqual('voucher-310000', 'harbor-310000', msg=\"case 310000: string required harbor-310000; actual voucher-310000\")\r\nAssertionError: 'voucher-310000' != 'harbor-310000'\r\n- voucher-310000\r\n+ harbor-310000\r\n : case 310000: string required harbor-310000; actual voucher-310000\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_development_python_case_310000"
+        ],
+        "expectedFiles": [
+          "development_python_0_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 310000: string required harbor-310000; actual voucher-310000"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "development-test-dev-captured-python-sequence-1",
+      "family": "dev-captured-python-sequence",
+      "framework": "unittest",
+      "command": "python development_python_1_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 310100 shard 0 verified; checksum 310100\r\ncapture 310100 shard 1 verified; checksum 310101\r\ncapture 310100 shard 2 verified; checksum 310102\r\ncapture 310100 shard 3 verified; checksum 310103\r\ncapture 310100 shard 4 verified; checksum 310104\r\ncapture 310100 shard 5 verified; checksum 310105\r\ncapture 310100 shard 6 verified; checksum 310106\r\ncapture 310100 shard 7 verified; checksum 310107\r\ncapture 310100 shard 8 verified; checksum 310108\r\ncapture 310100 shard 9 verified; checksum 310109\r\ncapture 310100 shard 10 verified; checksum 310110\r\ncapture 310100 shard 11 verified; checksum 310111\r\ncapture 310100 shard 12 verified; checksum 310112\r\ncapture 310100 shard 13 verified; checksum 310113\r\ncapture 310100 shard 14 verified; checksum 310114\r\ncapture 310100 shard 15 verified; checksum 310115\r\ncapture 310100 shard 16 verified; checksum 310116\r\ncapture 310100 shard 17 verified; checksum 310117\r\ncapture 310100 shard 18 verified; checksum 310118\r\n\nF\r\n======================================================================\r\nFAIL: test_development_python_case_310100 (__main__.CapturedQuality.test_development_python_case_310100)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/development/python-1-0\\development_python_1_0.py\", line 7, in test_development_python_case_310100\r\n    self.assertListEqual([310100, 'tally'], [310107, 'parcel'], msg=\"case 310100: list required [310107, 'parcel']; actual [310100, 'tally']\")\r\nAssertionError: Lists differ: [310100, 'tally'] != [310107, 'parcel']\r\n\r\nFirst differing element 0:\r\n310100\r\n310107\r\n\r\n- [310100, 'tally']\r\n+ [310107, 'parcel'] : case 310100: list required [310107, 'parcel']; actual [310100, 'tally']\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_development_python_case_310100"
+        ],
+        "expectedFiles": [
+          "development_python_1_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 310100: list required [310107, 'parcel']; actual [310100, 'tally']"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "development-test-dev-captured-python-predicate-1",
+      "family": "dev-captured-python-predicate",
+      "framework": "unittest",
+      "command": "python development_python_2_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 310200 shard 0 verified; checksum 310200\r\ncapture 310200 shard 1 verified; checksum 310201\r\ncapture 310200 shard 2 verified; checksum 310202\r\ncapture 310200 shard 3 verified; checksum 310203\r\ncapture 310200 shard 4 verified; checksum 310204\r\ncapture 310200 shard 5 verified; checksum 310205\r\ncapture 310200 shard 6 verified; checksum 310206\r\ncapture 310200 shard 7 verified; checksum 310207\r\ncapture 310200 shard 8 verified; checksum 310208\r\ncapture 310200 shard 9 verified; checksum 310209\r\ncapture 310200 shard 10 verified; checksum 310210\r\ncapture 310200 shard 11 verified; checksum 310211\r\ncapture 310200 shard 12 verified; checksum 310212\r\ncapture 310200 shard 13 verified; checksum 310213\r\ncapture 310200 shard 14 verified; checksum 310214\r\ncapture 310200 shard 15 verified; checksum 310215\r\ncapture 310200 shard 16 verified; checksum 310216\r\ncapture 310200 shard 17 verified; checksum 310217\r\ncapture 310200 shard 18 verified; checksum 310218\r\n\nF\r\n======================================================================\r\nFAIL: test_development_python_case_310200 (__main__.CapturedQuality.test_development_python_case_310200)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/development/python-2-0\\development_python_2_0.py\", line 7, in test_development_python_case_310200\r\n    self.assertIsInstance(310200, str, msg=\"case 310200: instance required str; actual integer 310200\")\r\nAssertionError: 310200 is not an instance of <class 'str'> : case 310200: instance required str; actual integer 310200\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_development_python_case_310200"
+        ],
+        "expectedFiles": [
+          "development_python_2_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 310200: instance required str; actual integer 310200"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "development-test-dev-captured-python-passing-1",
+      "family": "dev-captured-python-passing",
+      "framework": "unittest",
+      "command": "python development_python_3_0.py",
+      "exitCode": 0,
+      "rawOutput": "capture 310300 shard 0 verified; checksum 310300\r\ncapture 310300 shard 1 verified; checksum 310301\r\ncapture 310300 shard 2 verified; checksum 310302\r\ncapture 310300 shard 3 verified; checksum 310303\r\ncapture 310300 shard 4 verified; checksum 310304\r\ncapture 310300 shard 5 verified; checksum 310305\r\ncapture 310300 shard 6 verified; checksum 310306\r\ncapture 310300 shard 7 verified; checksum 310307\r\ncapture 310300 shard 8 verified; checksum 310308\r\ncapture 310300 shard 9 verified; checksum 310309\r\ncapture 310300 shard 10 verified; checksum 310310\r\ncapture 310300 shard 11 verified; checksum 310311\r\ncapture 310300 shard 12 verified; checksum 310312\r\ncapture 310300 shard 13 verified; checksum 310313\r\ncapture 310300 shard 14 verified; checksum 310314\r\ncapture 310300 shard 15 verified; checksum 310315\r\ncapture 310300 shard 16 verified; checksum 310316\r\ncapture 310300 shard 17 verified; checksum 310317\r\ncapture 310300 shard 18 verified; checksum 310318\r\n\n.\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.000s\r\n\r\nOK",
+      "gold": {
+        "expectedTests": [],
+        "expectedFiles": [],
+        "expectedAssertions": [
+          "Ran 1 test",
+          "OK"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    }
+  ],
+  "provenance": [
+    {
+      "taskId": "development-test-dev-captured-node-scalar-1",
+      "sourceKind": "node",
+      "scenario": 0,
+      "repetition": 0,
+      "basename": "development_node_0_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"development_node_case_310000\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 310000 shard', i, 'verified; checksum', 310000 + i);\n  assert.strictEqual(310000, 310007, \"case 310000: strict equality required 310007; actual 310000\");\n});\n",
+      "sourceSha256": "34ac05eaf7f1cfe544f2338904d368574c6ef3e9a641803cdd759b5bed9a461e",
+      "outputSha256": "6f9d92c731e3680ee4f1bc371cdd35c7ec246587afcdbe5b35a96789fe6a8065",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=tap",
+        "development_node_0_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 237,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "development-test-dev-captured-node-sequence-1",
+      "sourceKind": "node",
+      "scenario": 1,
+      "repetition": 0,
+      "basename": "development_node_1_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"development_node_case_310100\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 310100 shard', i, 'verified; checksum', 310100 + i);\n  assert.deepStrictEqual(['voucher', 310100], ['harbor', 310107], \"case 310100: sequence required ['harbor', 310107]; actual ['voucher', 310100]\");\n});\n",
+      "sourceSha256": "70df482d3616d3d4971aadd68e11e1112ce245526cd4e387871a52bc6448ed4e",
+      "outputSha256": "ce208883e915842d2b5512a1b2d891e27d6a92457242240352b004b59b9ba015",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=tap",
+        "development_node_1_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 213,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "development-test-dev-captured-node-predicate-1",
+      "sourceKind": "node",
+      "scenario": 2,
+      "repetition": 0,
+      "basename": "development_node_2_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"development_node_case_310200\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 310200 shard', i, 'verified; checksum', 310200 + i);\n  assert.ok(false, \"case 310200: truthiness required true; actual false\");\n});\n",
+      "sourceSha256": "e94b733cf87036c62bc9753d5cd52087d1820b53d5dedff3b6e01187dde9fd70",
+      "outputSha256": "07bf79edb601ad05f90d840cae2c0c1e57599231d9eb2717681cae12946195c8",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=tap",
+        "development_node_2_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 241,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "development-test-dev-captured-node-passing-1",
+      "sourceKind": "node",
+      "scenario": 3,
+      "repetition": 0,
+      "basename": "development_node_3_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"development_node_case_310300\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 310300 shard', i, 'verified; checksum', 310300 + i);\n  assert.strictEqual(310300, 310300);\n});\n",
+      "sourceSha256": "5f23f37b0ee521804801cc53d9d8c94a03dae7c6a91fd899caabb42539e518d3",
+      "outputSha256": "32df46d12fede212e113e2ce0911d1cb93c0d18be619e64bf5da0034282e9efb",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=tap",
+        "development_node_3_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 0,
+      "timeoutMs": 6000,
+      "elapsedMs": 197,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "development-test-dev-captured-python-scalar-1",
+      "sourceKind": "python",
+      "scenario": 0,
+      "repetition": 0,
+      "basename": "development_python_0_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_development_python_case_310000(self):\n        for shard in range(19):\n            print('capture 310000 shard', shard, 'verified; checksum', 310000 + shard)\n        self.assertEqual('voucher-310000', 'harbor-310000', msg=\"case 310000: string required harbor-310000; actual voucher-310000\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=1)\n",
+      "sourceSha256": "133f1c7eaaec43c7bcfb15747b6b5a61894cb747dd00a322152e4512d63245f6",
+      "outputSha256": "5ffce6ce72514c2aea686535877f0ace172bae1957f94198b57d0995976dbae2",
+      "executable": "python",
+      "argv": [
+        "development_python_0_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 207,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "development-test-dev-captured-python-sequence-1",
+      "sourceKind": "python",
+      "scenario": 1,
+      "repetition": 0,
+      "basename": "development_python_1_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_development_python_case_310100(self):\n        for shard in range(19):\n            print('capture 310100 shard', shard, 'verified; checksum', 310100 + shard)\n        self.assertListEqual([310100, 'tally'], [310107, 'parcel'], msg=\"case 310100: list required [310107, 'parcel']; actual [310100, 'tally']\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=1)\n",
+      "sourceSha256": "4bcc176c45707ced0721ad6a0fd7eb673b8a718276e7d723b875f230b5fe52cd",
+      "outputSha256": "3b56e57e25d8051811c2d94f553a60f694fd218cf5fd204fc62448b0d163336e",
+      "executable": "python",
+      "argv": [
+        "development_python_1_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 180,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "development-test-dev-captured-python-predicate-1",
+      "sourceKind": "python",
+      "scenario": 2,
+      "repetition": 0,
+      "basename": "development_python_2_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_development_python_case_310200(self):\n        for shard in range(19):\n            print('capture 310200 shard', shard, 'verified; checksum', 310200 + shard)\n        self.assertIsInstance(310200, str, msg=\"case 310200: instance required str; actual integer 310200\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=1)\n",
+      "sourceSha256": "165b28f5d9443505d4eda41fd666f7b42856f9e686ecd8933560e957be4f5ff6",
+      "outputSha256": "35b1ef606a9aa80d9889bc838856895e1197d88fc2ab39c2f5ec2bb6f7e1df9b",
+      "executable": "python",
+      "argv": [
+        "development_python_2_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 173,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "development-test-dev-captured-python-passing-1",
+      "sourceKind": "python",
+      "scenario": 3,
+      "repetition": 0,
+      "basename": "development_python_3_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_development_python_case_310300(self):\n        for shard in range(19):\n            print('capture 310300 shard', shard, 'verified; checksum', 310300 + shard)\n        self.assertEqual(310300, 310300)\n\nif __name__ == '__main__':\n    unittest.main(verbosity=1)\n",
+      "sourceSha256": "e8eadfa58aded2eb5baa041b3afd51c153e8bd02fda077c6d78d04f065b0ecc5",
+      "outputSha256": "db5fb8ba5eaeeb61679d7bc781defea4da8624080be1e4bb6ba1e8ee6a537cf8",
+      "executable": "python",
+      "argv": [
+        "development_python_3_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 0,
+      "timeoutMs": 6000,
+      "elapsedMs": 175,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    }
+  ]
+}

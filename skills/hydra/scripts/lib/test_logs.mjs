@@ -6,6 +6,10 @@ import { Unavailable } from './runtime.mjs';
 const PASS_THROUGH = 800;
 const MAX_CANDIDATES = 60;
 const MAX_CITED = 12;
+const FAILURE_HEADER = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|not\s+ok\b|error(?:\[E\d+\]| TS\d+)?|[A-Za-z_]\w*(?:Error|Exception)\s*:|panicked at|assert\s|assertion\s|Expected:|Received:|actual:|- Snapshot|[-+]\s|--- FAIL:|____+\s+\w+)|^\s*(?:left|right)\s*:/i;
+const LAUNCH_ERROR = /(?:\bnot found\b|\bis not recognized\b|\bNo module named\b|\bCannot find module\b|\bMissing script:|\bENOENT\b|\bERR_MODULE_NOT_FOUND\b)/i;
+const USER_STACK = /\b([a-zA-Z0-9_\-./]+\.(?:ts|tsx|js|jsx|mjs|cjs|py|rs|go|java|c|cpp|rb)):(\d+)(?::(\d+))?|\bFile\s+"[^"\n]+\.py",\s+line\s+\d+/;
+const IGNORE_STACK = /(?:node_modules|site-packages|\.cargo\/registry|internal\/process|\bat <anonymous>:\d+|\(<anonymous>:\d+|\/usr\/(?:local\/)?lib\/python|\/lib\/python)/;
 
 const SYSTEM = `You select verbatim evidence for test failures or build errors. Each line has its line number in brackets [N].
 Reply with JSON:
@@ -22,38 +26,43 @@ const SCHEMA = {
 // Heuristic identification of test failures, assertion diffs, and source lines
 export function extractFailureCandidates(logText) {
   const lines = logText.split('\n');
-  const candidateIndices = new Set();
-
-  const ERROR_START = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|error(?:\[E\d+\]| TS\d+)?|panicked at|AssertionError|assert\s|assertion\s|Expected:|Received:|- Snapshot|--- FAIL:|____+\s+\w+)|^\s*(?:left|right)\s*:/i;
-  const USER_STACK = /\b([a-zA-Z0-9_\-./]+\.(?:ts|tsx|js|jsx|py|rs|go|java|c|cpp|rb)):(\d+)(?::(\d+))?/;
-  const IGNORE_STACK = /(?:node_modules|site-packages|\.cargo\/registry|internal\/process|\bat <anonymous>:\d+|\(<anonymous>:\d+|\/usr\/(?:local\/)?lib\/python|\/lib\/python)/;
+  const candidateRanks = new Map();
+  const nearFailure = new Set();
+  const add = (index, rank) => {
+    if (!IGNORE_STACK.test(lines[index])) candidateRanks.set(index, Math.max(rank, candidateRanks.get(index) || 0));
+  };
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    if (ERROR_START.test(line)) {
+    if (!IGNORE_STACK.test(line) && (FAILURE_HEADER.test(line) || LAUNCH_ERROR.test(line))) {
+      add(i, 4);
       for (let j = Math.max(0, i - 1); j <= Math.min(lines.length - 1, i + 5); j++) {
-        if (!IGNORE_STACK.test(lines[j])) {
-          candidateIndices.add(j);
-        }
+        add(j, 2);
       }
+      for (let j = Math.max(0, i - 10); j <= Math.min(lines.length - 1, i + 20); j++) nearFailure.add(j);
     }
-
+  }
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     if (USER_STACK.test(line) && !IGNORE_STACK.test(line)) {
-      candidateIndices.add(i);
+      add(i, nearFailure.has(i) ? 3 : 1);
     }
   }
 
   // Include trailing summary lines
   for (let i = Math.max(0, lines.length - 8); i < lines.length; i++) {
     if (/(?:failed|passed|errors|finished in|Test Files|Tests\s+\d+)/i.test(lines[i])) {
-      candidateIndices.add(i);
+      add(i, 1);
     }
   }
 
-  return Array.from(candidateIndices)
-    .sort((a, b) => a - b)
+  // The budget belongs to failure evidence first, rather than the first incidental trace lines.
+  // Restore source order after selection so line numbers and verbatim context remain unchanged.
+  return Array.from(candidateRanks.keys())
+    .sort((a, b) => candidateRanks.get(b) - candidateRanks.get(a) || a - b)
     .slice(0, MAX_CANDIDATES)
+    .sort((a, b) => a - b)
     .map(idx => ({ id: idx + 1, text: lines[idx] }));
 }
 
@@ -74,7 +83,7 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
   if (exitCode === 0) {
     const lines = rawText.split('\n');
     const summaryLines = lines
-      .filter(l => /(?:passed|tests? passed|ok|success|finished in|\b(?:pass|fail(?:ures|ed)?|tests?|suites|cancelled|skipped|todo)\s*[: ]\s*\d+)/i.test(l))
+      .filter(l => /(?:passed|tests? passed|ok|success|finished in|^\s*Ran\s+\d+\s+tests?\b|\b(?:pass|fail(?:ures|ed)?|tests?|suites|cancelled|skipped|todo)\s*[: ]\s*\d+)/i.test(l))
       .slice(-8)
       .join('\n');
     return {
@@ -87,10 +96,12 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
   // Failing tests or compiler errors: extract high-signal failure regions
   const candidates = extractFailureCandidates(rawText);
   if (!candidates.length) {
-    // Fallback if no specific failure patterns matched
-    const head = rawText.split('\n').slice(0, 15).join('\n');
+    // Unknown runners commonly print setup first and the actual termination reason last.
+    const lines = rawText.split('\n');
+    const indices = new Set([...lines.slice(0, 3).map((_, i) => i), ...lines.slice(-12).map((_, i) => Math.max(0, lines.length - 12) + i)]);
+    const excerpt = [...indices].sort((a, b) => a - b).map(i => lines[i]).join('\n');
     return {
-      text: `$ ${cmd} (exit ${exitCode})\n${head}\n(... remaining ${rawText.split('\n').length - 15} lines withheld)`,
+      text: `$ ${cmd} (exit ${exitCode})\n${excerpt}\n(... ${lines.length - indices.size} lines withheld)`,
       rawChars,
       exitCode,
     };
@@ -112,15 +123,11 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
     (Array.isArray(reply?.lines) ? reply.lines : []).filter(id => Number.isInteger(id)),
   );
 
-  const FAILURE_HEADER = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|panicked at|AssertionError|assert\s|assertion\s|Expected:|Received:|[-+]\s|--- FAIL:|____+\s+\w+)|^\s*(?:left|right)\s*:/i;
-  const USER_STACK = /\b([a-zA-Z0-9_\-./]+\.(?:ts|tsx|js|jsx|py|rs|go|java|c|cpp|rb)):(\d+)(?::(\d+))?/;
-  const IGNORE_STACK = /(?:node_modules|site-packages|\.cargo\/registry|internal\/process|\bat <anonymous>:\d+|\(<anonymous>:\d+|\/usr\/(?:local\/)?lib\/python|\/lib\/python)/;
-
   let evidenceLines;
   if (citedIds.size > 0) {
     const essentialIds = new Set(
       candidates
-        .filter(c => (FAILURE_HEADER.test(c.text) || USER_STACK.test(c.text)) && !IGNORE_STACK.test(c.text))
+        .filter(c => (FAILURE_HEADER.test(c.text) || LAUNCH_ERROR.test(c.text) || USER_STACK.test(c.text)) && !IGNORE_STACK.test(c.text))
         .map(c => c.id),
     );
     evidenceLines = candidates

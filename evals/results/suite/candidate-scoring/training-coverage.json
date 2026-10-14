@@ -1,0 +1,18 @@
+{
+  "checkpointTrainingScope": "80 Git feasibility examples, ten intent labels, eight synthetic scenario IDs, ten optimizer updates. Not representative release training.",
+  "gitExamples": 80,
+  "gitIntentCounts": {
+    "author": 8,
+    "blame": 8,
+    "branch_diff": 8,
+    "branch_history": 8,
+    "file_history": 8,
+    "file_patch": 8,
+    "message": 8,
+    "modified": 8,
+    "staged": 8,
+    "untracked": 8
+  },
+  "scoringPlanSha256": "7e0d0ba02e27589ade44989b38c6394b0d081200152ed7dc5930f8bb49032c87",
+  "releaseGate": ">=95% solved per head on audited independent holdouts; non-Git 84 fixtures are development diagnostics only."
+}

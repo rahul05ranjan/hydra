@@ -1,0 +1,15 @@
+{
+  "kernelVersion": 4,
+  "status": "ERROR",
+  "trainingStarted": false,
+  "completedSteps": 0,
+  "acceptedCheckpoint": false,
+  "approvedPlanSha256": "862b956704cd66a91c880ffa906a4d8653322114a483e867c3661f214693afc2",
+  "loggedElapsedIncludingRenderingSeconds": 6.617244666,
+  "failureStage": "mounted-plan hash guard",
+  "error": "Kaggle mounted previous dataset version while new version was still becoming ready",
+  "remoteDatasetVersionVerified": 4,
+  "sealedEvaluation": false,
+  "published": false,
+  "defaultChanged": false
+}

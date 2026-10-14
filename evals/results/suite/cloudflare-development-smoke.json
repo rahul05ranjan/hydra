@@ -1,0 +1,17 @@
+{
+  "model": "@cf/zai-org/glm-5.3",
+  "elapsedSeconds": 1.9840000001713634,
+  "usage": {
+    "prompt_tokens": 23,
+    "completion_tokens": 7,
+    "total_tokens": 30,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "neurons": 5.727272987365723
+  },
+  "value": {
+    "ok": true
+  },
+  "scope": "Development assistance only. Independent review required before use as training or code."
+}

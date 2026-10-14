@@ -1,0 +1,13 @@
+{
+  "examples": 80,
+  "vocabSize": 248320,
+  "totalFullProjectionPositions": 56120,
+  "totalSelectedProjectionPositions": 1720,
+  "maximumFullProjectionPositions": 714,
+  "maximumSelectedProjectionPositions": 28,
+  "maximumFullFP32LogitBytes": 709201920,
+  "maximumSelectedFP32LogitBytes": 27811840,
+  "scope": "Tensor-size calculation from real tokenizer/data. Not a measured GPU peak.",
+  "trainerSha256": "2edc29879b9a6fcd0a9f35e9a0d2168fb25e9cca0f7e450884d24091fa4cfd83",
+  "dataSha256": "e9b961cc8987f30b2b277ced8035b64637c4fd52bae24c37a623727a4bee8ab8"
+}

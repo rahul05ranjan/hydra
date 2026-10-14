@@ -1,0 +1,44 @@
+{
+  "comparison-q8": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      1397,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "149, GPU-356b04a8-a09c-0c84-4245-dda25c256043, 1394\n",
+    "modelSha256": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be"
+  },
+  "candidate-f16": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      2071,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "8936, GPU-356b04a8-a09c-0c84-4245-dda25c256043, 2068\n",
+    "modelSha256": "0838f0aa7a197da494536a562b60c1752527b293f3345d0bd604b89bed09536a"
+  },
+  "candidate-q8": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      1403,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "10309, GPU-356b04a8-a09c-0c84-4245-dda25c256043, 1400\n",
+    "modelSha256": "1514df92c27a8fba18621e1f9361b2c09ad3b7eeb3612e76f3372f279bf073b7"
+  }
+}

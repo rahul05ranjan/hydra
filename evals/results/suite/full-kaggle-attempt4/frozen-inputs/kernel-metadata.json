@@ -1,0 +1,15 @@
+{
+  "id": "rahulswt7/hydra-full-parameter-feasibility",
+  "title": "Hydra full parameter feasibility",
+  "code_file": "full_kernel.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "rahulswt7/hydra-full-feasibility-input"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}

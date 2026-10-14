@@ -16,9 +16,11 @@ const NUMBER_WORDS = {
   sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50,
 };
 const COUNT = `(?:\\d+|(?:twenty|thirty|forty)[ -](?:one|two|three|four|five|six|seven|eight|nine)|${Object.keys(NUMBER_WORDS).join('|')})`;
+const COUNT_MODIFIERS = '(?:(?:last|latest|recent|newest|oldest|branch-only|file-specific|unique|matching|first|history|historical|past)\\s+){0,3}';
+const COUNT_ITEMS = '(?:commits?|revisions?|changesets?|records?)';
 const requestedCount = question => {
-  const match = question.match(new RegExp(`\\b(?:last|latest|recent|top|first)\\s+(${COUNT})\\s+commits?\\b`, 'i'))
-    ?? question.match(new RegExp(`\\b(${COUNT})\\s+(?:(?:last|latest|recent)\\s+)?commits?\\b`, 'i'));
+  const match = question.match(new RegExp(`\\b(?:last|latest|recent|top|first)\\s+(${COUNT})\\s+${COUNT_MODIFIERS}${COUNT_ITEMS}\\b`, 'i'))
+    ?? question.match(new RegExp(`\\b(${COUNT})\\s+${COUNT_MODIFIERS}${COUNT_ITEMS}\\b`, 'i'));
   if (!match) return null;
   const text = match[1].toLowerCase();
   const value = /^\d+$/.test(text) ? Number(text) : text.split(/[ -]/).reduce((sum, word) => sum + NUMBER_WORDS[word], 0);
@@ -43,7 +45,7 @@ export const PROBES = {
   },
   log: {
     about:
-      'commit history, newest first, who changed a file or what changed in it; optional n, path, author, grep (text in the commit message), base (only commits this branch has that the base branch lacks)',
+      'committed revision history, newest first, who last committed a file; optional n, path, author, grep (text in the commit message), base (only commits this branch has that the base branch lacks)',
     argv: a => [
       'log',
       ...FORMAT,
@@ -61,7 +63,7 @@ export const PROBES = {
     argv: a => [
       'diff',
       ...PATCH,
-      a.base ? `${a.base}...HEAD` : a.staged ? '--staged' : 'HEAD',
+      ...(a.base ? [`${a.base}...HEAD`] : a.staged ? ['--staged'] : a.worktreeOnly ? [] : ['HEAD']),
       ...(a.path ? ['--', a.path] : []),
     ],
   },
@@ -117,6 +119,10 @@ ${Object.entries(PROBES)
   .join('\n')}
 Set path, rev, base, author, grep or staged only when the question calls for one.
 Use author for who wrote commits; grep only searches commit messages. A file history query uses path, not grep. A file's last edit uses log; the author of a specific source line uses blame. Copy a named commit's rev exactly from the question.
+For the active branch name use status; for a list of branch references use branches. HEAD in a branch-name question does not ask for a commit patch.
+For multiple revisions or historical records use log with n, including file-specific history. show reads one committed revision and its changed files.
+Pending source edits relative to HEAD use diff. Cached/index/prepared differences use diff with staged=true; these edits have not been committed.
+Linked checkout directories use worktrees, even when the question also mentions their branches.
 
 Examples:
 "which branch am I on?" -> {"probes":[{"probe":"status"}]}
@@ -137,7 +143,7 @@ Examples:
 async function clean(p, question, cwd) {
   const asked = question.toLowerCase();
   const safe = s => typeof s === 'string' && s.trim() !== '' && !s.trim().startsWith('-') && asked.includes(s.trim().toLowerCase());
-  const a = { n: Number.isInteger(p.n) ? Math.min(Math.max(p.n, 1), 50) : 15, staged: p.staged === true };
+  const a = { n: Number.isInteger(p.n) ? Math.min(Math.max(p.n, 1), 50) : 15, staged: false };
   if (p.probe === 'log') a.n = requestedCount(question) ?? a.n;
   if (safe(p.author)) {
     const candidate = p.author.trim();
@@ -156,6 +162,15 @@ async function clean(p, question, cwd) {
       existsSync(path.resolve(cwd, file)) || (await git(cwd, ['log', '-1', '--format=%h', '--', file])).out.trim();
     if (known) a.path = file;
   }
+  // A validated file named staged.js or index.txt is not a staging request.
+  let scopeQuestion = a.path ? asked.split(a.path.toLowerCase()).join(' ') : asked;
+  scopeQuestion = scopeQuestion.replace(/\b(?:un[- ]?staged|not staged)\b/gi, 'unstaged');
+  const asksUnstaged = /\bunstaged\b/i.test(scopeQuestion);
+  scopeQuestion = scopeQuestion.replace(/\b(?:un[- ]?staged|not staged)\b/gi, '');
+  const asksIndex = /\b(?:staged|staging|cached)\b|\b(?:in|from|the|to|of)\s+(?:git\s+)?index(?=\s|[?!,;:]|\.(?:\s|$)|$)|\b(?:prepared|ready|queued)\s+for\s+(?:(?:the|next)\s+)*commit\b/i.test(scopeQuestion);
+  const asksBoth = asksUnstaged && asksIndex;
+  a.staged = asksIndex && !asksUnstaged;
+  if (p.probe === 'diff' && asksUnstaged && !asksBoth) a.worktreeOnly = true;
   // A named file or author is not automatically a commit-message filter.
   // Preserve compound filtering only when the question also asks about messages.
   const asksMessage = /\b(?:messages?|subjects?|mention\w*)\b/i.test(question);

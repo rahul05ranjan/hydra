@@ -1,0 +1,30 @@
+{
+  "candidate-f16": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      2071,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "131, GPU-ae0d449f-657a-a5d9-99f1-6205a489328b, 2068\n",
+    "modelSha256": "49a356d6d3add556eacbb99349ea9f464ce6d905785f6f75353bafc27c1e0ce8"
+  },
+  "candidate-q8": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      1397,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "1886, GPU-ae0d449f-657a-a5d9-99f1-6205a489328b, 1394\n",
+    "modelSha256": "e004af22b101fae315a847c2b2cc44127876f4f25aaff710a6ba0d243cac16d4"
+  }
+}

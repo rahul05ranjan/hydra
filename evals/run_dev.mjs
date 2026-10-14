@@ -34,9 +34,19 @@ async function score(task) {
   const cwd = path.join(worldsDir(), task.world, 'repo');
   const row = { id: task.id, intent: task.intent, routed: route(task.question, true) === 'git' };
   const started = Date.now();
+  const calls = [];
+  const tracedChat = async options => {
+    const begin = Date.now();
+    const call = { stage: options.schema?.required?.includes('probes') ? 'plan' : 'evidence' };
+    calls.push(call);
+    try { call.reply = await chat(options); return call.reply; }
+    catch (error) { call.error = error.message; throw error; }
+    finally { call.seconds = (Date.now() - begin) / 1000; }
+  };
   try {
-    const sections = await git.gather(task.question, cwd, chat);
-    const { text, rawChars } = await answer(task.question, sections, chat);
+    const sections = await git.gather(task.question, cwd, tracedChat);
+    const { text, rawChars } = await answer(task.question, sections, tracedChat);
+    const rawProbes = calls.find(call => call.stage === 'plan')?.reply?.probes;
     const [first, ...rest] = text.split('\n\n');
     const reading = first.startsWith(READING) ? first.toLowerCase() : null;
     const evidence = reading ? rest.join('\n\n') : text;
@@ -44,6 +54,9 @@ async function score(task) {
     const found = task.facts.filter(fact => comparable.includes(fact)).length;
     return {
       ...row,
+      calls,
+      modelProbeChoice: Array.isArray(rawProbes) ? rawProbes.some(probe => task.accept.some(want => probe?.probe === want.probe))
+        : calls.some(call => call.stage === 'plan') ? false : null,
       plan: sections.some(section => task.accept.some(want => fits(section, want))),
       recall: task.facts.length ? found / task.facts.length : 1,
       evidence: found === task.facts.length,
@@ -54,15 +67,23 @@ async function score(task) {
       probes: sections.map(section => section.cmd),
     };
   } catch (e) {
-    return { ...row, plan: false, recall: 0, evidence: false, reading: null, raw: 0, returned: 0, seconds: (Date.now() - started) / 1000, error: e.message };
+    const rawProbes = calls.find(call => call.stage === 'plan')?.reply?.probes;
+    const modelProbeChoice = Array.isArray(rawProbes) ? rawProbes.some(probe => task.accept.some(want => probe?.probe === want.probe))
+      : calls.some(call => call.stage === 'plan') ? false : null;
+    return { ...row, calls, modelProbeChoice, plan: false, recall: 0, evidence: false, reading: null, raw: 0, returned: 0, seconds: (Date.now() - started) / 1000, error: e.message };
   }
 }
 
 function summarise(rows) {
   const share = pick => rows.filter(pick).length / rows.length;
   const read = rows.filter(row => row.reading !== null);
+  const planned = rows.filter(row => row.modelProbeChoice !== null);
   return {
     tasks: rows.length,
+    modelCalls: rows.reduce((sum, row) => sum + row.calls.length, 0),
+    tasksWithModelCalls: rows.filter(row => row.calls.length).length,
+    modelPlannerTasks: planned.length,
+    modelProbeChoiceAccuracy: planned.length ? planned.filter(row => row.modelProbeChoice).length / planned.length : null,
     routed: share(row => row.routed),
     plan: share(row => row.plan),
     evidence: share(row => row.evidence),
@@ -120,6 +141,7 @@ for (const [name, s] of [...Object.entries(byIntent), ['ALL', overall]]) {
 }
 
 mkdirSync(path.join(HERE, 'results'), { recursive: true });
-const file = path.join(HERE, 'results', `git_dev.${MODEL.replace(/[^\w.-]+/g, '-')}.json`);
+const setSuffix = process.env.HYDRA_GIT_DEV_SET === 'extended' ? '_extended' : '';
+const file = path.join(HERE, 'results', `git_dev${setSuffix}.${MODEL.replace(/[^\w.-]+/g, '-')}.json`);
 writeFileSync(file, JSON.stringify({ model: MODEL, date: new Date().toISOString(), overall, byIntent, rows }, null, 1) + '\n');
 console.log(`wrote ${path.relative(process.cwd(), file)}`);

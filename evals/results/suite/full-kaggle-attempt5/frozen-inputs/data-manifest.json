@@ -1,0 +1,31 @@
+{
+  "scope": "New synthetic feasibility examples only. Not enough diversity/heldout coverage for release training or a 95% claim.",
+  "sealedInputsUsed": false,
+  "developmentInputsUsed": false,
+  "worldSeeds": [
+    71000,
+    71001,
+    71002,
+    71003,
+    71004,
+    71005,
+    71006,
+    71007
+  ],
+  "seedMeaning": "Synthetic scenario IDs, not materialized Git repository worlds",
+  "dataSha256": "e9b961cc8987f30b2b277ced8035b64637c4fd52bae24c37a623727a4bee8ab8",
+  "samplesByHead": {
+    "git": 80,
+    "files": 16,
+    "os": 48,
+    "test": 8,
+    "read": 8
+  },
+  "sourceHashes": {
+    "skills/hydra/scripts/lib/git.mjs": "6d9985920f09ca00ae4c20ef03b256c29b23af72a58a7656d03dc3d75565b320",
+    "skills/hydra/scripts/lib/files.mjs": "a607acc8d151ea3654eb544b45f8d26cd8fb1ccb84fb309bb59269290df9b65f",
+    "skills/hydra/scripts/lib/os.mjs": "624874d1c2b3490a60bc76cad7a1cc3f3107cfac322458c650562326cd149fbd",
+    "skills/hydra/scripts/lib/test_logs.mjs": "91cd5f784d33c7216330b1b06729ab8a3bca7475db58244cac8d2fd77dcb81a4",
+    "skills/hydra/scripts/lib/answer.mjs": "c982733b0d62afc40d20e7857ac25f98dd46065ab3011055c3fe537673cfe9c7"
+  }
+}

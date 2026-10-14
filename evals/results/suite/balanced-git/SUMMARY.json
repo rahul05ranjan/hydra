@@ -1,0 +1,43 @@
+{
+  "status": "COMPLETE",
+  "kernelVersion": 1,
+  "planSha256": "38f7d008168a7939abb62203c84e771ba842a4c2ec2432848ecbd16664901252",
+  "completedSteps": 67,
+  "trainingSeconds": 573.8043915459999,
+  "peakMemoryBytes": 8088888320,
+  "checkpointSha256": "212cd207471bf1073af79a2956add20b9db42d0e60a688b374307f9a1883072e",
+  "development": {
+    "candidate-f16-development": {
+      "tasks": 200,
+      "routed": 0.57,
+      "plan": 0.86,
+      "evidence": 0.86,
+      "solved": 0.855,
+      "recall": 0.8779875222816399,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 20534,
+      "returned": 15416,
+      "errors": 0
+    },
+    "candidate-q8-development": {
+      "tasks": 200,
+      "routed": 0.57,
+      "plan": 0.85,
+      "evidence": 0.85,
+      "solved": 0.845,
+      "recall": 0.87048752228164,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 20339,
+      "returned": 15174,
+      "errors": 0
+    }
+  },
+  "jobElapsedSeconds": 992.209734652,
+  "loggedElapsedIncludingRenderingSeconds": 998.951753393,
+  "sealedEvaluation": false,
+  "acceptedForRelease": false,
+  "published": false,
+  "defaultChanged": false
+}

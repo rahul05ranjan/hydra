@@ -1,0 +1,119 @@
+{
+  "complete": true,
+  "cpuOnly": true,
+  "developmentOnly": true,
+  "elapsedSeconds": 95.92200000002049,
+  "rows": [
+    {
+      "model": "original-hf",
+      "developmentId": "dev-dev_00-branches",
+      "intent": "branches",
+      "reply": "{\"probes\":[{\"probe\":\"branches\"}]}",
+      "probes": [
+        "branches"
+      ],
+      "expectedProbes": [
+        "branches"
+      ],
+      "validJSON": true,
+      "seconds": 15.375,
+      "coarseProbeMatch": true
+    },
+    {
+      "model": "original-hf",
+      "developmentId": "dev-dev_00-worktrees",
+      "intent": "worktrees",
+      "reply": "{\"probes\":[{\"probe\":\"worktrees\"}]}",
+      "probes": [
+        "worktrees"
+      ],
+      "expectedProbes": [
+        "worktrees"
+      ],
+      "validJSON": true,
+      "seconds": 12.562999999849126,
+      "coarseProbeMatch": true
+    },
+    {
+      "model": "original-hf",
+      "developmentId": "dev-dev_00-modified_files",
+      "intent": "modified_files",
+      "reply": "{\"probes\":[{\"probe\":\"diff\",\"staged\":true}]}",
+      "probes": [
+        "diff"
+      ],
+      "expectedProbes": [
+        "status",
+        "diff"
+      ],
+      "validJSON": true,
+      "seconds": 13.030999999959022,
+      "coarseProbeMatch": true
+    },
+    {
+      "model": "trained-hf",
+      "developmentId": "dev-dev_00-branches",
+      "intent": "branches",
+      "reply": "{\"probes\":[{\"probe\":\"status\"}]}",
+      "probes": [
+        "status"
+      ],
+      "expectedProbes": [
+        "branches"
+      ],
+      "validJSON": true,
+      "seconds": 12.547000000020489,
+      "coarseProbeMatch": false
+    },
+    {
+      "model": "trained-hf",
+      "developmentId": "dev-dev_00-worktrees",
+      "intent": "worktrees",
+      "reply": "{\"probes\":[{\"probe\":\"status\"}]}",
+      "probes": [
+        "status"
+      ],
+      "expectedProbes": [
+        "worktrees"
+      ],
+      "validJSON": true,
+      "seconds": 13.281999999890104,
+      "coarseProbeMatch": false
+    },
+    {
+      "model": "trained-hf",
+      "developmentId": "dev-dev_00-modified_files",
+      "intent": "modified_files",
+      "reply": "{\"probes\":[{\"probe\":\"status\"}]}",
+      "probes": [
+        "status"
+      ],
+      "expectedProbes": [
+        "status",
+        "diff"
+      ],
+      "validJSON": true,
+      "seconds": 13.25,
+      "coarseProbeMatch": true
+    }
+  ],
+  "scoreScope": "Three development prompt generation controls on CPU; coarse probe type match only, not argument/evidence/end-to-end accuracy.",
+  "inputTokenIDsIdentical": [
+    {
+      "developmentId": "dev-dev_00-branches",
+      "tokens": 672,
+      "identical": true
+    },
+    {
+      "developmentId": "dev-dev_00-modified_files",
+      "tokens": 677,
+      "identical": true
+    },
+    {
+      "developmentId": "dev-dev_00-worktrees",
+      "tokens": 675,
+      "identical": true
+    }
+  ],
+  "chatEOSIdentical": true
+}

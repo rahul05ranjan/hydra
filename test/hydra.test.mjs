@@ -357,6 +357,21 @@ test('read gather extracts file path and symbol from question', async () => {
   assert.match(sections[0].out, /export function login/);
 });
 
+test('read gather preserves quoted paths with spaces for ranges, symbols and outlines', async () => {
+  const dir = temp();
+  mkdirSync(path.join(dir, 'src'));
+  writeFileSync(path.join(dir, 'src', 'My File.ts'), 'export function login(user) {\n  return true;\n}\n');
+  for (const quote of ['"', "'"]) {
+    const range = await read.gather(`read ${quote}src/My File.ts${quote} lines 2-3`, dir, null);
+    assert.match(range[0].out, /2:   return true;/);
+    assert.doesNotMatch(range[0].out, /File not found/);
+    const symbol = await read.gather(`show login in ${quote}src/My File.ts${quote}`, dir, null);
+    assert.match(symbol[0].out, /export function login/);
+    const outline = await read.gather(`outline ${quote}src/My File.ts${quote}`, dir, null);
+    assert.match(outline[0].out, /Outline of definitions/);
+  }
+});
+
 test('route sends system questions to os head', () => {
   assert.equal(route('which ports are listening?', true), 'os');
   assert.equal(route('what is the cpu usage and uptime?', true), 'os');

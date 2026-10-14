@@ -1,0 +1,14 @@
+{
+  "sourceModel": "rahul05ranjan/hydra-nano-git",
+  "sourceRevision": "05d850ee62e55e2921e9ec970a9636109daa85e7",
+  "normalization": "train/normalize_mlx.py",
+  "files": {
+    "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+    "config.json": "48447c188a2079ce181cdfb49680c70c3ec5e93480a43786832b3658995826bb",
+    "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+    "model.safetensors": "fc1d9b0332a3fe5c4b1a0b2b37d31d9f9d8051c8257ab07effe44410740e1fa2",
+    "tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+    "tokenizer_config.json": "86f01837a638275f2d3479804e79802aaff0e3ccef15e5f29dd6afbe6551daed",
+    "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+  }
+}

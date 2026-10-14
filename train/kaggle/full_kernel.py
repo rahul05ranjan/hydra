@@ -65,6 +65,8 @@ def main():
     receipt = json.loads((output / 'training-receipt.json').read_text())
     if not receipt.get('checkpointSaved') or receipt['trainableParameters'] != receipt['totalParameters'] or receipt['completedSteps'] < 1:
         raise ValueError('No verified full-parameter optimizer step/checkpoint')
+    if receipt.get('lossMethod') != plan.get('lossMethod') or receipt.get('optimizer') != plan.get('optimizer'):
+        raise ValueError('Trainer loss/optimizer differs from the frozen plan')
     summary = {'complete': True, 'purpose': plan['purpose'], 'plan': plan,
         'receipt': receipt, 'elapsedSeconds': time.monotonic() - START,
         'sealedEvaluation': False, 'published': False, 'defaultChanged': False}

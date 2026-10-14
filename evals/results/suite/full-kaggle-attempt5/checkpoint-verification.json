@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "kernelVersion": 5,
+  "checkpointDirectory": "C:\\Users\\rahus\\.hydra\\build\\full-feasibility-version5",
+  "modelSha256": "bee2a5685ee37da42b24ef71d1beeb31ae015d9b0db2884897d40dd78df8ed4c",
+  "modelBytes": 1504822488,
+  "allTensorsFinite": true,
+  "tensorNamesAndShapesMatchInput": true,
+  "tensorCount": 320,
+  "parameterCount": 752393024,
+  "receiptWeightHashMatches": true,
+  "acceptedForRelease": false,
+  "qualityEvaluated": false
+}

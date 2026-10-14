@@ -1,0 +1,22 @@
+{
+  "id": "rahulswt7/hydra-balanced-git-quality",
+  "id_no": 138628428,
+  "title": "Hydra balanced Git quality",
+  "code_file": "hydra-balanced-git-quality.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "rahulswt7/hydra-balanced-git-quality-input",
+    "rahulswt7/hydra-full-feasibility-input"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "docker_image": "",
+  "machine_shape": "NvidiaTeslaT4"
+}

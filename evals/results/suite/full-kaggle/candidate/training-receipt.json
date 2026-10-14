@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-12T13:16:33.072951+00:00",
+  "timestamp": "2026-10-12T15:26:53.369466+00:00",
   "head": "git",
   "method": "full-parameter-supervised-fine-tuning",
   "trainingStarted": true,
@@ -52,14 +52,68 @@
   "maximumTokens": 714,
   "chatEOS": 248046,
   "stepsRequested": 10,
-  "maxSeconds": 540,
+  "maxSeconds": 410,
   "accumulation": 4,
   "learningRate": 1e-05,
   "totalParameters": 752393024,
   "trainableParameters": 752393024,
   "gpu": "Tesla T4",
-  "losses": [],
-  "completedSteps": 0,
-  "error": "Non-finite gradients; checkpoint cannot be accepted",
-  "elapsedSeconds": 48.82355306299996
+  "losses": [
+    0.030424827942624688
+  ],
+  "completedSteps": 1,
+  "overflowStepsSkipped": 7,
+  "gradientScaleHistory": [
+    {
+      "step": 0,
+      "attempt": 0,
+      "scale": 65536.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 1,
+      "scale": 32768.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 2,
+      "scale": 16384.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 3,
+      "scale": 8192.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 4,
+      "scale": 4096.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 5,
+      "scale": 2048.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 6,
+      "scale": 1024.0,
+      "norm": "non-finite"
+    },
+    {
+      "step": 0,
+      "attempt": 7,
+      "scale": 512.0,
+      "norm": 27.587844848632812
+    }
+  ],
+  "error": "CUDA out of memory. Tried to allocate 668.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 254.81 MiB is free. Including non-PyTorch memory, this process has 14.31 GiB memory in use. Of the allocated memory 13.69 GiB is allocated by PyTorch, and 488.96 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)",
+  "peakMemoryBytes": 14702130688,
+  "elapsedSeconds": 75.38995626799988
 }

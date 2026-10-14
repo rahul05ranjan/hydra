@@ -35,7 +35,8 @@ test('an explicit commit count overrides a wrong model count', async t => {
     git('add', 'value.txt');
     git('commit', '-qm', `Update value ${i}`);
   }
-  for (const question of ['show the recent 5 commits', 'show the latest five commits', 'show five recent commits']) {
+  for (const question of ['show the recent 5 commits', 'show the latest five commits', 'show five recent commits',
+    'show five branch-only commits', 'return up to five revisions', 'read the five latest commit records']) {
     const sections = await gather(question, cwd, async () => ({ probes: [{ probe: 'log', n: 1 }] }));
     assert.equal(sections[0].args.n, 5);
     assert.equal(sections[0].out.trim().split('\n').length, 5);

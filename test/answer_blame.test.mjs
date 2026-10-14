@@ -19,3 +19,23 @@ test('ambiguous blame anchors retain the bounded model selection path', async ()
   assert.equal(calls, 1);
   assert.ok(result.text.length < out.length);
 });
+
+test('numeric blame requests do not mistake filename tokens for source identifiers', async () => {
+  const target = 'abcd123 (Mira Shah 2026-06-12 40) requested source';
+  const out = Array.from({ length: 50 }, (_, i) => i === 39 ? target :
+    `abcd123 (Other 2026-06-12 ${i + 1}) ${i === 9 ? 'const version2 = 1;' : 'ordinary source '.repeat(4)}`).join('\n');
+  let calls = 0;
+  const result = await answer('Who wrote line 40 in version2.js?',
+    [{ probe: 'blame', cmd: 'git blame -- version2.js', out }], async () => { calls++; return { lines: [40] }; });
+  assert.equal(calls, 1);
+  assert.ok(result.text.includes(target));
+});
+
+test('diffstat file inventory remains visible when a model cites only one patch line', async () => {
+  const stats = Array.from({ length: 6 }, (_, i) => ` src/module${i}.js | 2 +-`);
+  const out = [...stats, ' 6 files changed, 6 insertions(+), 6 deletions(-)', '',
+    'diff --git a/src/module0.js b/src/module0.js', ...Array.from({ length: 40 }, () => '+source content '.repeat(4))].join('\n');
+  const result = await answer('Which files changed in this branch comparison?',
+    [{ probe: 'diff', cmd: 'git diff trunk...HEAD', out }], async () => ({ lines: [12] }));
+  for (const line of stats) assert.ok(result.text.includes(line), line);
+});

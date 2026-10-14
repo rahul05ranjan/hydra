@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import random
 import time
@@ -66,7 +67,7 @@ def load_examples(data, manifest, head):
     if spec.get('dataSha256') != digest(data):
         raise ValueError('Training data differs from provenance manifest')
     seeds = spec.get('worldSeeds')
-    if not isinstance(seeds, list) or not seeds or any(not isinstance(s, int) or 4100 <= s <= 4149 or 6100 <= s <= 6109 for s in seeds):
+    if not isinstance(seeds, list) or not seeds or any(not isinstance(s, int) or 4100 <= s <= 4149 or 6100 <= s <= 6109 or 6200 <= s <= 6239 for s in seeds):
         raise ValueError('Require training seeds disjoint from sealed and current development worlds')
     rows = [json.loads(line) for line in data.read_text(encoding='utf-8').splitlines() if line.strip()]
     selected = [row for row in rows if row.get('head') == head]
@@ -75,6 +76,63 @@ def load_examples(data, manifest, head):
     for row in selected:
         validate_target(head, row['messages'])
     return selected, spec
+
+
+def assistant_loss(model, input_ids, labels):
+    """Keep the full causal context, projecting only positions with a loss target.
+
+    The trainer has one sequence per microbatch. Label t is predicted by hidden
+    state t-1, including the first assistant token and chat EOS. Dropping ignored
+    positions before lm_head avoids prompt-length vocabulary tensors without
+    changing the mean assistant-only objective or its parameter gradients.
+    """
+    import torch
+    if input_ids.ndim != 2 or input_ids.shape[0] != 1 or labels.shape != input_ids.shape:
+        raise ValueError('Assistant loss requires a single sequence with matching labels')
+    shifted = labels[0, 1:]
+    positions = torch.nonzero(shifted != -100, as_tuple=True)[0]
+    if positions.numel() == 0:
+        raise ValueError('Assistant loss requires at least one supervised next token')
+    logits = model(input_ids=input_ids, logits_to_keep=positions,
+        use_cache=False, return_dict=True).logits
+    if logits.shape[:2] != (1, positions.numel()):
+        raise ValueError('Model did not honor selected loss positions')
+    # Match Transformers ForCausalLMLoss's FP32 cross-entropy and mean reduction.
+    return torch.nn.functional.cross_entropy(logits[0].float(), shifted[positions])
+
+
+class CpuAdamW:
+    """Full AdamW updates with FP32 optimizer weights and moments on the CPU.
+
+    CUDA parameters retain their autograd gradients through unscale/clipping.
+    Each gradient is then copied to CPU and released before the AdamW update;
+    updated weights are copied back to the same model parameters in place.
+    """
+
+    def __init__(self, parameters, lr, weight_decay):
+        import torch
+        self.model_parameters = list(parameters)
+        self.cpu_parameters = [torch.nn.Parameter(p.detach().to('cpu', copy=True))
+            for p in self.model_parameters]
+        self.gradient_optimizer = torch.optim.SGD(self.model_parameters, lr=0, foreach=False)
+        self.optimizer = torch.optim.AdamW(self.cpu_parameters, lr=lr,
+            weight_decay=weight_decay, foreach=False)
+
+    def zero_grad(self, set_to_none=True):
+        self.gradient_optimizer.zero_grad(set_to_none=set_to_none)
+        self.optimizer.zero_grad(set_to_none=set_to_none)
+
+    def step(self):
+        import torch
+        for model_parameter, cpu_parameter in zip(self.model_parameters, self.cpu_parameters):
+            cpu_parameter.grad = (model_parameter.grad.detach().to('cpu', copy=True)
+                if model_parameter.grad is not None else None)
+            model_parameter.grad = None
+        self.optimizer.step()
+        with torch.no_grad():
+            for model_parameter, cpu_parameter in zip(self.model_parameters, self.cpu_parameters):
+                model_parameter.copy_(cpu_parameter)
+        self.optimizer.zero_grad(set_to_none=True)
 
 
 def main():
@@ -92,11 +150,15 @@ def main():
     parser.add_argument('--max-length', type=int, default=2048)
     parser.add_argument('--accumulation', type=int, default=4)
     parser.add_argument('--learning-rate', type=float, default=1e-5)
+    parser.add_argument('--initial-scale', type=float, default=65536)
+    parser.add_argument('--sample-seed', type=int, default=1729)
     args = parser.parse_args()
     if not args.preflight and not args.approved:
         parser.error('Full training needs explicit approval, checkpoint/data hashes and a bounded GPU run notice')
     if min(args.max_seconds, args.steps, args.max_length, args.accumulation) <= 0 or args.learning_rate <= 0:
         parser.error('Training limits must be positive')
+    if not math.isfinite(args.initial_scale) or args.initial_scale <= 0:
+        parser.error('Initial gradient scale must be finite and positive')
     started = time.monotonic()
     config = json.loads((args.checkpoint / 'config.json').read_text())
     if 'text_config' in config:
@@ -124,7 +186,10 @@ def main():
         'examples': len(examples), 'maximumTokens': max(len(row['input_ids']) for row in examples),
         'chatEOS': tokenizer.eos_token_id, 'stepsRequested': args.steps,
         'maxSeconds': args.max_seconds, 'accumulation': args.accumulation,
-        'learningRate': args.learning_rate}
+        'learningRate': args.learning_rate, 'lossMethod': 'assistant-selected-logits',
+        'optimizer': 'cpu-adamw-fp32',
+        'initialGradientScale': args.initial_scale,
+        'maximumSupervisedTokens': max(sum(v != -100 for v in row['labels'][1:]) for row in examples)}
     if args.preflight:
         args.output.mkdir(parents=True, exist_ok=True)
         (args.output / 'preflight.json').write_text(json.dumps(receipt, indent=2) + '\n')
@@ -136,8 +201,8 @@ def main():
     from transformers import AutoModelForCausalLM
     if not torch.cuda.is_available():
         raise RuntimeError('Full training requires CUDA; refusing CPU fallback')
-    random.seed(1729)
-    torch.manual_seed(1729)
+    random.seed(args.sample_seed)
+    torch.manual_seed(args.sample_seed)
     model, loading_info = AutoModelForCausalLM.from_pretrained(args.checkpoint, local_files_only=True,
         dtype=torch.float32, attn_implementation='sdpa', output_loading_info=True)
     if loading_info.get('missing_keys') or loading_info.get('unexpected_keys') or loading_info.get('mismatched_keys'):
@@ -152,13 +217,13 @@ def main():
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     if total != trainable:
         raise RuntimeError('Expected every text backbone parameter to train')
-    # FP32 weights and optimizer state, mixed-precision activations on T4.
-    # foreach=False avoids an additional model-sized temporary tensor list.
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=0.01, foreach=False)
-    scaler = torch.amp.GradScaler('cuda')
+    # Keep all text parameters trainable on CUDA, with FP32 AdamW states on CPU.
+    optimizer = CpuAdamW(model.parameters(), lr=args.learning_rate, weight_decay=0.01)
+    scaler = torch.amp.GradScaler('cuda', init_scale=args.initial_scale)
     optimizer.zero_grad(set_to_none=True)
     args.output.mkdir(parents=True, exist_ok=True)
     receipt.update(trainingStarted=True, totalParameters=total, trainableParameters=trainable,
+        sampleSeed=args.sample_seed,
         gpu=torch.cuda.get_device_name(0), losses=[], completedSteps=0, overflowStepsSkipped=0,
         gradientScaleHistory=[])
     deadline = started + args.max_seconds
@@ -179,12 +244,12 @@ def main():
                     ids = torch.tensor([row['input_ids']], device='cuda')
                     labels = torch.tensor([row['labels']], device='cuda')
                     with torch.autocast('cuda', dtype=torch.float16):
-                        loss = model(input_ids=ids, labels=labels, use_cache=False, return_dict=True).loss
+                        loss = assistant_loss(model, ids, labels)
                     if not torch.isfinite(loss):
                         raise RuntimeError('Non-finite forward loss; loss scaling cannot repair it')
                     total_loss += float(loss.detach())
                     scaler.scale(loss / args.accumulation).backward()
-                scaler.unscale_(optimizer)
+                scaler.unscale_(optimizer.gradient_optimizer)
                 norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
                 scale = scaler.get_scale()
                 receipt['gradientScaleHistory'].append({'step': step, 'attempt': attempt, 'scale': scale,
@@ -197,7 +262,7 @@ def main():
                     print(json.dumps({'overflowSkipped': receipt['overflowStepsSkipped'],
                         'nextScale': scaler.get_scale(), 'peakMemoryBytes': torch.cuda.max_memory_allocated()}), flush=True)
                     continue
-                scaler.step(optimizer)
+                optimizer.step()
                 scaler.update()
                 optimizer.zero_grad(set_to_none=True)
                 break

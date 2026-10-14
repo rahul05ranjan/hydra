@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "tests": 11,
+  "torch": "2.13.0+cpu",
+  "transformers": "5.19.0",
+  "device": "cpu",
+  "optimizerUpdates": 0,
+  "scope": "Tiny Qwen3.5 hybrid model with checkpointing; numerical and projection-size proof only. No T4 fit or full-checkpoint quality claim.",
+  "measurements": [
+    {
+      "dtype": "torch.float16",
+      "tiedEmbeddings": false,
+      "lossAbsoluteError": 0.0,
+      "maximumGradientAbsoluteError": 0.0,
+      "parametersCompared": 28,
+      "fullProjectionPositions": 19,
+      "selectedProjectionPositions": 6
+    },
+    {
+      "dtype": "torch.float32",
+      "tiedEmbeddings": false,
+      "lossAbsoluteError": 4.76837158203125e-07,
+      "maximumGradientAbsoluteError": 0.0,
+      "parametersCompared": 28,
+      "fullProjectionPositions": 19,
+      "selectedProjectionPositions": 6
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "tiedEmbeddings": true,
+      "lossAbsoluteError": 0.0,
+      "maximumGradientAbsoluteError": 0.0,
+      "parametersCompared": 27,
+      "fullProjectionPositions": 19,
+      "selectedProjectionPositions": 6
+    }
+  ]
+}

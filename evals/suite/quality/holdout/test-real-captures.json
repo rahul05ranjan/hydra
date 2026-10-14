@@ -1,0 +1,1752 @@
+{
+  "version": 1,
+  "split": "holdout",
+  "bound": {
+    "subprocessMs": 6000,
+    "totalMs": 120000
+  },
+  "tasks": [
+    {
+      "id": "holdout-test-hold-captured-node-regex-1",
+      "family": "hold-captured-node-regex",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_0_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410000 shard 0 verified; checksum 410000\ncapture 410000 shard 1 verified; checksum 410001\ncapture 410000 shard 2 verified; checksum 410002\ncapture 410000 shard 3 verified; checksum 410003\ncapture 410000 shard 4 verified; checksum 410004\ncapture 410000 shard 5 verified; checksum 410005\ncapture 410000 shard 6 verified; checksum 410006\ncapture 410000 shard 7 verified; checksum 410007\ncapture 410000 shard 8 verified; checksum 410008\ncapture 410000 shard 9 verified; checksum 410009\ncapture 410000 shard 10 verified; checksum 410010\ncapture 410000 shard 11 verified; checksum 410011\ncapture 410000 shard 12 verified; checksum 410012\ncapture 410000 shard 13 verified; checksum 410013\ncapture 410000 shard 14 verified; checksum 410014\ncapture 410000 shard 15 verified; checksum 410015\ncapture 410000 shard 16 verified; checksum 410016\ncapture 410000 shard 17 verified; checksum 410017\ncapture 410000 shard 18 verified; checksum 410018\n✖ holdout_node_case_410000 (3.0508ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 113.3995\n\n✖ failing tests:\n\ntest at holdout_node_0_0.mjs:4:1\n✖ holdout_node_case_410000 (3.0508ms)\n  AssertionError [ERR_ASSERTION]: case 410000: regex required /^orchard-/; actual capsule-410000\n      at TestContext.<anonymous> (file:////captured/holdout/node-0-0/holdout_node_0_0.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: 'capsule-410000',\n    expected: /^orchard-/,\n    operator: 'match',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410000"
+        ],
+        "expectedFiles": [
+          "holdout_node_0_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410000: regex required /^orchard-/; actual capsule-410000"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-regex-2",
+      "family": "hold-captured-node-regex",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_0_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410001 shard 0 verified; checksum 410001\ncapture 410001 shard 1 verified; checksum 410002\ncapture 410001 shard 2 verified; checksum 410003\ncapture 410001 shard 3 verified; checksum 410004\ncapture 410001 shard 4 verified; checksum 410005\ncapture 410001 shard 5 verified; checksum 410006\ncapture 410001 shard 6 verified; checksum 410007\ncapture 410001 shard 7 verified; checksum 410008\ncapture 410001 shard 8 verified; checksum 410009\ncapture 410001 shard 9 verified; checksum 410010\ncapture 410001 shard 10 verified; checksum 410011\ncapture 410001 shard 11 verified; checksum 410012\ncapture 410001 shard 12 verified; checksum 410013\ncapture 410001 shard 13 verified; checksum 410014\ncapture 410001 shard 14 verified; checksum 410015\ncapture 410001 shard 15 verified; checksum 410016\ncapture 410001 shard 16 verified; checksum 410017\ncapture 410001 shard 17 verified; checksum 410018\ncapture 410001 shard 18 verified; checksum 410019\ncapture 410001 shard 19 verified; checksum 410020\ncapture 410001 shard 20 verified; checksum 410021\ncapture 410001 shard 21 verified; checksum 410022\ncapture 410001 shard 22 verified; checksum 410023\n✖ holdout_node_case_410001 (2.5269ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 104.9726\n\n✖ failing tests:\n\ntest at holdout_node_0_1.mjs:4:1\n✖ holdout_node_case_410001 (2.5269ms)\n  AssertionError [ERR_ASSERTION]: case 410001: regex required /^orchard-/; actual capsule-410001\n      at TestContext.<anonymous> (file:////captured/holdout/node-0-1/holdout_node_0_1.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: 'capsule-410001',\n    expected: /^orchard-/,\n    operator: 'match',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410001"
+        ],
+        "expectedFiles": [
+          "holdout_node_0_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410001: regex required /^orchard-/; actual capsule-410001"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-negative-regex-1",
+      "family": "hold-captured-node-negative-regex",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_1_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410100 shard 0 verified; checksum 410100\ncapture 410100 shard 1 verified; checksum 410101\ncapture 410100 shard 2 verified; checksum 410102\ncapture 410100 shard 3 verified; checksum 410103\ncapture 410100 shard 4 verified; checksum 410104\ncapture 410100 shard 5 verified; checksum 410105\ncapture 410100 shard 6 verified; checksum 410106\ncapture 410100 shard 7 verified; checksum 410107\ncapture 410100 shard 8 verified; checksum 410108\ncapture 410100 shard 9 verified; checksum 410109\ncapture 410100 shard 10 verified; checksum 410110\ncapture 410100 shard 11 verified; checksum 410111\ncapture 410100 shard 12 verified; checksum 410112\ncapture 410100 shard 13 verified; checksum 410113\ncapture 410100 shard 14 verified; checksum 410114\ncapture 410100 shard 15 verified; checksum 410115\ncapture 410100 shard 16 verified; checksum 410116\ncapture 410100 shard 17 verified; checksum 410117\ncapture 410100 shard 18 verified; checksum 410118\n✖ holdout_node_case_410100 (2.6561ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 109.2286\n\n✖ failing tests:\n\ntest at holdout_node_1_0.mjs:4:1\n✖ holdout_node_case_410100 (2.6561ms)\n  AssertionError [ERR_ASSERTION]: case 410100: regex /quartz/ forbidden; actual quartz-410100 matched\n      at TestContext.<anonymous> (file:////captured/holdout/node-1-0/holdout_node_1_0.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: 'quartz-410100',\n    expected: /quartz/,\n    operator: 'doesNotMatch',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410100"
+        ],
+        "expectedFiles": [
+          "holdout_node_1_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410100: regex /quartz/ forbidden; actual quartz-410100 matched"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-negative-regex-2",
+      "family": "hold-captured-node-negative-regex",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_1_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410101 shard 0 verified; checksum 410101\ncapture 410101 shard 1 verified; checksum 410102\ncapture 410101 shard 2 verified; checksum 410103\ncapture 410101 shard 3 verified; checksum 410104\ncapture 410101 shard 4 verified; checksum 410105\ncapture 410101 shard 5 verified; checksum 410106\ncapture 410101 shard 6 verified; checksum 410107\ncapture 410101 shard 7 verified; checksum 410108\ncapture 410101 shard 8 verified; checksum 410109\ncapture 410101 shard 9 verified; checksum 410110\ncapture 410101 shard 10 verified; checksum 410111\ncapture 410101 shard 11 verified; checksum 410112\ncapture 410101 shard 12 verified; checksum 410113\ncapture 410101 shard 13 verified; checksum 410114\ncapture 410101 shard 14 verified; checksum 410115\ncapture 410101 shard 15 verified; checksum 410116\ncapture 410101 shard 16 verified; checksum 410117\ncapture 410101 shard 17 verified; checksum 410118\ncapture 410101 shard 18 verified; checksum 410119\ncapture 410101 shard 19 verified; checksum 410120\ncapture 410101 shard 20 verified; checksum 410121\ncapture 410101 shard 21 verified; checksum 410122\ncapture 410101 shard 22 verified; checksum 410123\n✖ holdout_node_case_410101 (2.4117ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 102.575\n\n✖ failing tests:\n\ntest at holdout_node_1_1.mjs:4:1\n✖ holdout_node_case_410101 (2.4117ms)\n  AssertionError [ERR_ASSERTION]: case 410101: regex /quartz/ forbidden; actual quartz-410101 matched\n      at TestContext.<anonymous> (file:////captured/holdout/node-1-1/holdout_node_1_1.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: 'quartz-410101',\n    expected: /quartz/,\n    operator: 'doesNotMatch',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410101"
+        ],
+        "expectedFiles": [
+          "holdout_node_1_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410101: regex /quartz/ forbidden; actual quartz-410101 matched"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-missing-throw-1",
+      "family": "hold-captured-node-missing-throw",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_2_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410200 shard 0 verified; checksum 410200\ncapture 410200 shard 1 verified; checksum 410201\ncapture 410200 shard 2 verified; checksum 410202\ncapture 410200 shard 3 verified; checksum 410203\ncapture 410200 shard 4 verified; checksum 410204\ncapture 410200 shard 5 verified; checksum 410205\ncapture 410200 shard 6 verified; checksum 410206\ncapture 410200 shard 7 verified; checksum 410207\ncapture 410200 shard 8 verified; checksum 410208\ncapture 410200 shard 9 verified; checksum 410209\ncapture 410200 shard 10 verified; checksum 410210\ncapture 410200 shard 11 verified; checksum 410211\ncapture 410200 shard 12 verified; checksum 410212\ncapture 410200 shard 13 verified; checksum 410213\ncapture 410200 shard 14 verified; checksum 410214\ncapture 410200 shard 15 verified; checksum 410215\ncapture 410200 shard 16 verified; checksum 410216\ncapture 410200 shard 17 verified; checksum 410217\ncapture 410200 shard 18 verified; checksum 410218\n✖ holdout_node_case_410200 (2.9939ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 111.307\n\n✖ failing tests:\n\ntest at holdout_node_2_0.mjs:4:1\n✖ holdout_node_case_410200 (2.9939ms)\n  AssertionError [ERR_ASSERTION]: Missing expected exception (TypeError): case 410200: TypeError required; actual callback returned prism-410200\n      at TestContext.<anonymous> (file:////captured/holdout/node-2-0/holdout_node_2_0.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: undefined,\n    operator: 'throws',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410200"
+        ],
+        "expectedFiles": [
+          "holdout_node_2_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410200: TypeError required; actual callback returned prism-410200"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-missing-throw-2",
+      "family": "hold-captured-node-missing-throw",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_2_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410201 shard 0 verified; checksum 410201\ncapture 410201 shard 1 verified; checksum 410202\ncapture 410201 shard 2 verified; checksum 410203\ncapture 410201 shard 3 verified; checksum 410204\ncapture 410201 shard 4 verified; checksum 410205\ncapture 410201 shard 5 verified; checksum 410206\ncapture 410201 shard 6 verified; checksum 410207\ncapture 410201 shard 7 verified; checksum 410208\ncapture 410201 shard 8 verified; checksum 410209\ncapture 410201 shard 9 verified; checksum 410210\ncapture 410201 shard 10 verified; checksum 410211\ncapture 410201 shard 11 verified; checksum 410212\ncapture 410201 shard 12 verified; checksum 410213\ncapture 410201 shard 13 verified; checksum 410214\ncapture 410201 shard 14 verified; checksum 410215\ncapture 410201 shard 15 verified; checksum 410216\ncapture 410201 shard 16 verified; checksum 410217\ncapture 410201 shard 17 verified; checksum 410218\ncapture 410201 shard 18 verified; checksum 410219\ncapture 410201 shard 19 verified; checksum 410220\ncapture 410201 shard 20 verified; checksum 410221\ncapture 410201 shard 21 verified; checksum 410222\ncapture 410201 shard 22 verified; checksum 410223\n✖ holdout_node_case_410201 (2.7494ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 111.166\n\n✖ failing tests:\n\ntest at holdout_node_2_1.mjs:4:1\n✖ holdout_node_case_410201 (2.7494ms)\n  AssertionError [ERR_ASSERTION]: Missing expected exception (TypeError): case 410201: TypeError required; actual callback returned prism-410201\n      at TestContext.<anonymous> (file:////captured/holdout/node-2-1/holdout_node_2_1.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: undefined,\n    operator: 'throws',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410201"
+        ],
+        "expectedFiles": [
+          "holdout_node_2_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410201: TypeError required; actual callback returned prism-410201"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-wrong-error-class-1",
+      "family": "hold-captured-node-wrong-error-class",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_3_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410300 shard 0 verified; checksum 410300\ncapture 410300 shard 1 verified; checksum 410301\ncapture 410300 shard 2 verified; checksum 410302\ncapture 410300 shard 3 verified; checksum 410303\ncapture 410300 shard 4 verified; checksum 410304\ncapture 410300 shard 5 verified; checksum 410305\ncapture 410300 shard 6 verified; checksum 410306\ncapture 410300 shard 7 verified; checksum 410307\ncapture 410300 shard 8 verified; checksum 410308\ncapture 410300 shard 9 verified; checksum 410309\ncapture 410300 shard 10 verified; checksum 410310\ncapture 410300 shard 11 verified; checksum 410311\ncapture 410300 shard 12 verified; checksum 410312\ncapture 410300 shard 13 verified; checksum 410313\ncapture 410300 shard 14 verified; checksum 410314\ncapture 410300 shard 15 verified; checksum 410315\ncapture 410300 shard 16 verified; checksum 410316\ncapture 410300 shard 17 verified; checksum 410317\ncapture 410300 shard 18 verified; checksum 410318\n✖ holdout_node_case_410300 (2.9612ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 111.6183\n\n✖ failing tests:\n\ntest at holdout_node_3_0.mjs:4:1\n✖ holdout_node_case_410300 (2.9612ms)\n  AssertionError [ERR_ASSERTION]: case 410300: TypeError required; actual RangeError ribbon-410300\n      at TestContext.<anonymous> (file:////captured/holdout/node-3-0/holdout_node_3_0.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: RangeError: ribbon-410300\n        at file:////captured/holdout/node-3-0/holdout_node_3_0.mjs:6:31\n        at getActual (node:assert:586:5)\n        at strict.throws (node:assert:734:24)\n        at TestContext.<anonymous> (file:////captured/holdout/node-3-0/holdout_node_3_0.mjs:6:10)\n        at Test.runInAsyncScope (node:async_hooks:226:14)\n        at Test.run (node:internal/test_runner/test:1201:25)\n        at Test.start (node:internal/test_runner/test:1096:17)\n        at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17),\n    operator: 'throws',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410300"
+        ],
+        "expectedFiles": [
+          "holdout_node_3_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410300: TypeError required; actual RangeError ribbon-410300"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-wrong-error-class-2",
+      "family": "hold-captured-node-wrong-error-class",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_3_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410301 shard 0 verified; checksum 410301\ncapture 410301 shard 1 verified; checksum 410302\ncapture 410301 shard 2 verified; checksum 410303\ncapture 410301 shard 3 verified; checksum 410304\ncapture 410301 shard 4 verified; checksum 410305\ncapture 410301 shard 5 verified; checksum 410306\ncapture 410301 shard 6 verified; checksum 410307\ncapture 410301 shard 7 verified; checksum 410308\ncapture 410301 shard 8 verified; checksum 410309\ncapture 410301 shard 9 verified; checksum 410310\ncapture 410301 shard 10 verified; checksum 410311\ncapture 410301 shard 11 verified; checksum 410312\ncapture 410301 shard 12 verified; checksum 410313\ncapture 410301 shard 13 verified; checksum 410314\ncapture 410301 shard 14 verified; checksum 410315\ncapture 410301 shard 15 verified; checksum 410316\ncapture 410301 shard 16 verified; checksum 410317\ncapture 410301 shard 17 verified; checksum 410318\ncapture 410301 shard 18 verified; checksum 410319\ncapture 410301 shard 19 verified; checksum 410320\ncapture 410301 shard 20 verified; checksum 410321\ncapture 410301 shard 21 verified; checksum 410322\ncapture 410301 shard 22 verified; checksum 410323\n✖ holdout_node_case_410301 (3.26ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 108.0869\n\n✖ failing tests:\n\ntest at holdout_node_3_1.mjs:4:1\n✖ holdout_node_case_410301 (3.26ms)\n  AssertionError [ERR_ASSERTION]: case 410301: TypeError required; actual RangeError ribbon-410301\n      at TestContext.<anonymous> (file:////captured/holdout/node-3-1/holdout_node_3_1.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: RangeError: ribbon-410301\n        at file:////captured/holdout/node-3-1/holdout_node_3_1.mjs:6:31\n        at getActual (node:assert:586:5)\n        at strict.throws (node:assert:734:24)\n        at TestContext.<anonymous> (file:////captured/holdout/node-3-1/holdout_node_3_1.mjs:6:10)\n        at Test.runInAsyncScope (node:async_hooks:226:14)\n        at Test.run (node:internal/test_runner/test:1201:25)\n        at Test.start (node:internal/test_runner/test:1096:17)\n        at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17),\n    operator: 'throws',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410301"
+        ],
+        "expectedFiles": [
+          "holdout_node_3_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410301: TypeError required; actual RangeError ribbon-410301"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-rejection-pattern-1",
+      "family": "hold-captured-node-rejection-pattern",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_4_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410400 shard 0 verified; checksum 410400\ncapture 410400 shard 1 verified; checksum 410401\ncapture 410400 shard 2 verified; checksum 410402\ncapture 410400 shard 3 verified; checksum 410403\ncapture 410400 shard 4 verified; checksum 410404\ncapture 410400 shard 5 verified; checksum 410405\ncapture 410400 shard 6 verified; checksum 410406\ncapture 410400 shard 7 verified; checksum 410407\ncapture 410400 shard 8 verified; checksum 410408\ncapture 410400 shard 9 verified; checksum 410409\ncapture 410400 shard 10 verified; checksum 410410\ncapture 410400 shard 11 verified; checksum 410411\ncapture 410400 shard 12 verified; checksum 410412\ncapture 410400 shard 13 verified; checksum 410413\ncapture 410400 shard 14 verified; checksum 410414\ncapture 410400 shard 15 verified; checksum 410415\ncapture 410400 shard 16 verified; checksum 410416\ncapture 410400 shard 17 verified; checksum 410417\ncapture 410400 shard 18 verified; checksum 410418\n✖ holdout_node_case_410400 (2.9628ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 113.9274\n\n✖ failing tests:\n\ntest at holdout_node_4_0.mjs:4:1\n✖ holdout_node_case_410400 (2.9628ms)\n  AssertionError [ERR_ASSERTION]: case 410400: rejection matching /pollen/ required; actual Error cobalt-410400\n      at async TestContext.<anonymous> (file:////captured/holdout/node-4-0/holdout_node_4_0.mjs:6:3)\n      at async Test.run (node:internal/test_runner/test:1208:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Error: cobalt-410400\n        at TestContext.<anonymous> (file:////captured/holdout/node-4-0/holdout_node_4_0.mjs:6:39)\n        at Test.runInAsyncScope (node:async_hooks:226:14)\n        at Test.run (node:internal/test_runner/test:1201:25)\n        at Test.start (node:internal/test_runner/test:1096:17)\n        at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17),\n    expected: /pollen/,\n    operator: 'rejects',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410400"
+        ],
+        "expectedFiles": [
+          "holdout_node_4_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410400: rejection matching /pollen/ required; actual Error cobalt-410400"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-rejection-pattern-2",
+      "family": "hold-captured-node-rejection-pattern",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_4_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410401 shard 0 verified; checksum 410401\ncapture 410401 shard 1 verified; checksum 410402\ncapture 410401 shard 2 verified; checksum 410403\ncapture 410401 shard 3 verified; checksum 410404\ncapture 410401 shard 4 verified; checksum 410405\ncapture 410401 shard 5 verified; checksum 410406\ncapture 410401 shard 6 verified; checksum 410407\ncapture 410401 shard 7 verified; checksum 410408\ncapture 410401 shard 8 verified; checksum 410409\ncapture 410401 shard 9 verified; checksum 410410\ncapture 410401 shard 10 verified; checksum 410411\ncapture 410401 shard 11 verified; checksum 410412\ncapture 410401 shard 12 verified; checksum 410413\ncapture 410401 shard 13 verified; checksum 410414\ncapture 410401 shard 14 verified; checksum 410415\ncapture 410401 shard 15 verified; checksum 410416\ncapture 410401 shard 16 verified; checksum 410417\ncapture 410401 shard 17 verified; checksum 410418\ncapture 410401 shard 18 verified; checksum 410419\ncapture 410401 shard 19 verified; checksum 410420\ncapture 410401 shard 20 verified; checksum 410421\ncapture 410401 shard 21 verified; checksum 410422\ncapture 410401 shard 22 verified; checksum 410423\n✖ holdout_node_case_410401 (3.4267ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 117.1847\n\n✖ failing tests:\n\ntest at holdout_node_4_1.mjs:4:1\n✖ holdout_node_case_410401 (3.4267ms)\n  AssertionError [ERR_ASSERTION]: case 410401: rejection matching /pollen/ required; actual Error cobalt-410401\n      at async TestContext.<anonymous> (file:////captured/holdout/node-4-1/holdout_node_4_1.mjs:6:3)\n      at async Test.run (node:internal/test_runner/test:1208:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Error: cobalt-410401\n        at TestContext.<anonymous> (file:////captured/holdout/node-4-1/holdout_node_4_1.mjs:6:39)\n        at Test.runInAsyncScope (node:async_hooks:226:14)\n        at Test.run (node:internal/test_runner/test:1201:25)\n        at Test.start (node:internal/test_runner/test:1096:17)\n        at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17),\n    expected: /pollen/,\n    operator: 'rejects',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410401"
+        ],
+        "expectedFiles": [
+          "holdout_node_4_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410401: rejection matching /pollen/ required; actual Error cobalt-410401"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-unexpected-rejection-1",
+      "family": "hold-captured-node-unexpected-rejection",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_5_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410500 shard 0 verified; checksum 410500\ncapture 410500 shard 1 verified; checksum 410501\ncapture 410500 shard 2 verified; checksum 410502\ncapture 410500 shard 3 verified; checksum 410503\ncapture 410500 shard 4 verified; checksum 410504\ncapture 410500 shard 5 verified; checksum 410505\ncapture 410500 shard 6 verified; checksum 410506\ncapture 410500 shard 7 verified; checksum 410507\ncapture 410500 shard 8 verified; checksum 410508\ncapture 410500 shard 9 verified; checksum 410509\ncapture 410500 shard 10 verified; checksum 410510\ncapture 410500 shard 11 verified; checksum 410511\ncapture 410500 shard 12 verified; checksum 410512\ncapture 410500 shard 13 verified; checksum 410513\ncapture 410500 shard 14 verified; checksum 410514\ncapture 410500 shard 15 verified; checksum 410515\ncapture 410500 shard 16 verified; checksum 410516\ncapture 410500 shard 17 verified; checksum 410517\ncapture 410500 shard 18 verified; checksum 410518\n✖ holdout_node_case_410500 (2.9368ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 104.298\n\n✖ failing tests:\n\ntest at holdout_node_5_0.mjs:4:1\n✖ holdout_node_case_410500 (2.9368ms)\n  AssertionError [ERR_ASSERTION]: Got unwanted rejection: case 410500: resolved promise required; actual rejected Error tundra-410500\n  Actual message: \"tundra-410500\"\n      at async TestContext.<anonymous> (file:////captured/holdout/node-5-0/holdout_node_5_0.mjs:6:3)\n      at async Test.run (node:internal/test_runner/test:1208:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Error: tundra-410500\n        at TestContext.<anonymous> (file:////captured/holdout/node-5-0/holdout_node_5_0.mjs:6:45)\n        at Test.runInAsyncScope (node:async_hooks:226:14)\n        at Test.run (node:internal/test_runner/test:1201:25)\n        at Test.start (node:internal/test_runner/test:1096:17)\n        at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17),\n    expected: undefined,\n    operator: 'doesNotReject',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410500"
+        ],
+        "expectedFiles": [
+          "holdout_node_5_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410500: resolved promise required; actual rejected Error tundra-410500"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-unexpected-rejection-2",
+      "family": "hold-captured-node-unexpected-rejection",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_5_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410501 shard 0 verified; checksum 410501\ncapture 410501 shard 1 verified; checksum 410502\ncapture 410501 shard 2 verified; checksum 410503\ncapture 410501 shard 3 verified; checksum 410504\ncapture 410501 shard 4 verified; checksum 410505\ncapture 410501 shard 5 verified; checksum 410506\ncapture 410501 shard 6 verified; checksum 410507\ncapture 410501 shard 7 verified; checksum 410508\ncapture 410501 shard 8 verified; checksum 410509\ncapture 410501 shard 9 verified; checksum 410510\ncapture 410501 shard 10 verified; checksum 410511\ncapture 410501 shard 11 verified; checksum 410512\ncapture 410501 shard 12 verified; checksum 410513\ncapture 410501 shard 13 verified; checksum 410514\ncapture 410501 shard 14 verified; checksum 410515\ncapture 410501 shard 15 verified; checksum 410516\ncapture 410501 shard 16 verified; checksum 410517\ncapture 410501 shard 17 verified; checksum 410518\ncapture 410501 shard 18 verified; checksum 410519\ncapture 410501 shard 19 verified; checksum 410520\ncapture 410501 shard 20 verified; checksum 410521\ncapture 410501 shard 21 verified; checksum 410522\ncapture 410501 shard 22 verified; checksum 410523\n✖ holdout_node_case_410501 (3.3272ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 119.0471\n\n✖ failing tests:\n\ntest at holdout_node_5_1.mjs:4:1\n✖ holdout_node_case_410501 (3.3272ms)\n  AssertionError [ERR_ASSERTION]: Got unwanted rejection: case 410501: resolved promise required; actual rejected Error tundra-410501\n  Actual message: \"tundra-410501\"\n      at async TestContext.<anonymous> (file:////captured/holdout/node-5-1/holdout_node_5_1.mjs:6:3)\n      at async Test.run (node:internal/test_runner/test:1208:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Error: tundra-410501\n        at TestContext.<anonymous> (file:////captured/holdout/node-5-1/holdout_node_5_1.mjs:6:45)\n        at Test.runInAsyncScope (node:async_hooks:226:14)\n        at Test.run (node:internal/test_runner/test:1201:25)\n        at Test.start (node:internal/test_runner/test:1096:17)\n        at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17),\n    expected: undefined,\n    operator: 'doesNotReject',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410501"
+        ],
+        "expectedFiles": [
+          "holdout_node_5_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410501: resolved promise required; actual rejected Error tundra-410501"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-map-deep-equality-1",
+      "family": "hold-captured-node-map-deep-equality",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_6_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410600 shard 0 verified; checksum 410600\ncapture 410600 shard 1 verified; checksum 410601\ncapture 410600 shard 2 verified; checksum 410602\ncapture 410600 shard 3 verified; checksum 410603\ncapture 410600 shard 4 verified; checksum 410604\ncapture 410600 shard 5 verified; checksum 410605\ncapture 410600 shard 6 verified; checksum 410606\ncapture 410600 shard 7 verified; checksum 410607\ncapture 410600 shard 8 verified; checksum 410608\ncapture 410600 shard 9 verified; checksum 410609\ncapture 410600 shard 10 verified; checksum 410610\ncapture 410600 shard 11 verified; checksum 410611\ncapture 410600 shard 12 verified; checksum 410612\ncapture 410600 shard 13 verified; checksum 410613\ncapture 410600 shard 14 verified; checksum 410614\ncapture 410600 shard 15 verified; checksum 410615\ncapture 410600 shard 16 verified; checksum 410616\ncapture 410600 shard 17 verified; checksum 410617\ncapture 410600 shard 18 verified; checksum 410618\n✖ holdout_node_case_410600 (4.9041ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 119.1424\n\n✖ failing tests:\n\ntest at holdout_node_6_0.mjs:4:1\n✖ holdout_node_case_410600 (4.9041ms)\n  AssertionError [ERR_ASSERTION]: case 410600: Map capsule required 410607; actual 410600\n  + actual - expected\n  \n    Map(1) {\n  +   'capsule' => 410600\n  -   'capsule' => 410607\n    }\n  \n      at TestContext.<anonymous> (file:////captured/holdout/node-6-0/holdout_node_6_0.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Map(1) { 'capsule' => 410600 },\n    expected: Map(1) { 'capsule' => 410607 },\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410600"
+        ],
+        "expectedFiles": [
+          "holdout_node_6_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410600: Map capsule required 410607; actual 410600"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-map-deep-equality-2",
+      "family": "hold-captured-node-map-deep-equality",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_6_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410601 shard 0 verified; checksum 410601\ncapture 410601 shard 1 verified; checksum 410602\ncapture 410601 shard 2 verified; checksum 410603\ncapture 410601 shard 3 verified; checksum 410604\ncapture 410601 shard 4 verified; checksum 410605\ncapture 410601 shard 5 verified; checksum 410606\ncapture 410601 shard 6 verified; checksum 410607\ncapture 410601 shard 7 verified; checksum 410608\ncapture 410601 shard 8 verified; checksum 410609\ncapture 410601 shard 9 verified; checksum 410610\ncapture 410601 shard 10 verified; checksum 410611\ncapture 410601 shard 11 verified; checksum 410612\ncapture 410601 shard 12 verified; checksum 410613\ncapture 410601 shard 13 verified; checksum 410614\ncapture 410601 shard 14 verified; checksum 410615\ncapture 410601 shard 15 verified; checksum 410616\ncapture 410601 shard 16 verified; checksum 410617\ncapture 410601 shard 17 verified; checksum 410618\ncapture 410601 shard 18 verified; checksum 410619\ncapture 410601 shard 19 verified; checksum 410620\ncapture 410601 shard 20 verified; checksum 410621\ncapture 410601 shard 21 verified; checksum 410622\ncapture 410601 shard 22 verified; checksum 410623\n✖ holdout_node_case_410601 (4.6534ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 113.287\n\n✖ failing tests:\n\ntest at holdout_node_6_1.mjs:4:1\n✖ holdout_node_case_410601 (4.6534ms)\n  AssertionError [ERR_ASSERTION]: case 410601: Map capsule required 410608; actual 410601\n  + actual - expected\n  \n    Map(1) {\n  +   'capsule' => 410601\n  -   'capsule' => 410608\n    }\n  \n      at TestContext.<anonymous> (file:////captured/holdout/node-6-1/holdout_node_6_1.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Map(1) { 'capsule' => 410601 },\n    expected: Map(1) { 'capsule' => 410608 },\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410601"
+        ],
+        "expectedFiles": [
+          "holdout_node_6_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410601: Map capsule required 410608; actual 410601"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-set-deep-equality-1",
+      "family": "hold-captured-node-set-deep-equality",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_7_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410700 shard 0 verified; checksum 410700\ncapture 410700 shard 1 verified; checksum 410701\ncapture 410700 shard 2 verified; checksum 410702\ncapture 410700 shard 3 verified; checksum 410703\ncapture 410700 shard 4 verified; checksum 410704\ncapture 410700 shard 5 verified; checksum 410705\ncapture 410700 shard 6 verified; checksum 410706\ncapture 410700 shard 7 verified; checksum 410707\ncapture 410700 shard 8 verified; checksum 410708\ncapture 410700 shard 9 verified; checksum 410709\ncapture 410700 shard 10 verified; checksum 410710\ncapture 410700 shard 11 verified; checksum 410711\ncapture 410700 shard 12 verified; checksum 410712\ncapture 410700 shard 13 verified; checksum 410713\ncapture 410700 shard 14 verified; checksum 410714\ncapture 410700 shard 15 verified; checksum 410715\ncapture 410700 shard 16 verified; checksum 410716\ncapture 410700 shard 17 verified; checksum 410717\ncapture 410700 shard 18 verified; checksum 410718\n✖ holdout_node_case_410700 (8.2876ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 110.9355\n\n✖ failing tests:\n\ntest at holdout_node_7_0.mjs:4:1\n✖ holdout_node_case_410700 (8.2876ms)\n  AssertionError [ERR_ASSERTION]: case 410700: Set required quartz-410700; actual orchard-410700\n  + actual - expected\n  \n    Set(1) {\n  +   'orchard-410700'\n  -   'quartz-410700'\n    }\n  \n      at TestContext.<anonymous> (file:////captured/holdout/node-7-0/holdout_node_7_0.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Set(1) { 'orchard-410700' },\n    expected: Set(1) { 'quartz-410700' },\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410700"
+        ],
+        "expectedFiles": [
+          "holdout_node_7_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410700: Set required quartz-410700; actual orchard-410700"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-set-deep-equality-2",
+      "family": "hold-captured-node-set-deep-equality",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_7_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410701 shard 0 verified; checksum 410701\ncapture 410701 shard 1 verified; checksum 410702\ncapture 410701 shard 2 verified; checksum 410703\ncapture 410701 shard 3 verified; checksum 410704\ncapture 410701 shard 4 verified; checksum 410705\ncapture 410701 shard 5 verified; checksum 410706\ncapture 410701 shard 6 verified; checksum 410707\ncapture 410701 shard 7 verified; checksum 410708\ncapture 410701 shard 8 verified; checksum 410709\ncapture 410701 shard 9 verified; checksum 410710\ncapture 410701 shard 10 verified; checksum 410711\ncapture 410701 shard 11 verified; checksum 410712\ncapture 410701 shard 12 verified; checksum 410713\ncapture 410701 shard 13 verified; checksum 410714\ncapture 410701 shard 14 verified; checksum 410715\ncapture 410701 shard 15 verified; checksum 410716\ncapture 410701 shard 16 verified; checksum 410717\ncapture 410701 shard 17 verified; checksum 410718\ncapture 410701 shard 18 verified; checksum 410719\ncapture 410701 shard 19 verified; checksum 410720\ncapture 410701 shard 20 verified; checksum 410721\ncapture 410701 shard 21 verified; checksum 410722\ncapture 410701 shard 22 verified; checksum 410723\n✖ holdout_node_case_410701 (4.3811ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 101.1785\n\n✖ failing tests:\n\ntest at holdout_node_7_1.mjs:4:1\n✖ holdout_node_case_410701 (4.3811ms)\n  AssertionError [ERR_ASSERTION]: case 410701: Set required quartz-410701; actual orchard-410701\n  + actual - expected\n  \n    Set(1) {\n  +   'orchard-410701'\n  -   'quartz-410701'\n    }\n  \n      at TestContext.<anonymous> (file:////captured/holdout/node-7-1/holdout_node_7_1.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Set(1) { 'orchard-410701' },\n    expected: Set(1) { 'quartz-410701' },\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410701"
+        ],
+        "expectedFiles": [
+          "holdout_node_7_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410701: Set required quartz-410701; actual orchard-410701"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-typed-buffer-equality-1",
+      "family": "hold-captured-node-typed-buffer-equality",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_8_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410800 shard 0 verified; checksum 410800\ncapture 410800 shard 1 verified; checksum 410801\ncapture 410800 shard 2 verified; checksum 410802\ncapture 410800 shard 3 verified; checksum 410803\ncapture 410800 shard 4 verified; checksum 410804\ncapture 410800 shard 5 verified; checksum 410805\ncapture 410800 shard 6 verified; checksum 410806\ncapture 410800 shard 7 verified; checksum 410807\ncapture 410800 shard 8 verified; checksum 410808\ncapture 410800 shard 9 verified; checksum 410809\ncapture 410800 shard 10 verified; checksum 410810\ncapture 410800 shard 11 verified; checksum 410811\ncapture 410800 shard 12 verified; checksum 410812\ncapture 410800 shard 13 verified; checksum 410813\ncapture 410800 shard 14 verified; checksum 410814\ncapture 410800 shard 15 verified; checksum 410815\ncapture 410800 shard 16 verified; checksum 410816\ncapture 410800 shard 17 verified; checksum 410817\ncapture 410800 shard 18 verified; checksum 410818\n✖ holdout_node_case_410800 (13.8009ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 113.9991\n\n✖ failing tests:\n\ntest at holdout_node_8_0.mjs:4:1\n✖ holdout_node_case_410800 (13.8009ms)\n  AssertionError [ERR_ASSERTION]: case 410800: Uint8Array required [49,4]; actual [48,4]\n  + actual - expected\n  \n    Uint8Array(2) [\n  +   48,\n  -   49,\n      4\n    ]\n  \n      at TestContext.<anonymous> (file:////captured/holdout/node-8-0/holdout_node_8_0.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Uint8Array(2) [ 48, 4 ],\n    expected: Uint8Array(2) [ 49, 4 ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410800"
+        ],
+        "expectedFiles": [
+          "holdout_node_8_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410800: Uint8Array required [49,4]; actual [48,4]"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-typed-buffer-equality-2",
+      "family": "hold-captured-node-typed-buffer-equality",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_8_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410801 shard 0 verified; checksum 410801\ncapture 410801 shard 1 verified; checksum 410802\ncapture 410801 shard 2 verified; checksum 410803\ncapture 410801 shard 3 verified; checksum 410804\ncapture 410801 shard 4 verified; checksum 410805\ncapture 410801 shard 5 verified; checksum 410806\ncapture 410801 shard 6 verified; checksum 410807\ncapture 410801 shard 7 verified; checksum 410808\ncapture 410801 shard 8 verified; checksum 410809\ncapture 410801 shard 9 verified; checksum 410810\ncapture 410801 shard 10 verified; checksum 410811\ncapture 410801 shard 11 verified; checksum 410812\ncapture 410801 shard 12 verified; checksum 410813\ncapture 410801 shard 13 verified; checksum 410814\ncapture 410801 shard 14 verified; checksum 410815\ncapture 410801 shard 15 verified; checksum 410816\ncapture 410801 shard 16 verified; checksum 410817\ncapture 410801 shard 17 verified; checksum 410818\ncapture 410801 shard 18 verified; checksum 410819\ncapture 410801 shard 19 verified; checksum 410820\ncapture 410801 shard 20 verified; checksum 410821\ncapture 410801 shard 21 verified; checksum 410822\ncapture 410801 shard 22 verified; checksum 410823\n✖ holdout_node_case_410801 (3.6206ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 100.0074\n\n✖ failing tests:\n\ntest at holdout_node_8_1.mjs:4:1\n✖ holdout_node_case_410801 (3.6206ms)\n  AssertionError [ERR_ASSERTION]: case 410801: Uint8Array required [50,4]; actual [49,4]\n  + actual - expected\n  \n    Uint8Array(2) [\n  +   49,\n  -   50,\n      4\n    ]\n  \n      at TestContext.<anonymous> (file:////captured/holdout/node-8-1/holdout_node_8_1.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: Uint8Array(2) [ 49, 4 ],\n    expected: Uint8Array(2) [ 50, 4 ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410801"
+        ],
+        "expectedFiles": [
+          "holdout_node_8_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410801: Uint8Array required [50,4]; actual [49,4]"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-nested-error-cause-1",
+      "family": "hold-captured-node-nested-error-cause",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_9_0.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410900 shard 0 verified; checksum 410900\ncapture 410900 shard 1 verified; checksum 410901\ncapture 410900 shard 2 verified; checksum 410902\ncapture 410900 shard 3 verified; checksum 410903\ncapture 410900 shard 4 verified; checksum 410904\ncapture 410900 shard 5 verified; checksum 410905\ncapture 410900 shard 6 verified; checksum 410906\ncapture 410900 shard 7 verified; checksum 410907\ncapture 410900 shard 8 verified; checksum 410908\ncapture 410900 shard 9 verified; checksum 410909\ncapture 410900 shard 10 verified; checksum 410910\ncapture 410900 shard 11 verified; checksum 410911\ncapture 410900 shard 12 verified; checksum 410912\ncapture 410900 shard 13 verified; checksum 410913\ncapture 410900 shard 14 verified; checksum 410914\ncapture 410900 shard 15 verified; checksum 410915\ncapture 410900 shard 16 verified; checksum 410916\ncapture 410900 shard 17 verified; checksum 410917\ncapture 410900 shard 18 verified; checksum 410918\n✖ holdout_node_case_410900 (4.2806ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 104.844\n\n✖ failing tests:\n\ntest at holdout_node_9_0.mjs:4:1\n✖ holdout_node_case_410900 (4.2806ms)\n  AssertionError [ERR_ASSERTION]: case 410900: metadata required ribbon-410900 retries 3; actual prism-410900 retries 2\n  + actual - expected\n  \n    {\n      metadata: {\n  +     code: 'prism-410900',\n  +     retries: 2\n  -     code: 'ribbon-410900',\n  -     retries: 3\n      }\n    }\n  \n      at TestContext.<anonymous> (file:////captured/holdout/node-9-0/holdout_node_9_0.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: { metadata: { code: 'prism-410900', retries: 2 } },\n    expected: { metadata: { code: 'ribbon-410900', retries: 3 } },\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410900"
+        ],
+        "expectedFiles": [
+          "holdout_node_9_0.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410900: metadata required ribbon-410900 retries 3; actual prism-410900 retries 2"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-node-nested-error-cause-2",
+      "family": "hold-captured-node-nested-error-cause",
+      "framework": "node:test",
+      "command": "node --test --test-reporter=spec holdout_node_9_1.mjs",
+      "exitCode": 1,
+      "rawOutput": "capture 410901 shard 0 verified; checksum 410901\ncapture 410901 shard 1 verified; checksum 410902\ncapture 410901 shard 2 verified; checksum 410903\ncapture 410901 shard 3 verified; checksum 410904\ncapture 410901 shard 4 verified; checksum 410905\ncapture 410901 shard 5 verified; checksum 410906\ncapture 410901 shard 6 verified; checksum 410907\ncapture 410901 shard 7 verified; checksum 410908\ncapture 410901 shard 8 verified; checksum 410909\ncapture 410901 shard 9 verified; checksum 410910\ncapture 410901 shard 10 verified; checksum 410911\ncapture 410901 shard 11 verified; checksum 410912\ncapture 410901 shard 12 verified; checksum 410913\ncapture 410901 shard 13 verified; checksum 410914\ncapture 410901 shard 14 verified; checksum 410915\ncapture 410901 shard 15 verified; checksum 410916\ncapture 410901 shard 16 verified; checksum 410917\ncapture 410901 shard 17 verified; checksum 410918\ncapture 410901 shard 18 verified; checksum 410919\ncapture 410901 shard 19 verified; checksum 410920\ncapture 410901 shard 20 verified; checksum 410921\ncapture 410901 shard 21 verified; checksum 410922\ncapture 410901 shard 22 verified; checksum 410923\n✖ holdout_node_case_410901 (4.6632ms)\nℹ tests 1\nℹ suites 0\nℹ pass 0\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 109.4861\n\n✖ failing tests:\n\ntest at holdout_node_9_1.mjs:4:1\n✖ holdout_node_case_410901 (4.6632ms)\n  AssertionError [ERR_ASSERTION]: case 410901: metadata required ribbon-410901 retries 3; actual prism-410901 retries 2\n  + actual - expected\n  \n    {\n      metadata: {\n  +     code: 'prism-410901',\n  +     retries: 2\n  -     code: 'ribbon-410901',\n  -     retries: 3\n      }\n    }\n  \n      at TestContext.<anonymous> (file:////captured/holdout/node-9-1/holdout_node_9_1.mjs:6:10)\n      at Test.runInAsyncScope (node:async_hooks:226:14)\n      at Test.run (node:internal/test_runner/test:1201:25)\n      at Test.start (node:internal/test_runner/test:1096:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: { metadata: { code: 'prism-410901', retries: 2 } },\n    expected: { metadata: { code: 'ribbon-410901', retries: 3 } },\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }",
+      "gold": {
+        "expectedTests": [
+          "holdout_node_case_410901"
+        ],
+        "expectedFiles": [
+          "holdout_node_9_1.mjs:6"
+        ],
+        "expectedAssertions": [
+          "case 410901: metadata required ribbon-410901 retries 3; actual prism-410901 retries 2"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-regex-mismatch-1",
+      "family": "hold-captured-python-regex-mismatch",
+      "framework": "unittest",
+      "command": "python holdout_python_0_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410000 shard 0 verified; checksum 410000\r\ncapture 410000 shard 1 verified; checksum 410001\r\ncapture 410000 shard 2 verified; checksum 410002\r\ncapture 410000 shard 3 verified; checksum 410003\r\ncapture 410000 shard 4 verified; checksum 410004\r\ncapture 410000 shard 5 verified; checksum 410005\r\ncapture 410000 shard 6 verified; checksum 410006\r\ncapture 410000 shard 7 verified; checksum 410007\r\ncapture 410000 shard 8 verified; checksum 410008\r\ncapture 410000 shard 9 verified; checksum 410009\r\ncapture 410000 shard 10 verified; checksum 410010\r\ncapture 410000 shard 11 verified; checksum 410011\r\ncapture 410000 shard 12 verified; checksum 410012\r\ncapture 410000 shard 13 verified; checksum 410013\r\ncapture 410000 shard 14 verified; checksum 410014\r\ncapture 410000 shard 15 verified; checksum 410015\r\ncapture 410000 shard 16 verified; checksum 410016\r\ncapture 410000 shard 17 verified; checksum 410017\r\ncapture 410000 shard 18 verified; checksum 410018\r\n\ntest_holdout_python_case_410000 (__main__.CapturedQuality.test_holdout_python_case_410000) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410000 (__main__.CapturedQuality.test_holdout_python_case_410000)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-0-0\\holdout_python_0_0.py\", line 7, in test_holdout_python_case_410000\r\n    self.assertRegex('capsule-410000', r'^orchard-', msg=\"case 410000: regex required ^orchard-; actual capsule-410000\")\r\nAssertionError: Regex didn't match: '^orchard-' not found in 'capsule-410000' : case 410000: regex required ^orchard-; actual capsule-410000\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410000"
+        ],
+        "expectedFiles": [
+          "holdout_python_0_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410000: regex required ^orchard-; actual capsule-410000"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-regex-mismatch-2",
+      "family": "hold-captured-python-regex-mismatch",
+      "framework": "unittest",
+      "command": "python holdout_python_0_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410001 shard 0 verified; checksum 410001\r\ncapture 410001 shard 1 verified; checksum 410002\r\ncapture 410001 shard 2 verified; checksum 410003\r\ncapture 410001 shard 3 verified; checksum 410004\r\ncapture 410001 shard 4 verified; checksum 410005\r\ncapture 410001 shard 5 verified; checksum 410006\r\ncapture 410001 shard 6 verified; checksum 410007\r\ncapture 410001 shard 7 verified; checksum 410008\r\ncapture 410001 shard 8 verified; checksum 410009\r\ncapture 410001 shard 9 verified; checksum 410010\r\ncapture 410001 shard 10 verified; checksum 410011\r\ncapture 410001 shard 11 verified; checksum 410012\r\ncapture 410001 shard 12 verified; checksum 410013\r\ncapture 410001 shard 13 verified; checksum 410014\r\ncapture 410001 shard 14 verified; checksum 410015\r\ncapture 410001 shard 15 verified; checksum 410016\r\ncapture 410001 shard 16 verified; checksum 410017\r\ncapture 410001 shard 17 verified; checksum 410018\r\ncapture 410001 shard 18 verified; checksum 410019\r\ncapture 410001 shard 19 verified; checksum 410020\r\ncapture 410001 shard 20 verified; checksum 410021\r\ncapture 410001 shard 21 verified; checksum 410022\r\ncapture 410001 shard 22 verified; checksum 410023\r\n\ntest_holdout_python_case_410001 (__main__.CapturedQuality.test_holdout_python_case_410001) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410001 (__main__.CapturedQuality.test_holdout_python_case_410001)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-0-1\\holdout_python_0_1.py\", line 7, in test_holdout_python_case_410001\r\n    self.assertRegex('capsule-410001', r'^orchard-', msg=\"case 410001: regex required ^orchard-; actual capsule-410001\")\r\nAssertionError: Regex didn't match: '^orchard-' not found in 'capsule-410001' : case 410001: regex required ^orchard-; actual capsule-410001\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410001"
+        ],
+        "expectedFiles": [
+          "holdout_python_0_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410001: regex required ^orchard-; actual capsule-410001"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-negative-regex-1",
+      "family": "hold-captured-python-negative-regex",
+      "framework": "unittest",
+      "command": "python holdout_python_1_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410100 shard 0 verified; checksum 410100\r\ncapture 410100 shard 1 verified; checksum 410101\r\ncapture 410100 shard 2 verified; checksum 410102\r\ncapture 410100 shard 3 verified; checksum 410103\r\ncapture 410100 shard 4 verified; checksum 410104\r\ncapture 410100 shard 5 verified; checksum 410105\r\ncapture 410100 shard 6 verified; checksum 410106\r\ncapture 410100 shard 7 verified; checksum 410107\r\ncapture 410100 shard 8 verified; checksum 410108\r\ncapture 410100 shard 9 verified; checksum 410109\r\ncapture 410100 shard 10 verified; checksum 410110\r\ncapture 410100 shard 11 verified; checksum 410111\r\ncapture 410100 shard 12 verified; checksum 410112\r\ncapture 410100 shard 13 verified; checksum 410113\r\ncapture 410100 shard 14 verified; checksum 410114\r\ncapture 410100 shard 15 verified; checksum 410115\r\ncapture 410100 shard 16 verified; checksum 410116\r\ncapture 410100 shard 17 verified; checksum 410117\r\ncapture 410100 shard 18 verified; checksum 410118\r\n\ntest_holdout_python_case_410100 (__main__.CapturedQuality.test_holdout_python_case_410100) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410100 (__main__.CapturedQuality.test_holdout_python_case_410100)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-1-0\\holdout_python_1_0.py\", line 7, in test_holdout_python_case_410100\r\n    self.assertNotRegex('quartz-410100', r'quartz', msg=\"case 410100: regex quartz forbidden; actual quartz-410100 matched\")\r\nAssertionError: Regex matched: 'quartz' matches 'quartz' in 'quartz-410100' : case 410100: regex quartz forbidden; actual quartz-410100 matched\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410100"
+        ],
+        "expectedFiles": [
+          "holdout_python_1_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410100: regex quartz forbidden; actual quartz-410100 matched"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-negative-regex-2",
+      "family": "hold-captured-python-negative-regex",
+      "framework": "unittest",
+      "command": "python holdout_python_1_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410101 shard 0 verified; checksum 410101\r\ncapture 410101 shard 1 verified; checksum 410102\r\ncapture 410101 shard 2 verified; checksum 410103\r\ncapture 410101 shard 3 verified; checksum 410104\r\ncapture 410101 shard 4 verified; checksum 410105\r\ncapture 410101 shard 5 verified; checksum 410106\r\ncapture 410101 shard 6 verified; checksum 410107\r\ncapture 410101 shard 7 verified; checksum 410108\r\ncapture 410101 shard 8 verified; checksum 410109\r\ncapture 410101 shard 9 verified; checksum 410110\r\ncapture 410101 shard 10 verified; checksum 410111\r\ncapture 410101 shard 11 verified; checksum 410112\r\ncapture 410101 shard 12 verified; checksum 410113\r\ncapture 410101 shard 13 verified; checksum 410114\r\ncapture 410101 shard 14 verified; checksum 410115\r\ncapture 410101 shard 15 verified; checksum 410116\r\ncapture 410101 shard 16 verified; checksum 410117\r\ncapture 410101 shard 17 verified; checksum 410118\r\ncapture 410101 shard 18 verified; checksum 410119\r\ncapture 410101 shard 19 verified; checksum 410120\r\ncapture 410101 shard 20 verified; checksum 410121\r\ncapture 410101 shard 21 verified; checksum 410122\r\ncapture 410101 shard 22 verified; checksum 410123\r\n\ntest_holdout_python_case_410101 (__main__.CapturedQuality.test_holdout_python_case_410101) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410101 (__main__.CapturedQuality.test_holdout_python_case_410101)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-1-1\\holdout_python_1_1.py\", line 7, in test_holdout_python_case_410101\r\n    self.assertNotRegex('quartz-410101', r'quartz', msg=\"case 410101: regex quartz forbidden; actual quartz-410101 matched\")\r\nAssertionError: Regex matched: 'quartz' matches 'quartz' in 'quartz-410101' : case 410101: regex quartz forbidden; actual quartz-410101 matched\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410101"
+        ],
+        "expectedFiles": [
+          "holdout_python_1_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410101: regex quartz forbidden; actual quartz-410101 matched"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-multiplicity-1",
+      "family": "hold-captured-python-multiplicity",
+      "framework": "unittest",
+      "command": "python holdout_python_2_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410200 shard 0 verified; checksum 410200\r\ncapture 410200 shard 1 verified; checksum 410201\r\ncapture 410200 shard 2 verified; checksum 410202\r\ncapture 410200 shard 3 verified; checksum 410203\r\ncapture 410200 shard 4 verified; checksum 410204\r\ncapture 410200 shard 5 verified; checksum 410205\r\ncapture 410200 shard 6 verified; checksum 410206\r\ncapture 410200 shard 7 verified; checksum 410207\r\ncapture 410200 shard 8 verified; checksum 410208\r\ncapture 410200 shard 9 verified; checksum 410209\r\ncapture 410200 shard 10 verified; checksum 410210\r\ncapture 410200 shard 11 verified; checksum 410211\r\ncapture 410200 shard 12 verified; checksum 410212\r\ncapture 410200 shard 13 verified; checksum 410213\r\ncapture 410200 shard 14 verified; checksum 410214\r\ncapture 410200 shard 15 verified; checksum 410215\r\ncapture 410200 shard 16 verified; checksum 410216\r\ncapture 410200 shard 17 verified; checksum 410217\r\ncapture 410200 shard 18 verified; checksum 410218\r\n\ntest_holdout_python_case_410200 (__main__.CapturedQuality.test_holdout_python_case_410200) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410200 (__main__.CapturedQuality.test_holdout_python_case_410200)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-2-0\\holdout_python_2_0.py\", line 7, in test_holdout_python_case_410200\r\n    self.assertCountEqual(['prism', 'prism', 410200], ['prism', 410200], msg=\"case 410200: one prism required; actual two prism values with 410200\")\r\nAssertionError: Element counts were not equal:\r\nFirst has 2, Second has 1:  'prism' : case 410200: one prism required; actual two prism values with 410200\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410200"
+        ],
+        "expectedFiles": [
+          "holdout_python_2_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410200: one prism required; actual two prism values with 410200"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-multiplicity-2",
+      "family": "hold-captured-python-multiplicity",
+      "framework": "unittest",
+      "command": "python holdout_python_2_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410201 shard 0 verified; checksum 410201\r\ncapture 410201 shard 1 verified; checksum 410202\r\ncapture 410201 shard 2 verified; checksum 410203\r\ncapture 410201 shard 3 verified; checksum 410204\r\ncapture 410201 shard 4 verified; checksum 410205\r\ncapture 410201 shard 5 verified; checksum 410206\r\ncapture 410201 shard 6 verified; checksum 410207\r\ncapture 410201 shard 7 verified; checksum 410208\r\ncapture 410201 shard 8 verified; checksum 410209\r\ncapture 410201 shard 9 verified; checksum 410210\r\ncapture 410201 shard 10 verified; checksum 410211\r\ncapture 410201 shard 11 verified; checksum 410212\r\ncapture 410201 shard 12 verified; checksum 410213\r\ncapture 410201 shard 13 verified; checksum 410214\r\ncapture 410201 shard 14 verified; checksum 410215\r\ncapture 410201 shard 15 verified; checksum 410216\r\ncapture 410201 shard 16 verified; checksum 410217\r\ncapture 410201 shard 17 verified; checksum 410218\r\ncapture 410201 shard 18 verified; checksum 410219\r\ncapture 410201 shard 19 verified; checksum 410220\r\ncapture 410201 shard 20 verified; checksum 410221\r\ncapture 410201 shard 21 verified; checksum 410222\r\ncapture 410201 shard 22 verified; checksum 410223\r\n\ntest_holdout_python_case_410201 (__main__.CapturedQuality.test_holdout_python_case_410201) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410201 (__main__.CapturedQuality.test_holdout_python_case_410201)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-2-1\\holdout_python_2_1.py\", line 7, in test_holdout_python_case_410201\r\n    self.assertCountEqual(['prism', 'prism', 410201], ['prism', 410201], msg=\"case 410201: one prism required; actual two prism values with 410201\")\r\nAssertionError: Element counts were not equal:\r\nFirst has 2, Second has 1:  'prism' : case 410201: one prism required; actual two prism values with 410201\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410201"
+        ],
+        "expectedFiles": [
+          "holdout_python_2_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410201: one prism required; actual two prism values with 410201"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-numeric-tolerance-1",
+      "family": "hold-captured-python-numeric-tolerance",
+      "framework": "unittest",
+      "command": "python holdout_python_3_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410300 shard 0 verified; checksum 410300\r\ncapture 410300 shard 1 verified; checksum 410301\r\ncapture 410300 shard 2 verified; checksum 410302\r\ncapture 410300 shard 3 verified; checksum 410303\r\ncapture 410300 shard 4 verified; checksum 410304\r\ncapture 410300 shard 5 verified; checksum 410305\r\ncapture 410300 shard 6 verified; checksum 410306\r\ncapture 410300 shard 7 verified; checksum 410307\r\ncapture 410300 shard 8 verified; checksum 410308\r\ncapture 410300 shard 9 verified; checksum 410309\r\ncapture 410300 shard 10 verified; checksum 410310\r\ncapture 410300 shard 11 verified; checksum 410311\r\ncapture 410300 shard 12 verified; checksum 410312\r\ncapture 410300 shard 13 verified; checksum 410313\r\ncapture 410300 shard 14 verified; checksum 410314\r\ncapture 410300 shard 15 verified; checksum 410315\r\ncapture 410300 shard 16 verified; checksum 410316\r\ncapture 410300 shard 17 verified; checksum 410317\r\ncapture 410300 shard 18 verified; checksum 410318\r\n\ntest_holdout_python_case_410300 (__main__.CapturedQuality.test_holdout_python_case_410300) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410300 (__main__.CapturedQuality.test_holdout_python_case_410300)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-3-0\\holdout_python_3_0.py\", line 7, in test_holdout_python_case_410300\r\n    self.assertAlmostEqual(410300.12, 410300.29, places=2, msg=\"case 410300: two-place equality required 410300.29; actual 410300.12\")\r\nAssertionError: 410300.12 != 410300.29 within 2 places (0.16999999998370185 difference) : case 410300: two-place equality required 410300.29; actual 410300.12\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410300"
+        ],
+        "expectedFiles": [
+          "holdout_python_3_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410300: two-place equality required 410300.29; actual 410300.12"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-numeric-tolerance-2",
+      "family": "hold-captured-python-numeric-tolerance",
+      "framework": "unittest",
+      "command": "python holdout_python_3_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410301 shard 0 verified; checksum 410301\r\ncapture 410301 shard 1 verified; checksum 410302\r\ncapture 410301 shard 2 verified; checksum 410303\r\ncapture 410301 shard 3 verified; checksum 410304\r\ncapture 410301 shard 4 verified; checksum 410305\r\ncapture 410301 shard 5 verified; checksum 410306\r\ncapture 410301 shard 6 verified; checksum 410307\r\ncapture 410301 shard 7 verified; checksum 410308\r\ncapture 410301 shard 8 verified; checksum 410309\r\ncapture 410301 shard 9 verified; checksum 410310\r\ncapture 410301 shard 10 verified; checksum 410311\r\ncapture 410301 shard 11 verified; checksum 410312\r\ncapture 410301 shard 12 verified; checksum 410313\r\ncapture 410301 shard 13 verified; checksum 410314\r\ncapture 410301 shard 14 verified; checksum 410315\r\ncapture 410301 shard 15 verified; checksum 410316\r\ncapture 410301 shard 16 verified; checksum 410317\r\ncapture 410301 shard 17 verified; checksum 410318\r\ncapture 410301 shard 18 verified; checksum 410319\r\ncapture 410301 shard 19 verified; checksum 410320\r\ncapture 410301 shard 20 verified; checksum 410321\r\ncapture 410301 shard 21 verified; checksum 410322\r\ncapture 410301 shard 22 verified; checksum 410323\r\n\ntest_holdout_python_case_410301 (__main__.CapturedQuality.test_holdout_python_case_410301) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410301 (__main__.CapturedQuality.test_holdout_python_case_410301)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-3-1\\holdout_python_3_1.py\", line 7, in test_holdout_python_case_410301\r\n    self.assertAlmostEqual(410301.12, 410301.29, places=2, msg=\"case 410301: two-place equality required 410301.29; actual 410301.12\")\r\nAssertionError: 410301.12 != 410301.29 within 2 places (0.16999999998370185 difference) : case 410301: two-place equality required 410301.29; actual 410301.12\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410301"
+        ],
+        "expectedFiles": [
+          "holdout_python_3_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410301: two-place equality required 410301.29; actual 410301.12"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-identity-1",
+      "family": "hold-captured-python-identity",
+      "framework": "unittest",
+      "command": "python holdout_python_4_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410400 shard 0 verified; checksum 410400\r\ncapture 410400 shard 1 verified; checksum 410401\r\ncapture 410400 shard 2 verified; checksum 410402\r\ncapture 410400 shard 3 verified; checksum 410403\r\ncapture 410400 shard 4 verified; checksum 410404\r\ncapture 410400 shard 5 verified; checksum 410405\r\ncapture 410400 shard 6 verified; checksum 410406\r\ncapture 410400 shard 7 verified; checksum 410407\r\ncapture 410400 shard 8 verified; checksum 410408\r\ncapture 410400 shard 9 verified; checksum 410409\r\ncapture 410400 shard 10 verified; checksum 410410\r\ncapture 410400 shard 11 verified; checksum 410411\r\ncapture 410400 shard 12 verified; checksum 410412\r\ncapture 410400 shard 13 verified; checksum 410413\r\ncapture 410400 shard 14 verified; checksum 410414\r\ncapture 410400 shard 15 verified; checksum 410415\r\ncapture 410400 shard 16 verified; checksum 410416\r\ncapture 410400 shard 17 verified; checksum 410417\r\ncapture 410400 shard 18 verified; checksum 410418\r\n\ntest_holdout_python_case_410400 (__main__.CapturedQuality.test_holdout_python_case_410400) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410400 (__main__.CapturedQuality.test_holdout_python_case_410400)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-4-0\\holdout_python_4_0.py\", line 7, in test_holdout_python_case_410400\r\n    self.assertIs(['ribbon-410400'], ['ribbon-410400'], msg=\"case 410400: same object required; actual distinct lists containing ribbon-410400\")\r\nAssertionError: ['ribbon-410400'] is not ['ribbon-410400'] : case 410400: same object required; actual distinct lists containing ribbon-410400\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410400"
+        ],
+        "expectedFiles": [
+          "holdout_python_4_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410400: same object required; actual distinct lists containing ribbon-410400"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-identity-2",
+      "family": "hold-captured-python-identity",
+      "framework": "unittest",
+      "command": "python holdout_python_4_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410401 shard 0 verified; checksum 410401\r\ncapture 410401 shard 1 verified; checksum 410402\r\ncapture 410401 shard 2 verified; checksum 410403\r\ncapture 410401 shard 3 verified; checksum 410404\r\ncapture 410401 shard 4 verified; checksum 410405\r\ncapture 410401 shard 5 verified; checksum 410406\r\ncapture 410401 shard 6 verified; checksum 410407\r\ncapture 410401 shard 7 verified; checksum 410408\r\ncapture 410401 shard 8 verified; checksum 410409\r\ncapture 410401 shard 9 verified; checksum 410410\r\ncapture 410401 shard 10 verified; checksum 410411\r\ncapture 410401 shard 11 verified; checksum 410412\r\ncapture 410401 shard 12 verified; checksum 410413\r\ncapture 410401 shard 13 verified; checksum 410414\r\ncapture 410401 shard 14 verified; checksum 410415\r\ncapture 410401 shard 15 verified; checksum 410416\r\ncapture 410401 shard 16 verified; checksum 410417\r\ncapture 410401 shard 17 verified; checksum 410418\r\ncapture 410401 shard 18 verified; checksum 410419\r\ncapture 410401 shard 19 verified; checksum 410420\r\ncapture 410401 shard 20 verified; checksum 410421\r\ncapture 410401 shard 21 verified; checksum 410422\r\ncapture 410401 shard 22 verified; checksum 410423\r\n\ntest_holdout_python_case_410401 (__main__.CapturedQuality.test_holdout_python_case_410401) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410401 (__main__.CapturedQuality.test_holdout_python_case_410401)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-4-1\\holdout_python_4_1.py\", line 7, in test_holdout_python_case_410401\r\n    self.assertIs(['ribbon-410401'], ['ribbon-410401'], msg=\"case 410401: same object required; actual distinct lists containing ribbon-410401\")\r\nAssertionError: ['ribbon-410401'] is not ['ribbon-410401'] : case 410401: same object required; actual distinct lists containing ribbon-410401\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410401"
+        ],
+        "expectedFiles": [
+          "holdout_python_4_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410401: same object required; actual distinct lists containing ribbon-410401"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-subset-membership-1",
+      "family": "hold-captured-python-subset-membership",
+      "framework": "unittest",
+      "command": "python holdout_python_5_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410500 shard 0 verified; checksum 410500\r\ncapture 410500 shard 1 verified; checksum 410501\r\ncapture 410500 shard 2 verified; checksum 410502\r\ncapture 410500 shard 3 verified; checksum 410503\r\ncapture 410500 shard 4 verified; checksum 410504\r\ncapture 410500 shard 5 verified; checksum 410505\r\ncapture 410500 shard 6 verified; checksum 410506\r\ncapture 410500 shard 7 verified; checksum 410507\r\ncapture 410500 shard 8 verified; checksum 410508\r\ncapture 410500 shard 9 verified; checksum 410509\r\ncapture 410500 shard 10 verified; checksum 410510\r\ncapture 410500 shard 11 verified; checksum 410511\r\ncapture 410500 shard 12 verified; checksum 410512\r\ncapture 410500 shard 13 verified; checksum 410513\r\ncapture 410500 shard 14 verified; checksum 410514\r\ncapture 410500 shard 15 verified; checksum 410515\r\ncapture 410500 shard 16 verified; checksum 410516\r\ncapture 410500 shard 17 verified; checksum 410517\r\ncapture 410500 shard 18 verified; checksum 410518\r\n\ntest_holdout_python_case_410500 (__main__.CapturedQuality.test_holdout_python_case_410500) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410500 (__main__.CapturedQuality.test_holdout_python_case_410500)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-5-0\\holdout_python_5_0.py\", line 7, in test_holdout_python_case_410500\r\n    self.assertIn('cobalt-410500', {'pollen-410500': 7}, msg=\"case 410500: cobalt-410500 membership required; actual sole key pollen-410500\")\r\nAssertionError: 'cobalt-410500' not found in {'pollen-410500': 7} : case 410500: cobalt-410500 membership required; actual sole key pollen-410500\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410500"
+        ],
+        "expectedFiles": [
+          "holdout_python_5_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410500: cobalt-410500 membership required; actual sole key pollen-410500"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-subset-membership-2",
+      "family": "hold-captured-python-subset-membership",
+      "framework": "unittest",
+      "command": "python holdout_python_5_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410501 shard 0 verified; checksum 410501\r\ncapture 410501 shard 1 verified; checksum 410502\r\ncapture 410501 shard 2 verified; checksum 410503\r\ncapture 410501 shard 3 verified; checksum 410504\r\ncapture 410501 shard 4 verified; checksum 410505\r\ncapture 410501 shard 5 verified; checksum 410506\r\ncapture 410501 shard 6 verified; checksum 410507\r\ncapture 410501 shard 7 verified; checksum 410508\r\ncapture 410501 shard 8 verified; checksum 410509\r\ncapture 410501 shard 9 verified; checksum 410510\r\ncapture 410501 shard 10 verified; checksum 410511\r\ncapture 410501 shard 11 verified; checksum 410512\r\ncapture 410501 shard 12 verified; checksum 410513\r\ncapture 410501 shard 13 verified; checksum 410514\r\ncapture 410501 shard 14 verified; checksum 410515\r\ncapture 410501 shard 15 verified; checksum 410516\r\ncapture 410501 shard 16 verified; checksum 410517\r\ncapture 410501 shard 17 verified; checksum 410518\r\ncapture 410501 shard 18 verified; checksum 410519\r\ncapture 410501 shard 19 verified; checksum 410520\r\ncapture 410501 shard 20 verified; checksum 410521\r\ncapture 410501 shard 21 verified; checksum 410522\r\ncapture 410501 shard 22 verified; checksum 410523\r\n\ntest_holdout_python_case_410501 (__main__.CapturedQuality.test_holdout_python_case_410501) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410501 (__main__.CapturedQuality.test_holdout_python_case_410501)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-5-1\\holdout_python_5_1.py\", line 7, in test_holdout_python_case_410501\r\n    self.assertIn('cobalt-410501', {'pollen-410501': 7}, msg=\"case 410501: cobalt-410501 membership required; actual sole key pollen-410501\")\r\nAssertionError: 'cobalt-410501' not found in {'pollen-410501': 7} : case 410501: cobalt-410501 membership required; actual sole key pollen-410501\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410501"
+        ],
+        "expectedFiles": [
+          "holdout_python_5_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410501: cobalt-410501 membership required; actual sole key pollen-410501"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-ordering-1",
+      "family": "hold-captured-python-ordering",
+      "framework": "unittest",
+      "command": "python holdout_python_6_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410600 shard 0 verified; checksum 410600\r\ncapture 410600 shard 1 verified; checksum 410601\r\ncapture 410600 shard 2 verified; checksum 410602\r\ncapture 410600 shard 3 verified; checksum 410603\r\ncapture 410600 shard 4 verified; checksum 410604\r\ncapture 410600 shard 5 verified; checksum 410605\r\ncapture 410600 shard 6 verified; checksum 410606\r\ncapture 410600 shard 7 verified; checksum 410607\r\ncapture 410600 shard 8 verified; checksum 410608\r\ncapture 410600 shard 9 verified; checksum 410609\r\ncapture 410600 shard 10 verified; checksum 410610\r\ncapture 410600 shard 11 verified; checksum 410611\r\ncapture 410600 shard 12 verified; checksum 410612\r\ncapture 410600 shard 13 verified; checksum 410613\r\ncapture 410600 shard 14 verified; checksum 410614\r\ncapture 410600 shard 15 verified; checksum 410615\r\ncapture 410600 shard 16 verified; checksum 410616\r\ncapture 410600 shard 17 verified; checksum 410617\r\ncapture 410600 shard 18 verified; checksum 410618\r\n\ntest_holdout_python_case_410600 (__main__.CapturedQuality.test_holdout_python_case_410600) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410600 (__main__.CapturedQuality.test_holdout_python_case_410600)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-6-0\\holdout_python_6_0.py\", line 7, in test_holdout_python_case_410600\r\n    self.assertLess(410608, 410600, msg=\"case 410600: value less than 410600 required; actual 410608\")\r\nAssertionError: 410608 not less than 410600 : case 410600: value less than 410600 required; actual 410608\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410600"
+        ],
+        "expectedFiles": [
+          "holdout_python_6_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410600: value less than 410600 required; actual 410608"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-ordering-2",
+      "family": "hold-captured-python-ordering",
+      "framework": "unittest",
+      "command": "python holdout_python_6_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410601 shard 0 verified; checksum 410601\r\ncapture 410601 shard 1 verified; checksum 410602\r\ncapture 410601 shard 2 verified; checksum 410603\r\ncapture 410601 shard 3 verified; checksum 410604\r\ncapture 410601 shard 4 verified; checksum 410605\r\ncapture 410601 shard 5 verified; checksum 410606\r\ncapture 410601 shard 6 verified; checksum 410607\r\ncapture 410601 shard 7 verified; checksum 410608\r\ncapture 410601 shard 8 verified; checksum 410609\r\ncapture 410601 shard 9 verified; checksum 410610\r\ncapture 410601 shard 10 verified; checksum 410611\r\ncapture 410601 shard 11 verified; checksum 410612\r\ncapture 410601 shard 12 verified; checksum 410613\r\ncapture 410601 shard 13 verified; checksum 410614\r\ncapture 410601 shard 14 verified; checksum 410615\r\ncapture 410601 shard 15 verified; checksum 410616\r\ncapture 410601 shard 16 verified; checksum 410617\r\ncapture 410601 shard 17 verified; checksum 410618\r\ncapture 410601 shard 18 verified; checksum 410619\r\ncapture 410601 shard 19 verified; checksum 410620\r\ncapture 410601 shard 20 verified; checksum 410621\r\ncapture 410601 shard 21 verified; checksum 410622\r\ncapture 410601 shard 22 verified; checksum 410623\r\n\ntest_holdout_python_case_410601 (__main__.CapturedQuality.test_holdout_python_case_410601) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410601 (__main__.CapturedQuality.test_holdout_python_case_410601)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-6-1\\holdout_python_6_1.py\", line 7, in test_holdout_python_case_410601\r\n    self.assertLess(410609, 410601, msg=\"case 410601: value less than 410601 required; actual 410609\")\r\nAssertionError: 410609 not less than 410601 : case 410601: value less than 410601 required; actual 410609\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410601"
+        ],
+        "expectedFiles": [
+          "holdout_python_6_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410601: value less than 410601 required; actual 410609"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-dictionary-diff-1",
+      "family": "hold-captured-python-dictionary-diff",
+      "framework": "unittest",
+      "command": "python holdout_python_7_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410700 shard 0 verified; checksum 410700\r\ncapture 410700 shard 1 verified; checksum 410701\r\ncapture 410700 shard 2 verified; checksum 410702\r\ncapture 410700 shard 3 verified; checksum 410703\r\ncapture 410700 shard 4 verified; checksum 410704\r\ncapture 410700 shard 5 verified; checksum 410705\r\ncapture 410700 shard 6 verified; checksum 410706\r\ncapture 410700 shard 7 verified; checksum 410707\r\ncapture 410700 shard 8 verified; checksum 410708\r\ncapture 410700 shard 9 verified; checksum 410709\r\ncapture 410700 shard 10 verified; checksum 410710\r\ncapture 410700 shard 11 verified; checksum 410711\r\ncapture 410700 shard 12 verified; checksum 410712\r\ncapture 410700 shard 13 verified; checksum 410713\r\ncapture 410700 shard 14 verified; checksum 410714\r\ncapture 410700 shard 15 verified; checksum 410715\r\ncapture 410700 shard 16 verified; checksum 410716\r\ncapture 410700 shard 17 verified; checksum 410717\r\ncapture 410700 shard 18 verified; checksum 410718\r\n\ntest_holdout_python_case_410700 (__main__.CapturedQuality.test_holdout_python_case_410700) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410700 (__main__.CapturedQuality.test_holdout_python_case_410700)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-7-0\\holdout_python_7_0.py\", line 7, in test_holdout_python_case_410700\r\n    self.assertDictEqual({'capsule': 410700, 'nested': {'x': 'orchard'}}, {'capsule': 410709, 'nested': {'x': 'quartz'}}, msg=\"case 410700: dict required capsule 410709 nested quartz; actual capsule 410700 nested orchard\")\r\nAssertionError: {'capsule': 410700, 'nested': {'x': 'orchard'}} != {'capsule': 410709, 'nested': {'x': 'quartz'}}\r\n- {'capsule': 410700, 'nested': {'x': 'orchard'}}\r\n?                  ^                   ^^^^  ^\r\n\r\n+ {'capsule': 410709, 'nested': {'x': 'quartz'}}\r\n?                  ^                   ^^  ^^\r\n : case 410700: dict required capsule 410709 nested quartz; actual capsule 410700 nested orchard\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410700"
+        ],
+        "expectedFiles": [
+          "holdout_python_7_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410700: dict required capsule 410709 nested quartz; actual capsule 410700 nested orchard"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-dictionary-diff-2",
+      "family": "hold-captured-python-dictionary-diff",
+      "framework": "unittest",
+      "command": "python holdout_python_7_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410701 shard 0 verified; checksum 410701\r\ncapture 410701 shard 1 verified; checksum 410702\r\ncapture 410701 shard 2 verified; checksum 410703\r\ncapture 410701 shard 3 verified; checksum 410704\r\ncapture 410701 shard 4 verified; checksum 410705\r\ncapture 410701 shard 5 verified; checksum 410706\r\ncapture 410701 shard 6 verified; checksum 410707\r\ncapture 410701 shard 7 verified; checksum 410708\r\ncapture 410701 shard 8 verified; checksum 410709\r\ncapture 410701 shard 9 verified; checksum 410710\r\ncapture 410701 shard 10 verified; checksum 410711\r\ncapture 410701 shard 11 verified; checksum 410712\r\ncapture 410701 shard 12 verified; checksum 410713\r\ncapture 410701 shard 13 verified; checksum 410714\r\ncapture 410701 shard 14 verified; checksum 410715\r\ncapture 410701 shard 15 verified; checksum 410716\r\ncapture 410701 shard 16 verified; checksum 410717\r\ncapture 410701 shard 17 verified; checksum 410718\r\ncapture 410701 shard 18 verified; checksum 410719\r\ncapture 410701 shard 19 verified; checksum 410720\r\ncapture 410701 shard 20 verified; checksum 410721\r\ncapture 410701 shard 21 verified; checksum 410722\r\ncapture 410701 shard 22 verified; checksum 410723\r\n\ntest_holdout_python_case_410701 (__main__.CapturedQuality.test_holdout_python_case_410701) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410701 (__main__.CapturedQuality.test_holdout_python_case_410701)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-7-1\\holdout_python_7_1.py\", line 7, in test_holdout_python_case_410701\r\n    self.assertDictEqual({'capsule': 410701, 'nested': {'x': 'orchard'}}, {'capsule': 410710, 'nested': {'x': 'quartz'}}, msg=\"case 410701: dict required capsule 410710 nested quartz; actual capsule 410701 nested orchard\")\r\nAssertionError: {'capsule': 410701, 'nested': {'x': 'orchard'}} != {'capsule': 410710, 'nested': {'x': 'quartz'}}\r\n- {'capsule': 410701, 'nested': {'x': 'orchard'}}\r\n?                  -                   ^^^^  ^\r\n\r\n+ {'capsule': 410710, 'nested': {'x': 'quartz'}}\r\n?                 +                    ^^  ^^\r\n : case 410701: dict required capsule 410710 nested quartz; actual capsule 410701 nested orchard\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410701"
+        ],
+        "expectedFiles": [
+          "holdout_python_7_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410701: dict required capsule 410710 nested quartz; actual capsule 410701 nested orchard"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-tuple-diff-1",
+      "family": "hold-captured-python-tuple-diff",
+      "framework": "unittest",
+      "command": "python holdout_python_8_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410800 shard 0 verified; checksum 410800\r\ncapture 410800 shard 1 verified; checksum 410801\r\ncapture 410800 shard 2 verified; checksum 410802\r\ncapture 410800 shard 3 verified; checksum 410803\r\ncapture 410800 shard 4 verified; checksum 410804\r\ncapture 410800 shard 5 verified; checksum 410805\r\ncapture 410800 shard 6 verified; checksum 410806\r\ncapture 410800 shard 7 verified; checksum 410807\r\ncapture 410800 shard 8 verified; checksum 410808\r\ncapture 410800 shard 9 verified; checksum 410809\r\ncapture 410800 shard 10 verified; checksum 410810\r\ncapture 410800 shard 11 verified; checksum 410811\r\ncapture 410800 shard 12 verified; checksum 410812\r\ncapture 410800 shard 13 verified; checksum 410813\r\ncapture 410800 shard 14 verified; checksum 410814\r\ncapture 410800 shard 15 verified; checksum 410815\r\ncapture 410800 shard 16 verified; checksum 410816\r\ncapture 410800 shard 17 verified; checksum 410817\r\ncapture 410800 shard 18 verified; checksum 410818\r\n\ntest_holdout_python_case_410800 (__main__.CapturedQuality.test_holdout_python_case_410800) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410800 (__main__.CapturedQuality.test_holdout_python_case_410800)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-8-0\\holdout_python_8_0.py\", line 7, in test_holdout_python_case_410800\r\n    self.assertTupleEqual(('prism-410800', 4), ('ribbon-410800', 7), msg=\"case 410800: tuple required ribbon-410800 and 7; actual prism-410800 and 4\")\r\nAssertionError: Tuples differ: ('prism-410800', 4) != ('ribbon-410800', 7)\r\n\r\nFirst differing element 0:\r\n'prism-410800'\r\n'ribbon-410800'\r\n\r\n- ('prism-410800', 4)\r\n?   -  ^^          ^\r\n\r\n+ ('ribbon-410800', 7)\r\n?     ^^^^          ^\r\n : case 410800: tuple required ribbon-410800 and 7; actual prism-410800 and 4\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410800"
+        ],
+        "expectedFiles": [
+          "holdout_python_8_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410800: tuple required ribbon-410800 and 7; actual prism-410800 and 4"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-tuple-diff-2",
+      "family": "hold-captured-python-tuple-diff",
+      "framework": "unittest",
+      "command": "python holdout_python_8_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410801 shard 0 verified; checksum 410801\r\ncapture 410801 shard 1 verified; checksum 410802\r\ncapture 410801 shard 2 verified; checksum 410803\r\ncapture 410801 shard 3 verified; checksum 410804\r\ncapture 410801 shard 4 verified; checksum 410805\r\ncapture 410801 shard 5 verified; checksum 410806\r\ncapture 410801 shard 6 verified; checksum 410807\r\ncapture 410801 shard 7 verified; checksum 410808\r\ncapture 410801 shard 8 verified; checksum 410809\r\ncapture 410801 shard 9 verified; checksum 410810\r\ncapture 410801 shard 10 verified; checksum 410811\r\ncapture 410801 shard 11 verified; checksum 410812\r\ncapture 410801 shard 12 verified; checksum 410813\r\ncapture 410801 shard 13 verified; checksum 410814\r\ncapture 410801 shard 14 verified; checksum 410815\r\ncapture 410801 shard 15 verified; checksum 410816\r\ncapture 410801 shard 16 verified; checksum 410817\r\ncapture 410801 shard 17 verified; checksum 410818\r\ncapture 410801 shard 18 verified; checksum 410819\r\ncapture 410801 shard 19 verified; checksum 410820\r\ncapture 410801 shard 20 verified; checksum 410821\r\ncapture 410801 shard 21 verified; checksum 410822\r\ncapture 410801 shard 22 verified; checksum 410823\r\n\ntest_holdout_python_case_410801 (__main__.CapturedQuality.test_holdout_python_case_410801) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410801 (__main__.CapturedQuality.test_holdout_python_case_410801)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-8-1\\holdout_python_8_1.py\", line 7, in test_holdout_python_case_410801\r\n    self.assertTupleEqual(('prism-410801', 4), ('ribbon-410801', 7), msg=\"case 410801: tuple required ribbon-410801 and 7; actual prism-410801 and 4\")\r\nAssertionError: Tuples differ: ('prism-410801', 4) != ('ribbon-410801', 7)\r\n\r\nFirst differing element 0:\r\n'prism-410801'\r\n'ribbon-410801'\r\n\r\n- ('prism-410801', 4)\r\n?   -  ^^          ^\r\n\r\n+ ('ribbon-410801', 7)\r\n?     ^^^^          ^\r\n : case 410801: tuple required ribbon-410801 and 7; actual prism-410801 and 4\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410801"
+        ],
+        "expectedFiles": [
+          "holdout_python_8_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410801: tuple required ribbon-410801 and 7; actual prism-410801 and 4"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-unexpected-equality-1",
+      "family": "hold-captured-python-unexpected-equality",
+      "framework": "unittest",
+      "command": "python holdout_python_9_0.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410900 shard 0 verified; checksum 410900\r\ncapture 410900 shard 1 verified; checksum 410901\r\ncapture 410900 shard 2 verified; checksum 410902\r\ncapture 410900 shard 3 verified; checksum 410903\r\ncapture 410900 shard 4 verified; checksum 410904\r\ncapture 410900 shard 5 verified; checksum 410905\r\ncapture 410900 shard 6 verified; checksum 410906\r\ncapture 410900 shard 7 verified; checksum 410907\r\ncapture 410900 shard 8 verified; checksum 410908\r\ncapture 410900 shard 9 verified; checksum 410909\r\ncapture 410900 shard 10 verified; checksum 410910\r\ncapture 410900 shard 11 verified; checksum 410911\r\ncapture 410900 shard 12 verified; checksum 410912\r\ncapture 410900 shard 13 verified; checksum 410913\r\ncapture 410900 shard 14 verified; checksum 410914\r\ncapture 410900 shard 15 verified; checksum 410915\r\ncapture 410900 shard 16 verified; checksum 410916\r\ncapture 410900 shard 17 verified; checksum 410917\r\ncapture 410900 shard 18 verified; checksum 410918\r\n\ntest_holdout_python_case_410900 (__main__.CapturedQuality.test_holdout_python_case_410900) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410900 (__main__.CapturedQuality.test_holdout_python_case_410900)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-9-0\\holdout_python_9_0.py\", line 7, in test_holdout_python_case_410900\r\n    self.assertNotEqual('tundra-410900', 'tundra-410900', msg=\"case 410900: distinct strings required; actual both strings tundra-410900\")\r\nAssertionError: 'tundra-410900' == 'tundra-410900' : case 410900: distinct strings required; actual both strings tundra-410900\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410900"
+        ],
+        "expectedFiles": [
+          "holdout_python_9_0.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410900: distinct strings required; actual both strings tundra-410900"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    },
+    {
+      "id": "holdout-test-hold-captured-python-unexpected-equality-2",
+      "family": "hold-captured-python-unexpected-equality",
+      "framework": "unittest",
+      "command": "python holdout_python_9_1.py",
+      "exitCode": 1,
+      "rawOutput": "capture 410901 shard 0 verified; checksum 410901\r\ncapture 410901 shard 1 verified; checksum 410902\r\ncapture 410901 shard 2 verified; checksum 410903\r\ncapture 410901 shard 3 verified; checksum 410904\r\ncapture 410901 shard 4 verified; checksum 410905\r\ncapture 410901 shard 5 verified; checksum 410906\r\ncapture 410901 shard 6 verified; checksum 410907\r\ncapture 410901 shard 7 verified; checksum 410908\r\ncapture 410901 shard 8 verified; checksum 410909\r\ncapture 410901 shard 9 verified; checksum 410910\r\ncapture 410901 shard 10 verified; checksum 410911\r\ncapture 410901 shard 11 verified; checksum 410912\r\ncapture 410901 shard 12 verified; checksum 410913\r\ncapture 410901 shard 13 verified; checksum 410914\r\ncapture 410901 shard 14 verified; checksum 410915\r\ncapture 410901 shard 15 verified; checksum 410916\r\ncapture 410901 shard 16 verified; checksum 410917\r\ncapture 410901 shard 17 verified; checksum 410918\r\ncapture 410901 shard 18 verified; checksum 410919\r\ncapture 410901 shard 19 verified; checksum 410920\r\ncapture 410901 shard 20 verified; checksum 410921\r\ncapture 410901 shard 21 verified; checksum 410922\r\ncapture 410901 shard 22 verified; checksum 410923\r\n\ntest_holdout_python_case_410901 (__main__.CapturedQuality.test_holdout_python_case_410901) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_holdout_python_case_410901 (__main__.CapturedQuality.test_holdout_python_case_410901)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"/captured/holdout/python-9-1\\holdout_python_9_1.py\", line 7, in test_holdout_python_case_410901\r\n    self.assertNotEqual('tundra-410901', 'tundra-410901', msg=\"case 410901: distinct strings required; actual both strings tundra-410901\")\r\nAssertionError: 'tundra-410901' == 'tundra-410901' : case 410901: distinct strings required; actual both strings tundra-410901\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.001s\r\n\r\nFAILED (failures=1)",
+      "gold": {
+        "expectedTests": [
+          "test_holdout_python_case_410901"
+        ],
+        "expectedFiles": [
+          "holdout_python_9_1.py",
+          "line 7"
+        ],
+        "expectedAssertions": [
+          "case 410901: distinct strings required; actual both strings tundra-410901"
+        ],
+        "forbiddenStrings": [
+          "node:internal/test_runner",
+          "site-packages/"
+        ]
+      }
+    }
+  ],
+  "provenance": [
+    {
+      "taskId": "holdout-test-hold-captured-node-regex-1",
+      "sourceKind": "node",
+      "scenario": 0,
+      "repetition": 0,
+      "basename": "holdout_node_0_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410000\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410000 shard', i, 'verified; checksum', 410000 + i);\n  assert.match('capsule-410000', /^orchard-/, \"case 410000: regex required /^orchard-/; actual capsule-410000\");\n});\n",
+      "sourceSha256": "efe6117a5018e0129adf8ae677a0660750c76f8a98b54f38270ead960d11ccd6",
+      "outputSha256": "07b2de4ab6aa2a032bf18b2998607605afd2679f4e15e20342064f77889ff746",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_0_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 192,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-regex-2",
+      "sourceKind": "node",
+      "scenario": 0,
+      "repetition": 1,
+      "basename": "holdout_node_0_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410001\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410001 shard', i, 'verified; checksum', 410001 + i);\n  assert.match('capsule-410001', /^orchard-/, \"case 410001: regex required /^orchard-/; actual capsule-410001\");\n});\n",
+      "sourceSha256": "e4a532f02f401f091bca5ea7a16650c290d10156fcf64d97c2251fb06085cd3e",
+      "outputSha256": "9d86c2009a988fbe81a29d850a536ef014e864e672a535563366d19aeb537122",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_0_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 183,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-negative-regex-1",
+      "sourceKind": "node",
+      "scenario": 1,
+      "repetition": 0,
+      "basename": "holdout_node_1_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410100\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410100 shard', i, 'verified; checksum', 410100 + i);\n  assert.doesNotMatch('quartz-410100', /quartz/, \"case 410100: regex /quartz/ forbidden; actual quartz-410100 matched\");\n});\n",
+      "sourceSha256": "82af2e1133d6238e0a8e5e4cecc52fa5786036d77eac5497f0083047ea8a273f",
+      "outputSha256": "bd029e9a6351e3ec0e8d922a76893f1c27617b38c347a9ff83ca6a4208adae64",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_1_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 188,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-negative-regex-2",
+      "sourceKind": "node",
+      "scenario": 1,
+      "repetition": 1,
+      "basename": "holdout_node_1_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410101\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410101 shard', i, 'verified; checksum', 410101 + i);\n  assert.doesNotMatch('quartz-410101', /quartz/, \"case 410101: regex /quartz/ forbidden; actual quartz-410101 matched\");\n});\n",
+      "sourceSha256": "71c182eaf2e444a1b1d1445af03326c83ce6feea7817345825a857a5115365bc",
+      "outputSha256": "cbbb330d695bb00b5b548ad32a576ea50c3d68bdc601bfdfd3dd3dd1f410e3af",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_1_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 182,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-missing-throw-1",
+      "sourceKind": "node",
+      "scenario": 2,
+      "repetition": 0,
+      "basename": "holdout_node_2_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410200\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410200 shard', i, 'verified; checksum', 410200 + i);\n  assert.throws(() => 'prism-410200', TypeError, \"case 410200: TypeError required; actual callback returned prism-410200\");\n});\n",
+      "sourceSha256": "fa5c89b2947ba0e63907845a00c7b47babc7bc71cf33ba73e2241edab1e3eec2",
+      "outputSha256": "8a570fd084bd4556508a8cf6e51ed0f187336cfbabbd8aedb9bc7218a9681d88",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_2_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 184,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-missing-throw-2",
+      "sourceKind": "node",
+      "scenario": 2,
+      "repetition": 1,
+      "basename": "holdout_node_2_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410201\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410201 shard', i, 'verified; checksum', 410201 + i);\n  assert.throws(() => 'prism-410201', TypeError, \"case 410201: TypeError required; actual callback returned prism-410201\");\n});\n",
+      "sourceSha256": "e043849c736069ee8aae8d67825152b1e8b69db25d961cea38c3830f325e7681",
+      "outputSha256": "27675be619c2fe1f3e8a99138d6992c4f2740b891b4c1ac57a3ceb590f77b497",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_2_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 196,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-wrong-error-class-1",
+      "sourceKind": "node",
+      "scenario": 3,
+      "repetition": 0,
+      "basename": "holdout_node_3_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410300\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410300 shard', i, 'verified; checksum', 410300 + i);\n  assert.throws(() => { throw new RangeError('ribbon-410300'); }, TypeError, \"case 410300: TypeError required; actual RangeError ribbon-410300\");\n});\n",
+      "sourceSha256": "0c13d84cbe1a84b500ed76bd6fa9935afe9620a011eab5f258d79faee3c46c33",
+      "outputSha256": "cb682772fbe275ab3edb66748829fe171fb4fcc5ba921d63605c39bf50a572a7",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_3_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 203,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-wrong-error-class-2",
+      "sourceKind": "node",
+      "scenario": 3,
+      "repetition": 1,
+      "basename": "holdout_node_3_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410301\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410301 shard', i, 'verified; checksum', 410301 + i);\n  assert.throws(() => { throw new RangeError('ribbon-410301'); }, TypeError, \"case 410301: TypeError required; actual RangeError ribbon-410301\");\n});\n",
+      "sourceSha256": "27935ba832bd7f5bcff0ff2a71ffeb827fbb38d76c84ec9cd00e0a8468f0fddb",
+      "outputSha256": "a4ae25915be3808b35069ea939759628c3b9f357473044481bab43f2992dfbef",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_3_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 186,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-rejection-pattern-1",
+      "sourceKind": "node",
+      "scenario": 4,
+      "repetition": 0,
+      "basename": "holdout_node_4_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410400\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410400 shard', i, 'verified; checksum', 410400 + i);\n  await assert.rejects(Promise.reject(new Error('cobalt-410400')), /pollen/, \"case 410400: rejection matching /pollen/ required; actual Error cobalt-410400\");\n});\n",
+      "sourceSha256": "1102f9a1edb3a12abe50075af53d1757eda51951b28e04cc097f99cde0b096a2",
+      "outputSha256": "7fa3123efeb77d5af3fba69eda6944c3ad38d5c272dc1a29ea674c3c81ed923a",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_4_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 199,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-rejection-pattern-2",
+      "sourceKind": "node",
+      "scenario": 4,
+      "repetition": 1,
+      "basename": "holdout_node_4_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410401\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410401 shard', i, 'verified; checksum', 410401 + i);\n  await assert.rejects(Promise.reject(new Error('cobalt-410401')), /pollen/, \"case 410401: rejection matching /pollen/ required; actual Error cobalt-410401\");\n});\n",
+      "sourceSha256": "f18d5f27ea123462efbb0816968bde4134abf7f132e12fa594246a4643821fda",
+      "outputSha256": "719a5fec3145100a59b13c0645ef923d612c27bf08ec1c9c81c2197890be436b",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_4_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 202,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-unexpected-rejection-1",
+      "sourceKind": "node",
+      "scenario": 5,
+      "repetition": 0,
+      "basename": "holdout_node_5_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410500\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410500 shard', i, 'verified; checksum', 410500 + i);\n  await assert.doesNotReject(Promise.reject(new Error('tundra-410500')), \"case 410500: resolved promise required; actual rejected Error tundra-410500\");\n});\n",
+      "sourceSha256": "fec931250234bd32dc766e989c04daaec63616950fb675614870faf26e660db2",
+      "outputSha256": "c5075bcfa4372175cd73964266c7ec4004ba2dac1daf4a4fb5e071b3fc2a39e3",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_5_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 184,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-unexpected-rejection-2",
+      "sourceKind": "node",
+      "scenario": 5,
+      "repetition": 1,
+      "basename": "holdout_node_5_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410501\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410501 shard', i, 'verified; checksum', 410501 + i);\n  await assert.doesNotReject(Promise.reject(new Error('tundra-410501')), \"case 410501: resolved promise required; actual rejected Error tundra-410501\");\n});\n",
+      "sourceSha256": "8c8c27fd1a7a809d1afb72751594ea13d7711c468e12fc8b1a2e47d640388923",
+      "outputSha256": "d1e7735a7e22accebaa29768f7fb7132427ac0a876f2d45760013f6cefdc3953",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_5_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 206,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-map-deep-equality-1",
+      "sourceKind": "node",
+      "scenario": 6,
+      "repetition": 0,
+      "basename": "holdout_node_6_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410600\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410600 shard', i, 'verified; checksum', 410600 + i);\n  assert.deepStrictEqual(new Map([['capsule', 410600]]), new Map([['capsule', 410607]]), \"case 410600: Map capsule required 410607; actual 410600\");\n});\n",
+      "sourceSha256": "6ff919c8d17dc1055e00148b3a2432c9211d8ee5e38aa75ebe64a09031b3d949",
+      "outputSha256": "25f2eb54ddbda63555994af22936a33174253eb9d3a8439b8c3e57bea8ed2f9d",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_6_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 204,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-map-deep-equality-2",
+      "sourceKind": "node",
+      "scenario": 6,
+      "repetition": 1,
+      "basename": "holdout_node_6_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410601\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410601 shard', i, 'verified; checksum', 410601 + i);\n  assert.deepStrictEqual(new Map([['capsule', 410601]]), new Map([['capsule', 410608]]), \"case 410601: Map capsule required 410608; actual 410601\");\n});\n",
+      "sourceSha256": "369634aab3e678e90be39f982dedfb3c0adb74649a0034489185ead9885f82d8",
+      "outputSha256": "2f4635c9d34867fb4dad4e045299389ce33fad0341b0dc8404027fdde8b278f0",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_6_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 208,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-set-deep-equality-1",
+      "sourceKind": "node",
+      "scenario": 7,
+      "repetition": 0,
+      "basename": "holdout_node_7_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410700\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410700 shard', i, 'verified; checksum', 410700 + i);\n  assert.deepStrictEqual(new Set(['orchard-410700']), new Set(['quartz-410700']), \"case 410700: Set required quartz-410700; actual orchard-410700\");\n});\n",
+      "sourceSha256": "e366814b2d5ffe1c1585e9e861870a92396c20b46e33f42840e741985ace004b",
+      "outputSha256": "d143e456893a6994935e63a2e32dc8c9c10c6e24c2c4af7b4f8eae180974f473",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_7_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 186,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-set-deep-equality-2",
+      "sourceKind": "node",
+      "scenario": 7,
+      "repetition": 1,
+      "basename": "holdout_node_7_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410701\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410701 shard', i, 'verified; checksum', 410701 + i);\n  assert.deepStrictEqual(new Set(['orchard-410701']), new Set(['quartz-410701']), \"case 410701: Set required quartz-410701; actual orchard-410701\");\n});\n",
+      "sourceSha256": "8ce70813ccd61c13e8ba96a1830cb3506dedde6cdda395b0000d709cc830873a",
+      "outputSha256": "497f25c7c7d5f9047504ba93c6e790e5b48d99944cc564d2fa527a68a5876f48",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_7_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 188,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-typed-buffer-equality-1",
+      "sourceKind": "node",
+      "scenario": 8,
+      "repetition": 0,
+      "basename": "holdout_node_8_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410800\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410800 shard', i, 'verified; checksum', 410800 + i);\n  assert.deepStrictEqual(new Uint8Array([48, 4]), new Uint8Array([49, 4]), \"case 410800: Uint8Array required [49,4]; actual [48,4]\");\n});\n",
+      "sourceSha256": "a326c586b1a545d747c2990a4491849d903f2627eda6a7296cef7c305aeb4c54",
+      "outputSha256": "3c71c614a4ea083813c5df661965c58bf9a082299daab31474ea8a60b9d7c73e",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_8_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 188,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-typed-buffer-equality-2",
+      "sourceKind": "node",
+      "scenario": 8,
+      "repetition": 1,
+      "basename": "holdout_node_8_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410801\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410801 shard', i, 'verified; checksum', 410801 + i);\n  assert.deepStrictEqual(new Uint8Array([49, 4]), new Uint8Array([50, 4]), \"case 410801: Uint8Array required [50,4]; actual [49,4]\");\n});\n",
+      "sourceSha256": "b634c9b0a4f2e2ce03a93da9c3a751e47563e7feff9b235569de817027f45523",
+      "outputSha256": "d22e34e6462ae9cd507d1362803fee68f6153db2e664162f0951f59a2909f782",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_8_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 173,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-nested-error-cause-1",
+      "sourceKind": "node",
+      "scenario": 9,
+      "repetition": 0,
+      "basename": "holdout_node_9_0.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410900\", async () => {\n  for (let i = 0; i < 19; i++) console.log('capture 410900 shard', i, 'verified; checksum', 410900 + i);\n  assert.deepStrictEqual({ metadata: { code: 'prism-410900', retries: 2 } }, { metadata: { code: 'ribbon-410900', retries: 3 } }, \"case 410900: metadata required ribbon-410900 retries 3; actual prism-410900 retries 2\");\n});\n",
+      "sourceSha256": "f0f56a6abf5c957c8dac0cbd97f0c0eccae294a03f5a0b7f755b9053d0982b6f",
+      "outputSha256": "f11522155edff2c5bec18413026b6327ec7fd048ccf1c080017aeb5da4083358",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_9_0.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 180,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-node-nested-error-cause-2",
+      "sourceKind": "node",
+      "scenario": 9,
+      "repetition": 1,
+      "basename": "holdout_node_9_1.mjs",
+      "source": "import test from 'node:test';\nimport assert from 'node:assert/strict';\n\ntest(\"holdout_node_case_410901\", async () => {\n  for (let i = 0; i < 23; i++) console.log('capture 410901 shard', i, 'verified; checksum', 410901 + i);\n  assert.deepStrictEqual({ metadata: { code: 'prism-410901', retries: 2 } }, { metadata: { code: 'ribbon-410901', retries: 3 } }, \"case 410901: metadata required ribbon-410901 retries 3; actual prism-410901 retries 2\");\n});\n",
+      "sourceSha256": "6e9ffba916c0fa94432f527f981b487c000a65df681261d6d7e7580601de1ce4",
+      "outputSha256": "d0bbba5ae9cba2f51a4f280070fe05ab4d1aa081fb51f1ade0630cace5ed2447",
+      "executable": "node",
+      "argv": [
+        "--test",
+        "--test-reporter=spec",
+        "holdout_node_9_1.mjs"
+      ],
+      "runtimeVersion": "v25.9.0",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 193,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-regex-mismatch-1",
+      "sourceKind": "python",
+      "scenario": 0,
+      "repetition": 0,
+      "basename": "holdout_python_0_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410000(self):\n        for shard in range(19):\n            print('capture 410000 shard', shard, 'verified; checksum', 410000 + shard)\n        self.assertRegex('capsule-410000', r'^orchard-', msg=\"case 410000: regex required ^orchard-; actual capsule-410000\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "2ab1a429750cd8ba82a3ff2e3ef988c20c76750f304f3370edd8d229badd572c",
+      "outputSha256": "f547cc180ca535898e5eb833b4a1a30cd11f8e7902c7a9ff531cdcb48368d99b",
+      "executable": "python",
+      "argv": [
+        "holdout_python_0_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 179,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-regex-mismatch-2",
+      "sourceKind": "python",
+      "scenario": 0,
+      "repetition": 1,
+      "basename": "holdout_python_0_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410001(self):\n        for shard in range(23):\n            print('capture 410001 shard', shard, 'verified; checksum', 410001 + shard)\n        self.assertRegex('capsule-410001', r'^orchard-', msg=\"case 410001: regex required ^orchard-; actual capsule-410001\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "ec49f5b96bf505e3f8dc48e07dc321b9e0b92995c18eae1f99a90da9470b1cde",
+      "outputSha256": "9a355c1e55344c5b8f5838cc41c8dd5643ed092828daf0fa2075ae5a7797e37a",
+      "executable": "python",
+      "argv": [
+        "holdout_python_0_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 202,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-negative-regex-1",
+      "sourceKind": "python",
+      "scenario": 1,
+      "repetition": 0,
+      "basename": "holdout_python_1_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410100(self):\n        for shard in range(19):\n            print('capture 410100 shard', shard, 'verified; checksum', 410100 + shard)\n        self.assertNotRegex('quartz-410100', r'quartz', msg=\"case 410100: regex quartz forbidden; actual quartz-410100 matched\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "baf0742fd7ac6d856d471e79d51dbfe3b5164efbb253a37950ef059f5add41c9",
+      "outputSha256": "308b43675355da1d852ae6197fb98af1c91d102148b6e9ff6da31a69ec7ef1b7",
+      "executable": "python",
+      "argv": [
+        "holdout_python_1_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 126,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-negative-regex-2",
+      "sourceKind": "python",
+      "scenario": 1,
+      "repetition": 1,
+      "basename": "holdout_python_1_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410101(self):\n        for shard in range(23):\n            print('capture 410101 shard', shard, 'verified; checksum', 410101 + shard)\n        self.assertNotRegex('quartz-410101', r'quartz', msg=\"case 410101: regex quartz forbidden; actual quartz-410101 matched\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "c2bc0ee5a23d8c65597283f55f9279d8e7a5c5d7c14d76936b682452569f2391",
+      "outputSha256": "a83bbe6053bd766ff1de47a661f7dbcfa3deba7ab0646ce473033d74a13c274b",
+      "executable": "python",
+      "argv": [
+        "holdout_python_1_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 145,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-multiplicity-1",
+      "sourceKind": "python",
+      "scenario": 2,
+      "repetition": 0,
+      "basename": "holdout_python_2_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410200(self):\n        for shard in range(19):\n            print('capture 410200 shard', shard, 'verified; checksum', 410200 + shard)\n        self.assertCountEqual(['prism', 'prism', 410200], ['prism', 410200], msg=\"case 410200: one prism required; actual two prism values with 410200\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "bb86e44406ca934c3d403d3a191a8250a4c8719992ee1de1e3f7c06d8aa61885",
+      "outputSha256": "a28f42fe852765e657afb2603d6c265c12f92c2f0d1e04e5d8841dea893e9a8e",
+      "executable": "python",
+      "argv": [
+        "holdout_python_2_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 162,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-multiplicity-2",
+      "sourceKind": "python",
+      "scenario": 2,
+      "repetition": 1,
+      "basename": "holdout_python_2_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410201(self):\n        for shard in range(23):\n            print('capture 410201 shard', shard, 'verified; checksum', 410201 + shard)\n        self.assertCountEqual(['prism', 'prism', 410201], ['prism', 410201], msg=\"case 410201: one prism required; actual two prism values with 410201\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "a24d3bf82ed338d7319d7b31325787bf31cef3aafa67edd214721e535287564c",
+      "outputSha256": "82a578d271cf8329c0dfa45a2b92ab832a2c628d2f3473909ddadd74d2a24b0b",
+      "executable": "python",
+      "argv": [
+        "holdout_python_2_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 151,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-numeric-tolerance-1",
+      "sourceKind": "python",
+      "scenario": 3,
+      "repetition": 0,
+      "basename": "holdout_python_3_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410300(self):\n        for shard in range(19):\n            print('capture 410300 shard', shard, 'verified; checksum', 410300 + shard)\n        self.assertAlmostEqual(410300.12, 410300.29, places=2, msg=\"case 410300: two-place equality required 410300.29; actual 410300.12\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "f677885dbe0a40aca815d2228ad7a7e4f24ff7e945bd793407015033222817e6",
+      "outputSha256": "06c2146d1aebebabd6d34886a621a9710ad047997f7af9568719c317a0ae019e",
+      "executable": "python",
+      "argv": [
+        "holdout_python_3_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 534,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-numeric-tolerance-2",
+      "sourceKind": "python",
+      "scenario": 3,
+      "repetition": 1,
+      "basename": "holdout_python_3_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410301(self):\n        for shard in range(23):\n            print('capture 410301 shard', shard, 'verified; checksum', 410301 + shard)\n        self.assertAlmostEqual(410301.12, 410301.29, places=2, msg=\"case 410301: two-place equality required 410301.29; actual 410301.12\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "ff22d55959ea7a10d80d8a3e478cfd2195a385a6e1ec464983ca3fa91f094a08",
+      "outputSha256": "134eb02609da9d870820bf0e1869adfa5b09bee924dd37aa81a2fea10be51a2d",
+      "executable": "python",
+      "argv": [
+        "holdout_python_3_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 609,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-identity-1",
+      "sourceKind": "python",
+      "scenario": 4,
+      "repetition": 0,
+      "basename": "holdout_python_4_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410400(self):\n        for shard in range(19):\n            print('capture 410400 shard', shard, 'verified; checksum', 410400 + shard)\n        self.assertIs(['ribbon-410400'], ['ribbon-410400'], msg=\"case 410400: same object required; actual distinct lists containing ribbon-410400\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "08acaa88d1ebd7d51ba671fad4b0326d08ed09a51571a151f5d58213a3cd10a6",
+      "outputSha256": "4c65963b23d91dc33b18bf235b39a1edf843f6013cc72013fca3759e318eb35e",
+      "executable": "python",
+      "argv": [
+        "holdout_python_4_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 138,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-identity-2",
+      "sourceKind": "python",
+      "scenario": 4,
+      "repetition": 1,
+      "basename": "holdout_python_4_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410401(self):\n        for shard in range(23):\n            print('capture 410401 shard', shard, 'verified; checksum', 410401 + shard)\n        self.assertIs(['ribbon-410401'], ['ribbon-410401'], msg=\"case 410401: same object required; actual distinct lists containing ribbon-410401\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "b3eb83f153c60512c40686dfdbab390d91ba230b8daa7cb2af6cde09c0022a20",
+      "outputSha256": "afe52f57158912470ef2cb7f617435faad1e8dee5ba13b0d0b0b4c29c9a7626b",
+      "executable": "python",
+      "argv": [
+        "holdout_python_4_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 144,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-subset-membership-1",
+      "sourceKind": "python",
+      "scenario": 5,
+      "repetition": 0,
+      "basename": "holdout_python_5_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410500(self):\n        for shard in range(19):\n            print('capture 410500 shard', shard, 'verified; checksum', 410500 + shard)\n        self.assertIn('cobalt-410500', {'pollen-410500': 7}, msg=\"case 410500: cobalt-410500 membership required; actual sole key pollen-410500\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "162cc45aa70e2c9f93a6c427b6530cdc7f7d0cfaa563e72cbfb36a3d6bd42732",
+      "outputSha256": "dbc58db4596f872679946bd1ca385f1a671c0184f64a43fb7b196b983d360324",
+      "executable": "python",
+      "argv": [
+        "holdout_python_5_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 430,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-subset-membership-2",
+      "sourceKind": "python",
+      "scenario": 5,
+      "repetition": 1,
+      "basename": "holdout_python_5_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410501(self):\n        for shard in range(23):\n            print('capture 410501 shard', shard, 'verified; checksum', 410501 + shard)\n        self.assertIn('cobalt-410501', {'pollen-410501': 7}, msg=\"case 410501: cobalt-410501 membership required; actual sole key pollen-410501\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "a816e17d40b734f75101c7fe27317330f961f6700ac49fc7476632295f8be862",
+      "outputSha256": "d362595079d3a001295717ea4c2170ded5001e533f37a3563e12722f0ce02142",
+      "executable": "python",
+      "argv": [
+        "holdout_python_5_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 152,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-ordering-1",
+      "sourceKind": "python",
+      "scenario": 6,
+      "repetition": 0,
+      "basename": "holdout_python_6_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410600(self):\n        for shard in range(19):\n            print('capture 410600 shard', shard, 'verified; checksum', 410600 + shard)\n        self.assertLess(410608, 410600, msg=\"case 410600: value less than 410600 required; actual 410608\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "99dc81383f23d253f408296393e8b6cb55afcc405f7b9a1dd5d3fd7f88566d95",
+      "outputSha256": "6fd1260d276c55106cac59dc35f55c305f3aa7aea73a33511d8a901b2c031f7d",
+      "executable": "python",
+      "argv": [
+        "holdout_python_6_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 139,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-ordering-2",
+      "sourceKind": "python",
+      "scenario": 6,
+      "repetition": 1,
+      "basename": "holdout_python_6_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410601(self):\n        for shard in range(23):\n            print('capture 410601 shard', shard, 'verified; checksum', 410601 + shard)\n        self.assertLess(410609, 410601, msg=\"case 410601: value less than 410601 required; actual 410609\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "be19120b81d97316966eeac1cfc6d484b1568cb1788c4ca280cf8918e932012f",
+      "outputSha256": "7d5c6320d30e0af01774c2d1eda06ca0b7812f3682ee7b6e88b0bd280882f488",
+      "executable": "python",
+      "argv": [
+        "holdout_python_6_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 159,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-dictionary-diff-1",
+      "sourceKind": "python",
+      "scenario": 7,
+      "repetition": 0,
+      "basename": "holdout_python_7_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410700(self):\n        for shard in range(19):\n            print('capture 410700 shard', shard, 'verified; checksum', 410700 + shard)\n        self.assertDictEqual({'capsule': 410700, 'nested': {'x': 'orchard'}}, {'capsule': 410709, 'nested': {'x': 'quartz'}}, msg=\"case 410700: dict required capsule 410709 nested quartz; actual capsule 410700 nested orchard\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "e1daad42fdfd9c3ff3145325f0267b151f74cc8414f314e611dec104a3d06ca1",
+      "outputSha256": "bccbfd347186e4c53fd6b05cb47df7e9d10f749340da6c592150758a4cb72d28",
+      "executable": "python",
+      "argv": [
+        "holdout_python_7_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 150,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-dictionary-diff-2",
+      "sourceKind": "python",
+      "scenario": 7,
+      "repetition": 1,
+      "basename": "holdout_python_7_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410701(self):\n        for shard in range(23):\n            print('capture 410701 shard', shard, 'verified; checksum', 410701 + shard)\n        self.assertDictEqual({'capsule': 410701, 'nested': {'x': 'orchard'}}, {'capsule': 410710, 'nested': {'x': 'quartz'}}, msg=\"case 410701: dict required capsule 410710 nested quartz; actual capsule 410701 nested orchard\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "3c4c61d85bd8803520a55689d861960815c8b8dad7a34abf6ceb5d8bb6646da8",
+      "outputSha256": "c192a2a88679546cd95bc6b59f8f6efb571f22ab389c7ada052e4721d537a1d4",
+      "executable": "python",
+      "argv": [
+        "holdout_python_7_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 498,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-tuple-diff-1",
+      "sourceKind": "python",
+      "scenario": 8,
+      "repetition": 0,
+      "basename": "holdout_python_8_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410800(self):\n        for shard in range(19):\n            print('capture 410800 shard', shard, 'verified; checksum', 410800 + shard)\n        self.assertTupleEqual(('prism-410800', 4), ('ribbon-410800', 7), msg=\"case 410800: tuple required ribbon-410800 and 7; actual prism-410800 and 4\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "cfd5bd17ab45bbc96296fd0bf19a321d70a1d91f094f3ec97245da9211038f6f",
+      "outputSha256": "81ad5e713e3e18089027c7f837641c3fe67bebe26401a373c59457892e332fff",
+      "executable": "python",
+      "argv": [
+        "holdout_python_8_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 243,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-tuple-diff-2",
+      "sourceKind": "python",
+      "scenario": 8,
+      "repetition": 1,
+      "basename": "holdout_python_8_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410801(self):\n        for shard in range(23):\n            print('capture 410801 shard', shard, 'verified; checksum', 410801 + shard)\n        self.assertTupleEqual(('prism-410801', 4), ('ribbon-410801', 7), msg=\"case 410801: tuple required ribbon-410801 and 7; actual prism-410801 and 4\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "d5d36d8ece5ad86670c8cec33e3df7b5719b0d05e591d9909098bf2f0a807587",
+      "outputSha256": "5fb55fbef572d718e33c2f73fa98329efd3427a9286b4e3d6735629387f4f06f",
+      "executable": "python",
+      "argv": [
+        "holdout_python_8_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 153,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-unexpected-equality-1",
+      "sourceKind": "python",
+      "scenario": 9,
+      "repetition": 0,
+      "basename": "holdout_python_9_0.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410900(self):\n        for shard in range(19):\n            print('capture 410900 shard', shard, 'verified; checksum', 410900 + shard)\n        self.assertNotEqual('tundra-410900', 'tundra-410900', msg=\"case 410900: distinct strings required; actual both strings tundra-410900\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "05407a980bc74a51c2e81bba6fc9cbf90a00c49c09a6392aee768cdf873bb2f7",
+      "outputSha256": "2c5e3a9f2f1d0b3166044f8305714f3d331b2125bf9b8c5ba573a8b69b00f86c",
+      "executable": "python",
+      "argv": [
+        "holdout_python_9_0.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 152,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    },
+    {
+      "taskId": "holdout-test-hold-captured-python-unexpected-equality-2",
+      "sourceKind": "python",
+      "scenario": 9,
+      "repetition": 1,
+      "basename": "holdout_python_9_1.py",
+      "source": "import unittest\n\nclass CapturedQuality(unittest.TestCase):\n    def test_holdout_python_case_410901(self):\n        for shard in range(23):\n            print('capture 410901 shard', shard, 'verified; checksum', 410901 + shard)\n        self.assertNotEqual('tundra-410901', 'tundra-410901', msg=\"case 410901: distinct strings required; actual both strings tundra-410901\")\n\nif __name__ == '__main__':\n    unittest.main(verbosity=2)\n",
+      "sourceSha256": "39a44559863449c8e22a9ad5c3eeee4c735d52b6d359aa54d9f56575dceea21f",
+      "outputSha256": "56a8c653cfd67f62f3d6144269d6fb1e475752ad01dce7c0c76fa29640c82b17",
+      "executable": "python",
+      "argv": [
+        "holdout_python_9_1.py"
+      ],
+      "runtimeVersion": "Python 3.11.15",
+      "exitCode": 1,
+      "timeoutMs": 6000,
+      "elapsedMs": 139,
+      "normalizedPaths": "Only the verified capture directory is replaced by /captured/<split>/<fixture>; no failure text is rewritten."
+    }
+  ]
+}

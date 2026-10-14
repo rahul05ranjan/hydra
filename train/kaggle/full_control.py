@@ -7,6 +7,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import zipfile
 
 from dotenv import load_dotenv
@@ -16,6 +17,21 @@ from full_finetune import digest
 
 ROOT = Path(__file__).resolve().parents[2]
 STAGING = Path.home() / '.hydra/kaggle-full-feasibility'
+
+
+def verified_dataset_source(api, dataset, expected_plan_sha256):
+    # A newly uploaded version can still be processing while status reports the
+    # previous version as ready. Verify the actual versioned bytes before push.
+    status = json.loads(api.dataset_status(dataset, format='json(status,current_version_number)'))
+    version = status.get('current_version_number')
+    if status.get('status') != 'ready' or not isinstance(version, int) or version < 1:
+        raise ValueError('Private training input is not ready; no GPU job submitted')
+    source = f'{dataset}/{version}'
+    with tempfile.TemporaryDirectory(prefix='hydra-plan-') as directory:
+        api.dataset_download_file(source, 'plan.json', path=directory, force=True, quiet=True)
+        if digest(Path(directory) / 'plan.json') != expected_plan_sha256:
+            raise ValueError('Remote input differs from the approved frozen plan; no GPU job submitted')
+    return source
 
 
 def pin_kernel():
@@ -66,6 +82,7 @@ def prepare(username, checkpoint, seconds=600):
         raise ValueError('Unverified/disallowed training data')
     plan = {'training': True, 'method': 'full-parameter-supervised-fine-tuning', 'head': 'git',
         'purpose': 'GPU memory/step-time feasibility only; not a 95% quality claim',
+        'lossMethod': 'assistant-selected-logits', 'optimizer': 'cpu-adamw-fp32',
         'steps': 10, 'accumulation': 4, 'learningRate': 1e-5, 'maximumLength': 2048,
         'deadlineSeconds': seconds, 'trainerSeconds': seconds - 60, 'sealedEvaluation': False,
         'files': hashes, 'checkpointArchiveSha256': digest(dataset / 'checkpoint.zip'),
@@ -118,9 +135,17 @@ def main():
                 raise ValueError(f'Prepared input changed: {name}')
         if digest(STAGING / 'kernel/full_kernel.py') != spec.get('submittedKernelSha256', spec['plan']['files']['full_kernel.py']):
             raise ValueError('Submitted kernel differs from the prepared training kernel')
+        from kaggle.api.kaggle_api_extended import KaggleApi
+        api = KaggleApi()
+        api.authenticate()
+        source = verified_dataset_source(api, f'{username}/hydra-full-feasibility-input', spec['planSha256'])
+        metadata_path = STAGING / 'kernel/kernel-metadata.json'
+        metadata = json.loads(metadata_path.read_text())
+        metadata['dataset_sources'] = [source]
+        metadata_path.write_text(json.dumps(metadata, indent=2) + '\n')
     kernel_id = f'{username}/hydra-full-parameter-feasibility'
     commands = {'upload': ['datasets', 'create', '-p', str(STAGING / 'dataset'), '--dir-mode', 'skip'],
-        'update-input': ['datasets', 'version', '-p', str(STAGING / 'dataset'), '--dir-mode', 'skip', '-m', 'Restore bounded AMP overflow recovery'],
+        'update-input': ['datasets', 'version', '-p', str(STAGING / 'dataset'), '--dir-mode', 'skip', '-m', 'Full-parameter training with CPU AdamW optimizer state'],
         'run': ['kernels', 'push', '-p', str(STAGING / 'kernel'), '--accelerator', 'NvidiaTeslaT4', '--timeout', str(spec['plan']['deadlineSeconds']) if args.action == 'run' else '600'],
         'status': ['kernels', 'status', kernel_id],
         'output': ['kernels', 'output', kernel_id, '-p', str(ROOT / 'evals/results/suite/full-kaggle'),

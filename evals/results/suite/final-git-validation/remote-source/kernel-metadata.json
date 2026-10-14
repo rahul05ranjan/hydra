@@ -1,0 +1,23 @@
+{
+  "id": "rahulswt7/hydra-final-git-validation",
+  "id_no": 138647519,
+  "title": "Hydra final Git validation",
+  "code_file": "hydra-final-git-validation.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "rahulswt7/hydra-final-git-validation-input"
+  ],
+  "kernel_sources": [
+    "rahulswt7/hydra-balanced-git-refinement"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "docker_image": "",
+  "machine_shape": "NvidiaTeslaT4"
+}

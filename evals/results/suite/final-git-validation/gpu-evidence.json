@@ -1,0 +1,16 @@
+{
+  "candidate-q8": {
+    "beforeMB": [
+      0,
+      0
+    ],
+    "afterMB": [
+      1397,
+      0
+    ],
+    "device": "CUDA0",
+    "splitMode": "none",
+    "processEvidence": "67, GPU-a2eb6a11-c692-fe98-11ee-d9620f0d042d, 1394\n",
+    "modelSha256": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be"
+  }
+}

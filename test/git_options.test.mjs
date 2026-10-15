@@ -96,3 +96,62 @@ test('a named blame record is returned completely even when the model omits its 
     [{ probe: 'blame', cmd: 'git blame -- widget.js', out }], async () => ({ lines: [1] }));
   assert.ok(result.text.includes(wanted));
 });
+
+test('"git add" wording is a staging request and keeps the index-only patch', async t => {
+  const cwd = fixture(t);
+  const sections = await gather('Which edits did I put in place with git add?', cwd,
+    async () => ({ probes: [{ probe: 'diff', staged: true }] }));
+  assert.equal(sections[0].args.staged, true);
+  assert.match(sections[0].out, /\+INDEX_ONLY/);
+  assert.doesNotMatch(sections[0].out, /WORKTREE_ONLY/);
+});
+
+test('a staging question gets the staged patch even when the model plans a commit', async t => {
+  const cwd = fixture(t);
+  const sections = await gather('Which files sit in the index waiting for the next commit?', cwd,
+    async () => ({ probes: [{ probe: 'show' }] }));
+  assert.ok(sections.some(section => section.probe === 'diff' && section.args.staged), sections.map(s => s.cmd).join(', '));
+});
+
+test('a current-branch question gets status even when the model plans a commit', async t => {
+  const cwd = fixture(t);
+  const sections = await gather('What branch is HEAD on right now?', cwd, async () => ({ probes: [{ probe: 'show' }] }));
+  assert.ok(sections.some(section => section.probe === 'status'), sections.map(s => s.cmd).join(', '));
+  const listing = await gather('Which branches exist locally right now?', cwd, async () => ({ probes: [{ probe: 'branches' }] }));
+  assert.deepEqual(listing.map(section => section.probe), ['branches']);
+});
+
+test('pending edits to a named file since HEAD get its diff, and HEAD is never a log base', async t => {
+  const cwd = fixture(t);
+  const sections = await gather('What was edited in staged.js since HEAD?', cwd,
+    async () => ({ probes: [{ probe: 'log', path: 'staged.js', base: 'HEAD' }] }));
+  const diff = sections.find(section => section.probe === 'diff');
+  assert.ok(diff, sections.map(s => s.cmd).join(', '));
+  assert.equal(diff.args.path, 'staged.js');
+  assert.match(diff.out, /\+FILENAME_EDIT/);
+  assert.ok(sections.every(section => !section.cmd.includes('HEAD..HEAD')), sections.map(s => s.cmd).join(', '));
+});
+
+test('a subject term named in the question becomes the log message filter', async t => {
+  const cwd = fixture(t);
+  const sections = await gather('Show up to two commits with Initial in their subjects.', cwd,
+    async () => ({ probes: [{ probe: 'log', n: 2 }] }));
+  assert.equal(sections[0].args.grep, 'Initial');
+  assert.match(sections[0].cmd, /--grep=Initial/);
+});
+
+test('pending edits take the file named in the question when the model plans a commit', async t => {
+  const cwd = fixture(t);
+  writeFileSync(path.join(cwd, 'Makefile'), 'all:\n');
+  execFileSync('git', ['-c', 'user.name=Dev', '-c', 'user.email=dev@example.invalid', 'add', 'Makefile'], { cwd });
+  execFileSync('git', ['-c', 'user.name=Dev', '-c', 'user.email=dev@example.invalid', 'commit', '-qm', 'Add build file', '--', 'Makefile'], { cwd });
+  writeFileSync(path.join(cwd, 'Makefile'), 'all:\n\tMAKE_EDIT\n');
+  for (const [question, file, edit] of [['What was edited in staged.js since HEAD?', 'staged.js', /\+FILENAME_EDIT/],
+    ['Which uncommitted lines does Makefile have?', 'Makefile', /\+\tMAKE_EDIT/]]) {
+    const sections = await gather(question, cwd, async () => ({ probes: [{ probe: 'show' }] }));
+    const diff = sections.find(section => section.probe === 'diff');
+    assert.equal(diff?.args.path, file, question);
+    assert.match(diff.out, edit);
+    assert.ok(sections.every(section => section.probe !== 'show'), sections.map(s => s.cmd).join(', '));
+  }
+});

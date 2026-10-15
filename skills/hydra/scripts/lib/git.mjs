@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { run } from './exec.mjs';
 import { Unavailable } from './runtime.mjs';
@@ -29,6 +29,33 @@ const requestedCount = question => {
 const lastCommitRequest = question => /\b(?:last|latest|newest)\s+commit\b/i.test(question)
   && /\b(?:what|which)\b/i.test(question)
   && !/\b(?:since|after|before|between|compare|uncommitted|untracked|staged|working tree)\b/i.test(question);
+// The name of the checked-out branch, not a list of branches or a comparison.
+const currentBranchRequest = question => /\b(?:current|active|checked[- ]out)\s+branch\b|\b(?:which|what)\s+branch\b[^?]*\b(?:HEAD|am I|are we|currently|right now|checked out)\b/i.test(question)
+  && !/\bbranches\b|\bcontain|\bbetween|\bcompar|\bmerg|\bdiffer/i.test(question);
+// Edits not yet committed, measured against HEAD itself (HEAD~2 or HEAD^ is history).
+const pendingEditRequest = question => /\b(?:since|relative to|against|versus|vs\.?)\s+HEAD\b(?![~^@])|\buncommitted\b|\bnot (?:yet )?committed\b|\bworking (?:tree|copy)\b/i.test(question);
+// "with timeout in their subjects", "messages mentioning cache"
+const subjectTerm = question => (question.match(/\bwith\s+["'`]?([\w.-]+)["'`]?\s+in\s+(?:their|the|its)\s+(?:subjects?|messages?|titles?)\b/i)
+  ?? question.match(/\b(?:subjects?|messages?)\s+(?:containing|mentioning|that mention|with)\s+["'`]?([\w.-]+)/i))?.[1];
+// The first word of the question that is a file inside the repository, e.g. src/app.ts or Makefile.
+function fileInQuestion(question, cwd) {
+  for (const word of question.split(/\s+/)) {
+    const name = word.replace(/^["'`(]+|["'`),;:!?]+$|\.$/g, '');
+    if (!name || name.startsWith('-') || path.isAbsolute(name)) continue;
+    const file = path.resolve(cwd, name), relative = path.relative(cwd, file);
+    if (!relative || relative.startsWith('..')) continue;
+    try { if (statSync(file).isFile()) return name; } catch {}
+  }
+}
+// Staging scope from the question, ignoring any named file such as staged.js or index.txt.
+function scope(question, file) {
+  let text = file ? question.split(file.toLowerCase()).join(' ') : question.replace(/[\w./-]+\.[a-z0-9]+\b/gi, ' ');
+  text = text.replace(/\b(?:un[- ]?staged|not staged)\b/gi, 'unstaged');
+  const unstaged = /\bunstaged\b/i.test(text);
+  text = text.replace(/\bunstaged\b/gi, '');
+  const index = /\b(?:staged|staging|cached)\b|\bgit\s+add(?:ed)?\b|\b(?:in|from|the|to|of)\s+(?:git\s+)?index(?=\s|[?!,;:]|\.(?:\s|$)|$)|\b(?:prepared|ready|queued|waiting)\s+for\s+(?:(?:the|next|a)\s+)*commit\b/i.test(text);
+  return { index, unstaged };
+}
 
 export async function git(cwd, argv) {
   const r = await run('git', [...HARDEN, ...argv], cwd, ENV);
@@ -163,11 +190,7 @@ async function clean(p, question, cwd) {
     if (known) a.path = file;
   }
   // A validated file named staged.js or index.txt is not a staging request.
-  let scopeQuestion = a.path ? asked.split(a.path.toLowerCase()).join(' ') : asked;
-  scopeQuestion = scopeQuestion.replace(/\b(?:un[- ]?staged|not staged)\b/gi, 'unstaged');
-  const asksUnstaged = /\bunstaged\b/i.test(scopeQuestion);
-  scopeQuestion = scopeQuestion.replace(/\b(?:un[- ]?staged|not staged)\b/gi, '');
-  const asksIndex = /\b(?:staged|staging|cached)\b|\b(?:in|from|the|to|of)\s+(?:git\s+)?index(?=\s|[?!,;:]|\.(?:\s|$)|$)|\b(?:prepared|ready|queued)\s+for\s+(?:(?:the|next)\s+)*commit\b/i.test(scopeQuestion);
+  const { index: asksIndex, unstaged: asksUnstaged } = scope(asked, a.path);
   const asksBoth = asksUnstaged && asksIndex;
   a.staged = asksIndex && !asksUnstaged;
   if (p.probe === 'diff' && asksUnstaged && !asksBoth) a.worktreeOnly = true;
@@ -175,8 +198,11 @@ async function clean(p, question, cwd) {
   // Preserve compound filtering only when the question also asks about messages.
   const asksMessage = /\b(?:messages?|subjects?|mention\w*)\b/i.test(question);
   if (safe(p.grep) && (asksMessage || (!a.path && !a.author))) a.grep = p.grep.trim();
+  if (p.probe === 'log' && !a.grep && subjectTerm(question)) a.grep = subjectTerm(question);
   for (const key of ['rev', 'base']) {
-    if (safe(p[key]) && (await git(cwd, ['rev-parse', '--verify', '--quiet', `${p[key].trim()}^{commit}`])).ok) {
+    // HEAD as a base compares HEAD with itself and always shows nothing.
+    if (key === 'base' && /^HEAD$/i.test(String(p.base ?? '').trim())) continue;
+    if (safe(p[key]) &&(await git(cwd, ['rev-parse', '--verify', '--quiet', `${p[key].trim()}^{commit}`])).ok) {
       a[key] = p[key].trim();
     }
   }
@@ -197,9 +223,20 @@ export async function gather(question, cwd, chat) {
     }
   }
 
+  plan = Array.isArray(plan) ? plan.filter(p => PROBES[p?.probe]).slice(0, MAX_PROBES) : [];
+  // The question can name a scope the model's plan misses; add the probe that covers it.
+  const has = (...probes) => plan.some(p => probes.includes(p.probe));
+  const named = plan.find(p => p.path)?.path ?? fileInQuestion(question, cwd);
+  if (scope(question.toLowerCase(), null).index && !has('diff', 'status')) plan.push({ probe: 'diff', staged: true });
+  if (currentBranchRequest(question) && !has('status', 'branches')) plan.push({ probe: 'status' });
+  if (pendingEditRequest(question) && named && !has('diff')) {
+    // Edits since HEAD exclude HEAD's own commit patch, which would only crowd out the diff.
+    plan = plan.filter(p => !(p.probe === 'show' && (!p.rev || /^HEAD$/i.test(p.rev))));
+    plan.push({ probe: 'diff', path: named });
+  }
+
   const chosen = new Map();
-  for (const p of Array.isArray(plan) ? plan.slice(0, MAX_PROBES) : []) {
-    if (!PROBES[p?.probe]) continue;
+  for (const p of plan) {
     const args = await clean(p, question, cwd);
     if (PROBES[p.probe].needs && !args[PROBES[p.probe].needs]) continue;
     chosen.set(PROBES[p.probe].argv(args).join(' '), { probe: p.probe, args });

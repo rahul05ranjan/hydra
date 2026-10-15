@@ -39,3 +39,19 @@ test('diffstat file inventory remains visible when a model cites only one patch 
     [{ probe: 'diff', cmd: 'git diff trunk...HEAD', out }], async () => ({ lines: [12] }));
   for (const line of stats) assert.ok(result.text.includes(line), line);
 });
+
+test('a named source identifier selects its blame line without the model', async () => {
+  const wanted = 'cafe123 (Writer 2026-01-01 18) const val_77_3 = 7;';
+  const out = Array.from({ length: 35 }, (_, i) => i === 17 ? wanted : 'cafe123 (Other 2026-01-01 ' + i + ') filler_' + i + ' ' + 'x'.repeat(35)).join('\n');
+  const result = await answer('Attribute the source identifier val_77_3 in widget.js to whoever wrote it.',
+    [{ probe: 'blame', cmd: 'git blame -- widget.js', out }], async () => ({ lines: [1] }));
+  assert.equal(result.text, `$ git blame -- widget.js\n${wanted}`);
+});
+
+test('a lone identifier-shaped token in a blame question selects its line', async () => {
+  const wanted = 'cafe123 (Writer 2026-01-01 18) const retryBudget_4 = 7;';
+  const out = Array.from({ length: 35 }, (_, i) => i === 17 ? wanted : 'cafe123 (Other 2026-01-01 ' + i + ') filler ' + 'x'.repeat(35)).join('\n');
+  const result = await answer('Show attribution for retryBudget_4 inside lib/v2.client.js.',
+    [{ probe: 'blame', cmd: 'git blame -- lib/v2.client.js', out }], async () => ({ lines: [1] }));
+  assert.equal(result.text, `$ git blame -- lib/v2.client.js\n${wanted}`);
+});

@@ -61,7 +61,10 @@ const NO_ANSWER = 'The local model gave no usable answer. The start of each outp
 // The model only chooses line numbers; the evidence printed is the command's own text, never a paraphrase.
 export async function answer(question, sections, chat) {
   const rawChars = sections.reduce((sum, section) => sum + Math.min(section.out.length, ACCOUNT_CAP), 0);
-  const namedSource = /\b(?:line|record)\s+containing\s+[`"']?([A-Za-z_$][\w$]*)/i.exec(question)?.[1];
+  // A lone identifier-shaped token (snake_case, digits or camelCase) names the source line too; file names do not.
+  const shaped = (question.replace(/[\w$-]*[./][\w./$-]*/g, ' ').match(/[A-Za-z_$][\w$]*/g) ?? []).filter(word => /_|\d|[a-z][A-Z]/.test(word));
+  const namedSource = /\b(?:(?:line|record)\s+containing|identifier|token)\s+[`"']?([A-Za-z_$][\w$]*)/i.exec(question)?.[1]
+    ?? (shaped.length === 1 ? shaped[0] : undefined);
   if (sections.length === 1 && sections[0].probe === 'blame' && namedSource) {
     const lines = sections[0].out.split('\n').filter(line => line.includes(namedSource));
     const out = lines.join('\n');

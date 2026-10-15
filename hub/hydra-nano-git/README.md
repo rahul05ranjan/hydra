@@ -27,10 +27,10 @@ model-index:
     metrics:
     - type: accuracy
       name: Solved
-      value: 94.6
+      value: 96.3
     - type: accuracy
       name: Solved, usage-weighted
-      value: 94.55
+      value: 96.17
   - task:
       type: text-generation
       name: Code search term planning (Files head)
@@ -105,10 +105,10 @@ All figures are end-to-end Hydra results: the task counts as solved only when th
 
 | Head | Development | Held-out | Notes |
 |---|---|---|---|
-| **Git** | 200/200 (100%) · extended 800/800 (100%) | **946/1,000 (94.6%)** sealed `git1`; 94.55% usage-weighted | Sealed set never used for training or tuning; only its aggregate score was read. |
+| **Git** | 200/200 · extended 800/800 · paraphrase 800/800 | **963/1,000 (96.3%)** sealed `git1`; 96.17% usage-weighted | Sealed set never used for training or tuning; only its aggregate score was read. |
 | **Files** | 192/200 (96.0%) | **980/1,000 (98.0%)** | Real CPython, Node.js, Go and Rust sources. |
 | **Read** | 199/200 (99.5%) | **961/1,000 (96.1%)** | Most tasks are answered by deterministic slicing with no model call. |
-| **Test** | 198/200 (99.0%) | **944/1,000 (94.4%)** | Small failure regions are returned whole; the model is called only for long ones (24 of 1,000 held-out tasks). |
+| **Test** | 198/200 (99.0%) · extended 559/572 (97.7%) | **944/1,000 (94.4%)** | Small failure regions are returned whole; the model is called only for long ones (24 of 1,000 held-out tasks). |
 | **OS** | 200/200 · extended 397/400 (99.25%) | **1,000/1,000 (100%)** | Probe outputs are synthetic Windows/macOS/Linux fixtures, not live host runs. |
 
 - **Hardware.** All rows ran locally on an Apple Silicon laptop with llama.cpp b11563. The same GGUF scored 927/1,000 on the sealed set on an NVIDIA T4 with the earlier Hydra code.
@@ -184,7 +184,6 @@ The GGUF was converted with llama.cpp `convert_hf_to_gguf.py` at commit `a05e58c
 ## Limitations
 
 - **Test head.** It solves 94.4% of held-out tasks, just under the 95% target. Held-out failures are not inspected, so their causes are unknown. Read the raw log when a digest looks incomplete.
-- **Git.** Git solves 94.6% of the sealed set, just under the project's 95% target, while both development sets score 100%. The gap means the development sets no longer cover every kind of question; sealed failures are not inspected.
 - **OS evaluation is synthetic.** It tests planning and evidence on fixture outputs with the real secret guardrail. On macOS and Windows the memory probe does not yet report swap.
 - **Token savings are not proven.** In a 36-session trial on real repositories, Claude Opus used Hydra in 0 of 12 sessions where it was merely available. Forcing delegation used 72% more tokens on those source-extraction tasks. Hydra is a correctness-preserving offload path; it is not a proven way to save tokens.
 - **Scope.** The model was trained for Git planning and evidence only. Its behavior on the other heads comes from Hydra's prompts and code. It is not a general assistant, and English is the only language tested.

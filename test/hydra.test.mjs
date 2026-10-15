@@ -70,7 +70,8 @@ test('git head compares against a base branch the question names', async () => {
 
   assert.deepEqual(
     sections.map(s => s.cmd),
-    [`git log -n15 ${branch}..HEAD`, `git diff ${branch}...HEAD`, 'git log -n15'],
+    // Commits ahead of a base are returned whole (up to 50) unless the question asks for a count.
+    [`git log -n50 ${branch}..HEAD`, `git diff ${branch}...HEAD`, 'git log -n15'],
   );
 });
 

@@ -141,7 +141,7 @@ for (const [name, s] of [...Object.entries(byIntent), ['ALL', overall]]) {
 }
 
 mkdirSync(path.join(HERE, 'results'), { recursive: true });
-const setSuffix = process.env.HYDRA_GIT_DEV_SET === 'extended' ? '_extended' : '';
+const setSuffix = process.env.HYDRA_GIT_DEV_SET && process.env.HYDRA_GIT_DEV_SET !== 'original' ? `_${process.env.HYDRA_GIT_DEV_SET}` : '';
 const file = path.join(HERE, 'results', `git_dev${setSuffix}.${MODEL.replace(/[^\w.-]+/g, '-')}.json`);
 writeFileSync(file, JSON.stringify({ model: MODEL, date: new Date().toISOString(), overall, byIntent, rows }, null, 1) + '\n');
 console.log(`wrote ${path.relative(process.cwd(), file)}`);

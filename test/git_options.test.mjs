@@ -155,3 +155,48 @@ test('pending edits take the file named in the question when the model plans a c
     assert.ok(sections.every(section => section.probe !== 'show'), sections.map(s => s.cmd).join(', '));
   }
 });
+
+test('branch-only commit lists are not cut to the default fifteen', async t => {
+  const cwd = fixture(t);
+  const git = (...args) => execFileSync('git', ['-c', 'user.name=Dev', '-c', 'user.email=dev@example.invalid', ...args], { cwd });
+  git('branch', 'trunk');
+  const sections = await gather('Which commits does this branch have that trunk lacks?', cwd, async () => ({ probes: [{ probe: 'log', base: 'trunk' }] }));
+  assert.equal(sections[0].args.n, 50);
+  const counted = await gather('Show 4 commits this branch has that trunk lacks.', cwd, async () => ({ probes: [{ probe: 'log', base: 'trunk' }] }));
+  assert.equal(counted[0].args.n, 4);
+});
+
+test('scope phrases the model misses still reach the right probe', async t => {
+  const cwd = fixture(t);
+  const probes = async (question, plan) => (await gather(question, cwd, async () => ({ probes: plan }))).map(section => section.cmd);
+  // next commit = staging
+  assert.ok((await probes('Which files are going into the next commit?', [{ probe: 'diff', staged: true }])).includes('git diff --staged'));
+  // file history = log of that path
+  assert.ok((await probes('Which commits modified staged.js?', [{ probe: 'show' }])).some(cmd => cmd.startsWith('git log') && cmd.endsWith('-- staged.js')));
+  // most recent commit = show
+  assert.ok((await probes('What did the most recent commit change?', [{ probe: 'log', n: 1 }])).includes('git show HEAD'));
+  // remote tracking state = status
+  assert.ok((await probes('Is this branch behind its remote?', [{ probe: 'remotes' }])).includes('git status --short --branch'));
+  // never-added files = status, and "git add" here is not a staging request
+  const fresh = await probes('Which files would git add . treat as brand new?', [{ probe: 'diff', staged: true }]);
+  assert.ok(fresh.includes('git status --short --branch'), fresh.join(', '));
+  assert.ok(!fresh.includes('git diff --staged'), fresh.join(', '));
+  // a file against the last commit = its pending diff
+  assert.ok((await probes('Diff staged.js against the last commit.', [{ probe: 'show' }])).includes('git diff HEAD -- staged.js'));
+  assert.ok((await probes("What did I change in staged.js that isn't committed?", [{ probe: 'show' }])).includes('git diff HEAD -- staged.js'));
+});
+
+test('an author the model files under the wrong argument is still used as the author', async t => {
+  const cwd = fixture(t);
+  const sections = await gather('commits from Dev?', cwd, async () => ({ probes: [{ probe: 'log', base: 'Dev' }] }));
+  assert.equal(sections[0].args.author, 'Dev');
+});
+
+test('an unusable model base falls back to the one branch the question names', async t => {
+  const cwd = fixture(t);
+  execFileSync('git', ['branch', 'trunk'], { cwd });
+  const sections = await gather('Which commits would land in trunk from here?', cwd, async () => ({ probes: [{ probe: 'log', base: 'here' }] }));
+  assert.equal(sections[0].args.base, 'trunk');
+  const none = await gather('Which commits are new here?', cwd, async () => ({ probes: [{ probe: 'log', base: 'here' }] }));
+  assert.equal(none[0].args.base, undefined);
+});

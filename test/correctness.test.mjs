@@ -82,6 +82,34 @@ test('small failure regions are returned whole without a model call', async () =
   assert.doesNotMatch(res.text, /node_modules/);
 });
 
+test('failure digests keep PHP/Elixir locations and numbered headers but drop runtime library frames', async () => {
+  const pad = Array.from({ length: 30 }, (_, i) => `setup step ${i} completed without incident`).join('\n');
+  const cases = [
+    ['1) test slug is normalized (App.SlugTest)\n     test/app/slug_test.exs:31\n     Assertion with == failed\n     left:  "a"\n     right: "b"',
+      ['1) test slug is normalized (App.SlugTest)', 'test/app/slug_test.exs:31'], []],
+    ["1) Tests\\InvoiceTest::testNumber\nFailed asserting that two strings are identical.\n-'x'\n+'y'\n\n/srv/app/tests/InvoiceTest.php:117\n\nFAILURES!",
+      ['InvoiceTest.php:117'], []],
+    ['--- FAIL: TestWindow (0.00s)\npanic: runtime error: index out of range [5] with length 5\ngoroutine 7 [running]:\n\t/usr/local/go/src/testing/testing.go:1632 +0x1bc\n\t/home/ci/app/ring.go:61\nFAIL',
+      ['ring.go:61'], ['go/src/testing/testing.go']],
+    ['ServiceTest > total() FAILED\n    org.opentest4j.AssertionFailedError: expected: <1> but was: <2>\n        at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)\n        at app//com.example.ServiceTest.total(ServiceTest.java:44)',
+      ['ServiceTest.java:44', 'expected: <1> but was: <2>'], ['AssertionFailureBuilder.java']],
+    ['error: AssertionError: Values are not equal.\n    at assertEquals (https://jsr.io/@std/assert/1.0.13/equals.ts:64:9)\n    at file:///home/ci/app/app_test.ts:148:3',
+      ['app_test.ts:148:3'], ['jsr.io/@std/assert']],
+  ];
+  for (const [body, wanted, unwanted] of cases) {
+    const { text } = await digest({ cmd: 'run tests', out: `${pad}\n${body}`, exitCode: 1 }, async () => ({ lines: [] }));
+    for (const fact of wanted) assert.ok(text.includes(fact), fact);
+    for (const noise of unwanted) assert.ok(!text.includes(noise), noise);
+  }
+});
+
+test('AVA cross-mark failures are failure headers', async () => {
+  const pad = Array.from({ length: 30 }, (_, i) => `setup step ${i} completed without incident`).join('\n');
+  const out = `${pad}\n  ✔ cart › loads defaults\n  ✘ [fail]: cart › merges overrides\n\n  test/cart.js:12\n\n  - 'a'\n  + 'b'\n\n  1 test failed`;
+  const { text } = await digest({ cmd: 'npx ava', out, exitCode: 1 }, async () => ({ lines: [] }));
+  assert.ok(text.includes('✘ [fail]: cart › merges overrides'));
+});
+
 test('passing log digests keep both pass and failure counts', async () => {
   const out = 'runner progress\n'.repeat(80) + 'Tests: 4 passed, 4 total\nFailures: 0\n';
   const res = await digest({ cmd: 'node pass.mjs', out, exitCode: 0 }, async () => assert.fail('model not needed'));

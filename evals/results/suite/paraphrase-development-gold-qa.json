@@ -1,0 +1,12 @@
+{
+  "scope": "Development gold facts are reachable via an accepted read-only probe. This is not model accuracy or independent proof of every question interpretation.",
+  "timestamp": "2026-10-15T02:30:55.733Z",
+  "tasks": 800,
+  "valid": 800,
+  "hashes": {
+    "tasks.jsonl": "64a31a1d406ab33ec26255fab693efe8260b951ce8cc58c9b38daf5d4f9e1bce",
+    "worlds.json": "dccce935f7e07a3740f6fad7bec9092a94acd163ed0fc2612c219be8cfb3af80",
+    "phrasings.json": "79d395dc517716415a886e8a0320b4fb7a8ab8762e76729de1e31f07c8f5277d"
+  },
+  "failures": []
+}

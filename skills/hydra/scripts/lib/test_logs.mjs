@@ -7,10 +7,12 @@ const PASS_THROUGH = 800;
 const MAX_CANDIDATES = 60;
 const MAX_CITED = 12;
 const WHOLE_REGIONS = 2000;
-const FAILURE_HEADER = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|not\s+ok\b|error(?:\[E\d+\]| TS\d+)?|[A-Za-z_]\w*(?:Error|Exception)\s*:|panicked at|assert\s|assertion\s|Expected:|Received:|actual:|- Snapshot|[-+]\s|--- FAIL:|____+\s+\w+)|^\s*(?:left|right)\s*:/i;
+// Numbered headers ("1) test name") are how Mocha, RSpec, PHPUnit and ExUnit open each failure.
+const FAILURE_HEADER = /(?:^|\s)(?:FAIL(?:ED)?|[●•]|✘ \[fail\]:|not\s+ok\b|error(?:\[E\d+\]| TS\d+)?|[A-Za-z_]\w*(?:Error|Exception)\s*:|panicked at|assert\s|assertion\s|Expected:|Received:|actual:|- Snapshot|[-+]\s|--- FAIL:|____+\s+\w+)|^\s*(?:left|right)\s*:|^\s*\d+\)\s+\S/i;
 const LAUNCH_ERROR = /(?:\bnot found\b|\bis not recognized\b|\bNo module named\b|\bCannot find module\b|\bMissing script:|\bENOENT\b|\bERR_MODULE_NOT_FOUND\b)/i;
-const USER_STACK = /\b([a-zA-Z0-9_\-./]+\.(?:ts|tsx|js|jsx|mjs|cjs|py|rs|go|java|c|cpp|rb)):(\d+)(?::(\d+))?|\bFile\s+"[^"\n]+\.py",\s+line\s+\d+/;
-const IGNORE_STACK = /(?:node_modules|site-packages|\.cargo\/registry|internal\/process|\bat <anonymous>:\d+|\(<anonymous>:\d+|\/usr\/(?:local\/)?lib\/python|\/lib\/python)/;
+const USER_STACK = /\b([a-zA-Z0-9_\-./]+\.(?:ts|tsx|js|jsx|mjs|cjs|py|rs|go|java|kt|scala|c|cc|cpp|cxx|h|hpp|cs|swift|rb|php|ex|exs|dart)):(\d+)(?::(\d+))?|\bFile\s+"[^"\n]+\.py",\s+line\s+\d+/;
+// Frames inside language runtimes and test libraries, never the user's code.
+const IGNORE_STACK = /(?:node_modules|site-packages|\.cargo\/registry|internal\/process|\bat <anonymous>:\d+|\(<anonymous>:\d+|\/usr\/(?:local\/)?lib\/python|\/lib\/python|\/go\/src\/(?:testing|runtime)\/|\borg\.junit\.|\bjava\.base\/|\bjdk\.internal\.|jsr\.io\/@std\/|deno\.land\/std)/;
 
 const SYSTEM = `You select verbatim evidence for test failures or build errors. Each line has its line number in brackets [N].
 Reply with JSON:

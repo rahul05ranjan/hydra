@@ -26,14 +26,21 @@ const requestedCount = question => {
   const value = /^\d+$/.test(text) ? Number(text) : text.split(/[ -]/).reduce((sum, word) => sum + NUMBER_WORDS[word], 0);
   return Math.min(Math.max(value, 1), 50);
 };
-const lastCommitRequest = question => /\b(?:last|latest|newest)\s+commit\b/i.test(question)
+const lastCommitRequest = question => /\b(?:last|latest|newest|most recent)\s+commit\b/i.test(question)
   && /\b(?:what|which)\b/i.test(question)
-  && !/\b(?:since|after|before|between|compare|uncommitted|untracked|staged|working tree)\b/i.test(question);
+  && !/\b(?:since|after|before|between|compare|against|uncommitted|untracked|staged|working tree)\b/i.test(question);
 // The name of the checked-out branch, not a list of branches or a comparison.
 const currentBranchRequest = question => /\b(?:current|active|checked[- ]out)\s+branch\b|\b(?:which|what)\s+branch\b[^?]*\b(?:HEAD|am I|are we|currently|right now|checked out)\b/i.test(question)
   && !/\bbranches\b|\bcontain|\bbetween|\bcompar|\bmerg|\bdiffer/i.test(question);
 // Edits not yet committed, measured against HEAD itself (HEAD~2 or HEAD^ is history).
-const pendingEditRequest = question => /\b(?:since|relative to|against|versus|vs\.?)\s+HEAD\b(?![~^@])|\buncommitted\b|\bnot (?:yet )?committed\b|\bworking (?:tree|copy)\b/i.test(question);
+const pendingEditRequest = question => /\b(?:since|relative to|against|versus|vs\.?)\s+HEAD\b(?![~^@])|\buncommitted\b|\bnot (?:yet )?committed\b|\bworking (?:tree|copy)\b|\bagainst (?:the )?(?:last|latest|previous) commit\b|\b(?:isn't|is not|aren't|are not|haven't been|hasn't been) (?:yet )?committed\b/i.test(question);
+// Files Git has never tracked; "would git add . pick up" asks about these, not about the index.
+const untrackedRequest = question => /\buntracked\b|\bnot tracked\b|\bisn't tracking\b|\bnot under version control\b|\bbrand[- ]new\b|\bnever (?:been )?added\b|\bnot (?:been |yet )?added to git\b/i.test(question);
+// The branch's position against its remote tracking branch.
+const syncRequest = question => /\b(?:remote|upstream|origin|tracking)\b/i.test(question)
+  && /\b(?:ahead|behind|up[- ]to[- ]date|in sync|diverg\w*|separate\w*|pull|push)\b/i.test(question);
+// Commits that touched a file over time, as opposed to its pending edits.
+const historyRequest = question => /\b(?:commits?|history|evolved|over time|git log)\b/i.test(question) && !pendingEditRequest(question);
 // "with timeout in their subjects", "messages mentioning cache"
 const subjectTerm = question => (question.match(/\bwith\s+["'`]?([\w.-]+)["'`]?\s+in\s+(?:their|the|its)\s+(?:subjects?|messages?|titles?)\b/i)
   ?? question.match(/\b(?:subjects?|messages?)\s+(?:containing|mentioning|that mention|with)\s+["'`]?([\w.-]+)/i))?.[1];
@@ -53,7 +60,7 @@ function scope(question, file) {
   text = text.replace(/\b(?:un[- ]?staged|not staged)\b/gi, 'unstaged');
   const unstaged = /\bunstaged\b/i.test(text);
   text = text.replace(/\bunstaged\b/gi, '');
-  const index = /\b(?:staged|staging|cached)\b|\bgit\s+add(?:ed)?\b|\b(?:in|from|the|to|of)\s+(?:git\s+)?index(?=\s|[?!,;:]|\.(?:\s|$)|$)|\b(?:prepared|ready|queued|waiting)\s+for\s+(?:(?:the|next|a)\s+)*commit\b/i.test(text);
+  const index = !untrackedRequest(text) && /\b(?:staged|staging|cached)\b|\bgit\s+add(?:ed)?\b|\b(?:in|from|the|to|of)\s+(?:git\s+)?index(?=\s|[?!,;:]|\.(?:\s|$)|$)|\b(?:prepared|ready|queued|waiting)\s+for\s+(?:(?:the|next|a)\s+)*commit\b|\binto (?:my |the )?next commit\b/i.test(text);
   return { index, unstaged };
 }
 
@@ -183,6 +190,9 @@ async function clean(p, question, cwd) {
       || /^['’]s\s+commits?\b/i.test(after);
     if ((known.ok && known.out.trim()) || explicitlyNamed) a.author = candidate;
   }
+  // "commits from Hydra Seed": the model may file the name under another argument.
+  const named = !a.author && p.probe === 'log' ? question.match(/\b(?:by|from)\s+([A-Z][\w.'-]*(?:\s+[A-Z][\w.'-]*)?)/)?.[1] : null;
+  if (named && (await git(cwd, ['log', '-1', '--format=%an', '-i', '--fixed-strings', `--author=${named}`])).out.trim()) a.author = named;
   if (safe(p.path)) {
     const file = p.path.trim();
     const known =
@@ -206,6 +216,16 @@ async function clean(p, question, cwd) {
       a[key] = p[key].trim();
     }
   }
+  // The model asked for a base it could not name ("here"); use the one other local branch the question names.
+  if (p.base && !a.base && ['log', 'diff'].includes(p.probe)) {
+    const current = (await git(cwd, ['branch', '--show-current'])).out.trim();
+    const words = new Set(question.split(/[\s"'`?,.!;:()]+/).filter(Boolean));
+    const local = (await git(cwd, ['for-each-ref', '--format=%(refname:short)', 'refs/heads'])).out.split('\n').map(name => name.trim());
+    const named = local.filter(name => name && name !== current && words.has(name));
+    if (named.length === 1) a.base = named[0];
+  }
+  // Commits this branch has over its base form a bounded set; return it whole unless a count was asked for.
+  if (p.probe === 'log' && a.base && requestedCount(question) === null) a.n = 50;
   return a;
 }
 
@@ -229,6 +249,12 @@ export async function gather(question, cwd, chat) {
   const named = plan.find(p => p.path)?.path ?? fileInQuestion(question, cwd);
   if (scope(question.toLowerCase(), null).index && !has('diff', 'status')) plan.push({ probe: 'diff', staged: true });
   if (currentBranchRequest(question) && !has('status', 'branches')) plan.push({ probe: 'status' });
+  if (syncRequest(question) && !has('status', 'branches')) plan.push({ probe: 'status' });
+  if (untrackedRequest(question) && !has('status')) plan.push({ probe: 'status' });
+  if (historyRequest(question) && named && !has('log', 'blame')) {
+    plan = plan.filter(p => !((p.probe === 'show' && !p.rev) || (p.probe === 'diff' && !p.base)));
+    plan.push({ probe: 'log', path: named });
+  }
   if (pendingEditRequest(question) && named && !has('diff')) {
     // Edits since HEAD exclude HEAD's own commit patch, which would only crowd out the diff.
     plan = plan.filter(p => !(p.probe === 'show' && (!p.rev || /^HEAD$/i.test(p.rev))));

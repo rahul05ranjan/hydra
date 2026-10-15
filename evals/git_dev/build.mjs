@@ -11,14 +11,14 @@ import { buildWorld, rng } from '../../train/world.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const SET = process.env.HYDRA_GIT_DEV_SET || 'original';
-if (!['original', 'extended'].includes(SET)) throw new Error('Unknown Git development set');
-export const dataDir = SET === 'extended' ? path.join(HERE, 'extended') : HERE;
+if (!['original', 'extended', 'paraphrase'].includes(SET)) throw new Error('Unknown Git development set');
+export const dataDir = SET === 'original' ? HERE : path.join(HERE, SET);
 const TASKS = path.join(dataDir, 'tasks.jsonl');
 const HEADS = path.join(dataDir, 'worlds.json');
-const WORLDS = SET === 'extended' ? 40 : 10;
-const SEED = SET === 'extended' ? 6200 : 6100;
+const WORLDS = SET === 'original' ? 10 : 40;
+const SEED = { original: 6100, extended: 6200, paraphrase: 6400 }[SET];
 
-export const worldsDir = () => path.join(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds', SET === 'extended' ? 'git_dev_extended' : 'git_dev');
+export const worldsDir = () => path.join(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds', SET === 'original' ? 'git_dev' : `git_dev_${SET}`);
 export const worldName = i => `dev_${String(i).padStart(2, '0')}`;
 export const loadTasks = () => readFileSync(TASKS, 'utf8').split('\n').filter(Boolean).map(line => JSON.parse(line));
 
@@ -140,7 +140,7 @@ function tasksFor(world, index, phrasings) {
 export function buildWorlds() {
   const parent = path.resolve(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds');
   const relative = path.relative(parent, path.resolve(worldsDir()));
-  if (!['git_dev', 'git_dev_extended'].includes(relative)) throw new Error('Unsafe development-world cleanup path');
+  if (!['git_dev', 'git_dev_extended', 'git_dev_paraphrase'].includes(relative)) throw new Error('Unsafe development-world cleanup path');
   rmSync(worldsDir(), { recursive: true, force: true });
   mkdirSync(worldsDir(), { recursive: true });
   return Array.from({ length: WORLDS }, (_, i) => buildWorld(path.join(worldsDir(), worldName(i)), SEED + i));

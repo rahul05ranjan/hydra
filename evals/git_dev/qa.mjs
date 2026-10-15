@@ -34,7 +34,7 @@ const result = { scope: 'Development gold facts are reachable via an accepted re
   timestamp: new Date().toISOString(), tasks: rows.length, valid: rows.filter(r => r.valid).length,
   hashes: Object.fromEntries(['tasks.jsonl', 'worlds.json', 'phrasings.json'].map(name => [name, hash(name)])),
   failures: rows.filter(row => !row.valid) };
-const output = path.join(ROOT, 'evals/results/suite', process.env.HYDRA_GIT_DEV_SET === 'extended' ? 'extended-development-gold-qa.json' : 'development-gold-qa.json');
+const output = path.join(ROOT, 'evals/results/suite', process.env.HYDRA_GIT_DEV_SET && process.env.HYDRA_GIT_DEV_SET !== 'original' ? `${process.env.HYDRA_GIT_DEV_SET}-development-gold-qa.json` : 'development-gold-qa.json');
 mkdirSync(path.dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(result, null, 2) + '\n');
 console.log(JSON.stringify(result, null, 2));

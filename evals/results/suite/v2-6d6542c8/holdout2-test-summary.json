@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-10-16T17:15:39.650Z",
+  "split": "holdout2",
+  "complete": true,
+  "elapsedSeconds": 19.702,
+  "code": "fde07d8",
+  "model": "hydra-nano-git Q8_0 6d6542c8 (v2)",
+  "holdoutManifestSha256": "7008c1c4e988b6a3967184f6214a646cd8f4a9f30334f23d4eecc62968d9497b",
+  "note": "First and only score of holdout2. Aggregate only; per-task rows and per-family results were discarded unread so they cannot steer tuning.",
+  "byHead": {
+    "test": {
+      "tasks": 1000,
+      "solvedCount": 850,
+      "solved": 0.85,
+      "errors": 0,
+      "modelCalls": 50,
+      "tasksWithModelCalls": 50,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 50,
+      "modelEvidenceAccuracy": 0.16,
+      "latencySeconds": {
+        "p50": 0,
+        "p95": 0.002,
+        "maximum": 0.519
+      },
+      "solvedConfidence95": [
+        0.8265308859716873,
+        0.8707902850178393
+      ],
+      "rawChars": 2124447,
+      "returnedChars": 688703
+    }
+  }
+}

@@ -83,3 +83,15 @@ test('empty output preserves exit status without claiming a passing test suite',
   assert.equal(result.text, '$ node silent.mjs\n');
   assert.equal(result.exitCode, 0);
 });
+
+test('a log with more failures than the candidate cap keeps the first failure location and the summary', async () => {
+  const blocks = Array.from({ length: 30 }, (_, i) =>
+    `FAIL src/batch_${i}.test.ts\n  ● batch case ${i}\n    Expected: "sealed-${i}"\n    Received: "open-${i}"\n      at Object.<anonymous> (src/batch_${i}.test.ts:119:9)`).join('\n');
+  const out = `${progress(20)}\n${blocks}\nTest Suites: 30 failed, 2 passed, 32 total\nTests:       30 failed, 9 passed, 39 total`;
+  const candidates = extractFailureCandidates(out);
+  assert.ok(candidates.length <= 60);
+  const result = await digest({ cmd: 'npx jest', out, exitCode: 1 },
+    async () => cite(out, 'FAIL src/batch_0.test.ts'));
+  for (const fact of ['batch case 0', 'sealed-0', 'open-0', 'src/batch_0.test.ts:119:9', 'Tests:       30 failed'])
+    assert.ok(result.text.includes(fact), `lost ${fact}`);
+});

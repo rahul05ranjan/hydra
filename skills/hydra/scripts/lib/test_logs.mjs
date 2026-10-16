@@ -49,14 +49,18 @@ export function extractFailureCandidates(logText) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (USER_STACK.test(line) && !IGNORE_STACK.test(line)) {
-      add(i, nearFailure.has(i) ? 3 : 1);
+      // A failure's own source location ranks with its header, so a log with more failures
+      // than the budget keeps whole failures rather than only the headers of more of them.
+      add(i, nearFailure.has(i) ? 4 : 1);
     }
   }
 
-  // Include trailing summary lines
+  // Trailing summary lines always keep a place: they carry the failure count the budget cannot.
+  const summary = [];
   for (let i = Math.max(0, lines.length - 8); i < lines.length; i++) {
-    if (/(?:failed|passed|errors|finished in|Test Files|Tests\s+\d+)/i.test(lines[i])) {
-      add(i, 1);
+    if (/(?:failed|passed|errors|finished in|Test Files|Tests\s+\d+)/i.test(lines[i]) && !IGNORE_STACK.test(lines[i])) {
+      summary.push(i);
+      candidateRanks.delete(i);
     }
   }
 
@@ -64,7 +68,8 @@ export function extractFailureCandidates(logText) {
   // Restore source order after selection so line numbers and verbatim context remain unchanged.
   return Array.from(candidateRanks.keys())
     .sort((a, b) => candidateRanks.get(b) - candidateRanks.get(a) || a - b)
-    .slice(0, MAX_CANDIDATES)
+    .slice(0, MAX_CANDIDATES - summary.length)
+    .concat(summary)
     .sort((a, b) => a - b)
     .map(idx => ({ id: idx + 1, text: lines[idx] }));
 }

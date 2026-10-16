@@ -20,7 +20,7 @@ if (heads.some(head => !['files', 'read', 'test', 'os'].includes(head))) throw n
 const limit = Number(option('limit', '1000000'));
 const output = path.resolve(option('output', path.join(ROOT, 'evals/results/suite/development.json')));
 const split = option('split', 'legacy');
-if (!['legacy', 'development', 'extended', 'holdout'].includes(split)) throw new Error('Invalid suite split');
+if (!['legacy', 'development', 'extended', 'holdout', 'holdout2'].includes(split)) throw new Error('Invalid suite split');
 const sourceRoot = path.resolve(option('source-root', process.env.HYDRA_EVAL_SOURCE_ROOT || path.join(os.homedir(), '.hydra/quality-sources/files')));
 const allRows = [];
 const started = Date.now();

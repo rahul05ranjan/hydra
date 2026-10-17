@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createServer } from 'node:http';
-import { mkdtempSync, mkdirSync, readFileSync, existsSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, existsSync, realpathSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
@@ -18,7 +18,8 @@ test('npm discovery supports Windows, Homebrew and Debian layouts', () => {
     const root = mkdtempSync(path.join(os.tmpdir(), 'hydra-npm-'));
     const bin = path.join(root, 'bin'); const file = path.resolve(bin, relative);
     mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, '// fixture');
-    assert.equal(findNpx([bin]), file);
+    // findNpx resolves symlinks (npx is often one); on macOS the temp dir itself is /var -> /private/var.
+    assert.equal(findNpx([bin]), realpathSync(file));
   }
 });
 

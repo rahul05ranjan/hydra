@@ -86,6 +86,17 @@ Through MCP, Hydra offers the three where it pays most: `hydra_git`, `hydra_run`
 
 Receipts: [model card](https://huggingface.co/rahul05ranjan/hydra-nano-git) and [`evals/results`](https://github.com/rahul05ranjan/hydra/tree/main/evals/results).
 
+<!-- usage-stats:begin (written by evals/usage/readme_stats.mjs) -->
+**In real use.** Since 2026-10-17, Hydra has handled **31 calls** in **2 coding sessions** across **2 projects** on the maintainer's machine. Of **~33,785 tokens** of command output, **~8,019** reached the agent: **76% kept out of context**.
+
+| Work | Calls | Output read locally | Reached the agent | Kept out |
+|---|---|---|---|---|
+| Test and build runs | 30 | ~33,743 | ~7,969 | **76%** |
+| Git questions | 1 | ~42 | ~50 | **-19%** |
+
+<sub>From Hydra's local ledger; tokens are estimates (characters / 4). Updated 2026-10-17.</sub>
+<!-- usage-stats:end -->
+
 **Where Hydra does not help, measured.** In a controlled trial of 36 Claude Code sessions extracting functions from real source code, forcing that work through Hydra used **72% more tokens** than the agent's own tools. So Hydra leaves source reading and search to the agent, and routes only the noisy work: test and build logs, git history, system inspection. Full method and numbers in [evaluations](https://github.com/rahul05ranjan/hydra/blob/main/docs/evaluations.md).
 
 ## Commands

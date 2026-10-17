@@ -52,7 +52,8 @@
     "eval:frontier": "node evals/trial/frontier_trial.mjs --run",
     "eval:real:prepare": "node evals/trial/real_repo_trial.mjs",
     "eval:real": "node evals/trial/real_repo_trial.mjs --run",
-    "dashboard": "node dashboard/server.mjs"
+    "dashboard": "node dashboard/server.mjs",
+    "stats:readme": "node evals/usage/readme_stats.mjs"
   },
   "engines": {
     "node": ">=18"

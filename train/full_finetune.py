@@ -65,15 +65,30 @@ def validate_toolcall(row):
             raise ValueError("A call may pass only the function's declared parameters")
 
 
+def validate_chat(row):
+    """General replay: one plain-text reply, offered no tools. The reply is the starting checkpoint's own,
+    so these rows hold its general style in place while other rows change what it does with tools."""
+    messages = row.get('messages')
+    if [m.get('role') for m in messages or []] != ['user', 'assistant'] or row.get('tools'):
+        raise ValueError('Chat rows need exactly user/assistant messages and no tools')
+    text = messages[-1].get('content')
+    if not isinstance(text, str) or not text.strip() or '<tool_call>' in text or '<function=' in text:
+        raise ValueError('A chat reply must be plain text')
+
+
 def validate_row(row):
     if row.get('head') == 'toolcall':
         validate_toolcall(row)
+    elif row.get('head') == 'chat':
+        validate_chat(row)
     else:
         validate_target(row.get('head'), row['messages'])
 
 
-def encode_example(tokenizer, messages, maximum, tools=None):
-    if tools is None:
+def encode_example(tokenizer, messages, maximum, tools=None, head=None):
+    if head == 'chat':
+        validate_chat({'messages': messages, 'tools': tools})
+    elif tools is None:
         if [m.get('role') for m in messages] != ['system', 'user', 'assistant']:
             raise ValueError('Require exactly system/user/assistant messages')
         # Hydra trains constrained choices/evidence IDs, never shell command strings.
@@ -223,7 +238,7 @@ def main():
     from transformers import AutoTokenizer
     # Preserve the hash-pinned tokenizer regex; no automatic Mistral patch on Qwen exports.
     tokenizer = AutoTokenizer.from_pretrained(args.checkpoint, local_files_only=True, fix_mistral_regex=False)
-    examples = [encode_example(tokenizer, row['messages'], args.max_length, row.get('tools')) for row in rows]
+    examples = [encode_example(tokenizer, row['messages'], args.max_length, row.get('tools'), row.get('head')) for row in rows]
     receipt = {'timestamp': datetime.now(timezone.utc).isoformat(), 'head': args.head,
         'method': 'full-parameter-supervised-fine-tuning', 'trainingStarted': False,
         'checkpointManifest': checkpoint_spec, 'dataManifest': data_spec,

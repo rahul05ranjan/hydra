@@ -16,13 +16,15 @@ from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / '.env')
-STAGE = Path.home() / '.hydra/kaggle-toolcall-eval'
-TRAINING = Path.home() / '.hydra/build/toolcall-candidate'
-RESULT = Path.home() / '.hydra/build/toolcall-eval'
+# HYDRA_TOOLCALL_RUN=v2 evaluates the second training run under its own names (see toolcall_control.py).
+SUFFIX = '' if os.environ.get('HYDRA_TOOLCALL_RUN', 'v1') == 'v1' else '-' + os.environ['HYDRA_TOOLCALL_RUN']
+STAGE = Path.home() / f'.hydra/kaggle-toolcall-eval{SUFFIX}'
+TRAINING = Path.home() / f'.hydra/build/toolcall-candidate{SUFFIX}'
+RESULT = Path.home() / f'.hydra/build/toolcall-eval{SUFFIX}'
 USER = os.environ.get('KAGGLE_USERNAME', '')
-KERNEL = f'{USER}/hydra-toolcall-evaluation'
+KERNEL = f'{USER}/hydra-toolcall-evaluation{SUFFIX}'
 DATASET = KERNEL + '-input'
-TRAINING_KERNEL = f'{USER}/hydra-toolcall-training'
+TRAINING_KERNEL = f'{USER}/hydra-toolcall-training{SUFFIX}'
 TIMEOUT = 8 * 3600
 SOURCES = ['skills/hydra/scripts', 'evals/run.mjs', 'evals/run_dev.mjs', 'evals/live_reporter.mjs', 'evals/git1',
            'evals/git_dev', 'evals/suite/run.mjs', 'evals/suite/scoring.mjs', 'evals/public/bfcl_qwen35.py',
@@ -84,9 +86,9 @@ def prepare():
              f"if _H.sha256(_f.read_bytes()).hexdigest() != '{plan_hash}':\n"
              "    raise ValueError('Mounted plan differs from the frozen plan')\n\n")
     (kernel / 'toolcall_eval.py').write_text(guard + (ROOT / 'train/kaggle/toolcall_eval.py').read_text())
-    (dataset / 'dataset-metadata.json').write_text(json.dumps({'id': DATASET, 'title': 'Hydra toolcall evaluation input',
+    (dataset / 'dataset-metadata.json').write_text(json.dumps({'id': DATASET, 'title': f'Hydra toolcall evaluation input{SUFFIX}',
         'licenses': [{'name': 'apache-2.0'}], 'description': plan['scope']}, indent=2))
-    (kernel / 'kernel-metadata.json').write_text(json.dumps({'id': KERNEL, 'title': 'Hydra toolcall evaluation',
+    (kernel / 'kernel-metadata.json').write_text(json.dumps({'id': KERNEL, 'title': f'Hydra toolcall evaluation{SUFFIX}',
         'code_file': 'toolcall_eval.py', 'language': 'python', 'kernel_type': 'script', 'is_private': True,
         'enable_gpu': True, 'enable_internet': True, 'dataset_sources': [DATASET], 'competition_sources': [],
         'kernel_sources': [TRAINING_KERNEL]}, indent=2))

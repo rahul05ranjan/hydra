@@ -15,14 +15,20 @@ from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / '.env')
-STAGE = Path.home() / '.hydra/kaggle-toolcall'
-RESULT = Path.home() / '.hydra/build/toolcall-candidate'
+# HYDRA_TOOLCALL_RUN=v2 selects the second mix (train/data-toolcall-v2) under its own names, so the
+# first run's kernel, dataset and receipts stay as they were.
+RUN = os.environ.get('HYDRA_TOOLCALL_RUN', 'v1')
+SUFFIX = '' if RUN == 'v1' else f'-{RUN}'
+DATA = ROOT / {'v1': 'train/data-toolcall', 'v2': 'train/data-toolcall-v2'}[RUN]
+STAGE = Path.home() / f'.hydra/kaggle-toolcall{SUFFIX}'
+RESULT = Path.home() / f'.hydra/build/toolcall-candidate{SUFFIX}'
 USER = os.environ.get('KAGGLE_USERNAME', '')
-KERNEL = f'{USER}/hydra-toolcall-training'
+KERNEL = f'{USER}/hydra-toolcall-training{SUFFIX}'
 DATASET = KERNEL + '-input'
 V2 = Path.home() / '.hydra/build/bench-models/hydra-nano-v2'
-PLAN = {'heads': 'git,toolcall', 'steps': 200, 'accumulation': 8, 'learningRate': 2e-6, 'initialScale': 128,
-        'maxLength': 2048, 'sampleSeed': 20261017, 'trainerSeconds': 7200, 'kernelTimeoutSeconds': 3 * 3600,
+PLAN = {'heads': {'v1': 'git,toolcall', 'v2': 'git,toolcall,chat'}[RUN], 'steps': 200, 'accumulation': 8,
+        'learningRate': 2e-6, 'initialScale': 128, 'maxLength': 2048,
+        'sampleSeed': {'v1': 20261017, 'v2': 20261018}[RUN], 'trainerSeconds': 7200, 'kernelTimeoutSeconds': 3 * 3600,
         'checkpoint': {'repo': 'rahul05ranjan/hydra-nano-git', 'revision': '8129125fad1c664bbb58ebd3238f6598c879eb23'}}
 
 
@@ -39,12 +45,12 @@ def prepare():
     dataset, kernel = STAGE / 'dataset', STAGE / 'kernel'
     for d in (dataset, kernel):
         d.mkdir(parents=True, exist_ok=True)
-    data = json.loads((ROOT / 'train/data-toolcall/manifest.json').read_text())
-    if data['dataSha256'] != digest(ROOT / 'train/data-toolcall/train.jsonl') or any(
+    data = json.loads((DATA / 'manifest.json').read_text())
+    if data['dataSha256'] != digest(DATA / 'train.jsonl') or any(
             data[k] for k in ('sealedInputsUsed', 'developmentInputsUsed', 'holdoutInputsUsed', 'benchmarkInputsUsed')):
         raise ValueError('Unverified or contaminated training data')
-    shutil.copyfile(ROOT / 'train/data-toolcall/train.jsonl', dataset / 'train.jsonl')
-    shutil.copyfile(ROOT / 'train/data-toolcall/manifest.json', dataset / 'data-manifest.json')
+    shutil.copyfile(DATA / 'train.jsonl', dataset / 'train.jsonl')
+    shutil.copyfile(DATA / 'manifest.json', dataset / 'data-manifest.json')
     shutil.copyfile(ROOT / 'train/full_finetune.py', dataset / 'full_finetune.py')
     files = ('model.safetensors', 'config.json', 'tokenizer.json', 'tokenizer_config.json', 'chat_template.jinja', 'generation_config.json')
     plan = {**PLAN, 'checkpoint': {**PLAN['checkpoint'], 'files': {name: digest(V2 / name) for name in files}},
@@ -59,9 +65,9 @@ def prepare():
              f"if _H.sha256(_f.read_bytes()).hexdigest() != '{plan_hash}':\n"
              "    raise ValueError('Mounted plan differs from the frozen plan')\n\n")
     (kernel / 'toolcall_train.py').write_text(guard + (ROOT / 'train/kaggle/toolcall_train.py').read_text())
-    (dataset / 'dataset-metadata.json').write_text(json.dumps({'id': DATASET, 'title': 'Hydra toolcall training input',
+    (dataset / 'dataset-metadata.json').write_text(json.dumps({'id': DATASET, 'title': f'Hydra toolcall training input{SUFFIX}',
         'licenses': [{'name': 'CC-BY-4.0'}], 'description': plan['scope']}, indent=2))
-    (kernel / 'kernel-metadata.json').write_text(json.dumps({'id': KERNEL, 'title': 'Hydra toolcall training',
+    (kernel / 'kernel-metadata.json').write_text(json.dumps({'id': KERNEL, 'title': f'Hydra toolcall training{SUFFIX}',
         'code_file': 'toolcall_train.py', 'language': 'python', 'kernel_type': 'script', 'is_private': True,
         'enable_gpu': True, 'enable_internet': True, 'dataset_sources': [DATASET], 'competition_sources': [],
         'kernel_sources': []}, indent=2))

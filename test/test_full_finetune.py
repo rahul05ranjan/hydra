@@ -91,5 +91,31 @@ class ToolCallContract(unittest.TestCase):
             module.validate_row({'head': 'git', 'messages': decline()['messages']})
 
 
+def chat(text='Rivers carry water to the sea.', **extra):
+    return {'head': 'chat', 'messages': [{'role': 'user', 'content': 'why do rivers matter?'},
+                                         {'role': 'assistant', 'content': text}], **extra}
+
+
+class ChatReplayContract(unittest.TestCase):
+    def test_a_chat_row_is_one_plain_text_reply_without_tools(self):
+        module.validate_row(chat())
+        for bad in (chat(''), chat('<tool_call>\n<function=x>\n</function>\n</tool_call>'), chat(tools=TOOLS)):
+            with self.assertRaises(ValueError):
+                module.validate_row(bad)
+
+    def test_chat_rows_encode_without_the_hydra_json_contract(self):
+        seen = []
+
+        class Recording(ChatTokenizer):
+            def apply_chat_template(self, messages, **kwargs):
+                seen.append(kwargs.get('tools'))
+                return [1, 2, 3] if len(messages) == 1 else [1, 2, 3, 4, 9]
+        row = chat()
+        self.assertEqual(module.encode_example(Recording(), row['messages'], 5, None, 'chat')['labels'], [-100, -100, -100, 4, 9])
+        self.assertEqual(seen, [None, None])
+        with self.assertRaises(ValueError):
+            module.encode_example(Recording(), row['messages'], 5)
+
+
 if __name__ == '__main__':
     unittest.main()

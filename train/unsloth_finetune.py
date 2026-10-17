@@ -69,7 +69,7 @@ def main():
     from transformers import AutoTokenizer
     # Preserve the hash-pinned tokenizer regex; no automatic Mistral patch on Qwen exports.
     tokenizer = AutoTokenizer.from_pretrained(args.checkpoint, local_files_only=True, fix_mistral_regex=False)
-    examples = [encode_example(tokenizer, row['messages'], args.max_length, row.get('tools')) for row in rows]
+    examples = [encode_example(tokenizer, row['messages'], args.max_length, row.get('tools'), row.get('head')) for row in rows]
     receipt = {'timestamp': datetime.now(timezone.utc).isoformat(), 'head': args.head,
         'method': f'unsloth-{args.method}', 'trainingStarted': False,
         'checkpointManifest': checkpoint_spec, 'dataManifest': data_spec,

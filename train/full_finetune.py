@@ -1,11 +1,13 @@
 """Full parameter SFT of a local, standard-HF text checkpoint. Preflight never trains."""
 import argparse
 from datetime import datetime, timezone
+import gc
 import hashlib
 import json
 import math
 from pathlib import Path
 import random
+import re
 import time
 
 
@@ -15,6 +17,22 @@ def digest(file):
         for chunk in iter(lambda: stream.read(8 * 1024 * 1024), b''):
             value.update(chunk)
     return value.hexdigest()
+
+
+def host_memory(proc=Path('/proc')):
+    """Host RAM on Linux: this process's resident set and what the kernel can still hand out.
+    Empty where /proc does not say (macOS, Windows)."""
+    memory = {}
+    for file, key, name in ((proc / 'self' / 'status', 'VmRSS', 'hostRssBytes'),
+                            (proc / 'meminfo', 'MemAvailable', 'hostAvailableBytes')):
+        try:
+            match = re.search(rf'^{key}:\s+(\d+) kB$', file.read_text(), re.MULTILINE)
+        except OSError:
+            return {}
+        if not match:
+            return {}
+        memory[name] = int(match.group(1)) * 1024
+    return memory
 
 
 def validate_target(head, messages):
@@ -178,6 +196,8 @@ class CpuAdamW:
     CUDA parameters retain their autograd gradients through unscale/clipping.
     Each gradient is then copied to CPU and released before the AdamW update;
     updated weights are copied back to the same model parameters in place.
+    The CPU gradient buffers are allocated once: a fresh full-model copy every
+    update churns gigabytes of host memory over a long run.
     """
 
     def __init__(self, parameters, lr, weight_decay):
@@ -185,6 +205,7 @@ class CpuAdamW:
         self.model_parameters = list(parameters)
         self.cpu_parameters = [torch.nn.Parameter(p.detach().to('cpu', copy=True))
             for p in self.model_parameters]
+        self.gradient_buffers = [torch.empty_like(p) for p in self.cpu_parameters]
         self.gradient_optimizer = torch.optim.SGD(self.model_parameters, lr=0, foreach=False)
         self.optimizer = torch.optim.AdamW(self.cpu_parameters, lr=lr,
             weight_decay=weight_decay, foreach=False)
@@ -195,9 +216,13 @@ class CpuAdamW:
 
     def step(self):
         import torch
-        for model_parameter, cpu_parameter in zip(self.model_parameters, self.cpu_parameters):
-            cpu_parameter.grad = (model_parameter.grad.detach().to('cpu', copy=True)
-                if model_parameter.grad is not None else None)
+        for model_parameter, cpu_parameter, buffer in zip(self.model_parameters, self.cpu_parameters,
+                                                          self.gradient_buffers):
+            if model_parameter.grad is None:
+                cpu_parameter.grad = None
+                continue
+            buffer.copy_(model_parameter.grad.detach())
+            cpu_parameter.grad = buffer
             model_parameter.grad = None
         self.optimizer.step()
         with torch.no_grad():
@@ -223,10 +248,14 @@ def main():
     parser.add_argument('--learning-rate', type=float, default=1e-5)
     parser.add_argument('--initial-scale', type=float, default=65536)
     parser.add_argument('--sample-seed', type=int, default=1729)
+    parser.add_argument('--min-host-available-gb', type=float, default=4.0,
+        help='Stop and save before an update starts with less host RAM available than this (Linux only); '
+             'the OOM killer ends a run without a checkpoint')
     args = parser.parse_args()
     if not args.preflight and not args.approved:
         parser.error('Full training needs explicit approval, checkpoint/data hashes and a bounded GPU run notice')
-    if min(args.max_seconds, args.steps, args.max_length, args.accumulation) <= 0 or args.learning_rate <= 0:
+    if min(args.max_seconds, args.steps, args.max_length, args.accumulation) <= 0 or args.learning_rate <= 0 \
+            or args.min_host_available_gb < 0:
         parser.error('Training limits must be positive')
     if not math.isfinite(args.initial_scale) or args.initial_scale <= 0:
         parser.error('Initial gradient scale must be finite and positive')
@@ -284,7 +313,7 @@ def main():
     receipt.update(trainingStarted=True, totalParameters=total, trainableParameters=trainable,
         sampleSeed=args.sample_seed,
         gpu=torch.cuda.get_device_name(0), losses=[], completedSteps=0, overflowStepsSkipped=0,
-        gradientScaleHistory=[])
+        gradientScaleHistory=[], minHostAvailableGb=args.min_host_available_gb, hostMemory=[])
     deadline = started + args.max_seconds
     training_begin = time.monotonic()
     try:
@@ -292,6 +321,13 @@ def main():
             # Reserve time for a standalone save; the Kaggle parent enforces the hard cap.
             if time.monotonic() >= deadline - 90:
                 receipt['stoppedForDeadline'] = True
+                break
+            # Stop while there is still host RAM to save in: the OOM killer leaves no checkpoint.
+            memory = host_memory()
+            receipt['hostMemory'].append({'step': step, **memory})
+            if memory and memory['hostAvailableBytes'] < args.min_host_available_gb * 1024 ** 3:
+                receipt['stoppedForHostMemory'] = True
+                print(json.dumps({'stoppedForHostMemory': True, 'step': step, **memory}), flush=True)
                 break
             batch = [random.choice(examples) for _ in range(args.accumulation)]
             for attempt in range(8):
@@ -330,11 +366,16 @@ def main():
             receipt['completedSteps'] += 1
             receipt['losses'].append(total_loss / args.accumulation)
             print(json.dumps({'completedSteps': receipt['completedSteps'], 'loss': receipt['losses'][-1],
-                'scale': scaler.get_scale(), 'peakMemoryBytes': torch.cuda.max_memory_allocated()}), flush=True)
+                'scale': scaler.get_scale(), 'peakMemoryBytes': torch.cuda.max_memory_allocated(),
+                **host_memory()}), flush=True)
         receipt['trainingSeconds'] = time.monotonic() - training_begin
         receipt['peakMemoryBytes'] = torch.cuda.max_memory_allocated()
         if not receipt['completedSteps']:
             raise RuntimeError('No full-parameter optimization step completed')
+        # The CPU weight copies, moments and gradient buffers (about four times the model) are
+        # done with; free them before the save needs host memory of its own.
+        del optimizer
+        gc.collect()
         # Complete standalone text weights, not an adapter. No publication/default switch.
         model.to('cpu', dtype=torch.float16)
         model.save_pretrained(args.output, safe_serialization=True)
@@ -346,6 +387,7 @@ def main():
         raise
     finally:
         receipt['peakMemoryBytes'] = torch.cuda.max_memory_allocated()
+        receipt['hostMemoryAtEnd'] = host_memory()
         receipt['elapsedSeconds'] = time.monotonic() - started
         (args.output / 'training-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
 

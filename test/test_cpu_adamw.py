@@ -62,6 +62,24 @@ class CpuAdamWTests(unittest.TestCase):
                     self.assertTrue(all(not torch.is_tensor(v) or v.device.type == 'cpu'
                         for v in state.values()))
 
+    def test_cpu_gradient_buffers_are_allocated_once_and_reused(self):
+        # A fresh ~3 GB of CPU gradient copies per update fragments host memory over a long run.
+        torch.manual_seed(5)
+        model = tiny_model()
+        offloaded = trainer.CpuAdamW(model.parameters(), lr=1e-5, weight_decay=0.01)
+        ids = torch.randint(0, 41, (1, 19))
+        labels = ids.clone()
+        labels[:, :12] = -100
+        addresses = []
+        for _ in range(3):
+            offloaded.zero_grad(set_to_none=True)
+            trainer.assistant_loss(model, ids, labels).backward()
+            offloaded.step()
+            addresses.append([buffer.data_ptr() for buffer in offloaded.gradient_buffers])
+        self.assertEqual(len(offloaded.gradient_buffers), len(list(model.parameters())))
+        self.assertEqual(addresses[0], addresses[1])
+        self.assertEqual(addresses[1], addresses[2])
+
     def test_overflow_retry_does_not_update_weights_or_cpu_moments(self):
         torch.manual_seed(9)
         model = tiny_model()

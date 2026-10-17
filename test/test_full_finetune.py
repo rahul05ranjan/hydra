@@ -21,6 +21,16 @@ MESSAGES = [{'role': 'system', 'content': 'menu'}, {'role': 'user', 'content': '
 
 
 class FullTrainingInvariants(unittest.TestCase):
+    def test_host_memory_reads_linux_proc_and_is_empty_elsewhere(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as folder:
+            proc = Path(folder)
+            self.assertEqual(module.host_memory(proc), {})
+            (proc / 'self').mkdir()
+            (proc / 'self' / 'status').write_text('Name:\tpython\nVmRSS:\t  13631488 kB\nThreads:\t9\n')
+            (proc / 'meminfo').write_text('MemTotal:       32873496 kB\nMemAvailable:    2097152 kB\n')
+            self.assertEqual(module.host_memory(proc), {'hostRssBytes': 13631488 * 1024, 'hostAvailableBytes': 2097152 * 1024})
+
     def test_only_assistant_and_chat_eos_are_supervised(self):
         self.assertEqual(module.encode_example(ChatTokenizer(), MESSAGES, 5)['labels'], [-100, -100, -100, 4, 9])
 

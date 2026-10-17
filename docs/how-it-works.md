@@ -123,8 +123,11 @@ Every other tool Hydra finds gets Hydra's MCP server (`scripts/mcp.mjs`, also `h
 | OpenCode | `~/.config/opencode/opencode.json(c)` `mcp.hydra` | `~/.config/opencode/plugins/hydra.js` (`tool.execute.before` on `bash`) |
 | Gemini CLI | `~/.gemini/settings.json` `mcpServers.hydra` | same file, `BeforeTool` on `run_shell_command` |
 | Antigravity | `~/.gemini/antigravity/mcp_config.json` | none known; it gets the skill and the MCP server's instructions |
+| Antigravity IDE | `~/.gemini/config/mcp_config.json` | none known; Hydra also puts the current skill folder in `~/.gemini/config/skills/hydra`, replacing an older hydra skill there |
 
-Claude Code keeps its skill and hooks and gets no MCP entry, which would only repeat the same tools. Every registration points at Hydra's own copy of its scripts in `~/.hydra/scripts`, never at an npx cache. Each edited file is backed up once as `<file>.before-hydra` and written atomically; only Hydra's entries are added or removed. A JSON file with comments, or an invalid one, is left alone and the entry to add by hand is printed. Skip all of this with `--no-agents`, or only the hooks with `--no-hooks`. Manage it later with `hydra agents install|remove|status [codex cursor opencode gemini-cli antigravity]`.
+Antigravity IDE (detected by `~/.gemini/antigravity-ide`) is a different app from the older Antigravity: it reads MCP servers and skills from `~/.gemini/config`. Calls made from either app's terminal are recorded as `antigravity` in the ledger, from the bundle id macOS passes to child processes.
+
+Claude Code keeps its skill and hooks and gets no MCP entry, which would only repeat the same tools. Every registration points at Hydra's own copy of its scripts in `~/.hydra/scripts`, never at an npx cache. Each edited file is backed up once as `<file>.before-hydra` and written atomically; only Hydra's entries are added or removed. A JSON file with comments, or an invalid one, is left alone and the entry to add by hand is printed. Skip all of this with `--no-agents`, or only the hooks with `--no-hooks`. Manage it later with `hydra agents install|remove|status [codex cursor opencode gemini-cli antigravity antigravity-ide]`.
 
 The first bootstrap shares the Git model across all model-backed heads; it does not download five specialist weights. Runtime downloads and configuration stay outside agent skill folders, so skill updates retain them. Hydra starts its managed server on `127.0.0.1:11435` when needed; it stays running until `hydra stop` or a reboot. Run the installed `scripts/hydra.mjs doctor` to check readiness. `HYDRA_HOME` changes the data/config directory; explicit backend, URL and model environment variables override managed defaults.
 
@@ -151,7 +154,7 @@ Or copy `skills/hydra` directly to your agent's skills directory:
   - `answer.mjs`: verbatim line selection and lead generation.
   - `ollama.mjs`: compatibility exports for existing evaluation callers.
   - `ledger.mjs`: local telemetry ledger, token accounting and the `hydra improve` findings.
-  - `integrations.mjs`: MCP and hook registration for Codex, Cursor, OpenCode, Gemini CLI and Antigravity.
+  - `integrations.mjs`: MCP and hook registration for Codex, Cursor, OpenCode, Gemini CLI, Antigravity and Antigravity IDE (plus its skill folder).
 - `test/`: unit test suite (`npm test`).
 - `evals/git1/`: 1000-task sealed test set for git head.
 - `evals/test_logs/`: 20-task cross-language benchmark for test and build logs.

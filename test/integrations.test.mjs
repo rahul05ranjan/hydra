@@ -17,6 +17,11 @@ function fakeHome() {
   put('.config/opencode/opencode.json', JSON.stringify({ $schema: 'https://opencode.ai/config.json', mcp: { other: { type: 'local', command: ['other'] } } }));
   put('.gemini/settings.json', JSON.stringify({ hooks: { BeforeTool: [{ matcher: '*', hooks: [{ name: 'mem', type: 'command', command: 'mem hook' }] }] } }));
   put('.gemini/antigravity/mcp_config.json', JSON.stringify({ mcpServers: { other: { command: 'other' } } }));
+  // Antigravity IDE keeps its data in .gemini/antigravity-ide but reads MCP servers and skills from .gemini/config.
+  put('.gemini/antigravity-ide/installation_id', 'id\n');
+  put('.gemini/config/mcp_config.json', '');
+  put('.gemini/config/skills/other/SKILL.md', '---\nname: other\n---\n');
+  put('.gemini/config/skills/hydra/SKILL.md', '---\nname: hydra\ndescription: stale copy that expects Ollama\n---\n');
   return home;
 }
 
@@ -38,12 +43,13 @@ test('every tool gets Hydra beside its own settings, twice without duplicates, a
   const home = fakeHome();
   const read = file => readFileSync(path.join(home, file), 'utf8');
   const files = ['.codex/config.toml', '.cursor/mcp.json', '.config/opencode/opencode.json', '.gemini/settings.json', '.gemini/antigravity/mcp_config.json'];
+  // .gemini/config/mcp_config.json starts empty, so its removal is checked on its own below.
   const original = Object.fromEntries(files.map(file => [file, read(file)]));
   await withHome(home, async integrations => {
     const scripts = integrations.installSharedScripts(SCRIPTS);
     assert.ok(existsSync(path.join(scripts, 'mcp.mjs')));
     const ids = integrations.detected(scripts);
-    assert.deepEqual(ids.sort(), ['antigravity', 'codex', 'cursor', 'gemini-cli', 'opencode']);
+    assert.deepEqual(ids.sort(), ['antigravity', 'antigravity-ide', 'codex', 'cursor', 'gemini-cli', 'opencode']);
     integrations.apply(ids, 'install', { scripts });
     const results = integrations.apply(ids, 'install', { scripts });
     assert.ok(results.every(result => !result.manual.length));
@@ -60,9 +66,18 @@ test('every tool gets Hydra beside its own settings, twice without duplicates, a
     assert.deepEqual(gemini.hooks.BeforeTool.map(group => group.matcher), ['*', 'run_shell_command']);
     assert.ok(gemini.mcpServers.hydra.args[0].endsWith('mcp.mjs'));
     assert.ok(JSON.parse(read('.gemini/antigravity/mcp_config.json')).mcpServers.hydra);
+    assert.ok(JSON.parse(read('.gemini/config/mcp_config.json')).mcpServers.hydra.args[0].endsWith('mcp.mjs'));
+    // The stale skill copy is replaced by the current one, with the scripts its SKILL.md names.
+    assert.equal(read('.gemini/config/skills/hydra/SKILL.md'), readFileSync(path.join(SCRIPTS, '..', 'SKILL.md'), 'utf8'));
+    assert.ok(existsSync(path.join(home, '.gemini/config/skills/hydra/scripts/hydra.mjs')));
+    assert.equal(read('.gemini/config/skills/other/SKILL.md'), '---\nname: other\n---\n');
     assert.ok(integrations.status(scripts).filter(row => row.present).every(row => row.mcp));
+    assert.equal(integrations.status(scripts).find(row => row.id === 'antigravity-ide').skill, true);
 
     integrations.apply(ids, 'remove', { scripts });
+    assert.equal(existsSync(path.join(home, '.gemini/config/skills/hydra')), false);
+    assert.equal(read('.gemini/config/skills/other/SKILL.md'), '---\nname: other\n---\n');
+    assert.equal(JSON.parse(read('.gemini/config/mcp_config.json')).mcpServers, undefined);
     for (const file of files) {
       if (file.endsWith('.toml')) assert.equal(read(file), original[file], file);
       else assert.deepEqual(JSON.parse(read(file)), JSON.parse(original[file]), file);

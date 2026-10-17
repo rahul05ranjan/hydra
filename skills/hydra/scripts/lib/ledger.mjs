@@ -20,10 +20,12 @@ export const enabled = () => process.env.HYDRA_TELEMETRY !== '0';
  * AI_AGENT differs inside hooks (claude-code_<version>_harness) and the agent's shell (..._agent),
  * so `agent` keeps only the family and `agentDetail` the full value. */
 export function caller(session = process.env.CLAUDE_CODE_SESSION_ID) {
+  // Antigravity sets no agent variable; macOS passes the launching app's bundle id to every child process.
+  const app = /^com\.google\.antigravity(?:-ide)?$/.test(process.env.__CFBundleIdentifier ?? '') ? process.env.__CFBundleIdentifier : undefined;
   // HYDRA_AGENT is the MCP client's own name (codex-mcp-client, gemini-cli, opencode, ...), set by mcp.mjs.
-  const detail = process.env.HYDRA_AGENT || process.env.AI_AGENT;
+  const detail = process.env.HYDRA_AGENT || process.env.AI_AGENT || (process.env.CLAUDECODE ? undefined : app);
   const agent = process.env.HYDRA_AGENT ? detail.toLowerCase().replace(/[-_ ]?mcp[-_ ]?client$/, '')
-    : detail ? detail.split('_')[0] : process.env.CLAUDECODE ? 'claude-code' : 'shell';
+    : process.env.AI_AGENT ? detail.split('_')[0] : process.env.CLAUDECODE ? 'claude-code' : app ? 'antigravity' : 'shell';
   return { agent, ...(detail ? { agentDetail: detail } : {}), ...(process.env.HYDRA_VIA ? { via: process.env.HYDRA_VIA } : {}),
     ...(session ? { session } : {}) };
 }

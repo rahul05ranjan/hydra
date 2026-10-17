@@ -8,6 +8,10 @@
 //   opencode     ~/.config/opencode/opencode.json(c) mcp.hydra ~/.config/opencode/plugins/hydra.js tool.execute.before
 //   gemini-cli   ~/.gemini/settings.json mcpServers.hydra     same file, hooks.BeforeTool on run_shell_command
 //   antigravity  ~/.gemini/antigravity/mcp_config.json        none known; the MCP server's instructions guide it
+//   antigravity-ide ~/.gemini/config/mcp_config.json          none known; the skill in ~/.gemini/config/skills/hydra guides it
+//
+// Antigravity IDE (com.google.antigravity-ide, data in ~/.gemini/antigravity-ide) is a different app from
+// the older Antigravity (~/.gemini/antigravity): it reads MCP servers and skills from ~/.gemini/config.
 //
 // Every file Hydra edits is backed up once as <file>.before-hydra, written atomically, and only
 // Hydra's own entries are added or removed. A file Hydra cannot edit safely (JSON with comments, or
@@ -24,7 +28,8 @@ const END = '# <<< hydra <<<';
 /** Hydra's own copy of its scripts, which every tool's MCP entry and hook points at. */
 export const sharedScripts = () => path.join(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'scripts');
 
-/** Copy the skill's scripts to sharedScripts(), so registrations never point into an npx cache. */
+/** Copy the skill's scripts to sharedScripts(), so registrations never point into an npx cache.
+ * Its SKILL.md goes beside them, for tools that load skills from a folder of their own. */
 export function installSharedScripts(from) {
   const target = sharedScripts();
   if (path.resolve(from) === path.resolve(target)) return target; // Already running from the shared copy.
@@ -33,6 +38,8 @@ export function installSharedScripts(from) {
   cpSync(from, `${target}.hydra-tmp`, { recursive: true });
   rmSync(target, { recursive: true, force: true });
   renameSync(`${target}.hydra-tmp`, target);
+  const skill = path.join(from, '..', 'SKILL.md');
+  if (existsSync(skill)) copyFileSync(skill, path.join(path.dirname(target), 'SKILL.md'));
   return target;
 }
 
@@ -186,6 +193,33 @@ export const Hydra = async () => ({
   };
 }
 
+/** The hydra skill folder (SKILL.md and the scripts it names) in a tool's own skills folder.
+ * An older hydra skill there is replaced; a folder that is not the hydra skill is left alone. */
+function skillFolder(dir, scripts) {
+  const skillFile = path.join(dir, 'SKILL.md');
+  const ours = () => existsSync(skillFile) && /^name:\s*hydra\s*$/m.test(readFileSync(skillFile, 'utf8'));
+  return {
+    install() {
+      const source = path.join(path.dirname(scripts), 'SKILL.md');
+      if (!existsSync(source)) throw new Manual(dir, 'npx github:rahul05ranjan/hydra', `needs the hydra skill, but ${source} is missing; run the installer again`);
+      if (existsSync(dir) && !ours()) throw new Manual(dir, `the hydra skill folder (SKILL.md and scripts/) from ${path.dirname(scripts)}`, 'exists and is not the hydra skill');
+      rmSync(`${dir}.hydra-tmp`, { recursive: true, force: true });
+      mkdirSync(`${dir}.hydra-tmp`, { recursive: true });
+      copyFileSync(source, path.join(`${dir}.hydra-tmp`, 'SKILL.md'));
+      cpSync(scripts, path.join(`${dir}.hydra-tmp`, 'scripts'), { recursive: true });
+      rmSync(dir, { recursive: true, force: true });
+      renameSync(`${dir}.hydra-tmp`, dir);
+      return `${dir}: skill`;
+    },
+    remove() {
+      if (!ours()) return null;
+      rmSync(dir, { recursive: true, force: true });
+      return `${dir}: skill`;
+    },
+    status: () => ours() && existsSync(path.join(dir, 'scripts', 'hydra.mjs')),
+  };
+}
+
 const opencodeConfig = dir => ['opencode.json', 'opencode.jsonc'].map(name => path.join(dir, name)).find(existsSync) ?? path.join(dir, 'opencode.json');
 
 /** Every tool Hydra can join, with where it lives and what Hydra registers there. */
@@ -217,6 +251,9 @@ export function tools(scripts = sharedScripts()) {
         BeforeTool: [{ matcher: 'run_shell_command', hooks: [{ name: 'hydra', type: 'command', command: hookCommand(scripts, 'route-tests.mjs', 'gemini'), timeout: 10_000 }] }] }) } },
     antigravity: { dir: path.join(gemini, 'antigravity'), parts: {
       mcp: jsonServer(path.join(gemini, 'antigravity', 'mcp_config.json'), 'mcpServers', mcp) } },
+    'antigravity-ide': { dir: path.join(gemini, 'antigravity-ide'), parts: {
+      mcp: jsonServer(path.join(gemini, 'config', 'mcp_config.json'), 'mcpServers', mcp),
+      skill: skillFolder(path.join(gemini, 'config', 'skills', 'hydra'), scripts) } },
   };
 }
 

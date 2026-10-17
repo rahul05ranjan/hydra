@@ -36,7 +36,7 @@ const USAGE = `usage:
   hydra stop                                           stop Hydra's managed llama-server
   hydra hooks install|remove|status                    Claude Code hooks that route tests and git questions here
   hydra agents install|remove|status [tool...]         Hydra's MCP server and hooks in codex, cursor, opencode,
-                                                       gemini-cli and antigravity (default: every tool found)
+                                                       gemini-cli, antigravity and antigravity-ide (default: every tool found)
   hydra mcp                                            run the MCP server on stdio`;
 
 function fail(code, message) {
@@ -493,16 +493,16 @@ function agentsCommand(args) {
   const ids = words.filter(word => !word.startsWith('--'));
   if (action === 'status') {
     for (const row of integrations.status()) {
-      console.log(`${row.id.padEnd(12)} ${row.present ? 'found    ' : 'not found'}  mcp ${row.mcp ? 'yes' : 'no '}${'hooks' in row ? `  hooks ${row.hooks ? 'yes' : 'no'}` : ''}`);
+      console.log(`${row.id.padEnd(15)} ${row.present ? 'found    ' : 'not found'}  mcp ${row.mcp ? 'yes' : 'no '}${'hooks' in row ? `  hooks ${row.hooks ? 'yes' : 'no'}` : ''}${'skill' in row ? `  skill ${row.skill ? 'yes' : 'no'}` : ''}`);
     }
-    console.log(`claude-code  ${hookStatus().length ? 'hooks yes' : 'hooks no'} (skill and hooks; see hydra hooks status)`);
+    console.log(`claude-code     ${hookStatus().length ? 'hooks yes' : 'hooks no'} (skill and hooks; see hydra hooks status)`);
     return;
   }
-  if (!['install', 'remove'].includes(action)) fail(1, 'usage: hydra agents install|remove|status [codex cursor opencode gemini-cli antigravity] [--no-hooks]');
+  if (!['install', 'remove'].includes(action)) fail(1, 'usage: hydra agents install|remove|status [codex cursor opencode gemini-cli antigravity antigravity-ide] [--no-hooks]');
   const scripts = action === 'install'
     ? integrations.installSharedScripts(path.dirname(fileURLToPath(import.meta.url))) : integrations.sharedScripts();
   const targets = ids.length ? ids : action === 'install' ? integrations.detected(scripts) : Object.keys(integrations.tools(scripts));
-  if (!targets.length) return console.log('No supported coding tool found (codex, cursor, opencode, gemini-cli, antigravity).');
+  if (!targets.length) return console.log('No supported coding tool found (codex, cursor, opencode, gemini-cli, antigravity, antigravity-ide).');
   for (const result of integrations.apply(targets, action, { scripts, hooks: !words.includes('--no-hooks') })) {
     if (result.error) { console.log(`${result.id}: ${result.error}`); continue; }
     console.log(`${result.id}: ${result.changes.length ? result.changes.join('; ') : action === 'install' ? 'nothing changed' : 'nothing to remove'}`);

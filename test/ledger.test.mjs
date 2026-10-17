@@ -24,6 +24,25 @@ test('the ledger records calls with their caller, and HYDRA_TELEMETRY=0 records 
   if (prior === undefined) delete process.env.AI_AGENT; else process.env.AI_AGENT = prior;
 });
 
+test('a command run from an Antigravity terminal is recorded as antigravity, not shell', () => {
+  const keys = ['AI_AGENT', 'CLAUDECODE', 'HYDRA_AGENT', '__CFBundleIdentifier'];
+  const prior = Object.fromEntries(keys.map(key => [key, process.env[key]]));
+  try {
+    for (const key of keys) delete process.env[key];
+    // macOS passes the launching app's bundle id to every child process.
+    for (const [bundle, agent] of [['com.google.antigravity-ide', 'antigravity'], ['com.google.antigravity', 'antigravity'], ['com.mitchellh.ghostty', 'shell']]) {
+      process.env.__CFBundleIdentifier = bundle;
+      assert.equal(caller().agent, agent, bundle);
+    }
+    process.env.__CFBundleIdentifier = 'com.google.antigravity-ide';
+    assert.equal(caller().agentDetail, 'com.google.antigravity-ide');
+    process.env.CLAUDECODE = '1'; // Claude Code inside Antigravity's terminal is still Claude Code.
+    assert.equal(caller().agent, 'claude-code');
+  } finally {
+    for (const key of keys) if (prior[key] === undefined) delete process.env[key]; else process.env[key] = prior[key];
+  }
+});
+
 test('findings show where Hydra cost more than raw, how hooks were followed, and what failed', () => {
   const at = minutes => new Date(Date.UTC(2026, 9, 17, 0, minutes)).toISOString();
   const ledger = [

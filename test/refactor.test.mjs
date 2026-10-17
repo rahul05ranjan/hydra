@@ -197,26 +197,29 @@ function calculate(p1, p2, p3, p4, p5, p6) {
 }
 `);
 
+  // HYDRA_TELEMETRY=0: fixture calls must not land in the user's ledger and skew `hydra improve`.
+  const run = args => execFileSync(process.execPath, [CLI, ...args], { encoding: 'utf8', env: { ...process.env, HYDRA_TELEMETRY: '0' } });
+
   // hydra smell
-  const smellOut = execFileSync(process.execPath, [CLI, 'smell', testFile], { encoding: 'utf8' });
+  const smellOut = run(['smell', testFile]);
   assert.ok(smellOut.includes('[hydra smell]'));
   assert.ok(smellOut.includes('Long Parameter List'));
   assert.ok(smellOut.includes('Deep Nesting'));
   assert.ok(smellOut.includes('Dead Code'));
 
   // hydra smell --json
-  const smellJson = execFileSync(process.execPath, [CLI, 'smell', testFile, '--json'], { encoding: 'utf8' });
+  const smellJson = run(['smell', testFile, '--json']);
   const parsedSmell = JSON.parse(smellJson.slice(0, smellJson.indexOf('\n\n[hydra smell')));
   assert.ok(parsedSmell.smellsFound >= 3);
 
   // hydra refactor
-  const refactorOut = execFileSync(process.execPath, [CLI, 'refactor', testFile, 'calculate'], { encoding: 'utf8' });
+  const refactorOut = run(['refactor', testFile, 'calculate']);
   assert.ok(refactorOut.includes('[hydra refactor]'));
   assert.ok(refactorOut.includes('Guard Clauses'));
   assert.ok(refactorOut.includes('Parameter Object'));
 
   // hydra design
-  const designOut = execFileSync(process.execPath, [CLI, 'design', 'strategy'], { encoding: 'utf8' });
+  const designOut = run(['design', 'strategy']);
   assert.ok(designOut.includes('[hydra design] Strategy Pattern (Behavioral)'));
   assert.ok(designOut.includes('https://refactoring.guru/design-patterns/strategy'));
 });

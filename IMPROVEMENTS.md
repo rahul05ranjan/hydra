@@ -1,0 +1,29 @@
+# Hydra self-improvement log
+
+What real use of Hydra shows, and what to change because of it. The evidence comes from the local telemetry (`~/.hydra/ledger.jsonl`, read with `hydra improve`) and from what an agent noticed while working. Add an entry after any session that used Hydra; close an entry when its fix lands.
+
+Each entry: date, what was seen, the evidence, and its status (open, fixed, by design). Token figures are estimates (characters / 4). Run `hydra improve --since <date>` for the numbers since a given day.
+
+Do not use failures from the sealed `evals/git1` set to decide changes here; that rule in `AGENTS.md` still holds.
+
+## Open
+
+- **2026-10-17. Small git and read answers cost more than raw.** `which branches exist?`, `do I have any stashes?` and similar git calls (37 rows, sources unrecorded) and `read package.json` 129 -> 148 return a little more than they read: the reply labels each section. Same idea as the test head fix below; check `evals/git1` is untouched by any format change and score the git development set before and after.
+- **2026-10-17. Failing runs with short tracebacks save little.** 670 -> 390 and 315 -> 265 tok: the error itself is the evidence, so most of it has to come back. Correctness comes first, so this is mostly by design. Whether import errors repeated per test module can be grouped is still to be checked.
+- **2026-10-17. Speed is not measured against the raw command.** The ledger now records `commandSeconds` (the command alone) beside `seconds` (command plus digest), so Hydra's own overhead can be read per call. A raw-versus-Hydra wall-clock comparison has not been run.
+- **2026-10-17. Token figures are estimates.** Everything is characters / 4. A real tokenizer count of a sample of ledger rows would show how far off the estimate is.
+- **2026-10-17. The git head was not used in a long working session.** No history questions came up, so this says nothing either way about adoption. `hydra improve` now reports how many recorded sessions used Hydra at all; read it after a week of normal work.
+
+## Fixed
+
+- **2026-10-17. Tiny test outputs cost more through Hydra than raw.** A short passing run came back larger than it went in because the reply repeated the command line, often a long absolute path (29 -> 53 tok). A short pass now returns the output alone, and every other reply names the program without its directory (`/home/u/.venv/bin/python -m pytest` -> `python -m pytest`). The same command now returns 29 -> 29. Test-log benchmark unchanged: 19/20 solved, same task per task; returned 2,615 -> 2,613 tok (its commands are already short).
+- **2026-10-17. Hook rows and CLI rows named the agent differently** (`AI_AGENT` is `..._harness` in hooks, `..._agent` in the shell). `agent` now keeps the family (`claude-code`) and `agentDetail` the full value.
+- **2026-10-17. Hook latency was not recorded.** Every hook decision now carries `hookMs` (the hook process lifetime); passing commands are recorded without their text. First reading: p50 10 ms. `hydra improve` reports it.
+- **2026-10-17. The test hook read heredoc bodies as commands.** A line inside `<<'EOF'` data that began with a venv `python -m pytest` path was taken for a test run and stopped the command. `simpleCommands` now skips heredoc bodies; regression cases in `test/claude_hooks.test.mjs`.
+- **2026-10-17. The test hook stopped a grep whose quoted pattern contained `pytest`.** `testRun` split shell lines on `|` even inside quotes, so `grep -n "\"test\|pytest\|unittest" package.json` looked like a pytest run and cost a turn. It now splits only outside quotes (`simpleCommands`), with regression cases in `test/claude_hooks.test.mjs`.
+- **2026-10-17. The test suite wrote fixture calls into the user's ledger.** `test/runtime.test.mjs` ran the real CLI (`ask --head git 'show modified files'`, a bad backend, an unreachable server) without isolating telemetry. 31 of the git head's 68 "saved nothing" rows are that fixture question, and two errors in `hydra improve` came from the same test; where the other 37 came from (other tests, evaluations or real use) is not recorded. The test now sets `HYDRA_TELEMETRY=0`; the hook tests use a temporary `HYDRA_HOME`. Rows written before this fix are still in the ledger; use `--since 2026-10-17T05:00Z` for clean numbers (a time without `Z` is local time).
+- **2026-10-17. Too little telemetry to learn from.** Calls recorded only head, question, tokens and seconds; hook decisions and failures were not recorded. Telemetry v2 adds the caller (agent, session), exit code, command time, model calls and model time, hook denials and `HYDRA_RAW=1` bypasses, session starts, and errors, all local. `hydra improve` reads them.
+
+## By design
+
+- Hydra does not save tokens on reading source files; Read and Grep stay the default there (forced delegation measured +72% tokens, `TRACKER.md` step 12).

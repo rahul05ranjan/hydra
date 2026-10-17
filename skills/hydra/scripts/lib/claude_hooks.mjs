@@ -29,12 +29,77 @@ const RUNNERS = [
 export const claudeDir = () => process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), '.claude');
 export const settingsFile = () => path.join(claudeDir(), 'settings.json');
 
-/** The test/build run inside a shell command, or null. Hydra's own runs and HYDRA_RAW=1 pass. */
-export function testRun(command) {
-  if (!command || /hydra(?:\.mjs)?\s+(?:run|test)\b/.test(command) || /\bHYDRA_RAW=1\b/.test(command)) return null;
-  const run = command.split(/&&|\|\||;|\|/).map(part => part.trim().replace(/^(?:\w+=\S*\s+)+/, ''))
+/** The simple commands of a shell line: split on &&, ||, ;, | and newlines outside quotes, so a
+ * quoted grep pattern such as "test\|pytest" is never mistaken for a command of its own. A heredoc
+ * body (<<EOF ... EOF) is data, not commands, and is skipped whole. */
+export function simpleCommands(command) {
+  const parts = [];
+  let current = '';
+  let quote = null;
+  const heredocs = [];
+  for (let i = 0; i < command.length; i++) {
+    const c = command[i];
+    const heredoc = !quote && c === '<' && command[i + 1] === '<' && command[i + 2] !== '<'
+      && /^<<-?\s*(['"]?)([A-Za-z_]\w*)\1/.exec(command.slice(i));
+    if (heredoc) {
+      heredocs.push(heredoc[2]);
+      current += heredoc[0];
+      i += heredoc[0].length - 1;
+      continue;
+    }
+    if (!quote && c === '\n' && heredocs.length) {
+      parts.push(current);
+      current = '';
+      // Skip each body up to the line that holds only its delimiter.
+      for (const delimiter of heredocs.splice(0)) {
+        const end = command.slice(i + 1).split('\n').findIndex(line => line.trim() === delimiter);
+        if (end < 0) return parts.map(part => part.trim()).filter(Boolean);
+        i += command.slice(i + 1).split('\n').slice(0, end + 1).join('\n').length + 1;
+      }
+      continue;
+    }
+    if (quote) {
+      if (quote === '"' && c === '\\') { current += c + (command[++i] ?? ''); continue; }
+      if (c === quote) quote = null;
+      current += c;
+    } else if (c === "'" || c === '"') {
+      quote = c;
+      current += c;
+    } else if (c === '\\') {
+      current += c + (command[++i] ?? '');
+    } else if ((c === '&' || c === '|') && command[i + 1] === c) {
+      parts.push(current);
+      current = '';
+      i++;
+    } else if (c === ';' || c === '|' || c === '\n') {
+      parts.push(current);
+      current = '';
+    } else {
+      current += c;
+    }
+  }
+  parts.push(current);
+  return parts.map(part => part.trim()).filter(Boolean);
+}
+
+const ownRun = command => /hydra(?:\.mjs)?"?\s+(?:run|test)\b/.test(command);
+
+function runnerIn(command) {
+  const run = simpleCommands(command).map(part => part.replace(/^(?:\w+=\S*\s+)+/, ''))
     .find(part => RUNNERS.some(re => re.test(part)));
   return run ? run.replace(/\s+2>&1\s*$/, '') : null;
+}
+
+/** The test/build run inside a shell command, or null. Hydra's own runs and HYDRA_RAW=1 pass. */
+export function testRun(command) {
+  if (!command || ownRun(command) || /\bHYDRA_RAW=1\b/.test(command)) return null;
+  return runnerIn(command);
+}
+
+/** A test/build run let through by HYDRA_RAW=1: the agent wanted more than Hydra's digest. */
+export function rawBypass(command) {
+  return Boolean(command) && /\bHYDRA_RAW=1\b/.test(command) && !ownRun(command)
+    && runnerIn(command.replace(/\bHYDRA_RAW=1\s+/g, '')) !== null;
 }
 
 function load(file) {

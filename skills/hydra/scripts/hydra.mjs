@@ -10,7 +10,7 @@ import * as git from './lib/git.mjs';
 import * as test_logs from './lib/test_logs.mjs';
 import * as read from './lib/read.mjs';
 import * as osHead from './lib/os.mjs';
-import { record, stats, tokens } from './lib/ledger.mjs';
+import { findings, metered, record, stats, tokens } from './lib/ledger.mjs';
 import { chat, hasModel, BACKEND, modelFor, Unavailable } from './lib/runtime.mjs';
 import { route } from './lib/route.mjs';
 import { stopLocal } from './lib/local.mjs';
@@ -25,6 +25,7 @@ const USAGE = `usage:
   hydra run [--head test] -- <command...>              run a command and digest test/build output
   hydra os [question...]                               inspect ports, processes, disk, system
   hydra stats                                          token accounting for past calls
+  hydra improve [--since <date>] [--json]              what the local telemetry says to improve
   hydra doctor                                         check that the local model is ready
   hydra setup                                          show runtime setup instructions
   hydra stop                                           stop Hydra's managed llama-server
@@ -47,14 +48,14 @@ async function ask(args) {
   if (head === 'git' && !repo) fail(1, 'hydra: the git head needs a git repository, and this directory is not in one');
 
   const started = Date.now();
-  const headChat = opts => chat({ ...opts, model: modelFor(head) });
-  const sections = await HEADS[head].gather(question, cwd, headChat);
-  const { text, rawChars } = await answer(question, sections, headChat);
+  const meter = metered(opts => chat({ ...opts, model: modelFor(head) }));
+  const sections = await HEADS[head].gather(question, cwd, meter.chat);
+  const { text, rawChars } = await answer(question, sections, meter.chat);
   const raw = tokens(rawChars);
   const returned = tokens(text.length);
   const seconds = Number(((Date.now() - started) / 1000).toFixed(1));
 
-  record({ ts: new Date().toISOString(), head, question, raw, returned, seconds });
+  record({ ts: new Date().toISOString(), head, question, raw, returned, seconds, modelCalls: meter.modelCalls, modelSeconds: meter.modelSeconds });
   console.log(`${text}\n\n[hydra ${head} · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
 }
 
@@ -67,12 +68,12 @@ async function runCommand(args) {
       const stdinData = readFileSync(0, 'utf8');
       if (stdinData.trim()) {
         const started = Date.now();
-        const testChat = opts => chat({ ...opts, model: modelFor('test') });
-        const { text, rawChars, exitCode } = await test_logs.digest({ cmd: 'pipe', out: stdinData, exitCode: 1 }, testChat);
+        const meter = metered(opts => chat({ ...opts, model: modelFor('test') }));
+        const { text, rawChars, exitCode } = await test_logs.digest({ cmd: 'pipe', out: stdinData, exitCode: 1 }, meter.chat);
         const raw = tokens(rawChars);
         const returned = tokens(text.length);
         const seconds = Number(((Date.now() - started) / 1000).toFixed(1));
-        record({ ts: new Date().toISOString(), head: 'test', question: 'pipe', raw, returned, seconds });
+        record({ ts: new Date().toISOString(), head: 'test', question: 'pipe', raw, returned, seconds, modelCalls: meter.modelCalls, modelSeconds: meter.modelSeconds });
         console.log(`${text}\n\n[hydra test · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
         if (exitCode !== 0) process.exit(exitCode);
         return;
@@ -85,17 +86,19 @@ async function runCommand(args) {
   const cwd = process.cwd();
   const started = Date.now();
   const res = await run(prog, progArgs, cwd);
-  const testChat = opts => chat({ ...opts, model: modelFor('test') });
+  const commandSeconds = Number(((Date.now() - started) / 1000).toFixed(1));
+  const meter = metered(opts => chat({ ...opts, model: modelFor('test') }));
   const { text, rawChars, exitCode } = await test_logs.digest({
     cmd: cmdArgs.join(' '),
     out: res.out,
     err: res.err,
     exitCode: res.exitCode,
-  }, testChat);
+  }, meter.chat);
   const raw = tokens(rawChars);
   const returned = tokens(text.length);
   const seconds = Number(((Date.now() - started) / 1000).toFixed(1));
-  record({ ts: new Date().toISOString(), head: 'test', question: cmdArgs.join(' '), raw, returned, seconds });
+  record({ ts: new Date().toISOString(), head: 'test', question: cmdArgs.join(' '), raw, returned, seconds,
+    commandSeconds, exit: exitCode, modelCalls: meter.modelCalls, modelSeconds: meter.modelSeconds });
   console.log(`${text}\n\n[hydra test · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
   if (exitCode !== 0) process.exit(exitCode);
 }
@@ -153,14 +156,14 @@ async function readCommand(args) {
 async function osCommand(args) {
   const question = args.join(' ').trim() || 'system overview';
   const started = Date.now();
-  const osChat = opts => chat({ ...opts, model: modelFor('os') });
-  const sections = await osHead.gather(question, process.cwd(), osChat);
-  const { text, rawChars } = await answer(question, sections, osChat);
+  const meter = metered(opts => chat({ ...opts, model: modelFor('os') }));
+  const sections = await osHead.gather(question, process.cwd(), meter.chat);
+  const { text, rawChars } = await answer(question, sections, meter.chat);
   const raw = tokens(rawChars);
   const returned = tokens(text.length);
   const seconds = Number(((Date.now() - started) / 1000).toFixed(1));
 
-  record({ ts: new Date().toISOString(), head: 'os', question, raw, returned, seconds });
+  record({ ts: new Date().toISOString(), head: 'os', question, raw, returned, seconds, modelCalls: meter.modelCalls, modelSeconds: meter.modelSeconds });
   console.log(`${text}\n\n[hydra os · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
 }
 
@@ -218,6 +221,27 @@ Estimate: output size / 4. It counts the output an agent would have read by runn
 the commands itself, and leaves out the extra turns those commands would have cost.`);
 }
 
+function improve(args) {
+  const flag = args.indexOf('--since');
+  const since = flag >= 0 ? args[flag + 1] : undefined;
+  if (flag >= 0 && (!since || Number.isNaN(Date.parse(since)))) fail(1, 'usage: hydra improve [--since <date>] [--json]');
+  const report = findings(undefined, { since: since && new Date(since).toISOString() });
+  if (args.includes('--json')) return console.log(JSON.stringify(report, null, 2));
+  const lines = [`since ${report.since ?? 'the start'}: ${report.calls} calls; ${report.sessions.usingHydra} of ${report.sessions.seen} recorded sessions used Hydra`];
+  for (const [head, h] of Object.entries(report.perHead)) {
+    lines.push(`${head.padEnd(6)} ${h.calls} calls, saved ~${h.saved} tok (${Math.round(h.savedShare * 100)}%), ` +
+      `${h.costMore} cost more than raw, p50 ${h.p50Seconds}s, p90 ${h.p90Seconds}s, ${h.modelCalls} model calls`);
+    for (const row of h.costMoreExamples) lines.push(`         cost more: ${row.question.slice(0, 80)} (${row.raw} -> ${row.returned})`);
+  }
+  const { denials, followedByHydra, rawBypasses } = report.hooks;
+  const { decisions, p50Ms, p90Ms } = report.hooks;
+  lines.push(`hooks  ${decisions} Bash calls checked (p50 ${p50Ms} ms, p90 ${p90Ms} ms); ${denials} test/build runs turned back, ` +
+    `${followedByHydra} followed by a Hydra run within 5 minutes`);
+  for (const command of rawBypasses) lines.push(`         HYDRA_RAW=1 bypass (check for a false match): ${command.slice(0, 100)}`);
+  for (const error of report.errors) lines.push(`error  ${error.ts} ${error.command}: ${error.error}`);
+  console.log(lines.join('\n'));
+}
+
 async function doctor() {
   const checks = new Map();
   const modelStatuses = await Promise.all(
@@ -268,6 +292,7 @@ const commands = {
   read: () => readCommand(rest),
   os: () => osCommand(rest),
   stats: showStats,
+  improve: () => improve(rest),
   doctor,
   setup,
   stop: () => console.log(stopLocal() ? 'Hydra local server stopped.' : 'No managed Hydra server is running.'),
@@ -286,6 +311,7 @@ try {
   if (!commands[command]) fail(1, USAGE);
   await commands[command]();
 } catch (e) {
+  record({ ts: new Date().toISOString(), kind: 'error', command, error: String(e?.message ?? e).slice(0, 300) });
   if (!(e instanceof Unavailable)) throw e;
   fail(2, `hydra unavailable: ${e.message}`);
 }

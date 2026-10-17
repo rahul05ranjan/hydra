@@ -4,7 +4,8 @@ import { createServer } from 'node:http';
 import { test } from 'node:test';
 
 const child = (args, env) => new Promise(resolve => {
-  execFile(process.execPath, args, { env: { ...process.env, HYDRA_MODEL: 'fixture-model', ...env }, timeout: 10000 },
+  // HYDRA_TELEMETRY=0: fixture calls must not land in the user's ledger and skew `hydra improve`.
+  execFile(process.execPath, args, { env: { ...process.env, HYDRA_MODEL: 'fixture-model', HYDRA_TELEMETRY: '0', ...env }, timeout: 10000 },
     (error, stdout, stderr) => resolve({ code: error?.code ?? 0, stdout, stderr }));
 });
 const cli = 'skills/hydra/scripts/hydra.mjs';

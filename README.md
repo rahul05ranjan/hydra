@@ -84,6 +84,12 @@ node <path>/skills/hydra/scripts/hydra.mjs run -- pytest
 node <path>/skills/hydra/scripts/hydra.mjs stats
 ```
 
+### Local telemetry
+
+Every call, hook decision, session start and failure is one JSON line in `~/.hydra/ledger.jsonl`. It records the head, the question or command, token estimates (characters / 4), seconds, the run's exit code and command time, how many times the local model ran and for how long, and the agent and session that called. Nothing leaves the machine. `HYDRA_TELEMETRY=0` turns recording off.
+
+`hydra improve [--since <date>] [--json]` (a date or time in local time, or UTC with a trailing `Z`) reads that ledger and shows where Hydra should improve: per head, the calls that saved nothing and the p50/p90 latency; for the test hook, how many turned-back runs the agent followed with `hydra run` and which commands it pushed through with `HYDRA_RAW=1`; how many recorded sessions used Hydra; recent errors. Findings worth acting on go in `IMPROVEMENTS.md`.
+
 ## Install as a skill
 
 Everything an agent needs is inside `skills/hydra`:
@@ -187,7 +193,7 @@ Full results in `evals/results/read.json`.
   - `test_logs.mjs`: test runner and build log reader head.
   - `answer.mjs`: verbatim line selection and lead generation.
   - `ollama.mjs`: compatibility exports for existing evaluation callers.
-  - `ledger.mjs`: local token accounting ledger.
+  - `ledger.mjs`: local telemetry ledger, token accounting and the `hydra improve` findings.
 - `test/`: unit test suite (`npm test`).
 - `evals/git1/`: 1000-task sealed test set for git head.
 - `evals/test_logs/`: 20-task cross-language benchmark for test and build logs.

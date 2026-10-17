@@ -106,9 +106,23 @@ A complete bootstrap is provided separately:
 npx github:rahul05ranjan/hydra
 ```
 
-It installs the skill globally for every agent it finds (Claude Code if `~/.claude` exists, Codex if `~/.codex` exists; name others with `--agent <id>`), downloads a pinned llama.cpp runtime and the approximately 812 MB Hydra Nano Git Q8 GGUF, verifies SHA-256 hashes, and writes configuration under `~/.hydra`. Node 18+ with npm is required. Windows x64/arm64 CPU, macOS x64/arm64, and Ubuntu-compatible Linux x64/arm64 runtime artifacts are supported. Windows has live verification; other platform packages have not been exercised here.
+It installs the skill globally for every agent it finds (Claude Code if `~/.claude` exists, Codex if `~/.codex` exists, Antigravity if `~/.gemini/antigravity` exists; name others with `--agent <id>`), downloads a pinned llama.cpp runtime and the approximately 812 MB Hydra Nano Git Q8 GGUF, verifies SHA-256 hashes, and writes configuration under `~/.hydra`. Node 18+ with npm is required. Windows x64/arm64 CPU, macOS x64/arm64, and Ubuntu-compatible Linux x64/arm64 runtime artifacts are supported. Windows has live verification; other platform packages have not been exercised here.
 
 For Claude Code the bootstrap also registers two Claude Code hooks in `~/.claude/settings.json`, because an agent that merely has the skill rarely uses it. A `PreToolUse` hook turns a direct test or build run (npm/pnpm/yarn test or build, jest, vitest, pytest, unittest, `node --test`, cargo, go, gradle, mvn, dotnet, make test) back with the `hydra run --` command to use instead; prefixing a command with `HYDRA_RAW=1` lets the raw log through. A `SessionStart` hook tells each new session to ask Hydra about git history and to keep Read and Grep for source files, where Hydra does not save tokens. Other settings are kept, the original file is saved as `settings.json.before-hydra`, and an invalid settings file is left untouched. Skip the hooks with `--no-hooks`; manage them later with `hydra hooks install|remove|status`.
+
+### Other coding tools: MCP server and hooks
+
+Every other tool Hydra finds gets Hydra's MCP server (`scripts/mcp.mjs`, also `hydra mcp`), and its test/build hook where the tool has hooks. The MCP server offers three tools, where Hydra pays: `hydra_git` (a read-only git question), `hydra_run` (one test or build command; shell operators, redirection and env prefixes are refused, and the command must be a recognised test/build runner) and `hydra_os`. It sends the client a short instruction on when to use them, and records the client's name as the agent in the ledger. Source reading and search stay with the tool's own tools.
+
+| Tool | MCP entry | Hook |
+|---|---|---|
+| Codex | `~/.codex/config.toml` `[mcp_servers.hydra]` (between marker comments) | `~/.codex/hooks.json` `PreToolUse` on `Bash` and `SessionStart`; Codex runs them only after you trust them with `/hooks` |
+| Cursor | `~/.cursor/mcp.json` | `~/.cursor/hooks.json` `beforeShellExecution` and `sessionStart` |
+| OpenCode | `~/.config/opencode/opencode.json(c)` `mcp.hydra` | `~/.config/opencode/plugins/hydra.js` (`tool.execute.before` on `bash`) |
+| Gemini CLI | `~/.gemini/settings.json` `mcpServers.hydra` | same file, `BeforeTool` on `run_shell_command` |
+| Antigravity | `~/.gemini/antigravity/mcp_config.json` | none known; it gets the skill and the MCP server's instructions |
+
+Claude Code keeps its skill and hooks and gets no MCP entry, which would only repeat the same tools. Every registration points at Hydra's own copy of its scripts in `~/.hydra/scripts`, never at an npx cache. Each edited file is backed up once as `<file>.before-hydra` and written atomically; only Hydra's entries are added or removed. A JSON file with comments, or an invalid one, is left alone and the entry to add by hand is printed. Skip all of this with `--no-agents`, or only the hooks with `--no-hooks`. Manage it later with `hydra agents install|remove|status [codex cursor opencode gemini-cli antigravity]`.
 
 The first bootstrap shares the Git model across all model-backed heads; it does not download five specialist weights. Runtime downloads and configuration stay outside agent skill folders, so skill updates retain them. Hydra starts its managed server on `127.0.0.1:11435` when needed; it stays running until `hydra stop` or a reboot. Run the installed `scripts/hydra.mjs doctor` to check readiness. `HYDRA_HOME` changes the data/config directory; explicit backend, URL and model environment variables override managed defaults.
 
@@ -184,6 +198,7 @@ Full results in `evals/results/read.json`.
 
 - `skills/hydra/SKILL.md`: tells an agent when to delegate and how to read the result.
 - `skills/hydra/scripts/hydra.mjs`: the CLI.
+- `skills/hydra/scripts/mcp.mjs`: the MCP server (stdio).
 - `skills/hydra/scripts/lib/`:
   - `runtime.mjs`: selectable Ollama/llama.cpp API client and per-head model configuration.
   - `route.mjs`: route questions between heads.
@@ -194,6 +209,7 @@ Full results in `evals/results/read.json`.
   - `answer.mjs`: verbatim line selection and lead generation.
   - `ollama.mjs`: compatibility exports for existing evaluation callers.
   - `ledger.mjs`: local telemetry ledger, token accounting and the `hydra improve` findings.
+  - `integrations.mjs`: MCP and hook registration for Codex, Cursor, OpenCode, Gemini CLI and Antigravity.
 - `test/`: unit test suite (`npm test`).
 - `evals/git1/`: 1000-task sealed test set for git head.
 - `evals/test_logs/`: 20-task cross-language benchmark for test and build logs.

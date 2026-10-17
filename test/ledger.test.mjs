@@ -42,6 +42,9 @@ test('findings show where Hydra cost more than raw, how hooks were followed, and
   assert.deepEqual(report.hooks, { decisions: 2, p50Ms: 60, p90Ms: 60, denials: 1, followedByHydra: 1,
     rawBypasses: ['HYDRA_RAW=1 npm test'] });
   assert.deepEqual(report.sessions, { seen: 2, usingHydra: 1 });
+  assert.deepEqual(findings([{ ts: at(0), kind: 'call', agent: 'codex', via: 'mcp', head: 'git', raw: 9, returned: 3 },
+    { ts: at(1), kind: 'hook', agent: 'gemini', decision: 'deny' }]).agents,
+    { codex: { calls: 1, viaMcp: 1, denials: 0, sessions: 0 }, gemini: { calls: 0, viaMcp: 0, denials: 1, sessions: 0 } });
   assert.equal(report.errors[0].error, 'model unavailable');
   assert.equal(findings(ledger, { since: at(5) }).calls, 0);
 });

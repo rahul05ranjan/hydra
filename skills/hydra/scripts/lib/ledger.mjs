@@ -20,9 +20,12 @@ export const enabled = () => process.env.HYDRA_TELEMETRY !== '0';
  * AI_AGENT differs inside hooks (claude-code_<version>_harness) and the agent's shell (..._agent),
  * so `agent` keeps only the family and `agentDetail` the full value. */
 export function caller(session = process.env.CLAUDE_CODE_SESSION_ID) {
-  const detail = process.env.AI_AGENT;
-  const agent = detail ? detail.split('_')[0] : process.env.CLAUDECODE ? 'claude-code' : 'shell';
-  return { agent, ...(detail ? { agentDetail: detail } : {}), ...(session ? { session } : {}) };
+  // HYDRA_AGENT is the MCP client's own name (codex-mcp-client, gemini-cli, opencode, ...), set by mcp.mjs.
+  const detail = process.env.HYDRA_AGENT || process.env.AI_AGENT;
+  const agent = process.env.HYDRA_AGENT ? detail.toLowerCase().replace(/[-_ ]?mcp[-_ ]?client$/, '')
+    : detail ? detail.split('_')[0] : process.env.CLAUDECODE ? 'claude-code' : 'shell';
+  return { agent, ...(detail ? { agentDetail: detail } : {}), ...(process.env.HYDRA_VIA ? { via: process.env.HYDRA_VIA } : {}),
+    ...(session ? { session } : {}) };
 }
 
 export function record(entry) {
@@ -110,10 +113,17 @@ export function findings(all = rows(), { since } = {}) {
   const denials = hooks.filter(row => row.decision === 'deny');
   const followed = denials.filter(deny => calls.some(call => call.session && call.session === deny.session
     && call.head === 'test' && call.ts >= deny.ts && Date.parse(call.ts) - Date.parse(deny.ts) <= 5 * 60_000));
+  const agents = {};
+  for (const row of recent) {
+    const agent = agents[row.agent ?? 'unknown'] ??= { calls: 0, viaMcp: 0, denials: 0, sessions: 0 };
+    if (isCall(row)) { agent.calls += 1; if (row.via === 'mcp') agent.viaMcp += 1; }
+    if (row.kind === 'hook' && row.decision === 'deny') agent.denials += 1;
+    if (row.kind === 'session') agent.sessions += 1;
+  }
   const sessions = new Set(recent.map(row => row.session).filter(Boolean));
   const sessionsUsing = new Set(calls.map(row => row.session).filter(Boolean));
   return {
-    since: since ?? recent[0]?.ts ?? null, calls: calls.length, perHead,
+    since: since ?? recent[0]?.ts ?? null, calls: calls.length, perHead, agents,
     hooks: { decisions: hooks.length, p50Ms: percentile(hookMs, 0.5), p90Ms: percentile(hookMs, 0.9),
              denials: denials.length, followedByHydra: followed.length,
              rawBypasses: hooks.filter(row => row.decision === 'raw').map(row => row.command).slice(-5) },

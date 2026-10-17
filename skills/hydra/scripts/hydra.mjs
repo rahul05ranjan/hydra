@@ -15,6 +15,7 @@ import { chat, hasModel, BACKEND, modelFor, Unavailable } from './lib/runtime.mj
 import { route } from './lib/route.mjs';
 import { stopLocal } from './lib/local.mjs';
 import { hookStatus, installHooks, removeHooks } from './lib/claude_hooks.mjs';
+import * as integrations from './lib/integrations.mjs';
 
 const HEADS = { git, files, test: test_logs, read, os: osHead };
 
@@ -29,7 +30,10 @@ const USAGE = `usage:
   hydra doctor                                         check that the local model is ready
   hydra setup                                          show runtime setup instructions
   hydra stop                                           stop Hydra's managed llama-server
-  hydra hooks install|remove|status                    Claude Code hooks that route tests and git questions here`;
+  hydra hooks install|remove|status                    Claude Code hooks that route tests and git questions here
+  hydra agents install|remove|status [tool...]         Hydra's MCP server and hooks in codex, cursor, opencode,
+                                                       gemini-cli and antigravity (default: every tool found)
+  hydra mcp                                            run the MCP server on stdio`;
 
 function fail(code, message) {
   console.error(message);
@@ -233,6 +237,9 @@ function improve(args) {
       `${h.costMore} cost more than raw, p50 ${h.p50Seconds}s, p90 ${h.p90Seconds}s, ${h.modelCalls} model calls`);
     for (const row of h.costMoreExamples) lines.push(`         cost more: ${row.question.slice(0, 80)} (${row.raw} -> ${row.returned})`);
   }
+  for (const [agent, a] of Object.entries(report.agents)) {
+    lines.push(`agent  ${agent}: ${a.calls} calls (${a.viaMcp} through MCP), ${a.denials} runs turned back, ${a.sessions} sessions started`);
+  }
   const { denials, followedByHydra, rawBypasses } = report.hooks;
   const { decisions, p50Ms, p90Ms } = report.hooks;
   lines.push(`hooks  ${decisions} Bash calls checked (p50 ${p50Ms} ms, p90 ${p90Ms} ms); ${denials} test/build runs turned back, ` +
@@ -297,7 +304,32 @@ const commands = {
   setup,
   stop: () => console.log(stopLocal() ? 'Hydra local server stopped.' : 'No managed Hydra server is running.'),
   hooks: () => hooksCommand(rest[0]),
+  agents: () => agentsCommand(rest),
+  mcp: () => import('./mcp.mjs').then(server => server.serve()),
 };
+
+function agentsCommand(args) {
+  const [action, ...words] = args;
+  const ids = words.filter(word => !word.startsWith('--'));
+  if (action === 'status') {
+    for (const row of integrations.status()) {
+      console.log(`${row.id.padEnd(12)} ${row.present ? 'found    ' : 'not found'}  mcp ${row.mcp ? 'yes' : 'no '}${'hooks' in row ? `  hooks ${row.hooks ? 'yes' : 'no'}` : ''}`);
+    }
+    console.log(`claude-code  ${hookStatus().length ? 'hooks yes' : 'hooks no'} (skill and hooks; see hydra hooks status)`);
+    return;
+  }
+  if (!['install', 'remove'].includes(action)) fail(1, 'usage: hydra agents install|remove|status [codex cursor opencode gemini-cli antigravity] [--no-hooks]');
+  const scripts = action === 'install'
+    ? integrations.installSharedScripts(path.dirname(fileURLToPath(import.meta.url))) : integrations.sharedScripts();
+  const targets = ids.length ? ids : action === 'install' ? integrations.detected(scripts) : Object.keys(integrations.tools(scripts));
+  if (!targets.length) return console.log('No supported coding tool found (codex, cursor, opencode, gemini-cli, antigravity).');
+  for (const result of integrations.apply(targets, action, { scripts, hooks: !words.includes('--no-hooks') })) {
+    if (result.error) { console.log(`${result.id}: ${result.error}`); continue; }
+    console.log(`${result.id}: ${result.changes.length ? result.changes.join('; ') : action === 'install' ? 'nothing changed' : 'nothing to remove'}`);
+    for (const message of result.manual) console.log(`  ${message.replace(/\n/g, '\n  ')}`);
+    if (result.note) console.log(`  ${result.note}`);
+  }
+}
 
 function hooksCommand(action) {
   const scripts = path.dirname(fileURLToPath(import.meta.url));

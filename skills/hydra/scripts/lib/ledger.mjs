@@ -1,8 +1,9 @@
 // Local telemetry: one JSON line per Hydra call or hook decision in ~/.hydra/ledger.jsonl.
 // Nothing leaves the machine. HYDRA_TELEMETRY=0 turns recording off.
 //   kind 'call' (or no kind, rows written before telemetry v2): a head answered; raw/returned token estimates.
-//   kind 'hook': the PreToolUse hook turned a command back ('deny'), let HYDRA_RAW=1 through ('raw') or
-//     passed it ('pass', recorded without the command). hookMs is the hook process's whole lifetime.
+//   kind 'hook': the PreToolUse hook turned a command back ('deny'), let HYDRA_RAW=1 through ('raw'), let a
+//     run through that its own pipeline already cuts to a few lines ('trimmed') or passed it ('pass', recorded
+//     without the command). hookMs is the hook process's whole lifetime.
 //   kind 'error': a command failed (model unavailable, crash).
 import { appendFileSync, mkdirSync, readFileSync } from 'node:fs';
 import os from 'node:os';
@@ -128,6 +129,7 @@ export function findings(all = rows(), { since } = {}) {
     since: since ?? recent[0]?.ts ?? null, calls: calls.length, perHead, agents,
     hooks: { decisions: hooks.length, p50Ms: percentile(hookMs, 0.5), p90Ms: percentile(hookMs, 0.9),
              denials: denials.length, followedByHydra: followed.length,
+             trimmed: hooks.filter(row => row.decision === 'trimmed').length,
              rawBypasses: hooks.filter(row => row.decision === 'raw').map(row => row.command).slice(-5) },
     errors: recent.filter(row => row.kind === 'error').slice(-5).map(row => ({ ts: row.ts, command: row.command, error: row.error })),
     sessions: { seen: sessions.size, usingHydra: sessionsUsing.size },

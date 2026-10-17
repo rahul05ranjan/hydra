@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Shell-command hook: a test or build run goes through `hydra run --` (or the hydra_run MCP tool),
 // whose digest keeps failing test names, assertion diffs and source locations and drops the rest.
-// Prefix a command with HYDRA_RAW=1 when the raw log is really needed.
+// A run already cut to a few lines by its own pipeline (| tail -n 15, | grep -c) passes: Hydra would
+// save little and a retry costs more. Prefix a command with HYDRA_RAW=1 when the raw log is really needed.
 // --format picks the tool's hook protocol:
 //   claude, codex  PreToolUse; command at tool_input.command; deny via hookSpecificOutput.
 //   gemini         BeforeTool on run_shell_command; deny via {"decision": "deny", "reason"}.
@@ -10,7 +11,7 @@
 // that simply passes is recorded without its text.
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { rawBypass, testRun } from '../lib/claude_hooks.mjs';
+import { rawBypass, testRun, trimmedRun } from '../lib/claude_hooks.mjs';
 import { record } from '../lib/ledger.mjs';
 
 const hydra = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'hydra.mjs');
@@ -40,7 +41,7 @@ process.stdin.on('data', chunk => { input += chunk; }).on('end', () => {
     ...(session ? { session } : {}), hookMs: Math.round(process.uptime() * 1000) });
   const run = testRun(command);
   if (!run) {
-    record(rawBypass(command) ? event('raw') : event('pass', false));
+    record(rawBypass(command) ? event('raw') : trimmedRun(command) ? event('trimmed') : event('pass', false));
     if (answer.pass) process.stdout.write(JSON.stringify(answer.pass));
     return;
   }
@@ -48,5 +49,6 @@ process.stdin.on('data', chunk => { input += chunk; }).on('end', () => {
   process.stdout.write(JSON.stringify(answer.deny(`Test/build runs go through Hydra so the full log stays out of context. Run it as:\n` +
     `  node "${hydra}" run -- ${run}\n${format === 'claude' ? '' : 'or call the hydra_run tool with that command. '}` +
     `(Keep any cd or env prefix before it.) Hydra returns the failing tests, assertion diffs and source locations ` +
-    `verbatim, or a short pass summary. If you truly need the raw log, prefix the original command with HYDRA_RAW=1.`)));
+    `verbatim, or a short pass summary. A run you cut to a few lines yourself (| tail -n 40 or less) also passes. ` +
+    `If you truly need the raw log, prefix the original command with HYDRA_RAW=1.`)));
 });

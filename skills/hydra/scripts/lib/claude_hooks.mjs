@@ -31,8 +31,9 @@ export const settingsFile = () => path.join(claudeDir(), 'settings.json');
 
 /** The simple commands of a shell line: split on &&, ||, ;, | and newlines outside quotes, so a
  * quoted grep pattern such as "test\|pytest" is never mistaken for a command of its own. A heredoc
- * body (<<EOF ... EOF) is data, not commands, and is skipped whole. */
-export function simpleCommands(command) {
+ * body (<<EOF ... EOF) is data, not commands, and is skipped whole. With pipes false, a pipeline
+ * (a | b) stays one piece. */
+export function simpleCommands(command, { pipes = true } = {}) {
   const parts = [];
   let current = '';
   let quote = null;
@@ -71,6 +72,8 @@ export function simpleCommands(command) {
       parts.push(current);
       current = '';
       i++;
+    } else if (c === '|' && !pipes) {
+      current += c;
     } else if (c === ';' || c === '|' || c === '\n') {
       parts.push(current);
       current = '';
@@ -84,22 +87,58 @@ export function simpleCommands(command) {
 
 const ownRun = command => /hydra(?:\.mjs)?"?\s+(?:run|test)\b/.test(command);
 
-function runnerIn(command) {
-  const run = simpleCommands(command).map(part => part.replace(/^(?:\w+=\S*\s+)+/, ''))
-    .find(part => RUNNERS.some(re => re.test(part)));
-  return run ? run.replace(/\s+2>&1\s*$/, '') : null;
+// A later pipeline stage that keeps at most this many lines leaves little for Hydra to save.
+const FEW_LINES = 40;
+
+/** A pipeline stage that cuts its input to a few lines or a count: tail/head of at most FEW_LINES
+ * lines (10 when not given), grep -c, or wc. tail -f and tail -n +N can return everything. */
+function cutsShort(stage) {
+  const [name, ...args] = stage.split(/\s+/);
+  if (name === 'wc') return true;
+  if (name === 'grep' || name === 'rg') return args.some(arg => /^-[a-zA-Z]*c[a-zA-Z]*$/.test(arg) || arg === '--count');
+  if (name !== 'tail' && name !== 'head') return false;
+  let lines = 10;
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (/^-[a-zA-Z]*[fF]/.test(arg) || arg.startsWith('--follow')) return false;
+    const value = /^-\d+$/.test(arg) ? arg.slice(1) : arg === '-n' || arg === '--lines' ? args[++i]
+      : /^-n./.test(arg) ? arg.slice(2) : arg.startsWith('--lines=') ? arg.slice(8) : null;
+    if (value === null) continue;
+    if (!/^\d+$/.test(value ?? '')) return false;
+    lines = Number(value);
+  }
+  return lines <= FEW_LINES;
 }
 
-/** The test/build run inside a shell command, or null. Hydra's own runs and HYDRA_RAW=1 pass. */
+/** Each test/build run in a shell line, and whether its own pipeline cuts the output short. */
+function runsIn(command) {
+  return simpleCommands(command, { pipes: false }).flatMap(pipeline => {
+    const stages = simpleCommands(pipeline).map(part => part.replace(/^(?:\w+=\S*\s+)+/, ''));
+    const at = stages.findIndex(part => RUNNERS.some(re => re.test(part)));
+    return at < 0 ? [] : [{ run: stages[at].replace(/\s+2>&1\s*$/, ''), cut: stages.slice(at + 1).some(cutsShort) }];
+  });
+}
+
+const passesAnyway = command => !command || ownRun(command) || /\bHYDRA_RAW=1\b/.test(command);
+
+/** The test/build run inside a shell command that would put its whole log in context, or null.
+ * Hydra's own runs, HYDRA_RAW=1 and runs already cut to a few lines (| tail -n 15) pass. */
 export function testRun(command) {
-  if (!command || ownRun(command) || /\bHYDRA_RAW=1\b/.test(command)) return null;
-  return runnerIn(command);
+  if (passesAnyway(command)) return null;
+  return runsIn(command).find(run => !run.cut)?.run ?? null;
+}
+
+/** A command whose every test/build run is already cut to a few lines by its own pipeline. */
+export function trimmedRun(command) {
+  if (passesAnyway(command)) return false;
+  const runs = runsIn(command);
+  return runs.length > 0 && runs.every(run => run.cut);
 }
 
 /** A test/build run let through by HYDRA_RAW=1: the agent wanted more than Hydra's digest. */
 export function rawBypass(command) {
   return Boolean(command) && /\bHYDRA_RAW=1\b/.test(command) && !ownRun(command)
-    && runnerIn(command.replace(/\bHYDRA_RAW=1\s+/g, '')) !== null;
+    && runsIn(command.replace(/\bHYDRA_RAW=1\s+/g, '')).length > 0;
 }
 
 function load(file) {

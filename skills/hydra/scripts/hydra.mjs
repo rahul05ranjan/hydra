@@ -244,10 +244,10 @@ function improve(args) {
   for (const [agent, a] of Object.entries(report.agents)) {
     lines.push(`agent  ${agent}: ${a.calls} calls (${a.viaMcp} through MCP), ${a.denials} runs turned back, ${a.sessions} sessions started`);
   }
-  const { denials, followedByHydra, rawBypasses } = report.hooks;
+  const { denials, followedByHydra, trimmed, rawBypasses } = report.hooks;
   const { decisions, p50Ms, p90Ms } = report.hooks;
   lines.push(`hooks  ${decisions} Bash calls checked (p50 ${p50Ms} ms, p90 ${p90Ms} ms); ${denials} test/build runs turned back, ` +
-    `${followedByHydra} followed by a Hydra run within 5 minutes`);
+    `${followedByHydra} followed by a Hydra run within 5 minutes; ${trimmed} let through already cut short (| tail -n N)`);
   for (const command of rawBypasses) lines.push(`         HYDRA_RAW=1 bypass (check for a false match): ${command.slice(0, 100)}`);
   for (const error of report.errors) lines.push(`error  ${error.ts} ${error.command}: ${error.error}`);
   console.log(lines.join('\n'));

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { existsSync, readFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
@@ -12,22 +13,29 @@ try {
   if (Number(process.versions.node.split('.')[0]) < 18) throw new Error('Node 18 or newer is required');
   const manifest = JSON.parse(readFileSync(path.join(here, 'runtime-manifest.json'), 'utf8'));
   if (!manifest.model) throw new Error('GGUF publication is not ready; no downloads or installation performed');
-  const agentFlag = process.argv.indexOf('--agent');
-  const agent = agentFlag >= 0 ? process.argv[agentFlag + 1] : 'codex';
-  if (!agent || !/^[a-z][a-z0-9-]*$/.test(agent)) throw new Error('Use --agent with one skills CLI agent ID (default: codex)');
+  // Install for the agents named with --agent, or else for every agent found on this machine.
+  const named = process.argv.flatMap((arg, i) => arg === '--agent' ? [process.argv[i + 1]] : []);
+  const found = [['claude-code', claudeDir()], ['codex', path.join(os.homedir(), '.codex')]].filter(([, dir]) => existsSync(dir)).map(([id]) => id);
+  const agents = named.length ? named : found;
+  if (!process.argv.includes('--runtime-only')) {
+    if (!agents.length) throw new Error('No Claude Code (~/.claude) or Codex (~/.codex) found; name one with --agent <skills CLI agent ID>');
+    if (agents.some(agent => !agent || !/^[a-z][a-z0-9-]*$/.test(agent))) throw new Error('--agent takes a skills CLI agent ID such as claude-code or codex');
+  }
   console.log(`Hydra installs a pinned llama.cpp runtime and ${manifest.model.size} bytes of GGUF weights into ${home()}.
-It then installs the hydra skill globally for ${agent} and starts a local server on port 11435.
+It then installs the hydra skill for ${agents.join(' and ') || 'no agent (runtime only)'} and starts a local server on port 11435.
 The server stays running until stopped or the computer restarts. Download time depends on your connection.`);
   if (!process.argv.includes('--runtime-only')) {
     const npx = findNpx();
     if (!npx) throw new Error('Cannot locate npm npx-cli.js; install Node with npm or use --runtime-only');
-    execFileSync(process.execPath, [npx, '--yes', '--package=skills', 'skills', 'add', path.resolve(here, '..'), '--skill', 'hydra', '--agent', agent, '--global', '--yes'], { stdio: 'inherit' });
+    for (const agent of agents) {
+      execFileSync(process.execPath, [npx, '--yes', '--package=skills', 'skills', 'add', path.resolve(here, '..'), '--skill', 'hydra', '--agent', agent, '--global', '--yes'], { stdio: 'inherit' });
+    }
   }
   const config = await installRuntime(manifest);
   await ensureLocal(config);
   // Claude Code: register the hooks that route test/build runs and git questions to Hydra.
   const skill = path.join(claudeDir(), 'skills', 'hydra', 'scripts');
-  if (agent === 'claude-code' && !process.argv.includes('--runtime-only') && !process.argv.includes('--no-hooks')
+  if (agents.includes('claude-code') && !process.argv.includes('--runtime-only') && !process.argv.includes('--no-hooks')
       && existsSync(path.join(skill, 'hooks', 'route-tests.mjs'))) {
     const file = installHooks(skill);
     console.log(`Added Hydra's Claude Code hooks to ${file} (your other settings are kept; the original is saved as settings.json.before-hydra).

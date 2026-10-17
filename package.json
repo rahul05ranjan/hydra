@@ -1,10 +1,11 @@
 {
-  "name": "hydra",
+  "name": "hydra-nano",
   "version": "0.1.0",
   "description": "Local specialist models that frontier coding agents delegate repo questions to",
   "private": true,
   "type": "module",
   "bin": {
+    "hydra-nano": "skills/hydra/scripts/install.mjs",
     "hydra": "skills/hydra/scripts/hydra.mjs",
     "hydra-install": "skills/hydra/scripts/install.mjs"
   },

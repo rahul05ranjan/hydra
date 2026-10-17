@@ -115,6 +115,25 @@ def load_examples(data, manifest, heads):
     return selected, spec
 
 
+def verify_checkpoint(checkpoint, manifest):
+    config = json.loads((checkpoint / 'config.json').read_text())
+    if 'text_config' in config:
+        raise ValueError('Normalize to a verified standard-HF text checkpoint before full training')
+    checkpoint_spec = json.loads(manifest.read_text())
+    declared = checkpoint_spec.get('files', {})
+    actual_weights = {file.name for file in checkpoint.glob('*.safetensors')}
+    required_assets = {'config.json', 'tokenizer.json', 'tokenizer_config.json'}
+    if (checkpoint / 'chat_template.jinja').exists():
+        required_assets.add('chat_template.jinja')
+    if not actual_weights or not (actual_weights | required_assets).issubset(declared):
+        raise ValueError('Checkpoint manifest must cover every weight shard, config and tokenizer/chat assets')
+    for name, sha in declared.items():
+        target = (checkpoint / name).resolve()
+        if not target.is_relative_to(checkpoint.resolve()) or digest(target) != sha:
+            raise ValueError(f'Checkpoint provenance mismatch: {name}')
+    return checkpoint_spec
+
+
 def assistant_loss(model, input_ids, labels):
     """Keep the full causal context, projecting only positions with a loss target.
 
@@ -199,21 +218,7 @@ def main():
     if not args.head or not set(args.head.split(',')) <= {'git', 'files', 'read', 'test', 'os', 'toolcall'}:
         parser.error('Heads must come from git, files, read, test, os and toolcall')
     started = time.monotonic()
-    config = json.loads((args.checkpoint / 'config.json').read_text())
-    if 'text_config' in config:
-        raise ValueError('Normalize to a verified standard-HF text checkpoint before full training')
-    checkpoint_spec = json.loads(args.checkpoint_manifest.read_text())
-    declared = checkpoint_spec.get('files', {})
-    actual_weights = {file.name for file in args.checkpoint.glob('*.safetensors')}
-    required_assets = {'config.json', 'tokenizer.json', 'tokenizer_config.json'}
-    if (args.checkpoint / 'chat_template.jinja').exists():
-        required_assets.add('chat_template.jinja')
-    if not actual_weights or not (actual_weights | required_assets).issubset(declared):
-        raise ValueError('Checkpoint manifest must cover every weight shard, config and tokenizer/chat assets')
-    for name, sha in declared.items():
-        target = (args.checkpoint / name).resolve()
-        if not target.is_relative_to(args.checkpoint.resolve()) or digest(target) != sha:
-            raise ValueError(f'Checkpoint provenance mismatch: {name}')
+    checkpoint_spec = verify_checkpoint(args.checkpoint, args.checkpoint_manifest)
     rows, data_spec = load_examples(args.data, args.data_manifest, args.head)
     from transformers import AutoTokenizer
     # Preserve the hash-pinned tokenizer regex; no automatic Mistral patch on Qwen exports.

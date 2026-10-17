@@ -185,12 +185,18 @@ test('route sends test questions to test head', () => {
 test('test_logs hands short output over whole without calling the model', async () => {
   const never = async () => assert.fail('the model was called');
   const shortPass = await test_logs.digest({ cmd: 'npm test', out: 'PASS src/index.test.ts', exitCode: 0 }, never);
-  assert.equal(shortPass.text, '$ npm test\nPASS src/index.test.ts');
+  // A short pass is the output alone: the command line would cost more than it labels.
+  assert.equal(shortPass.text, 'PASS src/index.test.ts');
   assert.equal(shortPass.exitCode, 0);
 
   const shortFail = await test_logs.digest({ cmd: 'npm test', out: 'FAIL src/index.test.ts', exitCode: 1 }, never);
   assert.equal(shortFail.text, '$ npm test (exit 1)\nFAIL src/index.test.ts');
   assert.equal(shortFail.exitCode, 1);
+
+  const venv = await test_logs.digest({ cmd: '/home/u/.venv/bin/python -m pytest -q', out: 'E assert 1 == 2', exitCode: 1 }, never);
+  assert.equal(venv.text, '$ python -m pytest -q (exit 1)\nE assert 1 == 2');
+  assert.equal(test_logs.label('"/a b/bin/node" --test x/y.mjs'), 'node --test x/y.mjs');
+  assert.equal(test_logs.label('npm test'), 'npm test');
 });
 
 test('test_logs summarizes passing tests when output is long without calling the model', async () => {

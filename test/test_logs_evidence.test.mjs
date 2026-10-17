@@ -80,7 +80,7 @@ test('failure candidates retain original line numbers and ignore framework stack
 test('empty output preserves exit status without claiming a passing test suite', async () => {
   const result = await digest({ cmd: 'node silent.mjs', out: '', exitCode: 0 },
     async () => assert.fail('empty output needs no model'));
-  assert.equal(result.text, '$ node silent.mjs\n');
+  assert.equal(result.text, '(no output)');
   assert.equal(result.exitCode, 0);
 });
 

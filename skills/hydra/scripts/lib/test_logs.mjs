@@ -7,6 +7,9 @@ const PASS_THROUGH = 800;
 const MAX_CANDIDATES = 60;
 const MAX_CITED = 12;
 const WHOLE_REGIONS = 2000;
+// The command as the agent typed it, minus the program's directory: a long venv or toolchain path
+// costs tokens on every reply and tells the agent nothing it does not know.
+export const label = cmd => cmd.replace(/^(?:"[^"]*[\\/]|[^\s"]*[\\/])([^\s"\\/]+)"?/, '$1');
 // Colour codes and the prefixes CI runners put on each line (timestamps, BuildKit step markers,
 // GitLab section markers) are removed before matching. Output always keeps the original line.
 const ANSI = /\x1b\[[0-9;?]*[A-Za-z]/g;
@@ -145,10 +148,11 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
   const rawText = (out + (err ? (out ? '\n' : '') + err : '')).trimEnd();
   const rawChars = rawText.length;
 
-  // Short output passes through verbatim with no model call
+  // Short output passes through verbatim with no model call. A short pass needs no command line:
+  // the agent knows what it ran, and the line would cost more than the output it labels.
   if (rawChars <= PASS_THROUGH) {
     return {
-      text: `$ ${cmd}${exitCode !== 0 ? ` (exit ${exitCode})` : ''}\n${rawText}`,
+      text: exitCode !== 0 ? `$ ${label(cmd)} (exit ${exitCode})\n${rawText}` : rawText || '(no output)',
       rawChars,
       exitCode,
     };
@@ -162,7 +166,7 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
       .slice(-8)
       .join('\n');
     return {
-      text: `$ ${cmd} (exit 0)\nAll tests passed.\n${summaryLines ? `${summaryLines}\n` : ''}(Verbose output withheld)`,
+      text: `$ ${label(cmd)} (exit 0)\nAll tests passed.\n${summaryLines ? `${summaryLines}\n` : ''}(Verbose output withheld)`,
       rawChars,
       exitCode,
     };
@@ -176,7 +180,7 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
     const indices = new Set([...lines.slice(0, 3).map((_, i) => i), ...lines.slice(-12).map((_, i) => Math.max(0, lines.length - 12) + i)]);
     const excerpt = [...indices].sort((a, b) => a - b).map(i => lines[i]).join('\n');
     return {
-      text: `$ ${cmd} (exit ${exitCode})\n${excerpt}\n(... ${lines.length - indices.size} lines withheld)`,
+      text: `$ ${label(cmd)} (exit ${exitCode})\n${excerpt}\n(... ${lines.length - indices.size} lines withheld)`,
       rawChars,
       exitCode,
     };
@@ -185,7 +189,7 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
   // Failure regions this small cost less to return whole than to have the model cut down, and whole is always complete.
   const regions = candidates.map(c => c.text);
   if (regions.length && regions.join('\n').length <= WHOLE_REGIONS) {
-    return { text: `$ ${cmd} (exit ${exitCode})\n${regions.join('\n')}`, rawChars, exitCode };
+    return { text: `$ ${label(cmd)} (exit ${exitCode})\n${regions.join('\n')}`, rawChars, exitCode };
   }
 
   const numbered = candidates.map(c => `[${c.id}] ${c.text}`).join('\n');
@@ -215,7 +219,7 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
     evidenceLines = candidates.slice(0, 12).map(c => c.text);
   }
 
-  const text = `$ ${cmd} (exit ${exitCode})\n${evidenceLines.join('\n')}`;
+  const text = `$ ${label(cmd)} (exit ${exitCode})\n${evidenceLines.join('\n')}`;
   return { text, rawChars, exitCode };
 }
 

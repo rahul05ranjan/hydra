@@ -57,9 +57,12 @@ def prepare():
         for name in names:
             z.write(ROOT / name, name)
     quality = Path.home() / '.hydra/quality-sources/files'
-    with zipfile.ZipFile(dataset / 'quality-sources.zip', 'w', zipfile.ZIP_DEFLATED) as z:
+    tree = {}
+    with zipfile.ZipFile(dataset / 'quality-sources.bin', 'w', zipfile.ZIP_DEFLATED) as z:
         for file in sorted(p for p in quality.rglob('*') if p.is_file()):
-            z.write(file, 'files/' + file.relative_to(quality).as_posix())
+            name = 'files/' + file.relative_to(quality).as_posix()
+            z.write(file, name)
+            tree[name] = digest(file)
     v2 = Path.home() / '.hydra/build/bench-models/hydra-nano-v2'
     candidate = training['candidateFiles']
     for name in ('tokenizer.json', 'chat_template.jinja'):
@@ -70,7 +73,8 @@ def prepare():
             'converterFiles': json.loads((STAGE / 'converter-files.json').read_text()),
             'candidateFiles': {k: v for k, v in candidate.items() if k != 'training-receipt.json'},
             'trainingPlanSha256': training['plan'].get('inputs'),
-            'inputs': {name: digest(dataset / name) for name in ('frozen.zip', 'converter.zip', 'quality-sources.zip')},
+            'inputs': {name: digest(dataset / name) for name in ('frozen.zip', 'converter.zip', 'quality-sources.bin')},
+            'qualitySourcesTree': hashlib.sha256(json.dumps(tree, sort_keys=True).encode()).hexdigest(),
             'scope': 'Side-by-side evaluation of the toolcall candidate and Hydra Nano v2 (development gates; '
                      'held-out and sealed aggregate only if the gates pass; BFCL; lm-eval on the candidate).'}
     (dataset / 'toolcall-eval-plan.json').write_text(json.dumps(plan, indent=2) + '\n')

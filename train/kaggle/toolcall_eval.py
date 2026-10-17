@@ -55,9 +55,20 @@ def run(argv, log, **kwargs):
         return subprocess.run(argv, stdout=stream, stderr=subprocess.STDOUT, **kwargs).returncode
 
 
-def unzip(archive, target):
-    with zipfile.ZipFile(archive) as z:
-        z.extractall(target)
+def restore(inputs, name, target):
+    """Kaggle unpacks an uploaded x.zip into a folder x/; take whichever form is mounted. A zip named
+    x.bin is left alone (Kaggle never finished unpacking the 5,670-file quality sources)."""
+    for archive in (inputs / f'{name}.zip', inputs / f'{name}.bin'):
+        if archive.exists():
+            with zipfile.ZipFile(archive) as z:
+                z.extractall(target)
+            return
+    shutil.copytree(inputs / name, target)
+
+
+def tree_digest(root):
+    files = {p.relative_to(root).as_posix(): digest(p) for p in sorted(root.rglob('*')) if p.is_file()}
+    return hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest()
 
 
 def main():
@@ -65,7 +76,7 @@ def main():
     plan = json.loads((inputs / 'toolcall-eval-plan.json').read_text())
     SUMMARY['plan'] = plan
     for name, expected in plan['inputs'].items():
-        if digest(inputs / name) != expected:
+        if (inputs / name).exists() and digest(inputs / name) != expected:
             raise ValueError(f'Input changed: {name}')
     TEMP.mkdir(parents=True, exist_ok=True)
 
@@ -73,18 +84,20 @@ def main():
     repos = {}
     for label in ('candidate', 'v2'):
         repo = TEMP / f'repo-{label}'
-        unzip(inputs / 'frozen.zip', repo)
+        restore(inputs, 'frozen', repo)
         for name, expected in plan['sourceHashes'].items():
             if digest(repo / name) != expected:
                 raise ValueError(f'Source changed: {name}')
         repos[label] = repo
     converter = TEMP / 'converter'
-    unzip(inputs / 'converter.zip', converter)
+    restore(inputs, 'converter', converter)
     for name, expected in plan['converterFiles'].items():
         if digest(converter / name) != expected:
             raise ValueError(f'Converter source changed: {name}')
     sources = TEMP / 'quality-sources'
-    unzip(inputs / 'quality-sources.zip', sources)
+    restore(inputs, 'quality-sources', sources)
+    if tree_digest(sources) != plan['qualitySourcesTree']:
+        raise ValueError('Quality sources changed')
 
     pip = [sys.executable, '-m', 'pip', 'install', '-q']
     for packages in (['bfcl-eval==2026.3.23', 'soundfile'],

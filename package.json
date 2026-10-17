@@ -1,8 +1,27 @@
 {
   "name": "hydra-nano",
   "version": "0.1.0",
-  "description": "Local specialist models that frontier coding agents delegate repo questions to",
-  "private": true,
+  "description": "Small local models that Claude Code and Codex hand routine read-only repo work to: git questions, test and build digests, file slicing, code search and OS inspection",
+  "keywords": [
+    "claude-code",
+    "codex",
+    "agent-skill",
+    "local-llm",
+    "llama.cpp",
+    "git",
+    "test-runner",
+    "token-saving"
+  ],
+  "license": "MIT",
+  "author": "rahul05ranjan",
+  "homepage": "https://github.com/rahul05ranjan/hydra#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahul05ranjan/hydra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rahul05ranjan/hydra/issues"
+  },
   "type": "module",
   "bin": {
     "hydra-nano": "skills/hydra/scripts/install.mjs",

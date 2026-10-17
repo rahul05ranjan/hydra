@@ -29,10 +29,10 @@ hydra run -- npm test
 
 | Set | Solved |
 |---|---|
-| Development | 198/200 (99.0%) |
-| Held-out | **944/1,000 (94.4%)** |
+| Development | 200/200 · extended 572/572 · dev2 1,380/1,380 |
+| Held-out (holdout 2) | **975/1,000 (97.5%)** |
 
-Covers Vitest, Jest, pytest, unittest, cargo, Go, tsc, node:test, Mocha, JUnit, xUnit and Minitest layouts. Small failure regions are returned whole with no model call; the model only trims long ones. Held-out failures are not inspected, so read the raw log when a digest looks incomplete.
+The development sets cover more than 100 layouts across JavaScript, Python, Rust, Go, JVM, .NET, Swift, Haskell, OCaml, Zig, Julia, Dart, Elixir, PHP, Ruby, C/C++ and shell tools, with Windows paths, CI prefixes and colour codes. Small failure regions are returned whole with no model call; the model only trims long ones (50 of 1,000 held-out tasks). The first holdout (944/1,000) was scored while tuning, so a fresh holdout was written and frozen before it was scored. Held-out failures are not inspected, so read the raw log when a digest looks incomplete. These scores need Hydra code from 2026-10-16 or later.
 
 A task counts as solved only when every expected fact is returned and nothing forbidden is. Development, held-out and training data are separate. See the [Hydra Nano model card](https://huggingface.co/rahul05ranjan/hydra-nano-git) for the evaluation method, the training history, the other heads and the limitations.
 

@@ -40,16 +40,51 @@ def validate_target(head, messages):
             raise ValueError('Unknown probe or arbitrary command field in training target')
 
 
-def encode_example(tokenizer, messages, maximum):
-    if [m.get('role') for m in messages] != ['system', 'user', 'assistant']:
-        raise ValueError('Require exactly system/user/assistant messages')
-    # Hydra trains constrained choices/evidence IDs, never shell command strings.
-    target = json.loads(messages[-1]['content'])
-    if not isinstance(target, dict) or set(target) not in ({'probes'}, {'terms'}, {'lines'}):
-        raise ValueError('Assistant target must use one fixed Hydra JSON contract')
-    prompt = tokenizer.apply_chat_template(messages[:-1], tokenize=True,
+def validate_toolcall(row):
+    """General tool calling: a call names an offered function with only its declared parameters;
+    a reply without a call is plain text. Hydra's CLI never runs these calls; they teach the model
+    when to call and when to decline."""
+    messages, tools = row.get('messages'), row.get('tools')
+    if [m.get('role') for m in messages or []] != ['user', 'assistant'] or not isinstance(tools, list) or not tools:
+        raise ValueError('Tool rows need offered tools and exactly user/assistant messages')
+    offered = {t['function']['name']: set((t['function'].get('parameters') or {}).get('properties') or {}) for t in tools}
+    reply = messages[-1]
+    calls = reply.get('tool_calls')
+    if calls is None:
+        text = reply.get('content')
+        if not isinstance(text, str) or not text.strip() or '<tool_call>' in text or '<function=' in text:
+            raise ValueError('A reply without a call must be plain text')
+        return
+    if not isinstance(calls, list) or not 1 <= len(calls) <= 8 or reply.get('content'):
+        raise ValueError('A call reply holds one to eight calls and no text')
+    for item in calls:
+        function = item.get('function', item)
+        if function.get('name') not in offered:
+            raise ValueError('A call must name an offered function')
+        if not isinstance(function.get('arguments'), dict) or not set(function['arguments']) <= offered[function['name']]:
+            raise ValueError("A call may pass only the function's declared parameters")
+
+
+def validate_row(row):
+    if row.get('head') == 'toolcall':
+        validate_toolcall(row)
+    else:
+        validate_target(row.get('head'), row['messages'])
+
+
+def encode_example(tokenizer, messages, maximum, tools=None):
+    if tools is None:
+        if [m.get('role') for m in messages] != ['system', 'user', 'assistant']:
+            raise ValueError('Require exactly system/user/assistant messages')
+        # Hydra trains constrained choices/evidence IDs, never shell command strings.
+        target = json.loads(messages[-1]['content'])
+        if not isinstance(target, dict) or set(target) not in ({'probes'}, {'terms'}, {'lines'}):
+            raise ValueError('Assistant target must use one fixed Hydra JSON contract')
+    else:
+        validate_toolcall({'messages': messages, 'tools': tools})
+    prompt = tokenizer.apply_chat_template(messages[:-1], tools=tools, tokenize=True,
         add_generation_prompt=True, enable_thinking=False, return_dict=False)
-    full = tokenizer.apply_chat_template(messages, tokenize=True,
+    full = tokenizer.apply_chat_template(messages, tools=tools, tokenize=True,
         add_generation_prompt=False, enable_thinking=False, return_dict=False)
     if full[:len(prompt)] != prompt:
         raise ValueError('Chat template training prefix differs from inference prefix')
@@ -60,7 +95,7 @@ def encode_example(tokenizer, messages, maximum):
     return {'input_ids': full, 'labels': [-100] * len(prompt) + full[len(prompt):]}
 
 
-def load_examples(data, manifest, head):
+def load_examples(data, manifest, heads):
     spec = json.loads(manifest.read_text(encoding='utf-8'))
     if spec.get('sealedInputsUsed') is not False:
         raise ValueError('Require explicit disjoint-data provenance')
@@ -70,11 +105,13 @@ def load_examples(data, manifest, head):
     if not isinstance(seeds, list) or not seeds or any(not isinstance(s, int) or 4100 <= s <= 4149 or 6100 <= s <= 6109 or 6200 <= s <= 6239 for s in seeds):
         raise ValueError('Require training seeds disjoint from sealed and current development worlds')
     rows = [json.loads(line) for line in data.read_text(encoding='utf-8').splitlines() if line.strip()]
-    selected = [row for row in rows if row.get('head') == head]
-    if not selected:
-        raise ValueError(f'No training examples declared for {head}')
+    heads = heads.split(',') if isinstance(heads, str) else heads
+    selected = [row for row in rows if row.get('head') in heads]
+    for head in heads:
+        if not any(row.get('head') == head for row in selected):
+            raise ValueError(f'No training examples declared for {head}')
     for row in selected:
-        validate_target(head, row['messages'])
+        validate_row(row)
     return selected, spec
 
 
@@ -141,7 +178,7 @@ def main():
     parser.add_argument('--checkpoint-manifest', type=Path, required=True)
     parser.add_argument('--data', type=Path, required=True)
     parser.add_argument('--data-manifest', type=Path, required=True)
-    parser.add_argument('--head', choices=['git', 'files', 'read', 'test', 'os'], required=True)
+    parser.add_argument('--head', required=True, help="One head, or several joined by commas (git, files, read, test, os, toolcall)")
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--preflight', action='store_true')
     parser.add_argument('--approved', action='store_true', help='Only after a concrete runtime/budget notice and clear yes')
@@ -159,6 +196,8 @@ def main():
         parser.error('Training limits must be positive')
     if not math.isfinite(args.initial_scale) or args.initial_scale <= 0:
         parser.error('Initial gradient scale must be finite and positive')
+    if not args.head or not set(args.head.split(',')) <= {'git', 'files', 'read', 'test', 'os', 'toolcall'}:
+        parser.error('Heads must come from git, files, read, test, os and toolcall')
     started = time.monotonic()
     config = json.loads((args.checkpoint / 'config.json').read_text())
     if 'text_config' in config:
@@ -179,7 +218,7 @@ def main():
     from transformers import AutoTokenizer
     # Preserve the hash-pinned tokenizer regex; no automatic Mistral patch on Qwen exports.
     tokenizer = AutoTokenizer.from_pretrained(args.checkpoint, local_files_only=True, fix_mistral_regex=False)
-    examples = [encode_example(tokenizer, row['messages'], args.max_length) for row in rows]
+    examples = [encode_example(tokenizer, row['messages'], args.max_length, row.get('tools')) for row in rows]
     receipt = {'timestamp': datetime.now(timezone.utc).isoformat(), 'head': args.head,
         'method': 'full-parameter-supervised-fine-tuning', 'trainingStarted': False,
         'checkpointManifest': checkpoint_spec, 'dataManifest': data_spec,

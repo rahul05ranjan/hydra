@@ -43,5 +43,53 @@ class FullTrainingInvariants(unittest.TestCase):
             module.validate_target('os', MESSAGES)
 
 
+TOOLS = [{'type': 'function', 'function': {'name': 'get_weather', 'parameters': {
+    'type': 'object', 'properties': {'city': {'type': 'string'}, 'unit': {'type': 'string'}}}}}]
+
+
+def call(name='get_weather', **arguments):
+    return {'head': 'toolcall', 'tools': TOOLS, 'messages': [
+        {'role': 'user', 'content': 'weather in Pune?'},
+        {'role': 'assistant', 'content': '', 'tool_calls': [{'type': 'function', 'function': {'name': name, 'arguments': arguments or {'city': 'Pune'}}}]}]}
+
+
+def decline(text='None of these functions can tell you that.'):
+    return {'head': 'toolcall', 'tools': TOOLS, 'messages': [
+        {'role': 'user', 'content': 'who won the 2019 final?'}, {'role': 'assistant', 'content': text}]}
+
+
+class ToolCallContract(unittest.TestCase):
+    def test_a_call_must_name_an_offered_function(self):
+        module.validate_row(call())
+        with self.assertRaisesRegex(ValueError, 'offered function'):
+            module.validate_row(call('delete_everything'))
+
+    def test_a_call_may_pass_only_declared_parameters(self):
+        with self.assertRaisesRegex(ValueError, 'declared parameters'):
+            module.validate_row(call(city='Pune', command='rm -rf /'))
+
+    def test_a_decline_is_plain_text_without_a_call(self):
+        module.validate_row(decline())
+        for text in ('', '<tool_call>\n<function=get_weather>\n</function>\n</tool_call>'):
+            with self.assertRaisesRegex(ValueError, 'plain text'):
+                module.validate_row(decline(text))
+
+    def test_tool_rows_reach_the_chat_template_with_their_tools(self):
+        seen = []
+
+        class Recording(ChatTokenizer):
+            def apply_chat_template(self, messages, **kwargs):
+                seen.append(kwargs.get('tools'))
+                return [1, 2, 3] if len(messages) == 1 else [1, 2, 3, 4, 9]
+        row = decline()
+        self.assertEqual(module.encode_example(Recording(), row['messages'], 5, row['tools'])['labels'], [-100, -100, -100, 4, 9])
+        self.assertEqual(seen, [TOOLS, TOOLS])
+
+    def test_hydra_rows_keep_their_fixed_json_contract(self):
+        module.validate_row({'head': 'git', 'messages': MESSAGES})
+        with self.assertRaises(ValueError):
+            module.validate_row({'head': 'git', 'messages': decline()['messages']})
+
+
 if __name__ == '__main__':
     unittest.main()

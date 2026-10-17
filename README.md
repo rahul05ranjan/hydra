@@ -1,216 +1,122 @@
-# Hydra
+<p align="center">
+  <img src="https://raw.githubusercontent.com/rahul05ranjan/hydra/main/assets/hydra-banner.svg" alt="Hydra: small local models that take the noisy work off your coding agent" width="100%">
+</p>
 
-Small local models that a frontier coding agent (Claude Code, Codex) hands routine repo work to, so the raw output of that work never enters the frontier model's context.
+<p align="center">
+  <a href="https://www.npmjs.com/package/hydra-nano"><img src="https://img.shields.io/npm/v/hydra-nano?color=7c5cff&label=npm" alt="npm version"></a>
+  <a href="https://huggingface.co/rahul05ranjan/hydra-nano-git"><img src="https://img.shields.io/badge/model-Hydra%20Nano%20v2-22d3ee" alt="Hydra Nano v2 on Hugging Face"></a>
+  <img src="https://img.shields.io/badge/runs-100%25%20local-5eead4" alt="Runs 100% local">
+  <img src="https://img.shields.io/badge/node-%E2%89%A518-3c873a" alt="Node 18 or later">
+  <a href="https://github.com/rahul05ranjan/hydra/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
+</p>
 
-Hydra version 0.1 provides five specialist heads powered by the local **Hydra Nano** model family (`hydra-nano:git`, `hydra-nano:os`, `hydra-nano:test`, `hydra-nano:read`, `hydra-nano:files`), also hosted on Hugging Face at [`rahul05ranjan/hydra-nano-git`](https://huggingface.co/rahul05ranjan/hydra-nano-git):
-1. **git head** (`hydra-nano:git`): inspects repository history, branch sync, diffs, blame, and status.
-2. **files head** (`hydra-nano:files`): fast definition-ranked code search without cluttering context.
-3. **read head** (`hydra-nano:read`): extracts symbol definitions (functions, classes, methods), line ranges, or structural definition outlines across TypeScript, JavaScript, Python, Rust, and Go without dumping whole multi-thousand-line files into context.
-4. **test & logs head** (`hydra-nano:test`): runs test and compiler suites (`npm test`, `pytest`, `cargo test`, `tsc`), strips framework noise and `node_modules` stacks, and returns verbatim failure diffs and source lines with the command's exit code.
-5. **os head** (`hydra-nano:os`): read-only system inspection (ports, processes, disk, system info) with strict secret-blocking guardrails.
+<p align="center">
+  <b>Your coding agent reads every line of every test log, git diff and process list it runs.<br>Hydra reads them on your machine and hands back only the lines that matter.</b>
+</p>
 
-## How a call works
+---
 
-```
-agent ── hydra ask --head git "<question>" ──────▶ git head    model picks probes from a menu, code runs them
-agent ── hydra ask --head files "<question>" ────▶ files head  model picks search terms, code searches
-agent ── hydra read <file> [symbol|--lines] ─────▶ read head   pinpoints symbol/lines, extracts outline
-agent ── hydra run -- <test/build-command> ──────▶ test head   runs locally, digests failures & diffs
-agent ◀── verbatim evidence lines ──────────────── model picks lines; the agent interprets them
-```
+## Why Hydra
 
-- **Read-only and safe**: The model never writes an arbitrary command. It picks from fixed menus or digests command output.
-- **Verbatim evidence**: Results are the command's own text lines, never a paraphrase.
-- **Complete lists**: Git status, history, branches, remotes, stashes, tags and worktrees retain every returned record. Explicit commit counts override the model's count (maximum 50).
-- **Pass-through**: Output under 800 characters is handed over whole with zero model calls.
-- **Preserved exit codes**: `hydra run -- <cmd>` preserves `<cmd>`'s exit code, so agents know immediately if a build or test failed.
+Frontier coding agents pay for every token of tool output: a failing test suite, a long `git log`, a `ps` dump. Most of it is noise, and all of it fills the context window.
 
-On Windows, OS inspection uses fixed read-only netstat, tasklist and PowerShell CIM commands, plus Node system/memory APIs. Process output is capped at 30 records and is not sorted by CPU usage. Failed probes are marked in the returned evidence. Code search ranks current source ahead of archived evaluation results while keeping those results searchable.
+Hydra puts small specialist models on your own machine between the agent and that output:
 
-## Try it
+- **Less context, same answer.** A `pnpm test` run that printed ~13,807 tokens reached the agent as ~57: the failing test, the assertion diff and the source line.
+- **Nothing leaves your machine.** The model runs locally on llama.cpp. Hydra's telemetry stays in `~/.hydra/ledger.jsonl`.
+- **Read-only by design.** The model never writes a shell command. It picks from fixed, read-only menus; code builds and runs the command.
+- **Verbatim, not paraphrased.** Hydra returns the command's own lines, so the agent sees evidence, not a summary.
 
-Needs Node 18 or later and [llama.cpp](https://github.com/ggml-org/llama.cpp) (the default backend). [Ollama](https://ollama.com/download) is optional; select it with `HYDRA_BACKEND=ollama`.
-
-### Run without Ollama
-
-**Hydra Nano v2 (2026-10-14):** the installer pins the Q8_0 GGUF of a full-parameter Git fine-tune at Hub revision `8129125f` (SHA-256 `6d6542c8…`). With the current code it solves **963/1,000 sealed Git tasks (96.3%; 96.17% usage-weighted)** (927/1,000 with the code validated on Kaggle) and, on 1,000-task held-out sets, Files 98.0%, Read 96.1%, Test 94.4% and OS 100% (synthetic probe outputs). See the [model card](https://huggingface.co/rahul05ranjan/hydra-nano-git) and the receipts in [`evals/results/suite/v2-6d6542c8`](evals/results/suite/v2-6d6542c8) and [`final-git-validation`](evals/results/suite/final-git-validation/SUMMARY.json). The previous v1 artifact (87.4% sealed) stays at Hub revision `ff1c723f`.
-
-`train/publish_release.py` publishes a validated release: it checks the checkpoint and GGUF against the frozen validation receipt, uploads them with the model cards in [`hub/`](hub), and pins `runtime-manifest.json` to the new revision. The GGUF is reproducible with llama.cpp `convert_hf_to_gguf.py` at commit `a05e58c` (`--outtype q8_0`). Safetensors files cannot be passed directly to `llama-server`.
-
-Start the server in one terminal:
-
-```powershell
-llama-server -m C:\models\hydra-nano-git.gguf --alias hydra-nano:git --host 127.0.0.1 --port 8080 -c 8192
-```
-
-In another PowerShell terminal:
-
-```powershell
-$env:HYDRA_BACKEND = 'llamacpp'
-$env:HYDRA_LLAMA_URL = 'http://127.0.0.1:8080'
-$env:HYDRA_MODEL = 'hydra-nano:git'
-node skills/hydra/scripts/hydra.mjs doctor
-node skills/hydra/scripts/hydra.mjs ask --head git "which branch am I on?"
-```
-
-On macOS/Linux, set the same variables with `export HYDRA_BACKEND=llamacpp`, `export HYDRA_LLAMA_URL=http://127.0.0.1:8080` and `export HYDRA_MODEL=hydra-nano:git`.
-
-The URL is the server root, without `/v1`. `HYDRA_MODEL` must match the server alias; setting it sends all model-backed heads to that one model and does not create specialist weights. Without this override, Hydra requests its existing per-head model names; your server must serve those aliases. `hydra doctor` verifies the effective configured names. `hydra setup` with this backend prints instructions without installing or starting anything.
-
-Hydra uses llama.cpp's [schema-constrained chat API](https://github.com/ggml-org/llama.cpp/tree/master/tools/server#post-v1chatcompletions-openai-compatible-chat-completions-api), disables thinking, and limits replies to 512 tokens. The model still chooses fixed read-only probes. HTTP fixture tests and native Windows Q8 inference/bootstrap checks pass; sealed accuracy on the converted runtime is tracked separately.
-
-### Run with Ollama
-
-Set `HYDRA_BACKEND=ollama` first (`$env:HYDRA_BACKEND = 'ollama'` in PowerShell; `export HYDRA_BACKEND=ollama` in Bash).
+## Quick start
 
 ```bash
-# 1. Download the small local model (1.2 GB)
-node skills/hydra/scripts/hydra.mjs setup
-
-# 2. Ask questions about any repo
-cd <any git repository>
-node <path>/skills/hydra/scripts/hydra.mjs ask "who changed package.json most recently and why?"
-
-# 3. Slice files, symbols, or show structural outlines
-node <path>/skills/hydra/scripts/hydra.mjs read src/index.ts handleRequest
-node <path>/skills/hydra/scripts/hydra.mjs read src/server.ts --lines 20-50
-node <path>/skills/hydra/scripts/hydra.mjs read src/config.py --outline
-
-# 4. Run test and build commands through hydra
-node <path>/skills/hydra/scripts/hydra.mjs run -- npm test
-node <path>/skills/hydra/scripts/hydra.mjs run -- pytest
-
-# 5. View token savings
-node <path>/skills/hydra/scripts/hydra.mjs stats
+npx hydra-nano
 ```
 
-### Local telemetry
+One command installs everything: a pinned llama.cpp runtime, the ~812 MB Hydra Nano model (SHA-256 checked), the Hydra skill, and the integration for each coding tool it finds.
 
-Every call, hook decision, session start and failure is one JSON line in `~/.hydra/ledger.jsonl`. It records the head, the question or command, token estimates (characters / 4), seconds, the run's exit code and command time, how many times the local model ran and for how long, and the agent and session that called. Nothing leaves the machine. `HYDRA_TELEMETRY=0` turns recording off.
-
-`hydra improve [--since <date>] [--json]` (a date or time in local time, or UTC with a trailing `Z`) reads that ledger and shows where Hydra should improve: per head, the calls that saved nothing and the p50/p90 latency; for the test hook, how many turned-back runs the agent followed with `hydra run` and which commands it pushed through with `HYDRA_RAW=1`; how many recorded sessions used Hydra; recent errors. Findings worth acting on go in `IMPROVEMENTS.md`.
-
-## Install as a skill
-
-Everything an agent needs is inside `skills/hydra`:
+Want the `hydra` command in your own terminal too?
 
 ```bash
-npx skills add rahul05ranjan/hydra --skill hydra
+npm install -g hydra-nano
+hydra doctor
 ```
 
-This installs the skill instructions and bundled Node CLI. It does **not** install `llama-server`, download weights or start inference: the [skills installer](https://github.com/vercel-labs/skills) copies/links skill files, and [install lifecycle hooks](https://github.com/vercel-labs/skills/issues/1155) remain a feature request. The bundled CLI can run `read` and `search` immediately; model-backed calls need the runtime described above.
+Requires Node 18+. Runtime packages for macOS, Linux and Windows on x64 and arm64; verified live on macOS and Windows. Prefer GitHub? `npx github:rahul05ranjan/hydra` installs the same thing.
 
-A complete bootstrap is provided separately:
+## Works with your coding tools
 
-```bash
-npx github:rahul05ranjan/hydra
-```
-
-It installs the skill globally for every agent it finds (Claude Code if `~/.claude` exists, Codex if `~/.codex` exists, Antigravity if `~/.gemini/antigravity` exists; name others with `--agent <id>`), downloads a pinned llama.cpp runtime and the approximately 812 MB Hydra Nano Git Q8 GGUF, verifies SHA-256 hashes, and writes configuration under `~/.hydra`. Node 18+ with npm is required. Windows x64/arm64 CPU, macOS x64/arm64, and Ubuntu-compatible Linux x64/arm64 runtime artifacts are supported. Windows has live verification; other platform packages have not been exercised here.
-
-For Claude Code the bootstrap also registers two Claude Code hooks in `~/.claude/settings.json`, because an agent that merely has the skill rarely uses it. A `PreToolUse` hook turns a direct test or build run (npm/pnpm/yarn test or build, jest, vitest, pytest, unittest, `node --test`, cargo, go, gradle, mvn, dotnet, make test) back with the `hydra run --` command to use instead; prefixing a command with `HYDRA_RAW=1` lets the raw log through. A `SessionStart` hook tells each new session to ask Hydra about git history and to keep Read and Grep for source files, where Hydra does not save tokens. Other settings are kept, the original file is saved as `settings.json.before-hydra`, and an invalid settings file is left untouched. Skip the hooks with `--no-hooks`; manage them later with `hydra hooks install|remove|status`.
-
-### Other coding tools: MCP server and hooks
-
-Every other tool Hydra finds gets Hydra's MCP server (`scripts/mcp.mjs`, also `hydra mcp`), and its test/build hook where the tool has hooks. The MCP server offers three tools, where Hydra pays: `hydra_git` (a read-only git question), `hydra_run` (one test or build command; shell operators, redirection and env prefixes are refused, and the command must be a recognised test/build runner) and `hydra_os`. It sends the client a short instruction on when to use them, and records the client's name as the agent in the ledger. Source reading and search stay with the tool's own tools.
-
-| Tool | MCP entry | Hook |
+| Tool | How Hydra joins | Status |
 |---|---|---|
-| Codex | `~/.codex/config.toml` `[mcp_servers.hydra]` (between marker comments) | `~/.codex/hooks.json` `PreToolUse` on `Bash` and `SessionStart`; Codex runs them only after you trust them with `/hooks` |
-| Cursor | `~/.cursor/mcp.json` | `~/.cursor/hooks.json` `beforeShellExecution` and `sessionStart` |
-| OpenCode | `~/.config/opencode/opencode.json(c)` `mcp.hydra` | `~/.config/opencode/plugins/hydra.js` (`tool.execute.before` on `bash`) |
-| Gemini CLI | `~/.gemini/settings.json` `mcpServers.hydra` | same file, `BeforeTool` on `run_shell_command` |
-| Antigravity | `~/.gemini/antigravity/mcp_config.json` | none known; it gets the skill and the MCP server's instructions |
+| **Claude Code** | Skill + hooks that route test/build runs and git questions | Tested |
+| **Codex** | Skill + MCP server + `PreToolUse` hook | MCP listed by Codex; trust the hook with `/hooks` |
+| **OpenCode** | MCP server + plugin | MCP connects |
+| **Cursor** | MCP server + `beforeShellExecution` hook | Preview |
+| **Gemini CLI** | MCP server + `BeforeTool` hook | Preview |
+| **Antigravity** | Skill + MCP server | Preview |
 
-Claude Code keeps its skill and hooks and gets no MCP entry, which would only repeat the same tools. Every registration points at Hydra's own copy of its scripts in `~/.hydra/scripts`, never at an npx cache. Each edited file is backed up once as `<file>.before-hydra` and written atomically; only Hydra's entries are added or removed. A JSON file with comments, or an invalid one, is left alone and the entry to add by hand is printed. Skip all of this with `--no-agents`, or only the hooks with `--no-hooks`. Manage it later with `hydra agents install|remove|status [codex cursor opencode gemini-cli antigravity]`.
+Any other tool that speaks MCP can use Hydra too: point it at `hydra mcp` (stdio).
 
-The first bootstrap shares the Git model across all model-backed heads; it does not download five specialist weights. Runtime downloads and configuration stay outside agent skill folders, so skill updates retain them. Hydra starts its managed server on `127.0.0.1:11435` when needed; it stays running until `hydra stop` or a reboot. Run the installed `scripts/hydra.mjs doctor` to check readiness. `HYDRA_HOME` changes the data/config directory; explicit backend, URL and model environment variables override managed defaults.
+Hydra never overwrites your settings. Every file it edits is backed up once as `<file>.before-hydra`, only Hydra's own entries change, and `hydra agents remove` takes them out again.
 
-From a local checkout, run `node skills/hydra/scripts/install.mjs`. After skill-only installation, run the installed `scripts/install.mjs --runtime-only`. The code and immutable GGUF are published. The remote bootstrap was verified on Windows on 2026-10-12, including installed-skill readiness and model hash verification; see [the receipt](evals/results/remote-bootstrap-windows.json).
+## What it does
 
-For Kaggle evaluation, put `KAGGLE_USERNAME` and `KAGGLE_API_TOKEN` in root `.env` using [`.env.example`](.env.example). `train/kaggle/control.py` loads that file, prepares private frozen inputs, and separates upload from GPU execution. `run --approved` is only for an explicitly approved 30-minute evaluation; the kernel trains nothing, verifies source/model hashes, and rejects CPU fallback. Tokens are never embedded in the uploaded source bundle.
+| Head | Ask it | It returns |
+|---|---|---|
+| **git** | "what changed in the last commit?", "who last touched `billing.js`?" | The matching commits, diff hunks or blame lines |
+| **test** | `hydra run -- npm test` (pytest, cargo, go, tsc, gradle, ...) | Failing test names, assertion diffs and source locations, with the original exit code |
+| **os** | "what is listening on port 3000?" | The matching ports, processes or disk lines, with secrets blocked |
+| **read** | `hydra read src/server.ts handleRequest` | One symbol, a line range or an outline |
+| **files** | `hydra search parseConfig` | Definition-ranked matches |
 
-Or copy `skills/hydra` directly to your agent's skills directory:
-- Claude Code: `~/.claude/skills/hydra`
-- Antigravity: `~/.gemini/config/skills/hydra`
+Through MCP, Hydra offers the three where it pays most: `hydra_git`, `hydra_run` and `hydra_os`.
 
-## Evaluations & Benchmarks
+## Benchmarks
 
-### Strict comparison against targeted commands
+**Hydra Nano v2**: a full-parameter fine-tune of a 0.8B model, one set of weights for every head, run as a Q8_0 GGUF.
 
-`npm run eval:strict` creates an isolated development repository, executes 12 tasks through concise direct commands and Hydra, and checks complete source slices, file sets, ordered commit records, failure/pass facts and exit codes. It uses no sealed `git1` inputs. The latest run passed **12/12 on both routes**, but Hydra returned **866 estimated tokens versus 460** for targeted commands (**88.3% more output**). These are character-count estimates and do not measure actual frontier-agent usage.
+| Set | Tasks | Solved |
+|---|---|---|
+| Git (sealed test set, never used for training) | 1,000 | **96.3%** |
+| Files (held out) | 1,000 | **98.0%** |
+| Read (held out) | 1,000 | **96.1%** |
+| Test logs (second held-out set) | 1,000 | **97.5%** |
+| OS (held out, synthetic probe outputs) | 1,000 | **100%** |
+| Test-log benchmark across 8 frameworks | 20 | **19/20**, 47% fewer tokens |
 
-The older whole-file trial is retained as a historical result; its weak substring score is not answer accuracy. See `TRACKER.md` for the audit.
+Receipts: [model card](https://huggingface.co/rahul05ranjan/hydra-nano-git) and [`evals/results`](https://github.com/rahul05ranjan/hydra/tree/main/evals/results).
 
-The first actual Claude Code A/B run used `claude-opus-5-5`, with **6/6 correct in each arm**. Direct tools consumed **118,215** reported input-plus-output tokens and Hydra **112,431** (**4.89% fewer**). Trace review found that the harness denied a legitimate direct `git diff-tree` attempt; permission-denial-free pairs instead consumed **2.63% more tokens with Hydra**. This six-task single-run fixture does not establish general savings. The whitelist and workspace isolation have been corrected for future runs. The [frontier report](evals/results/frontier/2026-10-10T11-08-52-051Z/SUMMARY.md) includes the limitations and links to full traces.
+**Where Hydra does not help, measured.** In a controlled trial of 36 Claude Code sessions extracting functions from real source code, forcing that work through Hydra used **72% more tokens** than the agent's own tools. So Hydra leaves source reading and search to the agent, and routes only the noisy work: test and build logs, git history, system inspection. Full method and numbers in [evaluations](https://github.com/rahul05ranjan/hydra/blob/main/docs/evaluations.md).
 
-`npm run eval:frontier:prepare` prepares a six-task Claude Code A/B trial without model calls. `npm run eval:frontier` launches 12 fresh sessions after user approval, with direct tools versus explicit Hydra delegation. It records exact structured-answer checks, actual reported input/output tokens including cached input, cost, tool errors, tool calls, turns and elapsed time. Sessions use isolated copies of the fixture, the same configured frontier model, a frozen Hydra runtime, a $0.50 budget setting per session and a 10-minute overall time limit. This measures repository-inspection tasks in a controlled fixture; spontaneous skill adoption and full software-development workloads require further trials.
+## Commands
 
-`node evals/trial/analyze_frontier.mjs <run-directory>` independently checks saved answers against gold and reports overall and permission-denial-free pairs without new model calls. Fixture workspaces live under `~/.hydra/trials/frontier`, outside this project.
+```bash
+hydra ask "which branch am I on and what changed?"   # git, files or os, routed by the question
+hydra run -- pytest -q                               # a test or build run, digested
+hydra os "what is using port 8080?"                  # read-only system inspection
+hydra read src/app.py create_app                     # one symbol, a line range or an outline
+hydra stats                                          # tokens kept out of context
+hydra improve --since 2026-10-17                     # what the local telemetry says to improve
+hydra agents status                                  # Hydra in each coding tool
+hydra doctor                                         # is the local model ready?
+```
 
-### Repeated real-source and natural-adoption trial
+Need the raw log for one run? Prefix it with `HYDRA_RAW=1` and the hook lets it through.
 
-`npm run eval:real:prepare` freezes four function-extraction tasks from Vasuki and Dhruv CLI, independent parser gold, source hashes and the production skill. The 69-file source corpus has 9,375 lines. Three fresh sessions per task compare native tools, Hydra available without a usage instruction, and explicit Hydra delegation: **36 sessions** with a **20-minute** deadline and **$18** total configured API-cost-equivalent budget. This tests source inspection and complete function extraction.
+## Privacy and control
 
-After explicit run approval, use `npm run eval:real -- --prepared <directory>`. The runner checks startup skill discovery, unchanged sources and models, and permission errors; it preserves every factual failure. `node evals/trial/analyze_real_repo.mjs <directory>` audits saved traces without model calls. See the [predeclared protocol](evals/trial/REAL_REPO_PROTOCOL.md) for arm ordering, exact correctness and exploratory task-cluster intervals.
+- **Local only.** The model, the runtime and the telemetry live in `~/.hydra`. Nothing is sent anywhere.
+- **Turn telemetry off** with `HYDRA_TELEMETRY=0`.
+- **Skip parts of the install** with `--no-agents` (no other tools), `--no-hooks` (no hooks) or `--runtime-only` (no skill).
+- **Uninstall cleanly.** `hydra agents remove` and `hydra hooks remove` undo every integration and restore your settings; `hydra stop` stops the local server; deleting `~/.hydra` removes the runtime, the model and the telemetry.
 
-The approved run completed **36/36 sessions**, with **12/12 correct in every arm** and no protocol violations. Native tools used **387,115** total reported tokens, skill availability **391,296 (+1.08%)**, and explicit Hydra delegation **667,303 (+72.38%)**. Claude chose Hydra in **0/12** available sessions and **12/12** forced sessions. Runtime was **513.9 seconds** and reported API-cost equivalent **$2.7095**. Token savings were absent on these four tasks. Trace audit found Python symbol slices that included unrelated code or omitted part of the function; native fallback restored complete answers. See the [full report](evals/results/real-repo/2026-10-10T11-57-49-798Z/SUMMARY.md) and [evidence audit](evals/results/real-repo/2026-10-10T11-57-49-798Z/AUDIT.md).
+## Learn more
 
-### 1. `evals/git1` (1000 tasks, sealed git test set)
+- [How Hydra works](https://github.com/rahul05ranjan/hydra/blob/main/docs/how-it-works.md): heads, backends (llama.cpp or Ollama), telemetry, every install path and the code layout.
+- [Evaluations and trials](https://github.com/rahul05ranjan/hydra/blob/main/docs/evaluations.md): how each number above was measured.
+- [What real use teaches](https://github.com/rahul05ranjan/hydra/blob/main/IMPROVEMENTS.md): the open and fixed findings from Hydra's own telemetry.
+- [Hydra Nano on Hugging Face](https://huggingface.co/rahul05ranjan/hydra-nano-git).
 
-50 generated repositories, 20 kinds of question, 10 phrasings each. Verified by git gold facts and usage weighting.
+## License
 
-- **Baseline (`qwen3.5:0.8b`)**: 70% solved (69% weighted by real usage), plan accuracy 74%, 10 errors.
-- **Improved with JSON prompt grounding**: **77% solved (76% weighted)**, plan accuracy **80%**, **0 errors**, runtime dropped from 21.2 min to **3.5 min**.
-- `staged_files`: 0% ➔ 100% (+100 points)
-- `message_search`: 4% ➔ 72% (+68 points)
-- `commit_files`: 46% ➔ 72% (+26 points)
-
-Full results in `evals/results/git1.qwen3.5-0.8b.json`.
-
-### 2. `evals/test_logs` (20 cross-language tasks)
-
-Benchmarks failure extraction and noise reduction across Vitest, Jest, Pytest, Cargo, TSC, Go, node:test, and Mocha.
-
-- **Solved**: **100% (20/20)**
-- **Test Name Recall**: **100%**
-- **File / Line Location Recall**: **100%**
-- **Assertion Diff Recall**: **100%**
-- **Cleanliness**: **100%** (zero framework or `node_modules` stack frame pollution)
-- **Token Savings**: **49.6% net token reduction** overall, and **96.4% to 96.7%** on verbose test suites.
-- **Runtime**: **3.2s** across all 20 tasks.
-
-Full results in `evals/results/test_logs.qwen3.5-0.8b.json`.
-
-### 3. `evals/read` (20 cross-language tasks)
-
-Benchmarks targeted symbol extraction, line range slicing, and file outlines across TypeScript, JavaScript, Python, Rust, and Go to address the #1 token sink (75.5% of tool tokens).
-
-- **Solved**: **100% (20/20)**
-- **Target Line Recall**: **100%**
-- **Cleanliness**: **100%** (zero unrelated function/code leak)
-- **Token Savings**: **48.1% net token reduction** overall, and **77% to 92%** on targeted line and symbol slices.
-- **Runtime**: **0.01s** (instantaneous local extraction).
-
-Full results in `evals/results/read.json`.
-
-## Layout
-
-- `skills/hydra/SKILL.md`: tells an agent when to delegate and how to read the result.
-- `skills/hydra/scripts/hydra.mjs`: the CLI.
-- `skills/hydra/scripts/mcp.mjs`: the MCP server (stdio).
-- `skills/hydra/scripts/lib/`:
-  - `runtime.mjs`: selectable Ollama/llama.cpp API client and per-head model configuration.
-  - `route.mjs`: route questions between heads.
-  - `git.mjs`: git head probes and plan step.
-  - `files.mjs`: search and walk head.
-  - `read.mjs`: file slice and symbol reader head.
-  - `test_logs.mjs`: test runner and build log reader head.
-  - `answer.mjs`: verbatim line selection and lead generation.
-  - `ollama.mjs`: compatibility exports for existing evaluation callers.
-  - `ledger.mjs`: local telemetry ledger, token accounting and the `hydra improve` findings.
-  - `integrations.mjs`: MCP and hook registration for Codex, Cursor, OpenCode, Gemini CLI and Antigravity.
-- `test/`: unit test suite (`npm test`).
-- `evals/git1/`: 1000-task sealed test set for git head.
-- `evals/test_logs/`: 20-task cross-language benchmark for test and build logs.
-- `evals/read/`: 20-task cross-language benchmark for file slice reading.
+MIT. See [LICENSE](https://github.com/rahul05ranjan/hydra/blob/main/LICENSE).

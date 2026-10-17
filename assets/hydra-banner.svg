@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">Hydra</title>
+  <desc id="desc">Hydra: small local models that take the noisy work off your coding agent. One agent connects to five heads: git, test, read, files and os.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#151b33"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.5" r="0.45">
+      <stop offset="0" stop-color="#7c5cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#7c5cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#c9c2ff"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c5cff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="420" rx="28" fill="url(#bg)"/>
+  <rect width="1280" height="420" rx="28" fill="url(#glow)"/>
+  <rect x="0.5" y="0.5" width="1279" height="419" rx="27.5" fill="none" stroke="#2a3155"/>
+
+  <g font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="72" y="150" font-size="88" font-weight="800" letter-spacing="-2" fill="url(#word)">Hydra</text>
+    <text x="74" y="200" font-size="27" font-weight="500" fill="#c7cbe0">Small local models that take the noisy work</text>
+    <text x="74" y="236" font-size="27" font-weight="500" fill="#c7cbe0">off your coding agent.</text>
+  </g>
+
+  <g font-family="SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="19">
+    <rect x="72" y="276" width="520" height="84" rx="14" fill="#0e1430" stroke="#2a3155"/>
+    <text x="96" y="310" fill="#8b93b8">$ <tspan fill="#e6e8f2">pnpm test</tspan></text>
+    <text x="96" y="342" fill="#8b93b8">~13,807 tok of log <tspan fill="#7c5cff">→</tspan> <tspan fill="#5eead4" font-weight="700">~57 tok</tspan> to the agent</text>
+  </g>
+
+  <g stroke="url(#line)" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M905 210 C 980 210, 1000 92, 1080 92"/>
+    <path d="M905 210 C 990 210, 1010 151, 1080 151"/>
+    <path d="M905 210 L 1080 210"/>
+    <path d="M905 210 C 990 210, 1010 269, 1080 269"/>
+    <path d="M905 210 C 980 210, 1000 328, 1080 328"/>
+  </g>
+  <g font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <circle cx="860" cy="210" r="58" fill="#1b2147" stroke="#7c5cff" stroke-width="2.5"/>
+    <text x="860" y="205" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">your</text>
+    <text x="860" y="229" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">agent</text>
+  </g>
+  <g font-family="SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="18" font-weight="700" text-anchor="middle">
+    <rect x="1080" y="74" width="120" height="36" rx="18" fill="#12183a" stroke="#3b4380"/><text x="1140" y="98" fill="#e6e8f2">git</text>
+    <rect x="1080" y="133" width="120" height="36" rx="18" fill="#12183a" stroke="#3b4380"/><text x="1140" y="157" fill="#e6e8f2">test</text>
+    <rect x="1080" y="192" width="120" height="36" rx="18" fill="#12183a" stroke="#3b4380"/><text x="1140" y="216" fill="#e6e8f2">read</text>
+    <rect x="1080" y="251" width="120" height="36" rx="18" fill="#12183a" stroke="#3b4380"/><text x="1140" y="275" fill="#e6e8f2">files</text>
+    <rect x="1080" y="310" width="120" height="36" rx="18" fill="#12183a" stroke="#3b4380"/><text x="1140" y="334" fill="#e6e8f2">os</text>
+  </g>
+</svg>

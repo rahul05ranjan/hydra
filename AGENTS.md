@@ -3,7 +3,7 @@
 Small local models that a frontier coding agent hands routine repo work to, behind one CLI (`hydra`) that installs as a skill.
 
 - **State of the work:** read `TRACKER.md` before doing anything. It holds the decisions, the plan, what is blocked and the next step. Update it in the same turn as any change to those, and add one dated line to its Log.
-- **How the code works:** `README.md`.
+- **How the code works:** `docs/how-it-works.md` (the overview is `README.md`; benchmarks and trials are in `docs/evaluations.md`).
 - **What use teaches:** `IMPROVEMENTS.md`. After a session that used Hydra, run `hydra improve --since <session start>` and add what it shows, with its evidence; close entries when their fix lands. Telemetry stays local; never add anything that sends it off the machine without the user's yes.
 - **`evals/git1` is the sealed test set for the git head.** Score a model on it and report the number. Training data must not use its worlds (seeds 4100 to 4149), its phrasings (`evals/git1/questions.mjs`) or the word lists in `evals/git1/world.mjs`. Do not read its failures to decide what training data or prompt to change; build and use a development set for that (see `TRACKER.md`, step 3).
 - **`npm run eval:build` must leave `evals/git1/tasks.jsonl` and `worlds.json` byte-identical.** Run it and compare after touching anything under `evals/git1/`.

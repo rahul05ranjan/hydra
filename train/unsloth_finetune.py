@@ -59,8 +59,8 @@ def main():
         parser.error('Training limits must be positive')
     if not math.isfinite(args.initial_scale) or args.initial_scale <= 0:
         parser.error('Initial gradient scale must be finite and positive')
-    if not args.head or not set(args.head.split(',')) <= {'git', 'files', 'read', 'test', 'os', 'toolcall'}:
-        parser.error('Heads must come from git, files, read, test, os and toolcall')
+    if not args.head or not set(args.head.split(',')) <= {'git', 'files', 'read', 'test', 'os', 'toolcall', 'chat'}:
+        parser.error('Heads must come from git, files, read, test, os, toolcall and chat')
     started = time.monotonic()
     checkpoint_spec = verify_checkpoint(args.checkpoint, args.checkpoint_manifest)
     rows, data_spec = load_examples(args.data, args.data_manifest, args.head)

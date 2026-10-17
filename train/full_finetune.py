@@ -212,7 +212,7 @@ def main():
     parser.add_argument('--checkpoint-manifest', type=Path, required=True)
     parser.add_argument('--data', type=Path, required=True)
     parser.add_argument('--data-manifest', type=Path, required=True)
-    parser.add_argument('--head', required=True, help="One head, or several joined by commas (git, files, read, test, os, toolcall)")
+    parser.add_argument('--head', required=True, help="One head, or several joined by commas (git, files, read, test, os, toolcall, chat)")
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--preflight', action='store_true')
     parser.add_argument('--approved', action='store_true', help='Only after a concrete runtime/budget notice and clear yes')
@@ -230,8 +230,8 @@ def main():
         parser.error('Training limits must be positive')
     if not math.isfinite(args.initial_scale) or args.initial_scale <= 0:
         parser.error('Initial gradient scale must be finite and positive')
-    if not args.head or not set(args.head.split(',')) <= {'git', 'files', 'read', 'test', 'os', 'toolcall'}:
-        parser.error('Heads must come from git, files, read, test, os and toolcall')
+    if not args.head or not set(args.head.split(',')) <= {'git', 'files', 'read', 'test', 'os', 'toolcall', 'chat'}:
+        parser.error('Heads must come from git, files, read, test, os, toolcall and chat')
     started = time.monotonic()
     checkpoint_spec = verify_checkpoint(args.checkpoint, args.checkpoint_manifest)
     rows, data_spec = load_examples(args.data, args.data_manifest, args.head)

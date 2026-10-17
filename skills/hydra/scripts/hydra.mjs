@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -16,6 +16,7 @@ import { route } from './lib/route.mjs';
 import { stopLocal } from './lib/local.mjs';
 import { hookStatus, installHooks, removeHooks } from './lib/claude_hooks.mjs';
 import * as integrations from './lib/integrations.mjs';
+import * as refactor from './lib/refactor.mjs';
 
 const HEADS = { git, files, test: test_logs, read, os: osHead };
 
@@ -23,6 +24,9 @@ const USAGE = `usage:
   hydra ask "<question>" [--head git|files|test|read|os] answer a question about the repo or system
   hydra search <term...>                               search codebase with definition ranking
   hydra read <file> [symbol|--lines <start-end>]       slice a file, symbol, or show outline
+  hydra smell [file|dir|--diff|--staged]               detect Refactoring.Guru code smells & anti-patterns
+  hydra refactor <file> [symbol|--lines <start-end>]   step-by-step refactoring recipe for a function or range
+  hydra design [pattern|query] [--file <file>]         GoF design pattern advisor & architecture guide
   hydra run [--head test] -- <command...>              run a command and digest test/build output
   hydra os [question...]                               inspect ports, processes, disk, system
   hydra stats                                          token accounting for past calls
@@ -289,6 +293,179 @@ This command prints instructions only; it does not install, download or launch a
   }
 }
 
+async function smellCommand(args) {
+  const isJson = args.includes('--json');
+  const isDiff = args.includes('--diff');
+  const isStaged = args.includes('--staged');
+  const target = args.filter(a => !a.startsWith('--'))[0] || (isDiff || isStaged ? '.' : process.cwd());
+
+  const started = Date.now();
+  let text = '';
+  let rawChars = 0;
+
+  if (isDiff || isStaged) {
+    const gitArgs = ['diff'];
+    if (isStaged) gitArgs.push('--staged');
+    const diffRes = await run('git', gitArgs, process.cwd());
+    const diffOutput = diffRes.out || '';
+    rawChars = diffOutput.length;
+    const diffReport = refactor.scanDiff(diffOutput);
+    if (isJson) {
+      text = JSON.stringify(diffReport, null, 2);
+    } else {
+      if (!diffReport.filesWithSmells) {
+        text = '✔ No code smells introduced in this diff.';
+      } else {
+        text = `[hydra smell] ${diffReport.filesWithSmells} changed files with smells:\n\n` +
+          diffReport.reports.map(r => refactor.formatSmellReport(r)).join('\n\n');
+      }
+    }
+  } else {
+    const resolved = path.resolve(target);
+    if (!existsSync(resolved)) fail(1, `hydra smell: path not found: ${target}`);
+    const isDir = statSync(resolved).isDirectory();
+    if (isDir) {
+      const dirReport = refactor.scanDirectory(resolved);
+      rawChars = dirReport.reports.reduce((s, r) => s + r.totalLines * 30, 100);
+      if (isJson) {
+        text = JSON.stringify(dirReport, null, 2);
+      } else {
+        if (!dirReport.filesWithSmells) {
+          text = `✔ ${target}: No code smells detected across scanned files.`;
+        } else {
+          text = `[hydra smell] ${dirReport.totalSmells} smells across ${dirReport.filesWithSmells} files in ${target}:\n\n` +
+            dirReport.reports.map(r => refactor.formatSmellReport(r)).join('\n\n');
+        }
+      }
+    } else {
+      const report = refactor.scanFile(resolved);
+      rawChars = report.totalLines * 35;
+      text = isJson ? JSON.stringify(report, null, 2) : refactor.formatSmellReport(report);
+    }
+  }
+
+  const raw = tokens(rawChars);
+  const returned = tokens(text.length);
+  const seconds = Number(((Date.now() - started) / 1000).toFixed(2));
+
+  record({
+    ts: new Date().toISOString(),
+    head: 'refactor',
+    question: `smell ${args.join(' ')}`,
+    raw,
+    returned,
+    seconds,
+  });
+
+  console.log(`${text}\n\n[hydra smell · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+}
+
+async function refactorCommand(args) {
+  const isJson = args.includes('--json');
+  const cleanArgs = args.filter(a => a !== '--json');
+  if (cleanArgs.length === 0) fail(1, 'usage: hydra refactor <file> [symbol|--lines <start-end>]');
+
+  let fileArg = null;
+  let symbol = null;
+  let lines = null;
+
+  for (let i = 0; i < cleanArgs.length; i++) {
+    const arg = cleanArgs[i];
+    if (arg === '--lines' && i + 1 < cleanArgs.length) {
+      lines = cleanArgs[++i];
+    } else if (arg.startsWith('--lines=')) {
+      lines = arg.slice('--lines='.length);
+    } else if (/^\d+[:-]\d+$/.test(arg)) {
+      lines = arg;
+    } else if (!fileArg) {
+      fileArg = arg;
+    } else if (!symbol) {
+      symbol = arg;
+    }
+  }
+
+  if (!fileArg) fail(1, 'usage: hydra refactor <file> [symbol|--lines <start-end>]');
+  const resolved = path.resolve(fileArg);
+  if (!existsSync(resolved) || statSync(resolved).isDirectory()) {
+    fail(1, `hydra refactor: file not found: ${fileArg}`);
+  }
+
+  const started = Date.now();
+  const content = readFileSync(resolved, 'utf8');
+
+  let startLine, endLine;
+  if (lines) {
+    const [s, e] = lines.split(/[:-]/).map(Number);
+    startLine = s;
+    endLine = e;
+  }
+
+  const recipe = refactor.generateRecipe(content, { symbol, startLine, endLine });
+  const rawChars = content.length;
+  const text = isJson ? JSON.stringify(recipe, null, 2) : refactor.formatRecipe(recipe);
+
+  const raw = tokens(rawChars);
+  const returned = tokens(text.length);
+  const seconds = Number(((Date.now() - started) / 1000).toFixed(2));
+
+  record({
+    ts: new Date().toISOString(),
+    head: 'refactor',
+    question: `refactor ${fileArg}${symbol ? ` ${symbol}` : ''}`,
+    raw,
+    returned,
+    seconds,
+  });
+
+  console.log(`${text}\n\n[hydra refactor · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+}
+
+async function designCommand(args) {
+  const isJson = args.includes('--json');
+  let fileArg = null;
+  const words = [];
+
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg === '--json') continue;
+    if (arg === '--file' && i + 1 < args.length) {
+      fileArg = args[++i];
+    } else if (arg.startsWith('--file=')) {
+      fileArg = arg.slice('--file='.length);
+    } else {
+      words.push(arg);
+    }
+  }
+
+  const query = words.join(' ').trim();
+  let codeSnippet = '';
+  if (fileArg) {
+    const resolved = path.resolve(fileArg);
+    if (existsSync(resolved) && !statSync(resolved).isDirectory()) {
+      codeSnippet = readFileSync(resolved, 'utf8').slice(0, 5000);
+    }
+  }
+
+  const started = Date.now();
+  const adv = refactor.advisePattern(query, codeSnippet);
+  const text = isJson ? JSON.stringify(adv, null, 2) : refactor.formatPattern(adv);
+
+  const raw = tokens((query.length + codeSnippet.length) * 2 + 100);
+  const returned = tokens(text.length);
+  const seconds = Number(((Date.now() - started) / 1000).toFixed(2));
+
+  record({
+    ts: new Date().toISOString(),
+    head: 'refactor',
+    question: `design ${query}`,
+    raw,
+    returned,
+    seconds,
+  });
+
+  console.log(`${text}\n\n[hydra design · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+}
+
 const [command, ...rest] = process.argv.slice(2);
 const commands = {
   ask: () => ask(rest),
@@ -297,6 +474,9 @@ const commands = {
   run: () => runCommand(rest),
   test: () => runCommand(rest),
   read: () => readCommand(rest),
+  smell: () => smellCommand(rest),
+  refactor: () => refactorCommand(rest),
+  design: () => designCommand(rest),
   os: () => osCommand(rest),
   stats: showStats,
   improve: () => improve(rest),

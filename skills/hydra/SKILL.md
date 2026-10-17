@@ -1,6 +1,6 @@
 ---
 name: hydra
-description: Hand a read-only git question (repo state, history, blame), a where-is-it code search, targeted file slicing instead of whole-file reads, test/build failure digests, or system/OS inspections (ports, processes, disk) to hydra locally. Use before running git status, log, diff, show, blame, broad searches, whole file reads, ps/lsof dumps, or test/build commands where noisy output would flood your context.
+description: Hand a read-only git question (repo state, history, blame), a where-is-it code search, targeted file slicing instead of whole-file reads, test/build failure digests, system/OS inspections (ports, processes, disk), or Refactoring.Guru code smell detection, refactoring recipes, and GoF design pattern advice to hydra locally. Use before running git status, log, diff, show, blame, broad searches, whole file reads, ps/lsof dumps, or test/build commands where noisy output would flood your context.
 ---
 
 # Hydra
@@ -19,6 +19,9 @@ node scripts/hydra.mjs ask --head test "<question>"
 node scripts/hydra.mjs ask --head os "<question>"
 node scripts/hydra.mjs search <term...>
 node scripts/hydra.mjs read <file> [symbol|--lines <start-end>|--outline]
+node scripts/hydra.mjs smell [file|dir|--diff|--staged]
+node scripts/hydra.mjs refactor <file> [symbol|--lines <start-end>]
+node scripts/hydra.mjs design [pattern|query] [--file <file>]
 node scripts/hydra.mjs run -- <command...>
 node scripts/hydra.mjs os [question...]
 ```
@@ -26,6 +29,9 @@ node scripts/hydra.mjs os [question...]
 `scripts/` is in this skill's directory. Ask one full question per call and name the file, branch, commit or author when you know it: the model may only use a path, revision or name that appears in your question.
 - For finding definitions & files: use `hydra search <term>` to get definition-ranked matches without noise or raw grep dumps.
 - For reading code: use `hydra read <file> [symbol|--lines]` instead of reading multi-thousand-line files. It returns the exact symbol or slice, or a structural outline of symbols.
+- For code smells & anti-patterns: use `hydra smell [file|dir|--diff|--staged]` to scan for Refactoring.Guru code smells (Bloaters, OO Abusers, Change Preventers, Dispensables, Couplers, Deep Nesting, Magic Numbers) locally with zero token cost.
+- For refactoring recipes: use `hydra refactor <file> [symbol|--lines]` to get step-by-step recipes (Extract Method, Parameter Object, Guard Clauses, Strategy/Polymorphism).
+- For design patterns: use `hydra design [pattern|query]` to look up GoF patterns, architectural solutions, and matching smells addressed.
 - For tests and builds: run `hydra run -- <command...>` to execute the command locally and get the failure evidence with its exit code.
 - For system and environment: use `hydra os` or `--head os` to inspect listening ports, top processes, disk space, and system info without dumping 500 lines of terminal output into context.
 

@@ -106,6 +106,9 @@ hydra ask "which branch am I on and what changed?"   # git, files or os, routed 
 hydra run -- pytest -q                               # a test or build run, digested
 hydra os "what is using port 8080?"                  # read-only system inspection
 hydra read src/app.py create_app                     # one symbol, a line range or an outline
+hydra smell src/                                     # detect Refactoring.Guru code smells (or --diff / --staged)
+hydra refactor src/app.py process_order              # actionable step-by-step refactoring recipe
+hydra design "need flexible algorithms at runtime"   # GoF design pattern advisor & architecture guide
 hydra stats                                          # tokens kept out of context
 hydra improve --since 2026-10-17                     # what the local telemetry says to improve
 hydra agents status                                  # Hydra in each coding tool

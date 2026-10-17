@@ -43,7 +43,7 @@ test('one test or build command becomes argv; anything a shell would interpret i
     assert.equal(argvOf(command), null, `accepted ${command}`);
 });
 
-test('the server answers the MCP handshake, lists three tools and runs a test command', async t => {
+test('the server answers the MCP handshake, lists tools and runs commands', async t => {
   const server = connect();
   t.after(server.close);
   const init = await server.request('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'fixture-client', version: '1' } });
@@ -53,7 +53,7 @@ test('the server answers the MCP handshake, lists three tools and runs a test co
   server.notify('notifications/initialized');
 
   const { result: { tools } } = await server.request('tools/list', {});
-  assert.deepEqual(tools.map(tool => tool.name), ['hydra_git', 'hydra_run', 'hydra_os']);
+  assert.deepEqual(tools.map(tool => tool.name), ['hydra_git', 'hydra_run', 'hydra_os', 'hydra_smell', 'hydra_refactor', 'hydra_design']);
 
   const dir = mkdtempSync(path.join(os.tmpdir(), 'hydra-mcp-'));
   writeFileSync(path.join(dir, 'math.test.mjs'), "import test from 'node:test';\nimport assert from 'node:assert';\ntest('adds', () => assert.equal(1 + 1, 2));\n");

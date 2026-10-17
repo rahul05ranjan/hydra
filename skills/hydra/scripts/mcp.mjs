@@ -29,6 +29,12 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: { command: { type: 'string', description: 'One test or build command, for example "npm test" or "pytest -q tests/test_api.py".' }, cwd: cwdProperty }, required: ['command'] } },
   { name: 'hydra_os', description: 'Answer a read-only question about this machine (ports, processes, disk, memory, system, environment variable names).',
     inputSchema: { type: 'object', properties: { question: { type: 'string', description: 'The question, in plain words.' } }, required: ['question'] } },
+  { name: 'hydra_smell', description: 'Scan a file, directory or git diff for Refactoring.Guru code smells (Long Method, Large Class, Deep Nesting, Long Parameter List, etc.) with exact line numbers and refactoring recipes.',
+    inputSchema: { type: 'object', properties: { target: { type: 'string', description: 'File or directory path to scan. Defaults to repository root.' }, diff: { type: 'boolean', description: 'If true, scans newly introduced smells in unstaged/staged git changes.' }, cwd: cwdProperty } } },
+  { name: 'hydra_refactor', description: 'Generate a step-by-step Refactoring.Guru recipe (Extract Method, Guard Clauses, Parameter Object) for a function or line range in a file.',
+    inputSchema: { type: 'object', properties: { file: { type: 'string', description: 'Path to the file.' }, symbol: { type: 'string', description: 'Function, method or class name.' }, lines: { type: 'string', description: 'Line range like "40-90".' }, cwd: cwdProperty }, required: ['file'] } },
+  { name: 'hydra_design', description: 'Query GoF design patterns from Refactoring.Guru (intent, problem, solution, applicability) or get pattern recommendations for an architectural problem.',
+    inputSchema: { type: 'object', properties: { query: { type: 'string', description: 'Pattern name (e.g. strategy, builder, observer) or architectural problem description.' }, file: { type: 'string', description: 'Optional path to file to analyze for pattern recommendation.' }, cwd: cwdProperty }, required: ['query'] } },
 ];
 
 let client = 'mcp-client';
@@ -102,6 +108,25 @@ export async function callTool(name, args = {}) {
       throw new Error('hydra_run takes one test or build command with no shell operators, redirection or env prefix, such as "npm test" or "pytest -q"');
     }
     return hydra(['run', '--', ...argv], workdir(args.cwd));
+  }
+  if (name === 'hydra_smell') {
+    const cliArgs = ['smell'];
+    if (args.diff) cliArgs.push('--diff');
+    if (args.target) cliArgs.push(args.target);
+    return hydra(cliArgs, workdir(args.cwd));
+  }
+  if (name === 'hydra_refactor') {
+    if (typeof args.file !== 'string' || !args.file.trim()) throw new Error('file is required');
+    const cliArgs = ['refactor', args.file];
+    if (args.symbol) cliArgs.push(args.symbol);
+    if (args.lines) cliArgs.push('--lines', args.lines);
+    return hydra(cliArgs, workdir(args.cwd));
+  }
+  if (name === 'hydra_design') {
+    if (typeof args.query !== 'string' || !args.query.trim()) throw new Error('query is required');
+    const cliArgs = ['design', args.query];
+    if (args.file) cliArgs.push('--file', args.file);
+    return hydra(cliArgs, workdir(args.cwd));
   }
   throw new Error(`Unknown tool: ${name}`);
 }

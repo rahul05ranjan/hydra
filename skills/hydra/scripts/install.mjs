@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { installRuntime, findNpx } from './lib/bootstrap.mjs';
 import { ensureLocal, home } from './lib/local.mjs';
+import { claudeDir, installHooks } from './lib/claude_hooks.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 try {
@@ -24,5 +25,14 @@ The server stays running until stopped or the computer restarts. Download time d
   }
   const config = await installRuntime(manifest);
   await ensureLocal(config);
+  // Claude Code: register the hooks that route test/build runs and git questions to Hydra.
+  const skill = path.join(claudeDir(), 'skills', 'hydra', 'scripts');
+  if (agent === 'claude-code' && !process.argv.includes('--runtime-only') && !process.argv.includes('--no-hooks')
+      && existsSync(path.join(skill, 'hooks', 'route-tests.mjs'))) {
+    const file = installHooks(skill);
+    console.log(`Added Hydra's Claude Code hooks to ${file} (your other settings are kept; the original is saved as settings.json.before-hydra).
+Test and build runs now go through Hydra, and new sessions are told to ask Hydra about git history.
+Remove them with: node "${path.join(skill, 'hydra.mjs')}" hooks remove`);
+  }
   console.log('Hydra skill and local runtime ready. Run the installed scripts/hydra.mjs doctor to verify.');
 } catch (error) { console.error(`hydra-install: ${error.message}`); process.exitCode = 2; }

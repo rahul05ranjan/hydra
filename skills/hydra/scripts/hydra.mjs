@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { answer } from './lib/answer.mjs';
 import { run } from './lib/exec.mjs';
@@ -13,6 +14,7 @@ import { record, stats, tokens } from './lib/ledger.mjs';
 import { chat, hasModel, BACKEND, modelFor, Unavailable } from './lib/runtime.mjs';
 import { route } from './lib/route.mjs';
 import { stopLocal } from './lib/local.mjs';
+import { hookStatus, installHooks, removeHooks } from './lib/claude_hooks.mjs';
 
 const HEADS = { git, files, test: test_logs, read, os: osHead };
 
@@ -25,7 +27,8 @@ const USAGE = `usage:
   hydra stats                                          token accounting for past calls
   hydra doctor                                         check that the local model is ready
   hydra setup                                          show runtime setup instructions
-  hydra stop                                           stop Hydra's managed llama-server`;
+  hydra stop                                           stop Hydra's managed llama-server
+  hydra hooks install|remove|status                    Claude Code hooks that route tests and git questions here`;
 
 function fail(code, message) {
   console.error(message);
@@ -268,7 +271,16 @@ const commands = {
   doctor,
   setup,
   stop: () => console.log(stopLocal() ? 'Hydra local server stopped.' : 'No managed Hydra server is running.'),
+  hooks: () => hooksCommand(rest[0]),
 };
+
+function hooksCommand(action) {
+  const scripts = path.dirname(fileURLToPath(import.meta.url));
+  if (action === 'install') console.log(`Hydra hooks registered in ${installHooks(scripts)}.`);
+  else if (action === 'remove') console.log(removeHooks() ? 'Hydra hooks removed.' : 'No Hydra hooks were registered.');
+  else if (action === 'status') console.log(hookStatus().join('\n') || 'No Hydra hooks are registered.');
+  else fail(1, 'usage: hydra hooks install|remove|status');
+}
 
 try {
   if (!commands[command]) fail(1, USAGE);

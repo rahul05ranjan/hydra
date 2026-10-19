@@ -15,20 +15,20 @@ from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / '.env')
-# HYDRA_TOOLCALL_RUN=v2 selects the second mix (train/data-toolcall-v2) under its own names, so the
-# first run's kernel, dataset and receipts stay as they were.
+# HYDRA_TOOLCALL_RUN=v2 or v3 selects the second or third mix (train/data-toolcall-v2, -v3) under its own
+# names, so earlier runs' kernels, datasets and receipts stay as they were.
 RUN = os.environ.get('HYDRA_TOOLCALL_RUN', 'v1')
 SUFFIX = '' if RUN == 'v1' else f'-{RUN}'
-DATA = ROOT / {'v1': 'train/data-toolcall', 'v2': 'train/data-toolcall-v2'}[RUN]
+DATA = ROOT / {'v1': 'train/data-toolcall', 'v2': 'train/data-toolcall-v2', 'v3': 'train/data-toolcall-v3'}[RUN]
 STAGE = Path.home() / f'.hydra/kaggle-toolcall{SUFFIX}'
 RESULT = Path.home() / f'.hydra/build/toolcall-candidate{SUFFIX}'
 USER = os.environ.get('KAGGLE_USERNAME', '')
 KERNEL = f'{USER}/hydra-toolcall-training{SUFFIX}'
 DATASET = KERNEL + '-input'
 V2 = Path.home() / '.hydra/build/bench-models/hydra-nano-v2'
-PLAN = {'heads': {'v1': 'git,toolcall', 'v2': 'git,toolcall,chat'}[RUN], 'steps': 200, 'accumulation': 8,
+PLAN = {'heads': {'v1': 'git,toolcall', 'v2': 'git,toolcall,chat', 'v3': 'git,toolcall,chat'}[RUN], 'steps': 200, 'accumulation': 8,
         'learningRate': 2e-6, 'initialScale': 128, 'maxLength': 2048,
-        'sampleSeed': {'v1': 20261017, 'v2': 20261018}[RUN], 'trainerSeconds': 7200, 'kernelTimeoutSeconds': 3 * 3600,
+        'sampleSeed': {'v1': 20261017, 'v2': 20261018, 'v3': 20261019}[RUN], 'trainerSeconds': 7200, 'kernelTimeoutSeconds': 3 * 3600,
         'checkpoint': {'repo': 'rahul05ranjan/hydra-nano-git', 'revision': '8129125fad1c664bbb58ebd3238f6598c879eb23'}}
 
 

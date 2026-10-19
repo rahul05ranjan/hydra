@@ -31,6 +31,20 @@ class FullTrainingInvariants(unittest.TestCase):
             (proc / 'meminfo').write_text('MemTotal:       32873496 kB\nMemAvailable:    2097152 kB\n')
             self.assertEqual(module.host_memory(proc), {'hostRssBytes': 13631488 * 1024, 'hostAvailableBytes': 2097152 * 1024})
 
+    def test_release_host_memory_trims_glibc_and_is_false_elsewhere(self):
+        calls = []
+
+        class Libc:
+            def malloc_trim(self, pad):
+                calls.append(pad)
+                return 1
+
+        def missing(name):
+            raise OSError(name)
+        self.assertTrue(module.release_host_memory(lambda name: Libc()))
+        self.assertEqual(calls, [0])
+        self.assertFalse(module.release_host_memory(missing))
+
     def test_only_assistant_and_chat_eos_are_supervised(self):
         self.assertEqual(module.encode_example(ChatTokenizer(), MESSAGES, 5)['labels'], [-100, -100, -100, 4, 9])
 

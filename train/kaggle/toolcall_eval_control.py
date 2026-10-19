@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / '.env')
-# HYDRA_TOOLCALL_RUN=v2 evaluates the second training run under its own names (see toolcall_control.py).
+# HYDRA_TOOLCALL_RUN=v2 or v3 evaluates that training run under its own names (see toolcall_control.py).
 SUFFIX = '' if os.environ.get('HYDRA_TOOLCALL_RUN', 'v1') == 'v1' else '-' + os.environ['HYDRA_TOOLCALL_RUN']
 STAGE = Path.home() / f'.hydra/kaggle-toolcall-eval{SUFFIX}'
 TRAINING = Path.home() / f'.hydra/build/toolcall-candidate{SUFFIX}'

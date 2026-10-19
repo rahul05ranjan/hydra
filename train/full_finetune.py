@@ -35,6 +35,17 @@ def host_memory(proc=Path('/proc')):
     return memory
 
 
+def release_host_memory(load=None):
+    """Hand freed heap pages back to the OS with glibc's malloc_trim. Host RSS grew about 54-96 MB per
+    update even with reused buffers, which looks like fragmentation. False where there is no glibc."""
+    import ctypes
+    try:
+        libc = (load or ctypes.CDLL)('libc.so.6')
+        return bool(libc.malloc_trim(0))
+    except (OSError, AttributeError):
+        return False
+
+
 def validate_target(head, messages):
     target = json.loads(messages[-1]['content'])
     if not isinstance(target, dict) or len(target) != 1:
@@ -364,6 +375,7 @@ def main():
             else:
                 raise RuntimeError('Persistent non-finite gradients after bounded scale recovery')
             receipt['completedSteps'] += 1
+            receipt['hostMemoryTrimmed'] = release_host_memory()
             receipt['losses'].append(total_loss / args.accumulation)
             print(json.dumps({'completedSteps': receipt['completedSteps'], 'loss': receipt['losses'][-1],
                 'scale': scaler.get_scale(), 'peakMemoryBytes': torch.cuda.max_memory_allocated(),

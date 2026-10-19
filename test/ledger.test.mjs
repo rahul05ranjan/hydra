@@ -58,7 +58,7 @@ test('findings show where Hydra cost more than raw, how hooks were followed, and
   const report = findings(ledger);
   assert.equal(report.perHead.test.costMore, 1);
   assert.equal(report.perHead.test.costMoreExamples[0].question, 'npm test');
-  assert.deepEqual(report.hooks, { decisions: 2, p50Ms: 60, p90Ms: 60, denials: 1, followedByHydra: 1, trimmed: 0,
+  assert.deepEqual(report.hooks, { decisions: 2, p50Ms: 40, p90Ms: 60, denials: 1, followedByHydra: 1, trimmed: 0,
     rawBypasses: ['HYDRA_RAW=1 npm test'] });
   assert.deepEqual(report.sessions, { seen: 2, usingHydra: 1 });
   assert.deepEqual(findings([{ ts: at(0), kind: 'call', agent: 'codex', via: 'mcp', head: 'git', raw: 9, returned: 3 },

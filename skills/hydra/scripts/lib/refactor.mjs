@@ -823,7 +823,7 @@ export function scanDiff(diffText) {
     const line = lines[i];
     if (line.startsWith('diff --git ')) {
       if (currentFile && addedLines.length) {
-        fileDiffs.push({ file: currentFile, code: addedLines.map(l => l.text).join('\n') });
+        fileDiffs.push({ file: currentFile, code: addedLines.map(l => l.text).join('\n'), lineNumbers: addedLines.map(l => l.num) });
       }
       currentFile = line.split(' ')[2]?.replace(/^a\//, '') || 'unknown';
       addedLines = [];
@@ -839,12 +839,22 @@ export function scanDiff(diffText) {
   }
 
   if (currentFile && addedLines.length) {
-    fileDiffs.push({ file: currentFile, code: addedLines.map(l => l.text).join('\n') });
+    fileDiffs.push({ file: currentFile, code: addedLines.map(l => l.text).join('\n'), lineNumbers: addedLines.map(l => l.num) });
   }
 
   const reports = [];
-  for (const { file, code } of fileDiffs) {
+  for (const { file, code, lineNumbers } of fileDiffs) {
     const report = scanCode(code, file);
+    // scanCode numbers lines within the joined added-lines blob; map each
+    // finding back to the real new-file line it came from.
+    for (const finding of report.findings) {
+      const at = Math.min(Math.max(finding.line, 1), lineNumbers.length) - 1;
+      finding.line = lineNumbers[at];
+      if (finding.endLine !== undefined) {
+        const endAt = Math.min(Math.max(finding.endLine, 1), lineNumbers.length) - 1;
+        finding.endLine = lineNumbers[endAt];
+      }
+    }
     if (report.smellsFound > 0) {
       reports.push(report);
     }

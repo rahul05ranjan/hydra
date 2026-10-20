@@ -1,0 +1,178 @@
+{
+ "kernel": "rahulswt7/hydra-toolcall-evaluation-v3",
+ "elapsedSeconds": 13364,
+ "models": {
+  "candidate": "f5adbe60964d0bdad2aef7dadf98befc9bea1b1959520d889896e19236285fda",
+  "v2": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be"
+ },
+ "gateTolerance": 0.005,
+ "developmentGatesPass": false,
+ "heldOutAndSealedRun": false,
+ "gates": {
+  "candidate": {
+   "git-original": {
+    "tasks": 200,
+    "solved": 196
+   },
+   "git-extended": {
+    "tasks": 800,
+    "solved": 790
+   },
+   "git-paraphrase": {
+    "tasks": 800,
+    "solved": 781
+   },
+   "files-development": {
+    "tasks": 200,
+    "solved": 195
+   },
+   "read-development": {
+    "tasks": 200,
+    "solved": 199
+   },
+   "test-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "os-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "test-extended": {
+    "tasks": 572,
+    "solved": 572
+   },
+   "os-extended": {
+    "tasks": 400,
+    "solved": 397
+   },
+   "test-dev2": {
+    "tasks": 1380,
+    "solved": 1380
+   }
+  },
+  "v2": {
+   "git-original": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "git-extended": {
+    "tasks": 800,
+    "solved": 800
+   },
+   "git-paraphrase": {
+    "tasks": 800,
+    "solved": 798
+   },
+   "files-development": {
+    "tasks": 200,
+    "solved": 193
+   },
+   "read-development": {
+    "tasks": 200,
+    "solved": 199
+   },
+   "test-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "os-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "test-extended": {
+    "tasks": 572,
+    "solved": 572
+   },
+   "os-extended": {
+    "tasks": 400,
+    "solved": 393
+   },
+   "test-dev2": {
+    "tasks": 1380,
+    "solved": 1380
+   }
+  }
+ },
+ "bfcl": {
+  "candidate": {
+   "non_live": {
+    "Non-Live Overall Acc": "64.42%",
+    "AST Summary": "64.42%",
+    "Simple AST": "53.17%",
+    "Python Simple AST": "76.50%",
+    "Java Simple AST": "45.00%",
+    "JavaScript Simple AST": "38.00%",
+    "Multiple AST": "81.00%",
+    "Parallel AST": "59.00%",
+    "Parallel Multiple AST": "64.50%",
+    "Irrelevance Detection": "90.00%"
+   },
+   "live": {
+    "Live Overall Acc": "58.40%",
+    "AST Summary": "58.40%",
+    "Python Simple AST": "59.69%",
+    "Python Multiple AST": "58.31%",
+    "Python Parallel AST": "56.25%",
+    "Python Parallel Multiple AST": "50.00%",
+    "Irrelevance Detection": "77.49%",
+    "Relevance Detection": "62.50%"
+   },
+   "multi_turn": {
+    "Multi Turn Overall Acc": "2.37%",
+    "Base": "4.00%",
+    "Miss Func": "0.50%",
+    "Miss Param": "4.00%",
+    "Long Context": "1.00%"
+   }
+  },
+  "v2": {
+   "non_live": {
+    "Non-Live Overall Acc": "73.48%",
+    "AST Summary": "73.48%",
+    "Simple AST": "62.42%",
+    "Python Simple AST": "83.25%",
+    "Java Simple AST": "58.00%",
+    "JavaScript Simple AST": "46.00%",
+    "Multiple AST": "79.00%",
+    "Parallel AST": "75.50%",
+    "Parallel Multiple AST": "77.00%",
+    "Irrelevance Detection": "41.25%"
+   },
+   "live": {
+    "Live Overall Acc": "65.14%",
+    "AST Summary": "65.14%",
+    "Python Simple AST": "65.50%",
+    "Python Multiple AST": "65.43%",
+    "Python Parallel AST": "75.00%",
+    "Python Parallel Multiple AST": "41.67%",
+    "Irrelevance Detection": "27.60%",
+    "Relevance Detection": "87.50%"
+   },
+   "multi_turn": {
+    "Multi Turn Overall Acc": "4.25%",
+    "Base": "6.50%",
+    "Miss Func": "3.00%",
+    "Miss Param": "4.50%",
+    "Long Context": "3.00%"
+   }
+  }
+ },
+ "lmEvalCandidate": {
+  "mmlu": 49.84,
+  "arc_challenge_acc_norm": 37.46,
+  "hellaswag_acc_norm": 49.21,
+  "gsm8k_flexible": 42.61,
+  "gsm8k_strict": 42.3,
+  "ifeval_prompt_strict": 46.77
+ },
+ "lmEvalV2Published": {
+  "mmlu": 49.23,
+  "arc_challenge_acc_norm": 38.31,
+  "hellaswag_acc_norm": 49.89,
+  "gsm8k_flexible": 44.12,
+  "gsm8k_strict": 43.9,
+  "ifeval_prompt_strict": 54.16
+ },
+ "verdict": "rejected"
+}

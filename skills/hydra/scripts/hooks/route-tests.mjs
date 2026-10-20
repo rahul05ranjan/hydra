@@ -49,6 +49,6 @@ process.stdin.on('data', chunk => { input += chunk; }).on('end', () => {
   process.stdout.write(JSON.stringify(answer.deny(`Test/build runs go through Hydra so the full log stays out of context. Run it as:\n` +
     `  node "${hydra}" run -- ${run}\n${format === 'claude' ? '' : 'or call the hydra_run tool with that command. '}` +
     `(Keep any cd or env prefix before it.) Hydra returns the failing tests, assertion diffs and source locations ` +
-    `verbatim, or a short pass summary. A run you cut to a few lines yourself (| tail -n 40 or less) also passes. ` +
+    `verbatim, or a short pass summary. A run you cut to a few lines yourself (| tail -n 40 or less, or | grep ... | head -40) also passes. ` +
     `If you truly need the raw log, prefix the original command with HYDRA_RAW=1.`)));
 });

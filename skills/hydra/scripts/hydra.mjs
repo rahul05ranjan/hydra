@@ -44,6 +44,11 @@ function fail(code, message) {
   process.exit(code);
 }
 
+// The footer reports a saving; when there is none (short output passed through whole) it is pure cost.
+function withFooter(text, head, raw, returned, seconds) {
+  return returned < raw ? `${text}\n\n[hydra ${head} · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]` : text;
+}
+
 async function ask(args) {
   const flag = args.indexOf('--head');
   const forced = flag >= 0 ? args.splice(flag, 2)[1] : undefined;
@@ -64,7 +69,7 @@ async function ask(args) {
   const seconds = Number(((Date.now() - started) / 1000).toFixed(1));
 
   record({ ts: new Date().toISOString(), head, question, raw, returned, seconds, modelCalls: meter.modelCalls, modelSeconds: meter.modelSeconds });
-  console.log(`${text}\n\n[hydra ${head} · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+  console.log(withFooter(text, head, raw, returned, seconds));
 }
 
 async function runCommand(args) {
@@ -82,7 +87,7 @@ async function runCommand(args) {
         const returned = tokens(text.length);
         const seconds = Number(((Date.now() - started) / 1000).toFixed(1));
         record({ ts: new Date().toISOString(), head: 'test', question: 'pipe', raw, returned, seconds, modelCalls: meter.modelCalls, modelSeconds: meter.modelSeconds });
-        console.log(`${text}\n\n[hydra test · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+        console.log(withFooter(text, 'test', raw, returned, seconds));
         if (exitCode !== 0) process.exit(exitCode);
         return;
       }
@@ -107,7 +112,7 @@ async function runCommand(args) {
   const seconds = Number(((Date.now() - started) / 1000).toFixed(1));
   record({ ts: new Date().toISOString(), head: 'test', question: cmdArgs.join(' '), raw, returned, seconds,
     commandSeconds, exit: exitCode, modelCalls: meter.modelCalls, modelSeconds: meter.modelSeconds });
-  console.log(`${text}\n\n[hydra test · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+  console.log(withFooter(text, 'test', raw, returned, seconds));
   if (exitCode !== 0) process.exit(exitCode);
 }
 
@@ -158,7 +163,7 @@ async function readCommand(args) {
     seconds,
   });
 
-  console.log(`${res.text}\n\n[hydra read · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+  console.log(withFooter(res.text, 'read', raw, returned, seconds));
 }
 
 async function osCommand(args) {
@@ -172,7 +177,7 @@ async function osCommand(args) {
   const seconds = Number(((Date.now() - started) / 1000).toFixed(1));
 
   record({ ts: new Date().toISOString(), head: 'os', question, raw, returned, seconds, modelCalls: meter.modelCalls, modelSeconds: meter.modelSeconds });
-  console.log(`${text}\n\n[hydra os · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+  console.log(withFooter(text, 'os', raw, returned, seconds));
 }
 
 async function searchCommand(args) {
@@ -212,7 +217,7 @@ async function searchCommand(args) {
     seconds,
   });
 
-  console.log(`${text}\n\n[hydra files · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+  console.log(withFooter(text, 'files', raw, returned, seconds));
 }
 
 function showStats() {
@@ -357,7 +362,7 @@ async function smellCommand(args) {
     seconds,
   });
 
-  console.log(`${text}\n\n[hydra smell · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+  console.log(withFooter(text, 'smell', raw, returned, seconds));
 }
 
 async function refactorCommand(args) {
@@ -417,7 +422,7 @@ async function refactorCommand(args) {
     seconds,
   });
 
-  console.log(`${text}\n\n[hydra refactor · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+  console.log(withFooter(text, 'refactor', raw, returned, seconds));
 }
 
 async function designCommand(args) {
@@ -463,7 +468,7 @@ async function designCommand(args) {
     seconds,
   });
 
-  console.log(`${text}\n\n[hydra design · read ~${raw} tok locally, returned ~${returned} tok · ${seconds}s]`);
+  console.log(withFooter(text, 'design', raw, returned, seconds));
 }
 
 const [command, ...rest] = process.argv.slice(2);

@@ -517,3 +517,13 @@ test('system and memory probes return usable machine facts', async () => {
   assert.match(memory.out, /RAM|Mem/);
 });
 
+
+test('hydra run prints a short output alone and footers only a real saving', () => {
+  const env = { ...process.env, HYDRA_HOME: temp() };
+  const cli = path.resolve('skills/hydra/scripts/hydra.mjs');
+  const hydra = script => execFileSync(process.execPath, [cli, 'run', '--', process.execPath, '-e', script], { env, encoding: 'utf8' });
+  // A footer on output passed through whole costs more than the output it labels.
+  assert.equal(hydra('console.log("PASS one")'), 'PASS one\n');
+  const long = hydra('for (let i = 0; i < 400; i++) console.log("ok " + i + " passes"); console.log("Tests: 400 passed")');
+  assert.match(long, /All tests passed\.[\s\S]*\n\n\[hydra test · read ~\d+ tok locally, returned ~\d+ tok · [\d.]+s\]\n$/);
+});

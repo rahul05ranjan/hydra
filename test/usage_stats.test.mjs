@@ -2,12 +2,14 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { block } from '../evals/usage/readme_stats.mjs';
 
-test('the README usage block shows totals only, from the clean start date on', () => {
+test('the README usage block shows totals only, from agent sessions since the clean start date', () => {
   const rows = [
     { ts: '2026-10-16T00:00:00.000Z', kind: 'call', head: 'git', question: 'before the fixture fix', raw: 999, returned: 1, session: 'old' },
     { ts: '2026-10-18T00:00:00.000Z', kind: 'call', head: 'test', question: 'pnpm vitest run test/private-name.test.ts', raw: 1000, returned: 100, session: 'secret-session-id' },
     { ts: '2026-10-18T00:01:00.000Z', kind: 'call', head: 'git', question: 'who wrote private.js?', raw: 40, returned: 50, session: 'secret-session-id' },
     { ts: '2026-10-18T00:02:00.000Z', kind: 'hook', decision: 'pass', hookMs: 10 },
+    // Typed in a shell or written by a test fixture: no agent session, so not real use.
+    { ts: '2026-10-18T00:03:00.000Z', kind: 'call', head: 'refactor', question: 'smell /tmp/hydra-x', raw: 9000, returned: 10, agent: 'shell' },
   ];
   const text = block(rows, new Date('2026-10-19T00:00:00Z'));
   assert.match(text, /\*\*2 calls\*\* in \*\*1 coding session\*\*/);
@@ -15,5 +17,6 @@ test('the README usage block shows totals only, from the clean start date on', (
   assert.match(text, /\| Test and build runs \| 1 \| ~1,000 \| ~100 \| \*\*90%\*\* \|/);
   assert.match(text, /\| Git questions \| 1 \| ~40 \| ~50 \| \*\*-25%\*\* \|/);
   assert.match(text, /Updated 2026-10-19/);
+  assert.ok(!text.includes('refactor'), 'a call outside an agent session was counted');
   for (const secret of ['private-name', 'private.js', 'secret-session-id', 'before the fixture fix']) assert.ok(!text.includes(secret), secret);
 });

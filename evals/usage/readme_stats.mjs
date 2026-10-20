@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Refresh the "In real use" block of README.md from the local ledger (~/.hydra/ledger.jsonl).
 // Only totals are written: no project names, commands or session ids, because the README is public.
-// Counting starts at SINCE, when the test suite stopped writing fixture calls into the ledger.
+// Counting starts at SINCE, when the test suite stopped writing fixture calls into the ledger, and covers
+// only calls made inside an agent session.
 // Token figures are the ledger's estimates (characters / 4).
 //   node evals/usage/readme_stats.mjs [--check]   (--check prints the block without writing)
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -33,7 +34,8 @@ const fmt = n => Math.round(n).toLocaleString('en-US');
 const count = (n, word) => `**${fmt(n)} ${word}${n === 1 ? '' : 's'}**`;
 
 export function block(all = rows(), today = new Date()) {
-  const calls = all.filter(row => (row.kind ?? 'call') === 'call' && (row.ts ?? '') >= SINCE);
+  // Only calls made inside an agent session: a shell or a test fixture has no session and is not real use.
+  const calls = all.filter(row => (row.kind ?? 'call') === 'call' && (row.ts ?? '') >= SINCE && row.session);
   const heads = {};
   for (const row of calls) {
     const head = heads[row.head] ??= { calls: 0, raw: 0, returned: 0 };

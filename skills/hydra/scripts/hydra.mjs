@@ -455,20 +455,21 @@ async function designCommand(args) {
   const adv = refactor.advisePattern(query, codeSnippet);
   const text = isJson ? JSON.stringify(adv, null, 2) : refactor.formatPattern(adv);
 
-  const raw = tokens((query.length + codeSnippet.length) * 2 + 100);
-  const returned = tokens(text.length);
   const seconds = Number(((Date.now() - started) / 1000).toFixed(2));
 
+  // A pattern lookup replaces no command output, so it has no raw baseline: it counts as neither a
+  // saving nor a cost, and its size is kept apart.
   record({
     ts: new Date().toISOString(),
     head: 'refactor',
     question: `design ${query}`,
-    raw,
-    returned,
+    raw: 0,
+    returned: 0,
+    replyTokens: tokens(text.length),
     seconds,
   });
 
-  console.log(withFooter(text, 'design', raw, returned, seconds));
+  console.log(text);
 }
 
 const [command, ...rest] = process.argv.slice(2);

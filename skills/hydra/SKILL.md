@@ -1,47 +1,35 @@
 ---
 name: hydra
-description: Hand a read-only git question (repo state, history, blame), a where-is-it code search, targeted file slicing instead of whole-file reads, test/build failure digests, system/OS inspections (ports, processes, disk), or Refactoring.Guru code smell detection, refactoring recipes, and GoF design pattern advice to hydra locally. Use before running git status, log, diff, show, blame, broad searches, whole file reads, ps/lsof dumps, or test/build commands where noisy output would flood your context.
+description: Run test and build commands, git history/diff/blame questions, and machine inspections (ports, processes, disk) through hydra, a local model that returns only the lines that matter. Use before running npm test, pytest, cargo test, tsc or a build, before reading git log, diff, show or blame output, and before ps, lsof or df dumps.
 ---
 
 # Hydra
 
-`hydra` runs read-only commands for repo questions, file slicing, test/build runs, and system inspections on a small local model and prints the lines that answer it. The raw output stays on this machine instead of entering your context.
+`hydra` runs a noisy read-only command on this machine and prints only the lines that answer the question; the raw output stays out of your context. It pays off where output is long and mostly noise: test and build logs, git history and diffs, process and port listings.
 
 ## Call it
 
-From the repository the question is about, naming the head that fits:
+From the repository the question is about:
 
 ```
+node scripts/hydra.mjs run -- <test or build command...>
 node scripts/hydra.mjs ask --head git "<question>"
-node scripts/hydra.mjs ask --head files "<question>"
-node scripts/hydra.mjs ask --head read "<question>"
-node scripts/hydra.mjs ask --head test "<question>"
-node scripts/hydra.mjs ask --head os "<question>"
-node scripts/hydra.mjs search <term...>
-node scripts/hydra.mjs read <file> [symbol|--lines <start-end>|--outline]
-node scripts/hydra.mjs smell [file|dir|--diff|--staged]
-node scripts/hydra.mjs refactor <file> [symbol|--lines <start-end>]
-node scripts/hydra.mjs design [pattern|query] [--file <file>]
-node scripts/hydra.mjs run -- <command...>
 node scripts/hydra.mjs os [question...]
 ```
 
-`scripts/` is in this skill's directory. Ask one full question per call and name the file, branch, commit or author when you know it: the model may only use a path, revision or name that appears in your question.
-- For finding definitions & files: use `hydra search <term>` to get definition-ranked matches without noise or raw grep dumps.
-- For reading code: use `hydra read <file> [symbol|--lines]` instead of reading multi-thousand-line files. It returns the exact symbol or slice, or a structural outline of symbols.
-- For code smells & anti-patterns: use `hydra smell [file|dir|--diff|--staged]` to scan for Refactoring.Guru code smells (Bloaters, OO Abusers, Change Preventers, Dispensables, Couplers, Deep Nesting, Magic Numbers) locally with zero token cost.
-- For refactoring recipes: use `hydra refactor <file> [symbol|--lines]` to get step-by-step recipes (Extract Method, Parameter Object, Guard Clauses, Strategy/Polymorphism).
-- For design patterns: use `hydra design [pattern|query]` to look up GoF patterns, architectural solutions, and matching smells addressed.
-- For tests and builds: run `hydra run -- <command...>` to execute the command locally and get the failure evidence with its exit code.
-- For system and environment: use `hydra os` or `--head os` to inspect listening ports, top processes, disk space, and system info without dumping 500 lines of terminal output into context.
+`scripts/` is in this skill's directory.
+
+- **Tests and builds:** `run --` executes the command and returns the failing tests, assertion diffs and source locations with the exit code, or a short pass summary. A run you already cut to a few lines yourself (`| tail -n 20`) gains nothing from Hydra.
+- **Git:** ask one full question per call and name the file, branch, commit or author when you know it; the model may only use a path, revision or name that appears in your question. A short check such as `git status --short` is cheaper to run yourself.
+- **Machine:** ports, processes, disk, memory, system info and environment variable names, with secrets withheld.
+
+Read and search source files with your own tools: a measured trial found routing that work through Hydra cost 72% more tokens. Hydra also has `search`, `read`, `smell`, `refactor` and `design` commands (`node scripts/hydra.mjs` with no arguments lists them) for when the user asks for them.
 
 ## What it answers
 
+- **test**: test and build output (`npm test`, `pytest`, `cargo test`, `go test`, `tsc` and others). On failure, the failing test name, assertion diff and the user's own file:line, with node_modules and framework frames dropped.
 - **git**: current branch and sync state, uncommitted and staged changes, commit history, what this branch adds over a base branch, one commit's patch, blame, branches, worktrees, remotes, stashes, tags.
-- **files**: where a name is defined or used, and which files are named like it.
-- **read**: extracts symbol definitions (functions, classes, methods), line ranges (`--lines 10-50`), or structural definition outlines across TypeScript, JavaScript, Python, Rust, and Go without dumping whole files into context.
-- **test**: runs and parses test and build outputs (`npm test`, `pytest`, `cargo test`, `tsc`). If tests fail, extracts the failing test name, assertion diff, and exact user file:line location, stripping node_modules and framework traces.
-- **os**: inspects listening ports (`lsof`), running processes / CPU consumers (`ps`), disk space (`df -h`), and system info (`uptime`, `uname`) while strictly guarding against printing secrets.
+- **os**: listening ports, running processes and CPU consumers, disk space, memory, system info, environment variable names, never their values.
 
 Changes to the repository, and questions that need reasoning about what code does, stay with you.
 

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { writeFileSync, mkdirSync, mkdtempSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, mkdtempSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -222,4 +222,14 @@ function calculate(p1, p2, p3, p4, p5, p6) {
   const designOut = run(['design', 'strategy']);
   assert.ok(designOut.includes('[hydra design] Strategy Pattern (Behavioral)'));
   assert.ok(designOut.includes('https://refactoring.guru/design-patterns/strategy'));
+});
+
+test('a design lookup has no raw baseline, so it is neither a saving nor a cost', () => {
+  const home = temp();
+  const out = execFileSync(process.execPath, [CLI, 'design', 'strategy'], { encoding: 'utf8', env: { ...process.env, HYDRA_HOME: home } });
+  assert.ok(!out.includes('tok locally'), 'a footer claimed a saving or cost');
+  const [row] = readFileSync(path.join(home, 'ledger.jsonl'), 'utf8').trim().split('\n').map(JSON.parse).filter(r => r.head === 'refactor');
+  assert.equal(row.raw, 0);
+  assert.equal(row.returned, 0);
+  assert.ok(row.replyTokens > 0);
 });

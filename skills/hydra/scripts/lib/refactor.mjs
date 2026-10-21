@@ -557,6 +557,7 @@ export function scanCode(content, filename = 'code.ts', options = {}) {
   let switchStartLine = -1;
   let nestingStart = -1;
   let maxDepthInBlock = 0;
+  let indentWidth = 0;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -590,7 +591,10 @@ export function scanCode(content, filename = 'code.ts', options = {}) {
       if (ch === '\t') tabCount++;
       else spaceCount++;
     }
-    const depthFromSpaces = Math.floor(spaceCount / 2);
+    // A file's indent width is the smallest positive leading-space count on a
+    // nonblank line; 4-space Python must count one level per 4 spaces, not per 2.
+    if (spaceCount > 0 && (!indentWidth || spaceCount < indentWidth)) indentWidth = spaceCount;
+    const depthFromSpaces = Math.floor(spaceCount / (indentWidth || 2));
     const depth = tabCount + depthFromSpaces;
 
     if (depth > maxNesting && !trimmed.startsWith('//') && !trimmed.startsWith('*')) {

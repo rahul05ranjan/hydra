@@ -247,7 +247,8 @@ function improve(args) {
     for (const row of h.costMoreExamples) lines.push(`         cost more: ${row.question.slice(0, 80)} (${row.raw} -> ${row.returned})`);
   }
   for (const [agent, a] of Object.entries(report.agents)) {
-    lines.push(`agent  ${agent}: ${a.calls} calls (${a.viaMcp} through MCP), ${a.denials} runs turned back, ${a.sessions} sessions started`);
+    const apps = Object.entries(a.fromApps ?? {}).map(([app, n]) => `, ${n} from ${app}`).join('');
+    lines.push(`agent  ${agent}: ${a.calls} calls (${a.viaMcp} through MCP${apps}), ${a.denials} runs turned back, ${a.sessions} sessions started`);
   }
   const { denials, followedByHydra, trimmed, rawBypasses } = report.hooks;
   const { decisions, p50Ms, p90Ms } = report.hooks;

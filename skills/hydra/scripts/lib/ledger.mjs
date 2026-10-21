@@ -27,8 +27,10 @@ export function caller(session = process.env.CLAUDE_CODE_SESSION_ID) {
   const detail = process.env.HYDRA_AGENT || process.env.AI_AGENT || (process.env.CLAUDECODE ? undefined : app);
   const agent = process.env.HYDRA_AGENT ? detail.toLowerCase().replace(/[-_ ]?mcp[-_ ]?client$/, '')
     : process.env.AI_AGENT ? detail.split('_')[0] : process.env.CLAUDECODE ? 'claude-code' : app ? 'antigravity' : 'shell';
+  // An app that starts the agent for you (T3 Code runs Claude Code, Codex, ...) is kept apart from the agent itself.
+  const launcher = process.env.__CFBundleIdentifier === 'com.t3tools.t3code' || process.env.T3CODE_HOME ? 't3code' : undefined;
   return { agent, ...(detail ? { agentDetail: detail } : {}), ...(process.env.HYDRA_VIA ? { via: process.env.HYDRA_VIA } : {}),
-    ...(session ? { session } : {}) };
+    ...(launcher ? { app: launcher } : {}), ...(session ? { session } : {}) };
 }
 
 export function record(entry) {
@@ -118,8 +120,9 @@ export function findings(all = rows(), { since } = {}) {
     && call.head === 'test' && call.ts >= deny.ts && Date.parse(call.ts) - Date.parse(deny.ts) <= 5 * 60_000));
   const agents = {};
   for (const row of recent) {
-    const agent = agents[row.agent ?? 'unknown'] ??= { calls: 0, viaMcp: 0, denials: 0, sessions: 0 };
+    const agent = agents[row.agent ?? 'unknown'] ??= { calls: 0, viaMcp: 0, denials: 0, sessions: 0, fromApps: {} };
     if (isCall(row)) { agent.calls += 1; if (row.via === 'mcp') agent.viaMcp += 1; }
+    if (isCall(row) && row.app) agent.fromApps[row.app] = (agent.fromApps[row.app] ?? 0) + 1;
     if (row.kind === 'hook' && row.decision === 'deny') agent.denials += 1;
     if (row.kind === 'session') agent.sessions += 1;
   }

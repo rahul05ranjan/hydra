@@ -43,6 +43,27 @@ test('a command run from an Antigravity terminal is recorded as antigravity, not
   }
 });
 
+test('an agent started by T3 Code keeps its own name and records T3 Code as the app', () => {
+  const keys = ['AI_AGENT', 'CLAUDECODE', 'HYDRA_AGENT', '__CFBundleIdentifier', 'T3CODE_HOME'];
+  const prior = Object.fromEntries(keys.map(key => [key, process.env[key]]));
+  try {
+    for (const key of keys) delete process.env[key];
+    process.env.CLAUDECODE = '1';
+    process.env.__CFBundleIdentifier = 'com.t3tools.t3code';
+    assert.deepEqual([caller().agent, caller().app], ['claude-code', 't3code']);
+    delete process.env.__CFBundleIdentifier;
+    process.env.T3CODE_HOME = '/Users/x/.t3';
+    assert.equal(caller().app, 't3code');
+    delete process.env.T3CODE_HOME;
+    assert.equal(caller().app, undefined);
+    const report = findings([{ ts: '2026-10-21T00:00:00.000Z', kind: 'call', agent: 'claude-code', app: 't3code', head: 'test', raw: 9, returned: 3 },
+      { ts: '2026-10-21T00:01:00.000Z', kind: 'call', agent: 'claude-code', head: 'test', raw: 9, returned: 3 }]);
+    assert.deepEqual(report.agents['claude-code'].fromApps, { t3code: 1 });
+  } finally {
+    for (const key of keys) if (prior[key] === undefined) delete process.env[key]; else process.env[key] = prior[key];
+  }
+});
+
 test('findings show where Hydra cost more than raw, how hooks were followed, and what failed', () => {
   const at = minutes => new Date(Date.UTC(2026, 9, 17, 0, minutes)).toISOString();
   const ledger = [
@@ -63,7 +84,8 @@ test('findings show where Hydra cost more than raw, how hooks were followed, and
   assert.deepEqual(report.sessions, { seen: 2, usingHydra: 1 });
   assert.deepEqual(findings([{ ts: at(0), kind: 'call', agent: 'codex', via: 'mcp', head: 'git', raw: 9, returned: 3 },
     { ts: at(1), kind: 'hook', agent: 'gemini', decision: 'deny' }]).agents,
-    { codex: { calls: 1, viaMcp: 1, denials: 0, sessions: 0 }, gemini: { calls: 0, viaMcp: 0, denials: 1, sessions: 0 } });
+    { codex: { calls: 1, viaMcp: 1, denials: 0, sessions: 0, fromApps: {} },
+      gemini: { calls: 0, viaMcp: 0, denials: 1, sessions: 0, fromApps: {} } });
   assert.equal(report.errors[0].error, 'model unavailable');
   assert.equal(findings(ledger, { since: at(5) }).calls, 0);
 });

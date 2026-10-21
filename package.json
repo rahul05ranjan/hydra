@@ -1,6 +1,6 @@
 {
   "name": "hydra-nano",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Small local models that take the noisy work off your coding agent: git history, test and build digests and OS inspection run on your machine, and only the lines that matter reach Claude Code, Codex, Cursor, OpenCode, Gemini CLI or Antigravity. Skill, MCP server and hooks.",
   "keywords": [
     "claude-code",

@@ -44,6 +44,9 @@ const historyRequest = question => /\b(?:commits?|history|evolved|over time|git 
 // "with timeout in their subjects", "messages mentioning cache"
 const subjectTerm = question => (question.match(/\bwith\s+["'`]?([\w.-]+)["'`]?\s+in\s+(?:their|the|its)\s+(?:subjects?|messages?|titles?)\b/i)
   ?? question.match(/\b(?:subjects?|messages?)\s+(?:containing|mentioning|that mention|with)\s+["'`]?([\w.-]+)/i))?.[1];
+// "messages that mention main": the question searches message text for this word.
+const searchesFor = (question, term) => subjectTerm(question)?.toLowerCase() === term.toLowerCase()
+  || new RegExp(`\\b(?:mention\\w*|contain\\w*|says?|saying)\\s+["'\`]?${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w.-])`, 'i').test(question);
 // The first word of the question that is a file inside the repository, e.g. src/app.ts or Makefile.
 function fileInQuestion(question, cwd) {
   for (const word of question.split(/\s+/)) {
@@ -208,6 +211,9 @@ async function clean(p, question, cwd) {
   // Preserve compound filtering only when the question also asks about messages.
   const asksMessage = /\b(?:messages?|subjects?|mention\w*)\b/i.test(question);
   if (safe(p.grep) && (asksMessage || (!a.path && !a.author))) a.grep = p.grep.trim();
+  // A branch or tag named in the question ("between v0.2.0 and main") is a range end, not message text.
+  if (a.grep && !searchesFor(question, a.grep)
+    && (await git(cwd, ['rev-parse', '--verify', '--quiet', `${a.grep}^{commit}`])).ok) delete a.grep;
   if (p.probe === 'log' && !a.grep && subjectTerm(question)) a.grep = subjectTerm(question);
   for (const key of ['rev', 'base']) {
     // HEAD as a base compares HEAD with itself and always shows nothing.

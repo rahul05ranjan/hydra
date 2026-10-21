@@ -113,6 +113,22 @@ test('Git keeps an explicitly requested compound author/file/message filter', as
   assert.match(sections[0].out, /add port setting/);
 });
 
+test('Git range history drops a branch name used as a message filter', async () => {
+  const dir = repo();
+  const run = (...argv) => execFileSync('git', ['-c', 'user.name=Asha', '-c', 'user.email=a@example.com', ...argv], { cwd: dir });
+  run('branch', '-M', 'main');
+  run('tag', 'v0.1.0');
+  writeFileSync(path.join(dir, 'app.js'), 'export const port = 4000;\n');
+  run('commit', '-q', '-am', 'raise the port');
+  const sections = await git.gather('list the commit subjects between v0.1.0 and main', dir,
+    replies({ probes: [{ probe: 'log', base: 'v0.1.0', grep: 'main' }] }));
+  assert.equal(sections[0].args.grep, undefined);
+  assert.match(sections[0].out, /raise the port/);
+  const mentions = await git.gather('which commit messages mention main?', dir,
+    replies({ probes: [{ probe: 'log', grep: 'main' }] }));
+  assert.equal(mentions[0].args.grep, 'main');
+});
+
 test('Git preserves an explicitly named unknown author as an empty query', async () => {
   const dir = repo();
   const sections = await git.gather('List commits written by NobodySuiteWriter.', dir,

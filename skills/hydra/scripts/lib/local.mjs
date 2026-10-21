@@ -26,10 +26,36 @@ async function healthy(url, model) {
   }
   catch { return false; }
 }
+/** The path of the program a process runs, or undefined when it cannot be read. */
+function executableOf(pid) {
+  try {
+    if (process.platform === 'win32') return execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', `(Get-CimInstance Win32_Process -Filter 'ProcessId=${pid}').ExecutablePath`], { encoding: 'utf8', windowsHide: true }).trim() || undefined;
+    if (process.platform === 'linux') return readlinkSync(`/proc/${pid}/exe`);
+    return execFileSync('ps', ['-p', String(pid), '-o', 'comm='], { encoding: 'utf8' }).trim() || undefined;
+  } catch { return undefined; }
+}
+const sameFile = (a, b) => path.resolve(a).toLowerCase() === path.resolve(b).toLowerCase();
+
+/** Any local user can bind 127.0.0.1:11435 first and answer as hydra-nano:git, so a listener counts as
+ * Hydra's only while server.pid names a live process of this user that runs config.server. */
+export function ownServer(config) {
+  const file = path.join(home(), 'server.pid');
+  if (!existsSync(file)) return false;
+  const pid = Number(readFileSync(file, 'utf8'));
+  if (!Number.isSafeInteger(pid) || pid <= 0) return false;
+  try { process.kill(pid, 0); } catch { return false; } // gone, or another user's process (EPERM)
+  const executable = executableOf(pid);
+  return Boolean(executable) && sameFile(executable, config.server);
+}
+
 async function startLocal(config) {
   const url = 'http://127.0.0.1:11435';
   if (config.url !== url) throw new Error('Managed Hydra server must use http://127.0.0.1:11435');
-  if (await healthy(url, config.model)) return;
+  const notOurs = () => new Error('127.0.0.1:11435 answers, but not from the llama-server Hydra started (~/.hydra/server.pid); stop that process and retry');
+  if (await healthy(url, config.model)) {
+    if (ownServer(config)) return;
+    throw notOurs();
+  }
   if (!existsSync(config.server) || !existsSync(config.modelPath)) throw new Error('Hydra runtime or GGUF missing; rerun hydra-install');
   mkdirSync(home(), { recursive: true });
   const lock = path.join(home(), 'server.lock');
@@ -51,7 +77,10 @@ async function startLocal(config) {
   try {
     if (ownsLock) {
       const log = openSync(path.join(home(), 'server.log'), 'a');
-      child = spawn(config.server, ['-m', config.modelPath, '--alias', config.model, '--host', '127.0.0.1', '--port', '11435', '-c', '8192', '-np', '1'], {
+      // No slot monitor (it can echo prompts), no web UI, and CORS only for localhost pages: Hydra's own
+      // client is Node and needs none of them, while any web page could otherwise call this port.
+      child = spawn(config.server, ['-m', config.modelPath, '--alias', config.model, '--host', '127.0.0.1', '--port', '11435', '-c', '8192', '-np', '1',
+        '--no-slots', '--no-webui', '--cors-origins', 'localhost'], {
         detached: true, windowsHide: true, stdio: ['ignore', log, log],
       });
       closeSync(log);
@@ -61,7 +90,10 @@ async function startLocal(config) {
     }
     const deadline = Date.now() + 120000;
     while (Date.now() < deadline) {
-      if (await healthy(url, config.model)) return;
+      if (await healthy(url, config.model)) {
+        if (ownServer(config)) return;
+        throw notOurs();
+      }
       if (child && child.exitCode !== null) throw new Error('llama-server exited; inspect ~/.hydra/server.log');
       await new Promise(resolve => setTimeout(resolve, 500));
     }
@@ -77,14 +109,9 @@ export function stopLocal(config = localConfig()) {
   if (!config.managed || !existsSync(file)) return false;
   const pid = Number(readFileSync(file, 'utf8'));
   if (!Number.isSafeInteger(pid) || pid <= 0) throw new Error('Invalid managed server PID');
-  let executable;
-  try {
-    if (process.platform === 'win32') executable = execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', `(Get-CimInstance Win32_Process -Filter 'ProcessId=${pid}').ExecutablePath`], { encoding: 'utf8', windowsHide: true }).trim();
-    else if (process.platform === 'linux') executable = readlinkSync(`/proc/${pid}/exe`);
-    else executable = execFileSync('ps', ['-p', String(pid), '-o', 'comm='], { encoding: 'utf8' }).trim();
-  } catch { return false; }
+  const executable = executableOf(pid);
   if (!executable) return false;
-  if (path.resolve(executable).toLowerCase() !== path.resolve(config.server).toLowerCase()) throw new Error('Recorded PID belongs to another executable; refusing to stop it');
+  if (!sameFile(executable, config.server)) throw new Error('Recorded PID belongs to another executable; refusing to stop it');
   process.kill(pid);
   unlinkSync(file);
   starting = undefined;

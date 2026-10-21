@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, existsSync } from 'node:fs';
+import { mkdtempSync, existsSync, readFileSync, statSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -22,6 +22,26 @@ test('the ledger records calls with their caller, and HYDRA_TELEMETRY=0 records 
     assert.deepEqual([caller('s').agent, caller('s').agentDetail, caller('s').session], ['claude-code', detail, 's']);
   }
   if (prior === undefined) delete process.env.AI_AGENT; else process.env.AI_AGENT = prior;
+});
+
+test('the ledger is owner-only and keeps no credential from a recorded command', { skip: process.platform === 'win32' }, () => {
+  const prior = process.env.HYDRA_HOME;
+  process.env.HYDRA_HOME = path.join(mkdtempSync(path.join(os.tmpdir(), 'hydra-ledger-')), 'home');
+  try {
+    record({ kind: 'hook', decision: 'deny', run: 'npm test --token abc123',
+      command: 'HYDRA_RAW=1 DATABASE_URL=postgres://u:pw999@db.invalid/x GITHUB_TOKEN="ghp_dummy" npm test --token abc123' });
+    record({ head: 'test', question: 'pytest --password=hunter2 --test-name-pattern=adds http://bob:s3cret@host/x', raw: 1, returned: 1 });
+    record({ head: 'git', question: 'which commits mention a=b?', raw: 1, returned: 1 });
+    const text = readFileSync(path.join(process.env.HYDRA_HOME, 'ledger.jsonl'), 'utf8');
+    for (const secret of ['pw999', 'ghp_dummy', 'abc123', 'hunter2', 's3cret']) assert.ok(!text.includes(secret), secret);
+    assert.match(text, /HYDRA_RAW=1 DATABASE_URL=\*\*\* GITHUB_TOKEN=\*\*\* npm test --token \*\*\*/);
+    assert.match(text, /--test-name-pattern=adds/);
+    assert.match(text, /mention a=b/);
+    assert.equal(statSync(process.env.HYDRA_HOME).mode & 0o777, 0o700);
+    assert.equal(statSync(path.join(process.env.HYDRA_HOME, 'ledger.jsonl')).mode & 0o777, 0o600);
+  } finally {
+    if (prior === undefined) delete process.env.HYDRA_HOME; else process.env.HYDRA_HOME = prior;
+  }
 });
 
 test('a command run from an Antigravity terminal is recorded as antigravity, not shell', () => {

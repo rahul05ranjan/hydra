@@ -310,10 +310,7 @@ async function smellCommand(args) {
   let rawChars = 0;
 
   if (isDiff || isStaged) {
-    const gitArgs = ['diff'];
-    if (isStaged) gitArgs.push('--staged');
-    const diffRes = await run('git', gitArgs, process.cwd());
-    const diffOutput = diffRes.out || '';
+    const diffOutput = (await git.diffText(isStaged, process.cwd())) || '';
     rawChars = diffOutput.length;
     const diffReport = refactor.scanDiff(diffOutput);
     if (isJson) {

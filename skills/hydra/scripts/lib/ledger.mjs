@@ -5,7 +5,7 @@
 //     run through that its own pipeline already cuts to a few lines ('trimmed') or passed it ('pass', recorded
 //     without the command). hookMs is the hook process's whole lifetime.
 //   kind 'error': a command failed (model unavailable, crash).
-import { appendFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { appendFileSync, chmodSync, mkdirSync, readFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -33,11 +33,25 @@ export function caller(session = process.env.CLAUDE_CODE_SESSION_ID) {
     ...(launcher ? { app: launcher } : {}), ...(session ? { session } : {}) };
 }
 
+// Switches worth keeping readable in `hydra improve`; every other NAME=value is treated as a possible secret.
+const PLAIN = /^(?:HYDRA_\w+|CI|NODE_ENV|DEBUG|FORCE_COLOR|NO_COLOR)$/;
+
+/** A command with credential values masked: env assignments, URL passwords and secret-named flags. */
+export const redact = text => String(text)
+  .replace(/([a-z][\w+.-]*:\/\/)[^\s/@]+@/gi, '$1***@')
+  .replace(/(^|[\s;&|(])([A-Za-z_]\w*)=("[^"]*"|'[^']*'|\S+)/g, (all, before, name) => (PLAIN.test(name) ? all : `${before}${name}=***`))
+  .replace(/(--?[\w-]*(?:token|password|passwd|secret|api[-_]?key|auth)[\w-]*)([ =])("[^"]*"|'[^']*'|\S+)/gi, '$1$2***');
+
 export function record(entry) {
   if (!enabled()) return;
   try {
-    mkdirSync(home(), { recursive: true });
-    appendFileSync(file(), `${JSON.stringify({ v: 2, kind: 'call', ...caller(), ...entry })}\n`);
+    // Commands and test questions can carry credentials, so the ledger is owner-only and masked.
+    const row = { v: 2, kind: 'call', ...caller(), ...entry };
+    for (const key of ['command', 'run']) if (typeof row[key] === 'string') row[key] = redact(row[key]);
+    if (row.head === 'test' && typeof row.question === 'string') row.question = redact(row.question);
+    mkdirSync(home(), { recursive: true, mode: 0o700 });
+    appendFileSync(file(), `${JSON.stringify(row)}\n`, { mode: 0o600 });
+    chmodSync(file(), 0o600);
   } catch {
     // Accounting must never fail the answer.
   }

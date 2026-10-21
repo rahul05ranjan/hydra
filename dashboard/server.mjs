@@ -155,11 +155,21 @@ const MIME_TYPES = {
   '.svg': 'image/svg+xml',
 };
 
+// Loopback only. A Host check also stops DNS-rebinding pages, and starting an eval needs the dashboard's
+// own origin and a JSON body, which a cross-site page cannot send without a preflight this server never grants.
+const LOCAL_HOSTS = new Set([`127.0.0.1:${PORT}`, `localhost:${PORT}`]);
+
 const server = createServer(async (req, res) => {
-  const url = new URL(req.url, `http://${req.headers.host}`);
+  const host = req.headers.host ?? '';
+  if (!LOCAL_HOSTS.has(host)) {
+    res.writeHead(421, { 'Content-Type': 'text/plain' });
+    res.end('Misdirected request');
+    return;
+  }
+  const url = new URL(req.url, `http://${host}`);
 
   if (url.pathname === '/api/status') {
-    res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+    res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(getSystemStatus()));
     return;
   }
@@ -169,7 +179,6 @@ const server = createServer(async (req, res) => {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
       Connection: 'keep-alive',
-      'Access-Control-Allow-Origin': '*',
     });
     res.write('retry: 1000\n\n');
 
@@ -185,6 +194,12 @@ const server = createServer(async (req, res) => {
   }
 
   if (url.pathname === '/api/eval/start' && req.method === 'POST') {
+    const json = String(req.headers['content-type'] ?? '').split(';')[0].trim().toLowerCase() === 'application/json';
+    if (req.headers.origin !== `http://${host}` || !json) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Start evaluations from the dashboard page' }));
+      return;
+    }
     let body = '';
     req.on('data', chunk => (body += chunk));
     req.on('end', () => {
@@ -228,6 +243,6 @@ const server = createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, '0.0.0.0', () => {
+server.listen(PORT, '127.0.0.1', () => {
   console.log(`\n⚡ Hydra Live Dashboard listening at http://localhost:${PORT}`);
 });

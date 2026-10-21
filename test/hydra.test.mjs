@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -111,6 +111,17 @@ test('Git keeps an explicitly requested compound author/file/message filter', as
   assert.equal(sections[0].args.path, 'app.js');
   assert.equal(sections[0].args.grep, 'port');
   assert.match(sections[0].out, /add port setting/);
+});
+
+test('smell --diff reads the diff without running repository diff drivers', { skip: process.platform === 'win32' }, async () => {
+  const dir = repo();
+  const marker = path.join(dir, 'driver-ran');
+  writeFileSync(path.join(dir, 'driver.sh'), `#!/bin/sh\ntouch ${marker}\n`, { mode: 0o755 });
+  execFileSync('git', ['config', 'diff.external', path.join(dir, 'driver.sh')], { cwd: dir });
+  writeFileSync(path.join(dir, 'app.js'), 'export const port = 5000;\n');
+  const out = execFileSync(process.execPath, [path.resolve('skills/hydra/scripts/hydra.mjs'), 'smell', '--diff'], { cwd: dir, encoding: 'utf8', env: { ...process.env, HYDRA_TELEMETRY: '0' } });
+  assert.match(out, /smell|No code smells/);
+  assert.equal(existsSync(marker), false);
 });
 
 test('Git range history drops a branch name used as a message filter', async () => {
@@ -428,6 +439,27 @@ test('os head blocks sensitive environment variable inspection', async () => {
   const blockedRes = await osHead.PROBES.env.cmd({ var: 'MY_API_KEY' });
   assert.ok(blockedRes.ok);
   assert.match(blockedRes.out, /GUARDRAIL/);
+});
+
+test('os head withholds credentials held under names the old denylist missed', async () => {
+  const dummies = { DATABASE_URL: 'postgres://u:DUMMYPW@db.invalid/app', REDIS_URL: 'redis://:DUMMYPW@cache.invalid:6379',
+    MYSQL_PWD: 'DUMMYPW', SENTRY_DSN: 'https://DUMMYPW@o1.ingest.invalid/2', SLACK_WEBHOOK_URL: 'https://hooks.invalid/services/DUMMYPW',
+    AZURE_STORAGE_CONNECTION_STRING: 'DefaultEndpointsProtocol=https;AccountName=a;AccountKey=DUMMYPW', GH_PAT: 'DUMMYPW',
+    SESSION_COOKIE: 'DUMMYPW', BUILD_FLAVOR_1: 'release', SITE_URL: 'https://example.invalid/home' };
+  const prior = Object.fromEntries(Object.keys(dummies).map(key => [key, process.env[key]]));
+  Object.assign(process.env, dummies);
+  try {
+    for (const name of Object.keys(dummies).slice(0, 8)) {
+      const res = await osHead.PROBES.env.cmd({ var: name });
+      assert.doesNotMatch(res.out, /DUMMYPW/, name);
+      assert.match(res.out, /GUARDRAIL/, name);
+    }
+    assert.match((await osHead.PROBES.env.cmd({ var: 'BUILD_FLAVOR_1' })).out, /BUILD_FLAVOR_1=release/);
+    assert.match((await osHead.PROBES.env.cmd({ var: 'SITE_URL' })).out, /SITE_URL=https:\/\/example\.invalid\/home/);
+    assert.match((await osHead.PROBES.env.cmd({ var: 'PWD' })).out, /^PWD=/);
+  } finally {
+    for (const [key, value] of Object.entries(prior)) if (value === undefined) delete process.env[key]; else process.env[key] = value;
+  }
 });
 
 test('os head filters processes by name', async () => {

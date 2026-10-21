@@ -50,3 +50,20 @@ test('managed installation config is versioned and isolated by HYDRA_HOME', () =
     assert.throws(localConfig, /Unsupported Hydra config/);
   } finally { if (prior === undefined) delete process.env.HYDRA_HOME; else process.env.HYDRA_HOME = prior; }
 });
+
+test('a listener counts as the managed server only when server.pid names this user\'s llama-server', { skip: process.platform === 'win32' }, async () => {
+  const prior = process.env.HYDRA_HOME;
+  process.env.HYDRA_HOME = mkdtempSync(path.join(os.tmpdir(), 'hydra-own-'));
+  try {
+    const { ownServer } = await import('../skills/hydra/scripts/lib/local.mjs');
+    const pidFile = path.join(process.env.HYDRA_HOME, 'server.pid');
+    assert.equal(ownServer({ server: process.execPath }), false, 'no pid file');
+    writeFileSync(pidFile, String(process.pid));
+    assert.equal(ownServer({ server: process.execPath }), true, 'this process runs node');
+    assert.equal(ownServer({ server: '/nonexistent/llama-server' }), false, 'another executable');
+    writeFileSync(pidFile, '1');
+    assert.equal(ownServer({ server: process.execPath }), false, 'pid 1 belongs to another user');
+  } finally {
+    if (prior === undefined) delete process.env.HYDRA_HOME; else process.env.HYDRA_HOME = prior;
+  }
+});

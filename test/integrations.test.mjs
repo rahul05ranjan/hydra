@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -38,6 +38,31 @@ async function withHome(home, body) {
     }
   }
 }
+
+test('rewriting a tool config keeps its owner-only mode', { skip: process.platform === 'win32' }, async () => {
+  const home = fakeHome();
+  const files = ['.codex/config.toml', '.cursor/mcp.json', '.gemini/settings.json'];
+  for (const file of files) chmodSync(path.join(home, file), 0o600);
+  const claude = path.join(home, '.claude', 'settings.json');
+  mkdirSync(path.dirname(claude), { recursive: true });
+  writeFileSync(claude, JSON.stringify({ env: { DUMMY_TOKEN: 'x' } }));
+  chmodSync(claude, 0o600);
+  const { installHooks, removeHooks } = await import('../skills/hydra/scripts/lib/claude_hooks.mjs');
+  const mode = file => statSync(file).mode & 0o777;
+  await withHome(home, async integrations => {
+    const scripts = integrations.installSharedScripts(SCRIPTS);
+    for (const action of ['install', 'remove']) {
+      integrations.apply(['codex', 'cursor', 'gemini-cli'], action, { scripts });
+      for (const file of files) assert.equal(mode(path.join(home, file)), 0o600, `${action} ${file}`);
+    }
+    installHooks(scripts, claude);
+    assert.equal(mode(claude), 0o600);
+    removeHooks(claude);
+    assert.equal(mode(claude), 0o600);
+    // A file Hydra creates itself holds only Hydra's entries but still starts owner-only.
+    assert.equal(mode(path.join(home, '.cursor', 'hooks.json')), 0o600);
+  });
+});
 
 test('every tool gets Hydra beside its own settings, twice without duplicates, and loses only Hydra on removal', async () => {
   const home = fakeHome();

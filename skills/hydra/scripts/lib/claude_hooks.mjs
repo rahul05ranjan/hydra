@@ -3,7 +3,7 @@
 //   SessionStart: a short note tells the agent to ask Hydra about git history before reading it raw.
 // The installer registers them in the user's settings.json; `hydra hooks remove` takes them out again.
 // Only entries whose command points into skills/hydra/scripts/hooks/ are ever touched.
-import { copyFileSync, existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { chmodSync, copyFileSync, existsSync, mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -165,12 +165,22 @@ function withoutOurs(settings) {
   return settings;
 }
 
+/** Replace a config file in one step, keeping its permission bits: a 0600 file can hold tokens.
+ * A file Hydra creates is owner-only. */
+export function replaceFile(file, text) {
+  const mode = existsSync(file) ? statSync(file).mode & 0o777 : 0o600;
+  const temp = `${file}.hydra-tmp`;
+  rmSync(temp, { force: true });
+  writeFileSync(temp, text, { mode, flag: 'wx' });
+  chmodSync(temp, mode);
+  renameSync(temp, file);
+}
+
 function save(file, settings) {
   mkdirSync(path.dirname(file), { recursive: true });
   // Keep the user's settings as they were before Hydra first touched them.
   if (existsSync(file) && !existsSync(`${file}.before-hydra`)) copyFileSync(file, `${file}.before-hydra`);
-  writeFileSync(`${file}.hydra-tmp`, JSON.stringify(settings, null, 2) + '\n');
-  renameSync(`${file}.hydra-tmp`, file);
+  replaceFile(file, JSON.stringify(settings, null, 2) + '\n');
 }
 
 /** Register both hooks for the Hydra scripts directory `scripts`; re-running replaces, never duplicates. */

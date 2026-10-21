@@ -6,7 +6,9 @@ const IS_MAC = process.platform === 'darwin';
 const IS_WINDOWS = process.platform === 'win32';
 const result = r => ({ ok: r.ok, out: r.out || r.err || (r.ok ? '(no output)' : '(probe failed)') });
 const powershell = script => run('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', script]);
-const SENSITIVE_PATTERN = /(?:SECRET|KEY|TOKEN|PASS|AUTH|CREDENTIAL|PRIVATE|CLOUDFLARE|API)/i;
+const SENSITIVE_PATTERN = /(?:SECRET|KEY|TOKEN|PASS|AUTH|CREDENTIAL|PRIVATE|CLOUDFLARE|API|DSN|WEBHOOK|COOKIE|SESSION|CONN(?:ECTION)?_?STR|_PWD$|(?:^|_)PAT(?:_|$))/i;
+// A value can carry a credential whatever its name: a URL with a password or user, or a connection-string key.
+const SENSITIVE_VALUE = /:\/\/[^\s/@]+@|(?:AccountKey|SharedAccessKey|SharedAccessSignature|Password|Pwd)=/i;
 
 export const PROBES = {
   ports: {
@@ -101,6 +103,9 @@ export const PROBES = {
         return { ok: true, out: `[GUARDRAIL]: Variable "${v}" is flagged sensitive and cannot be inspected.` };
       }
       const val = process.env[v];
+      if (val !== undefined && SENSITIVE_VALUE.test(val)) {
+        return { ok: true, out: `[GUARDRAIL]: Variable "${v}" holds a credential-shaped value and cannot be inspected.` };
+      }
       return {
         ok: true,
         out: val !== undefined ? `${v}=${val}` : `Variable "${v}" is not set in environment.`,

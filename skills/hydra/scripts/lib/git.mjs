@@ -9,6 +9,12 @@ const FORMAT = ['--pretty=tformat:%h %ad %an: %s', '--date=short'];
 const PATCH = ['--no-ext-diff', '--no-textconv', '--stat', '-p'];
 const MAX_PROBES = 4;
 
+/** The working-copy (or staged) patch, read with the same guards as every probe: no pager, fsmonitor,
+ * external diff or textconv driver from the repository's own config runs. */
+export async function diffText(staged, cwd) {
+  return (await run('git', [...HARDEN, 'diff', '--no-ext-diff', '--no-textconv', ...(staged ? ['--staged'] : [])], cwd, ENV)).out;
+}
+
 // A requested count belongs to the caller, not the model. Avoid treating line numbers or hashes as counts.
 const NUMBER_WORDS = {
   one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9,
@@ -111,7 +117,7 @@ export const PROBES = {
   blame: {
     about: 'line-by-line attribution of who wrote each specific line of a file (not for whole-file history); needs path',
     needs: 'path',
-    argv: a => ['blame', '--date=short', '--', a.path],
+    argv: a => ['blame', '--no-textconv', '--date=short', '--', a.path],
   },
   branches: {
     about: 'local and remote branches with their latest commit',

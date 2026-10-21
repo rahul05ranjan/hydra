@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { argvOf } from '../skills/hydra/scripts/mcp.mjs';
+import { argvOf, callTool, runArgv, TOOLS } from '../skills/hydra/scripts/mcp.mjs';
 
 const SERVER = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../skills/hydra/scripts/mcp.mjs');
 
@@ -41,6 +41,42 @@ test('one test or build command becomes argv; anything a shell would interpret i
   for (const command of ['npm test && rm -rf x', 'npm test | tail', 'pytest > out.txt', 'pytest $(cat args)', 'CI=1 npm test',
     'pytest "$HOME"', 'go test ./... ; echo', 'npm test `id`', 'pytest tests/*.py', '', 'pytest "unclosed'])
     assert.equal(argvOf(command), null, `accepted ${command}`);
+});
+
+test('hydra_run accepts project test runs and refuses code loaded from flags or paths outside cwd', () => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), 'hydra-run-gate-'));
+  const outside = mkdtempSync(path.join(os.tmpdir(), 'hydra-outside-'));
+  mkdirSync(path.join(dir, 'tests'));
+  for (const command of ['npm test', 'node --test', 'node --test tests/a.test.mjs', 'pytest -q -p no:cacheprovider tests/test_a.py::test_x',
+    'go test ./...', 'cargo test -- --nocapture', 'make test', 'npx vitest run tests', './gradlew test'])
+    assert.ok(runArgv(command, dir), `refused ${command}`);
+  for (const command of [`node --test ${path.join(outside, 'x.test.mjs')}`, 'node --test ../x.test.mjs', 'node --test --import=./hook.mjs',
+    "node --test '--import=data:text/javascript,1'", 'node --test --require ./x.cjs', 'node --test -e 1', 'node --test --inspect',
+    "make test '--eval=test: ; touch x'", 'make test CC=sh', "cargo test --config 'target.x.runner=[]'", 'go vet -vettool=/usr/bin/touch',
+    'go test -exec ./x ./...', `${path.join(outside, 'pytest')}`, 'pytest -p evil_plugin', 'npm test --script-shell=/bin/sh',
+    'npm test --prefix ../other', './gradlew test --init-script x.gradle', 'pytest ~/tests'])
+    assert.throws(() => runArgv(command, dir), /test or build command|inside cwd|loads code|recipe commands/, `accepted ${command}`);
+});
+
+test('smell, refactor and design read only source files inside cwd', async () => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), 'hydra-files-'));
+  const outside = mkdtempSync(path.join(os.tmpdir(), 'hydra-outside-'));
+  writeFileSync(path.join(outside, 'secret.js'), 'export const a = 1;\n');
+  writeFileSync(path.join(dir, '.env'), 'DATABASE_URL=postgres://u:pw@db.example.internal/app\n');
+  writeFileSync(path.join(dir, 'id_rsa'), 'not a key\n');
+  writeFileSync(path.join(dir, 'app.js'), 'export function add(a, b) { return a + b; }\n');
+  for (const [name, args] of [['hydra_smell', { target: path.join(outside, 'secret.js') }], ['hydra_smell', { target: '../' + path.basename(outside) + '/secret.js' }],
+    ['hydra_smell', { target: '.env' }], ['hydra_refactor', { file: 'id_rsa' }], ['hydra_refactor', { file: '--json' }],
+    ['hydra_design', { query: 'strategy', file: path.join(outside, 'secret.js') }]])
+    await assert.rejects(callTool(name, { ...args, cwd: dir }), /inside cwd/, `${name} ${JSON.stringify(args)}`);
+  const smell = await callTool('hydra_smell', { target: 'app.js', cwd: dir });
+  assert.equal(smell.isError, false);
+});
+
+test('tools tell the client which ones only read', () => {
+  const byName = Object.fromEntries(TOOLS.map(tool => [tool.name, tool.annotations]));
+  assert.equal(byName.hydra_run.readOnlyHint, false);
+  for (const name of ['hydra_git', 'hydra_os', 'hydra_smell', 'hydra_refactor', 'hydra_design']) assert.equal(byName[name].readOnlyHint, true, name);
 });
 
 test('the server answers the MCP handshake, lists tools and runs commands', async t => {

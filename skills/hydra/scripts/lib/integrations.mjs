@@ -19,6 +19,7 @@
 import { copyFileSync, cpSync, existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { replaceFile } from './claude_hooks.mjs';
 
 const home = () => process.env.HYDRA_TOOLS_HOME || os.homedir();
 const OURS = /[\\/](?:\.hydra[\\/]scripts|skills[\\/]hydra[\\/]scripts)[\\/]/;
@@ -54,8 +55,7 @@ function backup(file) {
 function write(file, text) {
   mkdirSync(path.dirname(file), { recursive: true });
   backup(file);
-  writeFileSync(`${file}.hydra-tmp`, text);
-  renameSync(`${file}.hydra-tmp`, file);
+  replaceFile(file, text);
 }
 
 class Manual extends Error {

@@ -1,4 +1,7 @@
 const FILES_FIRST = /^\s*(where|find|locate|which files?|how is|how does)\b/i;
+// A build-failure question goes to the test head, whose digest carries the
+// compiler/test errors; the failure word may come before or after "build".
+const BUILD_FAILURE = /\bbuild\s+(?:is\s+)?(?:broken|broke|failing|failed|fails?|errors?)\b|\b(?:broken|broke|failing|failed|fails?|errors?)\b[^.?]*\bbuild\b|\bbuild\b[^.?]*\b(?:broken|broke|failing|failed|fails?|errors?)\b/i;
 const TEST = /\b(tests?|test failure|build failure|compile error|failing tests?)\b/i;
 const READ =
   /^\s*(read|slice|cat|outline|view code|inspect)\b|\b(outline of|slice lines?|lines \d+[:-]\d+)\b/i;
@@ -9,7 +12,7 @@ const GIT =
 
 // Routing is code, not a model: it must be the same every time and cost nothing.
 export function route(question, inRepo) {
-  if (TEST.test(question)) return 'test';
+  if (TEST.test(question) || BUILD_FAILURE.test(question)) return 'test';
   if (!inRepo || FILES_FIRST.test(question)) return 'files';
   if (READ.test(question) || (FILE_AND_CODE.test(question) && /\b(show|read|slice|outline|implementation|defined in)\b/i.test(question))) {
     return 'read';

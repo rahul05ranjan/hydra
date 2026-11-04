@@ -645,7 +645,17 @@ export function scanCode(content, filename = 'code.ts', options = {}) {
     // Dead Code detection: single-line terminal statements not opening a multiline block
     if (/^\s*(?:return\b[^;{([,?:+\-=>]*;|throw\s+new\b[^;{([,?:+\-=>]*;|break;|continue;)\s*$/.test(trimmed)) {
       const nextLine = lines[i + 1]?.trim();
-      if (nextLine && !/^[}\])]/.test(nextLine) && !/^(?:case\b|default\b|\/\/|\/\*)/.test(nextLine)) {
+      // An unbraced if/else makes the next line a sibling branch, not dead code:
+      //   if (x)
+      //     return 1;
+      //   else          <- reachable
+      //     return 2;
+      // More generally, a next line less indented than the terminal statement
+      // left its block: it is new code, not unreachable code.
+      const nextIndent = lines[i + 1] ? (lines[i + 1].match(/^([ \t]*)/) ?? ['', ''])[1].length : 0;
+      const myIndent = line.match(/^([ \t]*)/)[1].length;
+      const siblingBranch = /^(?:else\b|elif\b|catch\b|finally\b)/.test(nextLine ?? '') || nextIndent < myIndent;
+      if (nextLine && !siblingBranch && !/^[}\])]/.test(nextLine) && !/^(?:case\b|default\b|\/\/|\/\*)/.test(nextLine)) {
         findings.push({
           smell: 'dead-code',
           name: SMELLS_CATALOG['dead-code'].name,

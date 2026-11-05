@@ -135,6 +135,38 @@ index 1234567..89abcdef 100644
   assert.ok(res.reports[0].findings.some(f => f.smell === 'deep-nesting'));
 });
 
+test('scanDiff reports findings at the real new-file line, not the blob offset', () => {
+  // The four added lines land at new-file lines 12-15; the smells sit on the
+  // third and fourth of them, so they must report 14 and 15, not 3 and 4.
+  const diff = [
+    'diff --git a/src/deep.js b/src/deep.js',
+    'index 1111111..2222222 100644',
+    '--- a/src/deep.js',
+    '+++ b/src/deep.js',
+    '@@ -5,3 +12,4 @@ function outer() {',
+    '+  if (a) {',
+    '+    return 1;',
+    '+    dead();',
+    '+    return a.b().c().d();',
+  ].join('\n');
+  const res = refactor.scanDiff(diff);
+  assert.equal(res.filesWithSmells, 1);
+  const lines = res.reports[0].findings.map(f => f.line).sort((a, b) => a - b);
+  assert.deepEqual(lines, [14, 15]);
+  assert.ok(res.reports[0].findings.some(f => f.smell === 'dead-code' && f.line === 14));
+  assert.ok(res.reports[0].findings.some(f => f.smell === 'message-chains' && f.line === 15));
+});
+
+test('a stray one-space line does not distort the indent width', () => {
+  // Before the mode-based indent width, one stray ' x' line set the width to 1
+  // and every 4-space body line counted as a nesting level.
+  const report = refactor.scanCode(' x\nif a:\n    if b:\n        if c:\n            pass\n', 'stray.py');
+  assert.ok(!report.findings.some(f => f.smell === 'deep-nesting'), JSON.stringify(report.findings));
+  // Real nesting is still found once the width reflects the file's actual unit.
+  const nested = refactor.scanCode('if a:\n    if b:\n        if c:\n            if d:\n                pass\n', 'nested.py');
+  assert.ok(nested.findings.some(f => f.smell === 'deep-nesting' && f.line === 5));
+});
+
 test('generateRecipe provides actionable Refactoring.Guru steps', () => {
   const code = `
 function sendBulkEmail(recipients, subject, body, attachment, replyTo, templateId) {

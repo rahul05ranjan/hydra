@@ -24,7 +24,9 @@ const NUMBER_WORDS = {
 const COUNT = `(?:\\d+|(?:twenty|thirty|forty)[ -](?:one|two|three|four|five|six|seven|eight|nine)|${Object.keys(NUMBER_WORDS).join('|')})`;
 const COUNT_MODIFIERS = '(?:(?:last|latest|recent|most recent|newest|oldest|previous|prior|preceding|earlier|branch-only|file-specific|unique|matching|first|history|historical|past)\\s+){0,3}';
 const COUNT_ITEMS = '(?:commits?|revisions?|changesets?|records?)';
-const requestedCount = question => {
+// Caller-owned record counts are exported for testing; production callers pass
+// them through gather, never through the model.
+export const requestedCount = question => {
   const match = question.match(new RegExp(`\\b(?:last|latest|recent|newest|oldest|top|first)\\s+(${COUNT})\\s+${COUNT_MODIFIERS}${COUNT_ITEMS}\\b`, 'i'))
     ?? question.match(new RegExp(`\\b(${COUNT})\\s+${COUNT_MODIFIERS}${COUNT_ITEMS}\\b`, 'i'));
   if (!match) return null;

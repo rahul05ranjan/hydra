@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { gather } from '../skills/hydra/scripts/lib/git.mjs';
+import { gather, requestedCount } from '../skills/hydra/scripts/lib/git.mjs';
 import { answer } from '../skills/hydra/scripts/lib/answer.mjs';
 
 function fixture(t) {
@@ -24,6 +24,15 @@ function fixture(t) {
   writeFileSync(path.join(cwd, 'staged.js'), 'initial\nFILENAME_EDIT\n');
   return cwd;
 }
+
+test('requestedCount reads the count the question asks for', () => {
+  assert.equal(requestedCount('the 3 most recent commits'), 3);
+  assert.equal(requestedCount('5 oldest commits'), 5);
+  assert.equal(requestedCount('previous 4 commits'), 4);
+  assert.equal(requestedCount('twenty commits'), 20);
+  assert.equal(requestedCount('show all commits'), null);
+  assert.equal(requestedCount('recent commits'), null);
+});
 
 test('uncommitted patch rejects an unrequested model index flag, including index-named files', async t => {
   const cwd = fixture(t);

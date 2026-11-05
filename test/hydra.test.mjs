@@ -209,6 +209,14 @@ test('route sends test questions to test head', () => {
   assert.equal(route('is there any build failure?', true), 'test');
 });
 
+test('route sends build-failure questions to test head and build curiosity to files', () => {
+  // The failure word may come before or after 'build'; a build question that
+  // reports no failure is a code/architecture question for the files head.
+  assert.equal(route('why is the build broken?', true), 'test');
+  assert.equal(route('build is failing again', true), 'test');
+  assert.equal(route('how does the build system work?', true), 'files');
+});
+
 test('test_logs hands short output over whole without calling the model', async () => {
   const never = async () => assert.fail('the model was called');
   const shortPass = await test_logs.digest({ cmd: 'npm test', out: 'PASS src/index.test.ts', exitCode: 0 }, never);

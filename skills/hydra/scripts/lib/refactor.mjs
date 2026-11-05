@@ -557,7 +557,29 @@ export function scanCode(content, filename = 'code.ts', options = {}) {
   let switchStartLine = -1;
   let nestingStart = -1;
   let maxDepthInBlock = 0;
+  // A file's indent width is the most common positive leading-space count on a
+  // nonblank code line (the mode, smallest on a tie), not the minimum: one
+  // stray ' x' line at the top of a file must not count every 4-space body line
+  // as four nesting levels. No real language indents by one space, so a
+  // 1-space line only defines the width when nothing wider is indented at all.
+  // 4-space Python still counts one level per 4 spaces.
+  const spaceCounts = new Map();
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('//') || trimmed.startsWith('#') || trimmed.startsWith('/*')) continue;
+    const spaces = /^ */.exec(line)[0].length;
+    if (spaces > 0) spaceCounts.set(spaces, (spaceCounts.get(spaces) ?? 0) + 1);
+  }
+  const unitCandidates = [...spaceCounts.keys()].filter(width => width >= 2).sort((a, b) => a - b);
+  const candidates = unitCandidates.length ? unitCandidates : [...spaceCounts.keys()].sort((a, b) => a - b);
   let indentWidth = 0;
+  let mostLines = 0;
+  for (const width of candidates) {
+    if (spaceCounts.get(width) > mostLines) {
+      mostLines = spaceCounts.get(width);
+      indentWidth = width;
+    }
+  }
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -591,9 +613,6 @@ export function scanCode(content, filename = 'code.ts', options = {}) {
       if (ch === '\t') tabCount++;
       else spaceCount++;
     }
-    // A file's indent width is the smallest positive leading-space count on a
-    // nonblank line; 4-space Python must count one level per 4 spaces, not per 2.
-    if (spaceCount > 0 && (!indentWidth || spaceCount < indentWidth)) indentWidth = spaceCount;
     const depthFromSpaces = Math.floor(spaceCount / (indentWidth || 2));
     const depth = tabCount + depthFromSpaces;
 

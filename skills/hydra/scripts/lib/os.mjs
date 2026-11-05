@@ -164,9 +164,19 @@ function topic(text) {
   if (/\b(process(es)?|pids?|cpu)\b/.test(q)) return processes();
   if (/\b(ram|memory|swap)\b/.test(q)) return { probe: 'memory' };
   if (/\b(disk|space|filesystems?|storage|mount\w*)\b/.test(q)) return { probe: 'disk' };
-  if (/\b(env|environment|path|variables?)\b/.test(q)) {
-    const m = text.match(/\b([A-Z0-9_]{3,30})\b/);
-    return { probe: 'env', var: m ? m[1] : 'PATH' };
+  if (/\b(env|environment|path|variables?|vars?)\b/.test(q)) {
+    // The variable the question names: an underscored ALL_CAPS name first, else
+    // a bare ALL_CAPS word such as HOME, TERM or USER that is not generic noise,
+    // else the identifier beside the singular word 'variable'/'var' (a lowercase
+    // shell variable such as home or pwd is just as valid). A plural 'variables'
+    // question names none and keeps the PATH default.
+    const bareCaps = (text.match(/\b[A-Z][A-Z0-9]{2,}\b/g) || []).filter(word => !NOISE_CAPS.has(word));
+    const named = text.match(/\b([A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+)\b/)
+      ?? /\bvariable\s+([A-Za-z_][A-Za-z0-9_]{1,30})\b/i.exec(text)
+      ?? /\b([A-Za-z_][A-Za-z0-9_]{1,30})\s+variable\b/i.exec(text)
+      ?? /\bvar\s+([A-Za-z_][A-Za-z0-9_]{1,30})\b/i.exec(text)
+      ?? (bareCaps.length ? [undefined, bareCaps[0]] : null);
+    return { probe: 'env', var: named ? named[1] : 'PATH' };
   }
   // "running" alone is weak: "the RAM running low" is about memory, checked above.
   return /\brunning\b/.test(q) ? processes() : null;
@@ -181,6 +191,9 @@ function clauseTopics(question) {
   return found;
 }
 
+// Short generic acronyms are not environment variable names; the bare-caps
+// fallback below must not mistake them for one.
+const NOISE_CAPS = new Set(['RAM', 'CPU', 'PID', 'OS', 'API', 'URL', 'ID', 'TODO', 'FIXME', 'GB', 'MB', 'KB']);
 const ENV_NAME = /^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+$/;
 const MAX_LISTENERS = 40;
 // The one 2-5 digit number in a question that plans the ports probe is the port it asks about.

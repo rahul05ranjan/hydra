@@ -512,6 +512,22 @@ test('os plan treats an environment-variable name planned as a process as an env
   assert.deepEqual((await osHead.gather('is nginx up?', process.cwd(), named)).map(section => section.args), [{ probe: 'processes', name: 'nginx' }]);
 });
 
+test('os env questions name the variable they ask about', async () => {
+  const asks = async question => (await osHead.gather(question, process.cwd(), null)).map(section => ({ probe: section.probe, ...section.args }));
+  // A bare ALL_CAPS name (HOME, TERM) names the variable, not a PATH default.
+  assert.deepEqual(await asks('which env is HOME set to'), [{ probe: 'env', var: 'HOME' }]);
+  assert.deepEqual(await asks('what about TERM in the env'), [{ probe: 'env', var: 'TERM' }]);
+  // 'var'/'vars' questions reach the env probe and keep a lowercase name.
+  assert.deepEqual(await asks('show the var shell_opts'), [{ probe: 'env', var: 'shell_opts' }]);
+  // A plural 'variables' question names none and keeps the PATH default.
+  assert.deepEqual(await asks('what environment variables are set'), [{ probe: 'env', var: 'PATH' }]);
+  assert.deepEqual(await asks('what is the home variable?'), [{ probe: 'env', var: 'home' }]);
+  // A RAM question is about memory even when it says 'env', and a generic
+  // acronym such as API must not become an env variable name.
+  assert.deepEqual(await asks('how much RAM does the env report'), [{ probe: 'memory' }]);
+  assert.deepEqual(await asks('which env vars does the API use'), [{ probe: 'env', var: 'PATH' }]);
+});
+
 test('os compound questions joined by "or" and "along with" get both probes', async () => {
   const probes = async question => (await osHead.gather(question, process.cwd(), null)).map(section => section.probe);
   assert.deepEqual(await probes('is the disk or the RAM running low?'), ['disk', 'memory']);

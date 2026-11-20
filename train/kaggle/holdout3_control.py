@@ -55,11 +55,14 @@ def prepare(username):
             if task.get('sourceRef'):
                 needed.add(task['sourceRef']['source'])
     inventory = json.loads((ROOT / 'evals/suite/source-inventory.json').read_text())
-    with zipfile.ZipFile(dataset / 'sources.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
-        for key in sorted(needed):
-            if digest(SOURCES / key) != inventory['files'][key]:
-                raise ValueError(f'Pinned source changed: {key}')
-            archive.write(SOURCES / key, key)
+    for key in needed:
+        if digest(SOURCES / key) != inventory['files'][key]:
+            raise ValueError(f'Pinned source changed: {key}')
+    # Kaggle refuses a dataset that carries these source files (zip or tar.gz, found 2026-11-20), so the kernel
+    # downloads the pinned release archives itself and keeps only these files, each checked by its SHA-256.
+    sys.path.insert(0, str(ROOT / 'evals/suite'))
+    from build_sources import SPECS
+    archives = {spec[0]: {'url': spec[1], 'prefix': spec[2]} for spec in SPECS.values() if any(key.startswith(spec[0] + '/') for key in needed)}
     tasks = {head: len(json.loads((ROOT / f'evals/suite/quality/holdout3/{head}.json').read_text())) for head in ('files', 'read', 'test', 'os')}
     tasks['git'] = sum(1 for line in (ROOT / 'evals/git_holdout3/tasks.jsonl').read_text().splitlines() if line.strip())
     if set(tasks.values()) != {2000}:
@@ -67,12 +70,12 @@ def prepare(username):
     runtime = json.loads((ROOT / 'skills/hydra/scripts/runtime-manifest.json').read_text())
     plan = {'version': 1, 'split': 'holdout3', 'tasks': 10000, 'tasksByHead': tasks, 'training': False,
         'sealedEvaluation': False, 'timeoutSeconds': TIMEOUT, 'sourceHashes': hashes,
-        'frozen.zip': digest(dataset / 'frozen.zip'), 'sources.zip': digest(dataset / 'sources.zip'),
-        'sourceFiles': len(needed), 'model': runtime['model'],
+        'frozen.zip': digest(dataset / 'frozen.zip'), 'sourceArchives': archives,
+        'sourceFiles': {key: inventory['files'][key] for key in sorted(needed)}, 'model': runtime['model'],
         'commit': subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
         'scope': 'Third holdout, frozen before scoring and scored once; per-head aggregates only.'}
     (dataset / 'plan.json').write_text(json.dumps(plan, indent=2) + '\n')
-    dataset_id = f'{username}/hydra-holdout3-input'
+    dataset_id = f'{username}/hydra-holdout3-eval-input'
     (dataset / 'dataset-metadata.json').write_text(json.dumps({'id': dataset_id, 'title': 'Hydra holdout3 evaluation input',
         'licenses': [{'name': 'apache-2.0'}], 'description': 'Frozen holdout3 tasks, Hydra CLI and pinned public source files; no credentials, sealed tasks or training data.'}, indent=2))
     shutil.copyfile(ROOT / 'train/kaggle/holdout3_kernel.py', kernel / 'holdout3_kernel.py')
@@ -80,16 +83,16 @@ def prepare(username):
         'title': 'Hydra holdout3 evaluation', 'code_file': 'holdout3_kernel.py', 'language': 'python', 'kernel_type': 'script',
         'is_private': True, 'enable_gpu': True, 'enable_internet': True, 'dataset_sources': [dataset_id],
         'competition_sources': [], 'kernel_sources': []}, indent=2))
-    receipt = {'planSha256': digest(dataset / 'plan.json'), 'frozenSha256': plan['frozen.zip'], 'sourcesSha256': plan['sources.zip'],
-        'files': len(hashes), 'sourceFiles': len(needed), 'tasksByHead': tasks, 'commit': plan['commit'],
-        'bytes': {name: (dataset / name).stat().st_size for name in ('frozen.zip', 'sources.zip')}}
+    receipt = {'planSha256': digest(dataset / 'plan.json'), 'frozenSha256': plan['frozen.zip'],
+        'files': len(hashes), 'sourceFiles': len(needed), 'sourceArchives': sorted(archives), 'tasksByHead': tasks,
+        'commit': plan['commit'], 'bytes': (dataset / 'frozen.zip').stat().st_size}
     print(json.dumps(receipt, indent=2))
 
 
 def main():
     load_dotenv(ROOT / '.env')
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['prepare', 'upload', 'run', 'status', 'output'])
+    parser.add_argument('action', choices=['prepare', 'upload', 'verify', 'run', 'status', 'output'])
     parser.add_argument('--approved', action='store_true')
     args = parser.parse_args()
     username = os.environ.get('KAGGLE_USERNAME', '')
@@ -97,6 +100,25 @@ def main():
         parser.error('Set KAGGLE_USERNAME in root .env')
     if args.action == 'prepare':
         prepare(username)
+        return
+    kaggle = [sys.executable, '-X', 'utf8', '-m', 'kaggle']
+    if args.action == 'verify':
+        # A kernel can mount a stale dataset version; push only once the remote plan is this plan.
+        import tempfile
+        import time
+        dataset_id = f'{username}/hydra-holdout3-eval-input'
+        for _ in range(60):
+            status = subprocess.run([*kaggle, 'datasets', 'status', dataset_id], capture_output=True, text=True).stdout
+            if 'ready' in status.split():
+                break
+            time.sleep(10)
+        else:
+            raise SystemExit(f'Dataset not ready: {status.strip()[-200:]}')
+        with tempfile.TemporaryDirectory() as folder:
+            subprocess.run([*kaggle, 'datasets', 'download', dataset_id, '-f', 'plan.json', '-p', folder, '--unzip'], check=True, capture_output=True)
+            remote = next(Path(folder).rglob('plan.json'))
+            local = STAGING / 'dataset/plan.json'
+            print(json.dumps({'ready': True, 'remotePlanSha256': digest(remote), 'localPlanSha256': digest(local), 'match': digest(remote) == digest(local)}))
         return
     if args.action == 'run' and not args.approved:
         parser.error('Requires the user\'s approval: one private Kaggle T4, up to 2 hours, evaluation only')

@@ -8,6 +8,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import tarfile
 import time
 import urllib.request
 import zipfile
@@ -25,17 +26,41 @@ def main():
         raise ValueError('Expected the approved 10,000-task holdout3 evaluation plan')
     TEMP.mkdir(parents=True, exist_ok=True)
     repo, sources = TEMP / 'source', TEMP / 'quality-sources'
-    for name, target in (('frozen.zip', repo), ('sources.zip', sources)):
-        if hashlib.sha256((inputs / name).read_bytes()).hexdigest() != plan[name]:
-            raise ValueError(f'{name} changed')
-        with zipfile.ZipFile(inputs / name) as archive:
-            archive.extractall(target)
+    # Kaggle may hand over an uploaded zip already unpacked; accept either form, by content hash.
+    if (inputs / 'frozen.zip').is_file():
+        if hashlib.sha256((inputs / 'frozen.zip').read_bytes()).hexdigest() != plan['frozen.zip']:
+            raise ValueError('frozen.zip changed')
+        with zipfile.ZipFile(inputs / 'frozen.zip') as archive:
+            archive.extractall(repo)
+    else:
+        shutil.copytree(inputs / 'frozen', repo)
     sys.path.insert(0, str(repo / 'train/kaggle'))
     import kernel as helpers
     helpers.START, helpers.LIMIT = START, DEADLINE
     for name, expected in plan['sourceHashes'].items():
         if 'git1' in name or helpers.digest(repo / name) != expected:
             raise ValueError(f'Unexpected/changed source: {name}')
+    # The Files and Read source files, taken from the pinned public release archives; each file's SHA-256 is checked.
+    wanted = plan['sourceFiles']
+    for release, spec in plan['sourceArchives'].items():
+        archive = TEMP / f'{release}.tar.gz'
+        with urllib.request.urlopen(spec['url'], timeout=120) as response, open(archive, 'wb') as stream:
+            shutil.copyfileobj(response, stream, 8 * 1024 * 1024)
+        with tarfile.open(archive) as bundle:
+            for member in bundle:
+                if not member.isfile() or not member.name.startswith(spec['prefix']):
+                    continue
+                key = release + '/' + member.name[len(spec['prefix']):]
+                if key in wanted:
+                    data = bundle.extractfile(member).read()
+                    if hashlib.sha256(data).hexdigest() != wanted[key]:
+                        raise ValueError(f'Source file differs from the pinned one: {key}')
+                    (sources / key).parent.mkdir(parents=True, exist_ok=True)
+                    (sources / key).write_bytes(data)
+        archive.unlink()
+    missing = [key for key in wanted if not (sources / key).is_file()]
+    if missing:
+        raise ValueError(f'{len(missing)} pinned source files not found in their archives, e.g. {missing[0]}')
 
     manifest = json.loads((repo / 'skills/hydra/scripts/runtime-manifest.json').read_text())
     node = shutil.which('node')

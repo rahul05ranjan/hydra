@@ -11,6 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { simpleCommands, testRun } from './lib/claude_hooks.mjs';
 import { record } from './lib/ledger.mjs';
+import { currentVersion } from './lib/self_update.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CLI = path.join(HERE, 'hydra.mjs');
@@ -76,10 +77,8 @@ export const TOOLS = [
 
 let client = 'mcp-client';
 
-// The repository's package.json when run from a checkout; an installed skill folder has none.
-const version = (() => {
-  try { return JSON.parse(readFileSync(path.join(HERE, '..', '..', '..', 'package.json'), 'utf8')).version ?? '0'; } catch { return '0'; }
-})();
+// package.json in a checkout or the npm package; the installer's record for an installed skill folder.
+const version = currentVersion() ?? '0';
 
 /** Split one command into argv the way a shell would for plain words and quotes, or null when it
  * holds anything a shell would interpret (operators, redirection, expansion, env prefixes). */

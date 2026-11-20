@@ -37,6 +37,7 @@ const USAGE = `usage:
   hydra setup                                          show runtime setup instructions
   hydra stop                                           stop Hydra's managed llama-server
   hydra self-update [--check] [--force]                update Hydra to the latest npm release, same install options
+  hydra version                                        the installed Hydra version
   hydra hooks install|remove|status                    Claude Code hooks that route tests and git questions here
   hydra agents install|remove|status [tool...]         Hydra's MCP server and hooks in codex, cursor, opencode,
                                                        gemini-cli, antigravity and antigravity-ide (default: every tool found)
@@ -274,7 +275,9 @@ async function doctor() {
   );
   const allPresent = (await Promise.all(checks.values())).every(Boolean);
   const rg = (await run('rg', ['--version'], process.cwd())).ok;
-  console.log(`${BACKEND}: reachable
+  const installed = update.currentVersion();
+  console.log(`hydra ${installed ?? '(version not recorded: installed before 0.3.5)'}; hydra self-update --check looks for a newer release
+${BACKEND}: reachable
 models:
   ${modelStatuses.join('\n  ')}
 ripgrep: ${rg ? 'present' : 'missing, using the slower built-in search'}`);
@@ -494,7 +497,15 @@ const commands = {
   agents: () => agentsCommand(rest),
   mcp: () => import('./mcp.mjs').then(server => server.serve()),
   'self-update': () => selfUpdate(rest),
+  version: showVersion,
+  '--version': showVersion,
+  '-v': showVersion,
 };
+
+function showVersion() {
+  const version = update.currentVersion();
+  console.log(version ? `hydra ${version}` : 'hydra (version not recorded: installed before 0.3.5; hydra self-update records it)');
+}
 
 async function selfUpdate(args) {
   const unknown = args.filter(arg => !['--check', '--force'].includes(arg));

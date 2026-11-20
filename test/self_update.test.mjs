@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { compare, decide, latest, readInstalled, recordInstall, replayArgs } from '../skills/hydra/scripts/lib/self_update.mjs';
+import { compare, currentVersion, decide, latest, readInstalled, recordInstall, replayArgs } from '../skills/hydra/scripts/lib/self_update.mjs';
 
 const CLI = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../skills/hydra/scripts/hydra.mjs');
 
@@ -90,4 +90,36 @@ test('self-update fails clearly when the registry cannot be read, and rejects un
   run = await cli(t, { installed: '0.3.4', published: '0.3.5', args: ['--yes'] });
   assert.equal(run.code, 1);
   assert.match(run.output, /usage: hydra self-update/);
+});
+
+test('the running version comes from package.json, else from what the installer recorded', () => {
+  const prior = process.env.HYDRA_HOME;
+  process.env.HYDRA_HOME = mkdtempSync(path.join(os.tmpdir(), 'hydra-version-'));
+  try {
+    const own = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
+    assert.equal(currentVersion(), own);
+    const missing = path.join(process.env.HYDRA_HOME, 'no-package.json');
+    assert.equal(currentVersion(missing), null);
+    recordInstall('0.3.4', []);
+    assert.equal(currentVersion(missing), '0.3.4');
+    const other = path.join(process.env.HYDRA_HOME, 'other.json');
+    writeFileSync(other, JSON.stringify({ name: 'something-else', version: '9.9.9' }));
+    assert.equal(currentVersion(other), '0.3.4');
+  } finally {
+    if (prior === undefined) delete process.env.HYDRA_HOME; else process.env.HYDRA_HOME = prior;
+  }
+});
+
+test('hydra version and the MCP server report the version', async () => {
+  const own = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
+  const run = spawn(process.execPath, [CLI, 'version'], { env: { ...process.env, HYDRA_TELEMETRY: '0' } });
+  let out = '';
+  run.stdout.on('data', chunk => { out += chunk; });
+  await new Promise(resolve => run.on('close', resolve));
+  assert.equal(out.trim(), `hydra ${own}`);
+  const server = spawn(process.execPath, [path.join(path.dirname(CLI), 'mcp.mjs')], { env: { ...process.env, HYDRA_TELEMETRY: '0' } });
+  const reply = new Promise(resolve => server.stdout.once('data', chunk => resolve(JSON.parse(String(chunk).split('\n')[0]))));
+  server.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'version-check' } } })}\n`);
+  assert.equal((await reply).result.serverInfo.version, own);
+  server.kill();
 });

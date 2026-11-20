@@ -3,6 +3,7 @@
 // is one GET to the npm registry for the latest version, which carries nothing about the user.
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { home } from './local.mjs';
 
 export const PACKAGE = 'hydra-nano';
@@ -12,6 +13,17 @@ const FLAGS = new Set(['--runtime-only', '--no-agents', '--no-hooks']);
 const AGENT = /^[a-z][a-z0-9-]*$/;
 
 const file = () => path.join(home(), 'installed.json');
+// package.json sits beside the code in the repository and in the npm package, not in installed skill copies.
+const PACKAGE_JSON = fileURLToPath(new URL('../../../../package.json', import.meta.url));
+
+/** The version of the running Hydra: its package.json when it has one, else what the installer recorded. */
+export function currentVersion(packageFile = PACKAGE_JSON) {
+  try {
+    const { name, version } = JSON.parse(readFileSync(packageFile, 'utf8'));
+    if (name === PACKAGE && SEMVER.test(String(version))) return version;
+  } catch {}
+  return readInstalled()?.version ?? null;
+}
 
 export function readInstalled() {
   try {

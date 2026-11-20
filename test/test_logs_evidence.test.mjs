@@ -213,3 +213,12 @@ test('per-test FAILED lines at the end of a long log do not take the summary pla
   const result = await digest({ cmd: 'pytest --tb=line', out, exitCode: 1 }, async () => cite(out, 'test_batch.py:100:'));
   facts(result, ['test_case_0 ', 'test_batch.py:100', "assert 'open-0' == 'sealed-0'", `${k} failed, 12 passed`]);
 });
+
+test('a short cargo failure drops build status lines, passing tests and the backtrace hint', async () => {
+  const passing = Array.from({ length: 9 }, (_, i) => `test ledger::posts_entry_${i} ... ok`).join('\n');
+  const out = `   Compiling ledger v0.4.2 (/work/ledger)\n    Finished \`test\` profile [unoptimized + debuginfo] target(s) in 2.07s\n     Running unittests src/lib.rs (target/debug/deps/ledger-1f2e3d)\n\nrunning 10 tests\n${passing}\ntest ledger::closes_period ... FAILED\n\nfailures:\n\n---- ledger::closes_period stdout ----\nthread 'ledger::closes_period' panicked at src/ledger.rs:88:5:\nassertion \`left == right\` failed\n  left: 12\n right: 11\nnote: run with \`RUST_BACKTRACE=1\` environment variable to display a backtrace\n\nfailures:\n    ledger::closes_period\n\ntest result: FAILED. 9 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s`;
+  const result = await digest({ cmd: 'cargo test', out, exitCode: 1 }, () => { throw new Error('small failure regions need no model call'); });
+  for (const kept of ['ledger::closes_period', 'src/ledger.rs:88:5', 'left: 12', 'right: 11', '9 passed; 1 failed']) assert.ok(result.text.includes(kept), kept);
+  for (const dropped of ['Compiling ledger', 'Finished `test`', 'posts_entry_3 ... ok', 'RUST_BACKTRACE']) assert.ok(!result.text.includes(dropped), dropped);
+  assert.ok(result.text.length < out.length / 2, `${result.text.length} of ${out.length}`);
+});

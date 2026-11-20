@@ -45,6 +45,10 @@ const IGNORE_STACK = new RegExp([
 const PASS_SUMMARY = /(?:passed|tests? passed|\bok\b|success|finished in|^\s*Ran\s+\d+\s+tests?\b|\b\d+\s+(?:passing|pending)\b|\btest result:|\b(?:pass|fail(?:ures|ed)?|tests?|suites|cancelled|skipped|todo)\s*[: ]\s*\d+)/i;
 const PER_TEST = /\.\.\.\s*(?:ok|PASSED)\b|\bPASSED\s+\[\s*\d+%\]|^\s*[✓✔√]\s|^\s*ok \d+ /;
 const DIAGNOSTIC_NOTE = /^\s*= (?:note|help): /;
+// Never failure evidence: cargo's right-aligned status lines (whose "[unoptimized + debuginfo]" would
+// otherwise read as a diff line), a passing test's own line, and Rust's backtrace hint.
+const CARGO_STATUS = /^\s*(?:Compiling|Finished|Running|Doc-tests|Checking|Fresh|Downloaded|Downloading|Updating|Locking|Blocking|Building)\s/;
+const NOT_EVIDENCE = text => CARGO_STATUS.test(text) || PER_TEST.test(text) || /^note: run with `RUST_BACKTRACE=/.test(text);
 // A rule line: Catch2 frames test titles with them, PHPStan frames its tables.
 const RULE = /^\s*(?:[-=~─━]{20,}|-{3,}(?:\s+-{3,})+)\s*$/;
 
@@ -65,7 +69,7 @@ const SCHEMA = {
 export function extractFailureCandidates(logText) {
   const lines = logText.split('\n');
   const plain = lines.map(bare);
-  const ignored = plain.map(text => IGNORE_STACK.test(text));
+  const ignored = plain.map(text => IGNORE_STACK.test(text) || NOT_EVIDENCE(text));
   const candidateRanks = new Map();
   const essential = new Set();
   const nearFailure = new Set();

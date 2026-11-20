@@ -9,8 +9,8 @@
   "solvedCount": 800,
   "rawTokens": 103883,
   "returnedTokens": 71208,
-  "startedAt": 1795147087542,
-  "updatedAt": 1795147174554,
+  "startedAt": 1795147551560,
+  "updatedAt": 1795147634869,
   "history": [
     {
       "step": 2,
@@ -2822,7 +2822,7 @@
       "solved": true,
       "raw": 550,
       "returned": 25,
-      "seconds": 0.28,
+      "seconds": 0.3,
       "probes": [
         "git blame -- src/engine.cpp"
       ],
@@ -2836,7 +2836,7 @@
       "solved": true,
       "raw": 23,
       "returned": 27,
-      "seconds": 0.3,
+      "seconds": 0.33,
       "probes": [
         "git worktree list"
       ],
@@ -2850,7 +2850,7 @@
       "solved": true,
       "raw": 14,
       "returned": 18,
-      "seconds": 0.29,
+      "seconds": 0.32,
       "probes": [
         "git stash list"
       ],
@@ -2864,7 +2864,7 @@
       "solved": true,
       "raw": 89,
       "returned": 100,
-      "seconds": 0.38,
+      "seconds": 0.41,
       "probes": [
         "git branch --all -vv --sort=-committerdate"
       ],
@@ -2878,7 +2878,7 @@
       "solved": true,
       "raw": 107,
       "returned": 111,
-      "seconds": 0.4,
+      "seconds": 0.45,
       "probes": [
         "git show 8b39470"
       ],
@@ -2892,7 +2892,7 @@
       "solved": true,
       "raw": 98,
       "returned": 102,
-      "seconds": 0.43,
+      "seconds": 0.46,
       "probes": [
         "git show HEAD"
       ],
@@ -2906,7 +2906,7 @@
       "solved": true,
       "raw": 239,
       "returned": 246,
-      "seconds": 0.55,
+      "seconds": 0.61,
       "probes": [
         "git log -n50 main..HEAD"
       ],
@@ -2920,7 +2920,7 @@
       "solved": true,
       "raw": 91,
       "returned": 103,
-      "seconds": 0.67,
+      "seconds": 0.52,
       "probes": [
         "git log -n15 -i --fixed-strings --grep=parser"
       ],
@@ -2934,7 +2934,7 @@
       "solved": true,
       "raw": 93,
       "returned": 106,
-      "seconds": 0.78,
+      "seconds": 0.62,
       "probes": [
         "git log -n15 -i --fixed-strings --author=Mateo Rossi"
       ],
@@ -2948,7 +2948,7 @@
       "solved": true,
       "raw": 205,
       "returned": 213,
-      "seconds": 0.7,
+      "seconds": 0.55,
       "probes": [
         "git log -n15 -- include/engine.h"
       ],
@@ -2962,7 +2962,7 @@
       "solved": true,
       "raw": 626,
       "returned": 62,
-      "seconds": 0.93,
+      "seconds": 0.77,
       "probes": [
         "git diff main...HEAD"
       ],
@@ -2976,7 +2976,7 @@
       "solved": true,
       "raw": 166,
       "returned": 174,
-      "seconds": 0.41,
+      "seconds": 0.43,
       "probes": [
         "git log -n15 -- src/core.cpp"
       ],
@@ -3000,5 +3000,5 @@
     "returned": 71208,
     "errors": 0
   },
-  "finishedAt": 1795147174556
+  "finishedAt": 1795147634871
 }

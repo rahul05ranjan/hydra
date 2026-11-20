@@ -35,7 +35,8 @@ const count = (n, word) => `**${fmt(n)} ${word}${n === 1 ? '' : 's'}**`;
 
 export function block(all = rows(), today = new Date()) {
   // Only calls made inside an agent session: a shell or a test fixture has no session and is not real use.
-  const calls = all.filter(row => (row.kind ?? 'call') === 'call' && (row.ts ?? '') >= SINCE && row.session);
+  // An MCP fixture run from inside a session inherits its id but names no agent, so it is left out too.
+  const calls = all.filter(row => (row.kind ?? 'call') === 'call' && (row.ts ?? '') >= SINCE && row.session && row.agent);
   const heads = {};
   for (const row of calls) {
     const head = heads[row.head] ??= { calls: 0, raw: 0, returned: 0 };

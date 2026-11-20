@@ -5,8 +5,10 @@ import { block } from '../evals/usage/readme_stats.mjs';
 test('the README usage block shows totals only, from agent sessions since the clean start date', () => {
   const rows = [
     { ts: '2026-10-16T00:00:00.000Z', kind: 'call', head: 'git', question: 'before the fixture fix', raw: 999, returned: 1, session: 'old' },
-    { ts: '2026-10-18T00:00:00.000Z', kind: 'call', head: 'test', question: 'pnpm vitest run test/private-name.test.ts', raw: 1000, returned: 100, session: 'secret-session-id' },
-    { ts: '2026-10-18T00:01:00.000Z', kind: 'call', head: 'git', question: 'who wrote private.js?', raw: 40, returned: 50, session: 'secret-session-id' },
+    { ts: '2026-10-18T00:00:00.000Z', kind: 'call', head: 'test', question: 'pnpm vitest run test/private-name.test.ts', raw: 1000, returned: 100, session: 'secret-session-id', agent: 'claude-code' },
+    { ts: '2026-10-18T00:01:00.000Z', kind: 'call', head: 'git', question: 'who wrote private.js?', raw: 40, returned: 50, session: 'secret-session-id', agent: 'claude-code' },
+    // An MCP fixture run from inside a session inherits its id but names no agent.
+    { ts: '2026-10-18T00:04:00.000Z', kind: 'call', head: 'refactor', question: 'smell /tmp/hydra-files-x/app.js', raw: 18, returned: 35, session: 'secret-session-id', agent: '' },
     { ts: '2026-10-18T00:02:00.000Z', kind: 'hook', decision: 'pass', hookMs: 10 },
     // Typed in a shell or written by a test fixture: no agent session, so not real use.
     { ts: '2026-10-18T00:03:00.000Z', kind: 'call', head: 'refactor', question: 'smell /tmp/hydra-x', raw: 9000, returned: 10, agent: 'shell' },

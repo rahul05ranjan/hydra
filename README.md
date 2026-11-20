@@ -79,23 +79,23 @@ Through MCP, Hydra offers the three where it pays most: `hydra_git`, `hydra_run`
 |---|---|---|
 | Git (sealed test set, never used for training) | 1,000 | **96.3%** |
 | Files (held out) | 1,000 | **98.0%** |
-| Read (held out) | 1,000 | **96.1%** |
+| Read (held out) | 1,000 | **98.2%** |
 | Test logs (second held-out set) | 1,000 | **97.5%** |
 | OS (held out, synthetic probe outputs) | 1,000 | **100%** |
-| Test-log benchmark across 8 frameworks | 20 | **19/20**, 47% fewer tokens |
+| Test-log benchmark across 8 frameworks | 20 | **20/20**, 50% fewer tokens |
 
 Receipts: [model card](https://huggingface.co/rahul05ranjan/hydra-nano-git) and [`evals/results`](https://github.com/rahul05ranjan/hydra/tree/main/evals/results).
 
 <!-- usage-stats:begin (written by evals/usage/readme_stats.mjs) -->
-**In real use.** Since 2026-10-17, Hydra has handled **118 calls** in **9 coding sessions** across **3 projects** on the maintainer's machine. Of **~375,638 tokens** of command output, **~18,781** reached the agent: **95% kept out of context**.
+**In real use.** Since 2026-10-17, Hydra has handled **712 calls** in **29 coding sessions** across **5 projects** on the maintainer's machine. Of **~4,536,247 tokens** of command output, **~119,023** reached the agent: **97% kept out of context**.
 
 | Work | Calls | Output read locally | Reached the agent | Kept out |
 |---|---|---|---|---|
-| Test and build runs | 112 | ~374,873 | ~18,199 | **95%** |
+| Test and build runs | 697 | ~4,533,637 | ~116,518 | **97%** |
 | File slices | 1 | ~508 | ~283 | **44%** |
-| Git questions | 5 | ~257 | ~299 | **-16%** |
+| Git questions | 14 | ~2,102 | ~2,222 | **-6%** |
 
-<sub>From Hydra's local ledger; tokens are estimates (characters / 4). Updated 2026-10-20.</sub>
+<sub>From Hydra's local ledger; tokens are estimates (characters / 4). Updated 2026-11-20.</sub>
 <!-- usage-stats:end -->
 
 **Where Hydra does not help, measured.** In a controlled trial of 36 Claude Code sessions extracting functions from real source code, forcing that work through Hydra used **72% more tokens** than the agent's own tools. So Hydra leaves source reading and search to the agent, and routes only the noisy work: test and build logs, git history, system inspection. Full method and numbers in [evaluations](https://github.com/rahul05ranjan/hydra/blob/main/docs/evaluations.md).

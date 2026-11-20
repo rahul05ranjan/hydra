@@ -1,0 +1,104 @@
+{
+  "scope": "Held-out aggregates only; per-task rows not retained or inspected. One scoring after development-only fixes.",
+  "model": "hydra-nano:git Q8_0 sha256 6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be",
+  "runtime": "llama.cpp b11563 darwin-arm64",
+  "date": "2026-11-20T05:12:44.114Z",
+  "heads": {
+    "read": {
+      "split": "holdout",
+      "tasks": 1000,
+      "solvedCount": 982,
+      "solved": 0.982,
+      "errors": 0,
+      "modelCalls": 11,
+      "tasksWithModelCalls": 11,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 11,
+      "modelEvidenceAccuracy": 0,
+      "latencySeconds": {
+        "p50": 0.001,
+        "p95": 0.002,
+        "maximum": 0.744
+      },
+      "solvedConfidence95": [
+        0.9717265156214581,
+        0.9885843541412616
+      ],
+      "rawChars": 474373,
+      "returnedChars": 528950
+    },
+    "test": {
+      "split": "holdout2",
+      "tasks": 1000,
+      "solvedCount": 975,
+      "solved": 0.975,
+      "errors": 0,
+      "modelCalls": 50,
+      "tasksWithModelCalls": 50,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 50,
+      "modelEvidenceAccuracy": 0.16,
+      "latencySeconds": {
+        "p50": 0,
+        "p95": 0.004,
+        "maximum": 0.446
+      },
+      "solvedConfidence95": [
+        0.9633544581334902,
+        0.9830099882094389
+      ],
+      "rawChars": 2124447,
+      "returnedChars": 674132
+    },
+    "os": {
+      "split": "holdout",
+      "tasks": 1000,
+      "solvedCount": 1000,
+      "solved": 1,
+      "errors": 0,
+      "modelCalls": 1000,
+      "tasksWithModelCalls": 1000,
+      "modelPlanAccuracy": 1,
+      "modelPlannedTasks": 1000,
+      "modelEvidenceTasks": 0,
+      "modelEvidenceAccuracy": null,
+      "latencySeconds": {
+        "p50": 0.073,
+        "p95": 0.151,
+        "maximum": 0.266
+      },
+      "solvedConfidence95": [
+        0.9961731014136095,
+        1
+      ],
+      "rawChars": 307393,
+      "returnedChars": 326118
+    },
+    "files": {
+      "split": "holdout",
+      "tasks": 1000,
+      "solvedCount": 980,
+      "solved": 0.98,
+      "errors": 0,
+      "modelCalls": 1002,
+      "tasksWithModelCalls": 1000,
+      "modelPlanAccuracy": 1,
+      "modelPlannedTasks": 1000,
+      "modelEvidenceTasks": 2,
+      "modelEvidenceAccuracy": 0.5,
+      "latencySeconds": {
+        "p50": 0.075,
+        "p95": 0.093,
+        "maximum": 0.265
+      },
+      "solvedConfidence95": [
+        0.9693097584861028,
+        0.9870164188709625
+      ],
+      "rawChars": 427113,
+      "returnedChars": 459903
+    }
+  }
+}

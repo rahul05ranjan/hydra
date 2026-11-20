@@ -36,11 +36,15 @@ export function caller(session = process.env.CLAUDE_CODE_SESSION_ID) {
 // Switches worth keeping readable in `hydra improve`; every other NAME=value is treated as a possible secret.
 const PLAIN = /^(?:HYDRA_\w+|CI|NODE_ENV|DEBUG|FORCE_COLOR|NO_COLOR)$/;
 
+// A value ends at whitespace or a shell separator (so `A=x;B=y` masks both); one already masked stays as it is,
+// so masking twice changes nothing.
+const VALUE = String.raw`("[^"]*"|'[^']*'|\*\*\*(?=[\s;&|'"]|$)|[^\s;&|]+)`;
+
 /** A command with credential values masked: env assignments, URL passwords and secret-named flags. */
 export const redact = text => String(text)
   .replace(/([a-z][\w+.-]*:\/\/)[^\s/@]+@/gi, '$1***@')
-  .replace(/(^|[\s;&|(])([A-Za-z_]\w*)=("[^"]*"|'[^']*'|\S+)/g, (all, before, name) => (PLAIN.test(name) ? all : `${before}${name}=***`))
-  .replace(/(--?[\w-]*(?:token|password|passwd|secret|api[-_]?key|auth)[\w-]*)([ =])("[^"]*"|'[^']*'|\S+)/gi, '$1$2***');
+  .replace(new RegExp(String.raw`(^|[\s;&|(])([A-Za-z_]\w*)=${VALUE}`, 'g'), (all, before, name) => (PLAIN.test(name) ? all : `${before}${name}=***`))
+  .replace(new RegExp(String.raw`(--?[\w-]*(?:token|password|passwd|secret|api[-_]?key|auth)[\w-]*)([ =])${VALUE}`, 'gi'), '$1$2***');
 
 export function record(entry) {
   if (!enabled()) return;

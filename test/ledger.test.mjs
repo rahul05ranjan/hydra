@@ -116,3 +116,18 @@ test('metered chat counts model calls, including ones that throw', async () => {
   await assert.rejects(meter.chat({ fail: true }));
   assert.equal(meter.modelCalls, 2);
 });
+
+test('redact masks credentials once and leaves an already-masked command as it is', async () => {
+  const { redact } = await import('../skills/hydra/scripts/lib/ledger.mjs');
+  const once = redact("DB_PASS=hunter2 npm test && curl https://user:pw@host/x --token abc; HYDRA_RAW=1 echo ok");
+  assert.equal(once, 'DB_PASS=*** npm test && curl https://***@host/x --token ***; HYDRA_RAW=1 echo ok');
+  for (const text of [
+    "python3 - <<'EOF'\np='a.txt'; s=open(p).read()\na=\"x\"  if (y) { z }\nEOF",
+    "cd api && TOKEN=abc;KEY='two words' --password=pw; node run.js --api-key \"k k\"",
+  ]) {
+    const masked = redact(text);
+    assert.equal(redact(masked), masked, masked);
+  }
+  // A real value that only starts with *** is still masked.
+  assert.equal(redact('PASS=***real'), 'PASS=***');
+});

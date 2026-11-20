@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url';
 import { argvOf, callTool, runArgv, TOOLS } from '../skills/hydra/scripts/mcp.mjs';
 
 const SERVER = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../skills/hydra/scripts/mcp.mjs');
+// callTool runs the real CLI from this process too, so its fixture calls must stay out of the user's ledger.
+process.env.HYDRA_TELEMETRY = '0';
 
 /** Start the server and talk to it one JSON-RPC message per line, as an MCP client does over stdio. */
 function connect() {

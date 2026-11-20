@@ -1,0 +1,32 @@
+{
+  "line_number": [
+    "Which commit last changed line {line} of {path}, and who made it?",
+    "Who is responsible for line {line} in {path}?",
+    "Find the author behind line {line} of {path}.",
+    "Line {line} of {path}: whose change put it there?"
+  ],
+  "line_colon": [
+    "Who wrote {path}:{line}?",
+    "Blame {path}:{line} for me.",
+    "What commit introduced {path}:{line}?",
+    "I need the author of {path}:{line}."
+  ],
+  "line_span": [
+    "Who wrote lines {from}-{to} of {path}?",
+    "Attribute lines {from} to {to} in {path}.",
+    "Which commits produced lines {from} through {to} of {path}?",
+    "Show the authors of lines {from}-{to} in {path}."
+  ],
+  "range_log": [
+    "List the commits in {range}.",
+    "What landed in {range}? Give me the commit subjects.",
+    "Summarise the commits in {range}: what themes stand out?",
+    "Walk me through {range}, newest commit first."
+  ],
+  "range_diff": [
+    "Which files changed in {range}?",
+    "Give me the file-level changes in {range}.",
+    "What paths does {range} touch?",
+    "Show the patch for {range}."
+  ]
+}

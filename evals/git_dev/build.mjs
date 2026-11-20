@@ -11,12 +11,13 @@ import { buildWorld, rng } from '../../train/world.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const SET = process.env.HYDRA_GIT_DEV_SET || 'original';
-if (!['original', 'extended', 'paraphrase'].includes(SET)) throw new Error('Unknown Git development set');
+// `lines` (2026-11-20): line-number blame and written-out ranges only, for the caller-owned -L and A..B paths.
+if (!['original', 'extended', 'paraphrase', 'lines'].includes(SET)) throw new Error('Unknown Git development set');
 export const dataDir = SET === 'original' ? HERE : path.join(HERE, SET);
 const TASKS = path.join(dataDir, 'tasks.jsonl');
 const HEADS = path.join(dataDir, 'worlds.json');
-const WORLDS = SET === 'original' ? 10 : 40;
-const SEED = { original: 6100, extended: 6200, paraphrase: 6400 }[SET];
+const WORLDS = { original: 10, extended: 40, paraphrase: 40, lines: 20 }[SET];
+const SEED = { original: 6100, extended: 6200, paraphrase: 6400, lines: 6600 }[SET];
 
 export const worldsDir = () => path.join(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds', SET === 'original' ? 'git_dev' : `git_dev_${SET}`);
 export const worldName = i => `dev_${String(i).padStart(2, '0')}`;
@@ -137,10 +138,42 @@ function tasksFor(world, index, phrasings) {
   });
 }
 
+// The `lines` set: questions that name a line by number, or a commit range that need not end at HEAD.
+function lineTasksFor(world, index, phrasings) {
+  const { repo, trunk, branch, sync } = world;
+  const r = rng(SEED + 500 + index);
+  const hashes = (...args) => list(read(repo, 'log', '--format=%h', ...args));
+  const first = name => name.split(' ')[0];
+  const line = r.pick(world.history);
+  // The blamed file is the working copy; unstaged edits only append, so the token's line number holds.
+  const number = readFileSync(path.join(repo, line.file), 'utf8').split('\n').findIndex(text => text.includes(`export const ${line.token} `)) + 1;
+  if (number < 2) throw new Error(`${worldName(index)}: ${line.token} not found in ${line.file}`);
+  const ahead = hashes(`${trunk}..HEAD`).length;
+  // Behind its remote, the real-use case; otherwise a range that stops short of HEAD.
+  const range = sync.state === 'behind' ? `${branch}..origin/${branch}` : ahead >= 2 ? `${trunk}..${branch}~1` : `${trunk}..${branch}`;
+  const blame = { accept: [{ probe: 'blame', args: { path: line.file } }], facts: [line.token, first(line.author)] };
+  const gold = {
+    line_number: { slots: { path: line.file, line: number }, ...blame },
+    line_colon: { slots: { path: line.file, line: number }, ...blame },
+    line_span: { slots: { path: line.file, from: number - 1, to: number }, ...blame },
+    range_log: { slots: { range }, accept: [{ probe: 'log', args: { range } }], facts: hashes(range).slice(0, 50) },
+    range_diff: {
+      slots: { range: `${trunk}...${branch}` },
+      accept: [{ probe: 'diff', args: { range: `${trunk}...${branch}` } }],
+      facts: list(read(repo, 'diff', '--name-only', `${trunk}...${branch}`)),
+    },
+  };
+  return Object.entries(phrasings).map(([intent, templates]) => {
+    const { slots = {}, ...expected } = gold[intent];
+    const question = Object.entries(slots).reduce((text, [slot, value]) => text.replaceAll(`{${slot}}`, String(value)), templates[index % templates.length]);
+    return { id: `dev-${worldName(index)}-${intent}`, world: worldName(index), intent, question, ...expected };
+  });
+}
+
 export function buildWorlds() {
   const parent = path.resolve(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds');
   const relative = path.relative(parent, path.resolve(worldsDir()));
-  if (!['git_dev', 'git_dev_extended', 'git_dev_paraphrase'].includes(relative)) throw new Error('Unsafe development-world cleanup path');
+  if (!['git_dev', 'git_dev_extended', 'git_dev_paraphrase', 'git_dev_lines'].includes(relative)) throw new Error('Unsafe development-world cleanup path');
   rmSync(worldsDir(), { recursive: true, force: true });
   mkdirSync(worldsDir(), { recursive: true });
   return Array.from({ length: WORLDS }, (_, i) => buildWorld(path.join(worldsDir(), worldName(i)), SEED + i));
@@ -158,7 +191,7 @@ export function ensureWorlds() {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const phrasings = JSON.parse(readFileSync(path.join(dataDir, 'phrasings.json'), 'utf8'));
   const worlds = buildWorlds();
-  const tasks = worlds.flatMap((w, i) => tasksFor(w, i, phrasings));
+  const tasks = worlds.flatMap((w, i) => (SET === 'lines' ? lineTasksFor : tasksFor)(w, i, phrasings));
   writeFileSync(TASKS, tasks.map(task => JSON.stringify(task)).join('\n') + '\n');
   writeFileSync(HEADS, JSON.stringify(Object.fromEntries(worlds.map((w, i) => [worldName(i), read(w.repo, 'rev-parse', 'HEAD')])), null, 2) + '\n');
   console.log(`${tasks.length} dev tasks over ${worlds.length} worlds built in ${worldsDir()}`);

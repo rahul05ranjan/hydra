@@ -266,6 +266,8 @@ async function clean(p, question, cwd, range) {
   if (range && ['log', 'diff'].includes(p.probe)) {
     delete a.base;
     a.range = range;
+    // "what themes stand out in A..B" asks about the range, not for commits whose message says "themes".
+    if (a.grep && !asksMessage && !searchesFor(question, a.grep)) delete a.grep;
     if (p.probe === 'log' && requestedCount(question) === null) a.n = 50;
   }
   return a;
@@ -301,7 +303,12 @@ export async function gather(question, cwd, chat) {
     if (!has('blame')) plan.push({ probe: 'blame', path: lineFile });
   }
   const range = await explicitRange(question, cwd);
-  if (range && !has('log', 'diff')) plan.push({ probe: 'log' });
+  if (range) {
+    // HEAD's own patch says nothing about a range that the question wrote out.
+    plan = plan.filter(p => !(p.probe === 'show' && !p.rev));
+    // Files or a patch, or a three-dot range, read as a diff; anything else lists the range's commits.
+    if (!has('log', 'diff')) plan.push({ probe: range.includes('...') || /\b(?:files?|paths?|patch|touch\w*|diff\w*)\b/i.test(question) ? 'diff' : 'log' });
+  }
   if (historyRequest(question) && named && !has('log', 'blame')) {
     plan = plan.filter(p => !((p.probe === 'show' && !p.rev) || (p.probe === 'diff' && !p.base)));
     plan.push({ probe: 'log', path: named });

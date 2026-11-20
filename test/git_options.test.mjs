@@ -301,3 +301,19 @@ test('a named range cut by the count cap says how many commits it holds', async 
   const whole = await gather(`Show the commits in ${base}..feature.`, cwd, async () => ({ probes: [{ probe: 'log' }] }));
   assert.doesNotMatch(whole[0].out, /commits in .* shown/);
 });
+
+test('a file question about a range gets its diff, not HEAD and not a log', async t => {
+  const { cwd, base } = rangeFixture(t);
+  const sections = await gather(`What paths does ${base}...feature touch?`, cwd, async () => ({ probes: [{ probe: 'show' }] }));
+  assert.deepEqual(sections.map(s => s.cmd), [`git diff ${base}...feature`]);
+});
+
+test('inside a written-out range a question word is not a message filter unless messages are asked about', async t => {
+  const { cwd, base } = rangeFixture(t);
+  const themes = await gather(`Summarise the commits in ${base}..feature: what themes stand out?`, cwd,
+    async () => ({ probes: [{ probe: 'log', grep: 'themes' }] }));
+  assert.equal(themes[0].args.grep, undefined);
+  const asked = await gather(`Which commits in ${base}..feature mention step in their messages?`, cwd,
+    async () => ({ probes: [{ probe: 'log', grep: 'step' }] }));
+  assert.equal(asked[0].args.grep, 'step');
+});

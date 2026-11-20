@@ -66,7 +66,7 @@ Hydra uses llama.cpp's [schema-constrained chat API](https://github.com/ggml-org
 Set `HYDRA_BACKEND=ollama` first (`$env:HYDRA_BACKEND = 'ollama'` in PowerShell; `export HYDRA_BACKEND=ollama` in Bash).
 
 ```bash
-# 1. Download the small local model (1.2 GB)
+# 1. Pull the hydra-nano models into Ollama
 node skills/hydra/scripts/hydra.mjs setup
 
 # 2. Ask questions about any repo
@@ -108,7 +108,7 @@ A complete bootstrap is provided separately:
 npx github:rahul05ranjan/hydra
 ```
 
-It installs the skill globally for every agent it finds (Claude Code if `~/.claude` exists, Codex if `~/.codex` exists, Antigravity if `~/.gemini/antigravity` exists; name others with `--agent <id>`), downloads a pinned llama.cpp runtime and the approximately 812 MB Hydra Nano Git Q8 GGUF, verifies SHA-256 hashes, and writes configuration under `~/.hydra`. Node 18+ with npm is required. Windows x64/arm64 CPU, macOS x64/arm64, and Ubuntu-compatible Linux x64/arm64 runtime artifacts are supported. Windows has live verification; other platform packages have not been exercised here.
+It installs the skill globally for every agent it finds (Claude Code if `~/.claude` exists, Codex if `~/.codex` exists, Antigravity if `~/.gemini/antigravity` exists; name others with `--agent <id>`), downloads a pinned llama.cpp runtime and the approximately 812 MB Hydra Nano Git Q8 GGUF, verifies SHA-256 hashes, and writes configuration under `~/.hydra`. Node 18+ with npm is required. Windows x64/arm64 CPU, macOS x64/arm64, and Ubuntu-compatible Linux x64/arm64 runtime artifacts are supported. Verified in use: Windows x64 (live checks), macOS arm64 (the maintainer's daily machine) and Linux x64 with CUDA (the Kaggle evaluations). macOS x64, Linux arm64 and Linux CPU-only packages have not been exercised yet.
 
 For Claude Code the bootstrap also registers two Claude Code hooks in `~/.claude/settings.json`, because an agent that merely has the skill rarely uses it. A `PreToolUse` hook turns a direct test or build run (npm/pnpm/yarn test or build, jest, vitest, pytest, unittest, `node --test`, cargo, go, gradle, mvn, dotnet, make test) back with the `hydra run --` command to use instead. A run whose own pipeline already keeps only a few lines (`| tail -n 40` or less, `| head`, `| grep -c`, `| wc`) passes, since Hydra would save little and the retry costs more; prefixing a command with `HYDRA_RAW=1` lets the raw log through. A `SessionStart` hook tells each new session to ask Hydra about git history and to keep Read and Grep for source files, where Hydra does not save tokens. Other settings are kept, the original file is saved as `settings.json.before-hydra`, and an invalid settings file is left untouched. Skip the hooks with `--no-hooks`; manage them later with `hydra hooks install|remove|status`.
 

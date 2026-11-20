@@ -88,6 +88,30 @@ export function rows() {
 
 const isCall = row => (row.kind ?? 'call') === 'call';
 
+// Which ledger agent names belong to each coding tool: an MCP client reports its own name, a hook its tool's.
+const TOOL_AGENTS = {
+  'claude-code': /^claude-code/i, codex: /codex/i, cursor: /cursor/i, opencode: /opencode/i,
+  'gemini-cli': /^(?!.*antigravity).*gemini/i, antigravity: /antigravity/i, 'antigravity-ide': /antigravity/i,
+};
+
+/** Per coding tool: Hydra calls it made, the last one, and MCP folders refused. "Registered" is not "used". */
+export function usageByTool(all = rows()) {
+  const usage = Object.fromEntries(Object.keys(TOOL_AGENTS).map(id => [id, { calls: 0, last: null, refused: 0 }]));
+  for (const row of all) {
+    const call = isCall(row) && row.head, refused = row.kind === 'error' && /^cwd outside/.test(row.error ?? '');
+    if (!call && !refused) continue;
+    for (const [id, pattern] of Object.entries(TOOL_AGENTS)) {
+      if (!pattern.test(row.agent ?? '')) continue;
+      if (refused) usage[id].refused += 1;
+      else {
+        usage[id].calls += 1;
+        if (!usage[id].last || (row.ts ?? '') > usage[id].last) usage[id].last = row.ts ?? null;
+      }
+    }
+  }
+  return usage;
+}
+
 export function stats(all = rows()) {
   const total = { calls: 0, raw: 0, returned: 0, heads: {} };
   for (const row of all.filter(isCall)) {

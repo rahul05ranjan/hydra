@@ -131,3 +131,21 @@ test('redact masks credentials once and leaves an already-masked command as it i
   // A real value that only starts with *** is still masked.
   assert.equal(redact('PASS=***real'), 'PASS=***');
 });
+
+test('usage by tool tells registered tools that were used from ones never called', async () => {
+  const { usageByTool } = await import('../skills/hydra/scripts/lib/ledger.mjs');
+  const usage = usageByTool([
+    { kind: 'call', head: 'test', agent: 'opencode', ts: '2026-10-24T09:10:00.000Z' },
+    { kind: 'call', head: 'test', agent: 'opencode', ts: '2026-10-24T10:53:00.000Z' },
+    { kind: 'hook', decision: 'deny', agent: 'opencode', ts: '2026-10-24T09:38:00.000Z' },
+    { kind: 'call', head: 'git', agent: 'claude-code', agentDetail: 'claude-code_2-1-309_agent', ts: '2026-11-13T06:38:00.000Z' },
+    { kind: 'error', agent: 'codex-mcp-client', via: 'mcp', error: 'cwd outside the launch folder /x', ts: '2026-11-20T00:00:00.000Z' },
+    { kind: 'call', head: 'test', agent: 'gemini-cli-mcp-client', ts: '2026-11-19T00:00:00.000Z' },
+  ]);
+  assert.deepEqual(usage.opencode, { calls: 2, last: '2026-10-24T10:53:00.000Z', refused: 0 });
+  assert.deepEqual(usage['claude-code'], { calls: 1, last: '2026-11-13T06:38:00.000Z', refused: 0 });
+  assert.deepEqual(usage.codex, { calls: 0, last: null, refused: 1 });
+  assert.equal(usage['gemini-cli'].calls, 1);
+  assert.equal(usage.antigravity.calls, 0);
+  assert.equal(usage.cursor.calls, 0);
+});

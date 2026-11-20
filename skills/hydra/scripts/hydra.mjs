@@ -10,7 +10,7 @@ import * as git from './lib/git.mjs';
 import * as test_logs from './lib/test_logs.mjs';
 import * as read from './lib/read.mjs';
 import * as osHead from './lib/os.mjs';
-import { findings, metered, record, stats, tokens } from './lib/ledger.mjs';
+import { findings, metered, record, stats, tokens, usageByTool } from './lib/ledger.mjs';
 import { chat, hasModel, BACKEND, modelFor, Unavailable } from './lib/runtime.mjs';
 import { route } from './lib/route.mjs';
 import { stopLocal } from './lib/local.mjs';
@@ -540,10 +540,18 @@ function agentsCommand(args) {
   const [action, ...words] = args;
   const ids = words.filter(word => !word.startsWith('--'));
   if (action === 'status') {
+    // Registered is not the same as used: show what the local ledger saw each tool do.
+    const usage = usageByTool();
+    const used = id => {
+      const u = usage[id];
+      if (!u) return '';
+      const seen = u.calls ? `last call ${u.last?.slice(0, 10) ?? '?'} (${u.calls} call${u.calls === 1 ? '' : 's'})` : 'never called';
+      return `  ${seen}${u.refused ? `, ${u.refused} refused (folder outside the client's roots)` : ''}`;
+    };
     for (const row of integrations.status()) {
-      console.log(`${row.id.padEnd(15)} ${row.present ? 'found    ' : 'not found'}  mcp ${row.mcp ? 'yes' : 'no '}${'hooks' in row ? `  hooks ${row.hooks ? 'yes' : 'no'}` : ''}${'skill' in row ? `  skill ${row.skill ? 'yes' : 'no'}` : ''}`);
+      console.log(`${row.id.padEnd(15)} ${row.present ? 'found    ' : 'not found'}  mcp ${row.mcp ? 'yes' : 'no '}${'hooks' in row ? `  hooks ${row.hooks ? 'yes' : 'no'}` : ''}${'skill' in row ? `  skill ${row.skill ? 'yes' : 'no'}` : ''}${row.present ? used(row.id) : ''}`);
     }
-    console.log(`claude-code     ${hookStatus().length ? 'hooks yes' : 'hooks no'} (skill and hooks; see hydra hooks status)`);
+    console.log(`claude-code     ${hookStatus().length ? 'hooks yes' : 'hooks no'} (skill and hooks; see hydra hooks status)${used('claude-code')}`);
     return;
   }
   if (!['install', 'remove'].includes(action)) fail(1, 'usage: hydra agents install|remove|status [codex cursor opencode gemini-cli antigravity antigravity-ide] [--no-hooks]');

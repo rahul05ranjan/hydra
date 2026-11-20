@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { digest, extractFailureCandidates } from '../skills/hydra/scripts/lib/test_logs.mjs';
+import { collapseRepeats, digest, extractFailureCandidates } from '../skills/hydra/scripts/lib/test_logs.mjs';
 
 const progress = count => Array.from({ length: count }, (_, i) =>
   `worker ${i % 3} warmed partition ${i}; checksum verified; no exception occurred`).join('\n');
@@ -221,4 +221,34 @@ test('a short cargo failure drops build status lines, passing tests and the back
   for (const kept of ['ledger::closes_period', 'src/ledger.rs:88:5', 'left: 12', 'right: 11', '9 passed; 1 failed']) assert.ok(result.text.includes(kept), kept);
   for (const dropped of ['Compiling ledger', 'Finished `test`', 'posts_entry_3 ... ok', 'RUST_BACKTRACE']) assert.ok(!result.text.includes(dropped), dropped);
   assert.ok(result.text.length < out.length / 2, `${result.text.length} of ${out.length}`);
+});
+
+test('the same failure repeated across copies of a project keeps one full block and each other path', async () => {
+  const frame = path => [`[error] ${path}: SyntaxError: Unexpected character "EOF" (12:1)`, '[error]   10 | <table class="a-keyvalue"> <tr> <th> Return Reason </th> <th> Return Period </th>',
+    '[error]   11 | </body></html>', '[error] > 12 |', '[error]      | ^'];
+  const copies = Array.from({ length: 30 }, (_, i) => frame(`.claude/worktrees/agent-${i}/apps/api/test/fixtures/amazon/0062355309.html`)).flat();
+  const other = frame('apps/web/src/broken.tsx');
+  other[0] = '[error] apps/web/src/broken.tsx: SyntaxError: Unexpected token, expected "," (4:9)';
+  const out = ['> product@1.0.0 check', '> prettier --check .', 'Checking formatting...', ...copies, ...other, 'Error occurred when checking code style in 31 files.'].join('\n');
+  const collapsed = collapseRepeats(out);
+  assert.equal(collapsed.shortened, 29);
+  for (let i = 0; i < 30; i++) assert.ok(collapsed.text.includes(`agent-${i}/apps/api/test/fixtures/amazon/0062355309.html: SyntaxError`), `path ${i}`);
+  assert.equal(collapsed.text.split('\n').filter(line => line.includes('Return Reason')).length, 2, 'one frame for the repeated error, one for the other');
+  assert.ok(collapsed.text.includes('apps/web/src/broken.tsx: SyntaxError: Unexpected token'));
+  assert.ok(collapsed.text.includes('Error occurred when checking code style in 31 files.'));
+  const result = await digest({ cmd: 'npm run check', out, exitCode: 2 }, async () => ({ lines: [] }));
+  assert.ok(result.text.includes('(29 repeated failure blocks shown by their first line only)'));
+  assert.ok(result.text.length < out.length / 3, `${result.text.length} of ${out.length}`);
+});
+
+test('distinct failures that only share wording are all kept whole', async () => {
+  const block = (name, want, got) => [`FAIL src/${name}.test.ts`, `  ● ${name} › totals`, `    expect(received).toBe(expected)`, `    Expected: ${want}`, `    Received: ${got}`, `      at Object.<anonymous> (src/${name}.test.ts:9:21)`];
+  const out = [...Array.from({ length: 40 }, (_, i) => `PASS src/ok-${i}.test.ts`), ...block('cart', 3, 4), ...block('order', 3, 5), 'Tests: 2 failed, 40 passed, 42 total'].join('\n');
+  const result = await digest({ cmd: 'npx jest', out, exitCode: 1 }, async () => ({ lines: [] }));
+  for (const kept of ['Received: 4', 'Received: 5', 'src/cart.test.ts:9:21', 'src/order.test.ts:9:21']) assert.ok(result.text.includes(kept), kept);
+});
+
+test('a short failure is labelled with its exit code only', async () => {
+  const failed = await digest({ cmd: 'npm run typecheck -w @pr/api', out: 'src/a.ts(3,1): error TS2304: Cannot find name x.', exitCode: 2 }, () => assert.fail('no model call'));
+  assert.equal(failed.text, '(exit 2)\nsrc/a.ts(3,1): error TS2304: Cannot find name x.');
 });

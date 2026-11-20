@@ -148,6 +148,30 @@ export function extractFailureCandidates(logText) {
     .map(idx => ({ id: idx + 1, text: lines[idx], essential: essential.has(idx) }));
 }
 
+// A path with at least one directory: src/a.ts, .claude/worktrees/x/apps/b.html, C:\ci\c.py.
+const PATH_TOKEN = /(?:[A-Za-z]:)?(?:[\w.@+-]+[\\/])+[\w.@+-]+/g;
+const hasPath = line => new RegExp(PATH_TOKEN.source).test(line);
+
+/** The same failure printed once per copy of a file (agent worktrees, vendored or duplicated packages): a block
+ * that starts at a line naming a path, and repeats an earlier block word for word once paths are set aside, keeps
+ * only that first line, which still names its own path. Line numbers stay in the comparison, so the same error
+ * at different lines is never merged, and nothing is merged unless the whole block repeats. */
+export function collapseRepeats(text) {
+  const lines = text.split('\n'), kept = [], seen = new Set();
+  let shortened = 0;
+  for (let i = 0; i < lines.length;) {
+    if (!hasPath(lines[i])) { kept.push(lines[i]); i++; continue; }
+    let end = i + 1;
+    while (end < lines.length && !hasPath(lines[end]) && end - i < 30) end++;
+    const block = lines.slice(i, end);
+    const key = block.map(line => line.replace(PATH_TOKEN, '<path>')).join('\n');
+    if (block.length > 1 && seen.has(key)) { kept.push(block[0]); shortened++; }
+    else { seen.add(key); kept.push(...block); }
+    i = end;
+  }
+  return { text: kept.join('\n'), shortened };
+}
+
 export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
   const rawText = (out + (err ? (out ? '\n' : '') + err : '')).trimEnd();
   const rawChars = rawText.length;
@@ -156,7 +180,8 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
   // the agent knows what it ran, and the line would cost more than the output it labels.
   if (rawChars <= PASS_THROUGH) {
     return {
-      text: exitCode !== 0 ? `$ ${label(cmd)} (exit ${exitCode})\n${rawText}` : rawText || '(no output)',
+      // The agent knows what it ran; the exit code is the one fact the output may not show.
+      text: exitCode !== 0 ? `(exit ${exitCode})\n${rawText}` : rawText || '(no output)',
       rawChars,
       exitCode,
     };
@@ -177,14 +202,16 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
   }
 
   // Failing tests or compiler errors: extract high-signal failure regions
-  const candidates = extractFailureCandidates(rawText);
+  const { text: failureText, shortened } = collapseRepeats(rawText);
+  const head = `$ ${label(cmd)} (exit ${exitCode})${shortened ? `\n(${shortened} repeated failure blocks shown by their first line only)` : ''}`;
+  const candidates = extractFailureCandidates(failureText);
   if (!candidates.length) {
     // Unknown runners commonly print setup first and the actual termination reason last.
-    const lines = rawText.split('\n');
+    const lines = failureText.split('\n');
     const indices = new Set([...lines.slice(0, 3).map((_, i) => i), ...lines.slice(-12).map((_, i) => Math.max(0, lines.length - 12) + i)]);
     const excerpt = [...indices].sort((a, b) => a - b).map(i => lines[i]).join('\n');
     return {
-      text: `$ ${label(cmd)} (exit ${exitCode})\n${excerpt}\n(... ${lines.length - indices.size} lines withheld)`,
+      text: `${head}\n${excerpt}\n(... ${lines.length - indices.size} lines withheld)`,
       rawChars,
       exitCode,
     };
@@ -193,7 +220,7 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
   // Failure regions this small cost less to return whole than to have the model cut down, and whole is always complete.
   const regions = candidates.map(c => c.text);
   if (regions.length && regions.join('\n').length <= WHOLE_REGIONS) {
-    return { text: `$ ${label(cmd)} (exit ${exitCode})\n${regions.join('\n')}`, rawChars, exitCode };
+    return { text: `${head}\n${regions.join('\n')}`, rawChars, exitCode };
   }
 
   const numbered = candidates.map(c => `[${c.id}] ${c.text}`).join('\n');
@@ -223,7 +250,7 @@ export async function digest({ cmd, out = '', err = '', exitCode = 0 }, chat) {
     evidenceLines = candidates.slice(0, 12).map(c => c.text);
   }
 
-  const text = `$ ${label(cmd)} (exit ${exitCode})\n${evidenceLines.join('\n')}`;
+  const text = `${head}\n${evidenceLines.join('\n')}`;
   return { text, rawChars, exitCode };
 }
 

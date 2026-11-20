@@ -225,11 +225,12 @@ test('test_logs hands short output over whole without calling the model', async 
   assert.equal(shortPass.exitCode, 0);
 
   const shortFail = await test_logs.digest({ cmd: 'npm test', out: 'FAIL src/index.test.ts', exitCode: 1 }, never);
-  assert.equal(shortFail.text, '$ npm test (exit 1)\nFAIL src/index.test.ts');
+  // A short failure keeps only its exit code: the agent knows the command, and through MCP the code is the only failure signal.
+  assert.equal(shortFail.text, '(exit 1)\nFAIL src/index.test.ts');
   assert.equal(shortFail.exitCode, 1);
 
   const venv = await test_logs.digest({ cmd: '/home/u/.venv/bin/python -m pytest -q', out: 'E assert 1 == 2', exitCode: 1 }, never);
-  assert.equal(venv.text, '$ python -m pytest -q (exit 1)\nE assert 1 == 2');
+  assert.equal(venv.text, '(exit 1)\nE assert 1 == 2');
   assert.equal(test_logs.label('"/a b/bin/node" --test x/y.mjs'), 'node --test x/y.mjs');
   assert.equal(test_logs.label('npm test'), 'npm test');
 });

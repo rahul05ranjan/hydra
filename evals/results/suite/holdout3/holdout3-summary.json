@@ -1,0 +1,135 @@
+{
+  "complete": true,
+  "training": false,
+  "sealedEvaluation": false,
+  "split": "holdout3",
+  "tasks": 10000,
+  "elapsedSeconds": 1135.0395327,
+  "planSha256": "a190a04770a0c609a28c869aadccae2b9375a9b3c3776098c160e951f97c30e4",
+  "modelSha256": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be",
+  "gpuBeforeMB": [
+    0,
+    0
+  ],
+  "gpuAfterMB": [
+    1397,
+    0
+  ],
+  "gpuProcesses": "22, 1414\n",
+  "secondsByStage": {
+    "filesReadTestOs": 636.552971326,
+    "git": 372.746939698
+  },
+  "byHead": {
+    "files": {
+      "tasks": 2000,
+      "solvedCount": 1962,
+      "solved": 0.981,
+      "errors": 0,
+      "modelCalls": 2013,
+      "tasksWithModelCalls": 2000,
+      "modelPlanAccuracy": 0.999,
+      "modelPlannedTasks": 2000,
+      "modelEvidenceTasks": 13,
+      "modelEvidenceAccuracy": 0.9230769230769231,
+      "latencySeconds": {
+        "p50": 0.109,
+        "p95": 0.135,
+        "maximum": 32.953
+      },
+      "solvedConfidence95": [
+        0.9740294381036511,
+        0.9861262947646555
+      ],
+      "rawChars": 897775,
+      "returnedChars": 960056
+    },
+    "read": {
+      "tasks": 2000,
+      "solvedCount": 1951,
+      "solved": 0.9755,
+      "errors": 0,
+      "modelCalls": 43,
+      "tasksWithModelCalls": 43,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 43,
+      "modelEvidenceAccuracy": 0.13953488372093023,
+      "latencySeconds": {
+        "p50": 0.001,
+        "p95": 0.003,
+        "maximum": 0.745
+      },
+      "solvedConfidence95": [
+        0.9677583573863044,
+        0.9814184637756078
+      ],
+      "rawChars": 905134,
+      "returnedChars": 1006217
+    },
+    "test": {
+      "tasks": 2000,
+      "solvedCount": 1950,
+      "solved": 0.975,
+      "errors": 0,
+      "modelCalls": 100,
+      "tasksWithModelCalls": 100,
+      "modelPlanAccuracy": null,
+      "modelPlannedTasks": 0,
+      "modelEvidenceTasks": 100,
+      "modelEvidenceAccuracy": 0.15,
+      "latencySeconds": {
+        "p50": 0,
+        "p95": 0.013,
+        "maximum": 0.774
+      },
+      "solvedConfidence95": [
+        0.9671930665016661,
+        0.9809856717778467
+      ],
+      "rawChars": 4245110,
+      "returnedChars": 1347169
+    },
+    "os": {
+      "tasks": 2000,
+      "solvedCount": 1960,
+      "solved": 0.98,
+      "errors": 0,
+      "modelCalls": 2000,
+      "tasksWithModelCalls": 2000,
+      "modelPlanAccuracy": 0.98,
+      "modelPlannedTasks": 2000,
+      "modelEvidenceTasks": 0,
+      "modelEvidenceAccuracy": null,
+      "latencySeconds": {
+        "p50": 0.112,
+        "p95": 0.217,
+        "maximum": 0.231
+      },
+      "solvedConfidence95": [
+        0.9728812108707509,
+        0.9852783562327568
+      ],
+      "rawChars": 577860,
+      "returnedChars": 616390
+    },
+    "git": {
+      "tasks": 2000,
+      "modelCalls": 1999,
+      "tasksWithModelCalls": 1901,
+      "modelPlannerTasks": 1901,
+      "modelProbeChoiceAccuracy": 0.988427143608627,
+      "routed": 0.7205,
+      "plan": 0.9415,
+      "evidence": 0.9415,
+      "solved": 0.9415,
+      "recall": 0.9468333333333334,
+      "readingRight": 0,
+      "readingScored": 0,
+      "raw": 242839,
+      "returned": 160705,
+      "errors": 0
+    }
+  },
+  "scope": "Third holdout, scored once; per-head aggregates only. Rows and per-intent logs were not kept."
+}

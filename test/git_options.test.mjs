@@ -209,3 +209,95 @@ test('an unusable model base falls back to the one branch the question names', a
   const none = await gather('Which commits are new here?', cwd, async () => ({ probes: [{ probe: 'log', base: 'here' }] }));
   assert.equal(none[0].args.base, undefined);
 });
+
+// A question about one line of a file: blame that line, not the file's log. Three lines from two commits.
+function lineFixture(t) {
+  const cwd = fixture(t);
+  const git = (...args) => execFileSync('git', ['-c', 'user.name=Ana', '-c', 'user.email=ana@example.invalid', ...args], { cwd, encoding: 'utf8' });
+  writeFileSync(path.join(cwd, 'calc.js'), 'const a = 1;\nconst b = 2;\nconst c = 3;\n');
+  git('add', 'calc.js'); git('commit', '-qm', 'Add calc');
+  execFileSync('git', ['-c', 'user.name=Bo', '-c', 'user.email=bo@example.invalid', 'commit', '-qm', 'Touch index', '--allow-empty'], { cwd });
+  writeFileSync(path.join(cwd, 'calc.js'), 'const a = 1;\nconst b = 20;\nconst c = 3;\n');
+  execFileSync('git', ['-c', 'user.name=Bo', '-c', 'user.email=bo@example.invalid', 'commit', '-qam', 'Raise b'], { cwd });
+  return cwd;
+}
+
+test('a line question blames that line even when the model picks the file log', async t => {
+  const cwd = lineFixture(t);
+  const sections = await gather('Which commit last changed line 2 of calc.js, and when?', cwd,
+    async () => ({ probes: [{ probe: 'log', path: 'calc.js', n: 15 }] }));
+  assert.deepEqual(sections.map(s => s.cmd), ['git blame -L 2,2 -- calc.js']);
+  assert.equal(sections[0].out.trim().split('\n').length, 1);
+  assert.match(sections[0].out, /\(Bo .*const b = 20;/);
+});
+
+test('a path:line reference and a line range set the blame range from the question', async t => {
+  const cwd = lineFixture(t);
+  const colon = await gather('Who wrote calc.js:3?', cwd, async () => ({ probes: [{ probe: 'blame', path: 'calc.js:3' }] }));
+  assert.deepEqual(colon.map(s => s.cmd), ['git blame -L 3,3 -- calc.js']);
+  const range = await gather('Who wrote lines 1-2 of calc.js?', cwd, async () => ({ probes: [{ probe: 'blame', path: 'calc.js', lines: '1,99' }] }));
+  assert.deepEqual(range.map(s => s.cmd), ['git blame -L 1,2 -- calc.js']);
+  assert.equal(range[0].out.trim().split('\n').length, 2);
+});
+
+test('questions without a line number keep the whole-file blame and file history', async t => {
+  const cwd = lineFixture(t);
+  const whole = await gather('Who wrote calc.js?', cwd, async () => ({ probes: [{ probe: 'blame', path: 'calc.js' }] }));
+  assert.deepEqual(whole.map(s => s.cmd), ['git blame -- calc.js']);
+  const history = await gather('Which commits changed calc.js?', cwd, async () => ({ probes: [{ probe: 'log', path: 'calc.js' }] }));
+  assert.ok(history[0].cmd.startsWith('git log'), history[0].cmd);
+});
+
+test('a line-sliced blame is returned whole without a model call', async () => {
+  const out = Array.from({ length: 20 }, (_, i) => `abc123${i} (Bo 2026-11-20 ${i + 1}) const value${i} = ${i}; // padding padding padding`).join('\n');
+  assert.ok(out.length > 800);
+  const result = await answer('Who wrote lines 1-20 of calc.js?',
+    [{ probe: 'blame', args: { path: 'calc.js', lines: '1,20' }, cmd: 'git blame -L 1,20 -- calc.js', out }],
+    () => { throw new Error('A line-sliced blame should need no model call'); });
+  assert.equal(result.text, `$ git blame -L 1,20 -- calc.js\n${out}`);
+});
+
+// An explicit range in the question ("master..origin/master") is the caller's; the log probe's base..HEAD cannot say it.
+function rangeFixture(t) {
+  const cwd = fixture(t);
+  const git = (...args) => execFileSync('git', ['-c', 'user.name=Dev', '-c', 'user.email=dev@example.invalid', ...args], { cwd, encoding: 'utf8' });
+  git('commit', '-qam', 'Settle index');
+  const base = git('branch', '--show-current').trim();
+  git('checkout', '-qb', 'feature');
+  for (const i of [1, 2, 3]) { writeFileSync(path.join(cwd, `f${i}.txt`), `${i}\n`); git('add', '.'); git('commit', '-qm', `Feature step ${i}`); }
+  git('checkout', '-q', base);
+  return { cwd, base };
+}
+
+test('a log range named in the question is used as written, not as base..HEAD', async t => {
+  const { cwd, base } = rangeFixture(t);
+  const sections = await gather(`Summarise the commits in ${base}..feature: main themes and any new files.`, cwd,
+    async () => ({ probes: [{ probe: 'log', base }] }));
+  assert.deepEqual(sections.map(s => s.cmd), [`git log -n50 ${base}..feature`]);
+  assert.equal(sections[0].out.trim().split('\n').length, 3);
+  // A model plan with no log still gets the range's log.
+  const shown = await gather(`What is in ${base}..feature?`, cwd, async () => ({ probes: [{ probe: 'status' }] }));
+  assert.ok(shown.some(s => s.cmd === `git log -n50 ${base}..feature`), shown.map(s => s.cmd).join(', '));
+});
+
+test('a three-dot range in a diff question compares from the merge base to its end', async t => {
+  const { cwd, base } = rangeFixture(t);
+  const sections = await gather(`Which files changed in ${base}...feature?`, cwd, async () => ({ probes: [{ probe: 'diff', base }] }));
+  assert.deepEqual(sections.map(s => s.cmd), [`git diff ${base}...feature`]);
+  assert.match(sections[0].out, /f3\.txt/);
+});
+
+test('a range whose ends git cannot resolve leaves the plan alone', async t => {
+  const { cwd, base } = rangeFixture(t);
+  const sections = await gather(`Commits in nothing..nowhere since ${base}?`, cwd, async () => ({ probes: [{ probe: 'log', n: 5 }] }));
+  assert.deepEqual(sections.map(s => s.cmd), ['git log -n5']);
+});
+
+test('a named range cut by the count cap says how many commits it holds', async t => {
+  const { cwd, base } = rangeFixture(t);
+  const sections = await gather(`Show the last 2 commits in ${base}..feature.`, cwd, async () => ({ probes: [{ probe: 'log', base }] }));
+  assert.equal(sections[0].cmd, `git log -n2 ${base}..feature`);
+  assert.match(sections[0].out, new RegExp(`\\(2 of 3 commits in ${base}\\.\\.feature shown;`));
+  const whole = await gather(`Show the commits in ${base}..feature.`, cwd, async () => ({ probes: [{ probe: 'log' }] }));
+  assert.doesNotMatch(whole[0].out, /commits in .* shown/);
+});

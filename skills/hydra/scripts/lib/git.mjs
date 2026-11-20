@@ -55,10 +55,19 @@ const subjectTerm = question => (question.match(/\bwith\s+["'`]?([\w.-]+)["'`]?\
 // "messages that mention main": the question searches message text for this word.
 const searchesFor = (question, term) => subjectTerm(question)?.toLowerCase() === term.toLowerCase()
   || new RegExp(`\\b(?:mention\\w*|contain\\w*|says?|saying)\\s+["'\`]?${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w.-])`, 'i').test(question);
+// "line 16", "lines 10-20", "lines 10 to 20" or "src/app.js:16": the lines of one file a question is about.
+// Built from the question's own digits, never from the model; a range over 100 lines keeps the whole-file blame.
+const MAX_BLAME_LINES = 100;
+const lineRange = question => {
+  const m = question.match(/\blines?\s+(\d{1,6})(?:\s*(?:-|–|to|through)\s*(\d{1,6}))?\b/i) ?? question.match(/[\w.-]:(\d{1,6})(?:-(\d{1,6}))?\b/);
+  if (!m) return null;
+  const start = Number(m[1]), end = m[2] ? Number(m[2]) : start;
+  return start >= 1 && end >= start && end - start < MAX_BLAME_LINES ? `${start},${end}` : null;
+};
 // The first word of the question that is a file inside the repository, e.g. src/app.ts or Makefile.
 function fileInQuestion(question, cwd) {
   for (const word of question.split(/\s+/)) {
-    const name = word.replace(/^["'`(]+|["'`),;:!?]+$|\.$/g, '');
+    const name = word.replace(/^["'`(]+|["'`),;:!?]+$|\.$/g, '').replace(/:\d+(?:-\d+)?$/, '');
     if (!name || name.startsWith('-') || path.isAbsolute(name)) continue;
     const file = path.resolve(cwd, name), relative = path.relative(cwd, file);
     if (!relative || relative.startsWith('..')) continue;
@@ -80,7 +89,18 @@ export async function git(cwd, argv) {
   return { ok: r.ok, out: r.out || r.err };
 }
 
-export const inRepo = async cwd => (await git(cwd, ['rev-parse', '--is-inside-work-tree'])).out.trim() === 'true';
+// "master..origin/master" or "main...feature": a range the question writes out. Kept as written once git
+// resolves both ends to commits; the log probe's own base..HEAD cannot say a range that does not end at HEAD.
+async function explicitRange(question, cwd) {
+  const m = question.match(/(?:^|[\s(`'"])([\w./@^~{}-]+?)(\.{2,3})([\w./@^~{}-]*[\w/@^~{}-])/);
+  if (!m || m[1].startsWith('-') || m[3].startsWith('-')) return null;
+  for (const end of [m[1], m[3]]) {
+    if (!(await git(cwd, ['rev-parse', '--verify', '--quiet', `${end}^{commit}`])).ok) return null;
+  }
+  return `${m[1]}${m[2]}${m[3]}`;
+}
+
+export const inRepo = async cwd =>(await git(cwd, ['rev-parse', '--is-inside-work-tree'])).out.trim() === 'true';
 
 // The model picks from this menu and never writes a command. Every entry is read-only.
 export const PROBES = {
@@ -98,7 +118,7 @@ export const PROBES = {
       ...(a.author || a.grep ? ['-i', '--fixed-strings'] : []),
       ...(a.author ? [`--author=${a.author}`] : []),
       ...(a.grep ? [`--grep=${a.grep}`] : []),
-      ...(a.base ? [`${a.base}..HEAD`] : []),
+      ...(a.range ? [a.range] : a.base ? [`${a.base}..HEAD`] : []),
       ...(a.path ? ['--', a.path] : []),
     ],
   },
@@ -108,7 +128,7 @@ export const PROBES = {
     argv: a => [
       'diff',
       ...PATCH,
-      ...(a.base ? [`${a.base}...HEAD`] : a.staged ? ['--staged'] : a.worktreeOnly ? [] : ['HEAD']),
+      ...(a.range ? [a.range] : a.base ? [`${a.base}...HEAD`] : a.staged ? ['--staged'] : a.worktreeOnly ? [] : ['HEAD']),
       ...(a.path ? ['--', a.path] : []),
     ],
   },
@@ -119,7 +139,7 @@ export const PROBES = {
   blame: {
     about: 'line-by-line attribution of who wrote each specific line of a file (not for whole-file history); needs path',
     needs: 'path',
-    argv: a => ['blame', '--no-textconv', '--date=short', '--', a.path],
+    argv: a => ['blame', '--no-textconv', '--date=short', ...(a.lines ? ['-L', a.lines] : []), '--', a.path],
   },
   branches: {
     about: 'local and remote branches with their latest commit',
@@ -185,7 +205,7 @@ Examples:
 "commits present here but absent from main" -> {"probes":[{"probe":"log","base":"main","n":50}]}`;
 
 // The model's arguments are untrusted: keep a value only when the question itself names it and git can confirm it.
-async function clean(p, question, cwd) {
+async function clean(p, question, cwd, range) {
   const asked = question.toLowerCase();
   const safe = s => typeof s === 'string' && s.trim() !== '' && !s.trim().startsWith('-') && asked.includes(s.trim().toLowerCase());
   const a = { n: Number.isInteger(p.n) ? Math.min(Math.max(p.n, 1), 50) : 15, staged: false };
@@ -210,6 +230,8 @@ async function clean(p, question, cwd) {
       existsSync(path.resolve(cwd, file)) || (await git(cwd, ['log', '-1', '--format=%h', '--', file])).out.trim();
     if (known) a.path = file;
   }
+  // The lines to blame are the caller's, read from the question like a count.
+  if (p.probe === 'blame' && a.path && lineRange(question)) a.lines = lineRange(question);
   // A validated file named staged.js or index.txt is not a staging request.
   const { index: asksIndex, unstaged: asksUnstaged } = scope(asked, a.path);
   const asksBoth = asksUnstaged && asksIndex;
@@ -240,6 +262,12 @@ async function clean(p, question, cwd) {
   }
   // Commits this branch has over its base form a bounded set; return it whole unless a count was asked for.
   if (p.probe === 'log' && a.base && requestedCount(question) === null) a.n = 50;
+  // The question's own range replaces any base the model or the fallback chose; it is just as bounded.
+  if (range && ['log', 'diff'].includes(p.probe)) {
+    delete a.base;
+    a.range = range;
+    if (p.probe === 'log' && requestedCount(question) === null) a.n = 50;
+  }
   return a;
 }
 
@@ -265,6 +293,15 @@ export async function gather(question, cwd, chat) {
   if (currentBranchRequest(question) && !has('status', 'branches')) plan.push({ probe: 'status' });
   if (syncRequest(question) && !has('status', 'branches')) plan.push({ probe: 'status' });
   if (untrackedRequest(question) && !has('status')) plan.push({ probe: 'status' });
+  // "which commit last changed line 16 of x.js" is about that line, not the file's log: blame the line.
+  const lineFile = lineRange(question) && !pendingEditRequest(question) ? fileInQuestion(question, cwd) ?? named : null;
+  if (lineFile) {
+    plan = plan.filter(p => !(p.probe === 'log' && (!p.path || p.path === lineFile)) && !(p.probe === 'show' && !p.rev) && !(p.probe === 'diff' && !p.base))
+      .map(p => (p.probe === 'blame' ? { ...p, path: lineFile } : p));
+    if (!has('blame')) plan.push({ probe: 'blame', path: lineFile });
+  }
+  const range = await explicitRange(question, cwd);
+  if (range && !has('log', 'diff')) plan.push({ probe: 'log' });
   if (historyRequest(question) && named && !has('log', 'blame')) {
     plan = plan.filter(p => !((p.probe === 'show' && !p.rev) || (p.probe === 'diff' && !p.base)));
     plan.push({ probe: 'log', path: named });
@@ -277,7 +314,7 @@ export async function gather(question, cwd, chat) {
 
   const chosen = new Map();
   for (const p of plan) {
-    const args = await clean(p, question, cwd);
+    const args = await clean(p, question, cwd, range);
     if (PROBES[p.probe].needs && !args[PROBES[p.probe].needs]) continue;
     chosen.set(PROBES[p.probe].argv(args).join(' '), { probe: p.probe, args });
   }
@@ -286,7 +323,13 @@ export async function gather(question, cwd, chat) {
   return Promise.all(
     [...chosen.values()].map(async ({ probe, args }) => {
       const argv = PROBES[probe].argv(args);
-      return { probe, args, cmd: shown(argv), out: (await git(cwd, argv)).out || '(no output)' };
+      const out = (await git(cwd, argv)).out || '(no output)';
+      // A range the question named is a set the caller asked for whole; say so when the count cap cut it.
+      if (probe === 'log' && args.range && out.trimEnd().split('\n').length >= args.n) {
+        const total = Number((await git(cwd, ['rev-list', '--count', ...argv.filter(arg => arg !== 'log' && !FORMAT.includes(arg) && !/^-n\d+$/.test(arg))])).out.trim());
+        if (total > args.n) return { probe, args, cmd: shown(argv), out: `${out.trimEnd()}\n(${args.n} of ${total} commits in ${args.range} shown; ask for a narrower range or a path for the rest)` };
+      }
+      return { probe, args, cmd: shown(argv), out };
     }),
   );
 }

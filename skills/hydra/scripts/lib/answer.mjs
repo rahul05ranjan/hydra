@@ -72,7 +72,9 @@ export async function answer(question, sections, chat) {
       return { text: `$ ${sections[0].cmd}\n${out}`, rawChars };
     }
   }
-  if (rawChars <= PASS_THROUGH || sections.every(section => COMPLETE_PROBES.has(section.probe))) {
+  // A blame cut to the asked lines (-L, at most 100) is the answer itself.
+  const complete = section => COMPLETE_PROBES.has(section.probe) || (section.probe === 'blame' && Boolean(section.args?.lines));
+  if (rawChars <= PASS_THROUGH || sections.every(complete)) {
     return { text: sections.map(section => `$ ${section.cmd}\n${section.out.trimEnd()}`).join('\n\n'), rawChars };
   }
 

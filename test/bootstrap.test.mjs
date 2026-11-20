@@ -67,3 +67,14 @@ test('a listener counts as the managed server only when server.pid names this us
     if (prior === undefined) delete process.env.HYDRA_HOME; else process.env.HYDRA_HOME = prior;
   }
 });
+
+test('npm discovery ignores relative PATH entries, which resolve against the current directory', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'hydra-npm-rel-'));
+  const file = path.join(root, 'node_modules/npm/bin/npx-cli.js');
+  mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, '// planted');
+  const cwd = process.cwd();
+  process.chdir(root);
+  try {
+    assert.equal(findNpx(['', '.', 'sub/..']), undefined);
+  } finally { process.chdir(cwd); }
+});

@@ -3,6 +3,11 @@
 !.env.example
 node_modules/
 .DS_Store
+# Credentials that should never be committed by accident.
+*.pem
+*.key
+credentials*.json
+kaggle.json
 *.log
 
 # Model weights & staging artifacts (hosted on Hugging Face Hub)

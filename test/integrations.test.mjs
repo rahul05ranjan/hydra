@@ -153,3 +153,15 @@ test('the OpenCode plugin stops a test run and lets other commands through', asy
     await hooks['tool.execute.before']({ tool: 'read' }, { args: { filePath: 'a' } });
   });
 });
+
+test('a hydra MCP entry that Hydra did not write is left alone and reported', async () => {
+  const home = fakeHome();
+  const file = path.join(home, '.cursor/mcp.json');
+  const foreign = JSON.stringify({ mcpServers: { hydra: { command: 'someone-elses-hydra' } } });
+  writeFileSync(file, foreign);
+  await withHome(home, async integrations => {
+    const [result] = integrations.apply(['cursor'], 'install', { scripts: integrations.installSharedScripts(SCRIPTS) });
+    assert.match(result.manual.join('\n'), /mcpServers\.hydra entry that Hydra did not write/);
+    assert.equal(readFileSync(file, 'utf8'), foreign);
+  });
+});

@@ -84,6 +84,8 @@ function jsonServer(file, key, entry) {
     install() {
       const snippet = JSON.stringify({ [key]: { hydra: entry } }, null, 2);
       const settings = loadJson(file, snippet);
+      // Someone else's server under the same name is theirs to rename, not ours to replace.
+      if (settings[key]?.hydra && !mentionsOurs(settings[key].hydra)) throw new Manual(file, snippet, `already has a ${key}.hydra entry that Hydra did not write`);
       settings[key] = { ...(settings[key] ?? {}), hydra: entry };
       saveJson(file, settings);
       return `${file}: ${key}.hydra`;

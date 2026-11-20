@@ -7,7 +7,8 @@ import path from 'node:path';
 import { home, localConfig, stopLocal } from './local.mjs';
 
 export function findNpx(dirs = [path.dirname(process.execPath), ...(process.env.PATH || '').split(path.delimiter)]) {
-  for (const dir of dirs) {
+  // An empty or relative PATH entry means "the current directory", where a project could plant its own npx.
+  for (const dir of dirs.filter(dir => dir && path.isAbsolute(dir))) {
     for (const relative of ['node_modules/npm/bin/npx-cli.js', '../lib/node_modules/npm/bin/npx-cli.js', '../share/nodejs/npm/bin/npx-cli.js', 'npx']) {
       const file = path.resolve(dir, relative);
       if (existsSync(file)) {

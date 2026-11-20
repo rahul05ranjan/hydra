@@ -10,6 +10,8 @@ import { claudeDir, installHooks } from './lib/claude_hooks.mjs';
 import * as integrations from './lib/integrations.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
+// The skills.sh CLI version the installer runs; 1.7.6 was checked to take --skill, --agent, --global and --yes.
+const SKILLS_CLI = '1.7.6';
 try {
   if (Number(process.versions.node.split('.')[0]) < 18) throw new Error('Node 18 or newer is required');
   const manifest = JSON.parse(readFileSync(path.join(here, 'runtime-manifest.json'), 'utf8'));
@@ -31,8 +33,9 @@ The server stays running until stopped or the computer restarts. Download time d
   if (!process.argv.includes('--runtime-only')) {
     const npx = findNpx();
     if (!npx) throw new Error('Cannot locate npm npx-cli.js; install Node with npm or use --runtime-only');
+    // A pinned skills CLI: `npx --yes` would otherwise run whatever version is newest on the registry today.
     for (const agent of agents) {
-      execFileSync(process.execPath, [npx, '--yes', '--package=skills', 'skills', 'add', path.resolve(here, '..'), '--skill', 'hydra', '--agent', agent, '--global', '--yes'], { stdio: 'inherit' });
+      execFileSync(process.execPath, [npx, '--yes', `--package=skills@${SKILLS_CLI}`, 'skills', 'add', path.resolve(here, '..'), '--skill', 'hydra', '--agent', agent, '--global', '--yes'], { stdio: 'inherit' });
     }
   }
   const config = await installRuntime(manifest);

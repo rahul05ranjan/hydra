@@ -68,3 +68,55 @@ test('existing brace and string boundary handling survives declaration recogniti
   assert.equal(result.end, 6);
   assert.ok(!result.text.includes('function outside'));
 });
+
+test('a Go outline lists funcs, methods and every type spec, and no var or const', () => {
+  const content = [
+    'package queue', '', 'import "fmt"', '',
+    'var registry = map[string]struct {', '\tname string', '}{}', '',
+    'const limit = 3', '',
+    'type Mode int', '',
+    'type Handler func(job string) error', '',
+    'type Alias = Mode', '',
+    'type List[T any] struct {', '\titems []T', '}', '',
+    'type (', '\t// Grouped specs belong to the outline too.', '\tState uint8', '\tEntry struct {', '\t\tkey string', '\t}', ')', '',
+    'func Map[T, U any](in []T, f func(T) U) []U {', '\treturn nil', '}', '',
+    'func (l *List[T]) Push(item T) {', '\tl.items = append(l.items, item)', '}', '',
+    'func main() { fmt.Println(limit) }',
+  ].join('\n');
+  assert.deepEqual(outline(content, 'queue.go').map(item => `${item.line} ${item.name}`),
+    ['11 Mode', '13 Handler', '15 Alias', '17 List', '23 State', '24 Entry', '29 Map', '33 Push', '37 main']);
+});
+
+test('a generic Go function is found by name as a definition, not a call site', () => {
+  const content = ['package fp', '', 'func use() { _ = Map[int, int](nil, nil) }', '', 'func Map[T, U any](in []T, f func(T) U) []U {', '\tout := make([]U, 0, len(in))', '\treturn out', '}', ''].join('\n');
+  const res = sliceSymbol(content, 'Map');
+  assert.equal(res.start, 5);
+});
+
+test('outlines keep to each language: generators, unsafe traits, and no matches inside strings', () => {
+  const js = ['function* walk(node) {', '  yield node;', '}', 'async function* tick(ms) {', '  yield ms;', '}'].join('\n');
+  assert.deepEqual(outline(js, 'gen.js').map(item => item.line), [1, 4]);
+  const rs = ['pub(super) unsafe trait CopySpec: Clone {}', 'unsafe trait Radix: Sized {}', 'pub fn run() {}'].join('\n');
+  assert.deepEqual(outline(rs, 'lib.rs').map(item => item.line), [1, 2, 3]);
+  const py = ['"""Scheduler.', '', 'function is allowed to modify the queue.', 'class Inside:', '"""', '', 'SOURCE = """', 'class AlsoInside:', '    pass', '"""', '', 'class Real:', '    pass', '', 'def run():', '    pass'].join('\n');
+  assert.deepEqual(outline(py, 'sched.py').map(item => item.line), [12, 15]);
+  const go = ['package gen', '', 'const tmpl = `', 'func (e *{{ .Element }}) One() *{{ .Element }} {', '}', '`', '', 'func Render() string { return tmpl }'].join('\n');
+  assert.deepEqual(outline(go, 'generate.go').map(item => item.line), [8]);
+});
+
+test('symbol lookups match case first, keep to the language and end where the definition ends', () => {
+  const go = ['package s', '', '// Insert adds obj.', 'func (s *Scope) Insert(obj int) {', '\ts.insert(obj)', '}', '', 'func (s *Scope) insert(obj int) {', '\t_ = obj', '}', '',
+    'func castagnoli(', '\tcrcA, crcB uint32,', '\tb []byte,', ')', '', 'func next() {}'].join('\n');
+  assert.deepEqual([sliceSymbol(go, 'insert', 40, 's.go').start, sliceSymbol(go, 'insert', 40, 's.go').end], [8, 10]);
+  assert.deepEqual([sliceSymbol(go, 'castagnoli', 40, 's.go').start, sliceSymbol(go, 'castagnoli', 40, 's.go').end], [12, 15]);
+  const rs = ['impl S {', '    pub fn push(&mut self) {', '        let len = self.len();', '    }', '}', 'trait Spec {', '    fn spec(self) -> u8;', '}', 'impl Spec for S {',
+    '    default fn spec(self) -> u8 {', '        0', '    }', '}', 'impl S {', '    pub fn len(&self) -> usize {', '        0', '    }', '}'].join('\n');
+  assert.equal(sliceSymbol(rs, 'len', 40, 'lib.rs').start, 15);
+  assert.equal(sliceSymbol(rs, 'spec', 40, 'lib.rs').start, 10);
+  const py = ['SAMPLE = """', 'def run():', '    pass', '"""', '', 'def set_content(msg):', '    def body(lines): return b"".join(lines)', '    if msg:', '        msg.send()', '        # retry later', '', 'def run():', '    return 1'].join('\n');
+  assert.deepEqual([sliceSymbol(py, 'body', 40, 'cm.py').start, sliceSymbol(py, 'body', 40, 'cm.py').end], [7, 7]);
+  assert.deepEqual([sliceSymbol(py, 'set_content', 40, 'cm.py').start, sliceSymbol(py, 'set_content', 40, 'cm.py').end], [6, 9]);
+  assert.equal(sliceSymbol(py, 'run', 40, 'cm.py').start, 12);
+  const js = ['function toFile(url) {', "  if (url && url.startsWith('file://')) {", '    return url.slice(7);', '  }', '  return url;', '}', '', 'function other() {}'].join('\n');
+  assert.deepEqual([sliceSymbol(js, 'toFile', 40, 'h.js').start, sliceSymbol(js, 'toFile', 40, 'h.js').end], [1, 6]);
+});

@@ -1,0 +1,201 @@
+{
+  "branch_current": [
+    "Which branch am I on right now?",
+    "Tell me the current branch name.",
+    "What's the active branch in this repo?",
+    "Show which branch is checked out.",
+    "Get me the name of the branch I'm working on.",
+    "What branch is currently active here?",
+    "Point out the branch that HEAD is on.",
+    "Can you tell me which branch this working copy is on?"
+  ],
+  "sync": [
+    "How does this branch line up with its upstream?",
+    "Tell me whether this branch is ahead, behind, or in sync with its remote counterpart.",
+    "What's the tracking status against the upstream for this branch?",
+    "Check how this branch compares to the branch it tracks.",
+    "Is this branch out of step with its upstream, and by how much?",
+    "Give me the divergence status between this branch and its tracked upstream.",
+    "Report whether the upstream for this branch has diverged.",
+    "Show how far this branch is from its remote tracking ref, either way."
+  ],
+  "modified_files": [
+    "Which tracked files have been modified but not committed, staged or not?",
+    "Show me all files with pending changes, whether staged or not.",
+    "What tracked files have local modifications, including anything already staged?",
+    "List every file in the working tree with edits not yet committed, staged ones too.",
+    "Which files differ from the last commit, staged and unstaged both?",
+    "Point out all modified tracked files, staged changes included.",
+    "Give me the files that have uncommitted modifications, staged or otherwise.",
+    "What tracked paths currently show uncommitted edits, counting staged ones?"
+  ],
+  "untracked_files": [
+    "Which files aren't being tracked yet?",
+    "Show me any paths git doesn't know about.",
+    "What files exist here but aren't under version control?",
+    "Find the files that haven't been added to the repo.",
+    "Which paths are untracked in this working directory?",
+    "Tell me about any new files that aren't tracked.",
+    "List files present but not tracked by the repository.",
+    "What untracked files are sitting in the working tree?"
+  ],
+  "staged_files": [
+    "Which paths have changes sitting in the index?",
+    "Show me what's currently staged.",
+    "List the files with changes queued for the next commit.",
+    "What's been added to the staging area?",
+    "Tell me which files are staged right now.",
+    "Name the paths whose changes are in the index.",
+    "Which files have staged modifications?",
+    "Give me a list of everything prepared in the index."
+  ],
+  "change_in_file": [
+    "Show what changed in {path} that hasn't been staged.",
+    "Give me the pending diff for {path}.",
+    "What unstaged modifications exist in {path}?",
+    "Print the working-tree changes to {path}.",
+    "See the uncommitted, unstaged edits in {path}.",
+    "What's been changed in {path} since staging?",
+    "Display the pending edits for {path} that aren't in the index.",
+    "Let me see how {path} differs from the index."
+  ],
+  "branch_diff_files": [
+    "List the files that differ between this branch and {base}.",
+    "What paths were modified here relative to {base}?",
+    "Show which files this branch has changed over {base}.",
+    "Name the files whose content differs from {base} on this branch.",
+    "Give me the files touched on this branch that aren't the same as in {base}.",
+    "Which files set this branch apart from {base}?",
+    "Tell me the changed paths when this branch is compared against {base}."
+  ],
+  "last_commit": [
+    "What's the most recent commit, with its hash and message?",
+    "Give me the hash and title of the newest commit.",
+    "Show the current HEAD commit's hash and summary.",
+    "Which commit is at the tip, and what's it about?",
+    "Tell me the identifier and subject line of the latest commit.",
+    "What commit does HEAD point to, including its hash and message?",
+    "Get me the hash and subject of HEAD.",
+    "What's the newest commit's hash and its one-line description?"
+  ],
+  "recent_commits": [
+    "Show me the {n} most recent commits.",
+    "What are the last {n} commits?",
+    "List the {n} newest commits.",
+    "Give me the top {n} commits by recency.",
+    "Can I see the {n} latest commits?",
+    "Print the most recent {n} commits.",
+    "What were the previous {n} commits?",
+    "Walk me through the last {n} commits."
+  ],
+  "file_last_change": [
+    "Who last touched {path}, and what commit was it?",
+    "Which commit most recently modified {path}, and who wrote it?",
+    "Find the newest commit that changed {path} and give me its author and message.",
+    "Who authored the latest change to {path}, and what was the commit about?",
+    "What's the most recent commit affecting {path}, with author and subject?",
+    "Show me the author and message of the last commit that made changes to {path}.",
+    "Tell me who made the most recent edit to {path} and the commit message for it.",
+    "For the newest commit touching {path}, who was the author and what did it say?"
+  ],
+  "file_history": [
+    "Show the last five commits that touched {path}.",
+    "Give me the five most recent commits affecting {path}.",
+    "What are the newest five commits involving {path}?",
+    "List five commits, newest first, that changed {path}.",
+    "Can you show the past five commits for {path}?",
+    "Which five most recent commits modified {path}?",
+    "Print the top five commits in {path}'s history.",
+    "Walk me through the five latest commits for {path}."
+  ],
+  "author_commits": [
+    "Show me the three newest commits from {author}.",
+    "What are {author}'s three most recent commits?",
+    "List the last three commits {author} authored.",
+    "Give me the three latest commits written by {author}.",
+    "Which three commits did {author} make most recently?",
+    "Find the newest three commits credited to {author}.",
+    "Print {author}'s three most recent commits.",
+    "Can you show the top three commits by {author}?"
+  ],
+  "message_search": [
+    "Find the three newest commits whose messages mention {word}.",
+    "Show the last three commits with {word} in the message.",
+    "Which three most recent commits reference {word} in their messages?",
+    "Give me the three latest commits that include {word} in their commit messages.",
+    "Search commit messages for {word} and list the three newest hits.",
+    "What are the three most recent commits talking about {word}?",
+    "List three newest commits where the message contains {word}.",
+    "Can you find commits mentioning {word} and show the three most recent?"
+  ],
+  "branch_commits": [
+    "Show up to 50 commits on this branch that aren't in {base}.",
+    "List at most 50 commits here that {base} doesn't have.",
+    "What commits, up to 50, are reachable from here but missing from {base}?",
+    "Give me as many as 50 commits unique to this branch versus {base}.",
+    "Find up to 50 commits ahead of {base}.",
+    "Which commits, at most 50, exist on this branch but not in {base}?",
+    "Print up to 50 commits present here yet absent from {base}.",
+    "List the commits, no more than 50, that this branch has beyond {base}."
+  ],
+  "last_commit_files": [
+    "Which files did the most recent commit change?",
+    "Show the paths modified in the latest commit.",
+    "What files were touched by the newest commit?",
+    "List the files changed in the commit at HEAD.",
+    "Which paths did the last commit affect?",
+    "Give me the file list for the most recent commit's changes.",
+    "What did the newest commit modify?",
+    "Show me what files the HEAD commit changed."
+  ],
+  "commit_files": [
+    "For commit {hash}, list the changed files and the commit subject.",
+    "Which paths did {hash} modify, and what's its message?",
+    "Show me the files changed in {hash} along with its subject line.",
+    "What files were affected by {hash}, plus the commit's title?",
+    "Give me the subject and changed paths of {hash}.",
+    "Tell me what {hash} changed, with the file list and summary.",
+    "List the modifications {hash} made and the commit's subject.",
+    "What were the changed paths in commit {hash} and what was it about?"
+  ],
+  "branches": [
+    "Show me every branch, local and remote.",
+    "List all branches, including remote-tracking ones.",
+    "What branches exist locally and on remotes?",
+    "Give me the full branch list for this repo.",
+    "Which local branches and remote-tracking branches are there?",
+    "Print all the branches, both local and tracking remotes.",
+    "Enumerate the local branches as well as the remote ones.",
+    "Can you list every branch, local and remote alike?"
+  ],
+  "stashes": [
+    "Show the stashes saved in this repo.",
+    "What stashes exist here?",
+    "List the current stashes.",
+    "Which entries are in the stash list?",
+    "Give me all the stashes that have been saved.",
+    "Tell me what's been stashed in this repository.",
+    "Print the stash entries.",
+    "How many stashes are there and what are they?"
+  ],
+  "worktrees": [
+    "Show the registered worktrees and which branch each has checked out.",
+    "What worktrees are linked to this repo, and what branches are they on?",
+    "List every worktree with its checked-out branch.",
+    "Give me the registered worktrees along with their active branches.",
+    "Which working trees are registered, and which branch does each have?",
+    "Tell me about the worktrees in this repository and their branches.",
+    "Print each registered worktree and the branch checked out in it.",
+    "Can you enumerate the worktrees and the branches they're on?"
+  ],
+  "line_author": [
+    "Who wrote the line in {path} that contains {token}?",
+    "Find the author of the line with {token} in {path}.",
+    "Which contributor added the line containing {token} in {path}?",
+    "Tell me who's responsible for the line in {path} where {token} appears.",
+    "Trace the line with {token} in {path} back to its author.",
+    "Who last touched the line in {path} that includes {token}?",
+    "Identify the person who wrote the {token} line in {path}.",
+    "For the line in {path} containing {token}, who wrote it?"
+  ]
+}

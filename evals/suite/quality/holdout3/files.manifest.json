@@ -1,0 +1,27 @@
+{
+  "head": "files",
+  "split": "holdout3",
+  "tasks": 2000,
+  "tasksSha256": "c208d0e191bcdacd5fd4a07ca1ea2ac9eb92899a19d4a880050c8d10f7643b8a",
+  "builderSha256": "e28ccbb53101ef492a5bb31c0c5635e3387bcccc51ef30b1b2552ad42742cff5",
+  "scriptSha256": "b6c2001937731d0ad4316c9ae88c421c61254518e28c39717cad0237d1717efb",
+  "authoredDataSha256": "fb05c07ad76c782ba0ffb55b6a2ae4020793429fc94cfa82a8f29dad2a5efb0d",
+  "byFamily": {
+    "declaration/go": 420,
+    "declaration/javascript": 420,
+    "declaration/python": 420,
+    "declaration/rust": 420,
+    "search/case": 40,
+    "search/config": 40,
+    "search/empty": 40,
+    "search/literal": 40,
+    "search/multiple": 40,
+    "search/noise": 40,
+    "search/path": 40,
+    "search/punctuation": 40
+  },
+  "scope": "Third Files holdout for one aggregate-only scoring; failure rows are not read for tuning.",
+  "trainingInputsUsed": false,
+  "sealedGitInputsUsed": false,
+  "developmentInputsUsed": false
+}

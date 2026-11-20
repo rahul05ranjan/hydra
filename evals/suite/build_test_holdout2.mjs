@@ -11,15 +11,22 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const sha = value => createHash('sha256').update(value).digest('hex');
-const PER_FAMILY = 25;
-const WORDS = ['quiver', 'marble', 'juniper', 'falcon', 'orchid', 'granite', 'ripple', 'saffron', 'glacier', 'lichen', 'osprey', 'bramble', 'sparrow'];
+// HYDRA_TEST_HOLDOUT=3 (2026-11-20) builds the third holdout from these layouts: twice as many variants, serials
+// 710000+ and its own word list, so no log repeats one of holdout2's. Without it, holdout2 is rebuilt unchanged.
+const THIRD = process.env.HYDRA_TEST_HOLDOUT === '3';
+const SPLIT = THIRD ? 'holdout3' : 'holdout2';
+const PER_FAMILY = THIRD ? 50 : 25;
+const SERIAL_BASE = THIRD ? 710000 : 610000;
+const WORDS = THIRD
+  ? ['tamarack', 'pelican', 'cobble', 'heron', 'thistle', 'basalt', 'mistral', 'cardamom', 'tundra', 'kestrel', 'nettle', 'quartz', 'wren']
+  : ['quiver', 'marble', 'juniper', 'falcon', 'orchid', 'granite', 'ripple', 'saffron', 'glacier', 'lichen', 'osprey', 'bramble', 'sparrow'];
 const gold = (tests = [], files = [], assertions = [], forbidden = []) => ({
   expectedTests: tests, expectedFiles: files, expectedAssertions: assertions, forbiddenStrings: forbidden,
 });
 const out = (framework, command, rawOutput, g, exitCode = 1) => ({ framework, command, exitCode, rawOutput: rawOutput.trimEnd(), gold: g });
 
 function context(ordinal, variant) {
-  const serial = 610000 + ordinal * 100 + variant;
+  const serial = SERIAL_BASE + ordinal * 100 + variant;
   const word = WORDS[(ordinal * 5 + variant) % WORDS.length];
   const Word = word[0].toUpperCase() + word.slice(1);
   const stem = `${word}_${serial}`;
@@ -864,7 +871,7 @@ tests/test_${c.stem}.py::test_${c.word}_legacy
 };
 
 const tasks = Object.entries(FAMILIES).flatMap(([family, render], ordinal) =>
-  Array.from({ length: PER_FAMILY }, (_, variant) => ({ id: `holdout2-test-${family}-${variant + 1}`, family, ...render(context(ordinal, variant)) })));
+  Array.from({ length: PER_FAMILY }, (_, variant) => ({ id: `${SPLIT}-test-${family}-${variant + 1}`, family, ...render(context(ordinal, variant)) })));
 
 // Gold must be literally present, logs unique, and every log long enough to need a digest.
 const outputs = new Set();
@@ -876,13 +883,15 @@ for (const t of tasks) {
   for (const bad of t.gold.forbiddenStrings) assert(t.rawOutput.includes(bad) && !facts.some(f => f.includes(bad)), `Forbidden string ${t.id}: ${bad}`);
   assert(t.rawOutput.length > 800, `Log too short to need a digest: ${t.id}`);
 }
-assert.equal(tasks.length, 1000);
-const directory = path.join(HERE, 'quality/holdout2');
+assert.equal(tasks.length, 40 * PER_FAMILY);
+const directory = path.join(HERE, `quality/${SPLIT}`);
 const content = JSON.stringify(tasks, null, 2) + '\n';
 mkdirSync(directory, { recursive: true });
 writeFileSync(path.join(directory, 'test.json'), content);
-writeFileSync(path.join(directory, 'test-manifest.json'), JSON.stringify({ tasks: tasks.length, dataSha256: sha(content), split: 'holdout2',
+writeFileSync(path.join(directory, 'test-manifest.json'), JSON.stringify({ tasks: tasks.length, dataSha256: sha(content), split: SPLIT,
   families: Object.fromEntries(Object.keys(FAMILIES).map(family => [family, PER_FAMILY])),
-  scope: 'Second Test holdout. Layouts authored from tool output conventions on 2026-10-16; serials 610000+; new word list. Aggregate-only scoring of frozen candidates; failure rows are not read for tuning.',
+  scope: THIRD
+    ? 'Third Test holdout (2026-11-20): the holdout2 layouts with serials 710000+, 50 variants per family and a new word list; no log repeats holdout2. Aggregate-only scoring; failure rows are not read for tuning.'
+    : 'Second Test holdout. Layouts authored from tool output conventions on 2026-10-16; serials 610000+; new word list. Aggregate-only scoring of frozen candidates; failure rows are not read for tuning.',
   trainingInputsUsed: false, sealedInputsUsed: false, developmentInputsUsed: false, firstHoldoutInputsUsed: false }, null, 2) + '\n');
-console.log(JSON.stringify({ head: 'test', split: 'holdout2', tasks: tasks.length, families: Object.keys(FAMILIES).length, sha256: sha(content) }));
+console.log(JSON.stringify({ head: 'test', split: SPLIT, tasks: tasks.length, families: Object.keys(FAMILIES).length, sha256: sha(content) }));

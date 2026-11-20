@@ -1,0 +1,109 @@
+{
+  "split": "holdout3",
+  "tasks": 2000,
+  "dataSha256": "9af3642d133fa865fa8f8185a059c1b68e2fed3005a68bf9038bd5e7f95b2035",
+  "builderSha256": "14623ba6d572ce728715a248e73990c01da9a6aedd6a8628e54ed649810c6add",
+  "scriptSha256": "e88d6f6659c815ac040312b05c6a03c1482f75d46c4e0cd6977928af4c1a0c5f",
+  "kinds": {
+    "outline": 200,
+    "symbol": 1190,
+    "range": 595,
+    "whole": 5,
+    "empty": 5,
+    "missing-file": 5
+  },
+  "languages": {
+    "python": 550,
+    "javascript": 310,
+    "go": 550,
+    "rust": 550,
+    "typescript": 40
+  },
+  "excludedFirstHoldoutAnchors": 800,
+  "excludedFirstHoldoutOutlineModules": 80,
+  "candidateCoverage": {
+    "holdout3/python": {
+      "candidateCounts": {
+        "symbol": 5610,
+        "range": 8279,
+        "outline": 384
+      },
+      "sourceModulesAvailable": 480,
+      "exclusions": {
+        "unqueryableNames": 6450,
+        "fullSymbolExceedsCitationOrLineCap": 2669,
+        "wholeOutlineExceedsCitationOrPreviewCap": 96,
+        "ambiguousSameFileNames": 4
+      }
+    },
+    "holdout3/javascript": {
+      "candidateCounts": {
+        "symbol": 1137,
+        "range": 2140,
+        "outline": 27
+      },
+      "sourceModulesAvailable": 169,
+      "exclusions": {
+        "unqueryableNames": 10202,
+        "fullSymbolExceedsCitationOrLineCap": 1003,
+        "wholeOutlineExceedsCitationOrPreviewCap": 142,
+        "ambiguousSameFileNames": 92
+      }
+    },
+    "holdout3/go": {
+      "candidateCounts": {
+        "symbol": 19776,
+        "range": 30700,
+        "outline": 1272
+      },
+      "sourceModulesAvailable": 2359,
+      "exclusions": {
+        "unqueryableNames": 7871,
+        "wholeOutlineExceedsCitationOrPreviewCap": 1087,
+        "fullSymbolExceedsCitationOrLineCap": 11064,
+        "rangeExceedsLineCap": 140,
+        "ambiguousSameFileNames": 226
+      }
+    },
+    "holdout3/rust": {
+      "candidateCounts": {
+        "symbol": 5449,
+        "range": 6803,
+        "outline": 387
+      },
+      "sourceModulesAvailable": 546,
+      "exclusions": {
+        "unqueryableNames": 6595,
+        "fullSymbolExceedsCitationOrLineCap": 1357,
+        "parserRejectedModules": 63,
+        "wholeOutlineExceedsCitationOrPreviewCap": 159,
+        "ambiguousSameFileNames": 17,
+        "rangeExceedsLineCap": 3
+      }
+    }
+  },
+  "questionTemplates": {
+    "symbol": [
+      "show function {symbol} from \"{file}\"",
+      "read the code of {symbol} in \"{file}\"",
+      "how does {symbol} work in \"{file}\"",
+      "explain {symbol} in \"{file}\""
+    ],
+    "range": [
+      "read lines {lines} in \"{file}\"",
+      "show \"{file}\" from lines {lines}",
+      "slice lines {lines} of \"{file}\""
+    ],
+    "outline": [
+      "read \"{file}\" outline",
+      "outline for \"{file}\""
+    ],
+    "whole": [
+      "read the file \"{file}\""
+    ]
+  },
+  "scope": "Third Read holdout for one aggregate-only scoring; failure rows are not read for tuning.",
+  "trainingInputsUsed": false,
+  "sealedInputsUsed": false,
+  "developmentInputsUsed": false
+}

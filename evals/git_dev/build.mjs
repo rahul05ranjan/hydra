@@ -12,12 +12,14 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const SET = process.env.HYDRA_GIT_DEV_SET || 'original';
 // `lines` (2026-11-20): line-number blame and written-out ranges only, for the caller-owned -L and A..B paths.
-if (!['original', 'extended', 'paraphrase', 'lines'].includes(SET)) throw new Error('Unknown Git development set');
-export const dataDir = SET === 'original' ? HERE : path.join(HERE, SET);
+// `holdout3` (2026-11-20) is held out, not development: 100 worlds on seeds 9000..9099 with wordings written by
+// Cloudflare GLM, frozen before any scoring and scored once, aggregates only. It lives in evals/git_holdout3.
+if (!['original', 'extended', 'paraphrase', 'lines', 'holdout3'].includes(SET)) throw new Error('Unknown Git development set');
+export const dataDir = SET === 'original' ? HERE : SET === 'holdout3' ? path.join(ROOT, 'evals/git_holdout3') : path.join(HERE, SET);
 const TASKS = path.join(dataDir, 'tasks.jsonl');
 const HEADS = path.join(dataDir, 'worlds.json');
-const WORLDS = { original: 10, extended: 40, paraphrase: 40, lines: 20 }[SET];
-const SEED = { original: 6100, extended: 6200, paraphrase: 6400, lines: 6600 }[SET];
+const WORLDS = { original: 10, extended: 40, paraphrase: 40, lines: 20, holdout3: 100 }[SET];
+const SEED = { original: 6100, extended: 6200, paraphrase: 6400, lines: 6600, holdout3: 9000 }[SET];
 
 export const worldsDir = () => path.join(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds', SET === 'original' ? 'git_dev' : `git_dev_${SET}`);
 export const worldName = i => `dev_${String(i).padStart(2, '0')}`;
@@ -173,7 +175,7 @@ function lineTasksFor(world, index, phrasings) {
 export function buildWorlds() {
   const parent = path.resolve(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds');
   const relative = path.relative(parent, path.resolve(worldsDir()));
-  if (!['git_dev', 'git_dev_extended', 'git_dev_paraphrase', 'git_dev_lines'].includes(relative)) throw new Error('Unsafe development-world cleanup path');
+  if (!['git_dev', 'git_dev_extended', 'git_dev_paraphrase', 'git_dev_lines', 'git_dev_holdout3'].includes(relative)) throw new Error('Unsafe development-world cleanup path');
   rmSync(worldsDir(), { recursive: true, force: true });
   mkdirSync(worldsDir(), { recursive: true });
   return Array.from({ length: WORLDS }, (_, i) => buildWorld(path.join(worldsDir(), worldName(i)), SEED + i));

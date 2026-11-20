@@ -1,0 +1,505 @@
+{
+  "source": "Cloudflare Workers AI @cf/zai-org/glm-5.3, 2026-11-20; filtered for format and overlap, reviewed, frozen before scoring",
+  "declaration": [
+    "In which file does the implementation of `{name}` begin?",
+    "Show the defining occurrence of the routine `{name}` rather than any references to it.",
+    "Which source line contains the body or signature that defines `{name}`?",
+    "Locate the statement that creates the function `{name}` in the codebase.",
+    "Where can I find the original definition of `{name}`, not its callers?",
+    "Identify the file and line where `{name}` is first declared as a function.",
+    "Point me to the place where `{name}` is written into being, ignoring imports.",
+    "What part of the code actually defines the routine `{name}`?"
+  ],
+  "search": {
+    "config": [
+      "Find the lines where the configuration key {terms} is assigned a value.",
+      "Show me every place the code sets the config option {terms}."
+    ],
+    "literal": [
+      "Where does the exact literal value {terms} show up in the code?",
+      "Find each occurrence of the string literal {terms} in the sources."
+    ],
+    "path": [
+      "Which file in the repository is named {terms}?",
+      "Locate the file whose name is {terms}."
+    ],
+    "multiple": [
+      "Find where {terms} each appear in the code, listing them separately.",
+      "Show me every place {terms} occurs, one list per name."
+    ],
+    "empty": [
+      "Does {terms} appear anywhere at all in the codebase?",
+      "Check whether {terms} is present in any file of this project."
+    ],
+    "noise": [
+      "Find {terms} in the hand-written source only, skipping generated or lock files.",
+      "Where is {terms} used in files actually authored by the developers, not generated ones?"
+    ],
+    "case": [
+      "Find {terms} with exactly that capitalization and no other casing.",
+      "Show occurrences of {terms} only where the capitalization matches exactly."
+    ],
+    "punctuation": [
+      "Find {terms} as an exact character-for-character string, including any punctuation.",
+      "Where does the exact string {terms} appear with every character literal?"
+    ]
+  },
+  "terms": {
+    "config": [
+      "maxIdleSeconds",
+      "POOL_MIN_THREADS",
+      "retry_backoff_base",
+      "cache.maxEntries",
+      "auth-token-expiry",
+      "defaultLocaleTag",
+      "SESSION_TTL_SECONDS",
+      "log_rotation_size",
+      "ingest.maxBatchRows",
+      "grpc-keepalive-interval",
+      "shardCountLimit",
+      "WORKER_QUEUE_CAPACITY",
+      "audit_log_enabled",
+      "metrics.flushInterval",
+      "tls-cipher-allowlist",
+      "emitHeartbeatMs",
+      "MAX_REDIRECT_DEPTH",
+      "sstable_block_kb",
+      "stream.bufferLowWater",
+      "docker-network-name",
+      "traceSampleRatio",
+      "REPLAY_SPEED_FACTOR",
+      "header_size_budget",
+      "replication.quorumWrite",
+      "oauth-scope-prefix",
+      "gossipFanoutFactor",
+      "MEMTABLE_FLUSH_BYTES",
+      "snapshot_retention_days",
+      "queue.drainTimeoutMs",
+      "index-warmup-threads",
+      "compactionScoreCap",
+      "DEAD_LETTER_MAX_AGE",
+      "lease_refresh_jitter",
+      "auth.sessionGraceSeconds",
+      "webhook-retry-budget",
+      "diskQuotaPercent",
+      "CONNECTION_IDLE_TIMEOUT",
+      "gc_pause_threshold_ms",
+      "events.partitionCount",
+      "query-max-span-depth"
+    ],
+    "literal": [
+      "E_CONN_POOL_EXHAUSTED",
+      "/health/started",
+      "text/tab-separated-values",
+      "x-b3-traceid",
+      "urn:iac:queue:dlq",
+      "E_RATE_LIMIT_BLOCKED",
+      "/internal/reconcile",
+      "grpc-timeout",
+      "urn:edge:route:v3",
+      "E_CHECKSUM_MISMATCH",
+      "/metrics/prometheus",
+      "message/http",
+      "urn:audit:actor:user",
+      "E_LEASE_REVOKED",
+      "/api/gateway/routes",
+      "x-session-revision",
+      "urn:queue:shard:07",
+      "E_SCHEMA_MIGRATED",
+      "/static/manifest.json",
+      "application/vnd.api+json",
+      "authorization",
+      "urn:cfg:tls:minver",
+      "E_DISK_QUOTA_EXCEEDED",
+      "/v1/jobs/status",
+      "image/webp",
+      "x-forwarded-host",
+      "urn:log:stream:raw",
+      "E_DNS_RESOLUTION",
+      "/cluster/members",
+      "if-none-match",
+      "urn:auth:token:opaque",
+      "E_BACKPRESSURE",
+      "/_cat/indices",
+      "audio/ogg",
+      "link-etags",
+      "urn:store:blob:tmp",
+      "E_TOKEN_EXPIRED",
+      "/watch/changes",
+      "font/woff2",
+      "grpc-status-details"
+    ],
+    "path": [
+      "auth_grants.sql",
+      "worker-config.toml",
+      "session keys.go",
+      "deploy-runbook.md",
+      "tracing setup.ts",
+      "routes_webhooks.py",
+      "index_cutover.sql",
+      "graph_queries.json",
+      "lease_daemon.rs",
+      "policy matrix.csv",
+      "cooldown queue.py",
+      "tls-bootstrap.yaml",
+      "frontend main.mjs",
+      "sitemap_gen.go",
+      "usage examples.md",
+      "ledger_verify.rs",
+      "merge vars.csv",
+      "health-probe.py",
+      "shard rebalance.sql",
+      "backfill notes.md",
+      "coreSchema.ts",
+      "report builder.js",
+      "stream-framer.go",
+      "fixtureLoader.mjs",
+      "limits table.csv",
+      "admin_cli.py",
+      "kill switch.yaml",
+      "budget audit.json",
+      "projections.rs",
+      "packet dumps.csv",
+      "websock hub.ts",
+      "seed alerts.py",
+      "billing quotes.sql",
+      "mirror sync.go",
+      "replay driver.mjs",
+      "alert rules.toml",
+      "export helpers.js",
+      "plan diff.md",
+      "column stats.json",
+      "auth shadow.py"
+    ],
+    "multiple": [
+      [
+        "openShard",
+        "closeShard"
+      ],
+      [
+        "NUMA_BALANCE_ON",
+        "NUMA_BALANCE_OFF"
+      ],
+      [
+        "bindTransport",
+        "unbindTransport"
+      ],
+      [
+        "CACHE_WARM_LIMIT",
+        "CACHE_EVICT_LIMIT"
+      ],
+      [
+        "REPLAY_START_CURSOR",
+        "REPLAY_END_CURSOR"
+      ],
+      [
+        "mountVolume",
+        "unmountVolume"
+      ],
+      [
+        "TLS_CLIENT_BUNDLE",
+        "TLS_SERVER_BUNDLE"
+      ],
+      [
+        "beginTransaction",
+        "commitTransaction"
+      ],
+      [
+        "READ_AHEAD_PAGES",
+        "READ_BEHIND_PAGES"
+      ],
+      [
+        "registerWorker",
+        "deregisterWorker"
+      ],
+      [
+        "GRPC_SEND_BUFFER",
+        "GRPC_RECV_BUFFER"
+      ],
+      [
+        "enqueueBatch",
+        "dequeueBatch"
+      ],
+      [
+        "TOKEN_ISSUE_RATE",
+        "TOKEN_REVOKE_RATE"
+      ],
+      [
+        "attachDisk",
+        "detachDisk"
+      ],
+      [
+        "COMPACT_ON_START",
+        "COMPACT_ON_STOP"
+      ],
+      [
+        "subscribeTopic",
+        "unsubscribeTopic"
+      ],
+      [
+        "MAX_UPLOAD_BYTES",
+        "MAX_DOWNLOAD_BYTES"
+      ],
+      [
+        "freezeIndex",
+        "thawIndex"
+      ],
+      [
+        "LOG_DEBUG_LEVEL",
+        "LOG_TRACE_LEVEL"
+      ],
+      [
+        "claimTask",
+        "abandonTask"
+      ],
+      [
+        "QUEUE_PUSH_INTERVAL",
+        "QUEUE_PULL_INTERVAL"
+      ],
+      [
+        "importKey",
+        "exportKey"
+      ],
+      [
+        "STREAM_HEAD_OFFSET",
+        "STREAM_TAIL_OFFSET"
+      ],
+      [
+        "enableNode",
+        "disableNode"
+      ],
+      [
+        "HOT_KEY_WINDOW",
+        "COLD_KEY_WINDOW"
+      ],
+      [
+        "startProfiler",
+        "stopProfiler"
+      ],
+      [
+        "RETRY_SOFT_LIMIT",
+        "RETRY_HARD_LIMIT"
+      ],
+      [
+        "rotateSecret",
+        "revokeSecret"
+      ],
+      [
+        "PARTITION_MIN_ID",
+        "PARTITION_MAX_ID"
+      ],
+      [
+        "AUTH_ALLOW_GROUP",
+        "AUTH_DENY_GROUP"
+      ],
+      [
+        "pushTag",
+        "pullTag"
+      ],
+      [
+        "SNAPSHOT_PRE_DELAY",
+        "SNAPSHOT_POST_DELAY"
+      ],
+      [
+        "joinCluster",
+        "leaveCluster"
+      ],
+      [
+        "TLS_INSECURE_SKIP",
+        "TLS_STRICT_MODE"
+      ],
+      [
+        "increaseQuota",
+        "decreaseQuota"
+      ],
+      [
+        "LEDGER_OPEN_SLOT",
+        "LEDGER_CLOSE_SLOT"
+      ],
+      [
+        "pinVersion",
+        "unpinVersion"
+      ],
+      [
+        "SLOW_QUERY_FLOOR",
+        "SLOW_QUERY_CEILING"
+      ],
+      [
+        "appendSegment",
+        "truncateSegment"
+      ],
+      [
+        "GC_LOW_WATERMARK",
+        "GC_HIGH_WATERMARK"
+      ]
+    ],
+    "empty": [
+      "DeletedStreamBridge",
+      "REMOVED_PAGER_LIMIT",
+      "voidHealthPinger",
+      "legacy.tls renegotiate",
+      "DroppedUrnCodec",
+      "ABOLISHED_FEED_PORT",
+      "scrappedIdempotencyGate",
+      "old.log rotate.hour",
+      "RetiredShadowReader",
+      "MISSING_TIMER_WHEEL",
+      "abandonedPemLoader",
+      "stale.snapshot read",
+      "ExpiredAgentChannel",
+      "GUTTED_ROUTER_RULES",
+      "pulledPercentCodec",
+      "former.queue mirror.z",
+      "VanishedDigestStore",
+      "CANCELLED_EVENT_FIELDS",
+      "withdrawnBatchNamer",
+      "archived.rate limit.v0",
+      "DeadTrafficSplitter",
+      "UNSUPPORTED_AZ_LABEL",
+      "cannedDeleteReason",
+      "old.oauth.pkce",
+      "GhostReplicaGauge",
+      "ERASED_TTL_CACHE",
+      "wipedChunkDeduper",
+      "old.metrics legacy.tag",
+      "ObsoletePingRelay",
+      "RETIRED_WEBHOOK_LATCH",
+      "demotedPathNormalizer",
+      "last.gossip seed.v2",
+      "FossilQueueCounter",
+      "DISBANDED_SORT_KEYS",
+      "frozenTokenPruner",
+      "old.ssh agent.socks",
+      "UnlinkedCursorReader",
+      "PHANTOM_STAGE_HOOKS",
+      "unwoundTaskRescuer",
+      "old.retry policy.static"
+    ],
+    "noise": [
+      "ACTIVE_POOL_SIZE",
+      "ttlBudgetMs",
+      "READ_WINDOW_SECONDS",
+      "concurrencyLimitPerCore",
+      "ACTIVE_WAL_MODE",
+      "sweepBudgetRows",
+      "PUSH_WINDOW_MINUTES",
+      "sessionScanLimit",
+      "ACTIVE_TLS_PROFILE",
+      "compactionBudgetMb",
+      "OPEN_WINDOW_BYTES",
+      "tokenRefreshLimit",
+      "ACTIVE_QUEUE_KIND",
+      "tracesBudgetPerMin",
+      "LOCK_WINDOW_SECONDS",
+      "uploadParallelLimit",
+      "ACTIVE_SHARD_MODE",
+      "dedupeBudgetEntries",
+      "FANOUT_WINDOW_ITEMS",
+      "queryTimeoutLimit",
+      "ACTIVE_AUTH_CHAIN",
+      "cacheWarmBudgetSeconds",
+      "PULL_WINDOW_TICKS",
+      "diskEvictLimit",
+      "ACTIVE_COMPRESSOR",
+      "sortBudgetPages",
+      "JOIN_WINDOW_THREADS",
+      "mutexWaitLimit",
+      "ACTIVE_REBALANCE_JOB",
+      "heapBudgetPercent",
+      "DIAL_WINDOW_SECONDS",
+      "indexStaleLimit",
+      "ACTIVE_RULE_ENGINE",
+      "spawnBudgetTasks",
+      "ACK_WINDOW_BATCHES",
+      "subnetRouteLimit",
+      "ACTIVE_LOG_PIPELINE",
+      "publishBudgetPerSec",
+      "IDLE_WINDOW_TICKS",
+      "failoverFanLimit"
+    ],
+    "case": [
+      "TLSHandshakeProfile",
+      "HTTPRetryPolicy",
+      "GRPCDeadlineClock",
+      "TLSRenegotiateHook",
+      "JSONPatchApplier",
+      "SQLPlanRewriter",
+      "TLSSessionCache",
+      "OAuth2ScopeBuilder",
+      "UTF8Normalizer",
+      "TLSCipherPicker",
+      "HTTP2KeepaliveLoop",
+      "DNSResolveCache",
+      "SASLHandshakeStep",
+      "URLFragmentCodec",
+      "TLSPinStore",
+      "HTTPBasicRealm",
+      "gRPCDeadlineMeter",
+      "CSVCellSplitter",
+      "URIEncodeHelper",
+      "TLSRotateManager",
+      "HTTPRangeCodec",
+      "SSHTunnelDialer",
+      "WALReplayCursor",
+      "JSONSchemaWalker",
+      "TLSVerifyChain",
+      "HTTPStrictTransport",
+      "LZ4BlockCompressor",
+      "YAMLTagParser",
+      "UTF16Decoder",
+      "HTTP3FrameBuilder",
+      "TLSDebugSanitizer",
+      "OIDCTokenMinter",
+      "gRPCDeadlineWatcher",
+      "AMQPChannelPool",
+      "JSONPathLocator",
+      "TLSStapleFetcher",
+      "HTTPTrailCodec",
+      "ISO8601Formatter",
+      "SRIHashChecker",
+      "TLSSplitWriter"
+    ],
+    "punctuation": [
+      "stream.offset",
+      "limits[max-req]",
+      "backoff+jitter",
+      "route(alt-path)",
+      "cache*warm",
+      "replay{max-3}",
+      "lease^holder",
+      "cursor$",
+      "bulk|single",
+      "flush?now",
+      "queue.tag",
+      "shards[hot]",
+      "retry+linear",
+      "watch(prefix-1)",
+      "scan*target",
+      "window{ticks}",
+      "anchor^top",
+      "token$",
+      "merge|split",
+      "probe?live",
+      "tls.min",
+      "gauge[max-bytes]",
+      "emit+trace",
+      "bind(v4-only)",
+      "trim*suffix",
+      "budget{per-req}",
+      "scope^tenant",
+      "record$",
+      "log|metric",
+      "check?fast",
+      "cfg.log-level",
+      "roles[admin]",
+      "ramp+step",
+      "snapshot(auto-2)",
+      "prune*expired",
+      "cap{per-tick}",
+      "rank^boost",
+      "path$",
+      "primary|replica",
+      "head?merge"
+    ]
+  }
+}

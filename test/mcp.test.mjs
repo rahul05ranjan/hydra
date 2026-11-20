@@ -1,21 +1,23 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { fileURLToPath } from 'node:url';
-import { argvOf, callTool, runArgv, TOOLS } from '../skills/hydra/scripts/mcp.mjs';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { argvOf, callTool, runArgv, setRoots, TOOLS } from '../skills/hydra/scripts/mcp.mjs';
 
 const SERVER = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../skills/hydra/scripts/mcp.mjs');
 // callTool runs the real CLI from this process too, so its fixture calls must stay out of the user's ledger.
 process.env.HYDRA_TELEMETRY = '0';
+// In-process calls stand in for a client whose workspace is the temp folder the fixtures live in.
+setRoots([os.tmpdir()]);
 
 /** Start the server and talk to it one JSON-RPC message per line, as an MCP client does over stdio. */
-function connect() {
+function connect({ cwd = realpathSync(os.tmpdir()), onRequest } = {}) {
   // NODE_TEST_CONTEXT would make the nested `node --test` think it runs inside this test file and skip.
   const { NODE_TEST_CONTEXT, ...env } = process.env;
-  const child = spawn(process.execPath, [SERVER], { env: { ...env, HYDRA_TELEMETRY: '0' }, stdio: ['pipe', 'pipe', 'inherit'] });
+  const child = spawn(process.execPath, [SERVER], { cwd, env: { ...env, HYDRA_TELEMETRY: '0' }, stdio: ['pipe', 'pipe', 'inherit'] });
   const waiting = new Map();
   let buffer = '';
   child.stdout.on('data', chunk => {
@@ -24,7 +26,10 @@ function connect() {
     while ((newline = buffer.indexOf('\n')) >= 0) {
       const message = JSON.parse(buffer.slice(0, newline));
       buffer = buffer.slice(newline + 1);
-      waiting.get(message.id)?.(message);
+      // A request from the server (roots/list) goes to the client's handler, which answers it.
+      if (message.method && message.id !== undefined) {
+        child.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', id: message.id, ...onRequest(message) })}\n`);
+      } else waiting.get(message.id)?.(message);
     }
   });
   let next = 1;
@@ -109,4 +114,72 @@ test('the server answers the MCP handshake, lists tools and runs commands', asyn
 
   assert.equal((await server.request('ping', {})).result.constructor, Object);
   assert.equal((await server.request('resources/list', {})).error.code, -32601);
+});
+
+test('a client that declares roots can point tools only inside them', async t => {
+  const inside = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-root-')));
+  const outside = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-elsewhere-')));
+  const later = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-later-')));
+  let roots = [inside];
+  const asked = [];
+  const server = connect({ onRequest: message => { asked.push(message.method); return { result: { roots: roots.map(dir => ({ uri: pathToFileURL(dir).href })) } }; } });
+  t.after(server.close);
+  await server.request('initialize', { protocolVersion: '2025-06-18', capabilities: { roots: { listChanged: true } }, clientInfo: { name: 'fixture-client', version: '1' } });
+  server.notify('notifications/initialized');
+  const ask = cwd => server.request('tools/call', { name: 'hydra_git', arguments: { question: 'which branch am I on?', cwd } });
+  assert.doesNotMatch((await ask(inside)).result.content[0].text, /folders this client opened/);
+  assert.match((await ask(outside)).result.content[0].text, /folders this client opened/);
+  assert.match((await ask(later)).result.content[0].text, /folders this client opened/);
+  roots = [later];
+  server.notify('notifications/roots/list_changed');
+  assert.doesNotMatch((await ask(later)).result.content[0].text, /folders this client opened/);
+  assert.match((await ask(inside)).result.content[0].text, /folders this client opened/);
+  assert.deepEqual(asked, ['roots/list', 'roots/list']);
+});
+
+test('without roots from the client, tools stay inside the folder the server started in', async t => {
+  const start = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-start-')));
+  mkdirSync(path.join(start, 'repo'));
+  const outside = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-elsewhere-')));
+  const server = connect({ cwd: start, onRequest: () => assert.fail('a client without roots must not be asked for them') });
+  t.after(server.close);
+  await server.request('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'fixture-client', version: '1' } });
+  server.notify('notifications/initialized');
+  const ask = cwd => server.request('tools/call', { name: 'hydra_git', arguments: { question: 'which branch am I on?', cwd } });
+  assert.doesNotMatch((await ask(path.join(start, 'repo'))).result.content[0].text, /folders this client opened/);
+  assert.match((await ask(outside)).result.content[0].text, /folders this client opened/);
+  const run = await server.request('tools/call', { name: 'hydra_run', arguments: { command: 'node --test', cwd: outside } });
+  assert.match(run.result.content[0].text, /folders this client opened/);
+});
+
+test('HYDRA_MCP_ROOTS widens the folders for a client that sends no roots', async t => {
+  const start = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-start-')));
+  const code = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-code-')));
+  const prior = process.env.HYDRA_MCP_ROOTS;
+  process.env.HYDRA_MCP_ROOTS = code;
+  const server = connect({ cwd: start, onRequest: () => assert.fail('not asked') });
+  t.after(() => { server.close(); if (prior === undefined) delete process.env.HYDRA_MCP_ROOTS; else process.env.HYDRA_MCP_ROOTS = prior; });
+  await server.request('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'fixture-client', version: '1' } });
+  const ask = cwd => server.request('tools/call', { name: 'hydra_git', arguments: { question: 'which branch am I on?', cwd } });
+  assert.doesNotMatch((await ask(code)).result.content[0].text, /folders this client opened/);
+  assert.match((await ask(start)).result.content[0].text, /HYDRA_MCP_ROOTS/);
+});
+
+test('a refused folder is recorded with the client name, so hydra improve shows it', async t => {
+  const home = mkdtempSync(path.join(os.tmpdir(), 'hydra-ledger-mcp-'));
+  const start = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-start-')));
+  const outside = realpathSync(mkdtempSync(path.join(os.tmpdir(), 'hydra-elsewhere-')));
+  const { NODE_TEST_CONTEXT, ...env } = process.env;
+  const child = spawn(process.execPath, [SERVER], { cwd: start, env: { ...env, HYDRA_TELEMETRY: '1', HYDRA_HOME: home }, stdio: ['pipe', 'pipe', 'inherit'] });
+  t.after(() => child.kill());
+  const lines = [];
+  const done = new Promise(resolve => child.stdout.on('data', chunk => { lines.push(...String(chunk).split('\n').filter(Boolean)); if (lines.length >= 2) resolve(); }));
+  child.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'refused-client' } } })}\n`);
+  child.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'hydra_git', arguments: { question: 'which branch?', cwd: outside } } })}\n`);
+  await done;
+  const row = JSON.parse(readFileSync(path.join(home, 'ledger.jsonl'), 'utf8').trim().split('\n').at(-1));
+  assert.equal(row.kind, 'error');
+  assert.equal(row.agent, 'refused-client');
+  assert.equal(row.command, `hydra_git in ${outside}`);
+  assert.match(row.error, /launch folder/);
 });

@@ -118,6 +118,8 @@ Every other tool Hydra finds gets Hydra's MCP server (`scripts/mcp.mjs`, also `h
 
 The calling agent may be steered by text it read, and some clients sandbox their own shell but not MCP servers, so the server trusts tool arguments no further than the project. `hydra_run` refuses any path that leaves `cwd` (after `../` and symlinks are resolved) and flags that load other code (`node --import/--require/-e`, `make --eval` and variable overrides, `cargo --config`, `go -exec/-vettool`, `pytest -p <plugin>`, `npm --script-shell`, Gradle init scripts). It still runs the project's own test scripts, which is its job, so it is marked `readOnlyHint: false` for clients that ask before such calls; every other tool is marked read-only. `hydra_smell`, `hydra_refactor` and `hydra_design` read only source files inside `cwd`, never dotfiles or files without a source extension.
 
+`cwd` itself must sit inside the folders the client opened. A client that supports MCP roots is asked for them (`roots/list`) after `initialized` and again on `roots/list_changed`; a tool call waits up to 3 seconds for the answer. A client that sends none is held to the folder the server was started in, or to `HYDRA_MCP_ROOTS` (a path list) when that is set in the server's environment. Folders are compared after symlinks resolve. A refused `cwd` is recorded in the ledger as an error with the client's name, so `hydra improve` shows whether the limit turns away real work.
+
 | Tool | MCP entry | Hook |
 |---|---|---|
 | Codex | `~/.codex/config.toml` `[mcp_servers.hydra]` (between marker comments) | `~/.codex/hooks.json` `PreToolUse` on `Bash` and `SessionStart`; Codex runs them only after you trust them with `/hooks` |

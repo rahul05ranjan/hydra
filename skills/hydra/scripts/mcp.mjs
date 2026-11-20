@@ -10,6 +10,7 @@ import { existsSync, readFileSync, realpathSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { simpleCommands, testRun } from './lib/claude_hooks.mjs';
+import { record } from './lib/ledger.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CLI = path.join(HERE, 'hydra.mjs');
@@ -21,7 +22,40 @@ const INSTRUCTIONS = 'Hydra runs noisy read-only commands on a small local model
   + 'Use hydra_run for test and build commands; it returns failing tests, assertion diffs and locations, or a short pass summary. '
   + 'Keep using your own tools to read and search source files; Hydra does not save tokens there.';
 
-const cwdProperty = { type: 'string', description: 'Absolute path of the repository or project to work in. Defaults to the server\'s working directory.' };
+const cwdProperty = { type: 'string', description: 'Absolute path of the repository or project to work in, inside the folders this client opened. Defaults to the server\'s working directory.' };
+
+// Where a tool may work: the folders the client says it opened (MCP roots), else the folder the server
+// started in. A client whose shell is sandboxed should not reach other repositories through Hydra.
+const LAUNCH = realpathSync(process.cwd());
+let roots = null; // real paths from the client; null until it sends some
+let rootsCapable = false;
+let rootsPending = null;
+let requestId = 0;
+const pending = new Map();
+let send = message => process.stdout.write(`${JSON.stringify(message)}\n`);
+
+/** Set the client's folders; missing ones are dropped, and none at all falls back to the launch folder. */
+export function setRoots(dirs) {
+  const real = dirs.flatMap(dir => { try { return [realpathSync(dir)]; } catch { return []; } });
+  roots = real.length ? real : null;
+}
+
+/** Ask the client for its roots; a tool call waits for the answer, at most a few seconds. */
+function askRoots() {
+  const id = `hydra-roots-${++requestId}`;
+  rootsPending = new Promise(resolve => {
+    const timer = setTimeout(() => { pending.delete(id); resolve(); }, 3000);
+    pending.set(id, message => {
+      clearTimeout(timer);
+      pending.delete(id);
+      if (Array.isArray(message.result?.roots)) {
+        setRoots(message.result.roots.flatMap(root => { try { return [fileURLToPath(root.uri)]; } catch { return []; } }));
+      }
+      resolve();
+    });
+    send({ jsonrpc: '2.0', id, method: 'roots/list' });
+  });
+}
 // Clients use these hints to decide which calls need approval; hydra_run runs the project's own test scripts.
 const READS = { readOnlyHint: true, openWorldHint: false };
 export const TOOLS = [
@@ -76,18 +110,29 @@ export function argvOf(command) {
   return argv;
 }
 
-function workdir(cwd) {
-  if (cwd === undefined) return process.cwd();
-  if (typeof cwd !== 'string' || !path.isAbsolute(cwd) || !existsSync(cwd) || !statSync(cwd).isDirectory()) {
-    throw new Error('cwd must be the absolute path of an existing directory');
-  }
-  return cwd;
-}
-
 const inside = (root, file) => {
   const rel = path.relative(root, file);
   return rel !== '..' && !rel.startsWith(`..${path.sep}`) && !path.isAbsolute(rel);
 };
+
+// For a client that sends no roots and starts servers somewhere unhelpful: HYDRA_MCP_ROOTS=/code:/work in its server env.
+const configured = () => (process.env.HYDRA_MCP_ROOTS ?? '').split(path.delimiter).filter(dir => path.isAbsolute(dir))
+  .flatMap(dir => { try { return [realpathSync(dir)]; } catch { return []; } });
+
+function workdir(cwd) {
+  const allowed = roots ?? (configured().length ? configured() : [LAUNCH]);
+  const within = dir => allowed.some(root => inside(root, realpathSync(dir)));
+  if (cwd === undefined) return within(process.cwd()) ? process.cwd() : allowed[0];
+  if (typeof cwd !== 'string' || !path.isAbsolute(cwd) || !existsSync(cwd) || !statSync(cwd).isDirectory()) {
+    throw new Error('cwd must be the absolute path of an existing directory');
+  }
+  // Checked after symlinks resolve, so a link inside a root cannot lead out of it.
+  if (!within(cwd)) {
+    throw new Error(`cwd must be inside the folders this client opened: ${allowed.join(', ')}`
+      + (roots ? '' : ' (this client sent no roots; set HYDRA_MCP_ROOTS in the server\'s env to widen it)'));
+  }
+  return cwd;
+}
 // A word that names a file: a path separator, a leading dot or tilde. Test names, patterns and globs like ./... are checked too.
 const pathLike = word => /[\\/]/.test(word) || /^[.~]/.test(word);
 
@@ -157,6 +202,7 @@ function hydra(args, cwd) {
 }
 
 export async function callTool(name, args = {}) {
+  if (rootsPending) await rootsPending;
   if (name === 'hydra_git') {
     if (typeof args.question !== 'string' || !args.question.trim()) throw new Error('question is required');
     return hydra(['ask', '--head', 'git', args.question], workdir(args.cwd));
@@ -200,9 +246,15 @@ export async function handle(message) {
   const { id, method, params = {} } = message ?? {};
   const reply = result => ({ jsonrpc: '2.0', id, result });
   const failure = (code, text) => ({ jsonrpc: '2.0', id, error: { code, message: text } });
-  if (id === undefined || id === null) return null; // A notification: nothing to answer.
+  // The client's answer to a request of ours (roots/list).
+  if (method === undefined && pending.has(id)) { pending.get(id)(message); return null; }
+  if (id === undefined || id === null) { // A notification: nothing to answer.
+    if (rootsCapable && (method === 'notifications/initialized' || method === 'notifications/roots/list_changed')) askRoots();
+    return null;
+  }
   if (method === 'initialize') {
     client = String(params.clientInfo?.name ?? client).slice(0, 80);
+    rootsCapable = Boolean(params.capabilities?.roots);
     const protocolVersion = VERSIONS.includes(params.protocolVersion) ? params.protocolVersion : VERSIONS[0];
     return reply({ protocolVersion, capabilities: { tools: { listChanged: false } },
       serverInfo: { name: 'hydra', version }, instructions: INSTRUCTIONS });
@@ -214,6 +266,11 @@ export async function handle(message) {
       const { text, isError } = await callTool(params.name, params.arguments ?? {});
       return reply({ content: [{ type: 'text', text }], isError });
     } catch (error) {
+      // A refused folder goes to the ledger too: `hydra improve` shows whether the limit turns away real work.
+      if (/^cwd must be inside/.test(error.message)) {
+        record({ ts: new Date().toISOString(), kind: 'error', agent: client, via: 'mcp', command: `${params.name} in ${params.arguments?.cwd}`,
+          error: `cwd outside ${roots ? "the client's roots" : configured().length ? 'HYDRA_MCP_ROOTS' : `the launch folder ${LAUNCH}`}` });
+      }
       // A bad argument is a tool result the agent can read and correct, not a protocol error.
       return reply({ content: [{ type: 'text', text: `hydra: ${error.message}` }], isError: true });
     }

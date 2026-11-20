@@ -2,6 +2,7 @@
 // installed with. The installer records what it installed in ~/.hydra/installed.json; the only network call here
 // is one GET to the npm registry for the latest version, which carries nothing about the user.
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { home } from './local.mjs';
@@ -68,6 +69,27 @@ export async function latest(fetchImpl = fetch) {
   const { version } = await response.json();
   if (!SEMVER.test(String(version))) throw new Error('registry returned no valid version');
   return version;
+}
+
+/** Older hydra-nano copies in a node_modules above `start` or the home folder. `npx hydra-nano` run anywhere under
+ * one of them runs that copy instead of the latest release (found 2026-11-20: a ~/node_modules 0.2.0 reinstalled
+ * itself twice). */
+export function shadowingCopies(start = process.cwd(), version = currentVersion(), homeDir = os.homedir()) {
+  const dirs = new Set();
+  for (const from of [start, homeDir]) {
+    for (let dir = path.resolve(from); ; dir = path.dirname(dir)) {
+      dirs.add(dir);
+      if (path.dirname(dir) === dir) break;
+    }
+  }
+  const found = [];
+  for (const dir of dirs) {
+    try {
+      const copy = JSON.parse(readFileSync(path.join(dir, 'node_modules', PACKAGE, 'package.json'), 'utf8')).version;
+      if (SEMVER.test(String(copy)) && (!version || compare(copy, version) < 0)) found.push({ dir, version: copy });
+    } catch {}
+  }
+  return found;
 }
 
 /** What to do, given the installed and latest versions: 'current', 'update', 'ahead' or 'unknown'. */

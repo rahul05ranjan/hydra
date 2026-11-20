@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { compare, currentVersion, decide, latest, readInstalled, recordInstall, replayArgs } from '../skills/hydra/scripts/lib/self_update.mjs';
+import { compare, currentVersion, decide, latest, readInstalled, recordInstall, replayArgs, shadowingCopies } from '../skills/hydra/scripts/lib/self_update.mjs';
 
 const CLI = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../skills/hydra/scripts/hydra.mjs');
 
@@ -122,4 +122,16 @@ test('hydra version and the MCP server report the version', async () => {
   server.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'version-check' } } })}\n`);
   assert.equal((await reply).result.serverInfo.version, own);
   server.kill();
+});
+
+test('older hydra-nano copies above the current folder or home are found; newer ones are not', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'hydra-shadow-'));
+  const home = path.join(root, 'home'), project = path.join(home, 'code', 'app'), other = path.join(root, 'other');
+  const put = (dir, version) => { mkdirSync(path.join(dir, 'node_modules', 'hydra-nano'), { recursive: true }); writeFileSync(path.join(dir, 'node_modules', 'hydra-nano', 'package.json'), JSON.stringify({ name: 'hydra-nano', version })); };
+  mkdirSync(project, { recursive: true }); mkdirSync(other, { recursive: true });
+  put(home, '0.2.0');
+  put(project, '0.4.0');
+  assert.deepEqual(shadowingCopies(project, '0.3.5', home), [{ dir: home, version: '0.2.0' }]);
+  assert.deepEqual(shadowingCopies(other, '0.3.5', home), [{ dir: home, version: '0.2.0' }], 'home is checked from anywhere');
+  assert.deepEqual(shadowingCopies(other, '0.3.5', other), []);
 });

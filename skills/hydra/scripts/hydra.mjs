@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { answer } from './lib/answer.mjs';
@@ -281,6 +282,9 @@ ${BACKEND}: reachable
 models:
   ${modelStatuses.join('\n  ')}
 ripgrep: ${rg ? 'present' : 'missing, using the slower built-in search'}`);
+  for (const copy of update.shadowingCopies()) {
+    console.log(`warning: hydra-nano ${copy.version} is installed in ${path.join(copy.dir, 'node_modules')}; \`npx hydra-nano\` run under ${copy.dir} reinstalls that old version. Remove it with: npm uninstall hydra-nano --prefix "${copy.dir}"`);
+  }
   if (!allPresent) process.exit(2);
 }
 
@@ -527,12 +531,13 @@ async function selfUpdate(args) {
     return console.log(state === 'current' ? `Hydra ${newest} is the latest version.` : `Hydra ${newest} is available; installed: ${from}. Run: hydra self-update`);
   }
   const npx = findNpx();
-  if (!npx) fail(2, 'hydra self-update: cannot find npm\'s npx; reinstall with: npx hydra-nano');
+  if (!npx) fail(2, 'hydra self-update: cannot find npm\'s npx; reinstall with: npx hydra-nano@latest');
   const options = installed?.args ?? [];
   console.log(`Updating Hydra from ${from} to ${newest}${options.length ? ` (install options: ${options.join(' ')})` : ''}.`);
   // A fresh install starts its own server; the old one would keep serving the previous runtime and model.
   if (stopLocal()) console.log('Stopped the running Hydra server; the installer starts the new one.');
-  const result = spawnSync(process.execPath, [npx, '--yes', `--package=${update.PACKAGE}@${newest}`, 'hydra-nano', ...options], { stdio: 'inherit' });
+  // From a temporary folder, so no node_modules/hydra-nano above the current folder can stand in for the release.
+  const result = spawnSync(process.execPath, [npx, '--yes', `--package=${update.PACKAGE}@${newest}`, 'hydra-nano', ...options], { stdio: 'inherit', cwd: os.tmpdir() });
   if (result.status !== 0) fail(result.status || 1, `hydra self-update: the ${newest} installer did not finish; run it again or reinstall with: npx hydra-nano@${newest}`);
 }
 

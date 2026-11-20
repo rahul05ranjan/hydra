@@ -30,7 +30,7 @@ Hydra puts small specialist models on your own machine between the agent and tha
 ## Quick start
 
 ```bash
-npx hydra-nano
+npx hydra-nano@latest
 ```
 
 One command installs everything: a pinned llama.cpp runtime, the ~812 MB Hydra Nano model (SHA-256 checked), the Hydra skill, and the integration for each coding tool it finds.
@@ -42,7 +42,7 @@ npm install -g hydra-nano
 hydra doctor
 ```
 
-Requires Node 18+. Runtime packages for macOS, Linux and Windows on x64 and arm64; verified live on macOS and Windows. Prefer GitHub? `npx github:rahul05ranjan/hydra` installs the same thing.
+`@latest` makes npx fetch the newest release even when an older `hydra-nano` sits in a `node_modules` folder above you. Later updates: `hydra self-update`. Requires Node 18+. Runtime packages for macOS, Linux and Windows on x64 and arm64; verified live on macOS and Windows. Prefer GitHub? `npx github:rahul05ranjan/hydra` installs the same thing.
 
 ## Works with your coding tools
 

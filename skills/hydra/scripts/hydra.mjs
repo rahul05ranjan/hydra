@@ -17,6 +17,8 @@ import { stopLocal } from './lib/local.mjs';
 import { hookStatus, installHooks, removeHooks } from './lib/claude_hooks.mjs';
 import * as integrations from './lib/integrations.mjs';
 import * as refactor from './lib/refactor.mjs';
+import * as update from './lib/self_update.mjs';
+import { findNpx } from './lib/bootstrap.mjs';
 
 const HEADS = { git, files, test: test_logs, read, os: osHead };
 
@@ -34,6 +36,7 @@ const USAGE = `usage:
   hydra doctor                                         check that the local model is ready
   hydra setup                                          show runtime setup instructions
   hydra stop                                           stop Hydra's managed llama-server
+  hydra self-update [--check] [--force]                update Hydra to the latest npm release, same install options
   hydra hooks install|remove|status                    Claude Code hooks that route tests and git questions here
   hydra agents install|remove|status [tool...]         Hydra's MCP server and hooks in codex, cursor, opencode,
                                                        gemini-cli, antigravity and antigravity-ide (default: every tool found)
@@ -490,7 +493,37 @@ const commands = {
   hooks: () => hooksCommand(rest[0]),
   agents: () => agentsCommand(rest),
   mcp: () => import('./mcp.mjs').then(server => server.serve()),
+  'self-update': () => selfUpdate(rest),
 };
+
+async function selfUpdate(args) {
+  const unknown = args.filter(arg => !['--check', '--force'].includes(arg));
+  if (unknown.length) fail(1, 'usage: hydra self-update [--check] [--force]');
+  const installed = update.readInstalled();
+  let newest;
+  try {
+    newest = await update.latest();
+  } catch (error) {
+    fail(2, `hydra self-update: could not read the latest version from the npm registry (${error.message}).`);
+  }
+  const state = update.decide(installed?.version, newest);
+  if (state === 'current' && !args.includes('--force')) return console.log(`Hydra ${newest} is the latest version.`);
+  if (state === 'ahead' && !args.includes('--force')) {
+    return console.log(`Hydra ${installed.version} is newer than the latest npm release (${newest}); nothing to do. --force reinstalls ${newest}.`);
+  }
+  const from = installed?.version ?? 'an unrecorded version (installed before 0.3.5)';
+  if (args.includes('--check')) {
+    return console.log(state === 'current' ? `Hydra ${newest} is the latest version.` : `Hydra ${newest} is available; installed: ${from}. Run: hydra self-update`);
+  }
+  const npx = findNpx();
+  if (!npx) fail(2, 'hydra self-update: cannot find npm\'s npx; reinstall with: npx hydra-nano');
+  const options = installed?.args ?? [];
+  console.log(`Updating Hydra from ${from} to ${newest}${options.length ? ` (install options: ${options.join(' ')})` : ''}.`);
+  // A fresh install starts its own server; the old one would keep serving the previous runtime and model.
+  if (stopLocal()) console.log('Stopped the running Hydra server; the installer starts the new one.');
+  const result = spawnSync(process.execPath, [npx, '--yes', `--package=${update.PACKAGE}@${newest}`, 'hydra-nano', ...options], { stdio: 'inherit' });
+  if (result.status !== 0) fail(result.status || 1, `hydra self-update: the ${newest} installer did not finish; run it again or reinstall with: npx hydra-nano@${newest}`);
+}
 
 function agentsCommand(args) {
   const [action, ...words] = args;

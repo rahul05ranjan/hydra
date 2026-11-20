@@ -116,6 +116,7 @@ hydra stats                                          # tokens kept out of contex
 hydra improve --since 2026-10-17                     # what the local telemetry says to improve
 hydra agents status                                  # Hydra in each coding tool
 hydra doctor                                         # is the local model ready?
+hydra self-update                                    # update to the latest release (--check only reports)
 ```
 
 Need the raw log for one run? Prefix it with `HYDRA_RAW=1` and the hook lets it through.

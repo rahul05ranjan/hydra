@@ -8,6 +8,7 @@ import { installRuntime, findNpx } from './lib/bootstrap.mjs';
 import { ensureLocal, home } from './lib/local.mjs';
 import { claudeDir, installHooks } from './lib/claude_hooks.mjs';
 import * as integrations from './lib/integrations.mjs';
+import { recordInstall } from './lib/self_update.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 // The skills.sh CLI version the installer runs; 1.7.6 was checked to take --skill, --agent, --global and --yes.
@@ -64,5 +65,7 @@ Remove them with: node "${path.join(skill, 'hydra.mjs')}" hooks remove`);
       console.log(`  Remove them with: node "${path.join(scripts, 'hydra.mjs')}" agents remove`);
     }
   }
+  // What was installed, with which options, so `hydra self-update` can install the next version the same way.
+  try { recordInstall(JSON.parse(readFileSync(path.join(here, '..', '..', '..', 'package.json'), 'utf8')).version, process.argv.slice(2)); } catch {}
   console.log('Hydra skill and local runtime ready. Run the installed scripts/hydra.mjs doctor to verify.');
 } catch (error) { console.error(`hydra-install: ${error.message}`); process.exitCode = 2; }

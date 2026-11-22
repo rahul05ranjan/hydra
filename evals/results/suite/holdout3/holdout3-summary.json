@@ -4,8 +4,8 @@
   "sealedEvaluation": false,
   "split": "holdout3",
   "tasks": 10000,
-  "elapsedSeconds": 1135.0395327,
-  "planSha256": "a190a04770a0c609a28c869aadccae2b9375a9b3c3776098c160e951f97c30e4",
+  "elapsedSeconds": 1137.760282041,
+  "planSha256": "6509ec4679f4e8c77d78b50a88d4d6606e90eff6778738fb45c0345130c0e630",
   "modelSha256": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be",
   "gpuBeforeMB": [
     0,
@@ -17,8 +17,8 @@
   ],
   "gpuProcesses": "22, 1414\n",
   "secondsByStage": {
-    "filesReadTestOs": 636.552971326,
-    "git": 372.746939698
+    "filesReadTestOs": 634.888384932,
+    "git": 371.0683686080001
   },
   "byHead": {
     "files": {
@@ -35,7 +35,7 @@
       "latencySeconds": {
         "p50": 0.109,
         "p95": 0.135,
-        "maximum": 32.953
+        "maximum": 33.753
       },
       "solvedConfidence95": [
         0.9740294381036511,
@@ -58,7 +58,7 @@
       "latencySeconds": {
         "p50": 0.001,
         "p95": 0.003,
-        "maximum": 0.745
+        "maximum": 0.726
       },
       "solvedConfidence95": [
         0.9677583573863044,
@@ -80,8 +80,8 @@
       "modelEvidenceAccuracy": 0.15,
       "latencySeconds": {
         "p50": 0,
-        "p95": 0.013,
-        "maximum": 0.774
+        "p95": 0.02,
+        "maximum": 0.758
       },
       "solvedConfidence95": [
         0.9671930665016661,
@@ -92,8 +92,8 @@
     },
     "os": {
       "tasks": 2000,
-      "solvedCount": 1960,
-      "solved": 0.98,
+      "solvedCount": 1980,
+      "solved": 0.99,
       "errors": 0,
       "modelCalls": 2000,
       "tasksWithModelCalls": 2000,
@@ -102,32 +102,32 @@
       "modelEvidenceTasks": 0,
       "modelEvidenceAccuracy": null,
       "latencySeconds": {
-        "p50": 0.112,
-        "p95": 0.217,
-        "maximum": 0.231
+        "p50": 0.111,
+        "p95": 0.215,
+        "maximum": 0.229
       },
       "solvedConfidence95": [
-        0.9728812108707509,
-        0.9852783562327568
+        0.9846039417177715,
+        0.9935172830337259
       ],
-      "rawChars": 577860,
-      "returnedChars": 616390
+      "rawChars": 562571,
+      "returnedChars": 600761
     },
     "git": {
       "tasks": 2000,
-      "modelCalls": 1999,
+      "modelCalls": 2000,
       "tasksWithModelCalls": 1901,
       "modelPlannerTasks": 1901,
-      "modelProbeChoiceAccuracy": 0.988427143608627,
+      "modelProbeChoiceAccuracy": 0.9879011046817464,
       "routed": 0.7205,
-      "plan": 0.9415,
-      "evidence": 0.9415,
-      "solved": 0.9415,
-      "recall": 0.9468333333333334,
+      "plan": 0.972,
+      "evidence": 0.972,
+      "solved": 0.972,
+      "recall": 0.9730833333333334,
       "readingRight": 0,
       "readingScored": 0,
-      "raw": 242839,
-      "returned": 160705,
+      "raw": 247830,
+      "returned": 165592,
       "errors": 0
     }
   },

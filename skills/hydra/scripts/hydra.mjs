@@ -39,6 +39,7 @@ const USAGE = `usage:
   hydra stop                                           stop Hydra's managed llama-server
   hydra self-update [--check] [--force]                update Hydra to the latest npm release, same install options
   hydra version                                        the installed Hydra version
+  hydra audit [--json]                                 every file Hydra touched, what it can run and where it connects
   hydra hooks install|remove|status                    Claude Code hooks that route tests and git questions here
   hydra agents install|remove|status [tool...]         Hydra's MCP server and hooks in codex, cursor, opencode,
                                                        gemini-cli, antigravity and antigravity-ide (default: every tool found)
@@ -501,10 +502,17 @@ const commands = {
   agents: () => agentsCommand(rest),
   mcp: () => import('./mcp.mjs').then(server => server.serve()),
   'self-update': () => selfUpdate(rest),
+  audit: () => auditCommand(rest),
   version: showVersion,
   '--version': showVersion,
   '-v': showVersion,
 };
+
+async function auditCommand(args) {
+  const { audit, render } = await import('./lib/audit.mjs');
+  const report = audit();
+  console.log(args.includes('--json') ? JSON.stringify(report, null, 2) : render(report));
+}
 
 function showVersion() {
   const version = update.currentVersion();

@@ -81,6 +81,7 @@ const mentionsOurs = value => OURS.test(JSON.stringify(value ?? ''));
 /** Add or remove Hydra's entry in a JSON object of named servers, such as mcpServers. */
 function jsonServer(file, key, entry) {
   return {
+    file, // where this part lives, for hydra audit
     install() {
       const snippet = JSON.stringify({ [key]: { hydra: entry } }, null, 2);
       const settings = loadJson(file, snippet);
@@ -116,6 +117,7 @@ function jsonHooks(file, events, { root = 'hooks', extra = {} } = {}) {
     return settings;
   };
   return {
+    file, // where this part lives, for hydra audit
     install() {
       const snippet = JSON.stringify({ ...extra, [root]: events }, null, 2);
       const settings = without(loadJson(file, snippet));
@@ -144,6 +146,7 @@ function tomlServer(file, scripts) {
   // Install appends "\n" + block to text ending in a newline, so removing "\n" + block restores it exactly.
   const strip = text => text.replace(new RegExp(`\\n?${BEGIN.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?${END}\\n?`), '');
   return {
+    file, // where this part lives, for hydra audit
     install() {
       const text = existsSync(file) ? strip(readFileSync(file, 'utf8')) : '';
       if (/^\[mcp_servers\.hydra\]/m.test(text)) throw new Manual(file, block, 'already has an [mcp_servers.hydra] table that Hydra did not write');
@@ -184,6 +187,7 @@ export const Hydra = async () => ({
 });
 `;
   return {
+    file, // where this part lives, for hydra audit
     install() { write(file, source); return file; },
     remove() {
       if (!existsSync(file) || !readFileSync(file, 'utf8').includes('managed by Hydra')) return null;
@@ -201,6 +205,7 @@ function skillFolder(dir, scripts) {
   const skillFile = path.join(dir, 'SKILL.md');
   const ours = () => existsSync(skillFile) && /^name:\s*hydra\s*$/m.test(readFileSync(skillFile, 'utf8'));
   return {
+    file: dir, // where this part lives, for hydra audit
     install() {
       const source = path.join(path.dirname(scripts), 'SKILL.md');
       if (!existsSync(source)) throw new Manual(dir, 'npx github:rahul05ranjan/hydra', `needs the hydra skill, but ${source} is missing; run the installer again`);

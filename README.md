@@ -117,6 +117,7 @@ hydra improve --since 2026-10-17                     # what the local telemetry 
 hydra agents status                                  # Hydra in each coding tool
 hydra doctor                                         # is the local model ready?
 hydra self-update                                    # update to the latest release (--check only reports)
+hydra audit                                          # every file Hydra touched, what it can run, where it connects
 ```
 
 Need the raw log for one run? Prefix it with `HYDRA_RAW=1` and the hook lets it through.
@@ -124,6 +125,7 @@ Need the raw log for one run? Prefix it with `HYDRA_RAW=1` and the hook lets it 
 ## Privacy and control
 
 - **Local only.** The model, the runtime and the telemetry live in `~/.hydra`. Nothing is sent anywhere.
+- **See for yourself.** `hydra audit` lists every config file Hydra registered itself in (with its mode and the backup of the original), which tools have actually called it, where the model server listens, every network address Hydra contacts and when, and what the MCP server can run. It only reads; `--json` gives the same for a reviewer.
 - **Turn telemetry off** with `HYDRA_TELEMETRY=0`.
 - **Skip parts of the install** with `--no-agents` (no other tools), `--no-hooks` (no hooks) or `--runtime-only` (no skill).
 - **Uninstall cleanly.** `hydra agents remove` and `hydra hooks remove` undo every integration and restore your settings; `hydra stop` stops the local server; deleting `~/.hydra` removes the runtime, the model and the telemetry.

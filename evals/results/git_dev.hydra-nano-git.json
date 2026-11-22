@@ -1,6 +1,6 @@
 {
  "model": "hydra-nano:git",
- "date": "2026-11-20T04:33:44.630Z",
+ "date": "2026-11-22T12:06:51.642Z",
  "overall": {
   "tasks": 200,
   "modelCalls": 208,
@@ -377,7 +377,7 @@
        }
       ]
      },
-     "seconds": 0.791
+     "seconds": 0.798
     }
    ],
    "modelProbeChoice": true,
@@ -387,7 +387,7 @@
    "reading": null,
    "raw": 18,
    "returned": 32,
-   "seconds": 0.812,
+   "seconds": 0.818,
    "probes": [
     "git log -n3 -i --fixed-strings --author=Ananya Gupta"
    ]
@@ -408,7 +408,7 @@
        }
       ]
      },
-     "seconds": 0.723
+     "seconds": 0.73
     }
    ],
    "modelProbeChoice": true,
@@ -418,7 +418,7 @@
    "reading": null,
    "raw": 163,
    "returned": 169,
-   "seconds": 0.744,
+   "seconds": 0.752,
    "probes": [
     "git log -n50 main..HEAD"
    ]
@@ -437,7 +437,7 @@
        }
       ]
      },
-     "seconds": 0.084
+     "seconds": 0.098
     }
    ],
    "modelProbeChoice": true,
@@ -447,7 +447,7 @@
    "reading": null,
    "raw": 26,
    "returned": 33,
-   "seconds": 0.101,
+   "seconds": 0.12,
    "probes": [
     "git status --short --branch"
    ]
@@ -467,7 +467,7 @@
        }
       ]
      },
-     "seconds": 0.373
+     "seconds": 0.369
     },
     {
      "stage": "evidence",
@@ -480,7 +480,7 @@
        5
       ]
      },
-     "seconds": 0.493
+     "seconds": 0.491
     }
    ],
    "modelProbeChoice": true,
@@ -490,7 +490,7 @@
    "reading": null,
    "raw": 510,
    "returned": 58,
-   "seconds": 0.89,
+   "seconds": 0.888,
    "probes": [
     "git diff main...HEAD"
    ]
@@ -509,7 +509,7 @@
        }
       ]
      },
-     "seconds": 0.384
+     "seconds": 0.382
     }
    ],
    "modelProbeChoice": true,
@@ -519,7 +519,7 @@
    "reading": null,
    "raw": 121,
    "returned": 132,
-   "seconds": 0.397,
+   "seconds": 0.395,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -540,7 +540,7 @@
        }
       ]
      },
-     "seconds": 0.353
+     "seconds": 0.339
     }
    ],
    "modelProbeChoice": true,
@@ -550,7 +550,7 @@
    "reading": null,
    "raw": 97,
    "returned": 106,
-   "seconds": 0.363,
+   "seconds": 0.35,
    "probes": [
     "git diff -- test/router_test.exs"
    ]
@@ -570,7 +570,7 @@
        }
       ]
      },
-     "seconds": 0.455
+     "seconds": 0.457
     }
    ],
    "modelProbeChoice": true,
@@ -580,7 +580,7 @@
    "reading": null,
    "raw": 117,
    "returned": 122,
-   "seconds": 0.477,
+   "seconds": 0.481,
    "probes": [
     "git show 7506b4b"
    ]
@@ -605,7 +605,7 @@
        }
       ]
      },
-     "seconds": 0.72
+     "seconds": 0.725
     }
    ],
    "modelProbeChoice": true,
@@ -615,7 +615,7 @@
    "reading": null,
    "raw": 44,
    "returned": 50,
-   "seconds": 0.732,
+   "seconds": 0.736,
    "probes": [
     "git log -n5 -- mix.exs"
    ]
@@ -636,7 +636,7 @@
        }
       ]
      },
-     "seconds": 0.373
+     "seconds": 0.375
     }
    ],
    "modelProbeChoice": true,
@@ -646,7 +646,7 @@
    "reading": null,
    "raw": 81,
    "returned": 89,
-   "seconds": 0.396,
+   "seconds": 0.402,
    "probes": [
     "git log -n15 -- lib/accounts.ex"
    ]
@@ -665,7 +665,7 @@
        }
       ]
      },
-     "seconds": 0.374
+     "seconds": 0.363
     }
    ],
    "modelProbeChoice": true,
@@ -675,7 +675,7 @@
    "reading": null,
    "raw": 85,
    "returned": 89,
-   "seconds": 0.385,
+   "seconds": 0.375,
    "probes": [
     "git show HEAD"
    ]
@@ -694,7 +694,7 @@
        }
       ]
      },
-     "seconds": 0.497
+     "seconds": 0.501
     }
    ],
    "modelProbeChoice": true,
@@ -704,7 +704,7 @@
    "reading": null,
    "raw": 85,
    "returned": 89,
-   "seconds": 0.506,
+   "seconds": 0.511,
    "probes": [
     "git show HEAD"
    ]
@@ -724,7 +724,7 @@
        }
       ]
      },
-     "seconds": 0.273
+     "seconds": 0.271
     }
    ],
    "modelProbeChoice": true,
@@ -734,7 +734,7 @@
    "reading": null,
    "raw": 214,
    "returned": 25,
-   "seconds": 0.286,
+   "seconds": 0.287,
    "probes": [
     "git blame -- lib/router.ex"
    ]
@@ -755,7 +755,7 @@
        }
       ]
      },
-     "seconds": 0.767
+     "seconds": 0.769
     }
    ],
    "modelProbeChoice": true,
@@ -765,7 +765,7 @@
    "reading": null,
    "raw": 17,
    "returned": 29,
-   "seconds": 0.777,
+   "seconds": 0.781,
    "probes": [
     "git log -n3 -i --fixed-strings --grep=benchmark"
    ]
@@ -784,7 +784,7 @@
        }
       ]
      },
-     "seconds": 0.201
+     "seconds": 0.275
     }
    ],
    "modelProbeChoice": true,
@@ -794,7 +794,7 @@
    "reading": null,
    "raw": 26,
    "returned": 33,
-   "seconds": 0.212,
+   "seconds": 0.286,
    "probes": [
     "git status --short --branch"
    ]
@@ -814,7 +814,7 @@
        }
       ]
      },
-     "seconds": 0.348
+     "seconds": 0.35
     }
    ],
    "modelProbeChoice": true,
@@ -824,7 +824,7 @@
    "reading": null,
    "raw": 77,
    "returned": 80,
-   "seconds": 0.359,
+   "seconds": 0.361,
    "probes": [
     "git log -n5"
    ]
@@ -844,7 +844,7 @@
        }
       ]
      },
-     "seconds": 0.276
+     "seconds": 0.257
     }
    ],
    "modelProbeChoice": true,
@@ -854,7 +854,7 @@
    "reading": null,
    "raw": 61,
    "returned": 65,
-   "seconds": 0.286,
+   "seconds": 0.27,
    "probes": [
     "git diff --staged"
    ]
@@ -883,7 +883,7 @@
    "reading": null,
    "raw": 12,
    "returned": 16,
-   "seconds": 0.293,
+   "seconds": 0.294,
    "probes": [
     "git stash list"
    ]
@@ -902,7 +902,7 @@
        }
       ]
      },
-     "seconds": 0.135
+     "seconds": 0.148
     }
    ],
    "modelProbeChoice": true,
@@ -912,7 +912,7 @@
    "reading": null,
    "raw": 26,
    "returned": 33,
-   "seconds": 0.145,
+   "seconds": 0.161,
    "probes": [
     "git status --short --branch"
    ]
@@ -931,7 +931,7 @@
        }
       ]
      },
-     "seconds": 0.261
+     "seconds": 0.209
     }
    ],
    "modelProbeChoice": true,
@@ -941,7 +941,7 @@
    "reading": null,
    "raw": 26,
    "returned": 33,
-   "seconds": 0.272,
+   "seconds": 0.219,
    "probes": [
     "git status --short --branch"
    ]
@@ -960,7 +960,7 @@
        }
       ]
      },
-     "seconds": 0.302
+     "seconds": 0.301
     }
    ],
    "modelProbeChoice": true,
@@ -970,7 +970,7 @@
    "reading": null,
    "raw": 38,
    "returned": 43,
-   "seconds": 0.312,
+   "seconds": 0.311,
    "probes": [
     "git worktree list"
    ]
@@ -991,7 +991,7 @@
        }
       ]
      },
-     "seconds": 0.767
+     "seconds": 0.757
     }
    ],
    "modelProbeChoice": true,
@@ -1001,7 +1001,7 @@
    "reading": null,
    "raw": 60,
    "returned": 71,
-   "seconds": 0.788,
+   "seconds": 0.777,
    "probes": [
     "git log -n3 -i --fixed-strings --author=Liam"
    ]
@@ -1022,7 +1022,7 @@
        }
       ]
      },
-     "seconds": 0.62
+     "seconds": 0.612
     }
    ],
    "modelProbeChoice": true,
@@ -1032,7 +1032,7 @@
    "reading": null,
    "raw": 402,
    "returned": 409,
-   "seconds": 0.64,
+   "seconds": 0.631,
    "probes": [
     "git log -n50 trunk..HEAD"
    ]
@@ -1051,7 +1051,7 @@
        }
       ]
      },
-     "seconds": 0.283
+     "seconds": 0.282
     }
    ],
    "modelProbeChoice": true,
@@ -1061,7 +1061,7 @@
    "reading": null,
    "raw": 21,
    "returned": 29,
-   "seconds": 0.294,
+   "seconds": 0.301,
    "probes": [
     "git status --short --branch"
    ]
@@ -1081,7 +1081,7 @@
        }
       ]
      },
-     "seconds": 0.364
+     "seconds": 0.36
     },
     {
      "stage": "evidence",
@@ -1094,7 +1094,7 @@
        5
       ]
      },
-     "seconds": 0.587
+     "seconds": 0.573
     }
    ],
    "modelProbeChoice": true,
@@ -1104,7 +1104,7 @@
    "reading": null,
    "raw": 871,
    "returned": 92,
-   "seconds": 0.981,
+   "seconds": 0.962,
    "probes": [
     "git diff trunk...HEAD"
    ]
@@ -1123,7 +1123,7 @@
        }
       ]
      },
-     "seconds": 0.458
+     "seconds": 0.451
     }
    ],
    "modelProbeChoice": true,
@@ -1133,7 +1133,7 @@
    "reading": null,
    "raw": 133,
    "returned": 144,
-   "seconds": 0.476,
+   "seconds": 0.463,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -1154,7 +1154,7 @@
        }
       ]
      },
-     "seconds": 0.338
+     "seconds": 0.335
     }
    ],
    "modelProbeChoice": true,
@@ -1164,7 +1164,7 @@
    "reading": null,
    "raw": 101,
    "returned": 111,
-   "seconds": 0.351,
+   "seconds": 0.349,
    "probes": [
     "git diff HEAD -- app/models/account.rb"
    ]
@@ -1184,7 +1184,7 @@
        }
       ]
      },
-     "seconds": 0.539
+     "seconds": 0.537
     }
    ],
    "modelProbeChoice": true,
@@ -1194,7 +1194,7 @@
    "reading": null,
    "raw": 136,
    "returned": 141,
-   "seconds": 0.566,
+   "seconds": 0.559,
    "probes": [
     "git show 42ae10e"
    ]
@@ -1215,7 +1215,7 @@
        }
       ]
      },
-     "seconds": 0.704
+     "seconds": 0.689
     }
    ],
    "modelProbeChoice": true,
@@ -1225,7 +1225,7 @@
    "reading": null,
    "raw": 87,
    "returned": 93,
-   "seconds": 0.716,
+   "seconds": 0.7,
    "probes": [
     "git log -n5 -- Gemfile"
    ]
@@ -1246,7 +1246,7 @@
        }
       ]
      },
-     "seconds": 0.396
+     "seconds": 0.379
     }
    ],
    "modelProbeChoice": true,
@@ -1256,7 +1256,7 @@
    "reading": null,
    "raw": 251,
    "returned": 260,
-   "seconds": 0.419,
+   "seconds": 0.402,
    "probes": [
     "git log -n15 -- config/routes.rb"
    ]
@@ -1275,7 +1275,7 @@
        }
       ]
      },
-     "seconds": 0.368
+     "seconds": 0.359
     }
    ],
    "modelProbeChoice": true,
@@ -1285,7 +1285,7 @@
    "reading": null,
    "raw": 128,
    "returned": 132,
-   "seconds": 0.381,
+   "seconds": 0.371,
    "probes": [
     "git show HEAD"
    ]
@@ -1302,7 +1302,7 @@
    "reading": null,
    "raw": 128,
    "returned": 132,
-   "seconds": 0.011,
+   "seconds": 0.01,
    "probes": [
     "git show HEAD"
    ]
@@ -1322,7 +1322,7 @@
        }
       ]
      },
-     "seconds": 0.289
+     "seconds": 0.283
     }
    ],
    "modelProbeChoice": true,
@@ -1332,7 +1332,7 @@
    "reading": null,
    "raw": 586,
    "returned": 50,
-   "seconds": 0.308,
+   "seconds": 0.303,
    "probes": [
     "git blame -- app/controllers/accounts_controller.rb"
    ]
@@ -1353,7 +1353,7 @@
        }
       ]
      },
-     "seconds": 0.741
+     "seconds": 0.731
     }
    ],
    "modelProbeChoice": true,
@@ -1363,7 +1363,7 @@
    "reading": null,
    "raw": 15,
    "returned": 26,
-   "seconds": 0.761,
+   "seconds": 0.75,
    "probes": [
     "git log -n15 -i --fixed-strings --grep=ping"
    ]
@@ -1382,7 +1382,7 @@
        }
       ]
      },
-     "seconds": 0.288
+     "seconds": 0.285
     }
    ],
    "modelProbeChoice": true,
@@ -1392,7 +1392,7 @@
    "reading": null,
    "raw": 21,
    "returned": 29,
-   "seconds": 0.298,
+   "seconds": 0.295,
    "probes": [
     "git status --short --branch"
    ]
@@ -1412,7 +1412,7 @@
        }
       ]
      },
-     "seconds": 0.369
+     "seconds": 0.357
     }
    ],
    "modelProbeChoice": true,
@@ -1422,7 +1422,7 @@
    "reading": null,
    "raw": 103,
    "returned": 107,
-   "seconds": 0.382,
+   "seconds": 0.368,
    "probes": [
     "git log -n6"
    ]
@@ -1442,7 +1442,7 @@
        }
       ]
      },
-     "seconds": 0.275
+     "seconds": 0.265
     }
    ],
    "modelProbeChoice": true,
@@ -1452,7 +1452,7 @@
    "reading": null,
    "raw": 3,
    "returned": 8,
-   "seconds": 0.287,
+   "seconds": 0.274,
    "probes": [
     "git diff --staged"
    ]
@@ -1471,7 +1471,7 @@
        }
       ]
      },
-     "seconds": 0.383
+     "seconds": 0.371
     }
    ],
    "modelProbeChoice": true,
@@ -1481,7 +1481,7 @@
    "reading": null,
    "raw": 3,
    "returned": 7,
-   "seconds": 0.394,
+   "seconds": 0.381,
    "probes": [
     "git stash list"
    ]
@@ -1500,7 +1500,7 @@
        }
       ]
      },
-     "seconds": 0.287
+     "seconds": 0.284
     }
    ],
    "modelProbeChoice": true,
@@ -1510,7 +1510,7 @@
    "reading": null,
    "raw": 21,
    "returned": 29,
-   "seconds": 0.297,
+   "seconds": 0.295,
    "probes": [
     "git status --short --branch"
    ]
@@ -1529,7 +1529,7 @@
        }
       ]
      },
-     "seconds": 0.249
+     "seconds": 0.243
     }
    ],
    "modelProbeChoice": true,
@@ -1539,7 +1539,7 @@
    "reading": null,
    "raw": 21,
    "returned": 29,
-   "seconds": 0.26,
+   "seconds": 0.254,
    "probes": [
     "git status --short --branch"
    ]
@@ -1558,7 +1558,7 @@
        }
       ]
      },
-     "seconds": 0.293
+     "seconds": 0.277
     }
    ],
    "modelProbeChoice": true,
@@ -1568,7 +1568,7 @@
    "reading": null,
    "raw": 35,
    "returned": 40,
-   "seconds": 0.304,
+   "seconds": 0.286,
    "probes": [
     "git worktree list"
    ]
@@ -1589,7 +1589,7 @@
        }
       ]
      },
-     "seconds": 0.554
+     "seconds": 0.774
     }
    ],
    "modelProbeChoice": true,
@@ -1599,7 +1599,7 @@
    "reading": null,
    "raw": 16,
    "returned": 30,
-   "seconds": 0.573,
+   "seconds": 0.794,
    "probes": [
     "git log -n3 -i --fixed-strings --author=Fatima Zahra"
    ]
@@ -1620,7 +1620,7 @@
        }
       ]
      },
-     "seconds": 0.62
+     "seconds": 0.616
     }
    ],
    "modelProbeChoice": true,
@@ -1630,7 +1630,7 @@
    "reading": null,
    "raw": 286,
    "returned": 292,
-   "seconds": 0.64,
+   "seconds": 0.635,
    "probes": [
     "git log -n50 main..HEAD"
    ]
@@ -1679,7 +1679,7 @@
        }
       ]
      },
-     "seconds": 0.378
+     "seconds": 0.379
     },
     {
      "stage": "evidence",
@@ -1692,7 +1692,7 @@
        5
       ]
      },
-     "seconds": 0.377
+     "seconds": 0.597
     }
    ],
    "modelProbeChoice": true,
@@ -1702,7 +1702,7 @@
    "reading": null,
    "raw": 725,
    "returned": 88,
-   "seconds": 0.785,
+   "seconds": 1.006,
    "probes": [
     "git diff main...HEAD"
    ]
@@ -1721,7 +1721,7 @@
        }
       ]
      },
-     "seconds": 0.391
+     "seconds": 0.387
     }
    ],
    "modelProbeChoice": true,
@@ -1731,7 +1731,7 @@
    "reading": null,
    "raw": 63,
    "returned": 74,
-   "seconds": 0.405,
+   "seconds": 0.399,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -1752,7 +1752,7 @@
        }
       ]
      },
-     "seconds": 0.355
+     "seconds": 0.358
     }
    ],
    "modelProbeChoice": true,
@@ -1762,7 +1762,7 @@
    "reading": null,
    "raw": 104,
    "returned": 116,
-   "seconds": 0.367,
+   "seconds": 0.373,
    "probes": [
     "git diff HEAD -- spec/models/account_spec.rb"
    ]
@@ -1782,7 +1782,7 @@
        }
       ]
      },
-     "seconds": 0.459
+     "seconds": 0.461
     }
    ],
    "modelProbeChoice": true,
@@ -1792,7 +1792,7 @@
    "reading": null,
    "raw": 106,
    "returned": 110,
-   "seconds": 0.481,
+   "seconds": 0.483,
    "probes": [
     "git show 4f746c7"
    ]
@@ -1813,7 +1813,7 @@
        }
       ]
      },
-     "seconds": 0.488
+     "seconds": 0.699
     }
    ],
    "modelProbeChoice": true,
@@ -1823,7 +1823,7 @@
    "reading": null,
    "raw": 91,
    "returned": 97,
-   "seconds": 0.508,
+   "seconds": 0.719,
    "probes": [
     "git log -n5 -- Gemfile"
    ]
@@ -1844,7 +1844,7 @@
        }
       ]
      },
-     "seconds": 0.398
+     "seconds": 0.386
     }
    ],
    "modelProbeChoice": true,
@@ -1854,7 +1854,7 @@
    "reading": null,
    "raw": 102,
    "returned": 108,
-   "seconds": 0.415,
+   "seconds": 0.405,
    "probes": [
     "git log -n15 -- Gemfile"
    ]
@@ -1883,7 +1883,7 @@
    "reading": null,
    "raw": 106,
    "returned": 110,
-   "seconds": 0.394,
+   "seconds": 0.398,
    "probes": [
     "git show HEAD"
    ]
@@ -1902,7 +1902,7 @@
        }
       ]
      },
-     "seconds": 0.5
+     "seconds": 0.503
     }
    ],
    "modelProbeChoice": true,
@@ -1912,7 +1912,7 @@
    "reading": null,
    "raw": 106,
    "returned": 110,
-   "seconds": 0.51,
+   "seconds": 0.513,
    "probes": [
     "git show HEAD"
    ]
@@ -1932,7 +1932,7 @@
        }
       ]
      },
-     "seconds": 0.289
+     "seconds": 0.275
     }
    ],
    "modelProbeChoice": true,
@@ -1942,7 +1942,7 @@
    "reading": null,
    "raw": 321,
    "returned": 31,
-   "seconds": 0.305,
+   "seconds": 0.292,
    "probes": [
     "git blame -- app/controllers/accounts_controller.rb"
    ]
@@ -1963,7 +1963,7 @@
        }
       ]
      },
-     "seconds": 0.537
+     "seconds": 0.758
     }
    ],
    "modelProbeChoice": true,
@@ -1973,7 +1973,7 @@
    "reading": null,
    "raw": 48,
    "returned": 59,
-   "seconds": 0.548,
+   "seconds": 0.769,
    "probes": [
     "git log -n3 -i --fixed-strings --grep=policy"
    ]
@@ -1992,7 +1992,7 @@
        }
       ]
      },
-     "seconds": 0.297
+     "seconds": 0.305
     }
    ],
    "modelProbeChoice": true,
@@ -2002,7 +2002,7 @@
    "reading": null,
    "raw": 25,
    "returned": 32,
-   "seconds": 0.309,
+   "seconds": 0.315,
    "probes": [
     "git status --short --branch"
    ]
@@ -2022,7 +2022,7 @@
        }
       ]
      },
-     "seconds": 0.38
+     "seconds": 0.375
     }
    ],
    "modelProbeChoice": true,
@@ -2032,7 +2032,7 @@
    "reading": null,
    "raw": 84,
    "returned": 88,
-   "seconds": 0.393,
+   "seconds": 0.385,
    "probes": [
     "git log -n5"
    ]
@@ -2052,7 +2052,7 @@
        }
       ]
      },
-     "seconds": 0.28
+     "seconds": 0.279
     }
    ],
    "modelProbeChoice": true,
@@ -2062,7 +2062,7 @@
    "reading": null,
    "raw": 80,
    "returned": 85,
-   "seconds": 0.292,
+   "seconds": 0.294,
    "probes": [
     "git diff --staged"
    ]
@@ -2081,7 +2081,7 @@
        }
       ]
      },
-     "seconds": 0.296
+     "seconds": 0.284
     }
    ],
    "modelProbeChoice": true,
@@ -2091,7 +2091,7 @@
    "reading": null,
    "raw": 28,
    "returned": 32,
-   "seconds": 0.312,
+   "seconds": 0.301,
    "probes": [
     "git stash list"
    ]
@@ -2110,7 +2110,7 @@
        }
       ]
      },
-     "seconds": 0.297
+     "seconds": 0.299
     }
    ],
    "modelProbeChoice": true,
@@ -2120,7 +2120,7 @@
    "reading": null,
    "raw": 25,
    "returned": 32,
-   "seconds": 0.309,
+   "seconds": 0.31,
    "probes": [
     "git status --short --branch"
    ]
@@ -2149,7 +2149,7 @@
    "reading": null,
    "raw": 25,
    "returned": 32,
-   "seconds": 0.253,
+   "seconds": 0.252,
    "probes": [
     "git status --short --branch"
    ]
@@ -2168,7 +2168,7 @@
        }
       ]
      },
-     "seconds": 0.305
+     "seconds": 0.291
     }
    ],
    "modelProbeChoice": true,
@@ -2178,7 +2178,7 @@
    "reading": null,
    "raw": 37,
    "returned": 42,
-   "seconds": 0.315,
+   "seconds": 0.301,
    "probes": [
     "git worktree list"
    ]
@@ -2199,7 +2199,7 @@
        }
       ]
      },
-     "seconds": 0.55
+     "seconds": 0.875
     }
    ],
    "modelProbeChoice": true,
@@ -2209,7 +2209,7 @@
    "reading": null,
    "raw": 56,
    "returned": 69,
-   "seconds": 0.571,
+   "seconds": 0.896,
    "probes": [
     "git log -n3 -i --fixed-strings --author=Kavita Patel"
    ]
@@ -2259,7 +2259,7 @@
        }
       ]
      },
-     "seconds": 0.297
+     "seconds": 0.291
     }
    ],
    "modelProbeChoice": true,
@@ -2269,7 +2269,7 @@
    "reading": null,
    "raw": 15,
    "returned": 22,
-   "seconds": 0.308,
+   "seconds": 0.306,
    "probes": [
     "git status --short --branch"
    ]
@@ -2289,7 +2289,7 @@
        }
       ]
      },
-     "seconds": 0.342
+     "seconds": 0.339
     },
     {
      "stage": "evidence",
@@ -2302,7 +2302,7 @@
        5
       ]
      },
-     "seconds": 0.376
+     "seconds": 0.699
     }
    ],
    "modelProbeChoice": true,
@@ -2312,7 +2312,7 @@
    "reading": null,
    "raw": 1072,
    "returned": 80,
-   "seconds": 0.744,
+   "seconds": 1.068,
    "probes": [
     "git diff trunk...HEAD"
    ]
@@ -2331,7 +2331,7 @@
        }
       ]
      },
-     "seconds": 0.367
+     "seconds": 0.366
     }
    ],
    "modelProbeChoice": true,
@@ -2341,7 +2341,7 @@
    "reading": null,
    "raw": 61,
    "returned": 72,
-   "seconds": 0.378,
+   "seconds": 0.377,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -2362,7 +2362,7 @@
        }
       ]
      },
-     "seconds": 0.316
+     "seconds": 0.315
     }
    ],
    "modelProbeChoice": true,
@@ -2372,7 +2372,7 @@
    "reading": null,
    "raw": 81,
    "returned": 87,
-   "seconds": 0.327,
+   "seconds": 0.329,
    "probes": [
     "git diff HEAD -- mix.exs"
    ]
@@ -2392,7 +2392,7 @@
        }
       ]
      },
-     "seconds": 0.458
+     "seconds": 0.456
     }
    ],
    "modelProbeChoice": true,
@@ -2402,7 +2402,7 @@
    "reading": null,
    "raw": 104,
    "returned": 109,
-   "seconds": 0.48,
+   "seconds": 0.479,
    "probes": [
     "git show 629ee12"
    ]
@@ -2423,7 +2423,7 @@
        }
       ]
      },
-     "seconds": 0.497
+     "seconds": 0.822
     }
    ],
    "modelProbeChoice": true,
@@ -2433,7 +2433,7 @@
    "reading": null,
    "raw": 81,
    "returned": 88,
-   "seconds": 0.51,
+   "seconds": 0.84,
    "probes": [
     "git log -n5 -- lib/repo.ex"
    ]
@@ -2454,7 +2454,7 @@
        }
       ]
      },
-     "seconds": 0.385
+     "seconds": 0.378
     }
    ],
    "modelProbeChoice": true,
@@ -2464,7 +2464,7 @@
    "reading": null,
    "raw": 257,
    "returned": 263,
-   "seconds": 0.406,
+   "seconds": 0.401,
    "probes": [
     "git log -n15 -- mix.exs"
    ]
@@ -2483,7 +2483,7 @@
        }
       ]
      },
-     "seconds": 0.346
+     "seconds": 0.345
     }
    ],
    "modelProbeChoice": true,
@@ -2493,7 +2493,7 @@
    "reading": null,
    "raw": 107,
    "returned": 111,
-   "seconds": 0.357,
+   "seconds": 0.356,
    "probes": [
     "git show HEAD"
    ]
@@ -2512,7 +2512,7 @@
        }
       ]
      },
-     "seconds": 0.51
+     "seconds": 0.507
     }
    ],
    "modelProbeChoice": true,
@@ -2522,7 +2522,7 @@
    "reading": null,
    "raw": 107,
    "returned": 111,
-   "seconds": 0.521,
+   "seconds": 0.518,
    "probes": [
     "git show HEAD"
    ]
@@ -2542,7 +2542,7 @@
        }
       ]
      },
-     "seconds": 0.275
+     "seconds": 0.27
     }
    ],
    "modelProbeChoice": true,
@@ -2552,7 +2552,7 @@
    "reading": null,
    "raw": 964,
    "returned": 26,
-   "seconds": 0.3,
+   "seconds": 0.296,
    "probes": [
     "git blame -- lib/router.ex"
    ]
@@ -2573,7 +2573,7 @@
        }
       ]
      },
-     "seconds": 0.55
+     "seconds": 0.879
     }
    ],
    "modelProbeChoice": true,
@@ -2583,7 +2583,7 @@
    "reading": null,
    "raw": 51,
    "returned": 64,
-   "seconds": 0.571,
+   "seconds": 0.899,
    "probes": [
     "git log -n3 -i --fixed-strings --grep=notification"
    ]
@@ -2602,7 +2602,7 @@
        }
       ]
      },
-     "seconds": 0.288
+     "seconds": 0.289
     }
    ],
    "modelProbeChoice": true,
@@ -2612,7 +2612,7 @@
    "reading": null,
    "raw": 15,
    "returned": 22,
-   "seconds": 0.298,
+   "seconds": 0.299,
    "probes": [
     "git status --short --branch"
    ]
@@ -2632,7 +2632,7 @@
        }
       ]
      },
-     "seconds": 0.35
+     "seconds": 0.349
     }
    ],
    "modelProbeChoice": true,
@@ -2642,7 +2642,7 @@
    "reading": null,
    "raw": 98,
    "returned": 101,
-   "seconds": 0.377,
+   "seconds": 0.378,
    "probes": [
     "git log -n6"
    ]
@@ -2662,7 +2662,7 @@
        }
       ]
      },
-     "seconds": 0.253
+     "seconds": 0.249
     }
    ],
    "modelProbeChoice": true,
@@ -2672,7 +2672,7 @@
    "reading": null,
    "raw": 3,
    "returned": 8,
-   "seconds": 0.263,
+   "seconds": 0.258,
    "probes": [
     "git diff --staged"
    ]
@@ -2691,7 +2691,7 @@
        }
       ]
      },
-     "seconds": 0.279
+     "seconds": 0.278
     }
    ],
    "modelProbeChoice": true,
@@ -2701,7 +2701,7 @@
    "reading": null,
    "raw": 3,
    "returned": 7,
-   "seconds": 0.289,
+   "seconds": 0.287,
    "probes": [
     "git stash list"
    ]
@@ -2720,7 +2720,7 @@
        }
       ]
      },
-     "seconds": 0.287
+     "seconds": 0.286
     }
    ],
    "modelProbeChoice": true,
@@ -2730,7 +2730,7 @@
    "reading": null,
    "raw": 15,
    "returned": 22,
-   "seconds": 0.298,
+   "seconds": 0.296,
    "probes": [
     "git status --short --branch"
    ]
@@ -2749,7 +2749,7 @@
        }
       ]
      },
-     "seconds": 0.231
+     "seconds": 0.229
     }
    ],
    "modelProbeChoice": true,
@@ -2759,7 +2759,7 @@
    "reading": null,
    "raw": 15,
    "returned": 22,
-   "seconds": 0.241,
+   "seconds": 0.239,
    "probes": [
     "git status --short --branch"
    ]
@@ -2778,7 +2778,7 @@
        }
       ]
      },
-     "seconds": 0.294
+     "seconds": 0.291
     }
    ],
    "modelProbeChoice": true,
@@ -2788,7 +2788,7 @@
    "reading": null,
    "raw": 39,
    "returned": 43,
-   "seconds": 0.303,
+   "seconds": 0.3,
    "probes": [
     "git worktree list"
    ]
@@ -2809,7 +2809,7 @@
        }
       ]
      },
-     "seconds": 0.751
+     "seconds": 1.048
     }
    ],
    "modelProbeChoice": true,
@@ -2819,7 +2819,7 @@
    "reading": null,
    "raw": 39,
    "returned": 51,
-   "seconds": 0.774,
+   "seconds": 1.068,
    "probes": [
     "git log -n15 -i --fixed-strings --author=Chloe"
    ]
@@ -2840,7 +2840,7 @@
        }
       ]
      },
-     "seconds": 0.644
+     "seconds": 0.629
     }
    ],
    "modelProbeChoice": true,
@@ -2850,7 +2850,7 @@
    "reading": null,
    "raw": 489,
    "returned": 496,
-   "seconds": 0.666,
+   "seconds": 0.648,
    "probes": [
     "git log -n50 trunk..HEAD"
    ]
@@ -2869,7 +2869,7 @@
        }
       ]
      },
-     "seconds": 0.284
+     "seconds": 0.281
     }
    ],
    "modelProbeChoice": true,
@@ -2879,7 +2879,7 @@
    "reading": null,
    "raw": 27,
    "returned": 34,
-   "seconds": 0.296,
+   "seconds": 0.292,
    "probes": [
     "git status --short --branch"
    ]
@@ -2899,7 +2899,7 @@
        }
       ]
      },
-     "seconds": 0.345
+     "seconds": 0.339
     },
     {
      "stage": "evidence",
@@ -2914,7 +2914,7 @@
        7
       ]
      },
-     "seconds": 0.555
+     "seconds": 0.854
     }
    ],
    "modelProbeChoice": true,
@@ -2924,7 +2924,7 @@
    "reading": null,
    "raw": 1004,
    "returned": 99,
-   "seconds": 0.928,
+   "seconds": 1.226,
    "probes": [
     "git diff trunk...HEAD"
    ]
@@ -2943,7 +2943,7 @@
        }
       ]
      },
-     "seconds": 0.379
+     "seconds": 0.377
     }
    ],
    "modelProbeChoice": true,
@@ -2953,7 +2953,7 @@
    "reading": null,
    "raw": 84,
    "returned": 95,
-   "seconds": 0.391,
+   "seconds": 0.387,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -2974,7 +2974,7 @@
        }
       ]
      },
-     "seconds": 0.314
+     "seconds": 0.31
     }
    ],
    "modelProbeChoice": true,
@@ -2984,7 +2984,7 @@
    "reading": null,
    "raw": 71,
    "returned": 78,
-   "seconds": 0.324,
+   "seconds": 0.323,
    "probes": [
     "git diff HEAD -- README.md"
    ]
@@ -3004,7 +3004,7 @@
        }
       ]
      },
-     "seconds": 0.465
+     "seconds": 0.462
     }
    ],
    "modelProbeChoice": true,
@@ -3014,7 +3014,7 @@
    "reading": null,
    "raw": 124,
    "returned": 129,
-   "seconds": 0.486,
+   "seconds": 0.484,
    "probes": [
     "git show 8c92dca"
    ]
@@ -3035,7 +3035,7 @@
        }
       ]
      },
-     "seconds": 0.694
+     "seconds": 0.993
     }
    ],
    "modelProbeChoice": true,
@@ -3045,7 +3045,7 @@
    "reading": null,
    "raw": 164,
    "returned": 174,
-   "seconds": 0.716,
+   "seconds": 1.018,
    "probes": [
     "git log -n15 -- src/main/java/App.java"
    ]
@@ -3070,7 +3070,7 @@
        }
       ]
      },
-     "seconds": 0.553
+     "seconds": 0.54
     }
    ],
    "modelProbeChoice": true,
@@ -3080,7 +3080,7 @@
    "reading": null,
    "raw": 120,
    "returned": 131,
-   "seconds": 0.598,
+   "seconds": 0.584,
    "probes": [
     "git log -n15 -- src/test/java/AppTest.java"
    ]
@@ -3099,7 +3099,7 @@
        }
       ]
      },
-     "seconds": 0.353
+     "seconds": 0.348
     }
    ],
    "modelProbeChoice": true,
@@ -3109,7 +3109,7 @@
    "reading": null,
    "raw": 129,
    "returned": 133,
-   "seconds": 0.364,
+   "seconds": 0.358,
    "probes": [
     "git show HEAD"
    ]
@@ -3128,7 +3128,7 @@
        }
       ]
      },
-     "seconds": 0.498
+     "seconds": 0.487
     }
    ],
    "modelProbeChoice": true,
@@ -3138,7 +3138,7 @@
    "reading": null,
    "raw": 129,
    "returned": 133,
-   "seconds": 0.509,
+   "seconds": 0.497,
    "probes": [
     "git show HEAD"
    ]
@@ -3158,7 +3158,7 @@
        }
       ]
      },
-     "seconds": 0.267
+     "seconds": 0.264
     }
    ],
    "modelProbeChoice": true,
@@ -3189,7 +3189,7 @@
        }
       ]
      },
-     "seconds": 0.551
+     "seconds": 0.851
     }
    ],
    "modelProbeChoice": true,
@@ -3199,7 +3199,7 @@
    "reading": null,
    "raw": 45,
    "returned": 57,
-   "seconds": 0.57,
+   "seconds": 0.869,
    "probes": [
     "git log -n3 -i --fixed-strings --grep=exporter"
    ]
@@ -3218,7 +3218,7 @@
        }
       ]
      },
-     "seconds": 0.282
+     "seconds": 0.278
     }
    ],
    "modelProbeChoice": true,
@@ -3228,7 +3228,7 @@
    "reading": null,
    "raw": 27,
    "returned": 34,
-   "seconds": 0.293,
+   "seconds": 0.288,
    "probes": [
     "git status --short --branch"
    ]
@@ -3248,7 +3248,7 @@
        }
       ]
      },
-     "seconds": 0.357
+     "seconds": 0.351
     }
    ],
    "modelProbeChoice": true,
@@ -3258,7 +3258,7 @@
    "reading": null,
    "raw": 118,
    "returned": 121,
-   "seconds": 0.367,
+   "seconds": 0.361,
    "probes": [
     "git log -n7"
    ]
@@ -3278,7 +3278,7 @@
        }
       ]
      },
-     "seconds": 0.262
+     "seconds": 0.259
     }
    ],
    "modelProbeChoice": true,
@@ -3288,7 +3288,7 @@
    "reading": null,
    "raw": 3,
    "returned": 8,
-   "seconds": 0.273,
+   "seconds": 0.268,
    "probes": [
     "git diff --staged"
    ]
@@ -3307,7 +3307,7 @@
        }
       ]
      },
-     "seconds": 0.278
+     "seconds": 0.276
     }
    ],
    "modelProbeChoice": true,
@@ -3317,7 +3317,7 @@
    "reading": null,
    "raw": 3,
    "returned": 7,
-   "seconds": 0.288,
+   "seconds": 0.285,
    "probes": [
     "git stash list"
    ]
@@ -3336,7 +3336,7 @@
        }
       ]
      },
-     "seconds": 0.293
+     "seconds": 0.289
     }
    ],
    "modelProbeChoice": true,
@@ -3346,7 +3346,7 @@
    "reading": null,
    "raw": 27,
    "returned": 34,
-   "seconds": 0.304,
+   "seconds": 0.299,
    "probes": [
     "git status --short --branch"
    ]
@@ -3365,7 +3365,7 @@
        }
       ]
      },
-     "seconds": 0.224
+     "seconds": 0.22
     }
    ],
    "modelProbeChoice": true,
@@ -3375,7 +3375,7 @@
    "reading": null,
    "raw": 27,
    "returned": 34,
-   "seconds": 0.235,
+   "seconds": 0.23,
    "probes": [
     "git status --short --branch"
    ]
@@ -3394,7 +3394,7 @@
        }
       ]
      },
-     "seconds": 0.293
+     "seconds": 0.291
     }
    ],
    "modelProbeChoice": true,
@@ -3404,7 +3404,7 @@
    "reading": null,
    "raw": 21,
    "returned": 26,
-   "seconds": 0.302,
+   "seconds": 0.3,
    "probes": [
     "git worktree list"
    ]
@@ -3425,7 +3425,7 @@
        }
       ]
      },
-     "seconds": 0.807
+     "seconds": 0.786
     }
    ],
    "modelProbeChoice": true,
@@ -3435,7 +3435,7 @@
    "reading": null,
    "raw": 40,
    "returned": 52,
-   "seconds": 0.832,
+   "seconds": 0.805,
    "probes": [
     "git log -n3 -i --fixed-strings --author=Camila"
    ]
@@ -3456,7 +3456,7 @@
        }
       ]
      },
-     "seconds": 0.723
+     "seconds": 0.704
     }
    ],
    "modelProbeChoice": true,
@@ -3466,7 +3466,7 @@
    "reading": null,
    "raw": 141,
    "returned": 147,
-   "seconds": 0.745,
+   "seconds": 0.724,
    "probes": [
     "git log -n50 main..HEAD"
    ]
@@ -3485,7 +3485,7 @@
        }
       ]
      },
-     "seconds": 0.278
+     "seconds": 0.276
     }
    ],
    "modelProbeChoice": true,
@@ -3495,7 +3495,7 @@
    "reading": null,
    "raw": 32,
    "returned": 39,
-   "seconds": 0.29,
+   "seconds": 0.294,
    "probes": [
     "git status --short --branch"
    ]
@@ -3515,7 +3515,7 @@
        }
       ]
      },
-     "seconds": 0.362
+     "seconds": 0.361
     },
     {
      "stage": "evidence",
@@ -3527,7 +3527,7 @@
        4
       ]
      },
-     "seconds": 0.515
+     "seconds": 0.501
     }
    ],
    "modelProbeChoice": true,
@@ -3537,7 +3537,7 @@
    "reading": null,
    "raw": 483,
    "returned": 69,
-   "seconds": 0.902,
+   "seconds": 0.889,
    "probes": [
     "git diff main...HEAD"
    ]
@@ -3556,7 +3556,7 @@
        }
       ]
      },
-     "seconds": 0.381
+     "seconds": 0.375
     }
    ],
    "modelProbeChoice": true,
@@ -3566,7 +3566,7 @@
    "reading": null,
    "raw": 125,
    "returned": 136,
-   "seconds": 0.394,
+   "seconds": 0.387,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -3597,7 +3597,7 @@
    "reading": null,
    "raw": 98,
    "returned": 108,
-   "seconds": 0.352,
+   "seconds": 0.354,
    "probes": [
     "git diff -- spec/models/account_spec.rb"
    ]
@@ -3617,7 +3617,7 @@
        }
       ]
      },
-     "seconds": 0.452
+     "seconds": 0.449
     }
    ],
    "modelProbeChoice": true,
@@ -3627,7 +3627,7 @@
    "reading": null,
    "raw": 105,
    "returned": 110,
-   "seconds": 0.474,
+   "seconds": 0.471,
    "probes": [
     "git show 5c00ec1"
    ]
@@ -3650,7 +3650,7 @@
        }
       ]
      },
-     "seconds": 0.729
+     "seconds": 0.718
     }
    ],
    "modelProbeChoice": true,
@@ -3660,7 +3660,7 @@
    "reading": null,
    "raw": 51,
    "returned": 57,
-   "seconds": 0.74,
+   "seconds": 0.73,
    "probes": [
     "git log -n5 -- Gemfile"
    ]
@@ -3681,7 +3681,7 @@
        }
       ]
      },
-     "seconds": 0.385
+     "seconds": 0.373
     }
    ],
    "modelProbeChoice": true,
@@ -3691,7 +3691,7 @@
    "reading": null,
    "raw": 121,
    "returned": 131,
-   "seconds": 0.4,
+   "seconds": 0.39,
    "probes": [
     "git log -n15 -- app/models/account.rb"
    ]
@@ -3710,7 +3710,7 @@
        }
       ]
      },
-     "seconds": 0.363
+     "seconds": 0.361
     }
    ],
    "modelProbeChoice": true,
@@ -3720,7 +3720,7 @@
    "reading": null,
    "raw": 118,
    "returned": 121,
-   "seconds": 0.374,
+   "seconds": 0.372,
    "probes": [
     "git show HEAD"
    ]
@@ -3739,7 +3739,7 @@
        }
       ]
      },
-     "seconds": 0.51
+     "seconds": 0.491
     }
    ],
    "modelProbeChoice": true,
@@ -3749,7 +3749,7 @@
    "reading": null,
    "raw": 118,
    "returned": 121,
-   "seconds": 0.52,
+   "seconds": 0.501,
    "probes": [
     "git show HEAD"
    ]
@@ -3769,7 +3769,7 @@
        }
       ]
      },
-     "seconds": 0.284
+     "seconds": 0.275
     }
    ],
    "modelProbeChoice": true,
@@ -3779,7 +3779,7 @@
    "reading": null,
    "raw": 371,
    "returned": 28,
-   "seconds": 0.298,
+   "seconds": 0.291,
    "probes": [
     "git blame -- app/models/account.rb"
    ]
@@ -3800,7 +3800,7 @@
        }
       ]
      },
-     "seconds": 0.786
+     "seconds": 0.761
     }
    ],
    "modelProbeChoice": true,
@@ -3810,7 +3810,7 @@
    "reading": null,
    "raw": 16,
    "returned": 27,
-   "seconds": 0.797,
+   "seconds": 0.771,
    "probes": [
     "git log -n3 -i --fixed-strings --grep=timeout"
    ]
@@ -3839,7 +3839,7 @@
    "reading": null,
    "raw": 32,
    "returned": 39,
-   "seconds": 0.285,
+   "seconds": 0.284,
    "probes": [
     "git status --short --branch"
    ]
@@ -3859,7 +3859,7 @@
        }
       ]
      },
-     "seconds": 0.351
+     "seconds": 0.348
     }
    ],
    "modelProbeChoice": true,
@@ -3869,7 +3869,7 @@
    "reading": null,
    "raw": 124,
    "returned": 127,
-   "seconds": 0.361,
+   "seconds": 0.358,
    "probes": [
     "git log -n7"
    ]
@@ -3889,7 +3889,7 @@
        }
       ]
      },
-     "seconds": 0.267
+     "seconds": 0.26
     }
    ],
    "modelProbeChoice": true,
@@ -3899,7 +3899,7 @@
    "reading": null,
    "raw": 87,
    "returned": 92,
-   "seconds": 0.277,
+   "seconds": 0.272,
    "probes": [
     "git diff --staged"
    ]
@@ -3918,7 +3918,7 @@
        }
       ]
      },
-     "seconds": 0.277
+     "seconds": 0.27
     }
    ],
    "modelProbeChoice": true,
@@ -3928,7 +3928,7 @@
    "reading": null,
    "raw": 3,
    "returned": 7,
-   "seconds": 0.287,
+   "seconds": 0.278,
    "probes": [
     "git stash list"
    ]
@@ -3947,7 +3947,7 @@
        }
       ]
      },
-     "seconds": 0.28
+     "seconds": 0.278
     }
    ],
    "modelProbeChoice": true,
@@ -3957,7 +3957,7 @@
    "reading": null,
    "raw": 32,
    "returned": 39,
-   "seconds": 0.289,
+   "seconds": 0.288,
    "probes": [
     "git status --short --branch"
    ]
@@ -3976,7 +3976,7 @@
        }
       ]
      },
-     "seconds": 0.232
+     "seconds": 0.228
     }
    ],
    "modelProbeChoice": true,
@@ -3986,7 +3986,7 @@
    "reading": null,
    "raw": 32,
    "returned": 39,
-   "seconds": 0.242,
+   "seconds": 0.238,
    "probes": [
     "git status --short --branch"
    ]
@@ -4005,7 +4005,7 @@
        }
       ]
      },
-     "seconds": 0.301
+     "seconds": 0.292
     }
    ],
    "modelProbeChoice": true,
@@ -4015,7 +4015,7 @@
    "reading": null,
    "raw": 19,
    "returned": 24,
-   "seconds": 0.31,
+   "seconds": 0.301,
    "probes": [
     "git worktree list"
    ]
@@ -4036,7 +4036,7 @@
        }
       ]
      },
-     "seconds": 0.909
+     "seconds": 0.896
     }
    ],
    "modelProbeChoice": true,
@@ -4046,7 +4046,7 @@
    "reading": null,
    "raw": 15,
    "returned": 28,
-   "seconds": 0.929,
+   "seconds": 0.914,
    "probes": [
     "git log -n3 -i --fixed-strings --author=Yuki Tanaka"
    ]
@@ -4067,7 +4067,7 @@
        }
       ]
      },
-     "seconds": 0.756
+     "seconds": 0.746
     }
    ],
    "modelProbeChoice": true,
@@ -4077,7 +4077,7 @@
    "reading": null,
    "raw": 90,
    "returned": 96,
-   "seconds": 0.777,
+   "seconds": 0.765,
    "probes": [
     "git log -n50 main..HEAD"
    ]
@@ -4096,7 +4096,7 @@
        }
       ]
      },
-     "seconds": 0.288
+     "seconds": 0.286
     }
    ],
    "modelProbeChoice": true,
@@ -4106,7 +4106,7 @@
    "reading": null,
    "raw": 21,
    "returned": 28,
-   "seconds": 0.3,
+   "seconds": 0.303,
    "probes": [
     "git status --short --branch"
    ]
@@ -4126,7 +4126,7 @@
        }
       ]
      },
-     "seconds": 0.357
+     "seconds": 0.353
     },
     {
      "stage": "evidence",
@@ -4138,7 +4138,7 @@
        4
       ]
      },
-     "seconds": 0.6
+     "seconds": 0.587
     }
    ],
    "modelProbeChoice": true,
@@ -4148,7 +4148,7 @@
    "reading": null,
    "raw": 383,
    "returned": 47,
-   "seconds": 0.98,
+   "seconds": 0.966,
    "probes": [
     "git diff main...HEAD"
    ]
@@ -4167,7 +4167,7 @@
        }
       ]
      },
-     "seconds": 0.469
+     "seconds": 0.463
     }
    ],
    "modelProbeChoice": true,
@@ -4177,7 +4177,7 @@
    "reading": null,
    "raw": 156,
    "returned": 167,
-   "seconds": 0.481,
+   "seconds": 0.476,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -4198,7 +4198,7 @@
        }
       ]
      },
-     "seconds": 0.338
+     "seconds": 0.334
     }
    ],
    "modelProbeChoice": true,
@@ -4228,7 +4228,7 @@
        }
       ]
      },
-     "seconds": 0.561
+     "seconds": 0.557
     }
    ],
    "modelProbeChoice": true,
@@ -4238,7 +4238,7 @@
    "reading": null,
    "raw": 123,
    "returned": 127,
-   "seconds": 0.583,
+   "seconds": 0.577,
    "probes": [
     "git show a303b94"
    ]
@@ -4263,7 +4263,7 @@
        }
       ]
      },
-     "seconds": 0.828
+     "seconds": 0.819
     }
    ],
    "modelProbeChoice": true,
@@ -4273,7 +4273,7 @@
    "reading": null,
    "raw": 31,
    "returned": 44,
-   "seconds": 0.844,
+   "seconds": 0.832,
    "probes": [
     "git log -n5 -- src/Controller/IndexController.php"
    ]
@@ -4298,7 +4298,7 @@
        }
       ]
      },
-     "seconds": 0.529
+     "seconds": 0.518
     }
    ],
    "modelProbeChoice": true,
@@ -4308,7 +4308,7 @@
    "reading": null,
    "raw": 49,
    "returned": 58,
-   "seconds": 0.563,
+   "seconds": 0.55,
    "probes": [
     "git log -n15 -- tests/UserTest.php"
    ]
@@ -4327,7 +4327,7 @@
        }
       ]
      },
-     "seconds": 0.355
+     "seconds": 0.352
     }
    ],
    "modelProbeChoice": true,
@@ -4337,7 +4337,7 @@
    "reading": null,
    "raw": 106,
    "returned": 110,
-   "seconds": 0.366,
+   "seconds": 0.363,
    "probes": [
     "git show HEAD"
    ]
@@ -4354,7 +4354,7 @@
    "reading": null,
    "raw": 106,
    "returned": 110,
-   "seconds": 0.012,
+   "seconds": 0.01,
    "probes": [
     "git show HEAD"
    ]
@@ -4374,7 +4374,7 @@
        }
       ]
      },
-     "seconds": 0.277
+     "seconds": 0.271
     }
    ],
    "modelProbeChoice": true,
@@ -4384,7 +4384,7 @@
    "reading": null,
    "raw": 130,
    "returned": 26,
-   "seconds": 0.289,
+   "seconds": 0.285,
    "probes": [
     "git blame -- tests/UserTest.php"
    ]
@@ -4405,7 +4405,7 @@
        }
       ]
      },
-     "seconds": 0.737
+     "seconds": 0.728
     }
    ],
    "modelProbeChoice": true,
@@ -4415,7 +4415,7 @@
    "reading": null,
    "raw": 43,
    "returned": 55,
-   "seconds": 0.757,
+   "seconds": 0.746,
    "probes": [
     "git log -n15 -i --fixed-strings --grep=queue"
    ]
@@ -4434,7 +4434,7 @@
        }
       ]
      },
-     "seconds": 0.293
+     "seconds": 0.29
     }
    ],
    "modelProbeChoice": true,
@@ -4444,7 +4444,7 @@
    "reading": null,
    "raw": 21,
    "returned": 28,
-   "seconds": 0.303,
+   "seconds": 0.3,
    "probes": [
     "git status --short --branch"
    ]
@@ -4464,7 +4464,7 @@
        }
       ]
      },
-     "seconds": 0.35
+     "seconds": 0.348
     }
    ],
    "modelProbeChoice": true,
@@ -4474,7 +4474,7 @@
    "reading": null,
    "raw": 132,
    "returned": 136,
-   "seconds": 0.361,
+   "seconds": 0.36,
    "probes": [
     "git log -n7"
    ]
@@ -4494,7 +4494,7 @@
        }
       ]
      },
-     "seconds": 0.278
+     "seconds": 0.266
     }
    ],
    "modelProbeChoice": true,
@@ -4504,7 +4504,7 @@
    "reading": null,
    "raw": 3,
    "returned": 8,
-   "seconds": 0.289,
+   "seconds": 0.276,
    "probes": [
     "git diff --staged"
    ]
@@ -4523,7 +4523,7 @@
        }
       ]
      },
-     "seconds": 0.374
+     "seconds": 0.372
     }
    ],
    "modelProbeChoice": true,
@@ -4533,7 +4533,7 @@
    "reading": null,
    "raw": 29,
    "returned": 33,
-   "seconds": 0.39,
+   "seconds": 0.388,
    "probes": [
     "git stash list"
    ]
@@ -4552,7 +4552,7 @@
        }
       ]
      },
-     "seconds": 0.299
+     "seconds": 0.297
     }
    ],
    "modelProbeChoice": true,
@@ -4562,7 +4562,7 @@
    "reading": null,
    "raw": 21,
    "returned": 28,
-   "seconds": 0.309,
+   "seconds": 0.306,
    "probes": [
     "git status --short --branch"
    ]
@@ -4581,7 +4581,7 @@
        }
       ]
      },
-     "seconds": 0.251
+     "seconds": 0.244
     }
    ],
    "modelProbeChoice": true,
@@ -4591,7 +4591,7 @@
    "reading": null,
    "raw": 21,
    "returned": 28,
-   "seconds": 0.262,
+   "seconds": 0.254,
    "probes": [
     "git status --short --branch"
    ]
@@ -4610,7 +4610,7 @@
        }
       ]
      },
-     "seconds": 0.288
+     "seconds": 0.282
     }
    ],
    "modelProbeChoice": true,
@@ -4620,7 +4620,7 @@
    "reading": null,
    "raw": 37,
    "returned": 42,
-   "seconds": 0.298,
+   "seconds": 0.291,
    "probes": [
     "git worktree list"
    ]
@@ -4641,7 +4641,7 @@
        }
       ]
      },
-     "seconds": 0.827
+     "seconds": 0.797
     }
    ],
    "modelProbeChoice": true,
@@ -4651,7 +4651,7 @@
    "reading": null,
    "raw": 12,
    "returned": 25,
-   "seconds": 0.849,
+   "seconds": 0.816,
    "probes": [
     "git log -n3 -i --fixed-strings --author=Hydra Seed"
    ]
@@ -4672,7 +4672,7 @@
        }
       ]
      },
-     "seconds": 0.721
+     "seconds": 0.682
     }
    ],
    "modelProbeChoice": true,
@@ -4682,7 +4682,7 @@
    "reading": null,
    "raw": 106,
    "returned": 112,
-   "seconds": 0.744,
+   "seconds": 0.7,
    "probes": [
     "git log -n50 main..HEAD"
    ]
@@ -4701,7 +4701,7 @@
        }
       ]
      },
-     "seconds": 0.286
+     "seconds": 0.277
     }
    ],
    "modelProbeChoice": true,
@@ -4711,7 +4711,7 @@
    "reading": null,
    "raw": 26,
    "returned": 33,
-   "seconds": 0.298,
+   "seconds": 0.294,
    "probes": [
     "git status --short --branch"
    ]
@@ -4731,7 +4731,7 @@
        }
       ]
      },
-     "seconds": 0.38
+     "seconds": 0.354
     },
     {
      "stage": "evidence",
@@ -4743,7 +4743,7 @@
        4
       ]
      },
-     "seconds": 0.572
+     "seconds": 0.549
     }
    ],
    "modelProbeChoice": true,
@@ -4753,7 +4753,7 @@
    "reading": null,
    "raw": 384,
    "returned": 49,
-   "seconds": 0.979,
+   "seconds": 0.927,
    "probes": [
     "git diff main...HEAD"
    ]
@@ -4772,7 +4772,7 @@
        }
       ]
      },
-     "seconds": 0.414
+     "seconds": 0.387
     }
    ],
    "modelProbeChoice": true,
@@ -4782,7 +4782,7 @@
    "reading": null,
    "raw": 133,
    "returned": 144,
-   "seconds": 0.426,
+   "seconds": 0.398,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -4803,7 +4803,7 @@
        }
       ]
      },
-     "seconds": 0.35
+     "seconds": 0.335
     }
    ],
    "modelProbeChoice": true,
@@ -4813,7 +4813,7 @@
    "reading": null,
    "raw": 89,
    "returned": 97,
-   "seconds": 0.363,
+   "seconds": 0.348,
    "probes": [
     "git diff HEAD -- lib/router.ex"
    ]
@@ -4833,7 +4833,7 @@
        }
       ]
      },
-     "seconds": 0.49
+     "seconds": 0.459
     }
    ],
    "modelProbeChoice": true,
@@ -4843,7 +4843,7 @@
    "reading": null,
    "raw": 121,
    "returned": 125,
-   "seconds": 0.513,
+   "seconds": 0.482,
    "probes": [
     "git show 14e90b5"
    ]
@@ -4865,7 +4865,7 @@
        }
       ]
      },
-     "seconds": 0.755
+     "seconds": 0.723
     }
    ],
    "modelProbeChoice": true,
@@ -4875,7 +4875,7 @@
    "reading": null,
    "raw": 89,
    "returned": 98,
-   "seconds": 0.796,
+   "seconds": 0.753,
    "probes": [
     "git log -n5 -- test/router_test.exs"
    ]
@@ -4899,7 +4899,7 @@
        }
       ]
      },
-     "seconds": 0.512
+     "seconds": 0.478
     }
    ],
    "modelProbeChoice": true,
@@ -4909,7 +4909,7 @@
    "reading": null,
    "raw": 89,
    "returned": 98,
-   "seconds": 0.525,
+   "seconds": 0.494,
    "probes": [
     "git log -n15 -- test/router_test.exs"
    ]
@@ -4928,7 +4928,7 @@
        }
       ]
      },
-     "seconds": 0.385
+     "seconds": 0.354
     }
    ],
    "modelProbeChoice": true,
@@ -4938,7 +4938,7 @@
    "reading": null,
    "raw": 108,
    "returned": 112,
-   "seconds": 0.396,
+   "seconds": 0.37,
    "probes": [
     "git show HEAD"
    ]
@@ -4957,7 +4957,7 @@
        }
       ]
      },
-     "seconds": 0.51
+     "seconds": 0.485
     }
    ],
    "modelProbeChoice": true,
@@ -4967,7 +4967,7 @@
    "reading": null,
    "raw": 108,
    "returned": 112,
-   "seconds": 0.522,
+   "seconds": 0.494,
    "probes": [
     "git show HEAD"
    ]
@@ -4987,7 +4987,7 @@
        }
       ]
      },
-     "seconds": 0.293
+     "seconds": 0.269
     }
    ],
    "modelProbeChoice": true,
@@ -4997,7 +4997,7 @@
    "reading": null,
    "raw": 127,
    "returned": 24,
-   "seconds": 0.307,
+   "seconds": 0.283,
    "probes": [
     "git blame -- lib/repo.ex"
    ]
@@ -5018,7 +5018,7 @@
        }
       ]
      },
-     "seconds": 0.709
+     "seconds": 0.68
     }
    ],
    "modelProbeChoice": true,
@@ -5028,7 +5028,7 @@
    "reading": null,
    "raw": 35,
    "returned": 47,
-   "seconds": 0.721,
+   "seconds": 0.69,
    "probes": [
     "git log -n3 -i --fixed-strings --grep=parser"
    ]
@@ -5047,7 +5047,7 @@
        }
       ]
      },
-     "seconds": 0.285
+     "seconds": 0.283
     }
    ],
    "modelProbeChoice": true,
@@ -5057,7 +5057,7 @@
    "reading": null,
    "raw": 26,
    "returned": 33,
-   "seconds": 0.295,
+   "seconds": 0.293,
    "probes": [
     "git status --short --branch"
    ]
@@ -5077,7 +5077,7 @@
        }
       ]
      },
-     "seconds": 0.383
+     "seconds": 0.349
     }
    ],
    "modelProbeChoice": true,
@@ -5087,7 +5087,7 @@
    "reading": null,
    "raw": 106,
    "returned": 109,
-   "seconds": 0.396,
+   "seconds": 0.359,
    "probes": [
     "git log -n6"
    ]
@@ -5107,7 +5107,7 @@
        }
       ]
      },
-     "seconds": 0.275
+     "seconds": 0.266
     }
    ],
    "modelProbeChoice": true,
@@ -5117,7 +5117,7 @@
    "reading": null,
    "raw": 3,
    "returned": 8,
-   "seconds": 0.285,
+   "seconds": 0.276,
    "probes": [
     "git diff --staged"
    ]
@@ -5136,7 +5136,7 @@
        }
       ]
      },
-     "seconds": 0.292
+     "seconds": 0.284
     }
    ],
    "modelProbeChoice": true,
@@ -5146,7 +5146,7 @@
    "reading": null,
    "raw": 27,
    "returned": 31,
-   "seconds": 0.308,
+   "seconds": 0.303,
    "probes": [
     "git stash list"
    ]
@@ -5165,7 +5165,7 @@
        }
       ]
      },
-     "seconds": 0.281
+     "seconds": 0.275
     }
    ],
    "modelProbeChoice": true,
@@ -5175,7 +5175,7 @@
    "reading": null,
    "raw": 26,
    "returned": 33,
-   "seconds": 0.291,
+   "seconds": 0.284,
    "probes": [
     "git status --short --branch"
    ]
@@ -5194,7 +5194,7 @@
        }
       ]
      },
-     "seconds": 0.242
+     "seconds": 0.237
     }
    ],
    "modelProbeChoice": true,
@@ -5204,7 +5204,7 @@
    "reading": null,
    "raw": 26,
    "returned": 33,
-   "seconds": 0.251,
+   "seconds": 0.247,
    "probes": [
     "git status --short --branch"
    ]
@@ -5223,7 +5223,7 @@
        }
       ]
      },
-     "seconds": 0.302
+     "seconds": 0.292
     }
    ],
    "modelProbeChoice": true,
@@ -5233,7 +5233,7 @@
    "reading": null,
    "raw": 37,
    "returned": 42,
-   "seconds": 0.313,
+   "seconds": 0.302,
    "probes": [
     "git worktree list"
    ]
@@ -5254,7 +5254,7 @@
        }
       ]
      },
-     "seconds": 0.953
+     "seconds": 0.908
     }
    ],
    "modelProbeChoice": true,
@@ -5264,7 +5264,7 @@
    "reading": null,
    "raw": 17,
    "returned": 29,
-   "seconds": 0.976,
+   "seconds": 0.929,
    "probes": [
     "git log -n3 -i --fixed-strings --author=Kavita"
    ]
@@ -5285,7 +5285,7 @@
        }
       ]
      },
-     "seconds": 0.752
+     "seconds": 0.738
     }
    ],
    "modelProbeChoice": true,
@@ -5295,7 +5295,7 @@
    "reading": null,
    "raw": 593,
    "returned": 599,
-   "seconds": 0.774,
+   "seconds": 0.758,
    "probes": [
     "git log -n50 main..HEAD"
    ]
@@ -5314,7 +5314,7 @@
        }
       ]
      },
-     "seconds": 0.315
+     "seconds": 0.285
     }
    ],
    "modelProbeChoice": true,
@@ -5324,7 +5324,7 @@
    "reading": null,
    "raw": 24,
    "returned": 31,
-   "seconds": 0.33,
+   "seconds": 0.304,
    "probes": [
     "git status --short --branch"
    ]
@@ -5344,7 +5344,7 @@
        }
       ]
      },
-     "seconds": 0.343
+     "seconds": 0.329
     },
     {
      "stage": "evidence",
@@ -5355,7 +5355,7 @@
        11
       ]
      },
-     "seconds": 0.666
+     "seconds": 0.622
     }
    ],
    "modelProbeChoice": true,
@@ -5365,7 +5365,7 @@
    "reading": null,
    "raw": 1071,
    "returned": 115,
-   "seconds": 1.036,
+   "seconds": 0.98,
    "probes": [
     "git diff main...HEAD"
    ]
@@ -5384,7 +5384,7 @@
        }
       ]
      },
-     "seconds": 0.377
+     "seconds": 0.364
     }
    ],
    "modelProbeChoice": true,
@@ -5394,7 +5394,7 @@
    "reading": null,
    "raw": 101,
    "returned": 112,
-   "seconds": 0.391,
+   "seconds": 0.375,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -5415,7 +5415,7 @@
        }
       ]
      },
-     "seconds": 0.322
+     "seconds": 0.309
     }
    ],
    "modelProbeChoice": true,
@@ -5425,7 +5425,7 @@
    "reading": null,
    "raw": 71,
    "returned": 78,
-   "seconds": 0.333,
+   "seconds": 0.324,
    "probes": [
     "git diff HEAD -- README.md"
    ]
@@ -5445,7 +5445,7 @@
        }
       ]
      },
-     "seconds": 0.474
+     "seconds": 0.462
     }
    ],
    "modelProbeChoice": true,
@@ -5455,7 +5455,7 @@
    "reading": null,
    "raw": 86,
    "returned": 90,
-   "seconds": 0.497,
+   "seconds": 0.484,
    "probes": [
     "git show 09fb9a5"
    ]
@@ -5480,7 +5480,7 @@
        }
       ]
      },
-     "seconds": 0.902
+     "seconds": 0.855
     }
    ],
    "modelProbeChoice": true,
@@ -5490,7 +5490,7 @@
    "reading": null,
    "raw": 86,
    "returned": 94,
-   "seconds": 0.915,
+   "seconds": 0.869,
    "probes": [
     "git log -n5 -- config/routes.rb"
    ]
@@ -5511,7 +5511,7 @@
        }
       ]
      },
-     "seconds": 0.394
+     "seconds": 0.367
     }
    ],
    "modelProbeChoice": true,
@@ -5521,7 +5521,7 @@
    "reading": null,
    "raw": 251,
    "returned": 257,
-   "seconds": 0.42,
+   "seconds": 0.388,
    "probes": [
     "git log -n15 -- Gemfile"
    ]
@@ -5540,7 +5540,7 @@
        }
       ]
      },
-     "seconds": 0.349
+     "seconds": 0.336
     }
    ],
    "modelProbeChoice": true,
@@ -5550,7 +5550,7 @@
    "reading": null,
    "raw": 81,
    "returned": 85,
-   "seconds": 0.36,
+   "seconds": 0.346,
    "probes": [
     "git show HEAD"
    ]
@@ -5569,7 +5569,7 @@
        }
       ]
      },
-     "seconds": 0.523
+     "seconds": 0.51
     }
    ],
    "modelProbeChoice": true,
@@ -5579,7 +5579,7 @@
    "reading": null,
    "raw": 81,
    "returned": 85,
-   "seconds": 0.536,
+   "seconds": 0.52,
    "probes": [
     "git show HEAD"
    ]
@@ -5599,7 +5599,7 @@
        }
       ]
      },
-     "seconds": 0.273
+     "seconds": 0.265
     }
    ],
    "modelProbeChoice": true,
@@ -5609,7 +5609,7 @@
    "reading": null,
    "raw": 1031,
    "returned": 24,
-   "seconds": 0.291,
+   "seconds": 0.284,
    "probes": [
     "git blame -- Gemfile"
    ]
@@ -5630,7 +5630,7 @@
        }
       ]
      },
-     "seconds": 0.949
+     "seconds": 0.922
     }
    ],
    "modelProbeChoice": true,
@@ -5640,7 +5640,7 @@
    "reading": null,
    "raw": 43,
    "returned": 55,
-   "seconds": 0.968,
+   "seconds": 0.94,
    "probes": [
     "git log -n3 -i --fixed-strings --grep=webhook"
    ]
@@ -5659,7 +5659,7 @@
        }
       ]
      },
-     "seconds": 0.312
+     "seconds": 0.282
     }
    ],
    "modelProbeChoice": true,
@@ -5669,7 +5669,7 @@
    "reading": null,
    "raw": 24,
    "returned": 31,
-   "seconds": 0.323,
+   "seconds": 0.292,
    "probes": [
     "git status --short --branch"
    ]
@@ -5689,7 +5689,7 @@
        }
       ]
      },
-     "seconds": 0.355
+     "seconds": 0.338
     }
    ],
    "modelProbeChoice": true,
@@ -5699,7 +5699,7 @@
    "reading": null,
    "raw": 112,
    "returned": 116,
-   "seconds": 0.377,
+   "seconds": 0.362,
    "probes": [
     "git log -n7"
    ]
@@ -5719,7 +5719,7 @@
        }
       ]
      },
-     "seconds": 0.26
+     "seconds": 0.245
     }
    ],
    "modelProbeChoice": true,
@@ -5729,7 +5729,7 @@
    "reading": null,
    "raw": 3,
    "returned": 8,
-   "seconds": 0.27,
+   "seconds": 0.254,
    "probes": [
     "git diff --staged"
    ]
@@ -5748,7 +5748,7 @@
        }
       ]
      },
-     "seconds": 0.291
+     "seconds": 0.279
     }
    ],
    "modelProbeChoice": true,
@@ -5758,7 +5758,7 @@
    "reading": null,
    "raw": 25,
    "returned": 29,
-   "seconds": 0.306,
+   "seconds": 0.294,
    "probes": [
     "git stash list"
    ]
@@ -5777,7 +5777,7 @@
        }
       ]
      },
-     "seconds": 0.314
+     "seconds": 0.278
     }
    ],
    "modelProbeChoice": true,
@@ -5787,7 +5787,7 @@
    "reading": null,
    "raw": 24,
    "returned": 31,
-   "seconds": 0.326,
+   "seconds": 0.289,
    "probes": [
     "git status --short --branch"
    ]
@@ -5806,7 +5806,7 @@
        }
       ]
      },
-     "seconds": 0.245
+     "seconds": 0.23
     }
    ],
    "modelProbeChoice": true,
@@ -5816,7 +5816,7 @@
    "reading": null,
    "raw": 24,
    "returned": 31,
-   "seconds": 0.256,
+   "seconds": 0.241,
    "probes": [
     "git status --short --branch"
    ]
@@ -5835,7 +5835,7 @@
        }
       ]
      },
-     "seconds": 0.298
+     "seconds": 0.293
     }
    ],
    "modelProbeChoice": true,
@@ -5845,7 +5845,7 @@
    "reading": null,
    "raw": 19,
    "returned": 24,
-   "seconds": 0.308,
+   "seconds": 0.302,
    "probes": [
     "git worktree list"
    ]
@@ -5866,7 +5866,7 @@
        }
       ]
      },
-     "seconds": 0.797
+     "seconds": 0.94
     }
    ],
    "modelProbeChoice": true,
@@ -5876,7 +5876,7 @@
    "reading": null,
    "raw": 34,
    "returned": 47,
-   "seconds": 0.821,
+   "seconds": 0.96,
    "probes": [
     "git log -n15 -i --fixed-strings --author=Kavita"
    ]
@@ -5897,7 +5897,7 @@
        }
       ]
      },
-     "seconds": 0.694
+     "seconds": 0.671
     }
    ],
    "modelProbeChoice": true,
@@ -5907,7 +5907,7 @@
    "reading": null,
    "raw": 223,
    "returned": 229,
-   "seconds": 0.714,
+   "seconds": 0.69,
    "probes": [
     "git log -n50 main..HEAD"
    ]
@@ -5926,7 +5926,7 @@
        }
       ]
      },
-     "seconds": 0.281
+     "seconds": 0.275
     }
    ],
    "modelProbeChoice": true,
@@ -5936,7 +5936,7 @@
    "reading": null,
    "raw": 29,
    "returned": 36,
-   "seconds": 0.293,
+   "seconds": 0.286,
    "probes": [
     "git status --short --branch"
    ]
@@ -5956,7 +5956,7 @@
        }
       ]
      },
-     "seconds": 0.347
+     "seconds": 0.34
     },
     {
      "stage": "evidence",
@@ -5971,7 +5971,7 @@
        7
       ]
      },
-     "seconds": 0.546
+     "seconds": 0.699
     }
    ],
    "modelProbeChoice": true,
@@ -5981,7 +5981,7 @@
    "reading": null,
    "raw": 673,
    "returned": 76,
-   "seconds": 0.921,
+   "seconds": 1.067,
    "probes": [
     "git diff main...HEAD"
    ]
@@ -6000,7 +6000,7 @@
        }
       ]
      },
-     "seconds": 0.377
+     "seconds": 0.375
     }
    ],
    "modelProbeChoice": true,
@@ -6010,7 +6010,7 @@
    "reading": null,
    "raw": 109,
    "returned": 120,
-   "seconds": 0.389,
+   "seconds": 0.387,
    "probes": [
     "git branch --all -vv --sort=-committerdate"
    ]
@@ -6031,7 +6031,7 @@
        }
       ]
      },
-     "seconds": 0.321
+     "seconds": 0.314
     }
    ],
    "modelProbeChoice": true,
@@ -6041,7 +6041,7 @@
    "reading": null,
    "raw": 95,
    "returned": 103,
-   "seconds": 0.333,
+   "seconds": 0.328,
    "probes": [
     "git diff HEAD -- include/engine.h"
    ]
@@ -6061,7 +6061,7 @@
        }
       ]
      },
-     "seconds": 0.458
+     "seconds": 0.456
     }
    ],
    "modelProbeChoice": true,
@@ -6071,7 +6071,7 @@
    "reading": null,
    "raw": 101,
    "returned": 105,
-   "seconds": 0.482,
+   "seconds": 0.478,
    "probes": [
     "git show 14f5fb6"
    ]
@@ -6093,7 +6093,7 @@
        }
       ]
      },
-     "seconds": 0.727
+     "seconds": 0.873
     }
    ],
    "modelProbeChoice": true,
@@ -6103,7 +6103,7 @@
    "reading": null,
    "raw": 152,
    "returned": 159,
-   "seconds": 0.75,
+   "seconds": 0.894,
    "probes": [
     "git log -n15 -- build.sh"
    ]
@@ -6128,7 +6128,7 @@
        }
       ]
      },
-     "seconds": 0.54
+     "seconds": 0.519
     }
    ],
    "modelProbeChoice": true,
@@ -6138,7 +6138,7 @@
    "reading": null,
    "raw": 123,
    "returned": 131,
-   "seconds": 0.58,
+   "seconds": 0.556,
    "probes": [
     "git log -n15 -- src/engine.cpp"
    ]
@@ -6157,7 +6157,7 @@
        }
       ]
      },
-     "seconds": 0.354
+     "seconds": 0.347
     }
    ],
    "modelProbeChoice": true,
@@ -6167,7 +6167,7 @@
    "reading": null,
    "raw": 118,
    "returned": 122,
-   "seconds": 0.366,
+   "seconds": 0.357,
    "probes": [
     "git show HEAD"
    ]
@@ -6186,7 +6186,7 @@
        }
       ]
      },
-     "seconds": 0.505
+     "seconds": 0.493
     }
    ],
    "modelProbeChoice": true,
@@ -6196,7 +6196,7 @@
    "reading": null,
    "raw": 118,
    "returned": 122,
-   "seconds": 0.516,
+   "seconds": 0.503,
    "probes": [
     "git show HEAD"
    ]
@@ -6216,7 +6216,7 @@
        }
       ]
      },
-     "seconds": 0.28
+     "seconds": 0.275
     }
    ],
    "modelProbeChoice": true,
@@ -6226,7 +6226,7 @@
    "reading": null,
    "raw": 181,
    "returned": 27,
-   "seconds": 0.293,
+   "seconds": 0.291,
    "probes": [
     "git blame -- tests/test_core.cpp"
    ]
@@ -6247,7 +6247,7 @@
        }
       ]
      },
-     "seconds": 0.608
+     "seconds": 0.761
     }
    ],
    "modelProbeChoice": true,
@@ -6257,7 +6257,7 @@
    "reading": null,
    "raw": 18,
    "returned": 29,
-   "seconds": 0.629,
+   "seconds": 0.78,
    "probes": [
     "git log -n3 -i --fixed-strings --grep=queue"
    ]
@@ -6276,7 +6276,7 @@
        }
       ]
      },
-     "seconds": 0.278
+     "seconds": 0.272
     }
    ],
    "modelProbeChoice": true,
@@ -6286,7 +6286,7 @@
    "reading": null,
    "raw": 29,
    "returned": 36,
-   "seconds": 0.29,
+   "seconds": 0.282,
    "probes": [
     "git status --short --branch"
    ]
@@ -6306,7 +6306,7 @@
        }
       ]
      },
-     "seconds": 0.358
+     "seconds": 0.35
     }
    ],
    "modelProbeChoice": true,
@@ -6316,7 +6316,7 @@
    "reading": null,
    "raw": 136,
    "returned": 139,
-   "seconds": 0.369,
+   "seconds": 0.36,
    "probes": [
     "git log -n8"
    ]
@@ -6336,7 +6336,7 @@
        }
       ]
      },
-     "seconds": 0.264
+     "seconds": 0.259
     }
    ],
    "modelProbeChoice": true,
@@ -6346,7 +6346,7 @@
    "reading": null,
    "raw": 3,
    "returned": 8,
-   "seconds": 0.274,
+   "seconds": 0.268,
    "probes": [
     "git diff --staged"
    ]
@@ -6365,7 +6365,7 @@
        }
       ]
      },
-     "seconds": 0.283
+     "seconds": 0.281
     }
    ],
    "modelProbeChoice": true,
@@ -6394,7 +6394,7 @@
        }
       ]
      },
-     "seconds": 0.286
+     "seconds": 0.278
     }
    ],
    "modelProbeChoice": true,
@@ -6404,7 +6404,7 @@
    "reading": null,
    "raw": 29,
    "returned": 36,
-   "seconds": 0.297,
+   "seconds": 0.288,
    "probes": [
     "git status --short --branch"
    ]
@@ -6423,7 +6423,7 @@
        }
       ]
      },
-     "seconds": 0.233
+     "seconds": 0.227
     }
    ],
    "modelProbeChoice": true,
@@ -6433,7 +6433,7 @@
    "reading": null,
    "raw": 29,
    "returned": 36,
-   "seconds": 0.245,
+   "seconds": 0.237,
    "probes": [
     "git status --short --branch"
    ]
@@ -6452,7 +6452,7 @@
        }
       ]
      },
-     "seconds": 0.297
+     "seconds": 0.296
     }
    ],
    "modelProbeChoice": true,
@@ -6462,7 +6462,7 @@
    "reading": null,
    "raw": 19,
    "returned": 24,
-   "seconds": 0.308,
+   "seconds": 0.305,
    "probes": [
     "git worktree list"
    ]

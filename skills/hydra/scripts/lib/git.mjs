@@ -41,7 +41,7 @@ const lastCommitRequest = question => /\b(?:last|latest|newest|most recent)\s+co
 const currentBranchRequest = question => /\b(?:current|active|checked[- ]out)\s+branch\b|\b(?:which|what)\s+branch\b[^?]*\b(?:HEAD|am I|are we|currently|right now|checked out)\b/i.test(question)
   && !/\bbranches\b|\bcontain|\bbetween|\bcompar|\bmerg|\bdiffer/i.test(question);
 // Edits not yet committed, measured against HEAD itself (HEAD~2 or HEAD^ is history).
-const pendingEditRequest = question => /\b(?:since|relative to|against|versus|vs\.?)\s+HEAD\b(?![~^@])|\buncommitted\b|\bnot (?:yet )?committed\b|\bworking (?:tree|copy)\b|\bagainst (?:the )?(?:last|latest|previous) commit\b|\b(?:isn't|is not|aren't|are not|haven't been|hasn't been) (?:yet )?committed\b/i.test(question);
+const pendingEditRequest = question => /\b(?:since|relative to|against|versus|vs\.?)\s+HEAD\b(?![~^@])|\buncommitted\b|\bnot (?:yet )?committed\b|\bworking[- ](?:tree|copy)\b|\b(?:against|differ(?:s|ent)? from) (?:the )?(?:last|latest|previous) commit\b|\b(?:isn't|is not|aren't|are not|haven't been|hasn't been) (?:yet )?committed\b/i.test(question);
 // Files Git has never tracked; "would git add . pick up" asks about these, not about the index.
 const untrackedRequest = question => /\buntracked\b|\bnot tracked\b|\bisn't tracking\b|\bnot under version control\b|\bbrand[- ]new\b|\bnever (?:been )?added\b|\bnot (?:been |yet )?added to git\b/i.test(question);
 // The branch's position against its remote tracking branch.
@@ -51,7 +51,9 @@ const syncRequest = question => /\b(?:remote|upstream|origin|tracking)\b/i.test(
 const historyRequest = question => /\b(?:commits?|history|evolved|over time|git log)\b/i.test(question) && !pendingEditRequest(question);
 // "with timeout in their subjects", "messages mentioning cache"
 const subjectTerm = question => (question.match(/\bwith\s+["'`]?([\w.-]+)["'`]?\s+in\s+(?:their|the|its)\s+(?:subjects?|messages?|titles?)\b/i)
-  ?? question.match(/\b(?:subjects?|messages?)\s+(?:containing|mentioning|that mention|with)\s+["'`]?([\w.-]+)/i))?.[1];
+  ?? question.match(/\b(?:subjects?|messages?)\s+(?:containing|mentioning|that mention|with)\s+["'`]?([\w.-]+)/i)
+  // "the newest three commits mentioning probe", "commits that reference crop"
+  ?? question.match(/\bcommits?\s+(?:that\s+|which\s+)?(?:mention(?:s|ing)?|referenc(?:e|es|ing))\s+["'`]?([\w.-]+)/i))?.[1];
 // "messages that mention main": the question searches message text for this word.
 const searchesFor = (question, term) => subjectTerm(question)?.toLowerCase() === term.toLowerCase()
   || new RegExp(`\\b(?:mention\\w*|contain\\w*|says?|saying)\\s+["'\`]?${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w.-])`, 'i').test(question);
@@ -77,10 +79,14 @@ function fileInQuestion(question, cwd) {
 // Staging scope from the question, ignoring any named file such as staged.js or index.txt.
 function scope(question, file) {
   let text = file ? question.split(file.toLowerCase()).join(' ') : question.replace(/[\w./-]+\.[a-z0-9]+\b/gi, ' ');
-  text = text.replace(/\b(?:un[- ]?staged|not staged)\b/gi, 'unstaged');
-  const unstaged = /\bunstaged\b/i.test(text);
+  // "including staged ones", "staged included", "whether staged or not": both halves of the uncommitted edits.
+  const both = /\b(?:including|incl\.?|counting|plus|and|even)\s+(?:(?:the|any|ones?|already)\s+){0,3}staged\b|\bstaged\s+(?:(?:ones?|edits?|changes?)\s+)?(?:included|too|as well)\b|\bstaged\s+(?:or|and)\s+(?:not|unstaged|otherwise)\b|\bboth\s+staged\b/i.test(text);
+  // Unstaged, also when said by ruling staged edits out: "aren't staged yet", "excluding staged changes",
+  // "before staging anything", "since the staged version".
+  text = text.replace(/\b(?:un[- ]?staged|not (?:yet )?staged|(?:aren't|are not|isn't|is not|haven't been|hasn't been) (?:yet )?staged|(?:excluding|without) (?:the )?staged(?: \w+)?|before staging(?: \w+)?|(?:since|than) the staged version)\b/gi, 'unstaged');
+  const unstaged = both || /\bunstaged\b/i.test(text);
   text = text.replace(/\bunstaged\b/gi, '');
-  const index = !untrackedRequest(text) && /\b(?:staged|staging|cached)\b|\bgit\s+add(?:ed)?\b|\b(?:in|from|the|to|of)\s+(?:git\s+)?index(?=\s|[?!,;:]|\.(?:\s|$)|$)|\b(?:prepared|ready|queued|waiting)\s+for\s+(?:(?:the|next|a)\s+)*commit\b|\binto (?:my |the )?next commit\b/i.test(text);
+  const index = both || (!untrackedRequest(text) && /\b(?:staged|staging|cached)\b|\bgit\s+add(?:ed)?\b|\b(?:did I|have I|I've|I have|what I)\s+stage\b|\b(?:in|from|the|to|of)\s+(?:git\s+)?index(?=\s|[?!,;:]|\.(?:\s|$)|$)|\b(?:prepared|ready|queued|waiting|marked)\s+for\s+(?:(?:the|next|a)\s+)*commit\b|\binto (?:my |the )?next commit\b/i.test(text));
   return { index, unstaged };
 }
 
@@ -245,6 +251,8 @@ async function clean(p, question, cwd, range) {
   if (a.grep && !searchesFor(question, a.grep)
     && (await git(cwd, ['rev-parse', '--verify', '--quiet', `${a.grep}^{commit}`])).ok) delete a.grep;
   if (p.probe === 'log' && !a.grep && subjectTerm(question)) a.grep = subjectTerm(question);
+  // "who last changed build.sh, with the commit message?": the file is the path, not text to find in messages.
+  if (a.grep && a.path && (a.grep === a.path || a.grep === path.basename(a.path)) && !searchesFor(question, a.grep)) delete a.grep;
   for (const key of ['rev', 'base']) {
     // HEAD as a base compares HEAD with itself and always shows nothing.
     if (key === 'base' && /^HEAD$/i.test(String(p.base ?? '').trim())) continue;
@@ -314,8 +322,9 @@ export async function gather(question, cwd, chat) {
     plan.push({ probe: 'log', path: named });
   }
   if (pendingEditRequest(question) && named && !has('diff')) {
-    // Edits since HEAD exclude HEAD's own commit patch, which would only crowd out the diff.
-    plan = plan.filter(p => !(p.probe === 'show' && (!p.rev || /^HEAD$/i.test(p.rev))));
+    // Edits since HEAD exclude HEAD's own commit patch, which would only crowd out the diff; "working-tree
+    // changes" are edits, not the list of worktrees.
+    plan = plan.filter(p => !(p.probe === 'show' && (!p.rev || /^HEAD$/i.test(p.rev))) && !(p.probe === 'worktrees' && !/\bworktrees?\b/i.test(question)));
     plan.push({ probe: 'diff', path: named });
   }
 

@@ -9,8 +9,8 @@
     "assertionRecall": 100,
     "cleanliness": 100,
     "rawTokens": 4927,
-    "returnedTokens": 2471,
-    "tokenSaving": 49.8,
+    "returnedTokens": 2435,
+    "tokenSaving": 50.6,
     "elapsedSec": 0
   },
   "rows": [
@@ -88,9 +88,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 150,
-      "returnedTok": 155,
-      "saving": -3.3,
-      "text": "$ npx jest (exit 1)\n$ npx jest\n PASS  test/unit/crypto.test.js\n PASS  test/unit/cache.test.js\n FAIL  test/db.test.js\n  ● Database › connects within timeout\n\n    thrown: \"Exceeded timeout of 5000 ms for a hook.\"\n    Add a timeout value to this test to increase the timeout, if this is a long-running test.\n\n      at test/db.test.js:33:5\n      at node_modules/jest-jasmine2/build/queueRunner.js:45:12\n      at processTicksAndRejections (node:internal/process/task_queues:95:5)\n      at node_modules/jest-runner/build/runTest.js:105:10\n\nTest Suites: 1 failed, 2 passed, 3 total\nTests:       1 failed, 14 passed, 15 total"
+      "returnedTok": 152,
+      "saving": -1.3,
+      "text": "(exit 1)\n$ npx jest\n PASS  test/unit/crypto.test.js\n PASS  test/unit/cache.test.js\n FAIL  test/db.test.js\n  ● Database › connects within timeout\n\n    thrown: \"Exceeded timeout of 5000 ms for a hook.\"\n    Add a timeout value to this test to increase the timeout, if this is a long-running test.\n\n      at test/db.test.js:33:5\n      at node_modules/jest-jasmine2/build/queueRunner.js:45:12\n      at processTicksAndRejections (node:internal/process/task_queues:95:5)\n      at node_modules/jest-runner/build/runTest.js:105:10\n\nTest Suites: 1 failed, 2 passed, 3 total\nTests:       1 failed, 14 passed, 15 total"
     },
     {
       "id": "pytest_status_code_assertion",
@@ -166,9 +166,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 174,
-      "returnedTok": 180,
-      "saving": -3.4,
-      "text": "$ cargo test (exit 1)\n$ cargo test\n   Compiling myapp v0.1.0 (/Users/rivansh/code/myapp)\n    Finished `test` profile in 1.2s\n     Running unittests src/lib.rs\n\nrunning 12 tests\ntest db::test_conn ... ok\ntest db::test_ping ... ok\ntest config::test_env ... FAILED\ntest parser::test_json ... FAILED\ntest parser::test_xml ... ok\n\nfailures:\n\n---- config::test_env stdout ----\nthread 'config::test_env' panicked at src/config.rs:45:5:\nmissing required port env var\n\n---- parser::test_json stdout ----\nthread 'parser::test_json' panicked at src/parser.rs:88:13:\nassertion failed: !parsed.is_empty()\n\nfailures:\n    config::test_env\n    parser::test_json\n\ntest result: FAILED. 10 passed; 2 failed; 0 ignored; finished in 0.22s"
+      "returnedTok": 176,
+      "saving": -1.1,
+      "text": "(exit 1)\n$ cargo test\n   Compiling myapp v0.1.0 (/Users/rivansh/code/myapp)\n    Finished `test` profile in 1.2s\n     Running unittests src/lib.rs\n\nrunning 12 tests\ntest db::test_conn ... ok\ntest db::test_ping ... ok\ntest config::test_env ... FAILED\ntest parser::test_json ... FAILED\ntest parser::test_xml ... ok\n\nfailures:\n\n---- config::test_env stdout ----\nthread 'config::test_env' panicked at src/config.rs:45:5:\nmissing required port env var\n\n---- parser::test_json stdout ----\nthread 'parser::test_json' panicked at src/parser.rs:88:13:\nassertion failed: !parsed.is_empty()\n\nfailures:\n    config::test_env\n    parser::test_json\n\ntest result: FAILED. 10 passed; 2 failed; 0 ignored; finished in 0.22s"
     },
     {
       "id": "cargo_compile_error",
@@ -179,9 +179,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 120,
-      "returnedTok": 125,
-      "saving": -4.2,
-      "text": "$ cargo build (exit 1)\n$ cargo build\n   Compiling libc v0.2.155\n   Compiling serde v1.0.203\n   Compiling myapp v0.1.0 (/Users/rivansh/code/myapp)\nerror[E0308]: mismatched types\n  --> src/main.rs:24:18\n   |\n24 |     let port: u16 = \"8080\";\n   |               ---   ^^^^^^ expected `u16`, found `&str`\n   |               |\n   |               expected due to this\n\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `myapp` (bin \"myapp\") due to 1 previous error"
+      "returnedTok": 122,
+      "saving": -1.7,
+      "text": "(exit 1)\n$ cargo build\n   Compiling libc v0.2.155\n   Compiling serde v1.0.203\n   Compiling myapp v0.1.0 (/Users/rivansh/code/myapp)\nerror[E0308]: mismatched types\n  --> src/main.rs:24:18\n   |\n24 |     let port: u16 = \"8080\";\n   |               ---   ^^^^^^ expected `u16`, found `&str`\n   |               |\n   |               expected due to this\n\nFor more information about this error, try `rustc --explain E0308`.\nerror: could not compile `myapp` (bin \"myapp\") due to 1 previous error"
     },
     {
       "id": "tsc_type_errors",
@@ -192,9 +192,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 121,
-      "returnedTok": 127,
-      "saving": -5,
-      "text": "$ tsc --noEmit (exit 1)\n$ tsc --noEmit\nsrc/components/UserCard.tsx:14:7 - error TS2741: Property 'email' is missing in type '{ name: string; }' but required in type 'UserProps'.\n\n14       <UserProps name=\"Alice\" />\n         ~~~~~~~~~~\n\n  src/types.ts:4:3\n    4   email: string;\n        ~~~~~\n    'email' is declared here.\n\nsrc/utils/format.ts:25:12 - error TS2339: Property 'toUpperCase' does not exist on type 'number'.\n\n25   return val.toUpperCase();\n                ~~~~~~~~~~~\n\nFound 2 errors in 2 files."
+      "returnedTok": 124,
+      "saving": -2.5,
+      "text": "(exit 1)\n$ tsc --noEmit\nsrc/components/UserCard.tsx:14:7 - error TS2741: Property 'email' is missing in type '{ name: string; }' but required in type 'UserProps'.\n\n14       <UserProps name=\"Alice\" />\n         ~~~~~~~~~~\n\n  src/types.ts:4:3\n    4   email: string;\n        ~~~~~\n    'email' is declared here.\n\nsrc/utils/format.ts:25:12 - error TS2339: Property 'toUpperCase' does not exist on type 'number'.\n\n25   return val.toUpperCase();\n                ~~~~~~~~~~~\n\nFound 2 errors in 2 files."
     },
     {
       "id": "tsc_missing_import",
@@ -205,9 +205,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 53,
-      "returnedTok": 59,
-      "saving": -11.3,
-      "text": "$ tsc --noEmit (exit 1)\n$ tsc --noEmit\nsrc/index.ts:3:22 - error TS2307: Cannot find module './api' or its corresponding type declarations.\n\n3 import { getClient } from './api';\n                       ~~~~~~~\n\nFound 1 error in 1 file."
+      "returnedTok": 55,
+      "saving": -3.8,
+      "text": "(exit 1)\n$ tsc --noEmit\nsrc/index.ts:3:22 - error TS2307: Cannot find module './api' or its corresponding type declarations.\n\n3 import { getClient } from './api';\n                       ~~~~~~~\n\nFound 1 error in 1 file."
     },
     {
       "id": "go_test_failure",
@@ -218,9 +218,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 66,
-      "returnedTok": 73,
-      "saving": -10.6,
-      "text": "$ go test ./... (exit 1)\n$ go test ./...\n=== RUN   TestHealthCheck\n--- PASS: TestHealthCheck (0.00s)\n=== RUN   TestValidateEmail\n--- FAIL: TestValidateEmail (0.01s)\n    email_test.go:28: ValidateEmail(\"bad_email\") = true, want false\nFAIL\nFAIL    github.com/org/myapp/pkg/auth   0.024s\nFAIL"
+      "returnedTok": 69,
+      "saving": -4.5,
+      "text": "(exit 1)\n$ go test ./...\n=== RUN   TestHealthCheck\n--- PASS: TestHealthCheck (0.00s)\n=== RUN   TestValidateEmail\n--- FAIL: TestValidateEmail (0.01s)\n    email_test.go:28: ValidateEmail(\"bad_email\") = true, want false\nFAIL\nFAIL    github.com/org/myapp/pkg/auth   0.024s\nFAIL"
     },
     {
       "id": "go_test_panic",
@@ -231,9 +231,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 160,
-      "returnedTok": 167,
-      "saving": -4.4,
-      "text": "$ go test ./... (exit 1)\n$ go test ./...\n=== RUN   TestStartServer\n--- FAIL: TestStartServer (0.02s)\npanic: runtime error: invalid memory address or nil pointer dereference [recovered]\n\tpanic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x10f4388]\n\ngoroutine 6 [running]:\ngithub.com/org/myapp/server.Start(0x0)\n\t/Users/rivansh/code/myapp/server.go:84 +0x48\ngithub.com/org/myapp.TestStartServer(0x14000114000)\n\t/Users/rivansh/code/myapp/server_test.go:19 +0x28\ntesting.tRunner(0x14000114000, 0x10fa958)\n\t/usr/local/go/src/testing/testing.go:1689 +0xf4\nFAIL\tgithub.com/org/myapp\t0.035s"
+      "returnedTok": 163,
+      "saving": -1.9,
+      "text": "(exit 1)\n$ go test ./...\n=== RUN   TestStartServer\n--- FAIL: TestStartServer (0.02s)\npanic: runtime error: invalid memory address or nil pointer dereference [recovered]\n\tpanic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x2 addr=0x0 pc=0x10f4388]\n\ngoroutine 6 [running]:\ngithub.com/org/myapp/server.Start(0x0)\n\t/Users/rivansh/code/myapp/server.go:84 +0x48\ngithub.com/org/myapp.TestStartServer(0x14000114000)\n\t/Users/rivansh/code/myapp/server_test.go:19 +0x28\ntesting.tRunner(0x14000114000, 0x10fa958)\n\t/usr/local/go/src/testing/testing.go:1689 +0xf4\nFAIL\tgithub.com/org/myapp\t0.035s"
     },
     {
       "id": "node_test_runner",
@@ -244,9 +244,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 142,
-      "returnedTok": 148,
-      "saving": -4.2,
-      "text": "$ node --test (exit 1)\n$ node --test\n✔ math > addition works (0.5ms)\n✔ math > subtraction works (0.3ms)\n✔ calc > multiplication works (0.4ms)\n✖ calc > division by zero throws (1.8ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  + actual - expected\n\n  + 0\n  - Infinity\n      at TestContext.<anonymous> (file:///Users/rivansh/code/test/calc.test.mjs:15:10)\n      at Test.run (node:internal/test_runner/test:892:25)\n      at async Suite.run (node:internal/test_runner/test:1255:7)\n      at node:internal/main/test_runner:14:5\n\nℹ tests 4\nℹ suites 0\nℹ pass 3\nℹ fail 1"
+      "returnedTok": 145,
+      "saving": -2.1,
+      "text": "(exit 1)\n$ node --test\n✔ math > addition works (0.5ms)\n✔ math > subtraction works (0.3ms)\n✔ calc > multiplication works (0.4ms)\n✖ calc > division by zero throws (1.8ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  + actual - expected\n\n  + 0\n  - Infinity\n      at TestContext.<anonymous> (file:///Users/rivansh/code/test/calc.test.mjs:15:10)\n      at Test.run (node:internal/test_runner/test:892:25)\n      at async Suite.run (node:internal/test_runner/test:1255:7)\n      at node:internal/main/test_runner:14:5\n\nℹ tests 4\nℹ suites 0\nℹ pass 3\nℹ fail 1"
     },
     {
       "id": "python_syntax_error",
@@ -257,9 +257,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 85,
-      "returnedTok": 92,
-      "saving": -8.2,
-      "text": "$ python -m pytest (exit 1)\n$ python -m pytest\nImportError while loading conftest '/Users/rivansh/code/tests/conftest.py'.\ntests/conftest.py:12: in <module>\n    from app.server import app\napp/server.py:14: in <module>\n    def setup(\nE     SyntaxError: invalid syntax (server.py, line 14)\n=========================== no tests ran in 0.02s ============================"
+      "returnedTok": 87,
+      "saving": -2.4,
+      "text": "(exit 1)\n$ python -m pytest\nImportError while loading conftest '/Users/rivansh/code/tests/conftest.py'.\ntests/conftest.py:12: in <module>\n    from app.server import app\napp/server.py:14: in <module>\n    def setup(\nE     SyntaxError: invalid syntax (server.py, line 14)\n=========================== no tests ran in 0.02s ============================"
     },
     {
       "id": "mocha_failure",
@@ -270,9 +270,9 @@
       "assertionRecall": 1,
       "clean": true,
       "rawTok": 122,
-      "returnedTok": 127,
-      "saving": -4.1,
-      "text": "$ npx mocha (exit 1)\n$ npx mocha\n  Integration Tests\n    ✓ responds to health check (40ms)\n    ✓ loads user profile (35ms)\n    1) authenticates bearer token\n\n  2 passing (120ms)\n  1 failing\n\n  1) Integration Tests\n       authenticates bearer token:\n     AssertionError: expected false to be true\n      at Context.<anonymous> (test/integration.js:64:14)\n      at processImmediate (node:internal/timers:478:21)\n      at node_modules/mocha/lib/runnable.js:368:7\n      at node_modules/mocha/lib/runner.js:450:12"
+      "returnedTok": 124,
+      "saving": -1.6,
+      "text": "(exit 1)\n$ npx mocha\n  Integration Tests\n    ✓ responds to health check (40ms)\n    ✓ loads user profile (35ms)\n    1) authenticates bearer token\n\n  2 passing (120ms)\n  1 failing\n\n  1) Integration Tests\n       authenticates bearer token:\n     AssertionError: expected false to be true\n      at Context.<anonymous> (test/integration.js:64:14)\n      at processImmediate (node:internal/timers:478:21)\n      at node_modules/mocha/lib/runnable.js:368:7\n      at node_modules/mocha/lib/runner.js:450:12"
     }
   ]
 }

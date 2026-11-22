@@ -317,3 +317,37 @@ test('inside a written-out range a question word is not a message filter unless 
     async () => ({ probes: [{ probe: 'log', grep: 'step' }] }));
   assert.equal(asked[0].args.grep, 'step');
 });
+
+test('wordings that rule staged edits out, or count both halves, choose the right patch', async t => {
+  const cwd = fixture(t);
+  const plan = async (question, model) => (await gather(question, cwd, async () => ({ probes: model }))).map(s => s.cmd);
+  // Unstaged only, said by ruling staged out.
+  for (const question of ["What's the diff on index.txt excluding staged changes?", 'What changes are sitting in index.txt that aren\'t staged yet?',
+    'I want to see what I changed in index.txt before staging anything.', 'Can you show what differs in index.txt since the staged version?']) {
+    assert.deepEqual(await plan(question, [{ probe: 'diff', staged: true, path: 'index.txt' }]), ['git diff -- index.txt'], question);
+  }
+  // Both halves: staged and unstaged together.
+  for (const question of ["Show me everything I've edited but not committed, including staged ones.", 'Give me the full list of uncommitted modifications, staged included.',
+    'Show all files with modifications, whether staged or not.', "I need every tracked file that's been changed, even the ones already staged."]) {
+    assert.deepEqual(await plan(question, [{ probe: 'diff', staged: true }]), ['git diff HEAD'], question);
+  }
+  // Staged, said without the word "staged".
+  for (const question of ['What did I stage? I forgot.', 'List everything marked for the next commit.']) {
+    assert.ok((await plan(question, [{ probe: 'diff' }])).includes('git diff --staged'), question);
+  }
+});
+
+test('working-tree changes to a file read its patch, not the worktree list', async t => {
+  const cwd = fixture(t);
+  const sections = await gather('Show the working-tree changes for index.txt.', cwd, async () => ({ probes: [{ probe: 'worktrees' }] }));
+  assert.deepEqual(sections.map(s => s.cmd), ['git diff HEAD -- index.txt']);
+});
+
+test('commits mentioning a word search messages, and a file named in the question is not a message filter', async t => {
+  const cwd = fixture(t);
+  const mention = await gather('What are the newest three commits mentioning record?', cwd, async () => ({ probes: [{ probe: 'log', n: 3 }] }));
+  assert.equal(mention[0].args.grep, 'record');
+  const file = await gather('Who last changed staged.js, with the commit message?', cwd, async () => ({ probes: [{ probe: 'log', path: 'staged.js', grep: 'staged.js' }] }));
+  assert.equal(file[0].args.grep, undefined);
+  assert.equal(file[0].args.path, 'staged.js');
+});

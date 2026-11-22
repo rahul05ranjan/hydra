@@ -1,6 +1,6 @@
 {
  "model": "hydra-nano:git",
- "date": "2026-11-20T04:33:21.733Z",
+ "date": "2026-11-22T12:10:19.688Z",
  "overall": {
   "tasks": 100,
   "modelCalls": 123,
@@ -121,7 +121,7 @@
        }
       ]
      },
-     "seconds": 0.352
+     "seconds": 0.258
     }
    ],
    "modelProbeChoice": true,
@@ -131,7 +131,7 @@
    "reading": null,
    "raw": 18,
    "returned": 31,
-   "seconds": 0.374,
+   "seconds": 0.273,
    "probes": [
     "git blame -L 17,17 -- src/main/java/Service.java"
    ]
@@ -151,7 +151,7 @@
        }
       ]
      },
-     "seconds": 0.481
+     "seconds": 0.151
     }
    ],
    "modelProbeChoice": true,
@@ -161,7 +161,7 @@
    "reading": null,
    "raw": 18,
    "returned": 31,
-   "seconds": 0.493,
+   "seconds": 0.182,
    "probes": [
     "git blame -L 17,17 -- src/main/java/Service.java"
    ]
@@ -181,7 +181,7 @@
        }
       ]
      },
-     "seconds": 0.587
+     "seconds": 0.377
     }
    ],
    "modelProbeChoice": true,
@@ -191,7 +191,7 @@
    "reading": null,
    "raw": 39,
    "returned": 52,
-   "seconds": 0.6,
+   "seconds": 0.391,
    "probes": [
     "git blame -L 16,17 -- src/main/java/Service.java"
    ]
@@ -212,7 +212,7 @@
        }
       ]
      },
-     "seconds": 0.421
+     "seconds": 0.54
     },
     {
      "stage": "evidence",
@@ -225,7 +225,7 @@
        5
       ]
      },
-     "seconds": 0.353
+     "seconds": 0.632
     }
    ],
    "modelProbeChoice": true,
@@ -235,7 +235,7 @@
    "reading": null,
    "raw": 842,
    "returned": 86,
-   "seconds": 0.826,
+   "seconds": 1.236,
    "probes": [
     "git diff main...feat/oauth2-flow"
    ]
@@ -257,7 +257,7 @@
        }
       ]
      },
-     "seconds": 0.233
+     "seconds": 0.574
     }
    ],
    "modelProbeChoice": true,
@@ -267,7 +267,7 @@
    "reading": null,
    "raw": 318,
    "returned": 328,
-   "seconds": 0.296,
+   "seconds": 0.638,
    "probes": [
     "git log -n50 main..feat/oauth2-flow~1"
    ]
@@ -287,7 +287,7 @@
        }
       ]
      },
-     "seconds": 0.439
+     "seconds": 0.532
     }
    ],
    "modelProbeChoice": true,
@@ -297,7 +297,7 @@
    "reading": null,
    "raw": 18,
    "returned": 28,
-   "seconds": 0.452,
+   "seconds": 0.547,
    "probes": [
     "git blame -L 17,17 -- config/routes.rb"
    ]
@@ -317,7 +317,7 @@
        }
       ]
      },
-     "seconds": 0.446
+     "seconds": 0.543
     }
    ],
    "modelProbeChoice": true,
@@ -327,7 +327,7 @@
    "reading": null,
    "raw": 18,
    "returned": 28,
-   "seconds": 0.463,
+   "seconds": 0.566,
    "probes": [
     "git blame -L 17,17 -- config/routes.rb"
    ]
@@ -347,7 +347,7 @@
        }
       ]
      },
-     "seconds": 0.428
+     "seconds": 0.397
     }
    ],
    "modelProbeChoice": true,
@@ -357,7 +357,7 @@
    "reading": null,
    "raw": 37,
    "returned": 47,
-   "seconds": 0.442,
+   "seconds": 0.411,
    "probes": [
     "git blame -L 16,17 -- config/routes.rb"
    ]
@@ -377,7 +377,7 @@
        }
       ]
      },
-     "seconds": 0.435
+     "seconds": 0.727
     },
     {
      "stage": "evidence",
@@ -390,7 +390,7 @@
        5
       ]
      },
-     "seconds": 0.45
+     "seconds": 0.696
     }
    ],
    "modelProbeChoice": true,
@@ -400,7 +400,7 @@
    "reading": null,
    "raw": 791,
    "returned": 93,
-   "seconds": 0.917,
+   "seconds": 1.465,
    "probes": [
     "git diff master...feat/oauth2-flow"
    ]
@@ -420,7 +420,7 @@
        }
       ]
      },
-     "seconds": 0.422
+     "seconds": 0.71
     },
     {
      "stage": "evidence",
@@ -429,7 +429,7 @@
        17
       ]
      },
-     "seconds": 0.455
+     "seconds": 0.481
     }
    ],
    "modelProbeChoice": false,
@@ -439,7 +439,7 @@
    "reading": null,
    "raw": 433,
    "returned": 372,
-   "seconds": 0.919,
+   "seconds": 1.242,
    "probes": [
     "git show HEAD",
     "git log -n50 master..feat/oauth2-flow~1"
@@ -459,7 +459,7 @@
        }
       ]
      },
-     "seconds": 0.427
+     "seconds": 0.452
     }
    ],
    "modelProbeChoice": false,
@@ -469,7 +469,7 @@
    "reading": null,
    "raw": 18,
    "returned": 31,
-   "seconds": 0.439,
+   "seconds": 0.467,
    "probes": [
     "git blame -L 29,29 -- spec/models/account_spec.rb"
    ]
@@ -489,7 +489,7 @@
        }
       ]
      },
-     "seconds": 0.44
+     "seconds": 0.735
     }
    ],
    "modelProbeChoice": true,
@@ -499,7 +499,7 @@
    "reading": null,
    "raw": 18,
    "returned": 31,
-   "seconds": 0.455,
+   "seconds": 0.758,
    "probes": [
     "git blame -L 29,29 -- spec/models/account_spec.rb"
    ]
@@ -519,7 +519,7 @@
        }
       ]
      },
-     "seconds": 0.48
+     "seconds": 0.732
     }
    ],
    "modelProbeChoice": true,
@@ -529,7 +529,7 @@
    "reading": null,
    "raw": 35,
    "returned": 48,
-   "seconds": 0.493,
+   "seconds": 0.745,
    "probes": [
     "git blame -L 28,29 -- spec/models/account_spec.rb"
    ]
@@ -549,7 +549,7 @@
        }
       ]
      },
-     "seconds": 0.445
+     "seconds": 0.696
     },
     {
      "stage": "evidence",
@@ -561,7 +561,7 @@
        4
       ]
      },
-     "seconds": 0.675
+     "seconds": 0.706
     }
    ],
    "modelProbeChoice": false,
@@ -571,7 +571,7 @@
    "reading": null,
    "raw": 619,
    "returned": 77,
-   "seconds": 1.155,
+   "seconds": 1.443,
    "probes": [
     "git diff main...fix/cors-header"
    ]
@@ -591,7 +591,7 @@
        }
       ]
      },
-     "seconds": 0.528
+     "seconds": 0.784
     },
     {
      "stage": "evidence",
@@ -611,7 +611,7 @@
        12
       ]
      },
-     "seconds": 0.551
+     "seconds": 0.565
     }
    ],
    "modelProbeChoice": false,
@@ -621,7 +621,7 @@
    "reading": null,
    "raw": 350,
    "returned": 350,
-   "seconds": 1.122,
+   "seconds": 1.399,
    "probes": [
     "git show fix/cors-header~1",
     "git log -n50 main..fix/cors-header~1"
@@ -642,7 +642,7 @@
        }
       ]
      },
-     "seconds": 0.411
+     "seconds": 0.428
     }
    ],
    "modelProbeChoice": true,
@@ -652,7 +652,7 @@
    "reading": null,
    "raw": 17,
    "returned": 25,
-   "seconds": 0.422,
+   "seconds": 0.443,
    "probes": [
     "git blame -L 5,5 -- pom.xml"
    ]
@@ -672,7 +672,7 @@
        }
       ]
      },
-     "seconds": 0.449
+     "seconds": 0.476
     }
    ],
    "modelProbeChoice": true,
@@ -682,7 +682,7 @@
    "reading": null,
    "raw": 17,
    "returned": 25,
-   "seconds": 0.468,
+   "seconds": 0.497,
    "probes": [
     "git blame -L 5,5 -- pom.xml"
    ]
@@ -702,7 +702,7 @@
        }
       ]
      },
-     "seconds": 0.701
+     "seconds": 0.742
     }
    ],
    "modelProbeChoice": true,
@@ -712,7 +712,7 @@
    "reading": null,
    "raw": 39,
    "returned": 46,
-   "seconds": 0.713,
+   "seconds": 0.756,
    "probes": [
     "git blame -L 4,5 -- pom.xml"
    ]
@@ -733,7 +733,7 @@
        }
       ]
      },
-     "seconds": 0.744
+     "seconds": 0.811
     },
     {
      "stage": "evidence",
@@ -746,7 +746,7 @@
        5
       ]
      },
-     "seconds": 0.505
+     "seconds": 0.534
     }
    ],
    "modelProbeChoice": true,
@@ -756,7 +756,7 @@
    "reading": null,
    "raw": 486,
    "returned": 66,
-   "seconds": 1.31,
+   "seconds": 1.421,
    "probes": [
     "git diff main...feat/audit-log"
    ]
@@ -780,7 +780,7 @@
        }
       ]
      },
-     "seconds": 0.879
+     "seconds": 0.945
     }
    ],
    "modelProbeChoice": true,
@@ -790,7 +790,7 @@
    "reading": null,
    "raw": 17,
    "returned": 30,
-   "seconds": 0.908,
+   "seconds": 0.983,
    "probes": [
     "git log -n50 feat/audit-log..origin/feat/audit-log"
    ]
@@ -810,7 +810,7 @@
        }
       ]
      },
-     "seconds": 0.632
+     "seconds": 0.681
     }
    ],
    "modelProbeChoice": true,
@@ -820,7 +820,7 @@
    "reading": null,
    "raw": 17,
    "returned": 29,
-   "seconds": 0.642,
+   "seconds": 0.694,
    "probes": [
     "git blame -L 5,5 -- src/test/java/AppTest.java"
    ]
@@ -840,7 +840,7 @@
        }
       ]
      },
-     "seconds": 0.637
+     "seconds": 0.686
     }
    ],
    "modelProbeChoice": true,
@@ -850,7 +850,7 @@
    "reading": null,
    "raw": 17,
    "returned": 29,
-   "seconds": 0.649,
+   "seconds": 0.702,
    "probes": [
     "git blame -L 5,5 -- src/test/java/AppTest.java"
    ]
@@ -870,7 +870,7 @@
        }
       ]
      },
-     "seconds": 0.46
+     "seconds": 0.486
     }
    ],
    "modelProbeChoice": true,
@@ -880,7 +880,7 @@
    "reading": null,
    "raw": 40,
    "returned": 52,
-   "seconds": 0.472,
+   "seconds": 0.5,
    "probes": [
     "git blame -L 4,5 -- src/test/java/AppTest.java"
    ]
@@ -900,7 +900,7 @@
        }
       ]
      },
-     "seconds": 0.578
+     "seconds": 0.62
     },
     {
      "stage": "evidence",
@@ -913,7 +913,7 @@
        5
       ]
      },
-     "seconds": 0.35
+     "seconds": 0.545
     }
    ],
    "modelProbeChoice": true,
@@ -923,7 +923,7 @@
    "reading": null,
    "raw": 588,
    "returned": 70,
-   "seconds": 0.967,
+   "seconds": 1.211,
    "probes": [
     "git diff trunk...fix/db-leak"
    ]
@@ -943,7 +943,7 @@
        }
       ]
      },
-     "seconds": 0.576
+     "seconds": 0.623
     }
    ],
    "modelProbeChoice": true,
@@ -953,7 +953,7 @@
    "reading": null,
    "raw": 34,
    "returned": 45,
-   "seconds": 0.626,
+   "seconds": 0.686,
    "probes": [
     "git log -n50 fix/db-leak..origin/fix/db-leak"
    ]
@@ -973,7 +973,7 @@
        }
       ]
      },
-     "seconds": 0.463
+     "seconds": 0.495
     }
    ],
    "modelProbeChoice": true,
@@ -983,7 +983,7 @@
    "reading": null,
    "raw": 18,
    "returned": 28,
-   "seconds": 0.474,
+   "seconds": 0.509,
    "probes": [
     "git blame -L 23,23 -- include/engine.h"
    ]
@@ -1003,7 +1003,7 @@
        }
       ]
      },
-     "seconds": 0.562
+     "seconds": 0.601
     }
    ],
    "modelProbeChoice": true,
@@ -1013,7 +1013,7 @@
    "reading": null,
    "raw": 18,
    "returned": 28,
-   "seconds": 0.579,
+   "seconds": 0.627,
    "probes": [
     "git blame -L 23,23 -- include/engine.h"
    ]
@@ -1033,7 +1033,7 @@
        }
       ]
      },
-     "seconds": 0.37
+     "seconds": 0.39
     }
    ],
    "modelProbeChoice": true,
@@ -1043,7 +1043,7 @@
    "reading": null,
    "raw": 40,
    "returned": 50,
-   "seconds": 0.382,
+   "seconds": 0.405,
    "probes": [
     "git blame -L 22,23 -- include/engine.h"
    ]
@@ -1063,7 +1063,7 @@
        }
       ]
      },
-     "seconds": 0.419
+     "seconds": 0.608
     },
     {
      "stage": "evidence",
@@ -1076,7 +1076,7 @@
        5
       ]
      },
-     "seconds": 0.331
+     "seconds": 0.593
     }
    ],
    "modelProbeChoice": true,
@@ -1086,7 +1086,7 @@
    "reading": null,
    "raw": 634,
    "returned": 65,
-   "seconds": 0.799,
+   "seconds": 1.263,
    "probes": [
     "git diff main...feat/oauth2-flow"
    ]
@@ -1106,7 +1106,7 @@
        }
       ]
      },
-     "seconds": 0.401
+     "seconds": 0.588
     },
     {
      "stage": "evidence",
@@ -1115,7 +1115,7 @@
        17
       ]
      },
-     "seconds": 0.366
+     "seconds": 0.438
     }
    ],
    "modelProbeChoice": false,
@@ -1125,7 +1125,7 @@
    "reading": null,
    "raw": 355,
    "returned": 291,
-   "seconds": 0.808,
+   "seconds": 1.076,
    "probes": [
     "git show HEAD",
     "git log -n50 main..feat/oauth2-flow~1"
@@ -1145,7 +1145,7 @@
        }
       ]
      },
-     "seconds": 0.403
+     "seconds": 0.423
     }
    ],
    "modelProbeChoice": false,
@@ -1155,7 +1155,7 @@
    "reading": null,
    "raw": 18,
    "returned": 25,
-   "seconds": 0.414,
+   "seconds": 0.436,
    "probes": [
     "git blame -L 5,5 -- pom.xml"
    ]
@@ -1175,7 +1175,7 @@
        }
       ]
      },
-     "seconds": 0.416
+     "seconds": 0.6
     }
    ],
    "modelProbeChoice": true,
@@ -1185,7 +1185,7 @@
    "reading": null,
    "raw": 18,
    "returned": 25,
-   "seconds": 0.432,
+   "seconds": 0.62,
    "probes": [
     "git blame -L 5,5 -- pom.xml"
    ]
@@ -1205,7 +1205,7 @@
        }
       ]
      },
-     "seconds": 0.373
+     "seconds": 0.65
     }
    ],
    "modelProbeChoice": true,
@@ -1215,7 +1215,7 @@
    "reading": null,
    "raw": 40,
    "returned": 47,
-   "seconds": 0.385,
+   "seconds": 0.662,
    "probes": [
     "git blame -L 4,5 -- pom.xml"
    ]
@@ -1234,7 +1234,7 @@
        }
       ]
      },
-     "seconds": 0.422
+     "seconds": 0.646
     },
     {
      "stage": "evidence",
@@ -1246,7 +1246,7 @@
        4
       ]
      },
-     "seconds": 0.457
+     "seconds": 0.491
     }
    ],
    "modelProbeChoice": false,
@@ -1256,7 +1256,7 @@
    "reading": null,
    "raw": 399,
    "returned": 59,
-   "seconds": 0.909,
+   "seconds": 1.173,
    "probes": [
     "git diff trunk...chore/update-certs"
    ]
@@ -1277,7 +1277,7 @@
        }
       ]
      },
-     "seconds": 0.479
+     "seconds": 0.76
     }
    ],
    "modelProbeChoice": true,
@@ -1287,7 +1287,7 @@
    "reading": null,
    "raw": 89,
    "returned": 99,
-   "seconds": 0.548,
+   "seconds": 0.842,
    "probes": [
     "git log -n50 trunk..chore/update-certs~1"
    ]
@@ -1307,7 +1307,7 @@
        }
       ]
      },
-     "seconds": 0.422
+     "seconds": 0.452
     }
    ],
    "modelProbeChoice": true,
@@ -1317,7 +1317,7 @@
    "reading": null,
    "raw": 18,
    "returned": 28,
-   "seconds": 0.437,
+   "seconds": 0.47,
    "probes": [
     "git blame -L 20,20 -- include/engine.h"
    ]
@@ -1337,7 +1337,7 @@
        }
       ]
      },
-     "seconds": 0.438
+     "seconds": 0.471
     }
    ],
    "modelProbeChoice": true,
@@ -1347,7 +1347,7 @@
    "reading": null,
    "raw": 18,
    "returned": 28,
-   "seconds": 0.468,
+   "seconds": 0.512,
    "probes": [
     "git blame -L 20,20 -- include/engine.h"
    ]
@@ -1367,7 +1367,7 @@
        }
       ]
      },
-     "seconds": 0.304
+     "seconds": 0.322
     }
    ],
    "modelProbeChoice": true,
@@ -1377,7 +1377,7 @@
    "reading": null,
    "raw": 34,
    "returned": 44,
-   "seconds": 0.318,
+   "seconds": 0.339,
    "probes": [
     "git blame -L 19,20 -- include/engine.h"
    ]
@@ -1398,7 +1398,7 @@
        }
       ]
      },
-     "seconds": 0.624
+     "seconds": 0.669
     },
     {
      "stage": "evidence",
@@ -1413,7 +1413,7 @@
        7
       ]
      },
-     "seconds": 0.412
+     "seconds": 0.814
     }
    ],
    "modelProbeChoice": true,
@@ -1423,7 +1423,7 @@
    "reading": null,
    "raw": 1471,
    "returned": 110,
-   "seconds": 1.07,
+   "seconds": 1.525,
    "probes": [
     "git diff master...perf/redis-caching"
    ]
@@ -1444,7 +1444,7 @@
        }
       ]
      },
-     "seconds": 0.567
+     "seconds": 0.606
     }
    ],
    "modelProbeChoice": true,
@@ -1454,7 +1454,7 @@
    "reading": null,
    "raw": 20,
    "returned": 35,
-   "seconds": 0.596,
+   "seconds": 0.642,
    "probes": [
     "git log -n50 perf/redis-caching..origin/perf/redis-caching"
    ]
@@ -1474,7 +1474,7 @@
        }
       ]
      },
-     "seconds": 0.581
+     "seconds": 0.622
     }
    ],
    "modelProbeChoice": true,
@@ -1484,7 +1484,7 @@
    "reading": null,
    "raw": 18,
    "returned": 30,
-   "seconds": 0.593,
+   "seconds": 0.637,
    "probes": [
     "git blame -L 38,38 -- src/services/billing.ts"
    ]
@@ -1504,7 +1504,7 @@
        }
       ]
      },
-     "seconds": 0.637
+     "seconds": 0.676
     }
    ],
    "modelProbeChoice": true,
@@ -1514,7 +1514,7 @@
    "reading": null,
    "raw": 18,
    "returned": 30,
-   "seconds": 0.656,
+   "seconds": 0.707,
    "probes": [
     "git blame -L 38,38 -- src/services/billing.ts"
    ]
@@ -1534,7 +1534,7 @@
        }
       ]
      },
-     "seconds": 0.452
+     "seconds": 0.481
     }
    ],
    "modelProbeChoice": true,
@@ -1544,7 +1544,7 @@
    "reading": null,
    "raw": 37,
    "returned": 49,
-   "seconds": 0.464,
+   "seconds": 0.498,
    "probes": [
     "git blame -L 37,38 -- src/services/billing.ts"
    ]
@@ -1564,7 +1564,7 @@
        }
       ]
      },
-     "seconds": 0.528
+     "seconds": 0.937
     },
     {
      "stage": "evidence",
@@ -1579,7 +1579,7 @@
        7
       ]
      },
-     "seconds": 0.386
+     "seconds": 0.765
     }
    ],
    "modelProbeChoice": true,
@@ -1589,7 +1589,7 @@
    "reading": null,
    "raw": 1076,
    "returned": 95,
-   "seconds": 0.967,
+   "seconds": 1.763,
    "probes": [
     "git diff main...feat/audit-log"
    ]
@@ -1611,7 +1611,7 @@
        }
       ]
      },
-     "seconds": 0.519
+     "seconds": 0.926
     }
    ],
    "modelProbeChoice": true,
@@ -1621,7 +1621,7 @@
    "reading": null,
    "raw": 489,
    "returned": 498,
-   "seconds": 0.571,
+   "seconds": 0.989,
    "probes": [
     "git log -n50 main..feat/audit-log~1"
    ]
@@ -1641,7 +1641,7 @@
        }
       ]
      },
-     "seconds": 0.532
+     "seconds": 0.562
     }
    ],
    "modelProbeChoice": true,
@@ -1651,7 +1651,7 @@
    "reading": null,
    "raw": 17,
    "returned": 26,
-   "seconds": 0.543,
+   "seconds": 0.576,
    "probes": [
     "git blame -L 8,8 -- src/Kernel.php"
    ]
@@ -1671,7 +1671,7 @@
        }
       ]
      },
-     "seconds": 0.523
+     "seconds": 0.923
     }
    ],
    "modelProbeChoice": true,
@@ -1681,7 +1681,7 @@
    "reading": null,
    "raw": 17,
    "returned": 26,
-   "seconds": 0.536,
+   "seconds": 0.943,
    "probes": [
     "git blame -L 8,8 -- src/Kernel.php"
    ]
@@ -1701,7 +1701,7 @@
        }
       ]
      },
-     "seconds": 0.379
+     "seconds": 0.395
     }
    ],
    "modelProbeChoice": true,
@@ -1711,7 +1711,7 @@
    "reading": null,
    "raw": 35,
    "returned": 44,
-   "seconds": 0.39,
+   "seconds": 0.409,
    "probes": [
     "git blame -L 7,8 -- src/Kernel.php"
    ]
@@ -1731,7 +1731,7 @@
        }
       ]
      },
-     "seconds": 0.455
+     "seconds": 0.858
     },
     {
      "stage": "evidence",
@@ -1743,7 +1743,7 @@
        4
       ]
      },
-     "seconds": 0.393
+     "seconds": 0.471
     }
    ],
    "modelProbeChoice": true,
@@ -1753,7 +1753,7 @@
    "reading": null,
    "raw": 397,
    "returned": 66,
-   "seconds": 0.891,
+   "seconds": 1.387,
    "probes": [
     "git diff main...docs/quickstart"
    ]
@@ -1773,7 +1773,7 @@
        }
       ]
      },
-     "seconds": 0.446
+     "seconds": 0.84
     }
    ],
    "modelProbeChoice": false,
@@ -1783,7 +1783,7 @@
    "reading": null,
    "raw": 96,
    "returned": 105,
-   "seconds": 0.476,
+   "seconds": 0.884,
    "probes": [
     "git log -n50 main..docs/quickstart~1"
    ]
@@ -1802,7 +1802,7 @@
        }
       ]
      },
-     "seconds": 0.405
+     "seconds": 0.45
     }
    ],
    "modelProbeChoice": false,
@@ -1812,7 +1812,7 @@
    "reading": null,
    "raw": 18,
    "returned": 26,
-   "seconds": 0.417,
+   "seconds": 0.466,
    "probes": [
     "git blame -L 35,35 -- Gemfile"
    ]
@@ -1832,7 +1832,7 @@
        }
       ]
      },
-     "seconds": 0.447
+     "seconds": 0.85
     }
    ],
    "modelProbeChoice": true,
@@ -1842,7 +1842,7 @@
    "reading": null,
    "raw": 18,
    "returned": 26,
-   "seconds": 0.468,
+   "seconds": 0.884,
    "probes": [
     "git blame -L 35,35 -- Gemfile"
    ]
@@ -1862,7 +1862,7 @@
        }
       ]
      },
-     "seconds": 0.343
+     "seconds": 0.37
     }
    ],
    "modelProbeChoice": true,
@@ -1872,7 +1872,7 @@
    "reading": null,
    "raw": 39,
    "returned": 47,
-   "seconds": 0.356,
+   "seconds": 0.386,
    "probes": [
     "git blame -L 34,35 -- Gemfile"
    ]
@@ -1891,7 +1891,7 @@
        }
       ]
      },
-     "seconds": 0.49
+     "seconds": 0.591
     },
     {
      "stage": "evidence",
@@ -1904,7 +1904,7 @@
        5
       ]
      },
-     "seconds": 0.723
+     "seconds": 0.781
     }
    ],
    "modelProbeChoice": false,
@@ -1914,7 +1914,7 @@
    "reading": null,
    "raw": 1279,
    "returned": 112,
-   "seconds": 1.246,
+   "seconds": 1.413,
    "probes": [
     "git diff trunk...chore/update-certs"
    ]
@@ -1935,7 +1935,7 @@
        }
       ]
      },
-     "seconds": 0.48
+     "seconds": 0.572
     }
    ],
    "modelProbeChoice": true,
@@ -1945,7 +1945,7 @@
    "reading": null,
    "raw": 760,
    "returned": 771,
-   "seconds": 0.552,
+   "seconds": 0.666,
    "probes": [
     "git log -n50 trunk..chore/update-certs~1"
    ]
@@ -1965,7 +1965,7 @@
        }
       ]
      },
-     "seconds": 0.46
+     "seconds": 0.496
     }
    ],
    "modelProbeChoice": true,
@@ -1975,7 +1975,7 @@
    "reading": null,
    "raw": 18,
    "returned": 33,
-   "seconds": 0.474,
+   "seconds": 0.513,
    "probes": [
     "git blame -L 5,5 -- app/controllers/accounts_controller.rb"
    ]
@@ -1995,7 +1995,7 @@
        }
       ]
      },
-     "seconds": 0.509
+     "seconds": 0.602
     }
    ],
    "modelProbeChoice": true,
@@ -2005,7 +2005,7 @@
    "reading": null,
    "raw": 18,
    "returned": 33,
-   "seconds": 0.535,
+   "seconds": 0.637,
    "probes": [
     "git blame -L 5,5 -- app/controllers/accounts_controller.rb"
    ]
@@ -2025,7 +2025,7 @@
        }
       ]
      },
-     "seconds": 0.337
+     "seconds": 0.344
     }
    ],
    "modelProbeChoice": true,
@@ -2035,7 +2035,7 @@
    "reading": null,
    "raw": 36,
    "returned": 51,
-   "seconds": 0.352,
+   "seconds": 0.361,
    "probes": [
     "git blame -L 4,5 -- app/controllers/accounts_controller.rb"
    ]
@@ -2056,7 +2056,7 @@
        }
       ]
      },
-     "seconds": 0.815
+     "seconds": 0.886
     },
     {
      "stage": "evidence",
@@ -2069,7 +2069,7 @@
        5
       ]
      },
-     "seconds": 0.333
+     "seconds": 0.649
     }
    ],
    "modelProbeChoice": true,
@@ -2079,7 +2079,7 @@
    "reading": null,
    "raw": 900,
    "returned": 96,
-   "seconds": 1.209,
+   "seconds": 1.611,
    "probes": [
     "git diff main...fix/db-leak"
    ]
@@ -2100,7 +2100,7 @@
        }
       ]
      },
-     "seconds": 0.775
+     "seconds": 0.845
     }
    ],
    "modelProbeChoice": true,
@@ -2110,7 +2110,7 @@
    "reading": null,
    "raw": 408,
    "returned": 416,
-   "seconds": 0.834,
+   "seconds": 0.903,
    "probes": [
     "git log -n50 main..fix/db-leak~1"
    ]
@@ -2130,7 +2130,7 @@
        }
       ]
      },
-     "seconds": 0.507
+     "seconds": 0.54
     }
    ],
    "modelProbeChoice": true,
@@ -2140,7 +2140,7 @@
    "reading": null,
    "raw": 18,
    "returned": 27,
-   "seconds": 0.521,
+   "seconds": 0.556,
    "probes": [
     "git blame -L 11,11 -- src/main.ts"
    ]
@@ -2160,7 +2160,7 @@
        }
       ]
      },
-     "seconds": 0.805
+     "seconds": 0.869
     }
    ],
    "modelProbeChoice": true,
@@ -2170,7 +2170,7 @@
    "reading": null,
    "raw": 18,
    "returned": 27,
-   "seconds": 0.827,
+   "seconds": 0.901,
    "probes": [
     "git blame -L 11,11 -- src/main.ts"
    ]
@@ -2190,7 +2190,7 @@
        }
       ]
      },
-     "seconds": 0.387
+     "seconds": 0.416
     }
    ],
    "modelProbeChoice": true,
@@ -2200,7 +2200,7 @@
    "reading": null,
    "raw": 35,
    "returned": 44,
-   "seconds": 0.401,
+   "seconds": 0.433,
    "probes": [
     "git blame -L 10,11 -- src/main.ts"
    ]
@@ -2221,7 +2221,7 @@
        }
       ]
      },
-     "seconds": 0.503
+     "seconds": 0.852
     },
     {
      "stage": "evidence",
@@ -2236,7 +2236,7 @@
        7
       ]
      },
-     "seconds": 0.345
+     "seconds": 0.701
     }
    ],
    "modelProbeChoice": true,
@@ -2246,7 +2246,7 @@
    "reading": null,
    "raw": 959,
    "returned": 92,
-   "seconds": 0.905,
+   "seconds": 1.617,
    "probes": [
     "git diff main...feat/oauth2-flow"
    ]
@@ -2268,7 +2268,7 @@
        }
       ]
      },
-     "seconds": 0.464
+     "seconds": 0.806
     }
    ],
    "modelProbeChoice": true,
@@ -2278,7 +2278,7 @@
    "reading": null,
    "raw": 380,
    "returned": 390,
-   "seconds": 0.518,
+   "seconds": 0.868,
    "probes": [
     "git log -n50 main..feat/oauth2-flow~1"
    ]
@@ -2298,7 +2298,7 @@
        }
       ]
      },
-     "seconds": 0.523
+     "seconds": 0.573
     }
    ],
    "modelProbeChoice": true,
@@ -2308,7 +2308,7 @@
    "reading": null,
    "raw": 18,
    "returned": 26,
-   "seconds": 0.534,
+   "seconds": 0.585,
    "probes": [
     "git blame -L 17,17 -- pom.xml"
    ]
@@ -2328,7 +2328,7 @@
        }
       ]
      },
-     "seconds": 0.5
+     "seconds": 0.843
     }
    ],
    "modelProbeChoice": true,
@@ -2338,7 +2338,7 @@
    "reading": null,
    "raw": 18,
    "returned": 26,
-   "seconds": 0.513,
+   "seconds": 0.859,
    "probes": [
     "git blame -L 17,17 -- pom.xml"
    ]
@@ -2358,7 +2358,7 @@
        }
       ]
      },
-     "seconds": 0.37
+     "seconds": 0.393
     }
    ],
    "modelProbeChoice": true,
@@ -2368,7 +2368,7 @@
    "reading": null,
    "raw": 38,
    "returned": 46,
-   "seconds": 0.38,
+   "seconds": 0.407,
    "probes": [
     "git blame -L 16,17 -- pom.xml"
    ]
@@ -2388,7 +2388,7 @@
        }
       ]
      },
-     "seconds": 0.431
+     "seconds": 0.805
     },
     {
      "stage": "evidence",
@@ -2401,7 +2401,7 @@
        5
       ]
      },
-     "seconds": 0.343
+     "seconds": 0.577
     }
    ],
    "modelProbeChoice": true,
@@ -2411,7 +2411,7 @@
    "reading": null,
    "raw": 566,
    "returned": 70,
-   "seconds": 0.821,
+   "seconds": 1.439,
    "probes": [
     "git diff main...perf/redis-caching"
    ]
@@ -2431,7 +2431,7 @@
        }
       ]
      },
-     "seconds": 0.409
+     "seconds": 0.782
     }
    ],
    "modelProbeChoice": false,
@@ -2441,7 +2441,7 @@
    "reading": null,
    "raw": 34,
    "returned": 49,
-   "seconds": 0.44,
+   "seconds": 0.823,
    "probes": [
     "git log -n50 perf/redis-caching..origin/perf/redis-caching"
    ]
@@ -2460,7 +2460,7 @@
        }
       ]
      },
-     "seconds": 0.421
+     "seconds": 0.464
     }
    ],
    "modelProbeChoice": false,
@@ -2470,7 +2470,7 @@
    "reading": null,
    "raw": 18,
    "returned": 33,
-   "seconds": 0.432,
+   "seconds": 0.478,
    "probes": [
     "git blame -L 23,23 -- src/Controller/IndexController.php"
    ]
@@ -2490,7 +2490,7 @@
        }
       ]
      },
-     "seconds": 0.453
+     "seconds": 0.825
     }
    ],
    "modelProbeChoice": true,
@@ -2500,7 +2500,7 @@
    "reading": null,
    "raw": 18,
    "returned": 33,
-   "seconds": 0.47,
+   "seconds": 0.847,
    "probes": [
     "git blame -L 23,23 -- src/Controller/IndexController.php"
    ]
@@ -2520,7 +2520,7 @@
        }
       ]
      },
-     "seconds": 0.389
+     "seconds": 0.415
     }
    ],
    "modelProbeChoice": true,
@@ -2530,7 +2530,7 @@
    "reading": null,
    "raw": 35,
    "returned": 49,
-   "seconds": 0.4,
+   "seconds": 0.436,
    "probes": [
     "git blame -L 22,23 -- src/Controller/IndexController.php"
    ]
@@ -2549,7 +2549,7 @@
        }
       ]
      },
-     "seconds": 0.437
+     "seconds": 0.687
     }
    ],
    "modelProbeChoice": false,
@@ -2559,7 +2559,7 @@
    "reading": null,
    "raw": 191,
    "returned": 199,
-   "seconds": 0.465,
+   "seconds": 0.72,
    "probes": [
     "git diff trunk...feat/audit-log"
    ]
@@ -2580,7 +2580,7 @@
        }
       ]
      },
-     "seconds": 0.43
+     "seconds": 0.683
     }
    ],
    "modelProbeChoice": true,
@@ -2590,7 +2590,7 @@
    "reading": null,
    "raw": 41,
    "returned": 54,
-   "seconds": 0.489,
+   "seconds": 0.755,
    "probes": [
     "git log -n50 feat/audit-log..origin/feat/audit-log"
    ]
@@ -2610,7 +2610,7 @@
        }
       ]
      },
-     "seconds": 0.448
+     "seconds": 0.486
     }
    ],
    "modelProbeChoice": true,
@@ -2620,7 +2620,7 @@
    "reading": null,
    "raw": 18,
    "returned": 27,
-   "seconds": 0.459,
+   "seconds": 0.501,
    "probes": [
     "git blame -L 14,14 -- src/core.cpp"
    ]
@@ -2640,7 +2640,7 @@
        }
       ]
      },
-     "seconds": 0.421
+     "seconds": 0.661
     }
    ],
    "modelProbeChoice": true,
@@ -2650,7 +2650,7 @@
    "reading": null,
    "raw": 18,
    "returned": 27,
-   "seconds": 0.442,
+   "seconds": 0.688,
    "probes": [
     "git blame -L 14,14 -- src/core.cpp"
    ]
@@ -2670,7 +2670,7 @@
        }
       ]
      },
-     "seconds": 0.316
+     "seconds": 0.329
     }
    ],
    "modelProbeChoice": true,
@@ -2680,7 +2680,7 @@
    "reading": null,
    "raw": 36,
    "returned": 45,
-   "seconds": 0.328,
+   "seconds": 0.344,
    "probes": [
     "git blame -L 13,14 -- src/core.cpp"
    ]
@@ -2701,7 +2701,7 @@
        }
       ]
      },
-     "seconds": 0.51
+     "seconds": 0.547
     },
     {
      "stage": "evidence",
@@ -2715,7 +2715,7 @@
        6
       ]
      },
-     "seconds": 0.387
+     "seconds": 0.729
     }
    ],
    "modelProbeChoice": true,
@@ -2725,7 +2725,7 @@
    "reading": null,
    "raw": 966,
    "returned": 81,
-   "seconds": 0.946,
+   "seconds": 1.338,
    "probes": [
     "git diff main...feat/oauth2-flow"
    ]
@@ -2747,7 +2747,7 @@
        }
       ]
      },
-     "seconds": 0.468
+     "seconds": 0.509
     }
    ],
    "modelProbeChoice": true,
@@ -2757,7 +2757,7 @@
    "reading": null,
    "raw": 477,
    "returned": 487,
-   "seconds": 0.519,
+   "seconds": 0.572,
    "probes": [
     "git log -n50 main..feat/oauth2-flow~1"
    ]
@@ -2777,7 +2777,7 @@
        }
       ]
      },
-     "seconds": 0.537
+     "seconds": 0.576
     }
    ],
    "modelProbeChoice": true,
@@ -2787,7 +2787,7 @@
    "reading": null,
    "raw": 17,
    "returned": 32,
-   "seconds": 0.549,
+   "seconds": 0.59,
    "probes": [
     "git blame -L 5,5 -- app/controllers/accounts_controller.rb"
    ]
@@ -2807,7 +2807,7 @@
        }
       ]
      },
-     "seconds": 0.529
+     "seconds": 0.57
     }
    ],
    "modelProbeChoice": true,
@@ -2817,7 +2817,7 @@
    "reading": null,
    "raw": 17,
    "returned": 32,
-   "seconds": 0.548,
+   "seconds": 0.597,
    "probes": [
     "git blame -L 5,5 -- app/controllers/accounts_controller.rb"
    ]
@@ -2837,7 +2837,7 @@
        }
       ]
      },
-     "seconds": 0.421
+     "seconds": 0.439
     }
    ],
    "modelProbeChoice": true,
@@ -2847,7 +2847,7 @@
    "reading": null,
    "raw": 35,
    "returned": 50,
-   "seconds": 0.434,
+   "seconds": 0.455,
    "probes": [
     "git blame -L 4,5 -- app/controllers/accounts_controller.rb"
    ]
@@ -2867,7 +2867,7 @@
        }
       ]
      },
-     "seconds": 0.521
+     "seconds": 0.887
     },
     {
      "stage": "evidence",
@@ -2880,7 +2880,7 @@
        5
       ]
      },
-     "seconds": 0.356
+     "seconds": 0.587
     }
    ],
    "modelProbeChoice": true,
@@ -2890,7 +2890,7 @@
    "reading": null,
    "raw": 603,
    "returned": 85,
-   "seconds": 0.927,
+   "seconds": 1.534,
    "probes": [
     "git diff main...feat/audit-log"
    ]
@@ -2912,7 +2912,7 @@
        }
       ]
      },
-     "seconds": 0.513
+     "seconds": 0.875
     }
    ],
    "modelProbeChoice": true,
@@ -2922,7 +2922,7 @@
    "reading": null,
    "raw": 163,
    "returned": 172,
-   "seconds": 0.562,
+   "seconds": 0.934,
    "probes": [
     "git log -n50 main..feat/audit-log~1"
    ]
@@ -2942,7 +2942,7 @@
        }
       ]
      },
-     "seconds": 0.535
+     "seconds": 0.573
     }
    ],
    "modelProbeChoice": true,
@@ -2952,7 +2952,7 @@
    "reading": null,
    "raw": 18,
    "returned": 27,
-   "seconds": 0.546,
+   "seconds": 0.587,
    "probes": [
     "git blame -L 11,11 -- CMakeLists.txt"
    ]
@@ -2972,7 +2972,7 @@
        }
       ]
      },
-     "seconds": 0.515
+     "seconds": 0.876
     }
    ],
    "modelProbeChoice": true,
@@ -2982,7 +2982,7 @@
    "reading": null,
    "raw": 18,
    "returned": 27,
-   "seconds": 0.531,
+   "seconds": 0.9,
    "probes": [
     "git blame -L 11,11 -- CMakeLists.txt"
    ]
@@ -3002,7 +3002,7 @@
        }
       ]
      },
-     "seconds": 0.383
+     "seconds": 0.404
     }
    ],
    "modelProbeChoice": true,
@@ -3012,7 +3012,7 @@
    "reading": null,
    "raw": 35,
    "returned": 44,
-   "seconds": 0.394,
+   "seconds": 0.418,
    "probes": [
     "git blame -L 10,11 -- CMakeLists.txt"
    ]
@@ -3032,170 +3032,7 @@
        }
       ]
      },
-     "seconds": 0.413
-    },
-    {
-     "stage": "evidence",
-     "reply": {
-      "lines": [
-       1,
-       2,
-       3,
-       4,
-       5,
-       6
-      ]
-     },
-     "seconds": 0.307
-    }
-   ],
-   "modelProbeChoice": true,
-   "plan": true,
-   "recall": 1,
-   "evidence": true,
-   "reading": null,
-   "raw": 819,
-   "returned": 77,
-   "seconds": 0.77,
-   "probes": [
-    "git diff main...perf/redis-caching"
-   ]
-  },
-  {
-   "id": "dev-dev_17-range_log",
-   "intent": "range_log",
-   "routed": true,
-   "calls": [
-    {
-     "stage": "plan",
-     "reply": {
-      "probes": [
-       {
-        "probe": "show",
-        "path": "perf/redis-caching"
-       }
-      ]
-     },
-     "seconds": 0.395
-    }
-   ],
-   "modelProbeChoice": false,
-   "plan": true,
-   "recall": 1,
-   "evidence": true,
-   "reading": null,
-   "raw": 39,
-   "returned": 54,
-   "seconds": 0.428,
-   "probes": [
-    "git log -n50 perf/redis-caching..origin/perf/redis-caching"
-   ]
-  },
-  {
-   "id": "dev-dev_18-line_colon",
-   "intent": "line_colon",
-   "routed": true,
-   "calls": [
-    {
-     "stage": "plan",
-     "reply": {
-      "probes": [
-       {
-        "probe": "show"
-       }
-      ]
-     },
-     "seconds": 0.395
-    }
-   ],
-   "modelProbeChoice": false,
-   "plan": true,
-   "recall": 1,
-   "evidence": true,
-   "reading": null,
-   "raw": 19,
-   "returned": 26,
-   "seconds": 0.405,
-   "probes": [
-    "git blame -L 20,20 -- pom.xml"
-   ]
-  },
-  {
-   "id": "dev-dev_18-line_number",
-   "intent": "line_number",
-   "routed": false,
-   "calls": [
-    {
-     "stage": "plan",
-     "reply": {
-      "probes": [
-       {
-        "probe": "blame",
-        "path": "pom.xml"
-       }
-      ]
-     },
-     "seconds": 0.404
-    }
-   ],
-   "modelProbeChoice": true,
-   "plan": true,
-   "recall": 1,
-   "evidence": true,
-   "reading": null,
-   "raw": 19,
-   "returned": 26,
-   "seconds": 0.419,
-   "probes": [
-    "git blame -L 20,20 -- pom.xml"
-   ]
-  },
-  {
-   "id": "dev-dev_18-line_span",
-   "intent": "line_span",
-   "routed": true,
-   "calls": [
-    {
-     "stage": "plan",
-     "reply": {
-      "probes": [
-       {
-        "probe": "blame",
-        "path": "pom.xml"
-       }
-      ]
-     },
-     "seconds": 0.346
-    }
-   ],
-   "modelProbeChoice": true,
-   "plan": true,
-   "recall": 1,
-   "evidence": true,
-   "reading": null,
-   "raw": 40,
-   "returned": 47,
-   "seconds": 0.356,
-   "probes": [
-    "git blame -L 19,20 -- pom.xml"
-   ]
-  },
-  {
-   "id": "dev-dev_18-range_diff",
-   "intent": "range_diff",
-   "routed": false,
-   "calls": [
-    {
-     "stage": "plan",
-     "reply": {
-      "probes": [
-       {
-        "probe": "diff",
-        "base": "main...feat/oauth2-flow"
-       }
-      ]
-     },
-     "seconds": 0.427
+     "seconds": 0.662
     },
     {
      "stage": "evidence",
@@ -3217,9 +3054,172 @@
    "recall": 1,
    "evidence": true,
    "reading": null,
+   "raw": 819,
+   "returned": 77,
+   "seconds": 1.341,
+   "probes": [
+    "git diff main...perf/redis-caching"
+   ]
+  },
+  {
+   "id": "dev-dev_17-range_log",
+   "intent": "range_log",
+   "routed": true,
+   "calls": [
+    {
+     "stage": "plan",
+     "reply": {
+      "probes": [
+       {
+        "probe": "show",
+        "path": "perf/redis-caching"
+       }
+      ]
+     },
+     "seconds": 0.64
+    }
+   ],
+   "modelProbeChoice": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 39,
+   "returned": 54,
+   "seconds": 0.679,
+   "probes": [
+    "git log -n50 perf/redis-caching..origin/perf/redis-caching"
+   ]
+  },
+  {
+   "id": "dev-dev_18-line_colon",
+   "intent": "line_colon",
+   "routed": true,
+   "calls": [
+    {
+     "stage": "plan",
+     "reply": {
+      "probes": [
+       {
+        "probe": "show"
+       }
+      ]
+     },
+     "seconds": 0.432
+    }
+   ],
+   "modelProbeChoice": false,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 19,
+   "returned": 26,
+   "seconds": 0.446,
+   "probes": [
+    "git blame -L 20,20 -- pom.xml"
+   ]
+  },
+  {
+   "id": "dev-dev_18-line_number",
+   "intent": "line_number",
+   "routed": false,
+   "calls": [
+    {
+     "stage": "plan",
+     "reply": {
+      "probes": [
+       {
+        "probe": "blame",
+        "path": "pom.xml"
+       }
+      ]
+     },
+     "seconds": 0.645
+    }
+   ],
+   "modelProbeChoice": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 19,
+   "returned": 26,
+   "seconds": 0.663,
+   "probes": [
+    "git blame -L 20,20 -- pom.xml"
+   ]
+  },
+  {
+   "id": "dev-dev_18-line_span",
+   "intent": "line_span",
+   "routed": true,
+   "calls": [
+    {
+     "stage": "plan",
+     "reply": {
+      "probes": [
+       {
+        "probe": "blame",
+        "path": "pom.xml"
+       }
+      ]
+     },
+     "seconds": 0.371
+    }
+   ],
+   "modelProbeChoice": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
+   "raw": 40,
+   "returned": 47,
+   "seconds": 0.384,
+   "probes": [
+    "git blame -L 19,20 -- pom.xml"
+   ]
+  },
+  {
+   "id": "dev-dev_18-range_diff",
+   "intent": "range_diff",
+   "routed": false,
+   "calls": [
+    {
+     "stage": "plan",
+     "reply": {
+      "probes": [
+       {
+        "probe": "diff",
+        "base": "main...feat/oauth2-flow"
+       }
+      ]
+     },
+     "seconds": 0.756
+    },
+    {
+     "stage": "evidence",
+     "reply": {
+      "lines": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     },
+     "seconds": 0.854
+    }
+   ],
+   "modelProbeChoice": true,
+   "plan": true,
+   "recall": 1,
+   "evidence": true,
+   "reading": null,
    "raw": 751,
    "returned": 83,
-   "seconds": 1.107,
+   "seconds": 1.696,
    "probes": [
     "git diff main...feat/oauth2-flow"
    ]
@@ -3239,7 +3239,7 @@
        }
       ]
      },
-     "seconds": 0.375
+     "seconds": 0.707
     },
     {
      "stage": "evidence",
@@ -3259,7 +3259,7 @@
        28
       ]
      },
-     "seconds": 0.63
+     "seconds": 0.67
     }
    ],
    "modelProbeChoice": false,
@@ -3269,7 +3269,7 @@
    "reading": null,
    "raw": 361,
    "returned": 304,
-   "seconds": 1.051,
+   "seconds": 1.432,
    "probes": [
     "git show HEAD",
     "git log -n50 main..feat/oauth2-flow~1"
@@ -3290,7 +3290,7 @@
        }
       ]
      },
-     "seconds": 0.439
+     "seconds": 0.478
     }
    ],
    "modelProbeChoice": true,
@@ -3300,7 +3300,7 @@
    "reading": null,
    "raw": 17,
    "returned": 25,
-   "seconds": 0.451,
+   "seconds": 0.498,
    "probes": [
     "git blame -L 5,5 -- pom.xml"
    ]
@@ -3320,7 +3320,7 @@
        }
       ]
      },
-     "seconds": 0.428
+     "seconds": 0.754
     }
    ],
    "modelProbeChoice": true,
@@ -3330,7 +3330,7 @@
    "reading": null,
    "raw": 17,
    "returned": 25,
-   "seconds": 0.446,
+   "seconds": 0.78,
    "probes": [
     "git blame -L 5,5 -- pom.xml"
    ]
@@ -3350,7 +3350,7 @@
        }
       ]
      },
-     "seconds": 0.679
+     "seconds": 0.929
     }
    ],
    "modelProbeChoice": true,
@@ -3360,7 +3360,7 @@
    "reading": null,
    "raw": 35,
    "returned": 42,
-   "seconds": 0.693,
+   "seconds": 0.946,
    "probes": [
     "git blame -L 4,5 -- pom.xml"
    ]
@@ -3381,7 +3381,7 @@
        }
       ]
      },
-     "seconds": 0.56
+     "seconds": 0.802
     },
     {
      "stage": "evidence",
@@ -3395,7 +3395,7 @@
        6
       ]
      },
-     "seconds": 0.091
+     "seconds": 0.397
     }
    ],
    "modelProbeChoice": true,
@@ -3405,7 +3405,7 @@
    "reading": null,
    "raw": 973,
    "returned": 90,
-   "seconds": 0.69,
+   "seconds": 1.243,
    "probes": [
     "git diff main...docs/quickstart"
    ]
@@ -3426,7 +3426,7 @@
        }
       ]
      },
-     "seconds": 0.779
+     "seconds": 1.033
     }
    ],
    "modelProbeChoice": true,
@@ -3436,7 +3436,7 @@
    "reading": null,
    "raw": 427,
    "returned": 436,
-   "seconds": 0.825,
+   "seconds": 1.085,
    "probes": [
     "git log -n50 main..docs/quickstart~1"
    ]

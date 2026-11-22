@@ -241,6 +241,12 @@ export async function gather(question, cwd, chat) {
     return key && item[key] !== undefined ? { probe: item.probe, [key]: item[key] } : { probe: item.probe };
   });
 
+  // "Which process is on port 5432?": the listener line already names the process and its PID, so an unnamed
+  // process list only adds noise, unless the question also asks about processes in general.
+  if (namedPort(question) && plan.some(item => item.probe === 'ports') && !/\b(?:cpu|memory|ram|running processes|all processes|processes running|busiest|top)\b/i.test(question)) {
+    plan = plan.filter(item => item.probe !== 'processes' || item.name);
+  }
+
   const results = [];
   for (const item of plan.slice(0, 3)) {
     const handler = PROBES[item.probe];

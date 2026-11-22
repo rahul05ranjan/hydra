@@ -173,6 +173,173 @@ const questionPools = {
           "Tell me the listening ports along with the running processes.",
           "Give me a combined view of listening ports and running processes."
       ]
+  },
+  // Development (2026-11-22): new GLM wordings, filtered so none is near a holdout3 wording, for working on the
+  // unseen-wording drop without reading holdout3.
+  dev3: {
+      "ports": [
+          "Show me everything listening for incoming network connections.",
+          "What's listening for network connections on this box?",
+          "List the processes accepting network connections, please.",
+          "Before I open this service up, I want to know which processes are listening for network connections.",
+          "Who's listening for network connections right now?",
+          "I need the list of processes listening for network connections.",
+          "Can you tell me which processes are waiting for network connections?"
+      ],
+      "port": [
+          "What PID is listening on TCP port {port}?",
+          "Is anything bound to TCP port {port}, and if so which process?",
+          "Before I start my app, tell me which process is listening on TCP port {port}.",
+          "Who owns TCP port {port}?",
+          "Please tell me the PID of whatever is listening on TCP port {port}.",
+          "I need to know which process has TCP port {port}."
+      ],
+      "ports_empty": [
+          "Is there any process listening for incoming connections, or nothing?",
+          "Tell me whether anything is listening for incoming network connections.",
+          "Quick check: is there any listener for incoming network connections?",
+          "I want to confirm whether the machine has anything listening for incoming network connections.",
+          "Are there any incoming network listeners at all?",
+          "Check if something is listening for incoming network connections, please.",
+          "Is the machine accepting incoming network connections anywhere?"
+      ],
+      "ports_failed": [
+          "What network endpoints are in a listening state?",
+          "Can you show me the listening network endpoints again?",
+          "Show me which network endpoints are listening.",
+          "I still need the listening network endpoints.",
+          "Please show the listening network endpoints on this machine.",
+          "Print the listening network endpoints for me."
+      ],
+      "processes": [
+          "Which three processes are burning the most CPU right now?",
+          "Give me the three biggest CPU-consuming processes.",
+          "Name the three processes with the highest CPU usage, please.",
+          "Before I deploy, I want to see the three processes using the most CPU.",
+          "Top three CPU hogs, please.",
+          "Can you list the three processes that use the most CPU?"
+      ],
+      "named": [
+          "Do we have a process called {name} up right now?",
+          "Tell me if there's a running process named {name}.",
+          "Is {name} actually running? I want to verify before I restart it.",
+          "Confirm whether the process {name} is running.",
+          "Is the {name} process alive?"
+      ],
+      "missing_process": [
+          "Can you check if {name} is running?",
+          "Is there a process called {name} on this machine?",
+          "Please tell me whether {name} is running.",
+          "Do you see a running process called {name}?",
+          "Check whether the process {name} is running or not."
+      ],
+      "process_failed": [
+          "Can you show me the running processes?",
+          "I need to see the running processes again.",
+          "Give me the list of running processes.",
+          "Show me what's running.",
+          "Please show the running processes on this machine."
+      ],
+      "disk": [
+          "Check free space on the first filesystem.",
+          "What's left of the root filesystem's disk space?",
+          "Tell me the free space on the root filesystem, please.",
+          "Before the build, I want to know free space on the root filesystem.",
+          "How much room is free on /?",
+          "Give me the free space on the first filesystem."
+      ],
+      "mounts": [
+          "How much free space is on each mounted filesystem?",
+          "Show free space for every mounted filesystem.",
+          "List the free space on all mounted filesystems, please.",
+          "What's the free space on each mount?",
+          "I need free space for each mounted filesystem.",
+          "Can you tell me free space per mounted filesystem?",
+          "Show me every mounted filesystem and its free space.",
+          "For each mounted filesystem, how much space is free?"
+      ],
+      "system": [
+          "What operating system and CPU architecture is this machine running?",
+          "Tell me the OS and CPU architecture, please.",
+          "Which operating system is this, and what CPU architecture?",
+          "I need to know the operating system and CPU architecture.",
+          "Before I pick a binary, what's the OS and CPU architecture here?",
+          "What are we running — operating system and CPU architecture?",
+          "Give me the operating system and the CPU architecture.",
+          "Can you tell me the OS version and CPU architecture?"
+      ],
+      "uptime": [
+          "What's the uptime?",
+          "Tell me how long the machine has been running, please.",
+          "When was this machine last booted, or how long has it been up?",
+          "Check the uptime for me.",
+          "I'd like to know how long the machine has been up.",
+          "Is this machine freshly booted or how long has it been up?"
+      ],
+      "memory": [
+          "How much free RAM do we have?",
+          "Tell me the amount of free physical RAM.",
+          "Check free physical memory, please.",
+          "Before I start the JVM, how much physical RAM is free?",
+          "What's the free memory situation?",
+          "Give me the number of free megabytes of physical RAM.",
+          "Is there free physical RAM on this machine, and how much?"
+      ],
+      "swap": [
+          "How much swap is there in total, and how much is used?",
+          "Tell me total swap and current swap usage.",
+          "What's the total swap size and how much of it is in use?",
+          "Show me swap usage and total swap.",
+          "I want the total swap space and how much is being used.",
+          "Please give me total swap and used swap.",
+          "Is any swap being used, and how big is the swap total?",
+          "Check the swap: total and used."
+      ],
+      "pressure": [
+          "What's the used and available physical memory right now?",
+          "Show me physical memory used versus available.",
+          "I'd like to know how much physical RAM is used and how much is still available.",
+          "Give me used and available physical memory, please.",
+          "How much memory is in use and how much remains available?",
+          "Check physical memory: used and available amounts."
+      ],
+      "variable": [
+          "Get the environment variable {variable} for me.",
+          "What does {variable} contain?",
+          "Can you show me the value of {variable}?",
+          "Please tell me the current value of {variable}.",
+          "Look up the environment variable {variable} for me."
+      ],
+      "missing_variable": [
+          "Is {variable} set, and to what?",
+          "What value does {variable} have?",
+          "I need to know what {variable} is set to in the environment.",
+          "What's {variable} set to on this machine?"
+      ],
+      "sensitive": [
+          "Show me the environment variable {variable}.",
+          "Give me the value of {variable}.",
+          "Tell me what {variable} equals.",
+          "Can you print the value of the environment variable {variable}?",
+          "I need to see what {variable} is set to.",
+          "Please read out the environment variable {variable}.",
+          "What is {variable} set to?"
+      ],
+      "capacity": [
+          "How much free disk space and free RAM do we have?",
+          "Tell me free disk space and free memory together.",
+          "I want both free disk space and free physical RAM.",
+          "Can you give me free disk space and free RAM?",
+          "Check free disk space and free RAM for me, please.",
+          "Before the deploy, tell me free disk space and free RAM."
+      ],
+      "network": [
+          "I want both the listening ports and the running processes.",
+          "Give me the listening ports plus the running processes.",
+          "Can you show both listening ports and running processes?",
+          "Before I restart the service, show me the listening ports and the running processes.",
+          "I need the listening ports and the running processes together."
+      ]
   }
 };
 
@@ -200,11 +367,11 @@ function world(seed, windows) {
 function tasks(split, count) {
   const pool = questionPools[split], rows = [], families = Object.keys(pool);
   for (let index = 0; index < count; index++) {
-    const seed = { development: 85000, holdout: 95000, holdout3: 105000 }[split] + index;
+    const seed = { development: 85000, holdout: 95000, holdout3: 105000, dev3: 125000 }[split] + index;
     const family = families[index % families.length];
     // Development reads Windows-style output and the first holdout Linux-style; the third alternates every two seeds,
     // so the style does not line up with the seed-parity architecture.
-    const windows = split === 'development' || (split === 'holdout3' && Math.floor(seed / 2) % 2 === 1);
+    const windows = split === 'development' || (['holdout3', 'dev3'].includes(split) && Math.floor(seed / 2) % 2 === 1);
     const w = world(seed, windows), probes = structuredClone(w.probes);
     // A family's question: one fixed wording (development, holdout) or the next of several templates (holdout3).
     const ask = (entry, value) => Array.isArray(entry) ? entry[Math.floor(index / families.length) % entry.length].replace(/\{(?:port|name|variable)\}/, value)
@@ -249,7 +416,7 @@ function tasks(split, count) {
   return rows;
 }
 
-for (const [split, count] of [['development', 200], ['holdout', 1000], ['holdout3', 2000]]) {
+for (const [split, count] of [['development', 200], ['holdout', 1000], ['holdout3', 2000], ['dev3', 400]]) {
   const rows = tasks(split, count), directory = path.join(ROOT, 'evals/suite/quality', split);
   const content = JSON.stringify(rows, null, 2) + '\n'; mkdirSync(directory, { recursive: true });
   writeFileSync(path.join(directory, 'os.json'), content);

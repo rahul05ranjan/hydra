@@ -600,3 +600,19 @@ test('hydra run prints a short output alone and footers only a real saving', () 
   const long = hydra('for (let i = 0; i < 400; i++) console.log("ok " + i + " passes"); console.log("Tests: 400 passed")');
   assert.match(long, /All tests passed\.[\s\S]*\n\n\[hydra test · read ~\d+ tok locally, returned ~\d+ tok · [\d.]+s\]\n$/);
 });
+
+test('a question about one port reads the listener line, without an unnamed process list', async () => {
+  const saved = { ports: osHead.PROBES.ports.cmd, processes: osHead.PROBES.processes.cmd };
+  osHead.PROBES.ports.cmd = async () => ({ ok: true, out: 'Netid State Recv-Q Send-Q LocalAddress PeerAddress Process\ntcp LISTEN 0 128 0.0.0.0:53033 0.0.0.0:* users:(("worker12",pid=6033,fd=7))' });
+  osHead.PROBES.processes.cmd = async () => ({ ok: true, out: 'PID %CPU %MEM COMMAND\n  6033 3.0 2.0 worker12' });
+  try {
+    const plan = async (question, probes) => (await osHead.gather(question, process.cwd(), async () => ({ probes }))).map(s => s.cmd);
+    assert.deepEqual(await plan('Is anything bound to TCP port 53033, and if so which process?', [{ probe: 'ports' }, { probe: 'processes' }]), ['os ports']);
+    // A named process, or a question that also asks about processes in general, keeps its process probe.
+    assert.deepEqual(await plan('Is postgres the one on port 53033?', [{ probe: 'ports' }, { probe: 'processes', name: 'postgres' }]), ['os ports', 'os processes --name=postgres']);
+    assert.deepEqual(await plan('What is on port 53033, and which processes use the most CPU?', [{ probe: 'ports' }, { probe: 'processes' }]), ['os ports', 'os processes']);
+  } finally {
+    Object.assign(osHead.PROBES.ports, { cmd: saved.ports });
+    Object.assign(osHead.PROBES.processes, { cmd: saved.processes });
+  }
+});

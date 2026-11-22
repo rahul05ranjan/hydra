@@ -107,24 +107,29 @@ def main():
         import tempfile
         import time
         dataset_id = f'{username}/hydra-holdout3-eval-input'
+        local = digest(STAGING / 'dataset/plan.json')
         for _ in range(60):
             status = subprocess.run([*kaggle, 'datasets', 'status', dataset_id], capture_output=True, text=True).stdout
             if 'ready' in status.split():
-                break
+                with tempfile.TemporaryDirectory() as folder:
+                    got = subprocess.run([*kaggle, 'datasets', 'download', dataset_id, '-f', 'plan.json', '-p', folder, '--unzip'], capture_output=True)
+                    remote = next(Path(folder).rglob('plan.json'), None)
+                    if got.returncode == 0 and remote and digest(remote) == local:
+                        print(json.dumps({'ready': True, 'remotePlanSha256': local, 'match': True}))
+                        return
             time.sleep(10)
-        else:
-            raise SystemExit(f'Dataset not ready: {status.strip()[-200:]}')
-        with tempfile.TemporaryDirectory() as folder:
-            subprocess.run([*kaggle, 'datasets', 'download', dataset_id, '-f', 'plan.json', '-p', folder, '--unzip'], check=True, capture_output=True)
-            remote = next(Path(folder).rglob('plan.json'))
-            local = STAGING / 'dataset/plan.json'
-            print(json.dumps({'ready': True, 'remotePlanSha256': digest(remote), 'localPlanSha256': digest(local), 'match': digest(remote) == digest(local)}))
+        raise SystemExit('The remote dataset never served this plan; do not push the kernel.')
+    if args.action == 'upload':
+        # The first upload creates the dataset; later ones add a version to it.
+        dataset_id = f'{username}/hydra-holdout3-eval-input'
+        exists = subprocess.run([*kaggle, 'datasets', 'status', dataset_id], capture_output=True, text=True).returncode == 0
+        verb = ['datasets', 'version', '-p', str(STAGING / 'dataset'), '-m', 'holdout3 rescore'] if exists else ['datasets', 'create', '-p', str(STAGING / 'dataset')]
+        subprocess.run([*kaggle, *verb], check=True)
         return
     if args.action == 'run' and not args.approved:
         parser.error('Requires the user\'s approval: one private Kaggle T4, up to 2 hours, evaluation only')
     kernel_id = f'{username}/hydra-holdout3-evaluation'
-    commands = {'upload': ['datasets', 'create', '-p', str(STAGING / 'dataset')],
-        'run': ['kernels', 'push', '-p', str(STAGING / 'kernel'), '--accelerator', 'NvidiaTeslaT4', '--timeout', str(TIMEOUT)],
+    commands = {'run': ['kernels', 'push', '-p', str(STAGING / 'kernel'), '--accelerator', 'NvidiaTeslaT4', '--timeout', str(TIMEOUT)],
         'status': ['kernels', 'status', kernel_id],
         'output': ['kernels', 'output', kernel_id, '-p', str(ROOT / 'evals/results/suite/holdout3'), '--force']}
     subprocess.run([sys.executable, '-X', 'utf8', '-m', 'kaggle', *commands[args.action]], check=True)

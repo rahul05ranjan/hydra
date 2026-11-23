@@ -50,7 +50,7 @@ model-index:
     metrics:
     - type: accuracy
       name: Solved
-      value: 96.1
+      value: 98.2
   - task:
       type: text-generation
       name: Test and build log digestion (Test head)
@@ -71,6 +71,31 @@ model-index:
     - type: accuracy
       name: Solved
       value: 100.0
+  - task:
+      type: text-generation
+      name: All five heads, fresh wordings
+    dataset:
+      type: hydra/holdout3
+      name: Holdout 3 (10,000 tasks, 2,000 per head)
+    metrics:
+    - type: accuracy
+      name: Solved, all heads
+      value: 97.87
+    - type: accuracy
+      name: Solved, Git
+      value: 97.2
+    - type: accuracy
+      name: Solved, Files
+      value: 98.1
+    - type: accuracy
+      name: Solved, Read
+      value: 97.55
+    - type: accuracy
+      name: Solved, Test
+      value: 97.5
+    - type: accuracy
+      name: Solved, OS
+      value: 99.0
   - task:
       type: text-generation
       name: Function calling (BFCL v4, non-live AST)
@@ -225,11 +250,26 @@ All figures are end-to-end Hydra results: the task counts as solved only when th
 |---|---|---|---|
 | **Git** | 200/200 · extended 800/800 · paraphrase 800/800 | **963/1,000 (96.3%)** sealed `git1`; 96.17% usage-weighted | Sealed set never used for training or tuning; only its aggregate score was read. |
 | **Files** | 192/200 (96.0%) | **980/1,000 (98.0%)** | Real CPython, Node.js, Go and Rust sources. |
-| **Read** | 199/200 (99.5%) | **961/1,000 (96.1%)** | Most tasks are answered by deterministic slicing with no model call. |
+| **Read** | 199/200 (99.5%) | **982/1,000 (98.2%)** | Most tasks are answered by deterministic slicing with no model call. Was 961/1,000 (96.1%) before fixes found on development data only. |
 | **Test** | 200/200 · extended 572/572 · dev2 1,380/1,380 | **975/1,000 (97.5%)** holdout 2 | Small failure regions are returned whole; the model is called only for long ones (50 of 1,000). The first Test holdout (944/1,000) was scored while tuning, so a fresh one was built and frozen before scoring. Needs Hydra code from 2026-10-16 or later. |
 | **OS** | 200/200 · extended 397/400 (99.25%) | **1,000/1,000 (100%)** | Probe outputs are synthetic Windows/macOS/Linux fixtures, not live host runs. |
 
-- **Hardware.** All rows ran locally on an Apple Silicon laptop with llama.cpp b11563. The same GGUF scored 927/1,000 on the sealed set on an NVIDIA T4 with the earlier Hydra code.
+### 10,000 fresh tasks (holdout 3)
+
+A third held-out set, 2,000 per head, with new seeds, source files and wordings (Git and OS wordings written by a different model). It was built before scoring and run once on an NVIDIA T4 with the same Q8_0 GGUF; only aggregates were read.
+
+| Head | Solved |
+|---|---|
+| **Git** | **1,944/2,000 (97.2%)** |
+| **Files** | **1,962/2,000 (98.1%)** |
+| **Read** | **1,951/2,000 (97.6%)** |
+| **Test** | **1,950/2,000 (97.5%)** |
+| **OS** | **1,980/2,000 (99.0%)** |
+| **All** | **9,787/10,000 (97.9%)**, zero errors |
+
+These are Hydra 0.3.6 scores. With 0.3.5 code, Git scored 94.2% and OS 98.0% on these wordings; both were fixed using separate development sets, without reading holdout 3's failures. Receipt: [`holdout3-summary.json`](https://github.com/rahul05ranjan/hydra/blob/main/evals/results/suite/holdout3/holdout3-summary.json).
+
+- **Hardware.** All rows in the first table ran locally on an Apple Silicon laptop with llama.cpp b11563. The same GGUF scored 927/1,000 on the sealed set on an NVIDIA T4 with the earlier Hydra code.
 - **Latency.** The median model call takes about 0.07 s for Files and OS on the Apple Silicon laptop.
 - **Separation.** Development, held-out and training data come from separate generators, seeds and phrasings. Held-out failures were never inspected.
 - **Receipts.** Every row has a JSON receipt in the [Hydra repository](https://github.com/rahul05ranjan/hydra/tree/main/evals/results/suite).

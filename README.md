@@ -84,7 +84,18 @@ Through MCP, Hydra offers the three where it pays most: `hydra_git`, `hydra_run`
 | OS (held out, synthetic probe outputs) | 1,000 | **100%** |
 | Test-log benchmark across 8 frameworks | 20 | **20/20**, 50% fewer tokens |
 
-A third held-out set of **10,000 fresh tasks** (2,000 per head, new seeds, source files and wordings, scored on a Kaggle T4): Files 98.1%, Read 97.6%, Test 97.5%, OS 99.0%, Git 97.2%, **97.9% overall** (0.3.6; on 0.3.5 Git was 94.2% and OS 98.0%, lower on wordings they had not seen, and fixed using separate development sets).
+**10,000 fresh tasks.** A third held-out set, 2,000 per head, with new seeds, source files and wordings, built before scoring and run once on a Kaggle T4:
+
+| Head | Tasks | Solved |
+|---|---|---|
+| Git | 2,000 | **97.2%** |
+| Files | 2,000 | **98.1%** |
+| Read | 2,000 | **97.6%** |
+| Test logs | 2,000 | **97.5%** |
+| OS | 2,000 | **99.0%** |
+| **All** | **10,000** | **97.9%** |
+
+These are 0.3.6 scores. On 0.3.5, Git scored 94.2% and OS 98.0% on wordings they had not seen. Both were fixed using separate development sets, not this one.
 
 Receipts: [model card](https://huggingface.co/rahul05ranjan/hydra-nano-git) and [`evals/results`](https://github.com/rahul05ranjan/hydra/tree/main/evals/results).
 

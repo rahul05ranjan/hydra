@@ -1,4 +1,5 @@
-"""Full parameter SFT of a local, standard-HF text checkpoint. Preflight never trains."""
+"""SFT of a local, standard-HF text checkpoint: every parameter (--method full) or low-rank adapters
+merged back into the weights (--method lora). Preflight never trains."""
 import argparse
 from datetime import datetime, timezone
 import gc
@@ -242,8 +243,86 @@ class CpuAdamW:
         self.optimizer.zero_grad(set_to_none=True)
 
 
+# The 6 full-attention layers, the MLP, and the 18 linear-attention layers' large projections.
+LORA_TARGETS = ['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj',
+                'in_proj_qkv', 'in_proj_z', 'out_proj']
+
+
+def _lora_linear():
+    import torch
+
+    class LoraLinear(torch.nn.Module):
+        """A frozen Linear plus a trainable low-rank update B @ A, scaled by alpha / rank. B starts at
+        zero, so a fresh adapter leaves the model's output exactly as it was."""
+
+        def __init__(self, base, rank, alpha):
+            super().__init__()
+            self.base, self.scale = base, alpha / rank
+            weight = base.weight
+            self.lora_a = torch.nn.Parameter(torch.empty(rank, base.in_features, device=weight.device, dtype=torch.float32))
+            self.lora_b = torch.nn.Parameter(torch.zeros(base.out_features, rank, device=weight.device, dtype=torch.float32))
+            torch.nn.init.kaiming_uniform_(self.lora_a, a=math.sqrt(5))
+
+        def forward(self, x):
+            update = torch.nn.functional.linear(torch.nn.functional.linear(x, self.lora_a.to(x.dtype)), self.lora_b.to(x.dtype))
+            return self.base(x) + update * self.scale
+
+    return LoraLinear
+
+
+_LORA_CLASS = None
+
+
+def __getattr__(name):
+    # LoraLinear needs torch, which preflight never imports; build the class on first use.
+    global _LORA_CLASS
+    if name == 'LoraLinear':
+        _LORA_CLASS = _LORA_CLASS or _lora_linear()
+        return _LORA_CLASS
+    raise AttributeError(name)
+
+
+def tensor_shapes(model):
+    return {name: tuple(t.shape) for name, t in model.state_dict().items()}
+
+
+def apply_lora(model, targets, rank, alpha):
+    """Freeze every parameter and wrap each Linear whose name ends in a target. Returns the wrapped
+    module names; a target that matches no Linear is refused rather than silently skipped."""
+    import torch
+    lora = __getattr__('LoraLinear')
+    for parameter in model.parameters():
+        parameter.requires_grad_(False)
+    chosen = [(name, module) for name, module in model.named_modules()
+              if isinstance(module, torch.nn.Linear) and name.rsplit('.', 1)[-1] in targets]
+    missing = set(targets) - {name.rsplit('.', 1)[-1] for name, _ in chosen}
+    if missing:
+        raise ValueError(f'LoRA targets match no layer: {sorted(missing)}')
+    for name, module in chosen:
+        parent_name, _, child = name.rpartition('.')
+        setattr(model.get_submodule(parent_name) if parent_name else model, child, lora(module, rank, alpha))
+    return [name for name, _ in chosen]
+
+
+def merge_lora(model):
+    """Fold each adapter into its base weight and put the plain Linear back. Returns the count."""
+    import torch
+    lora = __getattr__('LoraLinear')
+    wrapped = [(name, module) for name, module in model.named_modules() if isinstance(module, lora)]
+    with torch.no_grad():
+        for name, module in wrapped:
+            weight = module.base.weight
+            weight.add_((module.lora_b.float() @ module.lora_a.float() * module.scale).to(weight.dtype))
+            parent_name, _, child = name.rpartition('.')
+            setattr(model.get_submodule(parent_name) if parent_name else model, child, module.base)
+    return len(wrapped)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--method', choices=['full', 'lora'], default='full')
+    parser.add_argument('--lora-rank', type=int, default=16)
+    parser.add_argument('--lora-alpha', type=int, default=16)
     parser.add_argument('--checkpoint', type=Path, required=True)
     parser.add_argument('--checkpoint-manifest', type=Path, required=True)
     parser.add_argument('--data', type=Path, required=True)
@@ -265,8 +344,8 @@ def main():
     args = parser.parse_args()
     if not args.preflight and not args.approved:
         parser.error('Full training needs explicit approval, checkpoint/data hashes and a bounded GPU run notice')
-    if min(args.max_seconds, args.steps, args.max_length, args.accumulation) <= 0 or args.learning_rate <= 0 \
-            or args.min_host_available_gb < 0:
+    if min(args.max_seconds, args.steps, args.max_length, args.accumulation, args.lora_rank, args.lora_alpha) <= 0 \
+            or args.learning_rate <= 0 or args.min_host_available_gb < 0:
         parser.error('Training limits must be positive')
     if not math.isfinite(args.initial_scale) or args.initial_scale <= 0:
         parser.error('Initial gradient scale must be finite and positive')
@@ -279,15 +358,18 @@ def main():
     # Preserve the hash-pinned tokenizer regex; no automatic Mistral patch on Qwen exports.
     tokenizer = AutoTokenizer.from_pretrained(args.checkpoint, local_files_only=True, fix_mistral_regex=False)
     examples = [encode_example(tokenizer, row['messages'], args.max_length, row.get('tools'), row.get('head')) for row in rows]
+    lora = args.method == 'lora'
     receipt = {'timestamp': datetime.now(timezone.utc).isoformat(), 'head': args.head,
-        'method': 'full-parameter-supervised-fine-tuning', 'trainingStarted': False,
+        'method': 'lora-supervised-fine-tuning-merged' if lora else 'full-parameter-supervised-fine-tuning',
+        'trainingStarted': False,
         'checkpointManifest': checkpoint_spec, 'dataManifest': data_spec,
         'examples': len(examples), 'maximumTokens': max(len(row['input_ids']) for row in examples),
         'chatEOS': tokenizer.eos_token_id, 'stepsRequested': args.steps,
         'maxSeconds': args.max_seconds, 'accumulation': args.accumulation,
         'learningRate': args.learning_rate, 'lossMethod': 'assistant-selected-logits',
-        'optimizer': 'cpu-adamw-fp32',
+        'optimizer': 'adamw-fp32-adapters' if lora else 'cpu-adamw-fp32',
         'initialGradientScale': args.initial_scale,
+        **({'lora': {'rank': args.lora_rank, 'alpha': args.lora_alpha, 'targets': LORA_TARGETS}} if lora else {}),
         'maximumSupervisedTokens': max(sum(v != -100 for v in row['labels'][1:]) for row in examples)}
     if args.preflight:
         args.output.mkdir(parents=True, exist_ok=True)
@@ -308,16 +390,34 @@ def main():
         raise RuntimeError('Checkpoint loading is incomplete; refusing to train randomly initialized/mismapped weights')
     model = model.to('cuda')
     model.config.use_cache = False
-    model.gradient_checkpointing_enable()
     model.train()
-    for parameter in model.parameters():
-        parameter.requires_grad_(True)
-    total = sum(p.numel() for p in model.parameters())
-    trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    if total != trainable:
-        raise RuntimeError('Expected every text backbone parameter to train')
-    # Keep all text parameters trainable on CUDA, with FP32 AdamW states on CPU.
-    optimizer = CpuAdamW(model.parameters(), lr=args.learning_rate, weight_decay=0.01)
+    if lora:
+        # The base is frozen, so reentrant checkpointing would see no input needing a gradient
+        # and give the adapters none; the non-reentrant kind does not depend on that.
+        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant': False})
+        layout = tensor_shapes(model)
+        total = sum(p.numel() for p in model.parameters())
+        wrapped = apply_lora(model, LORA_TARGETS, args.lora_rank, args.lora_alpha)
+        trained = [p for p in model.parameters() if p.requires_grad]
+        trainable = sum(p.numel() for p in trained)
+        if not trainable or any(not n.endswith(('.lora_a', '.lora_b')) for n, p in model.named_parameters() if p.requires_grad):
+            raise RuntimeError('Expected only LoRA adapters to train')
+        # Adapters are about 1% of the model, so plain AdamW on the GPU holds their state.
+        optimizer = torch.optim.AdamW(trained, lr=args.learning_rate, weight_decay=0.0, foreach=False)
+        unscale_target = optimizer
+        receipt['lora']['wrappedModules'] = len(wrapped)
+    else:
+        model.gradient_checkpointing_enable()
+        for parameter in model.parameters():
+            parameter.requires_grad_(True)
+        trained = list(model.parameters())
+        total = sum(p.numel() for p in model.parameters())
+        trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        if total != trainable:
+            raise RuntimeError('Expected every text backbone parameter to train')
+        # Keep all text parameters trainable on CUDA, with FP32 AdamW states on CPU.
+        optimizer = CpuAdamW(model.parameters(), lr=args.learning_rate, weight_decay=0.01)
+        unscale_target = optimizer.gradient_optimizer
     scaler = torch.amp.GradScaler('cuda', init_scale=args.initial_scale)
     optimizer.zero_grad(set_to_none=True)
     args.output.mkdir(parents=True, exist_ok=True)
@@ -355,8 +455,8 @@ def main():
                         raise RuntimeError('Non-finite forward loss; loss scaling cannot repair it')
                     total_loss += float(loss.detach())
                     scaler.scale(loss / args.accumulation).backward()
-                scaler.unscale_(optimizer.gradient_optimizer)
-                norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                scaler.unscale_(unscale_target)
+                norm = torch.nn.utils.clip_grad_norm_(trained, 1.0)
                 scale = scaler.get_scale()
                 receipt['gradientScaleHistory'].append({'step': step, 'attempt': attempt, 'scale': scale,
                     'norm': float(norm) if torch.isfinite(norm) else 'non-finite'})
@@ -383,11 +483,17 @@ def main():
         receipt['trainingSeconds'] = time.monotonic() - training_begin
         receipt['peakMemoryBytes'] = torch.cuda.max_memory_allocated()
         if not receipt['completedSteps']:
-            raise RuntimeError('No full-parameter optimization step completed')
+            raise RuntimeError('No optimization step completed')
         # The CPU weight copies, moments and gradient buffers (about four times the model) are
         # done with; free them before the save needs host memory of its own.
-        del optimizer
+        del optimizer, unscale_target
         gc.collect()
+        if lora:
+            # Fold the adapters into the weights so the checkpoint has the starting layout and
+            # converts and runs like any other; the adapters themselves are not shipped.
+            receipt['lora']['mergedModules'] = merge_lora(model)
+            if tensor_shapes(model) != layout:
+                raise RuntimeError('Merged checkpoint layout differs from the starting checkpoint')
         # Complete standalone text weights, not an adapter. No publication/default switch.
         model.to('cpu', dtype=torch.float16)
         model.save_pretrained(args.output, safe_serialization=True)

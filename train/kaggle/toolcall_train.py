@@ -46,13 +46,20 @@ def main():
             '--steps', str(plan['steps']), '--max-seconds', str(plan['trainerSeconds']),
             '--max-length', str(plan['maxLength']), '--accumulation', str(plan['accumulation']),
             '--learning-rate', str(plan['learningRate']), '--initial-scale', str(plan['initialScale']),
-            '--sample-seed', str(plan['sampleSeed'])],
+            '--sample-seed', str(plan['sampleSeed']), '--method', plan.get('method', 'full'),
+            *(['--lora-rank', str(plan['loraRank']), '--lora-alpha', str(plan['loraAlpha'])]
+              if plan.get('method') == 'lora' else [])],
             env={**os.environ, 'CUDA_VISIBLE_DEVICES': '0', 'HF_HUB_OFFLINE': '1'},
             stdout=log, stderr=subprocess.STDOUT).returncode
     receipt_file = candidate / 'training-receipt.json'
     receipt = json.loads(receipt_file.read_text()) if receipt_file.exists() else {}
-    if code or not receipt.get('checkpointSaved') or receipt.get('trainableParameters') != receipt.get('totalParameters'):
-        raise RuntimeError(f'Training did not save a complete full-parameter checkpoint (exit {code})')
+    if plan.get('method') == 'lora':
+        lora = receipt.get('lora') or {}
+        complete = receipt.get('checkpointSaved') and lora.get('wrappedModules') and lora.get('mergedModules') == lora.get('wrappedModules')
+    else:
+        complete = receipt.get('checkpointSaved') and receipt.get('trainableParameters') == receipt.get('totalParameters')
+    if code or not complete:
+        raise RuntimeError(f'Training did not save a complete {plan.get("method", "full")} checkpoint (exit {code})')
     # Ship the same chat and generation files as v2 so the candidate converts and runs like it.
     for name in ('chat_template.jinja', 'generation_config.json'):
         shutil.copyfile(start / name, candidate / name)

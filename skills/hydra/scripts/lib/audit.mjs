@@ -15,10 +15,10 @@ const mode = file => { try { return (statSync(file).mode & 0o777).toString(8).pa
 const backupOf = file => (existsSync(`${file}.before-hydra`) ? `${file}.before-hydra` : null);
 const loopback = url => { try { return ['127.0.0.1', 'localhost', '::1', '[::1]'].includes(new URL(url).hostname); } catch { return false; } };
 
-/** The managed server's process, if the pid file names a live one. */
-function serverPid() {
+/** A managed server's process (`server` or `embed`), if its pid file names a live one. */
+function serverPid(name = 'server') {
   try {
-    const pid = Number(readFileSync(path.join(home(), 'server.pid'), 'utf8'));
+    const pid = Number(readFileSync(path.join(home(), `${name}.pid`), 'utf8'));
     process.kill(pid, 0);
     return pid;
   } catch {
@@ -60,8 +60,14 @@ export function audit() {
       url: llamaUrl, loopback: loopback(llamaUrl), managed: Boolean(config.managed), pid: serverPid(),
       binary: config.server ?? null, model: config.modelPath ?? null, modelSha256: manifest.model?.sha256 ?? null,
     },
+    embed: manifest.embed ? {
+      model: path.join(home(), 'models', `${manifest.embed.sha256}.gguf`), sha256: manifest.embed.sha256,
+      installed: existsSync(path.join(home(), 'models', `${manifest.embed.sha256}.gguf`)),
+      url: 'http://127.0.0.1:11436', pid: serverPid('embed'), index: path.join(home(), 'index'), indexExists: existsSync(path.join(home(), 'index')),
+    } : null,
     network: [
       { when: 'install and hydra self-update reinstalls', to: [...installHosts, 'registry.npmjs.org (the skills CLI and the hydra-nano package)'] },
+      ...(manifest.embed ? [{ when: 'hydra embed install (optional)', to: [new URL(manifest.embed.url).host] }] : []),
       { when: 'hydra self-update and self-update --check', to: [process.env.HYDRA_REGISTRY ? new URL(process.env.HYDRA_REGISTRY).host : 'registry.npmjs.org'] },
       { when: 'every other command, hook and MCP call', to: [`the model server at ${llamaUrl}`] },
     ],
@@ -106,6 +112,12 @@ export function render(report) {
   row('address', `${report.server.url}${report.server.loopback ? ' (this machine only)' : ' (NOT this machine)'}`);
   row('process', report.server.pid ? `running, pid ${report.server.pid}` : 'not running (starts on the next call)');
   if (report.server.model) row('model', `${report.server.model} (pinned SHA-256 ${report.server.modelSha256?.slice(0, 12)}…)`);
+  if (report.embed) {
+    out.push('', 'Embedding model for hydra recall and search --meaning (optional):');
+    row('model', report.embed.installed ? `${report.embed.model} (pinned SHA-256 ${report.embed.sha256.slice(0, 12)}…)` : 'not installed (hydra embed install)');
+    if (report.embed.installed) row('process', report.embed.pid ? `running on ${report.embed.url}, pid ${report.embed.pid}` : 'not running (starts on the next recall)');
+    if (report.embed.indexExists) row('index cache', `${report.embed.index} (rebuildable; delete to clear)`);
+  }
   out.push('', 'Network:');
   for (const n of report.network) out.push(`  ${n.when}:`, `    ${n.to.join(', ')}`);
   out.push('', 'Telemetry:');

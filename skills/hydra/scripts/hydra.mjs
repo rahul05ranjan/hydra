@@ -14,7 +14,7 @@ import * as osHead from './lib/os.mjs';
 import { findings, metered, record, stats, tokens, usageByTool } from './lib/ledger.mjs';
 import { chat, hasModel, BACKEND, modelFor, Unavailable } from './lib/runtime.mjs';
 import { route } from './lib/route.mjs';
-import { stopLocal } from './lib/local.mjs';
+import { stopLocal, stopEmbed, ownServer, localConfig, embedModelPath } from './lib/local.mjs';
 import { hookStatus, installHooks, removeHooks } from './lib/claude_hooks.mjs';
 import * as integrations from './lib/integrations.mjs';
 import * as refactor from './lib/refactor.mjs';
@@ -26,6 +26,9 @@ const HEADS = { git, files, test: test_logs, read, os: osHead };
 const USAGE = `usage:
   hydra ask "<question>" [--head git|files|test|read|os] answer a question about the repo or system
   hydra search <term...>                               search codebase with definition ranking
+  hydra search --meaning "<question>" [-k N]           find code by what it does (needs hydra embed install)
+  hydra recall "<question>" [-k N]                     the project's markdown notes that answer it (needs hydra embed install)
+  hydra embed install|status|stop                      the optional EmbeddingGemma 2 model (about 310 MB) for the two above
   hydra read <file> [symbol|--lines <start-end>]       slice a file, symbol, or show outline
   hydra smell [file|dir|--diff|--staged]               detect Refactoring.Guru code smells & anti-patterns
   hydra refactor <file> [symbol|--lines <start-end>]   step-by-step refactoring recipe for a function or range
@@ -186,7 +189,59 @@ async function osCommand(args) {
   console.log(withFooter(text, 'os', raw, returned, seconds));
 }
 
+// Pull `-k N` out of args; the rest is the question.
+function takeK(args, fallback) {
+  const at = args.findIndex((a) => a === '-k' || a === '--k');
+  if (at < 0) return fallback;
+  const k = Number(args[at + 1]);
+  if (!Number.isInteger(k) || k < 1 || k > 20) fail(1, '-k takes a whole number from 1 to 20');
+  args.splice(at, 2);
+  return k;
+}
+
+async function meaningCommand(args, kind) {
+  const { query, render } = await import('./lib/recall.mjs');
+  const k = takeK(args, kind === 'notes' ? 5 : 3);
+  const question = args.join(' ').trim();
+  if (!question) fail(1, kind === 'notes' ? 'usage: hydra recall "<question>" [-k N]' : 'usage: hydra search --meaning "<question>" [-k N]');
+  const cwd = process.cwd();
+  const started = Date.now();
+  let shown = false;
+  const result = await query(cwd, question, { kind, k, onProgress: (n, total) => {
+    if (!shown && total > 0) { process.stderr.write(`hydra: indexing ${total} chunks (only changed files are re-indexed next time)\n`); shown = true; }
+  } });
+  const text = render(cwd, result, { kind });
+  const raw = tokens(result.rawChars);
+  const returned = tokens(text.length);
+  const seconds = Number(((Date.now() - started) / 1000).toFixed(2));
+  const head = kind === 'notes' ? 'recall' : 'files';
+  record({ ts: new Date().toISOString(), head, question: kind === 'notes' ? `recall ${question}` : `search --meaning ${question}`, raw, returned, seconds });
+  console.log(withFooter(text, head, raw, returned, seconds));
+}
+
+async function embedCommand(args) {
+  const { manifestEmbed } = await import('./lib/recall.mjs');
+  const artifact = manifestEmbed();
+  const file = embedModelPath(artifact.sha256);
+  const action = args[0];
+  if (action === 'install') {
+    const { download } = await import('./lib/bootstrap.mjs');
+    console.log(`Downloading/verifying ${artifact.name}, ${artifact.license} (${artifact.size} bytes)...`);
+    await download(artifact, file);
+    return console.log(`Installed at ${file}. Try: hydra recall "what is the current state?"`);
+  }
+  if (action === 'status') {
+    const config = localConfig();
+    console.log(`model   ${existsSync(file) ? `installed (${file})` : 'not installed (hydra embed install)'}`);
+    return console.log(`server  ${config.managed && ownServer(config, 'embed') ? 'running on 127.0.0.1:11436' : 'not running (starts on first use)'}`);
+  }
+  if (action === 'stop') return console.log(stopEmbed() ? 'Hydra embedding server stopped.' : 'No Hydra embedding server is running.');
+  fail(1, 'usage: hydra embed install|status|stop');
+}
+
 async function searchCommand(args) {
+  const meaning = args.indexOf('--meaning');
+  if (meaning >= 0) { args.splice(meaning, 1); return meaningCommand(args, 'code'); }
   const query = args.join(' ').trim();
   if (!query) fail(1, USAGE);
 
@@ -497,7 +552,12 @@ const commands = {
   improve: () => improve(rest),
   doctor,
   setup,
-  stop: () => console.log(stopLocal() ? 'Hydra local server stopped.' : 'No managed Hydra server is running.'),
+  recall: () => meaningCommand(rest, 'notes'),
+  embed: () => embedCommand(rest),
+  stop: () => {
+    console.log(stopLocal() ? 'Hydra local server stopped.' : 'No managed Hydra server is running.');
+    if (stopEmbed()) console.log('Hydra embedding server stopped.');
+  },
   hooks: () => hooksCommand(rest[0]),
   agents: () => agentsCommand(rest),
   mcp: () => import('./mcp.mjs').then(server => server.serve()),

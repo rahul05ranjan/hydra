@@ -1,0 +1,122 @@
+{
+  "scope": "Check set for memory recall, written on 2026-11-24 after the recency delta (0.03) was fixed on evals/memory/questions.json and before this set was run. Not to be used for tuning. The first 8 ask for facts that changed over time (an older version is also in the notes); the other 12 are general. `gold` is a verbatim phrase from the note that answers. After its one run, 4 questions gained an `also` phrase where a returned note answered in other words (label fix, no method change); strict scores are reported too.",
+  "files": [
+    "TRACKER.md",
+    "IMPROVEMENTS.md",
+    "docs/how-it-works.md"
+  ],
+  "questions": [
+    {
+      "kind": "changed",
+      "question": "What does the Git head score now on the third holdout?",
+      "gold": "Git 97.2% (was 94.2%)",
+      "also": [
+        "Git 1,944/2,000 (97.2%, was 94.2%)"
+      ]
+    },
+    {
+      "kind": "changed",
+      "question": "Which Hydra version did the user most recently publish to npm?",
+      "gold": "The user published 0.3.7"
+    },
+    {
+      "kind": "changed",
+      "question": "What is the Read head's held-out score after the parser fixes?",
+      "gold": "Read held-out, scored once afterwards: 982/1,000 (98.2%"
+    },
+    {
+      "kind": "changed",
+      "question": "Did the LoRA tool-calling run finish training?",
+      "gold": "v4 LoRA training COMPLETE"
+    },
+    {
+      "kind": "changed",
+      "question": "Which Hydra release is installed on this Mac right now?",
+      "gold": "`hydra self-update` brought this Mac to 0.3.6"
+    },
+    {
+      "kind": "changed",
+      "question": "In real use, is the git head still costing more tokens than plain git?",
+      "gold": "8 of 8 git calls over raw"
+    },
+    {
+      "kind": "changed",
+      "question": "What is the OS head's score on the third holdout these days?",
+      "gold": "OS 99.0% (was 98.0%)",
+      "also": [
+        "OS 1,980/2,000 (99.0%, was 98.0%)"
+      ]
+    },
+    {
+      "kind": "changed",
+      "question": "Is the ledger backup that still had unmasked secrets still on disk?",
+      "gold": "deleted `~/.hydra/ledger.jsonl.before-mask-2026-11-20`"
+    },
+    {
+      "kind": "general",
+      "question": "How was the sealed git test set generated?",
+      "gold": "50 generated repositories, 20 kinds of question"
+    },
+    {
+      "kind": "general",
+      "question": "Below what size does Hydra skip the model and hand back the output untouched?",
+      "gold": "Output up to 800 characters is returned whole",
+      "also": [
+        "Output under 800 characters is handed over whole"
+      ]
+    },
+    {
+      "kind": "general",
+      "question": "Why aren't unattended GPU jobs run on Colab?",
+      "gold": "unattended runs stay on Kaggle because they are scripted"
+    },
+    {
+      "kind": "general",
+      "question": "On Windows, why did running npm test through hydra return an empty failure?",
+      "gold": "could not execute the npm batch shim"
+    },
+    {
+      "kind": "general",
+      "question": "Where do the model cards for the Hugging Face repos live in this repo?",
+      "gold": "Model cards for all five Hub repos live in `hub/`"
+    },
+    {
+      "kind": "general",
+      "question": "How close was the existing trainer's first-batch loss to the FP32 reference?",
+      "gold": "`full_finetune.py` baseline 0.28293"
+    },
+    {
+      "kind": "general",
+      "question": "How does Files scoring treat a match that is only in a filename or a comment?",
+      "gold": "reject filename/comment impostors"
+    },
+    {
+      "kind": "general",
+      "question": "Why did the model card go up with the write token instead of the Hugging Face connector?",
+      "gold": "refused a direct commit (403)"
+    },
+    {
+      "kind": "general",
+      "question": "How would we know an agent inside T3 Code reached Hydra?",
+      "gold": "`from t3code`"
+    },
+    {
+      "kind": "general",
+      "question": "Are the OS head's tests run against real Windows and Linux commands?",
+      "gold": "OS coverage uses safe synthetic command outputs"
+    },
+    {
+      "kind": "general",
+      "question": "How much GPU memory did the CPU-offloaded full fine-tune use at its peak?",
+      "gold": "Peak GPU allocation 8,084,201,984 bytes"
+    },
+    {
+      "kind": "general",
+      "question": "Which Hub revision is the published Hydra Nano v2 pinned to?",
+      "gold": "8129125fad1c664bbb58ebd3238f6598c879eb23",
+      "also": [
+        "Hub revision `8129125f`"
+      ]
+    }
+  ]
+}

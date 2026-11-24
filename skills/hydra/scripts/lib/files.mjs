@@ -68,7 +68,7 @@ async function scanWithRg(cwd, terms) {
   };
 }
 
-async function* walk(dir, root = dir) {
+export async function* walk(dir, root = dir) {
   const entries = await readdir(dir, { withFileTypes: true }).catch(() => []);
   for (const entry of entries.sort((a, b) => (a.name < b.name ? -1 : 1))) {
     if (entry.name.startsWith('.') || SKIP.has(entry.name)) continue;

@@ -1,0 +1,1172 @@
+{
+ "suite": "memory-dev",
+ "set": "check",
+ "delta": 0.03,
+ "datedChunks": 228,
+ "model": "embeddinggemma-2 Q8_0 (2188ac1d)",
+ "tasks": 20,
+ "files": [
+  "TRACKER.md",
+  "IMPROVEMENTS.md",
+  "docs/how-it-works.md"
+ ],
+ "chunks": 553,
+ "fileTokens": 65437,
+ "indexSeconds": 0.002,
+ "seconds": 0.182,
+ "note": "hitK = a chunk containing the gold phrase is among the top K. Tokens are characters / 4; fileTokens is reading every file whole.",
+ "summary": {
+  "keyword": {
+   "hit1": 5,
+   "hit3": 10,
+   "hit5": 10,
+   "hit10": 12,
+   "strictHit5": 9,
+   "mrr": 0.383,
+   "meanTokensTop3": 572,
+   "meanTokensTop5": 958
+  },
+  "embedding-search": {
+   "hit1": 6,
+   "hit3": 11,
+   "hit5": 12,
+   "hit10": 15,
+   "strictHit5": 9,
+   "mrr": 0.443,
+   "meanTokensTop3": 520,
+   "meanTokensTop5": 809
+  },
+  "embedding-qa": {
+   "hit1": 6,
+   "hit3": 9,
+   "hit5": 12,
+   "hit10": 13,
+   "strictHit5": 9,
+   "mrr": 0.416,
+   "meanTokensTop3": 518,
+   "meanTokensTop5": 806
+  },
+  "hybrid": {
+   "hit1": 6,
+   "hit3": 10,
+   "hit5": 15,
+   "hit10": 18,
+   "strictHit5": 12,
+   "mrr": 0.467,
+   "meanTokensTop3": 611,
+   "meanTokensTop5": 991
+  },
+  "hybrid-newer": {
+   "hit1": 7,
+   "hit3": 14,
+   "hit5": 15,
+   "hit10": 17,
+   "strictHit5": 11,
+   "mrr": 0.539,
+   "meanTokensTop3": 603,
+   "meanTokensTop5": 998
+  }
+ },
+ "rows": [
+  {
+   "question": "What does the Git head score now on the third holdout?",
+   "gold": "Git 97.2% (was 94.2%)",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 11,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:7",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 1304,
+    "tokens5": 1688
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:686",
+     "IMPROVEMENTS.md:29"
+    ],
+    "tokens3": 1056,
+    "tokens5": 1764
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": null,
+    "top": [
+     "IMPROVEMENTS.md:29",
+     "TRACKER.md:686"
+    ],
+    "tokens3": 1056,
+    "tokens5": 1649
+   },
+   "hybrid": {
+    "rank": 4,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:9",
+     "TRACKER.md:677"
+    ],
+    "tokens3": 1023,
+    "tokens5": 2090
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:9",
+     "IMPROVEMENTS.md:29"
+    ],
+    "tokens3": 1348,
+    "tokens5": 1868
+   }
+  },
+  {
+   "question": "Which Hydra version did the user most recently publish to npm?",
+   "gold": "The user published 0.3.7",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:751",
+     "TRACKER.md:735"
+    ],
+    "tokens3": 418,
+    "tokens5": 673
+   },
+   "embedding-search": {
+    "rank": 9,
+    "strictRank": 9,
+    "top": [
+     "TRACKER.md:708",
+     "TRACKER.md:749"
+    ],
+    "tokens3": 276,
+    "tokens5": 559
+   },
+   "embedding-qa": {
+    "rank": 9,
+    "strictRank": 9,
+    "top": [
+     "TRACKER.md:708",
+     "TRACKER.md:749"
+    ],
+    "tokens3": 276,
+    "tokens5": 559
+   },
+   "hybrid": {
+    "rank": 19,
+    "strictRank": 19,
+    "top": [
+     "TRACKER.md:751",
+     "TRACKER.md:735"
+    ],
+    "tokens3": 352,
+    "tokens5": 607
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:760",
+     "TRACKER.md:757"
+    ],
+    "tokens3": 425,
+    "tokens5": 694
+   }
+  },
+  {
+   "question": "What is the Read head's held-out score after the parser fixes?",
+   "gold": "Read held-out, scored once afterwards: 982/1,000 (98.2%",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:39",
+     "TRACKER.md:746"
+    ],
+    "tokens3": 1295,
+    "tokens5": 2053
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:39",
+     "IMPROVEMENTS.md:29"
+    ],
+    "tokens3": 1289,
+    "tokens5": 2168
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:39",
+     "IMPROVEMENTS.md:29"
+    ],
+    "tokens3": 1432,
+    "tokens5": 2168
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:39",
+     "TRACKER.md:746"
+    ],
+    "tokens3": 1269,
+    "tokens5": 1885
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:39",
+     "IMPROVEMENTS.md:29"
+    ],
+    "tokens3": 1213,
+    "tokens5": 1971
+   }
+  },
+  {
+   "question": "Did the LoRA tool-calling run finish training?",
+   "gold": "v4 LoRA training COMPLETE",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 11,
+    "strictRank": 11,
+    "top": [
+     "TRACKER.md:761",
+     "TRACKER.md:253"
+    ],
+    "tokens3": 476,
+    "tokens5": 1557
+   },
+   "embedding-search": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:762",
+     "TRACKER.md:779"
+    ],
+    "tokens3": 515,
+    "tokens5": 798
+   },
+   "embedding-qa": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:262",
+     "TRACKER.md:779"
+    ],
+    "tokens3": 419,
+    "tokens5": 798
+   },
+   "hybrid": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:761",
+     "TRACKER.md:762"
+    ],
+    "tokens3": 611,
+    "tokens5": 961
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:762",
+     "TRACKER.md:764"
+    ],
+    "tokens3": 707,
+    "tokens5": 1149
+   }
+  },
+  {
+   "question": "Which Hydra release is installed on this Mac right now?",
+   "gold": "`hydra self-update` brought this Mac to 0.3.6",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:751",
+     "TRACKER.md:754"
+    ],
+    "tokens3": 507,
+    "tokens5": 661
+   },
+   "embedding-search": {
+    "rank": 22,
+    "strictRank": 22,
+    "top": [
+     "IMPROVEMENTS.md:12",
+     "TRACKER.md:751"
+    ],
+    "tokens3": 757,
+    "tokens5": 1022
+   },
+   "embedding-qa": {
+    "rank": 19,
+    "strictRank": 19,
+    "top": [
+     "IMPROVEMENTS.md:12",
+     "TRACKER.md:751"
+    ],
+    "tokens3": 757,
+    "tokens5": 1062
+   },
+   "hybrid": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:751",
+     "TRACKER.md:732"
+    ],
+    "tokens3": 460,
+    "tokens5": 613
+   },
+   "hybrid-newer": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:751",
+     "TRACKER.md:757"
+    ],
+    "tokens3": 514,
+    "tokens5": 692
+   }
+  },
+  {
+   "question": "In real use, is the git head still costing more tokens than plain git?",
+   "gold": "8 of 8 git calls over raw",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "IMPROVEMENTS.md:63",
+     "IMPROVEMENTS.md:22"
+    ],
+    "tokens3": 544,
+    "tokens5": 791
+   },
+   "embedding-search": {
+    "rank": 24,
+    "strictRank": 24,
+    "top": [
+     "IMPROVEMENTS.md:16",
+     "TRACKER.md:186"
+    ],
+    "tokens3": 191,
+    "tokens5": 303
+   },
+   "embedding-qa": {
+    "rank": 24,
+    "strictRank": 24,
+    "top": [
+     "IMPROVEMENTS.md:16",
+     "TRACKER.md:186"
+    ],
+    "tokens3": 191,
+    "tokens5": 252
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "IMPROVEMENTS.md:22",
+     "TRACKER.md:778"
+    ],
+    "tokens3": 671,
+    "tokens5": 1208
+   },
+   "hybrid-newer": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "IMPROVEMENTS.md:48",
+     "IMPROVEMENTS.md:22"
+    ],
+    "tokens3": 654,
+    "tokens5": 942
+   }
+  },
+  {
+   "question": "What is the OS head's score on the third holdout these days?",
+   "gold": "OS 99.0% (was 98.0%)",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 12,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:7",
+     "TRACKER.md:26"
+    ],
+    "tokens3": 896,
+    "tokens5": 1751
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": null,
+    "top": [
+     "IMPROVEMENTS.md:29",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 1064,
+    "tokens5": 1678
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": null,
+    "top": [
+     "IMPROVEMENTS.md:29",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 1064,
+    "tokens5": 1678
+   },
+   "hybrid": {
+    "rank": 3,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:9",
+     "TRACKER.md:747"
+    ],
+    "tokens3": 1348,
+    "tokens5": 2231
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:9",
+     "IMPROVEMENTS.md:29"
+    ],
+    "tokens3": 1348,
+    "tokens5": 2231
+   }
+  },
+  {
+   "question": "Is the ledger backup that still had unmasked secrets still on disk?",
+   "gold": "deleted `~/.hydra/ledger.jsonl.before-mask-2026-11-20`",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 6,
+    "strictRank": 6,
+    "top": [
+     "TRACKER.md:774",
+     "docs/how-it-works.md:12"
+    ],
+    "tokens3": 962,
+    "tokens5": 1472
+   },
+   "embedding-search": {
+    "rank": 10,
+    "strictRank": 10,
+    "top": [
+     "TRACKER.md:774",
+     "IMPROVEMENTS.md:45"
+    ],
+    "tokens3": 533,
+    "tokens5": 947
+   },
+   "embedding-qa": {
+    "rank": 11,
+    "strictRank": 11,
+    "top": [
+     "TRACKER.md:774",
+     "IMPROVEMENTS.md:45"
+    ],
+    "tokens3": 533,
+    "tokens5": 947
+   },
+   "hybrid": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:774",
+     "IMPROVEMENTS.md:80"
+    ],
+    "tokens3": 1094,
+    "tokens5": 1533
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:774",
+     "TRACKER.md:755"
+    ],
+    "tokens3": 740,
+    "tokens5": 1526
+   }
+  },
+  {
+   "question": "How was the sealed git test set generated?",
+   "gold": "50 generated repositories, 20 kinds of question",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:513",
+     "TRACKER.md:140"
+    ],
+    "tokens3": 214,
+    "tokens5": 336
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "docs/how-it-works.md:163",
+     "TRACKER.md:140"
+    ],
+    "tokens3": 108,
+    "tokens5": 167
+   },
+   "embedding-qa": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "docs/how-it-works.md:163",
+     "TRACKER.md:140"
+    ],
+    "tokens3": 108,
+    "tokens5": 167
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:140",
+     "docs/how-it-works.md:163"
+    ],
+    "tokens3": 149,
+    "tokens5": 220
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:140",
+     "docs/how-it-works.md:163"
+    ],
+    "tokens3": 149,
+    "tokens5": 220
+   }
+  },
+  {
+   "question": "Below what size does Hydra skip the model and hand back the output untouched?",
+   "gold": "Output up to 800 characters is returned whole",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 24,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:697",
+     "TRACKER.md:18"
+    ],
+    "tokens3": 488,
+    "tokens5": 696
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": null,
+    "top": [
+     "docs/how-it-works.md:27",
+     "TRACKER.md:217"
+    ],
+    "tokens3": 80,
+    "tokens5": 222
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": null,
+    "top": [
+     "docs/how-it-works.md:27",
+     "TRACKER.md:217"
+    ],
+    "tokens3": 77,
+    "tokens5": 222
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "IMPROVEMENTS.md:65",
+     "docs/how-it-works.md:27"
+    ],
+    "tokens3": 261,
+    "tokens5": 656
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "IMPROVEMENTS.md:65",
+     "docs/how-it-works.md:27"
+    ],
+    "tokens3": 261,
+    "tokens5": 478
+   }
+  },
+  {
+   "question": "Why aren't unattended GPU jobs run on Colab?",
+   "gold": "unattended runs stay on Kaggle because they are scripted",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:256",
+     "TRACKER.md:562"
+    ],
+    "tokens3": 201,
+    "tokens5": 514
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:256",
+     "TRACKER.md:252"
+    ],
+    "tokens3": 282,
+    "tokens5": 642
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:256",
+     "TRACKER.md:252"
+    ],
+    "tokens3": 282,
+    "tokens5": 642
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:256",
+     "TRACKER.md:698"
+    ],
+    "tokens3": 206,
+    "tokens5": 503
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:256",
+     "TRACKER.md:758"
+    ],
+    "tokens3": 794,
+    "tokens5": 966
+   }
+  },
+  {
+   "question": "On Windows, why did running npm test through hydra return an empty failure?",
+   "gold": "could not execute the npm batch shim",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:69",
+     "docs/how-it-works.md:11"
+    ],
+    "tokens3": 586,
+    "tokens5": 931
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:470",
+     "TRACKER.md:69"
+    ],
+    "tokens3": 293,
+    "tokens5": 431
+   },
+   "embedding-qa": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:470",
+     "TRACKER.md:69"
+    ],
+    "tokens3": 293,
+    "tokens5": 431
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:69",
+     "TRACKER.md:470"
+    ],
+    "tokens3": 279,
+    "tokens5": 400
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:69",
+     "TRACKER.md:470"
+    ],
+    "tokens3": 407,
+    "tokens5": 750
+   }
+  },
+  {
+   "question": "Where do the model cards for the Hugging Face repos live in this repo?",
+   "gold": "Model cards for all five Hub repos live in `hub/`",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 13,
+    "strictRank": 13,
+    "top": [
+     "TRACKER.md:633",
+     "TRACKER.md:760"
+    ],
+    "tokens3": 326,
+    "tokens5": 468
+   },
+   "embedding-search": {
+    "rank": 13,
+    "strictRank": 13,
+    "top": [
+     "docs/how-it-works.md:7",
+     "TRACKER.md:633"
+    ],
+    "tokens3": 189,
+    "tokens5": 338
+   },
+   "embedding-qa": {
+    "rank": 24,
+    "strictRank": 24,
+    "top": [
+     "docs/how-it-works.md:7",
+     "TRACKER.md:633"
+    ],
+    "tokens3": 218,
+    "tokens5": 378
+   },
+   "hybrid": {
+    "rank": 9,
+    "strictRank": 9,
+    "top": [
+     "TRACKER.md:633",
+     "docs/how-it-works.md:7"
+    ],
+    "tokens3": 288,
+    "tokens5": 427
+   },
+   "hybrid-newer": {
+    "rank": 13,
+    "strictRank": 13,
+    "top": [
+     "TRACKER.md:760",
+     "TRACKER.md:633"
+    ],
+    "tokens3": 288,
+    "tokens5": 427
+   }
+  },
+  {
+   "question": "How close was the existing trainer's first-batch loss to the FP32 reference?",
+   "gold": "`full_finetune.py` baseline 0.28293",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:702",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 418,
+    "tokens5": 760
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:702",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 437,
+    "tokens5": 700
+   },
+   "embedding-qa": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:702",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 437,
+    "tokens5": 760
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:702",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 418,
+    "tokens5": 760
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:702",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 418,
+    "tokens5": 870
+   }
+  },
+  {
+   "question": "How does Files scoring treat a match that is only in a filename or a comment?",
+   "gold": "reject filename/comment impostors",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:27",
+     "TRACKER.md:107"
+    ],
+    "tokens3": 277,
+    "tokens5": 337
+   },
+   "embedding-search": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:206",
+     "docs/how-it-works.md:9"
+    ],
+    "tokens3": 45,
+    "tokens5": 153
+   },
+   "embedding-qa": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:206",
+     "docs/how-it-works.md:9"
+    ],
+    "tokens3": 71,
+    "tokens5": 153
+   },
+   "hybrid": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "TRACKER.md:206",
+     "TRACKER.md:194"
+    ],
+    "tokens3": 450,
+    "tokens5": 748
+   },
+   "hybrid-newer": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:206",
+     "TRACKER.md:194"
+    ],
+    "tokens3": 325,
+    "tokens5": 1208
+   }
+  },
+  {
+   "question": "Why did the model card go up with the write token instead of the Hugging Face connector?",
+   "gold": "refused a direct commit (403)",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:760",
+     "TRACKER.md:633"
+    ],
+    "tokens3": 326,
+    "tokens5": 893
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:760",
+     "IMPROVEMENTS.md:25"
+    ],
+    "tokens3": 717,
+    "tokens5": 801
+   },
+   "embedding-qa": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "IMPROVEMENTS.md:25",
+     "IMPROVEMENTS.md:19"
+    ],
+    "tokens3": 616,
+    "tokens5": 801
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:760",
+     "TRACKER.md:94"
+    ],
+    "tokens3": 712,
+    "tokens5": 1320
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:760",
+     "TRACKER.md:94"
+    ],
+    "tokens3": 712,
+    "tokens5": 1113
+   }
+  },
+  {
+   "question": "How would we know an agent inside T3 Code reached Hydra?",
+   "gold": "`from t3code`",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 6,
+    "strictRank": 6,
+    "top": [
+     "IMPROVEMENTS.md:20",
+     "docs/how-it-works.md:28"
+    ],
+    "tokens3": 521,
+    "tokens5": 780
+   },
+   "embedding-search": {
+    "rank": 9,
+    "strictRank": 9,
+    "top": [
+     "IMPROVEMENTS.md:20",
+     "TRACKER.md:734"
+    ],
+    "tokens3": 510,
+    "tokens5": 539
+   },
+   "embedding-qa": {
+    "rank": 11,
+    "strictRank": 11,
+    "top": [
+     "IMPROVEMENTS.md:20",
+     "TRACKER.md:734"
+    ],
+    "tokens3": 510,
+    "tokens5": 556
+   },
+   "hybrid": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "IMPROVEMENTS.md:20",
+     "TRACKER.md:734"
+    ],
+    "tokens3": 521,
+    "tokens5": 781
+   },
+   "hybrid-newer": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "IMPROVEMENTS.md:20",
+     "TRACKER.md:734"
+    ],
+    "tokens3": 521,
+    "tokens5": 781
+   }
+  },
+  {
+   "question": "Are the OS head's tests run against real Windows and Linux commands?",
+   "gold": "OS coverage uses safe synthetic command outputs",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:479",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 665,
+    "tokens5": 893
+   },
+   "embedding-search": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:479",
+     "TRACKER.md:465"
+    ],
+    "tokens3": 179,
+    "tokens5": 299
+   },
+   "embedding-qa": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:479",
+     "docs/how-it-works.md:30"
+    ],
+    "tokens3": 179,
+    "tokens5": 262
+   },
+   "hybrid": {
+    "rank": 10,
+    "strictRank": 10,
+    "top": [
+     "TRACKER.md:479",
+     "TRACKER.md:470"
+    ],
+    "tokens3": 165,
+    "tokens5": 270
+   },
+   "hybrid-newer": {
+    "rank": 11,
+    "strictRank": 11,
+    "top": [
+     "TRACKER.md:479",
+     "TRACKER.md:470"
+    ],
+    "tokens3": 165,
+    "tokens5": 270
+   }
+  },
+  {
+   "question": "How much GPU memory did the CPU-offloaded full fine-tune use at its peak?",
+   "gold": "Peak GPU allocation 8,084,201,984 bytes",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 12,
+    "strictRank": 12,
+    "top": [
+     "TRACKER.md:722",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 583,
+    "tokens5": 904
+   },
+   "embedding-search": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "TRACKER.md:47",
+     "TRACKER.md:48"
+    ],
+    "tokens3": 820,
+    "tokens5": 1339
+   },
+   "embedding-qa": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:47",
+     "TRACKER.md:48"
+    ],
+    "tokens3": 794,
+    "tokens5": 1339
+   },
+   "hybrid": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:722",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 761,
+    "tokens5": 1175
+   },
+   "hybrid-newer": {
+    "rank": 9,
+    "strictRank": 9,
+    "top": [
+     "TRACKER.md:726",
+     "TRACKER.md:722"
+    ],
+    "tokens3": 705,
+    "tokens5": 1252
+   }
+  },
+  {
+   "question": "Which Hub revision is the published Hydra Nano v2 pinned to?",
+   "gold": "8129125fad1c664bbb58ebd3238f6598c879eb23",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:695",
+     "docs/how-it-works.md:38"
+    ],
+    "tokens3": 428,
+    "tokens5": 993
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:7",
+     "TRACKER.md:685"
+    ],
+    "tokens3": 1067,
+    "tokens5": 1302
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:7",
+     "TRACKER.md:685"
+    ],
+    "tokens3": 1053,
+    "tokens5": 1302
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 3,
+    "top": [
+     "docs/how-it-works.md:38",
+     "TRACKER.md:685"
+    ],
+    "tokens3": 1180,
+    "tokens5": 1426
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 8,
+    "top": [
+     "docs/how-it-works.md:38",
+     "TRACKER.md:744"
+    ],
+    "tokens3": 360,
+    "tokens5": 561
+   }
+  }
+ ]
+}

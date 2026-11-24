@@ -1,0 +1,142 @@
+{
+  "scope": "Development only. Recall questions over this repository's own notes (TRACKER.md, IMPROVEMENTS.md, docs/how-it-works.md), written by hand on 2026-11-24 the way a new agent session would ask. `gold` is a verbatim phrase that must appear in a returned chunk. No evals/git1 input is used. `also` lists further verbatim phrases that answer the question equally; added after the first run, where a retrieved chunk answered but lacked the original phrase. The runner reports strict (gold only) and full scores.",
+  "files": [
+    "TRACKER.md",
+    "IMPROVEMENTS.md",
+    "docs/how-it-works.md"
+  ],
+  "questions": [
+    {
+      "question": "How can I push commits to GitHub from the agent's shell when SSH is refused?",
+      "gold": "credential.helper='!gh auth git-credential'"
+    },
+    {
+      "question": "Why has Codex never actually called Hydra on this Mac?",
+      "gold": "gpt-6-sol"
+    },
+    {
+      "question": "What overall score did the big 10k-task holdout get after it was rescored?",
+      "gold": "9,787/10,000 (97.9%)"
+    },
+    {
+      "question": "Why did we stop moving training over to Unsloth?",
+      "gold": "Gate 1 fails; no 200-update run."
+    },
+    {
+      "question": "Which irrelevance numbers does a new tool-calling candidate have to beat on BFCL?",
+      "gold": "The irrelevance scores to beat are 40.83 non-live and 28.05 live"
+    },
+    {
+      "question": "Why did publishing to npm fail with E404?",
+      "gold": "the npm token in `~/.npmrc` had expired"
+    },
+    {
+      "question": "Why doesn't the skill tell agents to use Hydra for searching or slicing source files anymore?",
+      "gold": "The skill recommended Hydra for code search and file slicing"
+    },
+    {
+      "question": "The full-parameter run kept running out of GPU memory after the first step; what change made it fit?",
+      "gold": "Implemented `CpuAdamW`"
+    },
+    {
+      "question": "Across past Claude Code transcripts, which kind of tool output used the most tokens?",
+      "gold": "`file_read` represents 75.5%",
+      "also": [
+        "`file_read` + `search` represent **90.2%"
+      ]
+    },
+    {
+      "question": "How is the small model's own sentence labelled so the calling agent doesn't trust it blindly?",
+      "gold": "`Local model says:`"
+    },
+    {
+      "question": "A question summarising dozens of upstream commits returned almost nothing; what was going on?",
+      "gold": "A git question about 58 commits came back with 3 tokens"
+    },
+    {
+      "question": "Why did a formatting check return thousands of tokens of the same error over and over?",
+      "gold": "agent worktrees under `.claude/worktrees/`"
+    },
+    {
+      "question": "Was the MiroFish simulation server left running with an API key exposed?",
+      "gold": "stopped the MiroFish backend"
+    },
+    {
+      "question": "After the git specialist, which head did the user pick to build next and why?",
+      "gold": "Next head after git is Test & Build Log Reader"
+    },
+    {
+      "question": "When should the next read of real-usage telemetry happen?",
+      "gold": "2026-11-29 10:07"
+    },
+    {
+      "question": "Why was the sealed git benchmark not scored for the extended-set checkpoint?",
+      "gold": "the 95% extended-set gate did not pass"
+    },
+    {
+      "question": "Masking secrets in the ledger a second time broke some rows; what is the underlying problem?",
+      "gold": "is not idempotent"
+    },
+    {
+      "question": "Which tools does Hydra's MCP server give other coding assistants?",
+      "gold": "three tools (`hydra_git`, `hydra_run`",
+      "also": [
+        "The MCP server offers three tools"
+      ]
+    },
+    {
+      "question": "Which inference engine does Hydra use by default, and how do I switch to Ollama?",
+      "gold": "The default runtime is llama.cpp",
+      "also": [
+        "(the default backend). [Ollama](https://ollama.com/download) is optional; select it with `HYDRA_BACKEND=ollama`"
+      ]
+    },
+    {
+      "question": "Has any non-Claude coding tool been seen calling Hydra through MCP for real?",
+      "gold": "OpenCode works."
+    },
+    {
+      "question": "Why are model-supplied arguments like author names only accepted if they appear in the question?",
+      "gold": "copied the name \"Asha\""
+    },
+    {
+      "question": "How much GPU memory did the LoRA run peak at?",
+      "gold": "peak 5.65 GiB"
+    },
+    {
+      "question": "How did meaning-based code search compare to keyword search in the embedding prototype?",
+      "gold": "keyword BM25 65/80, embedding 72/80"
+    },
+    {
+      "question": "What sealed score did the checkpoint from the final Git validation get?",
+      "gold": "sealed aggregate 927/1,000"
+    },
+    {
+      "question": "When agents were left to choose for themselves, how often did they pick Hydra?",
+      "gold": "natural adoption was 0/12"
+    },
+    {
+      "question": "Is the Hydra installer writing its MCP config into the right Antigravity app?",
+      "gold": "Hydra is installed into the wrong Antigravity"
+    },
+    {
+      "question": "Why do agents sometimes bypass the test hook with HYDRA_RAW=1?",
+      "gold": "Agents route around the test hook"
+    },
+    {
+      "question": "Why did Codex's config file end up readable by other users?",
+      "gold": "config rewrites widened 0600 files to 0644",
+      "also": [
+        "was 0600 before Hydra rewrote it"
+      ]
+    },
+    {
+      "question": "Which wordings of staged versus unstaged changes did the Git head misread in the third holdout?",
+      "gold": "\"aren't staged yet\""
+    },
+    {
+      "question": "Does the v4 training only change the method compared to v3, or also the data?",
+      "gold": "v4 trains the v3 mix with the v3 seed"
+    }
+  ]
+}

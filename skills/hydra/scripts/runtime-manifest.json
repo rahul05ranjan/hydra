@@ -59,5 +59,12 @@
   "nodeArtifact": {
     "url": "https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz",
     "sha256": "fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6"
+  },
+  "embed": {
+    "name": "EmbeddingGemma 2 (text, Q8_0)",
+    "license": "Apache-2.0",
+    "url": "https://huggingface.co/ggml-org/embeddinggemma-2-GGUF/resolve/6ea3e3a309d12a4779cfda98b8c19800d2d5da71/embeddinggemma-2-Q8_0.gguf",
+    "size": 309855456,
+    "sha256": "2188ac1deca4b77dffefd603c2776a9d76d9d74ec01841392982ebb840b09135"
   }
 }

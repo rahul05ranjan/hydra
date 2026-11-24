@@ -1,0 +1,1722 @@
+{
+ "suite": "memory-dev",
+ "set": "questions",
+ "delta": 0.03,
+ "datedChunks": 228,
+ "model": "embeddinggemma-2 Q8_0 (2188ac1d)",
+ "tasks": 30,
+ "files": [
+  "TRACKER.md",
+  "IMPROVEMENTS.md",
+  "docs/how-it-works.md"
+ ],
+ "chunks": 553,
+ "fileTokens": 65437,
+ "indexSeconds": 0.003,
+ "seconds": 0.262,
+ "note": "hitK = a chunk containing the gold phrase is among the top K. Tokens are characters / 4; fileTokens is reading every file whole.",
+ "summary": {
+  "keyword": {
+   "hit1": 9,
+   "hit3": 18,
+   "hit5": 23,
+   "hit10": 27,
+   "strictHit5": 19,
+   "mrr": 0.497,
+   "meanTokensTop3": 586,
+   "meanTokensTop5": 914
+  },
+  "embedding-search": {
+   "hit1": 10,
+   "hit3": 19,
+   "hit5": 22,
+   "hit10": 25,
+   "strictHit5": 18,
+   "mrr": 0.505,
+   "meanTokensTop3": 549,
+   "meanTokensTop5": 858
+  },
+  "embedding-qa": {
+   "hit1": 11,
+   "hit3": 18,
+   "hit5": 22,
+   "hit10": 24,
+   "strictHit5": 18,
+   "mrr": 0.513,
+   "meanTokensTop3": 509,
+   "meanTokensTop5": 838
+  },
+  "hybrid": {
+   "hit1": 12,
+   "hit3": 21,
+   "hit5": 24,
+   "hit10": 27,
+   "strictHit5": 20,
+   "mrr": 0.575,
+   "meanTokensTop3": 656,
+   "meanTokensTop5": 1003
+  },
+  "hybrid-newer": {
+   "hit1": 15,
+   "hit3": 22,
+   "hit5": 25,
+   "hit10": 28,
+   "strictHit5": 21,
+   "mrr": 0.65,
+   "meanTokensTop3": 618,
+   "meanTokensTop5": 1046
+  }
+ },
+ "rows": [
+  {
+   "question": "How can I push commits to GitHub from the agent's shell when SSH is refused?",
+   "gold": "credential.helper='!gh auth git-credential'",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:732",
+     "TRACKER.md:769"
+    ],
+    "tokens3": 366,
+    "tokens5": 766
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:769",
+     "IMPROVEMENTS.md:7"
+    ],
+    "tokens3": 409,
+    "tokens5": 688
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:769",
+     "TRACKER.md:758"
+    ],
+    "tokens3": 409,
+    "tokens5": 735
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:769",
+     "TRACKER.md:740"
+    ],
+    "tokens3": 644,
+    "tokens5": 940
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:769",
+     "TRACKER.md:758"
+    ],
+    "tokens3": 644,
+    "tokens5": 1005
+   }
+  },
+  {
+   "question": "Why has Codex never actually called Hydra on this Mac?",
+   "gold": "gpt-6-sol",
+   "goldChunks": 2,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "IMPROVEMENTS.md:35",
+     "TRACKER.md:758"
+    ],
+    "tokens3": 1021,
+    "tokens5": 1666
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "IMPROVEMENTS.md:11",
+     "IMPROVEMENTS.md:25"
+    ],
+    "tokens3": 1329,
+    "tokens5": 1821
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:25",
+     "IMPROVEMENTS.md:11"
+    ],
+    "tokens3": 1269,
+    "tokens5": 1616
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "IMPROVEMENTS.md:11",
+     "IMPROVEMENTS.md:25"
+    ],
+    "tokens3": 1225,
+    "tokens5": 1754
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:758",
+     "IMPROVEMENTS.md:25"
+    ],
+    "tokens3": 1024,
+    "tokens5": 1591
+   }
+  },
+  {
+   "question": "What overall score did the big 10k-task holdout get after it was rescored?",
+   "gold": "9,787/10,000 (97.9%)",
+   "goldChunks": 2,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:9",
+     "IMPROVEMENTS.md:29"
+    ],
+    "tokens3": 1616,
+    "tokens5": 1915
+   },
+   "embedding-search": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:747",
+     "TRACKER.md:692"
+    ],
+    "tokens3": 752,
+    "tokens5": 1169
+   },
+   "embedding-qa": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:747",
+     "TRACKER.md:692"
+    ],
+    "tokens3": 628,
+    "tokens5": 795
+   },
+   "hybrid": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:692",
+     "TRACKER.md:691"
+    ],
+    "tokens3": 955,
+    "tokens5": 1626
+   },
+   "hybrid-newer": {
+    "rank": 6,
+    "strictRank": 6,
+    "top": [
+     "TRACKER.md:759",
+     "TRACKER.md:756"
+    ],
+    "tokens3": 567,
+    "tokens5": 1201
+   }
+  },
+  {
+   "question": "Why did we stop moving training over to Unsloth?",
+   "gold": "Gate 1 fails; no 200-update run.",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:252",
+     "TRACKER.md:698"
+    ],
+    "tokens3": 200,
+    "tokens5": 554
+   },
+   "embedding-search": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:252",
+     "TRACKER.md:254"
+    ],
+    "tokens3": 293,
+    "tokens5": 653
+   },
+   "embedding-qa": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "TRACKER.md:252",
+     "TRACKER.md:254"
+    ],
+    "tokens3": 293,
+    "tokens5": 653
+   },
+   "hybrid": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:252",
+     "TRACKER.md:254"
+    ],
+    "tokens3": 192,
+    "tokens5": 551
+   },
+   "hybrid-newer": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:252",
+     "TRACKER.md:254"
+    ],
+    "tokens3": 192,
+    "tokens5": 551
+   }
+  },
+  {
+   "question": "Which irrelevance numbers does a new tool-calling candidate have to beat on BFCL?",
+   "gold": "The irrelevance scores to beat are 40.83 non-live and 28.05 live",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:788",
+     "TRACKER.md:779"
+    ],
+    "tokens3": 587,
+    "tokens5": 1077
+   },
+   "embedding-search": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:728",
+     "TRACKER.md:783"
+    ],
+    "tokens3": 836,
+    "tokens5": 1058
+   },
+   "embedding-qa": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:783",
+     "TRACKER.md:728"
+    ],
+    "tokens3": 836,
+    "tokens5": 1058
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:788",
+     "TRACKER.md:779"
+    ],
+    "tokens3": 617,
+    "tokens5": 1134
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:788",
+     "TRACKER.md:779"
+    ],
+    "tokens3": 617,
+    "tokens5": 1134
+   }
+  },
+  {
+   "question": "Why did publishing to npm fail with E404?",
+   "gold": "the npm token in `~/.npmrc` had expired",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:731",
+     "TRACKER.md:757"
+    ],
+    "tokens3": 368,
+    "tokens5": 579
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:731",
+     "TRACKER.md:757"
+    ],
+    "tokens3": 368,
+    "tokens5": 561
+   },
+   "embedding-qa": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:731",
+     "TRACKER.md:757"
+    ],
+    "tokens3": 368,
+    "tokens5": 700
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:731",
+     "TRACKER.md:757"
+    ],
+    "tokens3": 368,
+    "tokens5": 567
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:757",
+     "TRACKER.md:731"
+    ],
+    "tokens3": 368,
+    "tokens5": 671
+   }
+  },
+  {
+   "question": "Why doesn't the skill tell agents to use Hydra for searching or slicing source files anymore?",
+   "gold": "The skill recommended Hydra for code search and file slicing",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:62",
+     "docs/how-it-works.md:148"
+    ],
+    "tokens3": 210,
+    "tokens5": 775
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:62",
+     "IMPROVEMENTS.md:12"
+    ],
+    "tokens3": 523,
+    "tokens5": 552
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:62",
+     "IMPROVEMENTS.md:12"
+    ],
+    "tokens3": 523,
+    "tokens5": 733
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:62",
+     "docs/how-it-works.md:148"
+    ],
+    "tokens3": 506,
+    "tokens5": 928
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:62",
+     "docs/how-it-works.md:148"
+    ],
+    "tokens3": 701,
+    "tokens5": 1224
+   }
+  },
+  {
+   "question": "The full-parameter run kept running out of GPU memory after the first step; what change made it fit?",
+   "gold": "Implemented `CpuAdamW`",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:253",
+     "TRACKER.md:48"
+    ],
+    "tokens3": 654,
+    "tokens5": 1012
+   },
+   "embedding-search": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "TRACKER.md:719",
+     "TRACKER.md:722"
+    ],
+    "tokens3": 597,
+    "tokens5": 1002
+   },
+   "embedding-qa": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:719",
+     "TRACKER.md:722"
+    ],
+    "tokens3": 597,
+    "tokens5": 1002
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:48",
+     "TRACKER.md:539"
+    ],
+    "tokens3": 641,
+    "tokens5": 943
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:48",
+     "TRACKER.md:722"
+    ],
+    "tokens3": 776,
+    "tokens5": 956
+   }
+  },
+  {
+   "question": "Across past Claude Code transcripts, which kind of tool output used the most tokens?",
+   "gold": "`file_read` represents 75.5%",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 4,
+    "strictRank": 24,
+    "top": [
+     "TRACKER.md:419",
+     "TRACKER.md:170"
+    ],
+    "tokens3": 147,
+    "tokens5": 267
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:419",
+     "TRACKER.md:430"
+    ],
+    "tokens3": 191,
+    "tokens5": 307
+   },
+   "embedding-qa": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:419",
+     "TRACKER.md:430"
+    ],
+    "tokens3": 194,
+    "tokens5": 307
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:419",
+     "TRACKER.md:430"
+    ],
+    "tokens3": 191,
+    "tokens5": 307
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:419",
+     "TRACKER.md:430"
+    ],
+    "tokens3": 191,
+    "tokens5": 307
+   }
+  },
+  {
+   "question": "How is the small model's own sentence labelled so the calling agent doesn't trust it blindly?",
+   "gold": "`Local model says:`",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:109",
+     "docs/how-it-works.md:119"
+    ],
+    "tokens3": 1128,
+    "tokens5": 1272
+   },
+   "embedding-search": {
+    "rank": 22,
+    "strictRank": 22,
+    "top": [
+     "TRACKER.md:301",
+     "docs/how-it-works.md:27"
+    ],
+    "tokens3": 84,
+    "tokens5": 118
+   },
+   "embedding-qa": {
+    "rank": 18,
+    "strictRank": 18,
+    "top": [
+     "TRACKER.md:301",
+     "docs/how-it-works.md:24"
+    ],
+    "tokens3": 84,
+    "tokens5": 118
+   },
+   "hybrid": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:301",
+     "TRACKER.md:413"
+    ],
+    "tokens3": 166,
+    "tokens5": 1090
+   },
+   "hybrid-newer": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:301",
+     "TRACKER.md:413"
+    ],
+    "tokens3": 166,
+    "tokens5": 1090
+   }
+  },
+  {
+   "question": "A question summarising dozens of upstream commits returned almost nothing; what was going on?",
+   "gold": "A git question about 58 commits came back with 3 tokens",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 12,
+    "strictRank": 12,
+    "top": [
+     "IMPROVEMENTS.md:22",
+     "TRACKER.md:688"
+    ],
+    "tokens3": 752,
+    "tokens5": 936
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:48",
+     "IMPROVEMENTS.md:16"
+    ],
+    "tokens3": 558,
+    "tokens5": 826
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:48",
+     "TRACKER.md:518"
+    ],
+    "tokens3": 389,
+    "tokens5": 670
+   },
+   "hybrid": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "IMPROVEMENTS.md:22",
+     "IMPROVEMENTS.md:61"
+    ],
+    "tokens3": 627,
+    "tokens5": 811
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:48",
+     "TRACKER.md:756"
+    ],
+    "tokens3": 537,
+    "tokens5": 968
+   }
+  },
+  {
+   "question": "Why did a formatting check return thousands of tokens of the same error over and over?",
+   "gold": "agent worktrees under `.claude/worktrees/`",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:37",
+     "TRACKER.md:430"
+    ],
+    "tokens3": 582,
+    "tokens5": 817
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:37",
+     "IMPROVEMENTS.md:19"
+    ],
+    "tokens3": 586,
+    "tokens5": 793
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:37",
+     "IMPROVEMENTS.md:19"
+    ],
+    "tokens3": 565,
+    "tokens5": 793
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:37",
+     "IMPROVEMENTS.md:75"
+    ],
+    "tokens3": 1018,
+    "tokens5": 1175
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:37",
+     "IMPROVEMENTS.md:40"
+    ],
+    "tokens3": 704,
+    "tokens5": 1114
+   }
+  },
+  {
+   "question": "Was the MiroFish simulation server left running with an API key exposed?",
+   "gold": "stopped the MiroFish backend",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:755",
+     "TRACKER.md:752"
+    ],
+    "tokens3": 573,
+    "tokens5": 959
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "IMPROVEMENTS.md:31",
+     "TRACKER.md:755"
+    ],
+    "tokens3": 700,
+    "tokens5": 836
+   },
+   "embedding-qa": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "IMPROVEMENTS.md:31",
+     "TRACKER.md:755"
+    ],
+    "tokens3": 700,
+    "tokens5": 1369
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:755",
+     "IMPROVEMENTS.md:31"
+    ],
+    "tokens3": 700,
+    "tokens5": 959
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:755",
+     "IMPROVEMENTS.md:31"
+    ],
+    "tokens3": 700,
+    "tokens5": 1066
+   }
+  },
+  {
+   "question": "After the git specialist, which head did the user pick to build next and why?",
+   "gold": "Next head after git is Test & Build Log Reader",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:601",
+     "docs/how-it-works.md:16"
+    ],
+    "tokens3": 655,
+    "tokens5": 717
+   },
+   "embedding-search": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:601",
+     "docs/how-it-works.md:8"
+    ],
+    "tokens3": 69,
+    "tokens5": 759
+   },
+   "embedding-qa": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:601",
+     "TRACKER.md:151"
+    ],
+    "tokens3": 69,
+    "tokens5": 759
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:601",
+     "TRACKER.md:94"
+    ],
+    "tokens3": 542,
+    "tokens5": 845
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:601",
+     "TRACKER.md:94"
+    ],
+    "tokens3": 542,
+    "tokens5": 980
+   }
+  },
+  {
+   "question": "When should the next read of real-usage telemetry happen?",
+   "gold": "2026-11-29 10:07",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 14,
+    "strictRank": 14,
+    "top": [
+     "docs/how-it-works.md:93",
+     "IMPROVEMENTS.md:3"
+    ],
+    "tokens3": 332,
+    "tokens5": 559
+   },
+   "embedding-search": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:709",
+     "TRACKER.md:415"
+    ],
+    "tokens3": 446,
+    "tokens5": 610
+   },
+   "embedding-qa": {
+    "rank": 21,
+    "strictRank": 21,
+    "top": [
+     "TRACKER.md:415",
+     "TRACKER.md:709"
+    ],
+    "tokens3": 446,
+    "tokens5": 634
+   },
+   "hybrid": {
+    "rank": 25,
+    "strictRank": 25,
+    "top": [
+     "TRACKER.md:709",
+     "IMPROVEMENTS.md:3"
+    ],
+    "tokens3": 332,
+    "tokens5": 559
+   },
+   "hybrid-newer": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "TRACKER.md:709",
+     "IMPROVEMENTS.md:3"
+    ],
+    "tokens3": 332,
+    "tokens5": 616
+   }
+  },
+  {
+   "question": "Why was the sealed git benchmark not scored for the extended-set checkpoint?",
+   "gold": "the 95% extended-set gate did not pass",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:659"
+    ],
+    "tokens3": 782,
+    "tokens5": 1166
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 932,
+    "tokens5": 1389
+   },
+   "embedding-qa": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 932,
+    "tokens5": 1389
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 932,
+    "tokens5": 1653
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 826,
+    "tokens5": 1539
+   }
+  },
+  {
+   "question": "Masking secrets in the ledger a second time broke some rows; what is the underlying problem?",
+   "gold": "is not idempotent",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:774",
+     "docs/how-it-works.md:91"
+    ],
+    "tokens3": 445,
+    "tokens5": 771
+   },
+   "embedding-search": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "IMPROVEMENTS.md:45",
+     "TRACKER.md:774"
+    ],
+    "tokens3": 578,
+    "tokens5": 817
+   },
+   "embedding-qa": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "IMPROVEMENTS.md:45",
+     "TRACKER.md:774"
+    ],
+    "tokens3": 578,
+    "tokens5": 817
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:774",
+     "IMPROVEMENTS.md:45"
+    ],
+    "tokens3": 627,
+    "tokens5": 927
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:774",
+     "IMPROVEMENTS.md:45"
+    ],
+    "tokens3": 724,
+    "tokens5": 1082
+   }
+  },
+  {
+   "question": "Which tools does Hydra's MCP server give other coding assistants?",
+   "gold": "three tools (`hydra_git`, `hydra_run`",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 4,
+    "strictRank": 13,
+    "top": [
+     "docs/how-it-works.md:143",
+     "docs/how-it-works.md:144"
+    ],
+    "tokens3": 38,
+    "tokens5": 257
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 14,
+    "top": [
+     "docs/how-it-works.md:117",
+     "docs/how-it-works.md:143"
+    ],
+    "tokens3": 172,
+    "tokens5": 360
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 14,
+    "top": [
+     "docs/how-it-works.md:117",
+     "docs/how-it-works.md:143"
+    ],
+    "tokens3": 172,
+    "tokens5": 197
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": 15,
+    "top": [
+     "docs/how-it-works.md:143",
+     "docs/how-it-works.md:117"
+    ],
+    "tokens3": 172,
+    "tokens5": 357
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": 16,
+    "top": [
+     "docs/how-it-works.md:143",
+     "docs/how-it-works.md:117"
+    ],
+    "tokens3": 172,
+    "tokens5": 357
+   }
+  },
+  {
+   "question": "Which inference engine does Hydra use by default, and how do I switch to Ollama?",
+   "gold": "The default runtime is llama.cpp",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 5,
+    "strictRank": 25,
+    "top": [
+     "TRACKER.md:543",
+     "TRACKER.md:789"
+    ],
+    "tokens3": 190,
+    "tokens5": 304
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 8,
+    "top": [
+     "docs/how-it-works.md:34",
+     "docs/how-it-works.md:66"
+    ],
+    "tokens3": 182,
+    "tokens5": 323
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 6,
+    "top": [
+     "docs/how-it-works.md:34",
+     "docs/how-it-works.md:66"
+    ],
+    "tokens3": 182,
+    "tokens5": 289
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 10,
+    "top": [
+     "docs/how-it-works.md:34",
+     "TRACKER.md:494"
+    ],
+    "tokens3": 218,
+    "tokens5": 318
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 10,
+    "top": [
+     "docs/how-it-works.md:34",
+     "TRACKER.md:494"
+    ],
+    "tokens3": 218,
+    "tokens5": 318
+   }
+  },
+  {
+   "question": "Has any non-Claude coding tool been seen calling Hydra through MCP for real?",
+   "gold": "OpenCode works.",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "docs/how-it-works.md:143",
+     "IMPROVEMENTS.md:11"
+    ],
+    "tokens3": 742,
+    "tokens5": 1083
+   },
+   "embedding-search": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "docs/how-it-works.md:143",
+     "docs/how-it-works.md:117"
+    ],
+    "tokens3": 620,
+    "tokens5": 1062
+   },
+   "embedding-qa": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "docs/how-it-works.md:143",
+     "docs/how-it-works.md:117"
+    ],
+    "tokens3": 170,
+    "tokens5": 808
+   },
+   "hybrid": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "docs/how-it-works.md:143",
+     "IMPROVEMENTS.md:11"
+    ],
+    "tokens3": 742,
+    "tokens5": 899
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "docs/how-it-works.md:143",
+     "IMPROVEMENTS.md:11"
+    ],
+    "tokens3": 742,
+    "tokens5": 899
+   }
+  },
+  {
+   "question": "Why are model-supplied arguments like author names only accepted if they appear in the question?",
+   "gold": "copied the name \"Asha\"",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:595",
+     "TRACKER.md:683"
+    ],
+    "tokens3": 412,
+    "tokens5": 561
+   },
+   "embedding-search": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "TRACKER.md:414",
+     "docs/how-it-works.md:24"
+    ],
+    "tokens3": 97,
+    "tokens5": 428
+   },
+   "embedding-qa": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "docs/how-it-works.md:24",
+     "TRACKER.md:414"
+    ],
+    "tokens3": 97,
+    "tokens5": 235
+   },
+   "hybrid": {
+    "rank": 14,
+    "strictRank": 14,
+    "top": [
+     "IMPROVEMENTS.md:47",
+     "docs/how-it-works.md:60"
+    ],
+    "tokens3": 551,
+    "tokens5": 647
+   },
+   "hybrid-newer": {
+    "rank": 21,
+    "strictRank": 21,
+    "top": [
+     "IMPROVEMENTS.md:47",
+     "docs/how-it-works.md:60"
+    ],
+    "tokens3": 868,
+    "tokens5": 1115
+   }
+  },
+  {
+   "question": "How much GPU memory did the LoRA run peak at?",
+   "gold": "peak 5.65 GiB",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 16,
+    "strictRank": 16,
+    "top": [
+     "TRACKER.md:253",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 443,
+    "tokens5": 823
+   },
+   "embedding-search": {
+    "rank": 6,
+    "strictRank": 6,
+    "top": [
+     "TRACKER.md:612",
+     "TRACKER.md:255"
+    ],
+    "tokens3": 534,
+    "tokens5": 761
+   },
+   "embedding-qa": {
+    "rank": 12,
+    "strictRank": 12,
+    "top": [
+     "TRACKER.md:255",
+     "TRACKER.md:612"
+    ],
+    "tokens3": 458,
+    "tokens5": 761
+   },
+   "hybrid": {
+    "rank": 9,
+    "strictRank": 9,
+    "top": [
+     "TRACKER.md:255",
+     "TRACKER.md:722"
+    ],
+    "tokens3": 583,
+    "tokens5": 826
+   },
+   "hybrid-newer": {
+    "rank": 2,
+    "strictRank": 2,
+    "top": [
+     "TRACKER.md:255",
+     "TRACKER.md:764"
+    ],
+    "tokens3": 714,
+    "tokens5": 1216
+   }
+  },
+  {
+   "question": "How did meaning-based code search compare to keyword search in the embedding prototype?",
+   "gold": "keyword BM25 65/80, embedding 72/80",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:272",
+     "TRACKER.md:274"
+    ],
+    "tokens3": 342,
+    "tokens5": 642
+   },
+   "embedding-search": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:272",
+     "TRACKER.md:268"
+    ],
+    "tokens3": 372,
+    "tokens5": 636
+   },
+   "embedding-qa": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:272",
+     "TRACKER.md:268"
+    ],
+    "tokens3": 372,
+    "tokens5": 636
+   },
+   "hybrid": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:272",
+     "TRACKER.md:268"
+    ],
+    "tokens3": 439,
+    "tokens5": 642
+   },
+   "hybrid-newer": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "TRACKER.md:272",
+     "TRACKER.md:268"
+    ],
+    "tokens3": 439,
+    "tokens5": 642
+   }
+  },
+  {
+   "question": "What sealed score did the checkpoint from the final Git validation get?",
+   "gold": "sealed aggregate 927/1,000",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:73",
+     "TRACKER.md:25"
+    ],
+    "tokens3": 546,
+    "tokens5": 1360
+   },
+   "embedding-search": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 972,
+    "tokens5": 1111
+   },
+   "embedding-qa": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 972,
+    "tokens5": 1435
+   },
+   "hybrid": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 972,
+    "tokens5": 1337
+   },
+   "hybrid-newer": {
+    "rank": 3,
+    "strictRank": 3,
+    "top": [
+     "TRACKER.md:25",
+     "TRACKER.md:9"
+    ],
+    "tokens3": 972,
+    "tokens5": 1585
+   }
+  },
+  {
+   "question": "When agents were left to choose for themselves, how often did they pick Hydra?",
+   "gold": "natural adoption was 0/12",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 8,
+    "strictRank": 8,
+    "top": [
+     "docs/how-it-works.md:16",
+     "TRACKER.md:181"
+    ],
+    "tokens3": 431,
+    "tokens5": 482
+   },
+   "embedding-search": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "docs/how-it-works.md:97",
+     "docs/how-it-works.md:148"
+    ],
+    "tokens3": 114,
+    "tokens5": 661
+   },
+   "embedding-qa": {
+    "rank": null,
+    "strictRank": null,
+    "top": [
+     "docs/how-it-works.md:97",
+     "docs/how-it-works.md:148"
+    ],
+    "tokens3": 63,
+    "tokens5": 195
+   },
+   "hybrid": {
+    "rank": 18,
+    "strictRank": 18,
+    "top": [
+     "docs/how-it-works.md:16",
+     "TRACKER.md:697"
+    ],
+    "tokens3": 1000,
+    "tokens5": 1442
+   },
+   "hybrid-newer": {
+    "rank": 20,
+    "strictRank": 20,
+    "top": [
+     "docs/how-it-works.md:16",
+     "IMPROVEMENTS.md:62"
+    ],
+    "tokens3": 552,
+    "tokens5": 1421
+   }
+  },
+  {
+   "question": "Is the Hydra installer writing its MCP config into the right Antigravity app?",
+   "gold": "Hydra is installed into the wrong Antigravity",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 4,
+    "strictRank": 4,
+    "top": [
+     "TRACKER.md:717",
+     "docs/how-it-works.md:132"
+    ],
+    "tokens3": 461,
+    "tokens5": 1057
+   },
+   "embedding-search": {
+    "rank": 7,
+    "strictRank": 7,
+    "top": [
+     "docs/how-it-works.md:132",
+     "IMPROVEMENTS.md:70"
+    ],
+    "tokens3": 568,
+    "tokens5": 807
+   },
+   "embedding-qa": {
+    "rank": 8,
+    "strictRank": 8,
+    "top": [
+     "docs/how-it-works.md:132",
+     "IMPROVEMENTS.md:70"
+    ],
+    "tokens3": 312,
+    "tokens5": 807
+   },
+   "hybrid": {
+    "rank": 5,
+    "strictRank": 5,
+    "top": [
+     "docs/how-it-works.md:132",
+     "IMPROVEMENTS.md:70"
+    ],
+    "tokens3": 568,
+    "tokens5": 1057
+   },
+   "hybrid-newer": {
+    "rank": 6,
+    "strictRank": 6,
+    "top": [
+     "docs/how-it-works.md:132",
+     "IMPROVEMENTS.md:70"
+    ],
+    "tokens3": 568,
+    "tokens5": 958
+   }
+  },
+  {
+   "question": "Why do agents sometimes bypass the test hook with HYDRA_RAW=1?",
+   "gold": "Agents route around the test hook",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:13",
+     "IMPROVEMENTS.md:68"
+    ],
+    "tokens3": 1116,
+    "tokens5": 1482
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:13",
+     "docs/how-it-works.md:119"
+    ],
+    "tokens3": 999,
+    "tokens5": 1643
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:13",
+     "docs/how-it-works.md:119"
+    ],
+    "tokens3": 999,
+    "tokens5": 1643
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:13",
+     "IMPROVEMENTS.md:68"
+    ],
+    "tokens3": 1320,
+    "tokens5": 1885
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:13",
+     "IMPROVEMENTS.md:68"
+    ],
+    "tokens3": 1320,
+    "tokens5": 1732
+   }
+  },
+  {
+   "question": "Why did Codex's config file end up readable by other users?",
+   "gold": "config rewrites widened 0600 files to 0644",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 2,
+    "strictRank": 23,
+    "top": [
+     "docs/how-it-works.md:123",
+     "TRACKER.md:774"
+    ],
+    "tokens3": 752,
+    "tokens5": 1087
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 16,
+    "top": [
+     "TRACKER.md:774",
+     "IMPROVEMENTS.md:25"
+    ],
+    "tokens3": 1101,
+    "tokens5": 1631
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 14,
+    "top": [
+     "TRACKER.md:774",
+     "IMPROVEMENTS.md:25"
+    ],
+    "tokens3": 1101,
+    "tokens5": 1631
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 12,
+    "top": [
+     "TRACKER.md:774",
+     "TRACKER.md:758"
+    ],
+    "tokens3": 1061,
+    "tokens5": 1631
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 11,
+    "top": [
+     "TRACKER.md:774",
+     "TRACKER.md:758"
+    ],
+    "tokens3": 789,
+    "tokens5": 1513
+   }
+  },
+  {
+   "question": "Which wordings of staged versus unstaged changes did the Git head misread in the third holdout?",
+   "gold": "\"aren't staged yet\"",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:29",
+     "TRACKER.md:747"
+    ],
+    "tokens3": 1037,
+    "tokens5": 1425
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:29",
+     "IMPROVEMENTS.md:16"
+    ],
+    "tokens3": 959,
+    "tokens5": 1393
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:29",
+     "IMPROVEMENTS.md:16"
+    ],
+    "tokens3": 959,
+    "tokens5": 1393
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:29",
+     "TRACKER.md:747"
+    ],
+    "tokens3": 1115,
+    "tokens5": 1364
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "IMPROVEMENTS.md:29",
+     "TRACKER.md:756"
+    ],
+    "tokens3": 922,
+    "tokens5": 1333
+   }
+  },
+  {
+   "question": "Does the v4 training only change the method compared to v3, or also the data?",
+   "gold": "v4 trains the v3 mix with the v3 seed",
+   "goldChunks": 1,
+   "keyword": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:262",
+     "TRACKER.md:764"
+    ],
+    "tokens3": 651,
+    "tokens5": 1063
+   },
+   "embedding-search": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:262",
+     "TRACKER.md:53"
+    ],
+    "tokens3": 518,
+    "tokens5": 970
+   },
+   "embedding-qa": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:262",
+     "TRACKER.md:53"
+    ],
+    "tokens3": 518,
+    "tokens5": 970
+   },
+   "hybrid": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:262",
+     "TRACKER.md:764"
+    ],
+    "tokens3": 651,
+    "tokens5": 913
+   },
+   "hybrid-newer": {
+    "rank": 1,
+    "strictRank": 1,
+    "top": [
+     "TRACKER.md:262",
+     "TRACKER.md:764"
+    ],
+    "tokens3": 651,
+    "tokens5": 1204
+   }
+  }
+ ]
+}

@@ -92,6 +92,12 @@ Every call, hook decision, session start and failure is one JSON line in `~/.hyd
 
 `hydra improve [--since <date>] [--json]` (a date or time in local time, or UTC with a trailing `Z`) reads that ledger and shows where Hydra should improve: per head, the calls that saved nothing and the p50/p90 latency; for the test hook, how many turned-back runs the agent followed with `hydra run` and which commands it pushed through with `HYDRA_RAW=1`; how many recorded sessions used Hydra; recent errors. Findings worth acting on go in `IMPROVEMENTS.md`.
 
+### Recall and meaning search (optional, experimental)
+
+`hydra recall "<question>"` returns the paragraphs or list items of the project's markdown notes (tracked `.md` files, such as a tracker, an improvements log and docs) that best answer the question. `hydra search --meaning "<question>"` returns the 40-line windows of source that best match what the question describes, for code whose names the caller does not know. Both print the files' own lines under `file:line` headers; nothing is paraphrased, and both only read.
+
+They need EmbeddingGemma 2 (Google, Apache 2.0), which is not part of the default install: `hydra embed install` downloads the pinned Q8_0 GGUF (about 310 MB, SHA-256 in `runtime-manifest.json`). The managed llama-server serves it on `127.0.0.1:11436` beside the chat model, started on first use; `hydra embed status|stop` and `hydra stop` manage it. The first call in a folder indexes it (a few seconds for notes, about a minute per 3,000 source chunks on an M5 Pro); later calls re-embed only changed files, and the index lives in `~/.hydra/index`. Ranking fuses the embedding with keyword BM25; for notes, a newer dated note moves above an older one when it is about as relevant. Without the model both exit 2, so the caller falls back to its own search. Development results are in `TRACKER.md` (Plan step 15); keep project rules in always-loaded files such as `AGENTS.md`, not behind recall.
+
 ## Install as a skill
 
 Everything an agent needs is inside `skills/hydra`:

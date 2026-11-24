@@ -1,0 +1,3364 @@
+{
+ "suite": "semantic-dev",
+ "model": "embeddinggemma-2 Q8_0 (2188ac1d)",
+ "k": 5,
+ "tasks": 80,
+ "seconds": 287.489,
+ "note": "hitK = the gold function's lines are inside one of the top 5 chunks (40-line windows); file5 = the gold file is among them.",
+ "summary": {
+  "keyword": {
+   "hit1": 45,
+   "hit5": 65,
+   "hit10": 69,
+   "file5": 77,
+   "mrr": 0.662,
+   "meanReturnedTokens": 1666
+  },
+  "embedding": {
+   "hit1": 47,
+   "hit5": 72,
+   "hit10": 76,
+   "file5": 77,
+   "mrr": 0.719,
+   "meanReturnedTokens": 1617
+  },
+  "hybrid": {
+   "hit1": 59,
+   "hit5": 71,
+   "hit10": 77,
+   "file5": 79,
+   "mrr": 0.812,
+   "meanReturnedTokens": 1630
+  }
+ },
+ "byLanguage": {
+  "cpython-3.13.5": {
+   "keyword": "18/20",
+   "embedding": "19/20",
+   "hybrid": "19/20"
+  },
+  "go-1.24.4": {
+   "keyword": "11/20",
+   "embedding": "15/20",
+   "hybrid": "14/20"
+  },
+  "node-22.16.0": {
+   "keyword": "20/20",
+   "embedding": "19/20",
+   "hybrid": "20/20"
+  },
+  "rust-1.88.0": {
+   "keyword": "16/20",
+   "embedding": "19/20",
+   "hybrid": "18/20"
+  }
+ },
+ "corpora": {
+  "cpython-3.13.5": {
+   "files": 130,
+   "chunks": 2031,
+   "embedded": 2031,
+   "indexSeconds": 47.71
+  },
+  "go-1.24.4": {
+   "files": 585,
+   "chunks": 7016,
+   "embedded": 7016,
+   "indexSeconds": 177.494
+  },
+  "node-22.16.0": {
+   "files": 56,
+   "chunks": 774,
+   "embedded": 774,
+   "indexSeconds": 13.529
+  },
+  "rust-1.88.0": {
+   "files": 136,
+   "chunks": 1641,
+   "embedded": 1641,
+   "indexSeconds": 48.261
+  }
+ },
+ "rows": [
+  {
+   "source": "cpython-3.13.5/zipimport.py",
+   "name": "find_spec",
+   "question": "How does the importer that loads modules out of zip archives build the module spec for a requested module?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "zipimport.py",
+    "start": 104,
+    "end": 129
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1740,
+    "top": [
+     "zipimport.py:91-130",
+     "pkgutil.py:151-190",
+     "zipimport.py:31-70"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1726,
+    "top": [
+     "zipimport.py:121-160",
+     "zipimport.py:301-340",
+     "zipimport.py:751-790"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1726,
+    "top": [
+     "zipimport.py:121-160",
+     "zipimport.py:31-70",
+     "zipimport.py:301-340"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/http/cookiejar.py",
+   "name": "reach",
+   "question": "Where do we compute the parent domain a cookie host is allowed to match under RFC 2965?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "http/cookiejar.py",
+    "start": 692,
+    "end": 725
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1875,
+    "top": [
+     "http/cookiejar.py:1171-1210",
+     "http/cookiejar.py:721-760",
+     "http/cookiejar.py:1621-1660"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1523,
+    "top": [
+     "http/cookiejar.py:691-730",
+     "http/cookiejar.py:601-640",
+     "http/cookiejar.py:631-670"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1793,
+    "top": [
+     "http/cookiejar.py:721-760",
+     "http/cookiejar.py:1171-1210",
+     "http/cookiejar.py:541-580"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/idlelib/idle_test/tkinter_testing_utils.py",
+   "name": "run_in_tk_mainloop",
+   "question": "Is there a decorator that lets IDLE tests run inside a real Tk event loop with a delay between steps?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "idlelib/idle_test/tkinter_testing_utils.py",
+    "start": 5,
+    "end": 62
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1879,
+    "top": [
+     "idlelib/idle_test/tkinter_testing_utils.py:1-40",
+     "unittest/async_case.py:1-40",
+     "idlelib/idle_test/tkinter_testing_utils.py:31-63"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1778,
+    "top": [
+     "idlelib/idle_test/tkinter_testing_utils.py:1-40",
+     "idlelib/idle_test/tkinter_testing_utils.py:31-63",
+     "threading.py:1321-1360"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1420,
+    "top": [
+     "idlelib/idle_test/tkinter_testing_utils.py:1-40",
+     "idlelib/idle_test/tkinter_testing_utils.py:31-63",
+     "sched.py:121-160"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/pathlib/_abc.py",
+   "name": "parents",
+   "question": "Which property returns the sequence of ancestor directories of a path?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "pathlib/_abc.py",
+    "start": 338,
+    "end": 349
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1683,
+    "top": [
+     "pathlib/_abc.py:301-340",
+     "pkgutil.py:331-370",
+     "pathlib/_abc.py:271-310"
+    ]
+   },
+   "embedding": {
+    "rank": 7,
+    "fileRank": 2,
+    "returnedTokens": 1235,
+    "top": [
+     "zipfile/_path/__init__.py:31-70",
+     "pathlib/_abc.py:151-190",
+     "zipfile/_path/__init__.py:421-453"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1462,
+    "top": [
+     "pathlib/_abc.py:301-340",
+     "pathlib/_abc.py:151-190",
+     "pathlib/_abc.py:121-160"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/threading.py",
+   "name": "setprofile",
+   "question": "Where can I install a profiling hook that applies to every thread started later?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "threading.py",
+    "start": 72,
+    "end": 79
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1539,
+    "top": [
+     "threading.py:61-100",
+     "threading.py:91-130",
+     "threading.py:1021-1060"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1637,
+    "top": [
+     "threading.py:61-100",
+     "threading.py:91-130",
+     "threading.py:1-40"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1556,
+    "top": [
+     "threading.py:61-100",
+     "threading.py:91-130",
+     "threading.py:1021-1060"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/unittest/mock.py",
+   "name": "assert_awaited_once_with",
+   "question": "Which assertion verifies that an async mock's coroutine ran exactly one time with given parameters?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "unittest/mock.py",
+    "start": 2384,
+    "end": 2393
+   },
+   "keyword": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 2044,
+    "top": [
+     "unittest/mock.py:2341-2380",
+     "unittest/mock.py:961-1000",
+     "unittest/mock.py:2371-2410"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1775,
+    "top": [
+     "unittest/mock.py:2371-2410",
+     "unittest/mock.py:2341-2380",
+     "unittest/mock.py:211-250"
+    ]
+   },
+   "hybrid": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1972,
+    "top": [
+     "unittest/mock.py:2341-2380",
+     "unittest/mock.py:2371-2410",
+     "unittest/mock.py:2251-2290"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/multiprocessing/spawn.py",
+   "name": "is_forking",
+   "question": "How does multiprocessing tell from the command-line arguments that the current process is a spawned child?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "multiprocessing/spawn.py",
+    "start": 57,
+    "end": 64
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1555,
+    "top": [
+     "multiprocessing/spawn.py:61-100",
+     "multiprocessing/spawn.py:211-250",
+     "multiprocessing/spawn.py:121-160"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1677,
+    "top": [
+     "multiprocessing/spawn.py:61-100",
+     "multiprocessing/spawn.py:211-250",
+     "multiprocessing/spawn.py:181-220"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1630,
+    "top": [
+     "multiprocessing/spawn.py:61-100",
+     "multiprocessing/spawn.py:211-250",
+     "multiprocessing/spawn.py:121-160"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/_pyrepl/unix_console.py",
+   "name": "__tputs",
+   "question": "Where is the pure-Python replacement for the curses routine that emits terminal capability strings with padding delays?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "_pyrepl/unix_console.py",
+    "start": 791,
+    "end": 816
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1675,
+    "top": [
+     "_pyrepl/unix_console.py:151-190",
+     "_pyrepl/unix_console.py:781-817",
+     "_pyrepl/unix_console.py:31-70"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1533,
+    "top": [
+     "_pyrepl/unix_console.py:1-40",
+     "_pyrepl/unix_console.py:781-817",
+     "_pyrepl/unix_console.py:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1629,
+    "top": [
+     "_pyrepl/unix_console.py:781-817",
+     "_pyrepl/unix_console.py:31-70",
+     "_pyrepl/unix_console.py:151-190"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/asyncio/events.py",
+   "name": "_get_running_loop",
+   "question": "What returns the event loop currently executing in this thread, or None if there isn't one?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "asyncio/events.py",
+    "start": 767,
+    "end": 776
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1612,
+    "top": [
+     "asyncio/events.py:661-700",
+     "asyncio/events.py:751-790",
+     "asyncio/events.py:691-730"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 2,
+    "returnedTokens": 1373,
+    "top": [
+     "asyncio/mixins.py:1-22",
+     "asyncio/events.py:751-790",
+     "asyncio/events.py:811-850"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1667,
+    "top": [
+     "asyncio/events.py:751-790",
+     "asyncio/events.py:661-700",
+     "asyncio/events.py:721-760"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/ipaddress.py",
+   "name": "v6_int_to_packed",
+   "question": "Convert an integer IPv6 address into 16 big-endian bytes.",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "ipaddress.py",
+    "start": 140,
+    "end": 153
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1534,
+    "top": [
+     "ipaddress.py:121-160",
+     "ipaddress.py:91-130",
+     "ipaddress.py:151-190"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1474,
+    "top": [
+     "ipaddress.py:1861-1900",
+     "ipaddress.py:151-190",
+     "ipaddress.py:121-160"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1569,
+    "top": [
+     "ipaddress.py:121-160",
+     "ipaddress.py:151-190",
+     "ipaddress.py:1771-1810"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/urllib/parse.py",
+   "name": "_splittype",
+   "question": "Where is the helper that separates a URL's scheme from the rest of the string?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "urllib/parse.py",
+    "start": 1099,
+    "end": 1109
+   },
+   "keyword": {
+    "rank": 10,
+    "fileRank": 1,
+    "returnedTokens": 1789,
+    "top": [
+     "urllib/parse.py:481-520",
+     "urllib/parse.py:361-400",
+     "urllib/parse.py:391-430"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1691,
+    "top": [
+     "urllib/parse.py:31-70",
+     "urllib/parse.py:1081-1120",
+     "urllib/request.py:751-790"
+    ]
+   },
+   "hybrid": {
+    "rank": 4,
+    "fileRank": 1,
+    "returnedTokens": 1718,
+    "top": [
+     "urllib/parse.py:241-280",
+     "urllib/parse.py:481-520",
+     "urllib/parse.py:361-400"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/_pyrepl/reader.py",
+   "name": "pos2xy",
+   "question": "How does the REPL reader translate the cursor's offset in the buffer into a screen column and row?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "_pyrepl/reader.py",
+    "start": 531,
+    "end": 559
+   },
+   "keyword": {
+    "rank": 13,
+    "fileRank": 1,
+    "returnedTokens": 1821,
+    "top": [
+     "_pyrepl/reader.py:301-340",
+     "_pyrepl/reader.py:451-490",
+     "_pyrepl/reader.py:271-310"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1999,
+    "top": [
+     "_pyrepl/reader.py:301-340",
+     "_pyrepl/reader.py:541-580",
+     "_pyrepl/reader.py:361-400"
+    ]
+   },
+   "hybrid": {
+    "rank": 6,
+    "fileRank": 1,
+    "returnedTokens": 1980,
+    "top": [
+     "_pyrepl/reader.py:301-340",
+     "_pyrepl/reader.py:271-310",
+     "_pyrepl/reader.py:451-490"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/email/charset.py",
+   "name": "get_body_encoding",
+   "question": "Which method decides whether a message body in a given character set uses quoted-printable or base64?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "email/charset.py",
+    "start": 245,
+    "end": 264
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2094,
+    "top": [
+     "email/charset.py:241-280",
+     "email/charset.py:151-190",
+     "email/charset.py:91-130"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1959,
+    "top": [
+     "email/charset.py:241-280",
+     "email/charset.py:361-399",
+     "email/quoprimime.py:1-40"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2106,
+    "top": [
+     "email/charset.py:241-280",
+     "email/charset.py:151-190",
+     "email/quoprimime.py:1-40"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/logging/__init__.py",
+   "name": "process",
+   "question": "Where does the logging adapter inject its extra context dict into a log call's keyword arguments?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "logging/__init__.py",
+    "start": 1890,
+    "end": 1904
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1796,
+    "top": [
+     "logging/__init__.py:1861-1900",
+     "logging/__init__.py:1891-1930",
+     "logging/__init__.py:1831-1870"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1681,
+    "top": [
+     "logging/__init__.py:1891-1930",
+     "logging/__init__.py:1861-1900",
+     "logging/__init__.py:1951-1990"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1681,
+    "top": [
+     "logging/__init__.py:1861-1900",
+     "logging/__init__.py:1891-1930",
+     "logging/__init__.py:1831-1870"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/idlelib/configdialog.py",
+   "name": "load_font_cfg",
+   "question": "Where does the IDLE settings dialog fill in the font name, size and bold options from the saved configuration?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "idlelib/configdialog.py",
+    "start": 378,
+    "end": 410
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1941,
+    "top": [
+     "idlelib/configdialog.py:361-400",
+     "idlelib/config.py:751-790",
+     "idlelib/config.py:721-760"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2382,
+    "top": [
+     "idlelib/configdialog.py:391-430",
+     "idlelib/configdialog.py:361-400",
+     "idlelib/configdialog.py:331-370"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2134,
+    "top": [
+     "idlelib/configdialog.py:361-400",
+     "idlelib/configdialog.py:331-370",
+     "idlelib/configdialog.py:391-430"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/urllib/request.py",
+   "name": "getproxies_environment",
+   "question": "How are proxy URLs read from environment variables like http_proxy?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "urllib/request.py",
+    "start": 2495,
+    "end": 2530
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1767,
+    "top": [
+     "urllib/request.py:2491-2530",
+     "urllib/request.py:151-190",
+     "urllib/request.py:2731-2770"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2039,
+    "top": [
+     "urllib/request.py:2491-2530",
+     "urllib/request.py:2671-2710",
+     "urllib/request.py:2521-2560"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1715,
+    "top": [
+     "urllib/request.py:2491-2530",
+     "urllib/request.py:2671-2710",
+     "urllib/request.py:2731-2770"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/asyncio/futures.py",
+   "name": "__schedule_callbacks",
+   "question": "Where does a future hand its registered done-callbacks over to the event loop?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "asyncio/futures.py",
+    "start": 158,
+    "end": 170
+   },
+   "keyword": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1492,
+    "top": [
+     "asyncio/futures.py:31-70",
+     "asyncio/futures.py:391-426",
+     "asyncio/futures.py:151-190"
+    ]
+   },
+   "embedding": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1637,
+    "top": [
+     "asyncio/futures.py:181-220",
+     "asyncio/futures.py:241-280",
+     "asyncio/futures.py:121-160"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1711,
+    "top": [
+     "asyncio/futures.py:121-160",
+     "asyncio/futures.py:1-40",
+     "asyncio/futures.py:31-70"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/pkgutil.py",
+   "name": "resolve_name",
+   "question": "Turn a dotted string like 'package.module:attr' into the actual Python object.",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "pkgutil.py",
+    "start": 458,
+    "end": 529
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1944,
+    "top": [
+     "pkgutil.py:451-490",
+     "pkgutil.py:481-520",
+     "zipimport.py:181-220"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1587,
+    "top": [
+     "pkgutil.py:481-520",
+     "pkgutil.py:451-490",
+     "pkgutil.py:511-530"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1649,
+    "top": [
+     "pkgutil.py:451-490",
+     "pkgutil.py:481-520",
+     "pkgutil.py:421-460"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/dis.py",
+   "name": "pretty_flags",
+   "question": "Which helper turns a code object's flag bits into readable names like OPTIMIZED or NEWLOCALS?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "dis.py",
+    "start": 161,
+    "end": 173
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1545,
+    "top": [
+     "dis.py:121-160",
+     "dis.py:151-190",
+     "pickletools.py:1111-1150"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1615,
+    "top": [
+     "dis.py:151-190",
+     "enum.py:1651-1690",
+     "enum.py:1561-1600"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1588,
+    "top": [
+     "dis.py:151-190",
+     "enum.py:1561-1600",
+     "dis.py:181-220"
+    ]
+   }
+  },
+  {
+   "source": "cpython-3.13.5/contextlib.py",
+   "name": "enter_async_context",
+   "question": "In an async exit stack, where is an async context manager entered and its exit callback registered?",
+   "gold": {
+    "release": "cpython-3.13.5",
+    "file": "contextlib.py",
+    "start": 654,
+    "end": 670
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1945,
+    "top": [
+     "contextlib.py:631-670",
+     "contextlib.py:601-640",
+     "contextlib.py:541-580"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2040,
+    "top": [
+     "contextlib.py:631-670",
+     "contextlib.py:691-730",
+     "contextlib.py:721-760"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1991,
+    "top": [
+     "contextlib.py:631-670",
+     "contextlib.py:601-640",
+     "contextlib.py:691-730"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/cmd/cgo/gcc.go",
+   "name": "checkSlice",
+   "question": "In cgo, where is a slice-expression argument rewritten into temporaries so the pointer check can run on it?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "cmd/cgo/gcc.go",
+    "start": 1281,
+    "end": 1323
+   },
+   "keyword": {
+    "rank": 13,
+    "fileRank": 2,
+    "returnedTokens": 1628,
+    "top": [
+     "runtime/cgocall.go:511-550",
+     "cmd/cgo/gcc.go:811-850",
+     "cmd/compile/internal/types2/call.go:661-700"
+    ]
+   },
+   "embedding": {
+    "rank": 10,
+    "fileRank": 7,
+    "returnedTokens": 1286,
+    "top": [
+     "cmd/compile/internal/ssa/rewritedec.go:451-490",
+     "runtime/cgocall.go:541-580",
+     "runtime/cgocall.go:781-797"
+    ]
+   },
+   "hybrid": {
+    "rank": 5,
+    "fileRank": 5,
+    "returnedTokens": 1614,
+    "top": [
+     "runtime/cgocall.go:481-520",
+     "runtime/cgocall.go:391-430",
+     "runtime/cgocall.go:511-550"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/go/format/format.go",
+   "name": "Node",
+   "question": "How do I print an AST node in canonical gofmt style to a writer?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "go/format/format.go",
+    "start": 43,
+    "end": 91
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1700,
+    "top": [
+     "go/format/format.go:31-70",
+     "go/format/format.go:61-100",
+     "go/ast/print.go:1-40"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1628,
+    "top": [
+     "go/format/format.go:31-70",
+     "go/ast/print.go:1-40",
+     "go/format/format.go:61-100"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1628,
+    "top": [
+     "go/format/format.go:31-70",
+     "go/format/format.go:61-100",
+     "go/ast/print.go:1-40"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/runtime/lockrank_on.go",
+   "name": "checkRanks",
+   "question": "Where does the runtime verify that acquiring a lock respects the lock ordering relative to the lock held before it?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "runtime/lockrank_on.go",
+    "start": 135,
+    "end": 168
+   },
+   "keyword": {
+    "rank": 5,
+    "fileRank": 1,
+    "returnedTokens": 1419,
+    "top": [
+     "runtime/lockrank_on.go:31-70",
+     "runtime/lockrank_on.go:211-250",
+     "runtime/lockrank_on.go:241-280"
+    ]
+   },
+   "embedding": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1364,
+    "top": [
+     "runtime/lockrank_on.go:271-310",
+     "runtime/lockrank_on.go:91-130",
+     "runtime/lockrank_on.go:151-190"
+    ]
+   },
+   "hybrid": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1440,
+    "top": [
+     "runtime/lockrank_on.go:31-70",
+     "runtime/lockrank_on.go:151-190",
+     "runtime/lockrank_on.go:91-130"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/net/conf.go",
+   "name": "mustUseGoResolver",
+   "question": "What decides that a DNS lookup has to use the pure Go resolver instead of cgo?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "net/conf.go",
+    "start": 193,
+    "end": 215
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1594,
+    "top": [
+     "net/conf.go:181-220",
+     "net/conf.go:211-250",
+     "net/conf.go:241-280"
+    ]
+   },
+   "embedding": {
+    "rank": 5,
+    "fileRank": 1,
+    "returnedTokens": 1702,
+    "top": [
+     "net/conf.go:1-40",
+     "net/conf.go:31-70",
+     "net/conf.go:91-130"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1709,
+    "top": [
+     "net/conf.go:181-220",
+     "net/conf.go:211-250",
+     "net/conf.go:271-310"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/internal/poll/fd_unix.go",
+   "name": "WriteTo",
+   "question": "Where is the sendto wrapper on a unix file descriptor for sending a datagram to an address?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "internal/poll/fd_unix.go",
+    "start": 496,
+    "end": 520
+   },
+   "keyword": {
+    "rank": 6,
+    "fileRank": 1,
+    "returnedTokens": 1386,
+    "top": [
+     "internal/poll/fd_unix.go:1-40",
+     "internal/poll/fd_unix.go:451-490",
+     "syscall/exec_unix.go:1-40"
+    ]
+   },
+   "embedding": {
+    "rank": 3,
+    "fileRank": 3,
+    "returnedTokens": 1367,
+    "top": [
+     "syscall/zsyscall_linux_mips.go:1441-1480",
+     "syscall/zsyscall_linux_mips.go:1471-1510",
+     "internal/poll/fd_unix.go:481-520"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1364,
+    "top": [
+     "internal/poll/fd_unix.go:481-520",
+     "internal/syscall/unix/net_js.go:1-40",
+     "syscall/zsyscall_linux_mips.go:1471-1510"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/cmd/compile/internal/types2/expr.go",
+   "name": "rawExpr",
+   "question": "Where does the compiler's type checker check an expression and record its value or type, given an optional target type?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "cmd/compile/internal/types2/expr.go",
+    "start": 942,
+    "end": 968
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1511,
+    "top": [
+     "cmd/compile/internal/types2/expr.go:931-970",
+     "cmd/compile/internal/types2/expr.go:361-400",
+     "cmd/compile/internal/types2/expr.go:1261-1300"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1675,
+    "top": [
+     "cmd/compile/internal/types2/expr.go:901-940",
+     "cmd/compile/internal/types2/expr.go:931-970",
+     "cmd/compile/internal/types2/expr.go:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1317,
+    "top": [
+     "cmd/compile/internal/types2/expr.go:931-970",
+     "cmd/compile/internal/types2/expr.go:361-400",
+     "cmd/compile/internal/types2/expr.go:961-1000"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/cmd/compile/internal/arm/ssa.go",
+   "name": "genregshift",
+   "question": "In the ARM backend, how is an instruction emitted whose second operand is shifted by an amount held in a register?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "cmd/compile/internal/arm/ssa.go",
+    "start": 116,
+    "end": 127
+   },
+   "keyword": {
+    "rank": 15,
+    "fileRank": 1,
+    "returnedTokens": 1347,
+    "top": [
+     "cmd/compile/internal/arm/ssa.go:61-100",
+     "cmd/asm/internal/arch/arch.go:211-250",
+     "cmd/asm/internal/arch/arch.go:1-40"
+    ]
+   },
+   "embedding": {
+    "rank": 9,
+    "fileRank": 1,
+    "returnedTokens": 2323,
+    "top": [
+     "cmd/compile/internal/arm/ssa.go:391-430",
+     "cmd/compile/internal/ssa/_gen/ARM64Ops.go:301-340",
+     "cmd/compile/internal/arm/ssa.go:361-400"
+    ]
+   },
+   "hybrid": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1362,
+    "top": [
+     "cmd/compile/internal/arm/ssa.go:241-280",
+     "cmd/compile/internal/arm/ssa.go:91-130",
+     "cmd/internal/obj/arm64/asm7.go:5941-5980"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/internal/poll/fd_wasip1.go",
+   "name": "ReadDir",
+   "question": "How are directory entries read from a file descriptor on WASI preview 1?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "internal/poll/fd_wasip1.go",
+    "start": 101,
+    "end": 122
+   },
+   "keyword": {
+    "rank": 20,
+    "fileRank": 1,
+    "returnedTokens": 1722,
+    "top": [
+     "internal/poll/fd_wasip1.go:1-40",
+     "internal/poll/fd_wasip1.go:181-220",
+     "internal/poll/fd_wasip1.go:151-190"
+    ]
+   },
+   "embedding": {
+    "rank": 3,
+    "fileRank": 2,
+    "returnedTokens": 1247,
+    "top": [
+     "internal/syscall/unix/at_wasip1.go:91-114",
+     "internal/poll/fd_wasip1.go:1-40",
+     "internal/poll/fd_wasip1.go:91-130"
+    ]
+   },
+   "hybrid": {
+    "rank": 7,
+    "fileRank": 1,
+    "returnedTokens": 1391,
+    "top": [
+     "internal/poll/fd_wasip1.go:1-40",
+     "internal/poll/fd_wasip1.go:181-220",
+     "internal/syscall/unix/at_wasip1.go:91-114"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/go/types/resolver.go",
+   "name": "unusedImports",
+   "question": "Where does go/types report packages that were imported but never referenced?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "go/types/resolver.go",
+    "start": 701,
+    "end": 717
+   },
+   "keyword": {
+    "rank": 19,
+    "fileRank": 2,
+    "returnedTokens": 1686,
+    "top": [
+     "go/types/package.go:61-84",
+     "go/types/resolver.go:451-490",
+     "go/types/package.go:31-70"
+    ]
+   },
+   "embedding": {
+    "rank": null,
+    "fileRank": 20,
+    "returnedTokens": 1285,
+    "top": [
+     "cmd/doc/pkg.go:1-40",
+     "go/types/package.go:31-70",
+     "cmd/compile/internal/typecheck/iexport.go:151-190"
+    ]
+   },
+   "hybrid": {
+    "rank": 36,
+    "fileRank": 5,
+    "returnedTokens": 1516,
+    "top": [
+     "go/types/package.go:31-70",
+     "go/types/package.go:61-84",
+     "cmd/compile/internal/types2/api.go:61-100"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/encoding/gob/decode.go",
+   "name": "decodeIgnoredValue",
+   "question": "When gob receives a value for a field the receiver doesn't have, where is that data read and thrown away?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "encoding/gob/decode.go",
+    "start": 1256,
+    "end": 1269
+   },
+   "keyword": {
+    "rank": 25,
+    "fileRank": 1,
+    "returnedTokens": 1654,
+    "top": [
+     "encoding/gob/decode.go:1-40",
+     "encoding/gob/decoder.go:151-190",
+     "encoding/gob/decode.go:991-1030"
+    ]
+   },
+   "embedding": {
+    "rank": 23,
+    "fileRank": 1,
+    "returnedTokens": 1677,
+    "top": [
+     "encoding/gob/decode.go:1-40",
+     "encoding/gob/decoder.go:1-40",
+     "encoding/gob/decode.go:181-220"
+    ]
+   },
+   "hybrid": {
+    "rank": 12,
+    "fileRank": 1,
+    "returnedTokens": 1654,
+    "top": [
+     "encoding/gob/decode.go:1-40",
+     "encoding/gob/decode.go:31-70",
+     "encoding/gob/decode.go:721-760"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/sort/zsortfunc.go",
+   "name": "siftDown_func",
+   "question": "Where is the heap sift-down step for the comparator-based sort?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "sort/zsortfunc.go",
+    "start": 18,
+    "end": 36
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1395,
+    "top": [
+     "sort/zsortfunc.go:31-70",
+     "sort/zsortfunc.go:1-40",
+     "sort/zsortfunc.go:181-220"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 2,
+    "returnedTokens": 1059,
+    "top": [
+     "slices/sort.go:151-190",
+     "sort/zsortfunc.go:1-40",
+     "compress/flate/huffman_code.go:331-346"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1330,
+    "top": [
+     "sort/zsortfunc.go:1-40",
+     "sort/sort.go:211-250",
+     "sort/zsortfunc.go:181-220"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/crypto/tls/conn.go",
+   "name": "readHandshake",
+   "question": "Where does a TLS connection read the next handshake message off the record layer and add it to the transcript?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "crypto/tls/conn.go",
+    "start": 1085,
+    "end": 1115
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1408,
+    "top": [
+     "crypto/tls/conn.go:1051-1090",
+     "crypto/tls/conn.go:1081-1120",
+     "crypto/tls/conn.go:1021-1060"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1554,
+    "top": [
+     "crypto/tls/conn.go:1051-1090",
+     "crypto/tls/conn.go:571-610",
+     "crypto/tls/handshake_client_tls13.go:661-700"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1409,
+    "top": [
+     "crypto/tls/conn.go:1051-1090",
+     "crypto/tls/conn.go:571-610",
+     "crypto/tls/conn.go:1021-1060"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/runtime/string.go",
+   "name": "atoi64",
+   "question": "Where does the runtime parse a decimal string into a 64-bit integer without using strconv?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "runtime/string.go",
+    "start": 393,
+    "end": 439
+   },
+   "keyword": {
+    "rank": 11,
+    "fileRank": 11,
+    "returnedTokens": 1583,
+    "top": [
+     "math/big/ftoa.go:1-40",
+     "cmd/cgo/gcc.go:271-310",
+     "encoding/asn1/asn1.go:91-130"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1281,
+    "top": [
+     "runtime/string.go:361-400",
+     "runtime/os_openbsd_arm64.go:1-12",
+     "runtime/os_linux_riscv64.go:1-8"
+    ]
+   },
+   "hybrid": {
+    "rank": 6,
+    "fileRank": 6,
+    "returnedTokens": 1532,
+    "top": [
+     "encoding/asn1/asn1.go:91-130",
+     "encoding/asn1/asn1.go:121-160",
+     "encoding/gob/decode.go:301-340"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/cmd/go/internal/modfetch/codehost/git.go",
+   "name": "loadRefs",
+   "question": "Where does the go command fetch the branch and tag references of a remote git repository and cache them?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "cmd/go/internal/modfetch/codehost/git.go",
+    "start": 216,
+    "end": 276
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1890,
+    "top": [
+     "cmd/go/internal/modfetch/codehost/git.go:121-160",
+     "cmd/go/internal/modfetch/codehost/git.go:211-250",
+     "cmd/go/internal/modfetch/codehost/git.go:541-580"
+    ]
+   },
+   "embedding": {
+    "rank": 5,
+    "fileRank": 1,
+    "returnedTokens": 1891,
+    "top": [
+     "cmd/go/internal/modfetch/codehost/git.go:511-550",
+     "cmd/go/internal/modfetch/codehost/git.go:91-130",
+     "cmd/go/internal/modfetch/codehost/codehost.go:181-220"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2018,
+    "top": [
+     "cmd/go/internal/modfetch/codehost/git.go:211-250",
+     "cmd/go/internal/modfetch/codehost/git.go:511-550",
+     "cmd/go/internal/modfetch/codehost/git.go:91-130"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/crypto/elliptic/params.go",
+   "name": "ScalarBaseMult",
+   "question": "For generic curve parameters, how is the base point multiplied by a scalar?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "crypto/elliptic/params.go",
+    "start": 311,
+    "end": 325
+   },
+   "keyword": {
+    "rank": 4,
+    "fileRank": 1,
+    "returnedTokens": 1625,
+    "top": [
+     "crypto/elliptic/params.go:1-40",
+     "crypto/elliptic/nistec.go:91-130",
+     "crypto/elliptic/nistec.go:211-250"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1499,
+    "top": [
+     "crypto/elliptic/params.go:301-335",
+     "crypto/elliptic/params.go:271-310",
+     "crypto/elliptic/params.go:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1561,
+    "top": [
+     "crypto/elliptic/params.go:301-335",
+     "crypto/elliptic/params.go:1-40",
+     "crypto/elliptic/nistec.go:211-250"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/cmd/link/internal/ld/data.go",
+   "name": "compressSyms",
+   "question": "Where does the linker compress the contents of a section's symbols, giving up if the result would be larger?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "cmd/link/internal/ld/data.go",
+    "start": 3157,
+    "end": 3235
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1911,
+    "top": [
+     "cmd/link/internal/ld/data.go:3121-3160",
+     "cmd/link/internal/ld/data.go:2071-2110",
+     "cmd/link/internal/ld/data.go:3151-3190"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1684,
+    "top": [
+     "cmd/link/internal/ld/data.go:3151-3190",
+     "cmd/link/internal/ld/data.go:3121-3160",
+     "cmd/link/internal/ld/data.go:2671-2710"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1555,
+    "top": [
+     "cmd/link/internal/ld/data.go:3121-3160",
+     "cmd/link/internal/ld/data.go:3151-3190",
+     "cmd/link/internal/ld/data.go:2671-2710"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/cmd/compile/internal/types2/selection.go",
+   "name": "Type",
+   "question": "For a selector expression x.f, what computes its type, which can differ from the declared type of f?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "cmd/compile/internal/types2/selection.go",
+    "start": 90,
+    "end": 122
+   },
+   "keyword": {
+    "rank": 30,
+    "fileRank": 5,
+    "returnedTokens": 1832,
+    "top": [
+     "cmd/compile/internal/types2/call.go:661-700",
+     "cmd/compile/internal/types2/api.go:181-220",
+     "cmd/cgo/gcc.go:1621-1660"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1630,
+    "top": [
+     "cmd/compile/internal/types2/selection.go:31-70",
+     "cmd/compile/internal/types2/selection.go:61-100",
+     "cmd/compile/internal/types2/selection.go:91-130"
+    ]
+   },
+   "hybrid": {
+    "rank": 6,
+    "fileRank": 1,
+    "returnedTokens": 1745,
+    "top": [
+     "cmd/compile/internal/types2/selection.go:31-70",
+     "cmd/compile/internal/types2/selection.go:1-40",
+     "cmd/compile/internal/types2/call.go:781-820"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/cmd/compile/internal/types2/decl.go",
+   "name": "pathString",
+   "question": "Where is the helper that formats a cycle of objects as a->b->c for error messages?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "cmd/compile/internal/types2/decl.go",
+    "start": 36,
+    "end": 46
+   },
+   "keyword": {
+    "rank": null,
+    "fileRank": 1,
+    "returnedTokens": 1749,
+    "top": [
+     "cmd/compile/internal/types2/decl.go:271-310",
+     "go/types/initorder.go:151-190",
+     "go/types/typexpr.go:31-70"
+    ]
+   },
+   "embedding": {
+    "rank": null,
+    "fileRank": 7,
+    "returnedTokens": 1123,
+    "top": [
+     "go/types/initorder.go:151-190",
+     "cmd/compile/internal/base/print.go:61-100",
+     "cmd/compile/internal/base/print.go:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": null,
+    "fileRank": 2,
+    "returnedTokens": 1712,
+    "top": [
+     "go/types/initorder.go:151-190",
+     "cmd/compile/internal/types2/decl.go:301-340",
+     "cmd/compile/internal/base/print.go:61-100"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/runtime/mgc.go",
+   "name": "gcBgMarkPrepare",
+   "question": "Where does the garbage collector set up its state before the background marking workers start?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "runtime/mgc.go",
+    "start": 1357,
+    "end": 1371
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1800,
+    "top": [
+     "runtime/mgc.go:1321-1360",
+     "runtime/mgc.go:1351-1390",
+     "runtime/mgc.go:211-250"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1851,
+    "top": [
+     "runtime/mgc.go:1321-1360",
+     "runtime/mgc.go:1531-1570",
+     "runtime/mgc.go:1351-1390"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1920,
+    "top": [
+     "runtime/mgc.go:1321-1360",
+     "runtime/mgc.go:1351-1390",
+     "runtime/mgc.go:181-220"
+    ]
+   }
+  },
+  {
+   "source": "go-1.24.4/cmd/compile/internal/types2/labels.go",
+   "name": "gotoTarget",
+   "question": "Where does the type checker find the labeled statement a goto jumps to, searching enclosing blocks?",
+   "gold": {
+    "release": "go-1.24.4",
+    "file": "cmd/compile/internal/types2/labels.go",
+    "start": 70,
+    "end": 79
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1494,
+    "top": [
+     "cmd/compile/internal/types2/labels.go:61-100",
+     "cmd/compile/internal/types2/labels.go:31-70",
+     "cmd/compile/internal/types2/labels.go:91-130"
+    ]
+   },
+   "embedding": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1397,
+    "top": [
+     "cmd/compile/internal/types2/labels.go:181-220",
+     "cmd/compile/internal/types2/labels.go:151-190",
+     "cmd/compile/internal/types2/labels.go:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1424,
+    "top": [
+     "cmd/compile/internal/types2/labels.go:61-100",
+     "cmd/compile/internal/types2/labels.go:181-220",
+     "cmd/compile/internal/types2/labels.go:31-70"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/streams/destroy.js",
+   "name": "destroyer",
+   "question": "How does stream code tear down a stream in a way that also works for legacy streams without a destroy method?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/streams/destroy.js",
+    "start": 321,
+    "end": 353
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 2,
+    "returnedTokens": 1592,
+    "top": [
+     "internal/streams/duplex.js:31-70",
+     "internal/streams/destroy.js:301-340",
+     "internal/streams/destroy.js:331-362"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 972,
+    "top": [
+     "internal/streams/destroy.js:271-310",
+     "internal/streams/destroy.js:331-362",
+     "internal/streams/destroy.js:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1032,
+    "top": [
+     "internal/streams/destroy.js:331-362",
+     "internal/streams/destroy.js:271-310",
+     "internal/streams/destroy.js:301-340"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/modules/package_json_reader.js",
+   "name": "findPackageJSON",
+   "question": "Where is the nearest package.json for a module specifier looked up?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/modules/package_json_reader.js",
+    "start": 261,
+    "end": 308
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1319,
+    "top": [
+     "internal/modules/package_json_reader.js:91-130",
+     "internal/modules/package_json_reader.js:271-310",
+     "internal/modules/package_json_reader.js:301-318"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1636,
+    "top": [
+     "internal/modules/package_json_reader.js:91-130",
+     "internal/modules/package_json_reader.js:271-310",
+     "internal/modules/package_json_reader.js:241-280"
+    ]
+   },
+   "hybrid": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1568,
+    "top": [
+     "internal/modules/package_json_reader.js:91-130",
+     "internal/modules/package_json_reader.js:271-310",
+     "internal/modules/package_json_reader.js:241-280"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/_http_common.js",
+   "name": "parserOnHeaders",
+   "question": "In the HTTP parser, what happens when request headers arrive fragmented across several TCP packets?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "_http_common.js",
+    "start": 53,
+    "end": 65
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1343,
+    "top": [
+     "_http_common.js:31-70",
+     "_http_common.js:211-250",
+     "_http_common.js:241-270"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1414,
+    "top": [
+     "_http_common.js:31-70",
+     "internal/http2/compat.js:121-160",
+     "_http_common.js:121-160"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1423,
+    "top": [
+     "_http_common.js:31-70",
+     "_http_common.js:121-160",
+     "_http_common.js:181-220"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/modules/run_main.js",
+   "name": "executeUserEntryPoint",
+   "question": "Where does node start running the main script given on the command line?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/modules/run_main.js",
+    "start": 147,
+    "end": 182
+   },
+   "keyword": {
+    "rank": 5,
+    "fileRank": 5,
+    "returnedTokens": 1660,
+    "top": [
+     "internal/main/worker_thread.js:31-70",
+     "internal/main/watch_mode.js:61-100",
+     "internal/process/execution.js:421-460"
+    ]
+   },
+   "embedding": {
+    "rank": 4,
+    "fileRank": 2,
+    "returnedTokens": 1789,
+    "top": [
+     "internal/main/check_syntax.js:1-40",
+     "internal/modules/run_main.js:1-40",
+     "repl.js:1-40"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1571,
+    "top": [
+     "internal/modules/run_main.js:151-188",
+     "internal/main/worker_thread.js:121-160",
+     "internal/main/watch_mode.js:61-100"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/histogram.js",
+   "name": "createHistogram",
+   "question": "How do I construct a recordable histogram with lowest, highest and significant-figures options?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/histogram.js",
+    "start": 358,
+    "end": 383
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1150,
+    "top": [
+     "internal/histogram.js:361-396",
+     "internal/histogram.js:331-370",
+     "internal/histogram.js:301-340"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1110,
+    "top": [
+     "internal/histogram.js:361-396",
+     "internal/histogram.js:331-370",
+     "internal/histogram.js:271-310"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1147,
+    "top": [
+     "internal/histogram.js:361-396",
+     "internal/histogram.js:331-370",
+     "internal/histogram.js:271-310"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/process/execution.js",
+   "name": "createModule",
+   "question": "When evaluating a script string passed on the CLI, where is the CommonJS module object for it created?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/process/execution.js",
+    "start": 410,
+    "end": 422
+   },
+   "keyword": {
+    "rank": 5,
+    "fileRank": 3,
+    "returnedTokens": 2104,
+    "top": [
+     "internal/bootstrap/realm.js:31-70",
+     "internal/bootstrap/realm.js:1-40",
+     "internal/process/execution.js:211-250"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1846,
+    "top": [
+     "internal/process/execution.js:361-400",
+     "internal/process/execution.js:391-430",
+     "repl.js:91-130"
+    ]
+   },
+   "hybrid": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1805,
+    "top": [
+     "internal/process/execution.js:361-400",
+     "internal/process/execution.js:391-430",
+     "internal/process/execution.js:211-250"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/os.js",
+   "name": "userInfo",
+   "question": "Where are the current user's username, shell and home directory returned, optionally as buffers?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "os.js",
+    "start": 285,
+    "end": 308
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1104,
+    "top": [
+     "os.js:271-310",
+     "os.js:31-70",
+     "os.js:301-340"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1294,
+    "top": [
+     "os.js:301-340",
+     "os.js:271-310",
+     "os.js:61-100"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1104,
+    "top": [
+     "os.js:271-310",
+     "os.js:301-340",
+     "os.js:61-100"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/worker/js_transferable.js",
+   "name": "markTransferMode",
+   "question": "How does an object get flagged as transferable or cloneable for postMessage?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/worker/js_transferable.js",
+    "start": 52,
+    "end": 98
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1501,
+    "top": [
+     "internal/worker/js_transferable.js:31-70",
+     "internal/worker/js_transferable.js:61-100",
+     "internal/worker/js_transferable.js:1-40"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1416,
+    "top": [
+     "internal/worker/js_transferable.js:31-70",
+     "internal/worker/js_transferable.js:61-100",
+     "internal/worker/js_transferable.js:91-130"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1486,
+    "top": [
+     "internal/worker/js_transferable.js:31-70",
+     "internal/worker/js_transferable.js:61-100",
+     "internal/worker/js_transferable.js:91-130"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/perf/resource_timing.js",
+   "name": "markResourceTiming",
+   "question": "Where is a resource timing performance entry created and recorded as the W3C spec describes?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/perf/resource_timing.js",
+    "start": 233,
+    "end": 262
+   },
+   "keyword": {
+    "rank": 3,
+    "fileRank": 3,
+    "returnedTokens": 1426,
+    "top": [
+     "internal/perf/observe.js:91-130",
+     "internal/perf/observe.js:421-460",
+     "internal/perf/resource_timing.js:211-250"
+    ]
+   },
+   "embedding": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1572,
+    "top": [
+     "internal/perf/resource_timing.js:1-40",
+     "internal/perf/resource_timing.js:181-220",
+     "internal/perf/resource_timing.js:211-250"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1543,
+    "top": [
+     "internal/perf/resource_timing.js:211-250",
+     "internal/perf/resource_timing.js:1-40",
+     "internal/perf/observe.js:91-130"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/perf/observe.js",
+   "name": "bufferResourceTiming",
+   "question": "Where is the event dispatched when the global buffer of resource timing entries is full?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/perf/observe.js",
+    "start": 434,
+    "end": 473
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1425,
+    "top": [
+     "internal/perf/observe.js:421-460",
+     "internal/perf/observe.js:451-490",
+     "internal/perf/observe.js:601-614"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1684,
+    "top": [
+     "internal/perf/observe.js:451-490",
+     "internal/perf/observe.js:421-460",
+     "internal/perf/observe.js:481-520"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1425,
+    "top": [
+     "internal/perf/observe.js:421-460",
+     "internal/perf/observe.js:451-490",
+     "internal/perf/observe.js:481-520"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/modules/helpers.js",
+   "name": "normalizeReferrerURL",
+   "question": "Where is the referrer of an import converted into a URL string, whether it is a path or already a URL?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/modules/helpers.js",
+    "start": 248,
+    "end": 275
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1696,
+    "top": [
+     "internal/modules/helpers.js:241-280",
+     "internal/modules/helpers.js:271-310",
+     "internal/vm.js:61-100"
+    ]
+   },
+   "embedding": {
+    "rank": 4,
+    "fileRank": 1,
+    "returnedTokens": 1453,
+    "top": [
+     "internal/modules/helpers.js:391-430",
+     "internal/modules/package_json_reader.js:1-40",
+     "internal/modules/helpers.js:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1527,
+    "top": [
+     "internal/modules/helpers.js:271-310",
+     "internal/modules/package_json_reader.js:1-40",
+     "internal/modules/package_json_reader.js:271-310"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/process/promises.js",
+   "name": "strictUnhandledRejectionsMode",
+   "question": "In the strict handling mode for rejected promises nobody catches, where is the rejection turned into an uncaught exception?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/process/promises.js",
+    "start": 332,
+    "end": 356
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1552,
+    "top": [
+     "internal/process/promises.js:331-370",
+     "internal/process/promises.js:301-340",
+     "internal/process/promises.js:391-430"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1410,
+    "top": [
+     "internal/process/promises.js:331-370",
+     "internal/process/promises.js:361-400",
+     "internal/process/promises.js:391-430"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1552,
+    "top": [
+     "internal/process/promises.js:331-370",
+     "internal/process/promises.js:361-400",
+     "internal/process/promises.js:391-430"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/repl.js",
+   "name": "completionGroupsLoaded",
+   "question": "In the REPL, what runs once all groups of tab-completion candidates have been gathered?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "repl.js",
+    "start": 1561,
+    "end": 1611
+   },
+   "keyword": {
+    "rank": 5,
+    "fileRank": 1,
+    "returnedTokens": 1707,
+    "top": [
+     "repl.js:1291-1330",
+     "repl.js:1381-1420",
+     "repl.js:1321-1360"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1694,
+    "top": [
+     "repl.js:1561-1600",
+     "repl.js:1591-1630",
+     "repl.js:1321-1360"
+    ]
+   },
+   "hybrid": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1694,
+    "top": [
+     "repl.js:1291-1330",
+     "repl.js:1561-1600",
+     "repl.js:1321-1360"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/vm.js",
+   "name": "internalCompileFunction",
+   "question": "Where does vm compile a function body from source code with parameters and a context?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/vm.js",
+    "start": 105,
+    "end": 156
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1858,
+    "top": [
+     "internal/vm.js:91-130",
+     "internal/modules/helpers.js:331-370",
+     "internal/process/execution.js:361-400"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1522,
+    "top": [
+     "internal/vm.js:121-160",
+     "internal/vm.js:91-130",
+     "internal/vm.js:211-230"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1813,
+    "top": [
+     "internal/vm.js:91-130",
+     "internal/vm.js:121-160",
+     "internal/process/execution.js:361-400"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/encoding.js",
+   "name": "trimAsciiWhitespace",
+   "question": "Where do we strip only ASCII whitespace from an encoding label because String.prototype.trim removes too much?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/encoding.js",
+    "start": 311,
+    "end": 333
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1497,
+    "top": [
+     "internal/encoding.js:301-340",
+     "internal/encoding.js:331-370",
+     "internal/modules/helpers.js:151-190"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1324,
+    "top": [
+     "internal/encoding.js:301-340",
+     "internal/encoding.js:331-370",
+     "internal/readline/utils.js:1-40"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1327,
+    "top": [
+     "internal/encoding.js:301-340",
+     "internal/encoding.js:331-370",
+     "internal/encoding.js:601-621"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/test_runner/mock/mock_timers.js",
+   "name": "MockDate",
+   "question": "In the test runner's fake timers, where is the replacement Date constructor implemented?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/test_runner/mock/mock_timers.js",
+    "start": 341,
+    "end": 383
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1641,
+    "top": [
+     "internal/test_runner/mock/mock_timers.js:331-370",
+     "internal/test_runner/mock/mock_timers.js:631-670",
+     "internal/test_runner/mock/mock_timers.js:571-610"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1594,
+    "top": [
+     "internal/test_runner/mock/mock_timers.js:91-130",
+     "internal/test_runner/mock/mock_timers.js:361-400",
+     "internal/test_runner/mock/mock_timers.js:121-160"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1749,
+    "top": [
+     "internal/test_runner/mock/mock_timers.js:331-370",
+     "internal/test_runner/mock/mock_timers.js:661-700",
+     "internal/test_runner/mock/mock_timers.js:631-670"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/bootstrap/realm.js",
+   "name": "requireWithFallbackInDeps",
+   "question": "How can internal modules that live in bundled dependencies require each other with a fallback?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/bootstrap/realm.js",
+    "start": 433,
+    "end": 442
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1814,
+    "top": [
+     "internal/bootstrap/realm.js:421-460",
+     "internal/bootstrap/realm.js:361-400",
+     "repl.js:481-520"
+    ]
+   },
+   "embedding": {
+    "rank": 12,
+    "fileRank": 1,
+    "returnedTokens": 1530,
+    "top": [
+     "internal/bootstrap/realm.js:151-190",
+     "internal/bootstrap/realm.js:121-160",
+     "internal/modules/helpers.js:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1549,
+    "top": [
+     "internal/bootstrap/realm.js:121-160",
+     "internal/bootstrap/realm.js:391-430",
+     "internal/bootstrap/realm.js:421-460"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/v8.js",
+   "name": "getHeapSpaceStatistics",
+   "question": "Where do we get per-space V8 heap usage numbers such as space size and used size?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "v8.js",
+    "start": 219,
+    "end": 245
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1439,
+    "top": [
+     "v8.js:211-250",
+     "v8.js:121-160",
+     "v8.js:151-190"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1439,
+    "top": [
+     "v8.js:181-220",
+     "v8.js:211-250",
+     "v8.js:151-190"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1439,
+    "top": [
+     "v8.js:211-250",
+     "v8.js:181-220",
+     "v8.js:121-160"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/events.js",
+   "name": "once",
+   "question": "Get a promise that resolves the next time an emitter fires a given event.",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "events.js",
+    "start": 962,
+    "end": 1012
+   },
+   "keyword": {
+    "rank": 4,
+    "fileRank": 1,
+    "returnedTokens": 1415,
+    "top": [
+     "events.js:1081-1120",
+     "events.js:1201-1224",
+     "internal/process/promises.js:211-250"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1752,
+    "top": [
+     "events.js:961-1000",
+     "internal/event_target.js:1081-1120",
+     "events.js:931-970"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1649,
+    "top": [
+     "events.js:961-1000",
+     "events.js:1081-1120",
+     "events.js:931-970"
+    ]
+   }
+  },
+  {
+   "source": "node-22.16.0/internal/inspector/network_undici.js",
+   "name": "requestHeadersArrayToDictionary",
+   "question": "For the inspector's network tracking of undici, where is the flat headers array turned into a plain object?",
+   "gold": {
+    "release": "node-22.16.0",
+    "file": "internal/inspector/network_undici.js",
+    "start": 16,
+    "end": 25
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1409,
+    "top": [
+     "internal/inspector/network_undici.js:1-40",
+     "internal/inspector_network_tracking.js:1-17",
+     "internal/inspector/network_undici.js:61-100"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1610,
+    "top": [
+     "internal/inspector/network_undici.js:1-40",
+     "internal/inspector/network_undici.js:31-70",
+     "internal/inspector/network_http.js:1-40"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1682,
+    "top": [
+     "internal/inspector/network_undici.js:1-40",
+     "internal/inspector/network_undici.js:31-70",
+     "internal/inspector/network_http.js:1-40"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/sync/mpmc/list.rs",
+   "name": "wait_next",
+   "question": "In the linked-list mpmc channel, where does a block spin until its successor pointer has been written?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/sync/mpmc/list.rs",
+    "start": 76,
+    "end": 86
+   },
+   "keyword": {
+    "rank": 11,
+    "fileRank": 1,
+    "returnedTokens": 1738,
+    "top": [
+     "std/src/sync/mpmc/list.rs:31-70",
+     "std/src/sync/mpmc/list.rs:1-40",
+     "std/src/sync/mpmc/list.rs:181-220"
+    ]
+   },
+   "embedding": {
+    "rank": 10,
+    "fileRank": 1,
+    "returnedTokens": 1784,
+    "top": [
+     "std/src/sync/mpmc/list.rs:31-70",
+     "std/src/sync/mpmc/list.rs:1-40",
+     "std/src/sync/mpmc/list.rs:181-220"
+    ]
+   },
+   "hybrid": {
+    "rank": 10,
+    "fileRank": 1,
+    "returnedTokens": 1602,
+    "top": [
+     "std/src/sync/mpmc/list.rs:31-70",
+     "std/src/sync/mpmc/list.rs:1-40",
+     "std/src/sync/mpmc/list.rs:181-220"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/core/src/net/parser.rs",
+   "name": "read_atomically",
+   "question": "In the IP address parser, how is a sub-parser run so that the position is rolled back if it fails?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "core/src/net/parser.rs",
+    "start": 43,
+    "end": 54
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1589,
+    "top": [
+     "core/src/net/parser.rs:211-250",
+     "core/src/net/parser.rs:31-70",
+     "core/src/net/parser.rs:451-490"
+    ]
+   },
+   "embedding": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1654,
+    "top": [
+     "core/src/net/parser.rs:61-100",
+     "core/src/net/parser.rs:481-520",
+     "core/src/net/parser.rs:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 2,
+    "fileRank": 1,
+    "returnedTokens": 1590,
+    "top": [
+     "core/src/net/parser.rs:211-250",
+     "core/src/net/parser.rs:31-70",
+     "core/src/net/parser.rs:481-520"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/core/src/fmt/num.rs",
+   "name": "fmt_int",
+   "question": "Where are integers written out in a given radix such as binary or hex through a Formatter?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "core/src/fmt/num.rs",
+    "start": 56,
+    "end": 104
+   },
+   "keyword": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1702,
+    "top": [
+     "core/src/fmt/num.rs:121-160",
+     "core/src/fmt/num.rs:151-190",
+     "core/src/fmt/num.rs:91-130"
+    ]
+   },
+   "embedding": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1657,
+    "top": [
+     "core/src/fmt/num.rs:121-160",
+     "core/src/fmt/num.rs:1-40",
+     "core/src/fmt/num.rs:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 3,
+    "fileRank": 1,
+    "returnedTokens": 1701,
+    "top": [
+     "core/src/fmt/num.rs:121-160",
+     "core/src/fmt/num.rs:151-190",
+     "core/src/fmt/num.rs:91-130"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/alloc/src/collections/btree/node.rs",
+   "name": "choose_parent_kv",
+   "question": "When rebalancing a B-tree node, how is the left or right sibling chosen through the parent?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "alloc/src/collections/btree/node.rs",
+    "start": 1322,
+    "end": 1355
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2081,
+    "top": [
+     "alloc/src/collections/btree/node.rs:1321-1360",
+     "alloc/src/collections/btree/fix.rs:1-40",
+     "alloc/src/collections/btree/node.rs:1291-1330"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2181,
+    "top": [
+     "alloc/src/collections/btree/node.rs:1321-1360",
+     "alloc/src/collections/btree/node.rs:1411-1450",
+     "alloc/src/collections/btree/node.rs:1291-1330"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2204,
+    "top": [
+     "alloc/src/collections/btree/node.rs:1321-1360",
+     "alloc/src/collections/btree/fix.rs:1-40",
+     "alloc/src/collections/btree/node.rs:1291-1330"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/core/src/num/bignum.rs",
+   "name": "add",
+   "question": "Where is addition implemented for the fixed-size big integer used by float parsing?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "core/src/num/bignum.rs",
+    "start": 146,
+    "end": 163
+   },
+   "keyword": {
+    "rank": null,
+    "fileRank": 3,
+    "returnedTokens": 1794,
+    "top": [
+     "core/src/fmt/float.rs:31-70",
+     "core/src/fmt/float.rs:1-40",
+     "core/src/num/bignum.rs:61-100"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1916,
+    "top": [
+     "core/src/num/bignum.rs:151-190",
+     "core/src/num/bignum.rs:121-160",
+     "core/src/num/bignum.rs:1-40"
+    ]
+   },
+   "hybrid": {
+    "rank": 9,
+    "fileRank": 1,
+    "returnedTokens": 1872,
+    "top": [
+     "core/src/num/bignum.rs:61-100",
+     "core/src/num/diy_float.rs:1-40",
+     "core/src/fmt/num.rs:91-130"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/io/buffered/bufwriter.rs",
+   "name": "flush_buf",
+   "question": "Where does the buffered writer push its buffered bytes into the inner writer, looping until everything is written?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/io/buffered/bufwriter.rs",
+    "start": 188,
+    "end": 252
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1818,
+    "top": [
+     "std/src/io/buffered/bufwriter.rs:181-220",
+     "std/src/io/buffered/bufwriter.rs:151-190",
+     "std/src/io/buffered/bufwriter.rs:121-160"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2099,
+    "top": [
+     "std/src/io/buffered/bufwriter.rs:181-220",
+     "std/src/io/buffered/bufwriter.rs:211-250",
+     "std/src/io/buffered/bufwriter.rs:151-190"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1785,
+    "top": [
+     "std/src/io/buffered/bufwriter.rs:181-220",
+     "std/src/io/buffered/bufwriter.rs:151-190",
+     "std/src/io/buffered/bufwriter.rs:121-160"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/alloc/src/collections/btree/merge_iter.rs",
+   "name": "lens",
+   "question": "What gives the upper bounds used for size_hint when merging two sorted B-tree iterators?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "alloc/src/collections/btree/merge_iter.rs",
+    "start": 87,
+    "end": 97
+   },
+   "keyword": {
+    "rank": 4,
+    "fileRank": 4,
+    "returnedTokens": 1495,
+    "top": [
+     "core/src/iter/adapters/take.rs:31-70",
+     "core/src/iter/adapters/filter_map.rs:121-160",
+     "core/src/iter/adapters/step_by.rs:121-160"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1523,
+    "top": [
+     "alloc/src/collections/btree/merge_iter.rs:61-99",
+     "alloc/src/collections/btree/merge_iter.rs:1-40",
+     "core/src/iter/adapters/skip.rs:91-130"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1390,
+    "top": [
+     "alloc/src/collections/btree/merge_iter.rs:61-99",
+     "core/src/iter/adapters/filter.rs:91-130",
+     "core/src/iter/adapters/skip.rs:91-130"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/sys/sync/mutex/itron.rs",
+   "name": "new_mtx",
+   "question": "On ITRON targets, where is the kernel mutex object created?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/sys/sync/mutex/itron.rs",
+    "start": 14,
+    "end": 24
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1468,
+    "top": [
+     "std/src/sys/sync/mutex/itron.rs:1-40",
+     "std/src/sys/sync/rwlock/solid.rs:1-40",
+     "std/src/sys/sync/mutex/itron.rs:31-69"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1537,
+    "top": [
+     "std/src/sys/sync/mutex/itron.rs:1-40",
+     "std/src/sys/sync/mutex/itron.rs:31-69",
+     "std/src/sys/pal/itron/thread.rs:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1544,
+    "top": [
+     "std/src/sys/sync/mutex/itron.rs:1-40",
+     "std/src/sys/sync/mutex/itron.rs:31-69",
+     "std/src/sys/sync/rwlock/solid.rs:1-40"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/sys/pal/windows/os.rs",
+   "name": "error_string",
+   "question": "How is a Windows error code turned into a readable message?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/sys/pal/windows/os.rs",
+    "start": 23,
+    "end": 77
+   },
+   "keyword": {
+    "rank": 2,
+    "fileRank": 2,
+    "returnedTokens": 1874,
+    "top": [
+     "std/src/sys/pal/windows/pipe.rs:151-190",
+     "std/src/sys/pal/windows/os.rs:31-70",
+     "std/src/sys/pal/windows/pipe.rs:91-130"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1477,
+    "top": [
+     "std/src/sys/pal/windows/os.rs:1-40",
+     "std/src/sys/pal/windows/os.rs:31-70",
+     "std/src/sys/process/unix/unsupported.rs:61-73"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1845,
+    "top": [
+     "std/src/sys/pal/windows/os.rs:31-70",
+     "std/src/sys/pal/windows/os.rs:1-40",
+     "std/src/sys/stdio/windows.rs:61-100"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/core/src/iter/adapters/take.rs",
+   "name": "check",
+   "question": "In the iterator adapter that yields only the first n items, where is folding done by counting down the remaining items instead of using a stateful closure?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "core/src/iter/adapters/take.rs",
+    "start": 274,
+    "end": 284
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1747,
+    "top": [
+     "core/src/iter/adapters/take.rs:271-310",
+     "core/src/iter/adapters/take.rs:241-280",
+     "core/src/iter/sources/from_fn.rs:1-40"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1435,
+    "top": [
+     "core/src/iter/adapters/take.rs:271-310",
+     "core/src/iter/adapters/take.rs:181-220",
+     "core/src/iter/adapters/take.rs:241-280"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1490,
+    "top": [
+     "core/src/iter/adapters/take.rs:271-310",
+     "core/src/iter/adapters/take.rs:241-280",
+     "core/src/iter/adapters/take.rs:1-40"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/proc_macro/src/bridge/server.rs",
+   "name": "recv",
+   "question": "In the proc-macro bridge, how does one end of the message pipe receive from the other end?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "proc_macro/src/bridge/server.rs",
+    "start": 358,
+    "end": 376
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1542,
+    "top": [
+     "proc_macro/src/bridge/server.rs:331-370",
+     "proc_macro/src/bridge/server.rs:301-340",
+     "proc_macro/src/bridge/server.rs:241-280"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1546,
+    "top": [
+     "proc_macro/src/bridge/server.rs:331-370",
+     "proc_macro/src/bridge/server.rs:241-280",
+     "proc_macro/src/bridge/server.rs:181-220"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1542,
+    "top": [
+     "proc_macro/src/bridge/server.rs:331-370",
+     "proc_macro/src/bridge/server.rs:241-280",
+     "proc_macro/src/bridge/server.rs:181-220"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/sys/pal/unix/sync/condvar.rs",
+   "name": "wait_timeout",
+   "question": "How does the unix condition variable wait with a deadline on a pthread mutex?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/sys/pal/unix/sync/condvar.rs",
+    "start": 51,
+    "end": 84
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1636,
+    "top": [
+     "std/src/sys/pal/unix/sync/condvar.rs:31-70",
+     "std/src/sys/pal/unix/sync/condvar.rs:1-40",
+     "std/src/sys/pal/teeos/mod.rs:1-40"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1776,
+    "top": [
+     "std/src/sys/pal/unix/sync/condvar.rs:31-70",
+     "std/src/sys/pal/unix/sync/condvar.rs:1-40",
+     "std/src/sys/pal/unix/sync/condvar.rs:61-100"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1658,
+    "top": [
+     "std/src/sys/pal/unix/sync/condvar.rs:31-70",
+     "std/src/sys/pal/unix/sync/condvar.rs:1-40",
+     "std/src/sys/pal/unix/sync/condvar.rs:61-100"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/sys/backtrace.rs",
+   "name": "print",
+   "question": "Where is the current stack trace written out in the chosen format?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/sys/backtrace.rs",
+    "start": 22,
+    "end": 43
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1754,
+    "top": [
+     "std/src/sys/backtrace.rs:31-70",
+     "std/src/sys/pal/itron/thread.rs:181-220",
+     "std/src/sys/pal/windows/stack_overflow.rs:1-40"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1477,
+    "top": [
+     "std/src/sys/backtrace.rs:1-40",
+     "std/src/sys/backtrace.rs:181-220",
+     "std/src/sys/backtrace.rs:31-70"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1912,
+    "top": [
+     "std/src/sys/backtrace.rs:31-70",
+     "std/src/sys/backtrace.rs:1-40",
+     "std/src/sys/pal/windows/stack_overflow.rs:1-40"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/sys/fs/wasi.rs",
+   "name": "open_parent",
+   "question": "On WASI, how is a bare path opened when every syscall needs a preopened directory?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/sys/fs/wasi.rs",
+    "start": 728,
+    "end": 801
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1975,
+    "top": [
+     "std/src/sys/fs/wasi.rs:721-760",
+     "std/src/sys/fs/wasi.rs:691-730",
+     "std/src/sys/fs/wasi.rs:811-850"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1785,
+    "top": [
+     "std/src/sys/fs/wasi.rs:751-790",
+     "std/src/sys/fs/wasi.rs:691-730",
+     "std/src/sys/fs/wasi.rs:721-760"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1854,
+    "top": [
+     "std/src/sys/fs/wasi.rs:721-760",
+     "std/src/sys/fs/wasi.rs:691-730",
+     "std/src/sys/fs/wasi.rs:751-790"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/alloc/src/collections/btree/fix.rs",
+   "name": "fix_node_through_parent",
+   "question": "How is an underfull B-tree node topped up by merging with or stealing from a sibling, possibly shrinking the parent?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "alloc/src/collections/btree/fix.rs",
+    "start": 9,
+    "end": 49
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2129,
+    "top": [
+     "alloc/src/collections/btree/fix.rs:1-40",
+     "alloc/src/collections/btree/node.rs:1321-1360",
+     "alloc/src/collections/btree/node.rs:1291-1330"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2071,
+    "top": [
+     "alloc/src/collections/btree/fix.rs:1-40",
+     "alloc/src/collections/btree/fix.rs:121-160",
+     "alloc/src/collections/btree/node.rs:1411-1450"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2084,
+    "top": [
+     "alloc/src/collections/btree/fix.rs:1-40",
+     "alloc/src/collections/btree/fix.rs:31-70",
+     "alloc/src/collections/btree/fix.rs:121-160"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/core/src/fmt/float.rs",
+   "name": "float_to_exponential_common",
+   "question": "Where is the shared code for formatting floats in scientific notation with a lowercase or uppercase e?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "core/src/fmt/float.rs",
+    "start": 154,
+    "end": 171
+   },
+   "keyword": {
+    "rank": 6,
+    "fileRank": 6,
+    "returnedTokens": 1395,
+    "top": [
+     "std/src/sys_common/wtf8/tests.rs:631-670",
+     "std/src/sys_common/wtf8/tests.rs:601-640",
+     "coretests/benches/char/methods.rs:61-90"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1630,
+    "top": [
+     "core/src/fmt/float.rs:121-160",
+     "core/src/fmt/float.rs:151-190",
+     "core/src/fmt/float.rs:61-100"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1541,
+    "top": [
+     "core/src/fmt/float.rs:151-190",
+     "core/src/fmt/float.rs:121-160",
+     "core/src/fmt/float.rs:181-220"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/core/src/panic.rs",
+   "name": "take_box",
+   "question": "How does a panic payload give up ownership of its contents as a boxed Any?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "core/src/panic.rs",
+    "start": 174,
+    "end": 190
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1764,
+    "top": [
+     "core/src/panic.rs:151-190",
+     "std/src/panicking.rs:631-670",
+     "std/src/panicking.rs:511-550"
+    ]
+   },
+   "embedding": {
+    "rank": 2,
+    "fileRank": 2,
+    "returnedTokens": 1980,
+    "top": [
+     "std/src/panicking.rs:751-790",
+     "core/src/panic.rs:151-190",
+     "std/src/panicking.rs:511-550"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1980,
+    "top": [
+     "core/src/panic.rs:151-190",
+     "std/src/panicking.rs:511-550",
+     "std/src/panicking.rs:631-670"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/sys/env/solid.rs",
+   "name": "env",
+   "question": "On SOLID, where are all environment variables of the process enumerated?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/sys/env/solid.rs",
+    "start": 17,
+    "end": 54
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1682,
+    "top": [
+     "std/src/sys/env/solid.rs:1-40",
+     "std/src/sys/env/solid.rs:31-70",
+     "std/src/panicking.rs:301-340"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1435,
+    "top": [
+     "std/src/sys/env/solid.rs:1-40",
+     "std/src/sys/process/unix/vxworks.rs:31-70",
+     "std/src/sys/env/solid.rs:61-97"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1478,
+    "top": [
+     "std/src/sys/env/solid.rs:1-40",
+     "std/src/sys/env/solid.rs:31-70",
+     "std/src/sys/process/unix/vxworks.rs:61-100"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/std/src/sys/pal/windows/compat.rs",
+   "name": "const_cstr_from_bytes",
+   "question": "Where is a C string built from a byte slice at compile time for Windows API names?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "std/src/sys/pal/windows/compat.rs",
+    "start": 77,
+    "end": 98
+   },
+   "keyword": {
+    "rank": 6,
+    "fileRank": 6,
+    "returnedTokens": 1753,
+    "top": [
+     "alloc/src/string.rs:181-220",
+     "std/src/sys/pal/windows/os.rs:1-40",
+     "alloc/src/string.rs:151-190"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1799,
+    "top": [
+     "std/src/sys/pal/windows/compat.rs:91-130",
+     "std/src/sys/pal/windows/compat.rs:61-100",
+     "std/src/sys/os_str/bytes.rs:271-310"
+    ]
+   },
+   "hybrid": {
+    "rank": 2,
+    "fileRank": 2,
+    "returnedTokens": 1744,
+    "top": [
+     "alloc/src/string.rs:181-220",
+     "std/src/sys/pal/windows/compat.rs:61-100",
+     "std/src/sys/pal/windows/os.rs:1-40"
+    ]
+   }
+  },
+  {
+   "source": "rust-1.88.0/core/src/ops/range.rs",
+   "name": "intersect",
+   "question": "How is the overlap of two ranges' bounds computed?",
+   "gold": {
+    "release": "rust-1.88.0",
+    "file": "core/src/ops/range.rs",
+    "start": 917,
+    "end": 985
+   },
+   "keyword": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 2096,
+    "top": [
+     "core/src/ops/range.rs:901-940",
+     "core/src/ops/range.rs:931-970",
+     "core/src/ptr/const_ptr.rs:361-400"
+    ]
+   },
+   "embedding": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1642,
+    "top": [
+     "core/src/ops/range.rs:931-970",
+     "core/src/ops/range.rs:901-940",
+     "core/src/ops/range.rs:961-1000"
+    ]
+   },
+   "hybrid": {
+    "rank": 1,
+    "fileRank": 1,
+    "returnedTokens": 1636,
+    "top": [
+     "core/src/ops/range.rs:901-940",
+     "core/src/ops/range.rs:931-970",
+     "core/src/ops/range.rs:991-1030"
+    ]
+   }
+  }
+ ]
+}

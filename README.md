@@ -133,6 +133,8 @@ hydra audit                                          # every file Hydra touched,
 
 Need the raw log for one run? Prefix it with `HYDRA_RAW=1` and the hook lets it through.
 
+**Experimental, opt-in: recall and meaning search.** After `hydra embed install` (EmbeddingGemma 2, Apache 2.0, about 310 MB), `hydra recall "why did the last release fail?"` returns the paragraphs of your project's markdown notes that answer it, and `hydra search --meaning "where do we retry failed requests?"` finds code by what it does. Both print the files' own lines with `file:line`. On development sets: the right note in the top 5 for 15 of 20 new questions in about 1,000 tokens (about 65,000 to read the notes whole), and the right function in the top 5 for 72 of 80 code questions against 65 for keyword search. Not yet measured in real sessions, so agents are not told to use it.
+
 ## Privacy and control
 
 - **Local only.** The model, the runtime and the telemetry live in `~/.hydra`. Nothing is sent anywhere.

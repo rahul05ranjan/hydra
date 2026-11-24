@@ -154,6 +154,29 @@ test('the OpenCode plugin stops a test run and lets other commands through', asy
   });
 });
 
+// Issue #10: on Windows a reinstall reported Hydra's own earlier entries as "not written by Hydra",
+// because the check ran on JSON text, where each backslash in C:\Users\x\.hydra\scripts is doubled.
+test('Hydra recognises its own MCP entry written with Windows paths: reinstall, status and remove', async () => {
+  const home = fakeHome();
+  const scripts = 'C:\\Users\\rahus\\.hydra\\scripts\\mcp.mjs';
+  const node = 'C:\\Program Files\\nodejs\\node.exe';
+  const opencode = path.join(home, '.config/opencode/opencode.json');
+  const antigravity = path.join(home, '.gemini/antigravity/mcp_config.json');
+  writeFileSync(opencode, JSON.stringify({ mcp: { other: { type: 'local', command: ['other'] }, hydra: { type: 'local', command: [node, scripts], enabled: true } } }));
+  writeFileSync(antigravity, JSON.stringify({ mcpServers: { hydra: { command: node, args: [scripts] } } }));
+  await withHome(home, async integrations => {
+    const mcp = id => integrations.status().find(r => r.id === id).mcp;
+    assert.equal(mcp('opencode'), true);
+    assert.equal(mcp('antigravity'), true);
+    const results = integrations.apply(['opencode', 'antigravity'], 'install', { scripts: integrations.installSharedScripts(SCRIPTS) });
+    for (const result of results) assert.deepEqual(result.manual, [], `${result.id}: ${result.manual.join('\n')}`);
+    assert.ok(JSON.parse(readFileSync(opencode, 'utf8')).mcp.other, 'the other server is kept');
+    integrations.apply(['opencode', 'antigravity'], 'remove', { scripts: integrations.sharedScripts() });
+    assert.equal(JSON.parse(readFileSync(opencode, 'utf8')).mcp.hydra, undefined);
+    assert.equal(JSON.parse(readFileSync(antigravity, 'utf8')).mcpServers?.hydra, undefined);
+  });
+});
+
 test('a hydra MCP entry that Hydra did not write is left alone and reported', async () => {
   const home = fakeHome();
   const file = path.join(home, '.cursor/mcp.json');

@@ -76,7 +76,10 @@ function loadJson(file, snippet) {
 }
 
 const saveJson = (file, value) => write(file, `${JSON.stringify(value, null, 2)}\n`);
-const mentionsOurs = value => OURS.test(JSON.stringify(value ?? ''));
+// Test each string in the entry, not its JSON text: JSON doubles every backslash, so a Windows path such
+// as C:\Users\x\.hydra\scripts\mcp.mjs never matched and Hydra took its own entry for someone else's (#10).
+const strings = value => (typeof value === 'string' ? [value] : value && typeof value === 'object' ? Object.values(value).flatMap(strings) : []);
+const mentionsOurs = value => strings(value).some(text => OURS.test(text));
 
 /** Add or remove Hydra's entry in a JSON object of named servers, such as mcpServers. */
 function jsonServer(file, key, entry) {

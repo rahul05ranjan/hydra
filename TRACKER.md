@@ -773,6 +773,7 @@ Built safe read-only OS inspection head supporting listening ports (`lsof`), run
 - 2026-11-25: On the user's "all": bumped to 0.3.8 (the issue #10 fix, `hydra recall`, `hydra search --meaning`, `hydra embed`) and added an opt-in note to the README's Commands section. Suite 230/231 (1 Windows-only skip); `npm pack --dry-run` 31 files, no `.env`. Pushed. Next: the user runs `npm publish`; then `npm view hydra-nano version`, a GitHub release on tag `v0.3.8`, and the reply on #10 once the user approves its text.
 - 2026-11-25: On the user's go, replied on issue #10 (cause, fix in 0.3.8 / 2c6301b, rerun the installer or `hydra self-update` once 0.3.8 is on npm); issue left open. npm still answers 0.3.7; `npm publish` waits on the user.
 - 2026-11-25: The user published 0.3.8 (`npm view` answers 0.3.8). GitHub release "Hydra 0.3.8: Windows install fix, opt-in recall and meaning search" on tag `v0.3.8` (commit 2c6301b), now Latest. Issue #10 was filed by the user from their own Windows PC; it stays open until they run `hydra self-update` and `hydra agents status` there and OpenCode and Antigravity show `mcp yes`. This Mac still runs the installed 0.3.6 until `hydra self-update`.
+- 2026-11-25: On the user's request, rewrote the #10 comment as a maintainer note (cause, fix in 0.3.8, how to update on Windows) and closed the issue as completed. It says plainly that the Windows machine has not been rechecked; reopen if `hydra agents status` still shows `mcp no` there.
 
 ### Next steps (left open 2026-10-21)
 

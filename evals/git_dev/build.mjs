@@ -16,12 +16,16 @@ const SET = process.env.HYDRA_GIT_DEV_SET || 'original';
 // Cloudflare GLM, frozen before any scoring and scored once, aggregates only. It lives in evals/git_holdout3.
 // `glm` (2026-11-22): development, not held out: 40 worlds on seeds 9200..9239 with new GLM wordings, filtered so
 // none is near a holdout3 wording, for working on the unseen-wording drop without touching holdout3.
-if (!['original', 'extended', 'paraphrase', 'lines', 'holdout3', 'glm'].includes(SET)) throw new Error('Unknown Git development set');
-export const dataDir = SET === 'original' ? HERE : SET === 'holdout3' ? path.join(ROOT, 'evals/git_holdout3') : path.join(HERE, SET);
+// `holdout_lines` (2026-11-27) is held out, not development: the `lines` intents on 40 worlds, seeds 9400..9439,
+// with GLM wordings filtered away from every other set's, frozen before any scoring and scored once, overall
+// only (evals/run_dev.mjs keeps no per-task rows for it). It lives in evals/git_holdout_lines.
+export const HELD_OUT = ['holdout3', 'holdout_lines'].includes(SET);
+if (!['original', 'extended', 'paraphrase', 'lines', 'holdout3', 'glm', 'holdout_lines'].includes(SET)) throw new Error('Unknown Git development set');
+export const dataDir = SET === 'original' ? HERE : SET === 'holdout3' ? path.join(ROOT, 'evals/git_holdout3') : SET === 'holdout_lines' ? path.join(ROOT, 'evals/git_holdout_lines') : path.join(HERE, SET);
 const TASKS = path.join(dataDir, 'tasks.jsonl');
 const HEADS = path.join(dataDir, 'worlds.json');
-const WORLDS = { original: 10, extended: 40, paraphrase: 40, lines: 20, holdout3: 100, glm: 40 }[SET];
-const SEED = { original: 6100, extended: 6200, paraphrase: 6400, lines: 6600, holdout3: 9000, glm: 9200 }[SET];
+const WORLDS = { original: 10, extended: 40, paraphrase: 40, lines: 20, holdout3: 100, glm: 40, holdout_lines: 40 }[SET];
+const SEED = { original: 6100, extended: 6200, paraphrase: 6400, lines: 6600, holdout3: 9000, glm: 9200, holdout_lines: 9400 }[SET];
 
 export const worldsDir = () => path.join(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds', SET === 'original' ? 'git_dev' : `git_dev_${SET}`);
 export const worldName = i => `dev_${String(i).padStart(2, '0')}`;
@@ -177,7 +181,7 @@ function lineTasksFor(world, index, phrasings) {
 export function buildWorlds() {
   const parent = path.resolve(process.env.HYDRA_HOME ?? path.join(os.homedir(), '.hydra'), 'worlds');
   const relative = path.relative(parent, path.resolve(worldsDir()));
-  if (!['git_dev', 'git_dev_extended', 'git_dev_paraphrase', 'git_dev_lines', 'git_dev_holdout3', 'git_dev_glm'].includes(relative)) throw new Error('Unsafe development-world cleanup path');
+  if (!['git_dev', 'git_dev_extended', 'git_dev_paraphrase', 'git_dev_lines', 'git_dev_holdout3', 'git_dev_glm', 'git_dev_holdout_lines'].includes(relative)) throw new Error('Unsafe development-world cleanup path');
   rmSync(worldsDir(), { recursive: true, force: true });
   mkdirSync(worldsDir(), { recursive: true });
   return Array.from({ length: WORLDS }, (_, i) => buildWorld(path.join(worldsDir(), worldName(i)), SEED + i));
@@ -195,7 +199,7 @@ export function ensureWorlds() {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const phrasings = JSON.parse(readFileSync(path.join(dataDir, 'phrasings.json'), 'utf8'));
   const worlds = buildWorlds();
-  const tasks = worlds.flatMap((w, i) => (SET === 'lines' ? lineTasksFor : tasksFor)(w, i, phrasings));
+  const tasks = worlds.flatMap((w, i) => (['lines', 'holdout_lines'].includes(SET) ? lineTasksFor : tasksFor)(w, i, phrasings));
   writeFileSync(TASKS, tasks.map(task => JSON.stringify(task)).join('\n') + '\n');
   writeFileSync(HEADS, JSON.stringify(Object.fromEntries(worlds.map((w, i) => [worldName(i), read(w.repo, 'rev-parse', 'HEAD')])), null, 2) + '\n');
   console.log(`${tasks.length} dev tasks over ${worlds.length} worlds built in ${worldsDir()}`);

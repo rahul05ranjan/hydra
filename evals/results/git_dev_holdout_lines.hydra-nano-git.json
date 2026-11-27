@@ -1,0 +1,22 @@
+{
+ "model": "hydra-nano:git",
+ "date": "2026-11-27T17:26:29.465Z",
+ "heldOut": true,
+ "overall": {
+  "tasks": 200,
+  "modelCalls": 237,
+  "tasksWithModelCalls": 195,
+  "modelPlannerTasks": 195,
+  "modelProbeChoiceAccuracy": 0.7589743589743589,
+  "routed": 0.595,
+  "plan": 1,
+  "evidence": 0.97,
+  "solved": 0.97,
+  "recall": 0.9825,
+  "readingRight": 0,
+  "readingScored": 0,
+  "raw": 46239,
+  "returned": 20994,
+  "errors": 0
+ }
+}

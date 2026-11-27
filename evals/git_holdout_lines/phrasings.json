@@ -1,0 +1,52 @@
+{
+  "line_number": [
+    "which commit last touched line {line} of {path}",
+    "Hey, can you tell me who last modified line {line} in {path}?",
+    "I need to know which commit most recently edited line {line} in the file {path}.",
+    "Show me the last commit that changed line {line} in {path}",
+    "Please find out who last updated line {line} in {path}, I'm debugging something.",
+    "What's the most recent commit that affects line {line} of {path}?",
+    "can u find the last person to change line {line} in {path}",
+    "I'd like the commit hash for the latest change to line {line} in {path}."
+  ],
+  "line_colon": [
+    "Who last changed {path}:{line}?",
+    "I want to know who last edited {path}:{line} \u2014 any idea?",
+    "Who is responsible for the change at {path}:{line}?",
+    "Could you tell me which commit last changed {path}:{line}? It's part of my code review.",
+    "git blame info for {path}:{line}, who was it?",
+    "What commit most recently affected {path}:{line}?",
+    "please look up who last touched {path}:{line} for me"
+  ],
+  "line_span": [
+    "Can you show me the commits responsible for lines {from} through {to} in {path}?",
+    "I'm curious who authored lines {from} to {to} of the file {path}.",
+    "show the history behind lines {from}-{to} in {path}",
+    "Which commits touched the range from line {from} to line {to} in {path}?",
+    "help me figure out who wrote the block at lines {from} to {to} in {path}",
+    "Give me the list of commits that created lines {from} through {to} of {path}.",
+    "who's behind lines {from}-{to} in {path}",
+    "Please identify the commits that produced lines {from} to {to} in {path}, I need it for attribution."
+  ],
+  "range_log": [
+    "what commits are in {range}?",
+    "Can you list the commits between {range}?",
+    "I'd like a quick overview of the commits in {range}.",
+    "Which commits make up {range}? Just the list please.",
+    "Print a summary of all commits in the range {range}.",
+    "hey can you show what went into {range}",
+    "List every commit in {range} with its subject line.",
+    "What are the commits included in {range}? I want to review them before merging."
+  ],
+  "range_diff": [
+    "what's the diff for {range}?",
+    "Can you show me the changes introduced by {range}?",
+    "I want to see which files differ between {range}.",
+    "show the changes in {range}",
+    "What files were modified in the three-dot range {range}?",
+    "Could you give me the diff of {range}? I'm comparing against the merge base.",
+    "list the files changed in {range} please",
+    "What changed in {range}? Give me an overview of the file changes.",
+    "help me see the diff between {range} before I rebase"
+  ]
+}

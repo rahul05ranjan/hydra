@@ -8,7 +8,7 @@ import * as git from '../skills/hydra/scripts/lib/git.mjs';
 import { tokens } from '../skills/hydra/scripts/lib/ledger.mjs';
 import { chat, MODEL } from '../skills/hydra/scripts/lib/ollama.mjs';
 import { route } from '../skills/hydra/scripts/lib/route.mjs';
-import { ensureWorlds, loadTasks, worldsDir } from './git_dev/build.mjs';
+import { ensureWorlds, HELD_OUT, loadTasks, worldsDir } from './git_dev/build.mjs';
 import { startLive, recordLive, finishLive } from './live_reporter.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -106,7 +106,8 @@ const tasks = allTasks
   .slice(0, limit);
 
 console.log(`Scoring ${tasks.length} dev tasks with model ${MODEL}...`);
-startLive('git_dev', MODEL, tasks.length);
+// A held-out set is scored once and reported overall only: no live per-task feed, no per-intent table, no rows.
+if (!HELD_OUT) startLive('git_dev', MODEL, tasks.length);
 const started = Date.now();
 const rows = [];
 const queue = [...tasks];
@@ -116,7 +117,7 @@ await Promise.all(
     for (let task = queue.shift(); task; task = queue.shift()) {
       const res = await score(task);
       rows.push(res);
-      recordLive(res);
+      if (!HELD_OUT) recordLive(res);
       if (rows.length % 50 === 0) console.error(`${rows.length}/${tasks.length}`);
     }
   }),
@@ -128,12 +129,12 @@ const byIntent = Object.fromEntries(
   intents.map(intent => [intent, summarise(rows.filter(row => row.intent === intent))]),
 );
 const overall = summarise(rows);
-finishLive(overall);
+if (!HELD_OUT) finishLive(overall);
 
 const pct = x => `${(100 * x).toFixed(0)}%`.padStart(5);
 console.log(`\nmodel ${MODEL}, ${rows.length} tasks, ${((Date.now() - started) / 60000).toFixed(1)} min\n`);
 console.log(`${'intent'.padEnd(19)} tasks routed  plan evid. solved  reading  read-tok  returned`);
-for (const [name, s] of [...Object.entries(byIntent), ['ALL', overall]]) {
+for (const [name, s] of [...(HELD_OUT ? [] : Object.entries(byIntent)), ['ALL', overall]]) {
   const reading = s.readingScored ? `${s.readingRight}/${s.readingScored}` : '-';
   console.log(
     `${name.padEnd(19)} ${String(s.tasks).padStart(5)} ${pct(s.routed)} ${pct(s.plan)} ${pct(s.evidence)} ${pct(s.solved)}  ${reading.padStart(7)}  ${String(s.raw).padStart(8)}  ${String(s.returned).padStart(8)}`,
@@ -143,5 +144,5 @@ for (const [name, s] of [...Object.entries(byIntent), ['ALL', overall]]) {
 mkdirSync(path.join(HERE, 'results'), { recursive: true });
 const setSuffix = process.env.HYDRA_GIT_DEV_SET && process.env.HYDRA_GIT_DEV_SET !== 'original' ? `_${process.env.HYDRA_GIT_DEV_SET}` : '';
 const file = path.join(HERE, 'results', `git_dev${setSuffix}.${MODEL.replace(/[^\w.-]+/g, '-')}.json`);
-writeFileSync(file, JSON.stringify({ model: MODEL, date: new Date().toISOString(), overall, byIntent, rows }, null, 1) + '\n');
+writeFileSync(file, JSON.stringify(HELD_OUT ? { model: MODEL, date: new Date().toISOString(), heldOut: true, overall } : { model: MODEL, date: new Date().toISOString(), overall, byIntent, rows }, null, 1) + '\n');
 console.log(`wrote ${path.relative(process.cwd(), file)}`);

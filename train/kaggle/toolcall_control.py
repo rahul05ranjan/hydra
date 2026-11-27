@@ -19,22 +19,48 @@ load_dotenv(ROOT / '.env')
 # names, so earlier runs' kernels, datasets and receipts stay as they were. v4 trains the v3 mix with the
 # same seed and update count but as merged LoRA adapters instead of every parameter, so the method is the
 # only thing that changes (full fine-tuning lost BFCL accuracy and Git gates in all three earlier runs).
+# v5 keeps v4's recipe and changes only the data: GLM-5.3 writes the tool-calling targets
+# (train/build_toolcall_data_v5.py), because v2's own replies cannot teach declining.
 RUN = os.environ.get('HYDRA_TOOLCALL_RUN', 'v1')
 SUFFIX = '' if RUN == 'v1' else f'-{RUN}'
+LORA = RUN in ('v4', 'v5')
 DATA = ROOT / {'v1': 'train/data-toolcall', 'v2': 'train/data-toolcall-v2', 'v3': 'train/data-toolcall-v3',
-               'v4': 'train/data-toolcall-v3'}[RUN]
+               'v4': 'train/data-toolcall-v3', 'v5': 'train/data-toolcall-v5'}[RUN]
 STAGE = Path.home() / f'.hydra/kaggle-toolcall{SUFFIX}'
 RESULT = Path.home() / f'.hydra/build/toolcall-candidate{SUFFIX}'
 USER = os.environ.get('KAGGLE_USERNAME', '')
 KERNEL = f'{USER}/hydra-toolcall-training{SUFFIX}'
 DATASET = KERNEL + '-input'
 V2 = Path.home() / '.hydra/build/bench-models/hydra-nano-v2'
-PLAN = {'heads': {'v1': 'git,toolcall', 'v2': 'git,toolcall,chat', 'v3': 'git,toolcall,chat', 'v4': 'git,toolcall,chat'}[RUN],
-        'steps': 200, 'accumulation': 8,
-        'learningRate': 2e-4 if RUN == 'v4' else 2e-6, 'initialScale': 128, 'maxLength': 2048,
-        'sampleSeed': {'v1': 20261017, 'v2': 20261018, 'v3': 20261019, 'v4': 20261019}[RUN], 'trainerSeconds': 7200, 'kernelTimeoutSeconds': 3 * 3600,
+# v5 builds its mix inside the Kaggle job (the user's choice, 2026-11-26: nothing runs on the laptop), then trains
+# on it in the same job. About 6,000 GLM questions give about three times v3's rows, so v5 takes 400 updates.
+BUILD = RUN == 'v5'
+PLAN = {'heads': 'git,toolcall' if RUN == 'v1' else 'git,toolcall,chat',
+        'steps': 400 if BUILD else 200, 'accumulation': 8,
+        'learningRate': 2e-4 if LORA else 2e-6, 'initialScale': 128, 'maxLength': 2048,
+        'sampleSeed': {'v1': 20261017, 'v2': 20261018, 'v3': 20261019, 'v4': 20261019, 'v5': 20261126}[RUN], 'trainerSeconds': 7200,
+        'kernelTimeoutSeconds': 9 * 3600 if BUILD else 3 * 3600,
         'checkpoint': {'repo': 'rahul05ranjan/hydra-nano-git', 'revision': '8129125fad1c664bbb58ebd3238f6598c879eb23'},
-        **({'method': 'lora', 'loraRank': 16, 'loraAlpha': 16} if RUN == 'v4' else {})}
+        **({'method': 'lora', 'loraRank': 16, 'loraAlpha': 16} if LORA else {}),
+        **({'build': {'script': 'train/build_toolcall_data_v5.py', 'teacher': '@cf/zai-org/glm-5.3', 'workers': 3,
+                      'deadlineSeconds': 6 * 3600, 'minToolcallRows': 3000}} if BUILD else {})}
+SOURCES = Path.home() / '.hydra/build/irrelevance-data'
+BUILD_FILES = {  # path inside build-inputs.bin: local source
+    'train/build_toolcall_data_v5.py': ROOT / 'train/build_toolcall_data_v5.py',
+    'train/build_toolcall_data_v3.py': ROOT / 'train/build_toolcall_data_v3.py',
+    'train/build_toolcall_data_v2.py': ROOT / 'train/build_toolcall_data_v2.py',
+    'train/build_toolcall_data.py': ROOT / 'train/build_toolcall_data.py',
+    'train/teacher_probe.py': ROOT / 'train/teacher_probe.py',
+    'train/cloudflare_dev.py': ROOT / 'train/cloudflare_dev.py',
+    'train/full_finetune.py': ROOT / 'train/full_finetune.py',
+    'train/data-toolcall-v3/train.jsonl': ROOT / 'train/data-toolcall-v3/train.jsonl',
+    'train/data-toolcall-v3/manifest.json': ROOT / 'train/data-toolcall-v3/manifest.json',
+    'evals/results/teacher-probe-glm-5.3.json': ROOT / 'evals/results/teacher-probe-glm-5.3.json',
+    'sources/glaive-function-calling-v2.json': SOURCES / 'glaive/glaive-function-calling-v2.json',
+    'sources/func-calling-singleturn.json': SOURCES / 'hermes/func-calling-singleturn.json',
+    'sources/xlam-7.5k-irrelevancek.json': SOURCES / 'raw/xlam-7.5k-irrelevancek.json',
+    'seed-cache.jsonl': Path.home() / '.hydra/build/toolcall-v5-glm.jsonl'}
+BFCL = Path.home() / '.hydra/build/bench-bfcl/lib/python3.12/site-packages/bfcl_eval/data'
 
 
 def digest(file):
@@ -50,17 +76,32 @@ def prepare():
     dataset, kernel = STAGE / 'dataset', STAGE / 'kernel'
     for d in (dataset, kernel):
         d.mkdir(parents=True, exist_ok=True)
-    data = json.loads((DATA / 'manifest.json').read_text())
-    if data['dataSha256'] != digest(DATA / 'train.jsonl') or any(
-            data[k] for k in ('sealedInputsUsed', 'developmentInputsUsed', 'holdoutInputsUsed', 'benchmarkInputsUsed')):
-        raise ValueError('Unverified or contaminated training data')
-    shutil.copyfile(DATA / 'train.jsonl', dataset / 'train.jsonl')
-    shutil.copyfile(DATA / 'manifest.json', dataset / 'data-manifest.json')
     shutil.copyfile(ROOT / 'train/full_finetune.py', dataset / 'full_finetune.py')
+    if BUILD:
+        import zipfile
+        bfcl = sorted(BFCL.glob('BFCL_v4_*.json'))
+        if not bfcl:
+            raise ValueError('BFCL v4 data not found; the leak filter needs it')
+        # Fixed timestamps, so the same inputs give the same archive bytes and plan hash.
+        with zipfile.ZipFile(dataset / 'build-inputs.bin', 'w', zipfile.ZIP_DEFLATED) as z:
+            for name, source in [*BUILD_FILES.items(), *((f'sources/bfcl/{f.name}', f) for f in bfcl)]:
+                z.writestr(zipfile.ZipInfo(name, (2026, 11, 26, 0, 0, 0)), source.read_bytes(), zipfile.ZIP_DEFLATED)
+        names = ('build-inputs.bin', 'full_finetune.py')
+        extra = {'buildFiles': {name: digest(source) for name, source in BUILD_FILES.items()},
+                 'scope': 'Tool-calling mix v5, built in this job: GLM-5.3 writes the call and decline targets; '
+                          'chat and Git rows from v3. Then LoRA training from v2.'}
+    else:
+        data = json.loads((DATA / 'manifest.json').read_text())
+        if data['dataSha256'] != digest(DATA / 'train.jsonl') or any(
+                data[k] for k in ('sealedInputsUsed', 'developmentInputsUsed', 'holdoutInputsUsed', 'benchmarkInputsUsed')):
+            raise ValueError('Unverified or contaminated training data')
+        shutil.copyfile(DATA / 'train.jsonl', dataset / 'train.jsonl')
+        shutil.copyfile(DATA / 'manifest.json', dataset / 'data-manifest.json')
+        names = ('train.jsonl', 'data-manifest.json', 'full_finetune.py')
+        extra = {'examples': data['examples'], 'scope': data['scope']}
     files = ('model.safetensors', 'config.json', 'tokenizer.json', 'tokenizer_config.json', 'chat_template.jinja', 'generation_config.json')
     plan = {**PLAN, 'checkpoint': {**PLAN['checkpoint'], 'files': {name: digest(V2 / name) for name in files}},
-            'inputs': {name: digest(dataset / name) for name in ('train.jsonl', 'data-manifest.json', 'full_finetune.py')},
-            'examples': data['examples'], 'scope': data['scope']}
+            'inputs': {name: digest(dataset / name) for name in names}, **extra}
     if plan['checkpoint']['files']['model.safetensors'] != '7b6b4662dbba3542fd296696b1c94e06240b28931e5b8ac6eec5cb99fc3dc8f0':
         raise ValueError('Local v2 copy is not the published v2 checkpoint')
     (dataset / 'toolcall-plan.json').write_text(json.dumps(plan, indent=2) + '\n')
@@ -79,7 +120,8 @@ def prepare():
     RESULT.mkdir(parents=True, exist_ok=True)
     (RESULT / 'prepared.json').write_text(json.dumps({'planSha256': plan_hash, 'plan': plan,
         'kernelSha256': digest(kernel / 'toolcall_train.py')}, indent=2) + '\n')
-    print(json.dumps({'planSha256': plan_hash, 'examples': plan['examples'], 'inputs': plan['inputs']}, indent=1))
+    print(json.dumps({'planSha256': plan_hash, 'examples': plan.get('examples', 'built in the job'),
+                      'inputs': plan['inputs']}, indent=1))
 
 
 def main():

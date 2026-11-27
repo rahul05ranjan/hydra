@@ -1,0 +1,183 @@
+{
+ "kernel": "rahulswt7/hydra-toolcall-evaluation-v5",
+ "elapsedSeconds": 11478,
+ "method": "GLM-5.3 text distillation (train/build_toolcall_data_v5.py, 9,155 rows, SHA 4e3e6556...) then merged rank-16 LoRA (alpha 16, LR 2e-4), 400 updates; weights 6c963aaf...",
+ "models": {
+  "candidate": "96cd8fb519c7ea6d9e01f6abe8faa8d315429dad89fa125b01aca33e5c24c55f",
+  "v2": "6d6542c8afae866bfba847b993f8061627fd9e56ae208427b586f653f81410be"
+ },
+ "gateTolerance": 0.005,
+ "developmentGatesPass": false,
+ "failedGates": [
+  "git-original",
+  "git-extended"
+ ],
+ "heldOutAndSealedRun": false,
+ "gates": {
+  "candidate": {
+   "git-original": {
+    "tasks": 200,
+    "solved": 197
+   },
+   "git-extended": {
+    "tasks": 800,
+    "solved": 784
+   },
+   "git-paraphrase": {
+    "tasks": 800,
+    "solved": 799
+   },
+   "files-development": {
+    "tasks": 200,
+    "solved": 198
+   },
+   "read-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "test-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "os-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "test-extended": {
+    "tasks": 572,
+    "solved": 572
+   },
+   "os-extended": {
+    "tasks": 400,
+    "solved": 400
+   },
+   "test-dev2": {
+    "tasks": 1380,
+    "solved": 1380
+   }
+  },
+  "v2": {
+   "git-original": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "git-extended": {
+    "tasks": 800,
+    "solved": 800
+   },
+   "git-paraphrase": {
+    "tasks": 800,
+    "solved": 798
+   },
+   "files-development": {
+    "tasks": 200,
+    "solved": 193
+   },
+   "read-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "test-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "os-development": {
+    "tasks": 200,
+    "solved": 200
+   },
+   "test-extended": {
+    "tasks": 572,
+    "solved": 572
+   },
+   "os-extended": {
+    "tasks": 400,
+    "solved": 396
+   },
+   "test-dev2": {
+    "tasks": 1380,
+    "solved": 1380
+   }
+  }
+ },
+ "bfcl": {
+  "candidate": {
+   "non_live": {
+    "Non-Live Overall Acc": "70.35%",
+    "AST Summary": "70.35%",
+    "Simple AST": "63.42%",
+    "Python Simple AST": "84.25%",
+    "Java Simple AST": "52.00%",
+    "JavaScript Simple AST": "54.00%",
+    "Multiple AST": "88.00%",
+    "Parallel AST": "59.50%",
+    "Parallel Multiple AST": "70.50%",
+    "Irrelevance Detection": "83.33%"
+   },
+   "live": {
+    "Live Overall Acc": "66.32%",
+    "AST Summary": "66.32%",
+    "Python Simple AST": "69.38%",
+    "Python Multiple AST": "66.00%",
+    "Python Parallel AST": "62.50%",
+    "Python Parallel Multiple AST": "50.00%",
+    "Irrelevance Detection": "61.20%",
+    "Relevance Detection": "93.75%"
+   },
+   "multi_turn": {
+    "Multi Turn Overall Acc": "3.50%",
+    "Base": "4.50%",
+    "Miss Func": "3.00%",
+    "Miss Param": "5.00%",
+    "Long Context": "1.50%"
+   }
+  },
+  "v2": {
+   "non_live": {
+    "Non-Live Overall Acc": "73.77%",
+    "AST Summary": "73.77%",
+    "Simple AST": "61.08%",
+    "Python Simple AST": "84.25%",
+    "Java Simple AST": "57.00%",
+    "JavaScript Simple AST": "42.00%",
+    "Multiple AST": "79.00%",
+    "Parallel AST": "76.50%",
+    "Parallel Multiple AST": "78.50%",
+    "Irrelevance Detection": "41.25%"
+   },
+   "live": {
+    "Live Overall Acc": "65.51%",
+    "AST Summary": "65.51%",
+    "Python Simple AST": "65.50%",
+    "Python Multiple AST": "66.00%",
+    "Python Parallel AST": "68.75%",
+    "Python Parallel Multiple AST": "41.67%",
+    "Irrelevance Detection": "27.60%",
+    "Relevance Detection": "93.75%"
+   },
+   "multi_turn": {
+    "Multi Turn Overall Acc": "3.62%",
+    "Base": "5.50%",
+    "Miss Func": "2.50%",
+    "Miss Param": "4.00%",
+    "Long Context": "2.50%"
+   }
+  }
+ },
+ "lmEvalCandidate": {
+  "mmlu": 49.54,
+  "arc_challenge_acc_norm": 37.8,
+  "hellaswag_acc_norm": 48.75,
+  "gsm8k_flexible": 44.81,
+  "gsm8k_strict": 43.52,
+  "ifeval_prompt_strict": 46.77
+ },
+ "lmEvalV2Published": {
+  "mmlu": 49.23,
+  "arc_challenge_acc_norm": 38.31,
+  "hellaswag_acc_norm": 49.89,
+  "gsm8k_flexible": 44.12,
+  "gsm8k_strict": 43.9,
+  "ifeval_prompt_strict": 54.16
+ },
+ "verdict": "rejected"
+}

@@ -69,7 +69,7 @@ Hydra never overwrites your settings. Every file it edits is backed up once as `
 | **read** | `hydra read src/server.ts handleRequest` | One symbol, a line range or an outline |
 | **files** | `hydra search parseConfig` | Definition-ranked matches |
 
-Through MCP, Hydra offers the three where it pays most: `hydra_git`, `hydra_run` and `hydra_os`.
+Through MCP, Hydra offers the three where it pays most: `hydra_git`, `hydra_run` and `hydra_os`, plus `hydra_recall`, which returns the lines of the project's markdown notes that answer a question (it needs the optional embedding model, `hydra embed install`).
 
 ## Benchmarks
 

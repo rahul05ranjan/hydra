@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Hydra as an MCP server (stdio, JSON-RPC 2.0, one message per line), for any coding tool that
-// speaks MCP: Codex, Cursor, OpenCode, Gemini CLI, Antigravity and others. Three tools only, where
-// Hydra pays: git history, test/build runs and OS inspection. Reading and searching source stay with
+// speaks MCP: Codex, Cursor, OpenCode, Gemini CLI, Antigravity and others. The tools are where Hydra
+// pays: git history, test/build runs, OS inspection and recall from the project's notes, plus the
+// refactoring helpers the user asks for by name. Reading and searching source stay with
 // the agent's own tools (forced delegation measured +72% tokens). Each tool runs the Hydra CLI in a
 // child process, so heads stay read-only, the model never writes a command, and every call lands in
 // the local ledger with the client's name as its agent.
@@ -21,6 +22,7 @@ const RUN_TIMEOUT_MS = 30 * 60_000;
 const INSTRUCTIONS = 'Hydra runs noisy read-only commands on a small local model and returns only the lines that matter. '
   + 'Use hydra_git for git history, diff, blame and "what changed" questions instead of reading git log or git diff output. '
   + 'Use hydra_run for test and build commands; it returns failing tests, assertion diffs and locations, or a short pass summary. '
+  + 'Use hydra_recall to find what the project\'s markdown notes say about a question instead of reading a long notes file whole. '
   + 'Keep using your own tools to read and search source files; Hydra does not save tokens there.';
 
 const cwdProperty = { type: 'string', description: 'Absolute path of the repository or project to work in, inside the folders this client opened. Defaults to the server\'s working directory.' };
@@ -67,6 +69,8 @@ export const TOOLS = [
     annotations: { readOnlyHint: false, destructiveHint: true, openWorldHint: true } },
   { name: 'hydra_os', description: 'Answer a read-only question about this machine (ports, processes, disk, memory, system, environment variables; credential-looking ones are withheld).',
     inputSchema: { type: 'object', properties: { question: { type: 'string', description: 'The question, in plain words.' } }, required: ['question'] }, annotations: READS },
+  { name: 'hydra_recall', description: 'Find the lines of this project\'s own markdown notes (tracker, decisions, logs, docs) that answer a question, and return them verbatim under file:line, newer notes first. Use it instead of reading a long notes file whole. Needs the optional embedding model (hydra embed install); without it the call says so.',
+    inputSchema: { type: 'object', properties: { question: { type: 'string', description: 'The question, in plain words.' }, k: { type: 'integer', minimum: 1, maximum: 20, description: 'How many notes to return (default 5).' }, cwd: cwdProperty }, required: ['question'] }, annotations: READS },
   { name: 'hydra_smell', description: 'Scan a file, directory or git diff for Refactoring.Guru code smells (Long Method, Large Class, Deep Nesting, Long Parameter List, etc.) with exact line numbers and refactoring recipes.',
     inputSchema: { type: 'object', properties: { target: { type: 'string', description: 'File or directory path to scan. Defaults to repository root.' }, diff: { type: 'boolean', description: 'If true, scans newly introduced smells in unstaged/staged git changes.' }, cwd: cwdProperty } }, annotations: READS },
   { name: 'hydra_refactor', description: 'Generate a step-by-step Refactoring.Guru recipe (Extract Method, Guard Clauses, Parameter Object) for a function or line range in a file.',
@@ -214,6 +218,11 @@ export async function callTool(name, args = {}) {
     const cwd = workdir(args.cwd);
     if (typeof args.command !== 'string') throw new Error('command is required');
     return hydra(['run', '--', ...runArgv(args.command, cwd)], cwd);
+  }
+  if (name === 'hydra_recall') {
+    if (typeof args.question !== 'string' || !args.question.trim()) throw new Error('question is required');
+    if (args.k !== undefined && !(Number.isInteger(args.k) && args.k >= 1 && args.k <= 20)) throw new Error('k must be a whole number from 1 to 20');
+    return hydra(['recall', args.question, ...(args.k === undefined ? [] : ['-k', String(args.k)])], workdir(args.cwd));
   }
   // The agent picks both cwd and the file, so a file must be project source under cwd, never a dotfile or a key.
   if (name === 'hydra_smell') {

@@ -80,10 +80,26 @@ test('smell, refactor and design read only source files inside cwd', async () =>
   assert.equal(smell.isError, false);
 });
 
+test('recall checks its arguments and says plainly when the embedding model is missing', async () => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), 'hydra-recall-'));
+  writeFileSync(path.join(dir, 'NOTES.md'), '# Notes\n\nThe next step is the release.\n');
+  await assert.rejects(callTool('hydra_recall', { question: ' ', cwd: dir }), /question is required/);
+  for (const k of [0, 21, 2.5, '3']) await assert.rejects(callTool('hydra_recall', { question: 'next step', k, cwd: dir }), /k must be/, `k ${k}`);
+  const saved = process.env.HYDRA_HOME;
+  process.env.HYDRA_HOME = mkdtempSync(path.join(os.tmpdir(), 'hydra-home-'));
+  try {
+    const result = await callTool('hydra_recall', { question: 'what is the next step', k: 3, cwd: dir });
+    assert.equal(result.isError, true);
+    assert.match(result.text, /hydra embed install/);
+  } finally {
+    if (saved === undefined) delete process.env.HYDRA_HOME; else process.env.HYDRA_HOME = saved;
+  }
+});
+
 test('tools tell the client which ones only read', () => {
   const byName = Object.fromEntries(TOOLS.map(tool => [tool.name, tool.annotations]));
   assert.equal(byName.hydra_run.readOnlyHint, false);
-  for (const name of ['hydra_git', 'hydra_os', 'hydra_smell', 'hydra_refactor', 'hydra_design']) assert.equal(byName[name].readOnlyHint, true, name);
+  for (const name of ['hydra_git', 'hydra_os', 'hydra_recall', 'hydra_smell', 'hydra_refactor', 'hydra_design']) assert.equal(byName[name].readOnlyHint, true, name);
 });
 
 test('the server answers the MCP handshake, lists tools and runs commands', async t => {
@@ -96,7 +112,7 @@ test('the server answers the MCP handshake, lists tools and runs commands', asyn
   server.notify('notifications/initialized');
 
   const { result: { tools } } = await server.request('tools/list', {});
-  assert.deepEqual(tools.map(tool => tool.name), ['hydra_git', 'hydra_run', 'hydra_os', 'hydra_smell', 'hydra_refactor', 'hydra_design']);
+  assert.deepEqual(tools.map(tool => tool.name), ['hydra_git', 'hydra_run', 'hydra_os', 'hydra_recall', 'hydra_smell', 'hydra_refactor', 'hydra_design']);
 
   const dir = mkdtempSync(path.join(os.tmpdir(), 'hydra-mcp-'));
   writeFileSync(path.join(dir, 'math.test.mjs'), "import test from 'node:test';\nimport assert from 'node:assert';\ntest('adds', () => assert.equal(1 + 1, 2));\n");

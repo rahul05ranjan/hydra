@@ -79,7 +79,7 @@ export function audit() {
       hydraRun: 'one recognised test or build command per call (npm test, pytest, cargo test, go test, tsc and similar); no shell operators, redirection or env prefix; paths and code-loading flags must stay inside cwd',
       folders: "cwd must sit inside the client's MCP roots, else the folder the server started in, or HYDRA_MCP_ROOTS",
       refusedSoFar: refused,
-      otherTools: 'hydra_git, hydra_os, hydra_smell, hydra_refactor and hydra_design only read',
+      otherTools: 'hydra_git, hydra_os, hydra_recall, hydra_smell, hydra_refactor and hydra_design only read',
     },
   };
   report.warnings = [

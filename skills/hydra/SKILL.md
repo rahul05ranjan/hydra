@@ -15,6 +15,7 @@ From the repository the question is about:
 node scripts/hydra.mjs run -- <test or build command...>
 node scripts/hydra.mjs ask --head git "<question>"
 node scripts/hydra.mjs os [question...]
+node scripts/hydra.mjs recall "<question>"
 ```
 
 `scripts/` is in this skill's directory.
@@ -22,6 +23,7 @@ node scripts/hydra.mjs os [question...]
 - **Tests and builds:** `run --` executes the command and returns the failing tests, assertion diffs and source locations with the exit code, or a short pass summary. A run you already cut to a few lines yourself (`| tail -n 20`) gains nothing from Hydra.
 - **Git:** ask one full question per call and name the file, branch, commit or author when you know it; the model may only use a path, revision or name that appears in your question. A short check such as `git status --short` is cheaper to run yourself.
 - **Machine:** ports, processes, disk, memory, system info and environment variables, with secret-looking names and values withheld.
+- **Project notes:** `recall` returns the lines of this repository's markdown notes (tracker, decisions, logs, docs) that answer the question, verbatim under `file:line`, newer notes first. Use it before reading a long notes file whole. It needs the optional embedding model; if it says `hydra embed install`, read the file yourself and leave the download to the user.
 
 Read and search source files with your own tools: a measured trial found routing that work through Hydra cost 72% more tokens. Hydra also has `search`, `read`, `smell`, `refactor` and `design` commands (`node scripts/hydra.mjs` with no arguments lists them) for when the user asks for them.
 

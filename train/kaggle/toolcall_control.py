@@ -23,11 +23,14 @@ load_dotenv(ROOT / '.env')
 # (train/build_toolcall_data_v5.py), because v2's own replies cannot teach declining.
 # v6 trains the prebuilt v6 mix (v5's GLM rows, v2's chat and Git rows three times) at half v5's LoRA learning
 # rate, since v5 slipped on Git probe choices and IFEval.
+# v7 goes back to v5's recipe and trains the prebuilt v7 mix: v5's rows unchanged plus Git planner rows with new
+# wordings for the three intents v5 missed (train/build_toolcall_data_v7.py).
 RUN = os.environ.get('HYDRA_TOOLCALL_RUN', 'v1')
 SUFFIX = '' if RUN == 'v1' else f'-{RUN}'
-LORA = RUN in ('v4', 'v5', 'v6')
+LORA = RUN in ('v4', 'v5', 'v6', 'v7')
 DATA = ROOT / {'v1': 'train/data-toolcall', 'v2': 'train/data-toolcall-v2', 'v3': 'train/data-toolcall-v3',
-               'v4': 'train/data-toolcall-v3', 'v5': 'train/data-toolcall-v5', 'v6': 'train/data-toolcall-v6'}[RUN]
+               'v4': 'train/data-toolcall-v3', 'v5': 'train/data-toolcall-v5', 'v6': 'train/data-toolcall-v6',
+               'v7': 'train/data-toolcall-v7'}[RUN]
 STAGE = Path.home() / f'.hydra/kaggle-toolcall{SUFFIX}'
 RESULT = Path.home() / f'.hydra/build/toolcall-candidate{SUFFIX}'
 USER = os.environ.get('KAGGLE_USERNAME', '')
@@ -38,10 +41,10 @@ V2 = Path.home() / '.hydra/build/bench-models/hydra-nano-v2'
 # on it in the same job. About 6,000 GLM questions give about three times v3's rows, so v5 takes 400 updates.
 BUILD = RUN == 'v5'
 PLAN = {'heads': 'git,toolcall' if RUN == 'v1' else 'git,toolcall,chat',
-        'steps': 400 if RUN in ('v5', 'v6') else 200, 'accumulation': 8,
+        'steps': 400 if RUN in ('v5', 'v6', 'v7') else 200, 'accumulation': 8,
         'learningRate': 1e-4 if RUN == 'v6' else 2e-4 if LORA else 2e-6, 'initialScale': 128, 'maxLength': 2048,
         'sampleSeed': {'v1': 20261017, 'v2': 20261018, 'v3': 20261019, 'v4': 20261019, 'v5': 20261126,
-                       'v6': 20261127}[RUN], 'trainerSeconds': 7200,
+                       'v6': 20261127, 'v7': 20261128}[RUN], 'trainerSeconds': 7200,
         'kernelTimeoutSeconds': 9 * 3600 if BUILD else 3 * 3600,
         'checkpoint': {'repo': 'rahul05ranjan/hydra-nano-git', 'revision': '8129125fad1c664bbb58ebd3238f6598c879eb23'},
         **({'method': 'lora', 'loraRank': 16, 'loraAlpha': 16} if LORA else {}),
